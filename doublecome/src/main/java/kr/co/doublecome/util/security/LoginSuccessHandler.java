@@ -15,17 +15,13 @@ import org.springframework.stereotype.Component;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
-	public LoginSuccessHandler() {
-		System.out.println("초기화성공");
-	}
-
 	@Override
 	public void onAuthenticationSuccess(
 			HttpServletRequest request, HttpServletResponse response, Authentication authentication) 
 					throws IOException, ServletException {
 		Collection<? extends GrantedAuthority> list = authentication.getAuthorities();
 		for (GrantedAuthority auth : list) {
-			System.out.println(auth.getAuthority());
+//			System.out.println(auth.getAuthority());
 		}
 		response.sendRedirect(request.getContextPath() + "/main.do");
 	}
