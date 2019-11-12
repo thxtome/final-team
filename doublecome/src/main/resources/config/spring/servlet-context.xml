@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      					  http://www.springframework.org/schema/beans/spring-beans.xsd
+            			  http://www.springframework.org/schema/context 
+            			  http://www.springframework.org/schema/context/spring-context.xsd
+            			  http://www.springframework.org/schema/mvc 
+            			  http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 컨테이너에 객체를 어노테이션으로 자동 등록 -->
+	<context:component-scan base-package="kr.co.doublecome" />
+	
+	<!-- 각종 mvc관련 어노테이션 (ex: RequestMapping) 및 제이슨파일 처리설정 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 정적페이지 처리 -->
+	<mvc:default-servlet-handler />
+
+	<mvc:resources mapping="/resources/../**" location="/resources/../**" />
+
+
+	<!-- 페이지 이동 설정 -->
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
+	</mvc:view-resolvers>
+	
+	<!-- 파일업로드 관련 클래스 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760"></property>
+	</bean>
+</beans>
