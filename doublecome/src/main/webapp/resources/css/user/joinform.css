@@ -1,0 +1,110 @@
+	
+	#bg{
+		background: rgb(253, 247, 247);
+	}
+
+	#registBox{
+		margin: auto;
+		position: relative;
+		width: 600px;
+		height: 700px;
+		background: white;
+	}
+	#registTitle{
+		position: absolute;
+		width: 150px;
+		height: 30px;
+		left: 25px;
+		top: 25px;;
+
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 24px;
+		line-height: 28px;
+		text-align: center;
+
+		color: #000000;
+	}
+	#pfimg{
+		position: absolute;
+		width: 200px;
+		height: 200px;
+		left: 362px;
+		top: 5px;
+		
+
+		background: #FFE1E1;
+	}
+	#registDoBtn{
+		position: absolute;
+		width: 500px;
+		height: 50px;
+		left: 50px;
+		top: 630px;
+		line-height: 40px;
+        text-align: center;
+		font: bold;
+		font-size: 30px;
+
+        color: white;
+		background: #FF6464;
+	}
+	#registBox div{
+		position: absolute;
+		width: 600px;
+		height: 100px;
+		left: 0px;
+		
+
+		background: rgb(255, 255, 255);
+		
+	}
+	#registInputBox1{
+		top: 216px;
+	}
+	#registInputBox2{
+		top: 316px;
+	}
+	#registInputBox3{
+		top: 416px;
+	}
+	#registInputBox4{
+		top: 516px;
+	}
+
+	#registBox div > #icon{
+		position: relative;
+		width: 50px;
+		height: 50px;
+		left: 10px;
+		top: 20px;
+
+		background: rgb(255, 255, 255);
+	}
+
+	#registBox div > #alert{
+		
+		width: 400px;
+		height: 15px;
+		left: 70px;
+		top: 70px;
+
+		background: rgb(253, 188, 188);
+	}
+	#registBox div > #registInput{
+		
+		width: 250px;
+		height: 40px;
+		left: 70px;
+		top: 25px;
+
+		background: rgb(211, 211, 211);
+	}
+	#registBox div > #registInput:nth-child(4){
+		
+		left: 330px;
+		top: 25px;
+
+		background: rgb(211, 211, 211);
+	}
