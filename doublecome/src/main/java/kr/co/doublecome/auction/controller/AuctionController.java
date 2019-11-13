@@ -13,4 +13,7 @@ public class AuctionController {
 	@RequestMapping("/insertAuction.do")
 	public void auctionInsert() {}
 	
+	@RequestMapping("/searchAuction.do")
+	public void auctionSearch() {}
+	
 }

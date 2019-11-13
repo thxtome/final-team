@@ -37,9 +37,7 @@
 		</div>
 	</div>
 	<div>
-		<div>
-			<img src="/images/mypage.svg" alt=""> <span>마이페이지</span>
-		</div>
+		
 		<div>
 			<img src="/images/mypage.svg" alt=""> <span>마이페이지</span>
 		</div>
@@ -60,7 +58,9 @@
 			<div>카테고리6</div>
 		</div>
 		<div>
-			<div>카테고리1</div>
+			<div>
+				<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/auction/searchAuction.do" />">경매찾기</a></span>
+			</div>
 			<div>카테고리2</div>
 			<div>카테고리3</div>
 			<div>카테고리4</div>
