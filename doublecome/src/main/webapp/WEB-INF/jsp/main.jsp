@@ -111,6 +111,9 @@
       </div>
     </div>
   </div>
+  
+  <div><a href="<c:url value="/auction/detailAuction.do" />">디테일 페이지로이동</a></div>
+
   <footer class="text-muted py-5" style="">
     <div class="container">
       <p class="float-right">

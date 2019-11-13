@@ -1,0 +1,158 @@
+
+#wrapper {
+    width: 1000px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+#slide {
+    float: left;
+    margin-left: 133px;
+    position: absolute;
+    padding-top: 33px;
+}
+#l-sub {
+    float: right;
+    height: 400px;
+}
+.swiper-container {
+    width: 400px;
+}
+#top {
+    height: 480px;
+    padding-top: 20px;
+}
+#bottom {
+    border-top: 2px solid black;
+    width: 666px;
+    height: 1000px;
+}
+#inquiry-contents {
+    width: 600px;
+    height: 200px;
+    resize: none;
+}
+.inquiry-contents {
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+.inquiry_box {
+    display: none;
+}
+#tab-2 {
+    text-align: left;
+}
+#tab-pane {
+    width: 666px;
+}
+.nav-item {
+    padding: 5px;
+} 
+#auction-title {
+    padding-left: 10px;
+    border-bottom: 2px solid black;
+    padding-bottom: 20px;
+    text-align: left;
+}
+.nav-item {
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.nav-tabs > .nav-item:nth-last-child(1) {
+    border-right: 1px solid black;
+}
+.nav-tabs.nav-justified>li>a {
+    border-bottom: 1px solid white;
+}
+#auction-board {
+    height: 500px;
+    padding-top: 10px;
+}
+.table-responsive {
+    margin-top: 20px;
+    border-top: 1px solid gray;
+}
+#seller_detail {
+    border: 1px solid gray;
+}
+#seller_info tr td:nth-child(1){
+    background: #F9F9F9;
+}
+#table_col {
+    width: 150px;
+}
+#inquiry_insert {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid gray;
+    
+}
+#inquiry_insert > h2 {
+    margin: 0;
+}
+.button {
+    position: relative;
+    left: 521px;
+    background: #E27575;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    box-shadow: 1px 1px 5px #B6B6B6;
+    border-radius: 3px;
+    text-shadow: 1px 1px 1px #9E3F3F;
+    cursor: pointer;
+}
+.reply {
+    position: relative;
+    left: 80%;
+    background: #E27575;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    box-shadow: 1px 1px 5px #B6B6B6;
+    border-radius: 3px;
+    text-shadow: 1px 1px 1px #9E3F3F;
+    cursor: pointer;
+}
+.button:hover {
+    background: #CF7A7A
+}
+.reply:hover {
+    background: #CF7A7A;
+    color: white;
+}
+.reply_button {
+    float: right;
+    background: #E27575;
+    border: none;
+    padding: 6px 15px 6px 15px;
+    color: #FFF;
+    box-shadow: 1px 1px 5px #B6B6B6;
+    border-radius: 3px;
+    text-shadow: 1px 1px 1px #9E3F3F;
+    cursor: pointer;
+}
+.reply_button:hover {
+    background: #CF7A7A;
+    color: white;
+}
+.card-inner {
+    margin-left: 4rem;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+.inquiry_container {
+    margin-top: 20px;
+    border: 1px solid gray;
+}
+.card {
+    padding: 20px;
+}
+.counter-class {
+    position: relative;
+    left: 10px;
+}
