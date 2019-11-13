@@ -39,7 +39,7 @@
 	<div>
 		
 		<div>
-			<img src="/images/mypage.svg" alt=""> <span>마이페이지</span>
+			<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/mypage/mypage.do" />">마이페이지</a></span>
 		</div>
 		<div>
 			<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/auction/insertAuction.do" />">글작성 페이지로 이동</a></span>

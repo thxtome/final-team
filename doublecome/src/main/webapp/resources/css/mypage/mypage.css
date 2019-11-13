@@ -1,0 +1,382 @@
+@charset "UTF-8";
+body{
+    position: relative;
+    width: 1000px;
+    font-family: Roboto;
+    margin: auto;
+}
+#userinfo{
+    width: 900px;
+    height: 1200px;
+}
+#reviewhead, #purchasehaed, #saleshaed {
+    position: relative;
+    width: 900px;
+    height: 50px;
+    margin-top: 25px;
+    
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    border-top: 3px solid #555;
+    color: #000000;
+}
+.tabhead{
+    position: relative;
+    width: 900px;
+    height: 50px;
+    list-style: none;
+    border-bottom: 2px solid #EF2011;
+    padding-left: 0;
+}
+.tabhead li{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
+
+    width: 150px;
+    height: 49px;  
+    font-size: 15px;
+    line-height: 49px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+}
+.tablist{
+    display: inline-block;
+    width: 150px;
+    height: 49px;
+    margin-left: -1px;
+    background-color: #fff;
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid #c3c3c3;
+    border-bottom: 0 none;
+}
+.tabchoice{
+    border: 2px solid #EF2011;
+    border-bottom: none;
+    width: 150px;
+    height: 53px;
+    line-height: 57px;
+    font-weight: bold;
+    z-index: 1;
+}
+#navbar{
+    list-style: none;
+    width: 900px;
+    height: 50px; 
+    border-top: 3px solid #555; 
+}
+#navbar li{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    float: left;
+
+    list-style: none;
+    width: 300px;
+    height: 50px;
+}
+.navlist{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border: 1px solid #c3c3c3;
+    background: rgb(243, 240, 240);
+    margin-bottom: 20px;
+}
+.navchoice{
+    background: white;
+    border-bottom: 0 none;
+}
+.barfixed {
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+}
+#review{
+    position: relative;
+    width: 900px;
+}
+#searchtype{
+    display: inline-block;
+    width: 900px;
+}
+#searchtype select{
+    float: right;
+    width: 80px;
+    height: 30px;
+}
+#reviewcon{
+    width: 900px;
+    margin: -15px;
+    overflow: hidden;
+}
+#reviewcon ul{
+    width: 900px;
+    list-style: none;
+}
+#reviewcon ul li:first-child{
+    border-top: 1px solid #c3c3c3;
+}
+
+#reviewcon ul li{
+    height: 120px;
+    border-bottom: 1px solid #c3c3c3;
+}
+#reviewcon ul li > div{
+    float: left;
+    margin-top: 15px;
+}
+.scorearea{
+    /* border: 1px solid black; */
+    width: 180px;
+    height: 80px;
+    text-align: center;
+}
+.scorearea > div{
+    float: left;
+}
+.contentarea{
+    /* border: 1px solid black; */
+    width: 480px;
+    height: 80px;
+    font-size: 15px;
+    padding-left: 20px;
+    line-height: 32px;
+    margin: 0;
+}
+.writerarea{
+    /* border: 1px solid black; */
+    width: 180px;
+    height: 80px;
+    text-align: center;
+    line-height: 40px;
+}
+.score{
+    width:50px;
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 85px;
+    margin-left: 30px;
+}
+.scoreform{
+    width:50px;
+    font-size: 20px;
+    line-height: 100px;
+    margin: 0;
+}
+.auctiontitle, .reviewer, .auctionwriter{
+    font-weight: bold;
+}
+.listcon{
+    width: 900px;
+    height: 260px;
+    border: 1px solid #e7e7e7;
+    margin-left: 0;
+    margin-top: 40px;
+}
+.listhead{
+    display: inline-block;
+    /* float: left; */
+    width: 900px;
+    height: 60px;
+    background: rgb(243, 240, 240);
+    border-bottom: 1px solid #e7e7e7;
+}
+.listdate{
+    width: 400px;
+    line-height: 60px;
+    margin-left: 10px;
+    margin-right: 0;
+    float: left;
+}
+.datetitle{
+    font-size: 17px;
+}
+.datecontent{
+    font-size: 20px;
+}
+.detailcon{
+    float: left;
+    width: 370px;
+    height: 60px;
+    text-align: right;
+    margin-left: 100px;
+}
+.detailcon a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: right;
+    line-height: 60px;
+}
+.listbody{
+    display: inline-block;
+    width: 900px;
+    height: 200px;
+    /* float: left; */
+}
+.productimg{
+    display: inline-block;
+    width: 200px;
+    height: 160px;
+    text-align: center;
+    line-height: 250px;
+}
+.imgcon{
+    width: 120px;
+    height: 120px;
+    border: 1px solid black;
+}
+.listbody > ul {
+    list-style: none;
+    float: left;
+    width: 900px;
+    height: 170px;
+    padding: 0;
+}
+.listbody ul li > div{
+    float: left;
+}
+.productinfo{
+    width: 500px;
+    height: 160px;
+}
+.listtitle, .listregdate{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.listtitle{
+    display: inline-block;
+    font-weight: bold;
+}
+.writerinfo{
+    float: left;
+    width: 200px;
+    height: 160px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.reportbtn{
+    display: block;
+    width: 100px;
+    height: 35px;
+    background-color: #EF2011;
+    border-bottom: 2px solid rgb(170, 26, 15);
+    color: #fff;
+    border-radius: 3px;
+    margin: 5px auto;
+
+}
+.reviewbtn{
+    display: block;
+    width: 100px;
+    height: 35px;
+    margin: auto;
+    border: 1px solid #EF2011;
+    color: #EF2011;
+    border-radius: 3px;
+    box-shadow: inset 0 -2px #e6e6e6;
+    cursor: pointer;
+}
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 50px auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 800px; /* Could be more or less, depending on screen size */                          
+    height: 600px;
+}
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+#reviewform{
+    width: 700px;
+    height: 550px;
+    margin: 10px auto;
+}
+#scorediv, #reviewtitlediv, #photodiv{
+    display: grid;
+    width: 700px;
+    height: 70px;
+    grid-template-columns: 100px 600px;
+    border-top: 1px solid #ddd;
+}
+#reviewcondiv{
+    display: grid;
+    width: 700px;
+    height: 300px;
+    grid-template-columns: 100px 600px;
+    border-top: 1px solid #ddd;
+}
+#regitbtn{
+    width: 700px;
+    height: 40px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    line-height: 50px;
+}
+#scorediv > div, #reviewtitlediv > div, #photodiv > div{
+    text-align: center;
+    line-height: 70px;
+}
+#reviewtitlediv > div > input{
+    text-align: center;
+    width: 500px;
+    height: 30px;
+}
+#reviewcondiv > div{
+    text-align: center;
+    line-height: 300px;
+}
+#reviewcondiv > div > textarea{
+    text-align: center;
+    width: 500px;
+    height: 250px;
+    margin-top: 20px;
+}
+
+.border{
+    border: 1px solid black;
+}
