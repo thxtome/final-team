@@ -26,14 +26,14 @@
 		
 		
 <!--  		<security:intercept-url pattern="/index.jsp" access="permitAll" /> -->
-<!--  		<security:intercept-url pattern="/user/login-form.do" access="permitAll" /> -->
-<!--  		<security:intercept-url pattern="/user/join-form.do" access="permitAll" /> -->
+<!--  		<security:intercept-url pattern="/user/loginForm.do" access="permitAll" /> -->
+<!--  		<security:intercept-url pattern="/user/joinForm.do" access="permitAll" /> -->
 <!--  		<security:intercept-url pattern="/user/insert.do" access="permitAll" /> -->
 <!--  		<security:intercept-url pattern="/main.do" access="permitAll" /> -->
 <!-- 		<security:intercept-url pattern="/resources/**" access="permitAll" /> -->
 <!--  		<security:intercept-url pattern="/**" access="hasRole('ROLE_U')" /> -->
 		<!-- <security:intercept-url pattern="admin.do" access="hasRole('ROLE_A')" /> -->
-		<security:form-login login-page="/user/login-form.do" username-parameter="userEmail" password-parameter="userPass" 
+		<security:form-login login-page="/user/loginForm.do" username-parameter="userEmail" password-parameter="userPass" 
 		                     authentication-success-handler-ref="loginSuccessHandler" login-processing-url="/user/login.do" />
 		<security:logout logout-url="/user/logout.do" 
 						 logout-success-url="/main.do"
