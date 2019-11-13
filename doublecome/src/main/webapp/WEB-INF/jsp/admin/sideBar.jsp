@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <div class="adminSideItem">
-	<div class="moveItem">
+	<div class="moveItem" data-action="basic.do">
 		<i class="fas fa-info-circle"></i>
 		<p>기본 정보</p>
 	</div>
@@ -14,7 +14,7 @@
 		<p>회원 관리</p>
 		<i class="fas fa-chevron-right"></i>
 	</div>
-	<div class="moveItem" data-action="./userSearchBar.html">
+	<div class="moveItem" data-action="retrieveUser.do">
 		<p>전체 회원 조회</p>
 	</div>
 	<div class="moveItem">
@@ -63,5 +63,3 @@
 		<p>신고 항목 관리</p>
 	</div>
 </div>
-
-<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>

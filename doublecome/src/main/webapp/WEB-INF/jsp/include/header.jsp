@@ -72,5 +72,5 @@
 <hr />
 
 
-<script src="/js/header.js"></script>
+<script src="<c:url value="/resources/js/common/header.js" />"></script>
 

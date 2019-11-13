@@ -7,15 +7,12 @@ $(".parentItem").click((e) => {
 })
 
 $(".moveItem").click((e) => {
-    $(".moveItem").removeClass("clicked");
-    let target = $(e.target).closest(".moveItem");
-    target.addClass("clicked");
+	location.href = $(e.target).closest(".moveItem").data("action");
 })
 
-$(".moveItem").click((e)=>{
-   console.log($(e.target).data("action"));
-   $("#loadContent").load($(e.target).data("action"));
-})
+$($(".moveItem")[$("#innerIndex").val()]).addClass("clicked");
 
-console.log($("#outerIndex").val());
-console.log($("#innerIndex").val());
+
+let $parentItem = $($(".moveItem")[$("#innerIndex").val()]).siblings(".parentItem");
+$parentItem.toggleClass("selected").siblings().toggle();
+$parentItem.find("svg:last").toggleClass("fa-chevron-right").toggleClass("fa-chevron-down");
