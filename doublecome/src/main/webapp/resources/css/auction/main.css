@@ -4,6 +4,7 @@
     text-align: center;
     margin: 0 auto;
     padding-top: 20px;
+    padding: 0;
 }
 #slide {
     float: left;
@@ -37,7 +38,7 @@
     height: 100px;
     resize: none;
 }
-.inquiry_box {
+#inquiry_box {
     display: none;
 }
 #tab-2 {

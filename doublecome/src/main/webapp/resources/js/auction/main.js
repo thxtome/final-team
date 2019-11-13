@@ -28,15 +28,19 @@ let galleryThumbs = new Swiper('.gallery-thumbs', {
   
   });
 $("#btn1").click(() => {
+	$("#inquiry_box").css('display', 'block')
   $("#insertbox1").html($("#inquiry_box"))
 })
 $("#btn1_1").click(() => {
+	$("#inquiry_box").css('display', 'block')
   $("#insertbox1_1").html($("#inquiry_box"))
 })
 $("#btn1_2").click(() => {
+	$("#inquiry_box").css('display', 'block')
   $("#insertbox1_2").html($("#inquiry_box"))
 })
 $("#btn2").click(() => {
+	$("#inquiry_box").css('display', 'block')
   $("#insertbox2").html($("#inquiry_box"))
 })
   

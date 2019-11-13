@@ -9,4 +9,8 @@ public class AuctionController {
 
 	@RequestMapping("/detailAuction.do")
 	public void auctionDetail() {}
+
+	@RequestMapping("/insertAuction.do")
+	public void auctionInsert() {}
+	
 }

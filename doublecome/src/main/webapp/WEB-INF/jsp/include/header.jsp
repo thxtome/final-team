@@ -25,7 +25,7 @@
 	</sec:authorize>
 </div>
 <div class="topContent">
-	<div>
+	<div id="movetomain">
 		<div>누구나 쉬운 경매!</div>
 		<div>더블</div>
 		<div>로와</div>
@@ -44,7 +44,7 @@
 			<img src="/images/mypage.svg" alt=""> <span>마이페이지</span>
 		</div>
 		<div>
-			<img src="/images/mypage.svg" alt=""> <span>마이페이지</span>
+			<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/auction/insertAuction.do" />">글작성 페이지로 이동</a></span>
 		</div>
 	</div>
 	<div>
