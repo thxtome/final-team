@@ -9,8 +9,8 @@
 <div class="topbar">
 	<sec:authorize access="isAnonymous()">
 		<div>
-			<span><a href="<c:url value="/user/login-form.do" />">로그인</a></span>
-			<span><a href="<c:url value="/user/join-form.do" />">회원가입</a></span>
+			<span><a href="<c:url value="/user/loginForm.do" />">로그인</a></span>
+			<span><a href="<c:url value="/user/joinForm.do" />">회원가입</a></span>
 		</div>
 	</sec:authorize>
 

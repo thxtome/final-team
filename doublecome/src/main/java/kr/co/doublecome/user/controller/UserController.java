@@ -19,14 +19,14 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder encoder;
 	
-	@RequestMapping("/login-form.do")
+	@RequestMapping("/loginForm.do")
 	public void loginForm(String result, Model model) throws Exception{
 		if(result != null) {
 			model.addAttribute("result", "false");
 		}
 	}
 	
-	@RequestMapping("/join-form.do")
+	@RequestMapping("/joinForm.do")
 	public void joinForm(User user) throws Exception{}
 
 	
