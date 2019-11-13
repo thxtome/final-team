@@ -28,7 +28,7 @@
 		<p>경매 관리</p>
 		<i class="fas fa-chevron-right"></i>
 	</div>
-	<div class="moveItem">
+	<div class="moveItem" data-action="retrieveAuction.do">
 		<p>전체 경매 조회</p>
 	</div>
 	<div class="moveItem">
