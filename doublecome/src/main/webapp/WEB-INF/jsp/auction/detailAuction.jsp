@@ -10,10 +10,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
-<link rel="stylesheet" href="<c:url value="/resources/css/auction/side button.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/common/normalize.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/auction/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/auction/side button.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/auction/swiper.min.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/auction/main.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/auction/detail.css"/>">
 
 <body>
 <header>
@@ -304,7 +305,7 @@
   <script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
   <script src="<c:url value="/resources/js/auction/loopcounter.js" />"></script>
   <script src="<c:url value="/resources/js/auction/swiper.min.js" />"></script>
-  <script src="<c:url value="/resources/js/auction/main.js" />"></script>
+  <script src="<c:url value="/resources/js/auction/detail.js" />"></script>
   <script src="<c:url value="/resources/js/auction/sticky.js" />"></script>
   <script>
     $('#sidebar').stick_in_parent({ parent: '#contents' });

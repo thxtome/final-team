@@ -32,7 +32,6 @@
 
 	<mvc:resources mapping="/resources/../**" location="/resources/../**" />
 
-
 	<!-- 페이지 이동 설정 -->
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
