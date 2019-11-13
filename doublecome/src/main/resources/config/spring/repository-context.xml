@@ -23,8 +23,8 @@
       	  destroy-method="close"
       	  p:driverClassName="${driver}"
       	  p:url="${url}"
-      	  p:username="${mysqlusername}"
-      	  p:password="${mysqlpassword}"/>
+      	  p:username="bitfinalteam"
+      	  p:password="bitfinalteam!"/>
       
       
       <!-- db관련 경로를 지정해줌 -->

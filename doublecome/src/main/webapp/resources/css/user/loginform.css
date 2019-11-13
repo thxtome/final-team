@@ -32,7 +32,7 @@
             line-height: 56px;
             text-align: center;
 
-            color: rgb(255, 136, 136);
+            color: hsl(0, 100%, 72%);
         }
         #loginId{
             position: absolute;
@@ -54,6 +54,17 @@
             background: rgb(211, 211, 211);
             border-radius: 80px;
         }
+         #loginId > input, #loginPass input{
+             position: relative;
+             left: 40px;
+             top: 13px;
+             width: 300px;
+             font-size: 20px;
+             background: rgb(211, 211, 211);
+             border: none;
+
+         }
+         input:focus {outline:none;}
         #loginDo{
             position: absolute;
             width: 350px;
@@ -64,8 +75,9 @@
             font-size: 20px;
             line-height: 40px;
             text-align: center;
-            background: rgb(255, 136, 136);
+            background: hsl(0, 100%, 72%);
             border-radius: 3px;
+            border: 0;
         }
         #naverLogin{
             position: absolute;
@@ -125,6 +137,6 @@
             height: 85px;
             left: calc(50% - 85px/2 + 192.5px);
             top: 30px;
-            border: #000000 solid 1px ;
             background: #fff;
+            color: hsl(0, 100%, 72%);
         }
