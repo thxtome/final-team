@@ -21,12 +21,16 @@
 <!-- 시큐리티 설정 -->	  
 	<security:http> 
 		<security:csrf disabled="true" />
- 		<security:intercept-url pattern="/index.jsp" access="permitAll" />
- 		<security:intercept-url pattern="/user/login-form.do" access="permitAll" />
- 		<security:intercept-url pattern="/user/join-form.do" access="permitAll" />
- 		<security:intercept-url pattern="/user/insert.do" access="permitAll" />
- 		<security:intercept-url pattern="/main.do" access="permitAll" />
-		<security:intercept-url pattern="/resources/**" access="permitAll" />
+		
+		<security:intercept-url pattern="/**" access="permitAll" />
+		
+		
+<!--  		<security:intercept-url pattern="/index.jsp" access="permitAll" /> -->
+<!--  		<security:intercept-url pattern="/user/login-form.do" access="permitAll" /> -->
+<!--  		<security:intercept-url pattern="/user/join-form.do" access="permitAll" /> -->
+<!--  		<security:intercept-url pattern="/user/insert.do" access="permitAll" /> -->
+<!--  		<security:intercept-url pattern="/main.do" access="permitAll" /> -->
+<!-- 		<security:intercept-url pattern="/resources/**" access="permitAll" /> -->
 <!--  		<security:intercept-url pattern="/**" access="hasRole('ROLE_U')" /> -->
 		<!-- <security:intercept-url pattern="admin.do" access="hasRole('ROLE_A')" /> -->
 		<security:form-login login-page="/user/login-form.do" username-parameter="userEmail" password-parameter="userPass" 

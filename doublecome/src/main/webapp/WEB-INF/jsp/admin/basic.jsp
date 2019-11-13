@@ -11,9 +11,9 @@
 <title>Document</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../css/normalize.css">
-<link rel="stylesheet" href="../css/admin.css">
-<link rel="stylesheet" type="text/css" href="/css/admincontent.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/common/normalize.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/admin/sideBar.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/admin/content.css"/>">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 
@@ -21,6 +21,7 @@
 	<div class="adminPage">
 
 		<div class="adminSideBar">
+			<input type="hidden" id="innerIndex" value="0">
 			<c:import url="/WEB-INF/jsp/admin/sideBar.jsp" />
 		</div>
 
@@ -31,7 +32,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="../js/admin.js"></script>
+	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
 </body>
 
 </html>

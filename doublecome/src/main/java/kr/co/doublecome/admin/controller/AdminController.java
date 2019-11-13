@@ -9,4 +9,8 @@ public class AdminController {
 	
 	@RequestMapping("/basic.do")
 	public void basic() {}
+	
+	@RequestMapping("/retrieveUser.do")
+	public void retrieveUser() {}
+	
 }

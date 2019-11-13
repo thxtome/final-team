@@ -19,7 +19,6 @@
 	<div class="adminPage">
 
 		<div class="adminSideBar">
-			<input type="hidden" id="outerIndex" value="1">
 			<input type="hidden" id="innerIndex" value="1">
 			<c:import url="/WEB-INF/jsp/admin/sideBar.jsp" />
 		</div>
@@ -155,7 +154,7 @@
 			</table>
 		</div>
 	</div>
-	<script src="../js/admin.js"></script>
+	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
 </body>
 
 </html>
