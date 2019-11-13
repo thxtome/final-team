@@ -27,7 +27,7 @@
  		<security:intercept-url pattern="/user/insert.do" access="permitAll" />
  		<security:intercept-url pattern="/main.do" access="permitAll" />
 		<security:intercept-url pattern="/resources/**" access="permitAll" />
- 		<security:intercept-url pattern="/**" access="hasRole('ROLE_U')" />
+<!--  		<security:intercept-url pattern="/**" access="hasRole('ROLE_U')" /> -->
 		<!-- <security:intercept-url pattern="admin.do" access="hasRole('ROLE_A')" /> -->
 		<security:form-login login-page="/user/login-form.do" username-parameter="userEmail" password-parameter="userPass" 
 		                     authentication-success-handler-ref="loginSuccessHandler" login-processing-url="/user/login.do" />
