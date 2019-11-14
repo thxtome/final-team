@@ -35,7 +35,10 @@
 							</svg>
 						</span>
 					</label>
-		</span>
+        </span>
+        
+        <span id="scoreBox">
+        </span>
 	<!--
 			<img src="<c:url value="/src/main/webapp/resources/css/user/defaultpfimg.jpeg"/>" id="pfimg"/>
 			<button>사진 등록</button>
