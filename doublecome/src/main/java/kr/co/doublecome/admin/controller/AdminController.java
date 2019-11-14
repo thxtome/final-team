@@ -19,4 +19,10 @@ public class AdminController {
 	@RequestMapping("/retrieveDeal.do")
 	public void retrieveDeal() {}
 	
+	@RequestMapping("/retrieveCategory.do")
+	public void retrieveCategory() {}
+	
+	@RequestMapping("/retrieveReport.do")
+	public void retrieveReport() {}
+	
 }

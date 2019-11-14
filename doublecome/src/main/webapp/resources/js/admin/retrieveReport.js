@@ -8,7 +8,7 @@
       $("#eventBtn").text("수정");
   })
 
-  $(".addCategoryBtn > button").click((e)=>{
+  $(".addReportBtn > button").click((e)=>{
       $("#eventBtn").text("등록");
       $(".adminModal").show();
   });

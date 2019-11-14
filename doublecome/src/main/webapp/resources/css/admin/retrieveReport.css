@@ -1,10 +1,10 @@
-.addCategoryBtn {
+.addReportBtn {
 	float: right;
 	margin-right: 30px;
 	margin-top: 10px;
 }
 
-.addCategoryBtn>button, .adminModal button, .dataContent button {
+.addReportBtn>button, .adminModal button, .dataContent button {
 	width: 100px;
 	height: 25px;
 	border: none;
@@ -16,7 +16,7 @@
 	cursor: pointer;
 }
 
-.addCategoryBtn>button {
+.addReportBtn>button {
 	background: white;
 	color: rgb(252, 79, 79);
 	border: 1.5px solid;

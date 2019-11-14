@@ -17,29 +17,28 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/admin/content.css"/>">
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/admin/retrieveCategory.css"/>">
+	href="<c:url value="/resources/css/admin/retrieveReport.css"/>">
 </head>
 
 <body>
 	<div class="adminPage">
 		<div class="adminSideBar">
-			<input type="hidden" id="innerIndex" value="7">
+			<input type="hidden" id="innerIndex" value="8">
 			<c:import url="/WEB-INF/jsp/admin/sideBar.jsp" />
 		</div>
 
 		<div class="adminContent">
 			<div>
-				<h2>카테고리 항목</h2>
+				<h2>신고 항목</h2>
 			</div>
-
 
 
 			<table class="dataContent">
 				<thead>
 					<tr>
-						<th>카테고리 순서</th>
-						<th>카테고리 제목</th>
-						<th>경매 수</th>
+						<th>신고항목 순서</th>
+						<th>신고항목 내용</th>
+						<th>신고 수</th>
 						<th>등록 날짜</th>
 						<th>비고</th>
 					</tr>
@@ -47,7 +46,7 @@
 				<tbody>
 					<tr>
 						<td>1</td>
-						<td>전자기기</td>
+						<td>욕설/비방</td>
 						<td>13</td>
 						<td>2019-07-19</td>
 						<td>
@@ -56,7 +55,7 @@
 					</tr>
 					<tr>
 						<td>2</td>
-						<td>생활용품</td>
+						<td>사기</td>
 						<td>16</td>
 						<td>2019-08-11</td>
 						<td>
@@ -65,7 +64,7 @@
 					</tr>
 					<tr>
 						<td>3</td>
-						<td>의류</td>
+						<td>물품 상태</td>
 						<td>152</td>
 						<td>2019-01-14</td>
 						<td>
@@ -74,18 +73,9 @@
 					</tr>
 					<tr>
 						<td>4</td>
-						<td>식품</td>
+						<td>불친전</td>
 						<td>123</td>
 						<td>2019-02-13</td>
-						<td>
-							<button class="editBtn">관리</button>
-						</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>휴대기기</td>
-						<td>97</td>
-						<td>2019-03-29</td>
 						<td>
 							<button class="editBtn">관리</button>
 						</td>
@@ -93,9 +83,10 @@
 				</tbody>
 			</table>
 
-			<div class="addCategoryBtn">
+			<div class="addReportBtn">
 				<button>등록</button>
 			</div>
+
 
 
 
@@ -104,14 +95,14 @@
 		<div class="adminModal">
 			<div class="adminMoadalBack">
 				<div>
-					<h2>카테고리 관리</h2>
+					<h2>신고항목 관리</h2>
 					<hr style="width: 90%" />
 					<div>
-						<span>카테고리 순서</span> <input type="text">
+						<span>신고항목 순서</span> <input type="text">
 					</div>
 
 					<div>
-						<span>카테고리 제목</span> <input type="text">
+						<span>신고항목 제목</span> <input type="text">
 					</div>
 
 					<div>
@@ -124,7 +115,7 @@
 
 	</div>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
-	<script src="<c:url value="/resources/js/admin/retrieveCategory.js"/>"></script>
+	<script src="<c:url value="/resources/js/admin/retrieveReport.js"/>"></script>
 
 </body>
 

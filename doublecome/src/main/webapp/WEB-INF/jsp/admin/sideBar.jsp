@@ -56,10 +56,10 @@
 		<p>항목 관리</p>
 		<i class="fas fa-chevron-right"></i>
 	</div>
-	<div class="moveItem">
+	<div class="moveItem" data-action="retrieveCategory.do">
 		<p>카테고리 항목 관리</p>
 	</div>
-	<div class="moveItem">
+	<div class="moveItem" data-action="retrieveReport.do">
 		<p>신고 항목 관리</p>
 	</div>
 </div>
