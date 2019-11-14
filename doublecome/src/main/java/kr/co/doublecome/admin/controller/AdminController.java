@@ -16,4 +16,7 @@ public class AdminController {
 	@RequestMapping("/retrieveAuction.do")
 	public void retrieveAuction() {}
 	
+	@RequestMapping("/retrieveDeal.do")
+	public void retrieveDeal() {}
+	
 }

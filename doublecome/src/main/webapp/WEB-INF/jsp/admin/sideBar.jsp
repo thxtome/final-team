@@ -42,7 +42,7 @@
 		<p>거래 관리</p>
 		<i class="fas fa-chevron-right"></i>
 	</div>
-	<div class="moveItem">
+	<div class="moveItem" data-action="retrieveDeal.do">
 		<p>전체 거래 조회</p>
 	</div>
 	<div class="moveItem">

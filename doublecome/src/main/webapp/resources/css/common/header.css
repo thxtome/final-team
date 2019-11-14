@@ -10,6 +10,12 @@
     height: 40px;
 }
 
+.topbar > div span{	
+    color: #8e8e8e;
+    text-decoration: none;
+    background-color: transparent;
+}
+
 .topbar span {
     position: relative;
     width: 50px;
