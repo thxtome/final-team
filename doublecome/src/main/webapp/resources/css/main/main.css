@@ -145,22 +145,22 @@ sub {
 sup {
   top: -.5em; }
 
-a {
+.auction_list {
     color: #686868;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
-  a:hover {
+.auction_list:hover {
   color: #8e8e8e;
     text-decoration: none; }
 
-a:not([href]):not([tabindex]) {
+.auction_list:not([href]):not([tabindex]) {
   color: inherit;
   text-decoration: none; }
-  a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
+.auction_list:not([href]):not([tabindex]):hover, .auction_list:not([href]):not([tabindex]):focus {
     color: inherit;
     text-decoration: none; }
-  a:not([href]):not([tabindex]):focus {
+.auction_list:not([href]):not([tabindex]):focus {
     outline: 0; }
 
 pre,
