@@ -71,7 +71,7 @@
 	</div>
 </div>
 <hr />
-<c:import url="/WEB-INF/jsp/user/loginForm.jsp" />
+
 
 
 <script src="<c:url value="/resources/js/common/header.js" />"></script>
