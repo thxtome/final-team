@@ -6,6 +6,8 @@ $('a').click( (e) => {
         $('#background').show();
     }
 });
-$('#background').children().parent().click( () => {   
-    $('#background').hide();
+$('#background').click( (e) => {
+    if($(e.target).attr("id") == "background"){
+    	$('#background').hide();
+    } 
 });

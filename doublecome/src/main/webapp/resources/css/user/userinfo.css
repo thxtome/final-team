@@ -6,50 +6,45 @@
 	#registBox{
 		margin: auto;
 		position: relative;
-		width: 600px;
-		height: 700px;
+		width: 1000px;
+		height: 500px;
 		background: white;
 	}
-	#registTitle{
-		position: absolute;
-		width: 150px;
-		height: 30px;
-		left: 25px;
-		top: 25px;;
-
-		font-family: Roboto;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 24px;
-		line-height: 28px;
-		text-align: center;
-
-		color: #000000;
-	}
+	
 	#pfimgbox{
+        left: 25px;
+        top: 25px;
 		position: absolute;
 		width: 200px;
 		height: 200px;
-		left: 362px;
-		top: 5px;
 		align-content: flex-end;
 
-	}
-	#pfimgbox > button{
-		margin: auto;
-		
+    }
+    #scoreBox{
+        left: 25px;
+        top: 275px;
+		position: absolute;
+		width: 200px;
+		height: 200px;
+    }
+    
+    /*
+    #pfimgbox > button{
+		margin: auto;	
 	}
 	#pfimg{
 		width: 180px;
 		height: 180px;
 		border: solid 1px;
-	}
+    }
+    */
+
 	#registDoBtn{
 		position: absolute;
-		width: 500px;
+		width: 100px;
 		height: 50px;
-		left: 50px;
-		top: 630px;
+		right: 50px;
+		top: 430px;
 		line-height: 40px;
         text-align: center;
 		font: bold;
@@ -63,7 +58,7 @@
 		position: absolute;
 		width: 600px;
 		height: 100px;
-		left: 0px;
+		left: 350px;
 		/*border: 1px solid #000000;*/
 		
 
@@ -71,16 +66,16 @@
 		
 	}
 	#registInputBox1{
-		top: 216px;
+		top: 25px;
 	}
 	#registInputBox2{
-		top: 316px;
+		top: 125px;
 	}
 	#registInputBox3{
-		top: 416px;
+		top: 225px;
 	}
 	#registInputBox4{
-		top: 516px;
+		top: 325px;
 	}
 
 	#registBox div > #icon{
