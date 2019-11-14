@@ -83,7 +83,7 @@
         <div class="container w-75">
           <div class="row">
             <div class="col-md-4 p-2" style="">
-              <a href="">
+              <a class="auction_list" href="">
                 <div class="card box-shadow">
                   <img class="card-img-top w-100" src="<c:url value="/resources/images/macbook.jpg"/>"
                   style="height: 250px;">
@@ -97,7 +97,7 @@
               </div>
             </div>
             <div class="col-md-4 p-2" style="">
-              <a href="">
+              <a class="auction_list" href="">
                 <div class="card box-shadow">
                   <img class="card-img-top w-100" src="<c:url value="/resources/images/macbook.jpg"/>"
                   style="height: 250px;">
@@ -111,7 +111,7 @@
               </div>
             </div>
             <div class="col-md-4 p-2" style="">
-              <a href="">
+              <a class="auction_list" href="">
                 <div class="card box-shadow">
                   <img class="card-img-top w-100" src="<c:url value="/resources/images/macbook.jpg"/>"
                   style="height: 250px;">

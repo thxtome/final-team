@@ -26,9 +26,7 @@
 	href="<c:url value="/resources/css/main/main.css" />">
 </head>
 <body>
-	<header>
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-	</header>
 	
 	<div class="py-5">
 		<div class="container">
@@ -53,7 +51,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="container w-75">
+		<div class="container w-75" id="container">
 			<div class="row">
 				<c:choose>
 					<c:when test="${empty auclist}">
@@ -102,10 +100,7 @@
 			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 			integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
 			crossorigin="anonymous"></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-			integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-			crossorigin="anonymous" style=""></script>
+
 		<script src="<c:url value="/resources/js/common/countdown.js" />"></script>
 </body>
 </html>

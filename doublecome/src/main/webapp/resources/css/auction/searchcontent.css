@@ -10,9 +10,11 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-.layout-right {
-  
-}
+
+ #container {
+   width: 1000px !important;
+   max-width: 1000px !important;
+ }
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -145,22 +147,22 @@ sub {
 sup {
   top: -.5em; }
 
-a {
+.auction_list {
     color: #686868;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
-  a:hover {
+.auction_list:hover {
   color: #8e8e8e;
     text-decoration: none; }
 
-a:not([href]):not([tabindex]) {
+.auction_list:not([href]):not([tabindex]) {
   color: inherit;
   text-decoration: none; }
-  a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
+.auction_list:not([href]):not([tabindex]):hover, .auction_list:not([href]):not([tabindex]):focus {
     color: inherit;
     text-decoration: none; }
-  a:not([href]):not([tabindex]):focus {
+.auction_list:not([href]):not([tabindex]):focus {
     outline: 0; }
 
 pre,
@@ -474,7 +476,7 @@ pre {
       max-width: 960px; } }
   @media (min-width: 1200px) {
     .container {
-      max-width: 1140px; } }
+      max-width: 1000px; } }
 
 .container-fluid {
   width: 100%;
@@ -703,6 +705,8 @@ pre {
   .order-sm-3 {
     order: 3; }
   .order-sm-4 {
+  flex: 0 0 33.33333%;
+    max-width: 33.33333%;
     order: 4; }
   .order-sm-5 {
     order: 5; }
@@ -5181,7 +5185,7 @@ button.bg-dark:focus {
 .mx-0 {
   margin-right: 0 !important; }
 .mb-1 {
-  font-family: 돋움, Dotum, sans-serif;
+  font-family: Tahoma;
   font-size: 100%;
 }
 .mb-0,
@@ -5193,7 +5197,12 @@ button.bg-dark:focus {
   margin-left: 0 !important; }
 
 .m-1 {
-  margin: 0.1rem 0.375rem !important; }
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0.1rem 0.375rem !important; 
+  padding : 2px;
+}
 
 .mt-1,
 .my-1 {
@@ -6165,6 +6174,7 @@ button.bg-dark:focus {
   white-space: nowrap; }
 
 .text-left {
+  padding : 4px;
   text-align: left !important; }
 
 .text-right {
@@ -6196,7 +6206,10 @@ button.bg-dark:focus {
     text-align: right !important; }
   .text-lg-center {
     text-align: center !important; } }
-
+footer {
+	margin-top: 100px;
+	border-top:1px solid #eee;
+}
 @media (min-width: 1200px) {
   .text-xl-left {
     text-align: left !important; }
