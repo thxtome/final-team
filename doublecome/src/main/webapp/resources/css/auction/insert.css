@@ -1,8 +1,78 @@
 
 #wrapper {
     width: 1000px;
-    text-align: center;
     margin: 0 auto;
-    padding-top: 20px;
-    padding: 0;
+    padding: 25px;
+/*     margin-top: 20px; */
+}
+.contents {
+	padding: 25px;
+    border: 1px solid #E5E5E5;	
+}
+.attach_img {
+    margin-right: 20px;
+}
+.note-editor {
+    margin: 0 auto;
+}
+dd {
+    padding: 4px;
+}
+.formbox {
+    margin-left: 40px;
+}
+.button {
+    background: #E27575;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    box-shadow: 1px 1px 5px #B6B6B6;
+    border-radius: 3px;
+    text-shadow: 1px 1px 1px #9E3F3F;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #CF7A7A
+}
+.submit {
+    margin-top: 13px;
+    text-align: center;
+}
+#auctiontitle {
+    width: 500px;
+}
+.category {
+    width: 150px;
+    height: 25px;
+}
+#datetimepicker {
+	width: 220px;
+}
+.menu {
+	padding-top: 9px;
+}
+.input {
+	width: 120px;
+}
+.attach {
+	text-decoration: none;
+	color: black;
+	padding-right: 15px;
+}
+a:link {
+	text-decoration: none;
+    color: black;
+}
+a:visited {
+	text-decoration: none;
+    color: black;
+}
+.attach:hover {
+	text-decoration: none;
+    color: gray;
+	cursor: pointer;
+}
+.note-editing-area {
+	border: 1px solid gray;
 }

@@ -17,9 +17,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/auction/detail.css"/>">
 
 <body>
-<header>
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
-</header>
   <div id="wrapper">
     <div id="contents">
       <h2 id="auction-title">글 제목</h2>
@@ -300,6 +298,7 @@
       <button class="reply_button">등록</button>
     </form>
   </div>
+  <c:import url="/WEB-INF/jsp/include/footer.jsp" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
   <script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>

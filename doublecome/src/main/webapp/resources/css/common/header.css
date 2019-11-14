@@ -226,3 +226,6 @@
     text-decoration: underline;
     cursor: pointer;
 }
+#movetomain {
+	cursor: pointer;
+}
