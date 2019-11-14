@@ -1,17 +1,14 @@
-<!--
-	
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
--->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/resources/css/user/userinfo.css"> 
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/user/userinfo.css"/>"> 
 
 
 <style>
@@ -20,6 +17,9 @@
 </style>
 </head>
 <body>
+	<header>
+		<c:import url="/WEB-INF/jsp/include/header.jsp" />
+	</header>
 	<div id="bg">
 	<div id="registBox">
 	
@@ -43,8 +43,11 @@
 					</label>
         </span>
         
+     <a href="<c:url value="/mypage/mypage.do"/>">
         <span id="scoreBox">
+			거래내역/후기
         </span>
+     </a>
 	<!--
 			<img src="<c:url value="/src/main/webapp/resources/css/user/defaultpfimg.jpeg"/>" id="pfimg"/>
 			<button>사진 등록</button>
@@ -86,6 +89,6 @@
 		
 	</div>
 	</div>
-	<script src="/resources/js/user/userInfo.js"></script>
+	<script src="<c:url value="/resources/js/user/userInfo.js" />" ></script>
 </body>
 </html>

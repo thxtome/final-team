@@ -1,0 +1,52 @@
+#findIdBG, #findPassBG {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0, 0, 0, 0.5);
+    z-index:1; 
+}
+
+#findIdBox, #findPassBox{
+    position: relative;
+    top:50%; left:50%;
+    transform: translate(-50%, -50%);
+	
+    width: 500px;
+    height: 300px;
+
+    background: #FFFFFF;
+}
+
+#key{
+    position: relative;
+    width: 400px;
+    height: 50px;
+   /*  left: 50px;
+    top: 50px; */
+    background: #C4C4C4;
+}
+
+#value{
+    position: relative;
+    width: 400px;
+    height: 50px;
+   /*  left: 50px;
+    top: 103px; */
+    
+    background: #C4C4C4;
+}
+
+#findBtn{
+    position: relative;
+    width: 350px;
+    height: 50px;
+   /*  left: 75px;
+    top: 161px; */
+
+    background: #C4C4C4;
+}
+.hideLogin{
+    z-index: -100;
+}

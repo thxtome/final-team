@@ -8,21 +8,53 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/user/joinform.css"/>"> 
-<style>
 
-
-</style>
 </head>
 <body>
+<!-- Form Mixin-->
+<!-- Input Mixin-->
+<!-- Button Mixin-->
+<!-- Pen Title-->
+  <div class="topContent">
+<div class="pen-title">
+  <div>누구나 쉬운 경매!</div>
+		<div>더블</div>
+		<div>로와</div>
+</div>
+</div>
+<!-- Form Module-->
+<div class="module form-module">
+  <div >
+    <div ></div>
+  </div>
+  
+  <div class="form">
+    <h2>Create an account</h2>
+    <form>
+      <input type="email" placeholder="Email Address"/>
+      <input type="password" placeholder="Password"/>
+      <input type="password" placeholder="Confirm Password"/>
+      <input type="tel" placeholder="Phone Number"/>
+      <input type="text" placeholder="Username"/>
+      <button>Register</button>
+    </form>
+  </div>
+  <div class="cta"><a href="http://andytran.me">Forgot your password?</a></div>
+</div>
+	
+</body>
+</html>
+
+<!-- 
+	<script src="<c:url value="/resources/js/user/joinForm.js" />"></script>
+
+
 	<div id="bg">
 	<div id="registBox">
 		<span id="registTitle">회원 가입</span>
 					  
 		<form method="post" action="<c:url value="/user/insert.do"/>" class="uploader" enctype="multipart/form-data" >
-				<!-- 
-				<form class="uploader">
-				</form> 
-				 -->
+				
 		<span id="pfimgbox"> 
 					<input class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" />
 					
@@ -36,10 +68,7 @@
 						</span>
 					</label>
 		</span>
-	<!--
-			<img src="<c:url value="/src/main/webapp/resources/css/user/defaultpfimg.jpeg"/>" id="pfimg"/>
-			<button>사진 등록</button>
-	-->	
+	
 		
 		
 		<div id="registInputBox1" class="registInputBox">
@@ -77,6 +106,4 @@
 		
 	</div>
 	</div>
-	<script src="<c:url value="/resources/js/user/joinForm.js" />"></script>
-</body>
-</html>
+ -->

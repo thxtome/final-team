@@ -29,6 +29,16 @@ public class UserController {
 	@RequestMapping("/joinForm.do")
 	public void joinForm(User user) throws Exception{}
 
+	@RequestMapping("/userInfo.do")
+	public void userInfo(User user) throws Exception{}
+	
+	@RequestMapping("/findIdForm.do")
+	public void findId(User user) throws Exception{}
+	
+	@RequestMapping("/findPassForm.do")
+	public void findPass(User user) throws Exception{}
+	
+
 	
 	@RequestMapping("/insert.do")
 	public String insertUser(User user) throws Exception{
