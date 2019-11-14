@@ -1,9 +1,13 @@
-@charset "UTF-8";
-body{
+#historycontent{
     position: relative;
     width: 1000px;
     font-family: Roboto;
     margin: auto;
+    text-align: center;
+}
+#innercontent{
+	width: 900px;
+	margin: auto;
 }
 #userinfo{
     width: 900px;
@@ -17,17 +21,17 @@ body{
     
     font-style: normal;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 23px;
     line-height: 35px;
     display: flex;
     align-items: center;
-    border-top: 3px solid #555;
+/*     border-top: 3px solid #555; */
     color: #000000;
 }
 .tabhead{
     position: relative;
     width: 900px;
-    height: 50px;
+    height: 40px;
     list-style: none;
     border-bottom: 2px solid #EF2011;
     padding-left: 0;
@@ -39,7 +43,7 @@ body{
     float: left;
 
     width: 150px;
-    height: 49px;  
+    height: 39px;  
     font-size: 15px;
     line-height: 49px;
     display: flex;
@@ -48,23 +52,48 @@ body{
 
     color: #000000;
 }
-.tablist{
+.purchasetablist{
     display: inline-block;
     width: 150px;
-    height: 49px;
+    height: 39px;
     margin-left: -1px;
     background-color: #fff;
     text-decoration: none;
     text-align: center;
     border: 1px solid #c3c3c3;
     border-bottom: 0 none;
+    cursor: pointer;
+}
+.salestablist{
+    display: inline-block;
+    width: 150px;
+    height: 39px;
+    margin-left: -1px;
+    background-color: #fff;
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid #c3c3c3;
+    border-bottom: 0 none;
+    cursor: pointer;
+}
+.reviewtablist{
+    display: inline-block;
+    width: 150px;
+    height: 39px;
+    margin-left: -1px;
+    background-color: #fff;
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid #c3c3c3;
+    border-bottom: 0 none;
+    cursor: pointer;
 }
 .tabchoice{
     border: 2px solid #EF2011;
     border-bottom: none;
     width: 150px;
-    height: 53px;
-    line-height: 57px;
+    height: 43px;
+    line-height: 47px;
     font-weight: bold;
     z-index: 1;
 }
@@ -72,7 +101,9 @@ body{
     list-style: none;
     width: 900px;
     height: 50px; 
-    border-top: 3px solid #555; 
+    margin-left: 50px;
+    margin-top: 0;
+    padding: 0;
 }
 #navbar li{
     margin: 0 0 0 0;
@@ -86,7 +117,7 @@ body{
 .navlist{
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 17px;
 
     text-decoration: none;
     cursor: pointer;
@@ -98,6 +129,7 @@ body{
     border: 1px solid #c3c3c3;
     background: rgb(243, 240, 240);
     margin-bottom: 20px;
+    color: black;
 }
 .navchoice{
     background: white;
@@ -118,8 +150,9 @@ body{
 }
 #searchtype select{
     float: right;
-    width: 80px;
-    height: 30px;
+    width: 70px;
+    height: 24px;
+    font-size: 13px;
 }
 #reviewcon{
     width: 900px;
@@ -127,16 +160,19 @@ body{
     overflow: hidden;
 }
 #reviewcon ul{
+	float: left;
     width: 900px;
     list-style: none;
+    overflow: auto;
 }
-#reviewcon ul li:first-child{
-    border-top: 1px solid #c3c3c3;
+#reviewcon ul li:last-child{
+    border-bottom: 1px solid #c3c3c3;
 }
 
-#reviewcon ul li{
+.preview{
     height: 120px;
     border-bottom: 1px solid #c3c3c3;
+    border-top: 1px solid #c3c3c3;
 }
 #reviewcon ul li > div{
     float: left;
@@ -144,7 +180,7 @@ body{
 }
 .scorearea{
     /* border: 1px solid black; */
-    width: 180px;
+    width: 150px;
     height: 80px;
     text-align: center;
 }
@@ -153,30 +189,31 @@ body{
 }
 .contentarea{
     /* border: 1px solid black; */
-    width: 480px;
+    width: 450px;
     height: 80px;
-    font-size: 15px;
+    font-size: 12px;
     padding-left: 20px;
     line-height: 32px;
     margin: 0;
 }
 .writerarea{
     /* border: 1px solid black; */
-    width: 180px;
+    width: 150px;
     height: 80px;
     text-align: center;
     line-height: 40px;
+    font-size: 13px;
 }
 .score{
     width:50px;
-    font-size: 50px;
+    font-size: 45px;
     font-weight: bold;
     line-height: 85px;
     margin-left: 30px;
 }
 .scoreform{
     width:50px;
-    font-size: 20px;
+    font-size: 17px;
     line-height: 100px;
     margin: 0;
 }
@@ -189,6 +226,7 @@ body{
     border: 1px solid #e7e7e7;
     margin-left: 0;
     margin-top: 40px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .listhead{
     display: inline-block;
@@ -206,10 +244,10 @@ body{
     float: left;
 }
 .datetitle{
-    font-size: 17px;
+    font-size: 14px;
 }
 .datecontent{
-    font-size: 20px;
+    font-size: 17px;
 }
 .detailcon{
     float: left;
@@ -217,6 +255,7 @@ body{
     height: 60px;
     text-align: right;
     margin-left: 100px;
+    font-size: 17px;
 }
 .detailcon a{
     display: inline-block;
@@ -224,6 +263,7 @@ body{
     height: 100%;
     text-align: right;
     line-height: 60px;
+    font-size: 14px;
 }
 .listbody{
     display: inline-block;
@@ -264,6 +304,7 @@ body{
 .listtitle{
     display: inline-block;
     font-weight: bold;
+    font-size: 14px;
 }
 .writerinfo{
     float: left;
@@ -271,32 +312,36 @@ body{
     height: 160px;
     text-align: center;
     line-height: 40px;
+    font-size: 15px;
 }
 
 .reportbtn{
     display: block;
-    width: 100px;
-    height: 35px;
+    width: 80px;
+    height: 27px;
     background-color: #EF2011;
     border-bottom: 2px solid rgb(170, 26, 15);
     color: #fff;
     border-radius: 3px;
     margin: 5px auto;
-
+    font-size: 13px;
+    line-height: 30px;
 }
 .reviewbtn{
     display: block;
-    width: 100px;
-    height: 35px;
+    width: 80px;
+    height: 27px;
     margin: auto;
     border: 1px solid #EF2011;
     color: #EF2011;
     border-radius: 3px;
     box-shadow: inset 0 -2px #e6e6e6;
     cursor: pointer;
+    font-size: 13px;
+    line-height: 27px;
 }
 /* The Modal (background) */
-.modal {
+.modal{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 3; /* Sit on top */
@@ -314,9 +359,9 @@ body{
     background-color: #fefefe;
     margin: 50px auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
     width: 800px; /* Could be more or less, depending on screen size */                          
     height: 600px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 /* The Close Button */
 .close {
@@ -331,52 +376,216 @@ body{
     text-decoration: none;
     cursor: pointer;
 }
-#reviewform{
+.reviewform{
     width: 700px;
     height: 550px;
     margin: 10px auto;
 }
-#scorediv, #reviewtitlediv, #photodiv{
+.reviewtitle{
+	cursor: pointer;
+}
+.reviewtitle:hover{
+	font-weight: bold;
+}
+.scorediv, .reviewtitlediv, .photodiv{
     display: grid;
     width: 700px;
     height: 70px;
     grid-template-columns: 100px 600px;
     border-top: 1px solid #ddd;
 }
-#reviewcondiv{
+.reviewcondiv{
     display: grid;
     width: 700px;
     height: 300px;
     grid-template-columns: 100px 600px;
     border-top: 1px solid #ddd;
 }
-#regitbtn{
+.regitbtn {
     width: 700px;
     height: 40px;
     border-top: 1px solid #ddd;
     text-align: center;
     line-height: 50px;
 }
-#scorediv > div, #reviewtitlediv > div, #photodiv > div{
+.scorediv > div, .reviewtitlediv > div, .photodiv > div{
     text-align: center;
-    line-height: 70px;
+    line-height: 80px;
+    font-size: 13px;
 }
-#reviewtitlediv > div > input{
+.photodiv div:last-child {
     text-align: center;
+    font-size: 12px;
+    color: #888888;
+}
+.reviewtitlediv > div > input{
     width: 500px;
     height: 30px;
+    font-size: 13px;
 }
-#reviewcondiv > div{
+.reviewcondiv > div{
     text-align: center;
     line-height: 300px;
+    font-size: 13px;
 }
-#reviewcondiv > div > textarea{
-    text-align: center;
+.reviewcondiv > div > textarea{
     width: 500px;
     height: 250px;
     margin-top: 20px;
+    resize: none;
 }
 
-.border{
-    border: 1px solid black;
+.scorebar span{
+	display: inline-block;
+	text-align: center;
+	line-height: 15px;
+    padding: 5px;
+    font-size: 18px;
+    width: 15px;
+    height: 15px;
+}
+.scorebar span:hover{
+    cursor: pointer;
+    font-weight: bold;
+    /* font-size: 20px; */
+    color: rgb(231, 102, 93);
+}
+.scorechoice{
+    font-size: 20px;
+    background-color: rgb(231, 102, 93);
+    border-radius: 50%;
+    color: white;
+}
+.regitbtn button{
+    border: none;
+    width: 80px;
+    height: 35px;
+    background-color: #EF2011;
+    border-bottom :2px solid rgb(170, 26, 15);
+    color: white;
+    border-radius: 10px;
+}
+.reviewdetail{
+	display: inline-block;
+	margin: auto;
+	width: 880px;
+	height: 500px;
+}
+.profileimg{
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+.editdel{
+	width:90px;
+	line-height: 80px;
+}
+.editdel a {
+	font-size: 12px;
+	cursor: pointer;
+}
+.profilediv{
+	grid-area: profilediv;
+	line-height: 20px;
+}
+.scorezone{
+s
+	grid-area: scorezone;
+	line-height: 20px;
+}
+.nicknamediv{
+	grid-area: nicknamediv;
+	line-height: 20px;
+}
+.regdatediv{
+	grid-area: regdatediv;
+	line-height: 20px;
+}
+.onelinediv{
+	grid-area: onelinediv;
+	line-height: 20px;
+}
+.reviewimg{
+	grid-area: reviewimg;
+}
+.reviewdiv{
+	grid-area: reviewdiv;
+	line-height: 20px;
+	width: 400px;
+	margin: auto;
+	text-align: left;
+}
+.conclose{
+	grid-area: conclose;
+	text-align: right;
+	margin-right: 5px;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.reviewcontent{
+	margin-left: 120px;
+	font-size: 13px;
+	display: grid;
+	width: 600px;
+	height: 500px;
+	grid-template-columns: 1fr 1fr 1fr 4fr;
+  	grid-template-rows: 30px 30px 100px 300px;
+/* 	border: 1px solid black; */
+	grid-template-areas:
+	"profilediv scorezone scorezone conclose"
+	"profilediv nicknamediv regdatediv onelinediv"
+	"reviewdiv reviewdiv reviewdiv reviewdiv"
+	"reviewimg reviewimg reviewimg reviewimg";
+}
+.emodal{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.editmodal{
+    background-color: #fefefe;
+    margin: 50px auto; /* 15% from the top and centered */
+    padding: 20px;
+    width: 800px; /* Could be more or less, depending on screen size */                          
+    height: 600px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+/* The Close Button */
+.eclose {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.eclose:hover,
+.eclose:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+#editreviewform{
+    width: 700px;
+    height: 550px;
+    margin: 10px auto;
+}
+.editbtn button{
+    border: none;
+    width: 80px;
+    height: 35px;
+    background-color: #EF2011;
+    border-bottom :2px solid rgb(170, 26, 15);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
 }
