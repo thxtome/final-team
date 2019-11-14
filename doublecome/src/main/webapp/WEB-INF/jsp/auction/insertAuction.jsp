@@ -49,15 +49,14 @@
             <dd class="col-xs-9">
               <dl class="row">
                 <dd class="col-xs-4">
-							<input type="text" class="start"/><span> 원</span>
+							<input type="text" class="start"/><p class="won">원</p>
                 </dd>
                 <dt class="col-xs-2 menu">즉시 구매가</dt>
                 <dd class="col-xs-4">
-							<input type="text" class="buy"/><span> 원</span>
+							<input type="text" class="buy"/><p class="won">원</p>
                 </dd>
               </dl>
             </dd> 
-            
 						<dt class="col-xs-3 menu">파일첨부</dt>
 						<dd class="col-xs-3 attach">
 							<a class="attach glyphicon glyphicon-picture">사진</a>
