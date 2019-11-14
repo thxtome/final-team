@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -28,6 +29,7 @@
 	<header>
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	</header>
+	
 	<div class="py-5">
 		<div class="container">
 			<div class="row">
@@ -43,153 +45,53 @@
 	<div class="py-4 bg-light">
 		<div class="container w-75">
 			<div class="row">
-				<div class="col-md-12" style="">
-					<div class="card-body" style="">
-						<h5 class="card-title m-0" style="text-shadow: 0px 0px 1px black;">Best
-							Auction</h5>
+				<div class="col-md-12">
+					<div class="card-body" >
+						<h5 class="card-title m-0" style="text-shadow: 0px 0px 1px black;">
+						Best Auction</h5>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="container w-75">
 			<div class="row">
-				<div class="col-md-4 p-2" style="">
-					<a href="<c:url value="/auction/detailAuction.do" />">
-						<div class="card box-shadow">
-							<img class="card-img-top w-100"
-								src="<c:url value="/resources/images/macbook.jpg"/>"
-								style="height: 250px;">
-							<p class="mb-1 m-1">비트캠프 메인 컴퓨터</p>
-							<p class="card-text m-1">50,000원</p>
-							<div class="auction-condition">
-								<span class="text-left">입찰 1건</span> <small
-									class="text-muted m-1">3 days ago</small>
+				<c:choose>
+					<c:when test="${empty auclist}">
+						<div class="col-md-12">
+							<div class="card-body" >
+								<h5 class="card-title m-0" style="text-shadow: 0px 0px 1px black;">
+								등록되어있는 경매가 존재하지 않습니다.</h5>
 							</div>
 						</div>
-					</a>
-				</div>
-				<div class="col-md-4 p-2" style="">
-					<a href="<c:url value="/auction/detailAuction.do" />">
-						<div class="card box-shadow">
-							<img class="card-img-top w-100"
-								src="<c:url value="/resources/images/macbook.jpg"/>"
-								style="height: 250px;">
-							<p class="mb-1 m-1">비트캠프 메인 컴퓨터</p>
-							<p class="card-text m-1">50,000원</p>
-							<div class="auction-condition">
-								<span class="text-left">입찰 1건</span> <small
-									class="text-muted m-1">3 days ago</small>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${auclist}" var="list">
+							<div class="col-md-4 p-2" >
+								<a href="<c:url value="/auction/detailAuction.do" />">
+									<div class="card box-shadow">
+										<img class="card-img-top w-100"
+											src="<c:url value="/resources/images/macbook.jpg"/>"
+											style="height: 250px;">
+										<p class="mb-1 m-1">${list.auctionTitle}</p>
+										<c:choose>
+											<c:when test="${empty list.maxPrice}">
+												<p class="card-text m-1"><fmt:formatNumber value="${list.auctionMinPrice}" pattern="#,###"/>원</p>											
+											</c:when>
+											<c:otherwise>
+												<p class="card-text m-1"><fmt:formatNumber value="${list.maxPrice}" pattern="#,###"/>원</p>		
+											</c:otherwise>
+										</c:choose>
+										<div class="auction-condition">
+											<span class="text-left">입찰 ${list.bidCnt}건</span>
+											<small class="countdown text-muted m-1"></small>
+										</div>
+									</div>
+								</a>
 							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 p-2" style="">
-					<a href="<c:url value="/auction/detailAuction.do" />">
-						<div class="card box-shadow">
-							<img class="card-img-top w-100"
-								src="<c:url value="/resources/images/macbook.jpg"/>"
-								style="height: 250px;">
-							<p class="mb-1 m-1">비트캠프 메인 컴퓨터</p>
-							<p class="card-text m-1">50,000원</p>
-							<div class="auction-condition">
-								<span class="text-left">입찰 1건</span> <small
-									class="text-muted m-1">3 days ago</small>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 p-2" style="">
-					<a href="<c:url value="/auction/detailAuction.do" />">
-						<div class="card box-shadow">
-							<img class="card-img-top w-100"
-								src="<c:url value="/resources/images/macbook.jpg"/>"
-								style="height: 250px;">
-							<p class="mb-1 m-1">비트캠프 메인 컴퓨터</p>
-							<p class="card-text m-1">50,000원</p>
-							<div class="auction-condition">
-								<span class="text-left">입찰 1건</span> <small
-									class="text-muted m-1">3 days ago</small>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 p-2" style="">
-					<a href="<c:url value="/auction/detailAuction.do" />">
-						<div class="card box-shadow">
-							<img class="card-img-top w-100"
-								src="<c:url value="/resources/images/macbook.jpg"/>"
-								style="height: 250px;">
-							<p class="mb-1 m-1">비트캠프 메인 컴퓨터</p>
-							<p class="card-text m-1">50,000원</p>
-							<div class="auction-condition">
-								<span class="text-left">입찰 1건</span> <small
-									class="text-muted m-1">3 days ago</small>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 p-2" style="">
-					<a href="<c:url value="/auction/detailAuction.do" />">
-						<div class="card box-shadow">
-							<img class="card-img-top w-100"
-								src="<c:url value="/resources/images/macbook.jpg"/>"
-								style="height: 250px;">
-							<p class="mb-1 m-1">비트캠프 메인 컴퓨터</p>
-							<p class="card-text m-1">50,000원</p>
-							<div class="auction-condition">
-								<span class="text-left">입찰 1건</span> <small
-									class="text-muted m-1">3 days ago</small>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 p-2" style="">
-					<a href="<c:url value="/auction/detailAuction.do" />">
-						<div class="card box-shadow">
-							<img class="card-img-top w-100"
-								src="<c:url value="/resources/images/macbook.jpg"/>"
-								style="height: 250px;">
-							<p class="mb-1 m-1">비트캠프 메인 컴퓨터</p>
-							<p class="card-text m-1">50,000원</p>
-							<div class="auction-condition">
-								<span class="text-left">입찰 1건</span> <small
-									class="text-muted m-1">3 days ago</small>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 p-2" style="">
-					<a href="<c:url value="/auction/detailAuction.do" />">
-						<div class="card box-shadow">
-							<img class="card-img-top w-100"
-								src="<c:url value="/resources/images/macbook.jpg"/>"
-								style="height: 250px;">
-							<p class="mb-1 m-1">비트캠프 메인 컴퓨터</p>
-							<p class="card-text m-1">50,000원</p>
-							<div class="auction-condition">
-								<span class="text-left">입찰 1건</span> <small
-									class="text-muted m-1">3 days ago</small>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-4 p-2" style="">
-					<a href="<c:url value="/auction/detailAuction.do" />">
-						<div class="card box-shadow">
-							<img class="card-img-top w-100"
-								src="<c:url value="/resources/images/macbook.jpg"/>"
-								style="height: 250px;">
-							<p class="mb-1 m-1">비트캠프 메인 컴퓨터</p>
-							<p class="card-text m-1">50,000원</p>
-							<div class="auction-condition">
-								<span class="text-left">입찰 1건</span> <small
-									class="text-muted m-1">3 days ago</small>
-							</div>
-						</div>
-					</a>
-				</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
-
 		</div>
 
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
@@ -204,5 +106,6 @@
 			src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 			integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 			crossorigin="anonymous" style=""></script>
+		<script src="<c:url value="/resources/js/common/countdown.js" />"></script>
 </body>
 </html>

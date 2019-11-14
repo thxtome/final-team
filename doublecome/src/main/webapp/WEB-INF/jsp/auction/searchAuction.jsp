@@ -37,10 +37,20 @@
             <li><a href="">20만원 이상</a></li>
             <li>
               <input class="price-choice" type="text" numberOnly/> ~
-              <input class="price-choice" type="text" />
+              <input class="price-choice" type="text" numberOnly/>
               <a href="" class="price_srh"></a>
             </li>
           </ul>
+      </div>
+      <div class="checklist categories">
+        <h3>카데고리</h3>
+        <ul>
+        <c:forEach var="category" items="${category}">
+          <li>
+            <input type="checkbox" id="category${category.categoryCode}"/><label for="${category.categoryCode }">${category.categoryName}</label>
+          </li>	        
+        </c:forEach>
+        </ul>
       </div>
       <div class="checklist box-line">
           <h3>시간</h3>
@@ -57,50 +67,6 @@
             <li><a href="">5건 ~ 10건</a></li>
             <li><a href="">10건 이상</a></li>
           </ul>
-      </div>
-      <div class="checklist categories">
-        <h3>카데고리</h3>
-        <ul>
-          <li>
-            <input type="checkbox" id="cate1"/><label for="cate1">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate2"/><label for="cate2">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate3"/><label for="cate3">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate4"/><label for="cate4">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate5"/><label for="cate5">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate6"/><label for="cate6">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate7"/><label for="cate7">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate8"/><label for="cate8">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate9"/><label for="cate9">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate10"/><label for="cate10">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate11"/><label for="cate11">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate12"/><label for="cate12">가전제품</label>
-          </li>
-          <li>
-            <input type="checkbox" id="cate13"/><label for="cate13">가전제품</label>
-          </li>
-        </ul>
       </div>
     </div>
     <div class="layout-right">

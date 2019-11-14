@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.doublecome.repository.mapper.MainMapper">
+	<!--  옥션 전체 리스트 가져오기 -->
+	<select id="mainAuctionList" resultType="Auction">
+		select distinct
+			a.auction_no,
+			a.auction_title,
+			a.auction_reg_date,
+			a.auction_limit_date,
+			a.auction_min_price,
+			a.auction_buy_now,
+			a.auction_min_price,
+			a.file_group_code,
+			max(b.bid_price) over(partition by  a.auction_no) as max_price,
+			count(b.bid_no) over(partition by  a.auction_no) as bid_cnt
+	 	 from auction a 
+	  	inner join bid b
+		   on a.auction_no = b.auction_no
+		  and auction_condition = 1
+          and str_to_date(a.auction_limit_date, "%Y-%m-%d") > str_to_date(date_format(now(), "%Y-%m-%d"), "%Y-%m-%d")
+		order by bid_cnt desc
+	</select>
+</mapper>
