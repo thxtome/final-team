@@ -4,7 +4,6 @@
     text-align: center;
     margin: 0 auto;
     padding-top: 20px;
-    padding: 0;
 }
 #slide {
     float: left;
@@ -24,7 +23,6 @@
     padding-top: 20px;
 }
 #bottom {
-    border-top: 2px solid black;
     width: 666px;
     height: 1000px;
 }
@@ -38,7 +36,7 @@
     height: 100px;
     resize: none;
 }
-#inquiry_box {
+.inquiry_box {
     display: none;
 }
 #tab-2 {
@@ -47,9 +45,6 @@
 #tab-pane {
     width: 666px;
 }
-.nav-item {
-    padding: 5px;
-} 
 #auction-title {
     padding-left: 10px;
     border-bottom: 2px solid black;
@@ -57,11 +52,10 @@
     text-align: left;
 }
 .nav-item {
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
+    border-left: 1px solid #9f9e98;
 }
-.nav-tabs > .nav-item:nth-last-child(1) {
-    border-right: 1px solid black;
+.nav > .nav-item:nth-last-child(1) {
+    border-right: 1px solid #9f9e98;
 }
 .nav-tabs.nav-justified>li>a {
     border-bottom: 1px solid white;
@@ -156,4 +150,17 @@ img {
 .counter-class {
     position: relative;
     left: 10px;
+}
+.nav {
+    width: 100%;
+    z-index: 9999;
+}
+.movenav {
+    border-bottom: none !important;
+    background: white !important;
+}
+.nav-item {
+    border-bottom: 1px solid #9f9e98;
+    border-top: 1px solid #9f9e98;
+    background: #F2F2F2;
 }

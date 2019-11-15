@@ -351,3 +351,26 @@ body a:hover {
   .counter-class .counter-seconds {
     color: #ffbb33;
   }
+
+  .side_seller_info {
+      padding: 15px;
+      padding-bottom: 24px;
+      padding-top: 24px;
+  }
+  blockquote, dd, div, dl, dt, fieldset, form, input, li, ol, p, pre, ul {
+    margin: 0;
+    padding: 0;
+}
+.Seller__subCard.cvr273 .Seller__ratingTitle {
+    width: 150px;
+    font-size: 12px;
+}
+.Seller__ratingTitle {
+    float: left;
+}
+.Seller__subCard.cvr273 .Seller__ratingCount {
+    width: 150px;
+    font-size: 12px;
+    border-left: 1px solid #ccc;
+    float: left;
+}

@@ -91,6 +91,7 @@
                   </div>
                 </li>
 
+
                 <li class="ProductInformation__item js-stickyNavigation-start">
 
 
@@ -131,18 +132,208 @@
                     <div id="auc_detail_ymobile_pc"></div>
                   </div>
                 </li>
+
+
+                <li class="ProductInformation__item side_seller_info">
+                  <dl class="Seller">
+                    <dt class="Seller__title sellerInfo">
+                      <p class="Seller__titleText">판매자 정보</p>
+                    </dt>
+                    <dl class="Seller__card">
+                      <p>닉네임 : <span>SM</span></p>
+                    </dl>
+                    <dd class="Seller__subCard cvr273">
+                        <!--<a href="#" class="Seller__followButton">フォロー</a>-->
+                        <dl class="Seller__rating">
+                          <dd class="Seller__ratingTitle">
+                            거래횟수：<span class="Seller__ratingSum">12</span> 회
+                          </dd>
+                            <dd class="Seller__ratingCount">
+                              <span class="Seller__ratingGood">평가점수 : <span>4.4</span>점</span>
+                          </dd>
+                        </dl>
+                      </dd>
+                      </dl>
+                </li>
+
                 </ul>
             </div>
           </div>
         </div>
       </div>
 
-      <div id="bottom">
-        <ul class="nav nav-tabs nav-justified">
-          <li class="nav-item"><a role="tab" data-toggle="tab" href="#tab-1" class="nav-link active">상품 정보</a></li>
-          <li class="nav-item"><a role="tab" data-toggle="tab" href="#tab-2" class="nav-link">상품 문의</a></li>
-          <li class="nav-item"><a role="tab" data-toggle="tab" href="#tab-3" class="nav-link">판매자 정보</a></li>
-        </ul>
+     <div id="bottom">
+        <div calss="in_bottom">
+            <ul class="nav nav-justified">
+                <li class="nav-item nav1 movenav"><a href="#services" class="nav-link js-scroll-trigger">상품 정보</a></li>
+                <li class="nav-item nav2"><a href="#portfolio" class="nav-link js-scroll-trigger">상품 문의</a></li>
+                <li class="nav-item nav3"><a href="#about" class="nav-link js-scroll-trigger">판매자 후기</a></li>
+            </ul>
+            <section id="services">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <h2 class="text-uppercase section-heading">Services</h2>
+                            <h3 class="text-muted section-subheading">Lorem ipsum dolor sit amet consectetur</h3>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-xs-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i></span>
+                            <h4 class="section-heading">E-Commerce</h4>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        </div>
+                        <div class="col-xs-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-laptop fa-stack-1x fa-inverse"></i></span>
+                            <h4 class="section-heading">Responsive Design</h4>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        </div>
+                        <div class="col-xs-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-lock fa-stack-1x fa-inverse"></i></span>
+                            <h4 class="section-heading">Web Security</h4>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="portfolio" class="bg-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <h2 class="text-uppercase section-heading">Portfolio</h2>
+                            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 portfolio-item">
+                            <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
+                                </div><img src="portfolio/1-thumbnail.jpg" class="img-fluid" /></a>
+                            <div class="portfolio-caption">
+                                <h4>Threads</h4>
+                                <p class="text-muted">Illustration</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 portfolio-item">
+                            <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
+                                </div><img src="portfolio/2-thumbnail.jpg" class="img-fluid" /></a>
+                            <div class="portfolio-caption">
+                                <h4>Explore</h4>
+                                <p class="text-muted">Graphic Design</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 portfolio-item">
+                            <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
+                                </div><img src="portfolio/3-thumbnail.jpg" class="img-fluid" /></a>
+                            <div class="portfolio-caption">
+                                <h4>Finish</h4>
+                                <p class="text-muted">Identity</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 portfolio-item">
+                            <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
+                                </div><img src="portfolio/4-thumbnail.jpg" class="img-fluid" /></a>
+                            <div class="portfolio-caption">
+                                <h4>Lines</h4>
+                                <p class="text-muted">Branding</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 portfolio-item">
+                            <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
+                                </div><img src="portfolio/5-thumbnail.jpg" class="img-fluid img-fluid" /></a>
+                            <div class="portfolio-caption">
+                                <h4>Southwest</h4>
+                                <p class="text-muted">Website Design</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 portfolio-item">
+                            <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
+                                </div><img src="portfolio/6-thumbnail.jpg" class="img-fluid" /></a>
+                            <div class="portfolio-caption">
+                                <h4>Window</h4>
+                                <p class="text-muted">Photography</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="about">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <h2 class="text-uppercase">About</h2>
+                            <h3 class="text-muted section-subheading">Lorem ipsum dolor sit amet consectetur.</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul class="list-group timeline">
+                                <li class="list-group-item">
+                                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="about/1.jpg" /></div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4>2009-2011</h4>
+                                            <h4 class="subheading">Our Humble Beginnings</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item timeline-inverted">
+                                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="about/2.jpg" /></div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4>March 2011</h4>
+                                            <h4 class="subheading">An Agency is Born</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="about/3.jpg" /></div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4>December 2012</h4>
+                                            <h4 class="subheading">Transition to Full Service</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item timeline-inverted">
+                                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="about/4.jpg" /></div>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4>July 2014</h4>
+                                            <h4 class="subheading">Phase Two Expansion</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item timeline-inverted">
+                                    <div class="timeline-image">
+                                        <h4>Be Part<br /> Of Our<br /> Story!</h4>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="tab-1">
             <div id="auction-board">글작성내용</div>
@@ -289,7 +480,7 @@
           </div>
         </div>
       </div>
-
+    </div>
     </div>
   </div>
   <div id="inquiry_box">
@@ -304,11 +495,8 @@
   <script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
   <script src="<c:url value="/resources/js/auction/loopcounter.js" />"></script>
   <script src="<c:url value="/resources/js/auction/swiper.min.js" />"></script>
-  <script src="<c:url value="/resources/js/auction/detail.js" />"></script>
   <script src="<c:url value="/resources/js/auction/sticky.js" />"></script>
-  <script>
-    $('#sidebar').stick_in_parent({ parent: '#contents' });
-  </script>
+  <script src="<c:url value="/resources/js/auction/detail.js" />"></script>
 </body>
 
 </html>

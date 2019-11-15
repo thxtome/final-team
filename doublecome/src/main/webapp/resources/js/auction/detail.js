@@ -73,5 +73,23 @@ $(document).ready(function(){
     loopcounter('counter-class');
   });
 
-  $('#sidebar').stick_in_parent({parent:'#contents'});
-	
+
+$(window).scroll(function () {
+  height = $(document).scrollTop();
+  if ($("#services").offset().top-70 < height && 
+      $("#portfolio").offset().top-70 > height) {
+        $(".nav").children().removeClass("movenav")
+        $(".nav1").addClass("movenav")
+      } else if ($("#portfolio").offset().top-70 < height &&
+      $("#about").offset().top-70 > height
+      ) {
+        $(".nav").children().removeClass("movenav")
+        $(".nav2").addClass("movenav")
+      } else if ($("#about").offset().top-70 < height
+      ) {
+        $(".nav").children().removeClass("movenav")
+        $(".nav3").addClass("movenav")
+      }
+})
+
+$('#sidebar, .nav').stick_in_parent();
