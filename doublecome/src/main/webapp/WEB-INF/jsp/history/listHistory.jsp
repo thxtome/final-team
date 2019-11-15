@@ -9,7 +9,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/common/normalize.css"/>">
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/mypage/mypage.css"/>">
+	href="<c:url value="/resources/css/history/listHistory.css"/>">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -293,6 +293,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="<c:url value="/resources/js/mypage/mypage.js"/>"></script>
+<%-- 	<c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
+	<script src="<c:url value="/resources/js/history/listHistory.js"/>"></script>
 </body>
 </html>
