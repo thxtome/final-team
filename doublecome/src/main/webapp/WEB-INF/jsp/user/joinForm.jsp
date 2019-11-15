@@ -29,17 +29,16 @@
   </div>
   
   <div class="form">
-    <h2>Create an account</h2>
-    <form>
-      <input type="email" placeholder="Email Address"/>
-      <input type="password" placeholder="Password"/>
-      <input type="password" placeholder="Confirm Password"/>
-      <input type="tel" placeholder="Phone Number"/>
-      <input type="text" placeholder="Username"/>
-      <button>Register</button>
+    <h2>회원 가입</h2>
+    <form method="post" action="<c:url value="/user/insert.do"/>">
+      <input type="email" placeholder="이메일" name="userEmail"/>
+      <input type="password" placeholder="비밀 번호" name="userPass"/>
+      <input type="password" placeholder="비밀번호 확인" name="userPassConfirm"/>
+      <input type="tel" placeholder="핸드폰 번호" name="userPhnum"/>
+      <input type="text" placeholder="아이디" name="userNickname"/>
+      <button>가입</button>
     </form>
   </div>
-  <div class="cta"><a href="http://andytran.me">Forgot your password?</a></div>
 </div>
 	
 </body>

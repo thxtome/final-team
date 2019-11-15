@@ -31,13 +31,14 @@
     <div ></div>
   </div>
   <div class="form">
-    <h2>Login to your account</h2>
-    <form>
-      <input type="text" placeholder="Username"/>
-      <input type="password" placeholder="Password"/>
-      <button>Login</button>
-      <a ></a>
-      <a ></a>
+    <h2>로그인</h2>
+    <form action="<c:url value="/user/login.do"/>" method="post">
+      <input type="text" placeholder="이메일" name="userEmail"/>
+      <input type="password" placeholder="비밀번호" name="userPass"/>
+      <button>로그인</button>
+      <a class="rg">회원 가입</a>
+      <a >naver</a>
+      <a >kakao</a>
     </form>
   </div>
   

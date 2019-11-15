@@ -1,7 +1,7 @@
 .topContent {
     margin: auto;
     width: 1000px;
-    height: 200px;
+    height: 150px;
     display: grid;
     grid-template-columns: 4fr 7fr 4fr;
     grid-template-rows: 140px 60px;
@@ -31,7 +31,7 @@
     font-weight: bold;
     line-height: 59px;
     display: flex;
-    color: #D92323;
+    color: #DB1D3B;
 }
 
 .topContent>div:first-child>div:nth-child(3) {
@@ -43,7 +43,7 @@
     font-weight: bold;
     font-size: 40px;
     line-height: 59px;
-    color: #D92323;
+    color: #DB1D3B;
 }
 
 .topContent>div:nth-child(2)>div {
@@ -74,7 +74,7 @@ body {
 
 /* Pen Title */
 .pen-title {
-  padding: 50px 350px;
+  padding: 10px 350px;
   text-align: center;
   letter-spacing: 2px;
 }
@@ -101,7 +101,7 @@ body {
   background: #ffffff;
   max-width: 320px;
   width: 100%;
-  border-top: 5px solid #F20505;
+  border-top: 5px solid #DB1D3B;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
 }
@@ -172,7 +172,7 @@ body {
 }
 .form-module button {
   cursor: pointer;
-  background: #F20505;
+  background: #DB1D3B;
   width: 100%;
   border: 0;
   padding: 10px 15px;
@@ -180,7 +180,7 @@ body {
   transition: 0.3s ease;
 }
 .form-module button:hover {
-  background: #178ab4;
+  background: #FF3B58;
 }
 .form-module .cta {
   background: #f2f2f2;
