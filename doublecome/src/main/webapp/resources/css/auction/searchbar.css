@@ -1,0 +1,56 @@
+.option_selectbar {
+	width : 980px;
+	height : 45px;
+	background : #F2F2F2;
+}
+
+.card-body {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	height : 40px;
+}
+.card-body > .card-title {
+	line-height : 42px;
+}
+
+.sort_list li {
+	float : left;
+	list-style:none;
+	height: 30px;
+    margin-left: 14px;
+    line-height: 45px;
+}
+.sort_list {
+	margin :0;
+}
+.sort_list:last-child {
+	margin-left : 0;
+}
+.sort_list li a{
+	font-family: gulim;
+    color: #959595;
+    font-size: 12px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-decoration: none;
+}
+.view_count {
+	line-height: 50px;
+    margin-left: 20px;
+	
+}
+.sort_list li span {
+    display: inline-block;
+    overflow: hidden;
+    width: 7px;
+    height: 7px;
+    margin: -3px 4px 0 0;
+    background: url(https://ssl.pstatic.net/imgshopping/static/pc-real-2019/img/search/sp_search_v8.png) no-repeat -180px -18px;
+    line-height: 9999px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.sort_list li span.on {
+	width : 7px;
+	height : 7px;
+	background: url(https://ssl.pstatic.net/imgshopping/static/pc-real-2019/img/search/sp_search_v8.png) no-repeat -190px -21px;
+}

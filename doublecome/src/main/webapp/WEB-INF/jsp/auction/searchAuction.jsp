@@ -19,12 +19,11 @@
     type="text/css">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchsidebar.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchcontent.css" />">
-  <link rel="stylesheet" href="wireframe.css">
-  <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchbar.css" />">
 </head>
 
 <body>
-	<c:import url="/WEB-INF/jsp/include/header.jsp" />
+<c:import url="/WEB-INF/jsp/include/header.jsp" />
   <div id="wrapper">
     <div id="sidebar">
       <div class="checklist box-line">
@@ -42,7 +41,7 @@
             </li>
           </ul>
       </div>
-      <div class="checklist categories">
+      <div class="checklist box-line">
         <h3>카데고리</h3>
         <ul>
         <c:forEach var="category" items="${category}">
@@ -71,11 +70,30 @@
     </div>
     <div class="layout-right">
       <div class="py-4 bg-light">
+      	<div class="option_selectbar">
+      		
+      	</div>
         <div class="container w-75">
           <div class="row">
             <div class="col-md-12" style="">
               <div class="card-body" style="">
                 <h5 class="card-title m-0" style="	text-shadow: 0px 0px 1px black;">Best Auction</h5>
+               	<div class="sort_area">
+		      		<ul class="sort_list" id="sort_list">
+						<li id="_sort_rel"><a href="#" data-filter-name="sort" data-filter-value="rel" title="랭킹순"><span></span>랭킹순</a></li>
+						<li id="_sort_price_asc"><a href="#" data-filter-name="sort" data-filter-value="price_asc" title="낮은 가격순"><span></span>낮은 가격순</a></li>
+						<li id="_sort_price_dsc"><a href="#" data-filter-name="sort" data-filter-value="price_dsc" title="높은 가격순"><span></span>높은 가격순</a></li>
+						<li id="_sort_date"><a href="#" data-filter-name="sort" data-filter-value="date" title="등록일순"><span></span>등록일순</a></li>
+						<li  id="_sort_review"><a href="#" data-filter-name="sort" data-filter-value="review" title="입찰 많은순"><span></span>입찰횟수순</a></li>
+					</ul>
+					<span class="view_count">
+						<select style="height:height: 22px">
+							<option selected="selected" value="1">10개씩 보기</option>
+							<option value="1">20개씩 보기</option>
+							<option value="1">40개씩 보기</option>
+						</select>
+					</span>
+		      	</div>
               </div>
             </div>
           </div>
@@ -230,6 +248,7 @@
       $(this).val($(this).val().replace(/[^0-9]/g,""));
   });
   </script>
+  <script src="<c:url value="/resources/js/auction/searchauction.js" />"></script>
 </body>
 
 </html>

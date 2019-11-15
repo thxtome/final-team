@@ -73,7 +73,7 @@
 		</div>
 	</div>
 </div>
-<hr />
+<hr id="bdhr" />
 
 
 

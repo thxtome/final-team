@@ -3,11 +3,17 @@
     height: 40px;
     background: rgb(230, 230, 230);
 }
-
+.topContent {
+	border-bottom : eee;
+}
 .topbar>div {
     width: 1000px;
     margin: auto;
     height: 40px;
+}
+#bdhr {
+	margin : 0 ;
+	padding: 0;
 }
 
 .topbar > div span{	
