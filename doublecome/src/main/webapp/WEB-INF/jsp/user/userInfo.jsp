@@ -21,13 +21,11 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	</header>
 	<div id="bg">
-	<div id="registBox">
-	
+		<div id="registBox">
+				<h2>마이 페이지</h2>
+		
 					  
-		<!-- 
-		<form class="uploader">
-		</form> 
-		 -->
+		
 		<form method="post" action="/doublecome/user/insert.do" class="uploader" enctype="multipart/form-data" >
 		<span id="pfimgbox"> 
 					<input class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" />
@@ -44,49 +42,45 @@
         </span>
         
      <a href="<c:url value="/mypage/mypage.do"/>">
-        <span id="scoreBox">
 			거래내역/후기
-        </span>
      </a>
-	<!--
-			<img src="<c:url value="/src/main/webapp/resources/css/user/defaultpfimg.jpeg"/>" id="pfimg"/>
-			<button>사진 등록</button>
-	-->	
+	
 		
-		
+		<span id="registInputBox">
 		<div id="registInputBox1" class="registInputBox">
-				<i class="far fa-envelope fa-3x" id="icon"></i>
-				<div id="registInput">
+				<i class="far fa-envelope fa-1x" id="icon"></i>
+				
 				<input id="registInput" name="userEmail" type="text" placeholder="이메일 ">
-				</div>
+				
 				<div id="alert"></div>
 		</div>
 		<div id="registInputBox2" class="registInputBox">
-				<i class="fas fa-unlock-alt fa-3x" id="icon"></i>
-				<div id="registInput">
+				<i class="fas fa-unlock-alt fa-1x" id="icon"></i>
+				
 				<input id="registInput" name="userPass" type="password" placeholder="비밀번호">
-				</div>
+				
 				<div id="alert"></div>
-				<div id="registInput">
+				
 				<input id="registInput" name="userPassConfirm" type="password" placeholder="비밀번호 확인">
-				</div>
+				
 		</div>
 		<div id="registInputBox3" class="registInputBox">
-				<i class="fas fa-mobile-alt fa-3x" id="icon"></i>
-				<div id="registInput">
+				<i class="fas fa-mobile-alt fa-1x" id="icon"></i>
+				
 				<input id="registInput" name="userPhnum" type="text" placeholder="핸드폰 번호">
-				</div>
+				
 				<div id="alert"></div>
 		</div>
 		<div id="registInputBox4" class="registInputBox">
-				<i class="fas fa-user fa-3x" id="icon"></i>
-				<div id="registInput">
-				<input id="registInput" name="userNickname" type="text" placeholder="별명"></div>
+				<i class="fas fa-user fa-1x" id="icon"></i>
+				
+				<input id="registInput" name="userNickname" type="text" placeholder="별명">
 				<div id="alert"></div>
 		</div>
+		</span>
 			<button id="registDoBtn" type="submit">수정</button>
-		</form>
 		
+		</form>
 	</div>
 	</div>
 	<script src="<c:url value="/resources/js/user/userInfo.js" />" ></script>

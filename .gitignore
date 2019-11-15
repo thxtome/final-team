@@ -104,3 +104,15 @@ hs_err_pid*
 target/
 
 # End of https://www.gitignore.io/api/java,eclipse,java-web
+Servers/Tomcat v9.0 Server at localhost-config/tomcat-users.xml
+Servers/Tomcat v9.0 Server at localhost-config/context.xml
+Servers/Tomcat v9.0 Server at localhost-config/catalina.properties
+Servers/Tomcat v9.0 Server at localhost-config/catalina.policy
+Servers/Tomcat v9.0 Server at localhost-config/web.xml
+Servers/Tomcat v9.0 Server at localhost-config/server.xml
+Servers/Tomcat v9.0-config/web.xml
+Servers/Tomcat v9.0-config/tomcat-users.xml
+Servers/Tomcat v9.0-config/server.xml
+Servers/Tomcat v9.0-config/context.xml
+Servers/Tomcat v9.0-config/catalina.properties
+Servers/Tomcat v9.0-config/catalina.policy

@@ -40,7 +40,7 @@
 	<div>
 		
 		<div>
-			<img src="/images/mypage.svg" alt=""><span><a>마이페이지</a></span>
+			<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="user/userInfo.do" />">마이페이지</a></span>
 		</div>
 		<div>
 			<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
