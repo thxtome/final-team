@@ -160,11 +160,15 @@ body {
   display: block;
   width: 100%;
   border: 1px solid #d9d9d9;
-  margin: 0 0 20px;
+  margin: 3 0 2px;
   padding: 10px 15px;
   box-sizing: border-box;
   font-wieght: 400;
   transition: 0.3s ease;
+}
+.form-module .alert{
+	height: 15px;
+    width: 240px;
 }
 .form-module input:focus {
   border: 1px solid #33b5e5;

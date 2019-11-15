@@ -50,7 +50,7 @@
 		<div id="registInputBox1" class="registInputBox">
 				<i class="far fa-envelope fa-1x" id="icon"></i>
 				
-				<input id="registInput" name="userEmail" type="text" placeholder="이메일 ">
+				<span id="registInput" name="userEmail">ㅋ@ㅋ</span>
 				
 				<div id="alert"></div>
 		</div>
@@ -61,24 +61,24 @@
 				
 				<div id="alert"></div>
 				
-				<input id="registInput" name="userPassConfirm" type="password" placeholder="비밀번호 확인">
+				<!-- <input id="registInput" name="userPassConfirm" type="password" placeholder="비밀번호 확인"> -->
 				
 		</div>
 		<div id="registInputBox3" class="registInputBox">
 				<i class="fas fa-mobile-alt fa-1x" id="icon"></i>
 				
-				<input id="registInput" name="userPhnum" type="text" placeholder="핸드폰 번호">
+				<span id="registInput" name="userPhnum">01077278287</span>
 				
 				<div id="alert"></div>
 		</div>
 		<div id="registInputBox4" class="registInputBox">
 				<i class="fas fa-user fa-1x" id="icon"></i>
 				
-				<input id="registInput" name="userNickname" type="text" placeholder="별명">
+				<span id="registInput" name="userNickname">ㅋ</span>
 				<div id="alert"></div>
 		</div>
 		</span>
-			<button id="registDoBtn" type="submit">수정</button>
+			<a id="registDoBtn" href="">수정</a>
 		
 		</form>
 	</div>
