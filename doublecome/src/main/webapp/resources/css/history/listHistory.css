@@ -13,7 +13,7 @@
     width: 900px;
     height: 1200px;
 }
-#reviewhead, #purchasehaed, #saleshaed {
+#reviewhead, #purchasehead, #saleshead {
     position: relative;
     width: 900px;
     height: 50px;
@@ -89,7 +89,7 @@
     cursor: pointer;
 }
 .tabchoice{
-    border: 2px solid #EF2011;
+    border: 2px solid #DB1D3B;
     border-bottom: none;
     width: 150px;
     height: 43px;
@@ -106,8 +106,8 @@
     padding: 0;
 }
 #navbar li{
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
+    margin: 0;
+    padding: 0;
     float: left;
 
     list-style: none;
@@ -127,13 +127,13 @@
     text-align: center;
     line-height: 50px;
     border: 1px solid #c3c3c3;
-    background: rgb(243, 240, 240);
+    background:  #F2F2F2;
     margin-bottom: 20px;
     color: black;
 }
 .navchoice{
     background: white;
-    border-bottom: 0 none;
+    border-bottom: none;
 }
 .barfixed {
     position: fixed;
@@ -141,7 +141,6 @@
     z-index: 2;
 }
 #review{
-    position: relative;
     width: 900px;
 }
 #searchtype{
@@ -163,7 +162,6 @@
 	float: left;
     width: 900px;
     list-style: none;
-    overflow: auto;
 }
 #reviewcon ul li:last-child{
     border-bottom: 1px solid #c3c3c3;
@@ -233,7 +231,7 @@
     /* float: left; */
     width: 900px;
     height: 60px;
-    background: rgb(243, 240, 240);
+    background:  #F2F2F2;
     border-bottom: 1px solid #e7e7e7;
 }
 .listdate{
@@ -242,6 +240,7 @@
     margin-left: 10px;
     margin-right: 0;
     float: left;
+    text-align: left;
 }
 .datetitle{
     font-size: 14px;
@@ -319,7 +318,7 @@
     display: block;
     width: 80px;
     height: 27px;
-    background-color: #EF2011;
+    background-color: #DB1D3B;
     border-bottom: 2px solid rgb(170, 26, 15);
     color: #fff;
     border-radius: 3px;
@@ -332,8 +331,8 @@
     width: 80px;
     height: 27px;
     margin: auto;
-    border: 1px solid #EF2011;
-    color: #EF2011;
+    border: 1px solid #DB1D3B;
+    color: #DB1D3B;
     border-radius: 3px;
     box-shadow: inset 0 -2px #e6e6e6;
     cursor: pointer;
@@ -448,7 +447,7 @@
     cursor: pointer;
     font-weight: bold;
     /* font-size: 20px; */
-    color: rgb(231, 102, 93);
+    color: #FF3B58;
 }
 .scorechoice{
     font-size: 20px;
@@ -460,13 +459,13 @@
     border: none;
     width: 80px;
     height: 35px;
-    background-color: #EF2011;
+    background-color: #DB1D3B;
     border-bottom :2px solid rgb(170, 26, 15);
     color: white;
     border-radius: 10px;
 }
 .reviewdetail{
-	display: inline-block;
+	display: none;
 	margin: auto;
 	width: 880px;
 	height: 500px;
@@ -490,7 +489,6 @@
 	line-height: 20px;
 }
 .scorezone{
-s
 	grid-area: scorezone;
 	line-height: 20px;
 }
@@ -583,9 +581,57 @@ s
     border: none;
     width: 80px;
     height: 35px;
-    background-color: #EF2011;
+    background-color: #DB1D3B;
     border-bottom :2px solid rgb(170, 26, 15);
     color: white;
     border-radius: 10px;
     cursor: pointer;
+}
+#searchtype {
+    width: 100%;
+    height: 30px;
+}
+#searchtype>div:first-child {
+    float: left;
+    margin-left: 25px;
+}
+#searchtype ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#searchtype li {
+    margin-right: 20px;
+    margin-top: 10px;
+    float: left;
+    font-size: 14px;
+    color: gray;
+}
+#searchtype li:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+#morebtn{
+	width:800px;
+	height: 40px;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 20px;
+	margin-left: 40px;
+	margin-bottom: 60px;
+	background-color: #ffffff;
+	color: #a1a1a1;
+}
+#morebtn:hover {
+	background-color: #f2f2f2; 
+}
+#tothetop{
+	 position: fixed; 
+	 bottom: 2rem; 
+	 right: 2rem; 
+	 cursor: pointer;
 }
