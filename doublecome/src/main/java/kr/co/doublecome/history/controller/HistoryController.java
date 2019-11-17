@@ -8,4 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HistoryController {
 	@RequestMapping("/listHistory.do")
 	public void listHistory() {}
+	
+	@RequestMapping("/retrieveReview.do")
+	public void retrieveReview() {}
+	
+	@RequestMapping("/editReview.do")
+	public void editReview() {}
 }

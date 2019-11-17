@@ -5,19 +5,57 @@
     margin: auto;
     text-align: center;
 }
-#innercontent{
+#innerContent{
 	width: 900px;
 	margin: auto;
 }
-#userinfo{
+#myInfo{
+	display: grid;
     width: 900px;
-    height: 1200px;
+    height: 150px;
+    margin: 50px auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-areas:
+	"myDeal purchaseDeal salesDeal reviewDeal";
 }
-#reviewhead, #purchasehead, #saleshead {
+#myDeal{
+	grid-area: myDeal;
+	background-color: #DB1D3B;
+	color: white;
+	font-size: 40px;
+	text-align: center;
+	line-height: 150px;
+}
+#purchaseDeal, #salesDeal, #reviewDeal{
+	border-right: 1px solid #FFE6E6;
+	background-color: #FFC8C8;
+	color: white;
+}
+#purchaseDeal > div, #salesDeal > div, #reviewDeal > div{
+	margin: 20px 70px;
+	font-size: 17px;
+}
+#purchaseDeal :nth-child(2), #salesDeal :nth-child(2), #reviewDeal :nth-child(2){
+	display: inline-block;
+	margin-left: 70px;
+	margin-right: 10px;
+	font-size: 60px;
+	font-weight: lighter;
+}
+#purchaseDeal{
+	grid-area: purchaseDeal;
+}
+#salesDeal{
+	grid-area: salesDeal;
+}
+#reviewDeal{
+	grid-area: reviewDeal;
+}
+#reviewHead, #purchaseHead, #salesHead {
     position: relative;
     width: 900px;
     height: 50px;
-    margin-top: 25px;
+    margin-top: 30px;
     
     font-style: normal;
     font-weight: bold;
@@ -28,31 +66,31 @@
 /*     border-top: 3px solid #555; */
     color: #000000;
 }
-.tabhead{
+.tabHead{
     position: relative;
     width: 900px;
     height: 40px;
     list-style: none;
-    border-bottom: 2px solid #EF2011;
+    border-bottom: 2px solid #DB1D3B;
+    text-decoration: none;
     padding-left: 0;
 }
-.tabhead li{
+.tabHead li{
     margin: 0 0 0 0;
     padding: 0 0 0 0;
     border : 0;
     float: left;
 
     width: 150px;
-    height: 39px;  
+    height: 36px;  
     font-size: 15px;
     line-height: 49px;
     display: flex;
     align-items: center;
     text-align: center;
-
     color: #000000;
 }
-.purchasetablist{
+.purchaseTabList, .salesTabList, .reviewTabList{
     display: inline-block;
     width: 150px;
     height: 39px;
@@ -63,32 +101,10 @@
     border: 1px solid #c3c3c3;
     border-bottom: 0 none;
     cursor: pointer;
-}
-.salestablist{
-    display: inline-block;
-    width: 150px;
-    height: 39px;
-    margin-left: -1px;
-    background-color: #fff;
+    color: black;
     text-decoration: none;
-    text-align: center;
-    border: 1px solid #c3c3c3;
-    border-bottom: 0 none;
-    cursor: pointer;
 }
-.reviewtablist{
-    display: inline-block;
-    width: 150px;
-    height: 39px;
-    margin-left: -1px;
-    background-color: #fff;
-    text-decoration: none;
-    text-align: center;
-    border: 1px solid #c3c3c3;
-    border-bottom: 0 none;
-    cursor: pointer;
-}
-.tabchoice{
+.tabChoice{
     border: 2px solid #DB1D3B;
     border-bottom: none;
     width: 150px;
@@ -97,15 +113,16 @@
     font-weight: bold;
     z-index: 1;
 }
-#navbar{
+#navBar{
     list-style: none;
     width: 900px;
     height: 50px; 
-    margin-left: 50px;
-    margin-top: 0;
+/*     margin-left: 50px; */
+/*     margin-top: 0; */
+	margin: auto;
     padding: 0;
 }
-#navbar li{
+#navBar li{
     margin: 0;
     padding: 0;
     float: left;
@@ -114,7 +131,7 @@
     width: 300px;
     height: 50px;
 }
-.navlist{
+.navList{
     font-style: normal;
     font-weight: normal;
     font-size: 17px;
@@ -131,70 +148,75 @@
     margin-bottom: 20px;
     color: black;
 }
-.navchoice{
+.navChoice{
     background: white;
     border-bottom: none;
 }
-.barfixed {
+.barFixed {
     position: fixed;
     top: 0px;
     z-index: 2;
 }
-#review{
+#sendReview, #receiveReview{
     width: 900px;
+    margin-top: 30px;
 }
-#searchtype{
+#sendReview{
+	display: none;
+}
+#searchType{
     display: inline-block;
     width: 900px;
+    margin-bottom: 20px;
 }
-#searchtype select{
+#searchType select{
     float: right;
     width: 70px;
     height: 24px;
     font-size: 13px;
 }
-#reviewcon{
+#reviewCon{
     width: 900px;
     margin: -15px;
     overflow: hidden;
 }
-#reviewcon ul{
+#reviewCon ul{
 	float: left;
     width: 900px;
     list-style: none;
 }
-#reviewcon ul li:last-child{
+#reviewCon ul li:last-child{
     border-bottom: 1px solid #c3c3c3;
 }
 
-.preview{
+.preView{
     height: 120px;
     border-bottom: 1px solid #c3c3c3;
     border-top: 1px solid #c3c3c3;
 }
-#reviewcon ul li > div{
+#reviewCon ul li > div{
     float: left;
     margin-top: 15px;
 }
-.scorearea{
+.scoreArea{
     /* border: 1px solid black; */
-    width: 150px;
+    width: 200px;
     height: 80px;
     text-align: center;
 }
-.scorearea > div{
+.scoreArea > div{
     float: left;
 }
-.contentarea{
+.contentArea{
     /* border: 1px solid black; */
-    width: 450px;
+    width: 400px;
     height: 80px;
     font-size: 12px;
     padding-left: 20px;
     line-height: 32px;
     margin: 0;
 }
-.writerarea{
+.writerArea{
     /* border: 1px solid black; */
     width: 150px;
     height: 80px;
@@ -209,16 +231,23 @@
     line-height: 85px;
     margin-left: 30px;
 }
-.scoreform{
+.scoreForm{
     width:50px;
     font-size: 17px;
     line-height: 100px;
     margin: 0;
 }
-.auctiontitle, .reviewer, .auctionwriter{
+.auctionTitle, .reviewer, .auctionWriter{
     font-weight: bold;
+    color: black;
 }
-.listcon{
+.reviewTitle{
+	cursor: pointer;
+}
+.reviewTitle:hover{
+	text-decoration: underline;
+}
+.listCon{
     width: 900px;
     height: 260px;
     border: 1px solid #e7e7e7;
@@ -226,7 +255,7 @@
     margin-top: 40px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-.listhead{
+.listHead{
     display: inline-block;
     /* float: left; */
     width: 900px;
@@ -234,7 +263,7 @@
     background:  #F2F2F2;
     border-bottom: 1px solid #e7e7e7;
 }
-.listdate{
+.listDate{
     width: 400px;
     line-height: 60px;
     margin-left: 10px;
@@ -242,13 +271,13 @@
     float: left;
     text-align: left;
 }
-.datetitle{
+.dateTitle{
     font-size: 14px;
 }
-.datecontent{
+.dateContent{
     font-size: 17px;
 }
-.detailcon{
+.detailCon{
     float: left;
     width: 370px;
     height: 60px;
@@ -256,56 +285,58 @@
     margin-left: 100px;
     font-size: 17px;
 }
-.detailcon a{
+.detailCon a{
     display: inline-block;
     width: 100%;
     height: 100%;
     text-align: right;
     line-height: 60px;
     font-size: 14px;
+    color: black;
 }
-.listbody{
+.listBody{
     display: inline-block;
     width: 900px;
     height: 200px;
-    /* float: left; */
+    margin-top: 20px;
 }
-.productimg{
+.productImg{
     display: inline-block;
     width: 200px;
     height: 160px;
     text-align: center;
-    line-height: 250px;
+    line-height: 150px;
 }
-.imgcon{
+.imgCon{
     width: 120px;
     height: 120px;
     border: 1px solid black;
 }
-.listbody > ul {
+.listBody > ul {
     list-style: none;
     float: left;
     width: 900px;
     height: 170px;
     padding: 0;
 }
-.listbody ul li > div{
+.listBody ul li > div{
     float: left;
 }
-.productinfo{
+.productInfo{
     width: 500px;
     height: 160px;
 }
-.listtitle, .listregdate{
+.listTitle, .listRegDate{
     margin-top: 15px;
     margin-bottom: 15px;
+    color: black;
 }
-.listtitle{
+.listTitle{
     display: inline-block;
     font-weight: bold;
     font-size: 14px;
 }
-.writerinfo{
+.writerInfo{
     float: left;
     width: 200px;
     height: 160px;
@@ -314,7 +345,7 @@
     font-size: 15px;
 }
 
-.reportbtn{
+.reportBtn{
     display: block;
     width: 80px;
     height: 27px;
@@ -326,7 +357,7 @@
     font-size: 13px;
     line-height: 30px;
 }
-.reviewbtn{
+.reviewBtn{
     display: block;
     width: 80px;
     height: 27px;
@@ -352,129 +383,11 @@
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 50px auto; /* 15% from the top and centered */
-    padding: 20px;
-    width: 800px; /* Could be more or less, depending on screen size */                          
-    height: 600px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-.reviewform{
-    width: 700px;
-    height: 550px;
-    margin: 10px auto;
-}
-.reviewtitle{
-	cursor: pointer;
-}
-.reviewtitle:hover{
-	font-weight: bold;
-}
-.scorediv, .reviewtitlediv, .photodiv{
-    display: grid;
-    width: 700px;
-    height: 70px;
-    grid-template-columns: 100px 600px;
-    border-top: 1px solid #ddd;
-}
-.reviewcondiv{
-    display: grid;
-    width: 700px;
-    height: 300px;
-    grid-template-columns: 100px 600px;
-    border-top: 1px solid #ddd;
-}
-.regitbtn {
-    width: 700px;
-    height: 40px;
-    border-top: 1px solid #ddd;
-    text-align: center;
-    line-height: 50px;
-}
-.scorediv > div, .reviewtitlediv > div, .photodiv > div{
-    text-align: center;
-    line-height: 80px;
-    font-size: 13px;
-}
-.photodiv div:last-child {
-    text-align: center;
-    font-size: 12px;
-    color: #888888;
-}
-.reviewtitlediv > div > input{
-    width: 500px;
-    height: 30px;
-    font-size: 13px;
-}
-.reviewcondiv > div{
-    text-align: center;
-    line-height: 300px;
-    font-size: 13px;
-}
-.reviewcondiv > div > textarea{
-    width: 500px;
-    height: 250px;
-    margin-top: 20px;
-    resize: none;
-}
-
-.scorebar span{
-	display: inline-block;
-	text-align: center;
-	line-height: 15px;
-    padding: 5px;
-    font-size: 18px;
-    width: 15px;
-    height: 15px;
-}
-.scorebar span:hover{
-    cursor: pointer;
-    font-weight: bold;
-    /* font-size: 20px; */
-    color: #FF3B58;
-}
-.scorechoice{
-    font-size: 20px;
-    background-color: rgb(231, 102, 93);
-    border-radius: 50%;
-    color: white;
-}
-.regitbtn button{
-    border: none;
-    width: 80px;
-    height: 35px;
-    background-color: #DB1D3B;
-    border-bottom :2px solid rgb(170, 26, 15);
-    color: white;
-    border-radius: 10px;
-}
-.reviewdetail{
+.reviewDetail{
 	display: none;
 	margin: auto;
 	width: 880px;
-	height: 500px;
-}
-.profileimg{
-	display: inline-block;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
+/* 	height: 500px; */
 }
 .editdel{
 	width:90px;
@@ -484,135 +397,77 @@
 	font-size: 12px;
 	cursor: pointer;
 }
-.profilediv{
-	grid-area: profilediv;
-	line-height: 20px;
-}
-.scorezone{
-	grid-area: scorezone;
-	line-height: 20px;
-}
-.nicknamediv{
-	grid-area: nicknamediv;
-	line-height: 20px;
-}
-.regdatediv{
-	grid-area: regdatediv;
-	line-height: 20px;
-}
-.onelinediv{
-	grid-area: onelinediv;
-	line-height: 20px;
-}
-.reviewimg{
-	grid-area: reviewimg;
-}
-.reviewdiv{
-	grid-area: reviewdiv;
-	line-height: 20px;
-	width: 400px;
-	margin: auto;
-	text-align: left;
-}
-.conclose{
-	grid-area: conclose;
-	text-align: right;
-	margin-right: 5px;
-	font-size: 20px;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-.reviewcontent{
+.reviewContent{
 	margin-left: 120px;
 	font-size: 13px;
 	display: grid;
 	width: 600px;
-	height: 500px;
-	grid-template-columns: 1fr 1fr 1fr 4fr;
-  	grid-template-rows: 30px 30px 100px 300px;
-/* 	border: 1px solid black; */
+/* 	height: 500px; */
+	grid-template-columns: 0.85fr 0.45fr 1fr;
+  	grid-template-rows: 40px 40px 200px;
 	grid-template-areas:
-	"profilediv scorezone scorezone conclose"
-	"profilediv nicknamediv regdatediv onelinediv"
-	"reviewdiv reviewdiv reviewdiv reviewdiv"
-	"reviewimg reviewimg reviewimg reviewimg";
+	"profileDiv nicknameDiv regdateDiv"
+	"profileDiv onelineDiv onelineDiv"
+	"reviewDiv reviewDiv reviewDiv";
 }
-.emodal{
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 3; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+.profileImg{
+	display: inline-block;
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	margin-left: 100px;
 }
-/* Modal Content/Box */
-.editmodal{
-    background-color: #fefefe;
-    margin: 50px auto; /* 15% from the top and centered */
-    padding: 20px;
-    width: 800px; /* Could be more or less, depending on screen size */                          
-    height: 600px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+.profileDiv, .nicknameDiv, .onelineDiv, .regdateDiv{
+	line-height: 36px;
 }
-/* The Close Button */
-.eclose {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+.profileDiv{
+	grid-area: profileDiv;
 }
-.eclose:hover,
-.eclose:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.nicknameDiv{
+	grid-area: nicknameDiv;
+	font-weight: bold;
 }
-#editreviewform{
-    width: 700px;
-    height: 550px;
-    margin: 10px auto;
+.regdateDiv{
+	grid-area: regdateDiv;
 }
-.editbtn button{
-    border: none;
-    width: 80px;
-    height: 35px;
-    background-color: #DB1D3B;
-    border-bottom :2px solid rgb(170, 26, 15);
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
+.onelineDiv{
+	grid-area: onelineDiv;
 }
-#searchtype {
+.reviewDiv{
+	grid-area: reviewDiv;
+	line-height: 20px;
+	width: 400px;
+	margin: 10px auto;
+	padding-top: 15px;
+	text-align: left;
+	border-top: 1px solid #C3C3C3;
+}
+#searchType {
     width: 100%;
     height: 30px;
 }
-#searchtype>div:first-child {
+#searchType>div:first-child {
     float: left;
     margin-left: 25px;
 }
-#searchtype ul {
+#searchType ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-#searchtype li {
+#searchType li {
     margin-right: 20px;
     margin-top: 10px;
     float: left;
     font-size: 14px;
     color: gray;
 }
-#searchtype li:hover{
+#searchType li:hover{
     opacity: 0.6;
     cursor: pointer;
 }
-#morebtn{
+#moreBtn{
 	width:800px;
 	height: 40px;
 	border: 1px solid #e6e6e6;
@@ -621,17 +476,17 @@
 	text-align: center;
 	cursor: pointer;
 	margin-top: 20px;
-	margin-left: 40px;
+	margin-left: 70px;
 	margin-bottom: 60px;
 	background-color: #ffffff;
 	color: #a1a1a1;
 }
-#morebtn:hover {
+#moreBtn:hover {
 	background-color: #f2f2f2; 
 }
-#tothetop{
+#toTheTop{
 	 position: fixed; 
-	 bottom: 2rem; 
-	 right: 2rem; 
+	 bottom: 50px; 
+	 right: 50px; 
 	 cursor: pointer;
 }

@@ -1,99 +1,85 @@
-let $navbar = $("#navbar");
-let navtop = $navbar.offset().top;
-
-$navbar.find("a").click((e) => {
+// 네비게이션바 클릭시 이동
+let $navBar = $("#navBar");
+let navTop = $navBar.offset().top;
+$navBar.find("a").click((e) => {
 	let topTarget = '';
-    $navbar.find("a").removeClass("navchoice");
-    $(e.target).addClass("navchoice");
-    switch ($(e.target).data("location")){
-    case "purchasehead": topTarget = "purchasehead"; break;
-    case "saleshead": topTarget = "saleshead"; break;
-    case "reviewhead": topTarget = "reviewhead"; break;
+	let minus = 100;
+	$location = $(e.target).data("location");
+    switch ($location){
+    	case "purchaseHead": 
+    		$topTarget = $("#"+$location); 
+    		break;
+    	case "salesHead": 
+    		$topTarget = $("#"+$location); 
+    		minus = 120;
+    		break;
+    	case "reviewHead": 
+    		$topTarget = $("#"+$location); 
+    		minus = 50; 
+    		break;
     }
-    jQuery('html, body').animate( { scrollTop : $(`#${topTarget}`).offset().top - 100 }, 400 );
+    jQuery('html, body').animate( { scrollTop : $topTarget.offset().top - minus }, 400 );
 });
+
+// 네비게이션바 고정 & 색깔 변화
+let navFun = function(navigation) {
+	$navBar.find("a").removeClass("navChoice");
+	$navBar.find(navigation).addClass("navChoice");
+};
 $(window).scroll(function () {
     // 네비게이션 상단바 고정
     height = $(document).scrollTop();
-    if (height >= navtop){
-        $navbar.addClass("barfixed");
-        if (height > $("#purchasehead").offset().top && height < $("#saleshead").offset().top){
-        	$navbar.find("a").removeClass("navchoice");
-        	$navbar.find("a:eq(0)").addClass("navchoice");
-        } else if (height > $("#saleshead").offset().top && height < $("#reviewhead").offset().top){
-        	$navbar.find("a").removeClass("navchoice");
-        	$navbar.find("a:eq(1)").addClass("navchoice");
+    if (height >= navTop){
+        $navBar.addClass("barFixed");
+        if (height > $("#purchaseHead").offset().top-60 && height < $("#salesHead").offset().top-70){
+        	navFun("a:eq(0)");
+        } else if (height > $("#salesHead").offset().top-70 && height < $("#reviewHead").offset().top-100){
+        	navFun("a:eq(1)");
         } 
-        else if (height > $("#reviewhead").offset().top){
-        	$navbar.find("a").removeClass("navchoice");
-        	$navbar.find("a:eq(2)").addClass("navchoice");
+        else if (height > $("#reviewHead").offset().top-100){
+        	navFun("a:eq(2)");
         }
-    } else if(height < navtop) {
-        $navbar.removeClass("barfixed");
-        $navbar.find("a").removeClass("navchoice");
-        $navbar.find("a:eq(0)").addClass("navchoice");
+    } else if(height < navTop) {
+        $navBar.removeClass("barFixed");
+        navFun("a:eq(0)");
     };
 });
 
-$("#scorebar").find("span").click((e) => {
-	$("#scorebar").find("span").removeClass("scorechoice");
-	$(e.target).addClass("scorechoice");
+//  각 구매내역, 판매내역, 후기 탭 클릭시 색상변화 모듈화하기(e.target문제 해결)
+$(".purchaseTabList").click((e) => {
+	$(".purchaseTabList").removeClass("tabChoice");
+	$(e.target).addClass("tabChoice");
 });
-
-let modal =$("#myModal");
-let btn = $(".reviewbtn");
-let span = $(".close");                                          
-$(".reviewbtn").click((e) => {
-    modal.css("display", "block");
+$(".salesTabList").click((e) => {
+	$(".salesTabList").removeClass("tabChoice");
+	$(e.target).addClass("tabChoice");
 });
-span.click((e) => {
-    modal.css("display", "none");
-});
-$(window).click((e) => {
-    if (e.target == modal) {
-        modal.css("display", "none");
-    }
-}); 
-$(".purchasetablist").click((e) => {
-	$(".purchasetablist").removeClass("tabchoice");
-	$(e.target).addClass("tabchoice");
-});
-$(".salestablist").click((e) => {
-	$(".salestablist").removeClass("tabchoice");
-	$(e.target).addClass("tabchoice");
-});
-$(".reviewtablist").click((e) => {
-	$(".reviewtablist").removeClass("tabchoice");
-	$(e.target).addClass("tabchoice");
-});
-let eModal = $("#editModal");
-let editA = $(".editreview");
-let eclose = $(".eclose"); 
-$(".editreview").click((e) => {
-	console.log("클릭됨");
-    eModal.css("display", "block");
-});
-eclose.click((e) => {
-    eModal.css("display", "none");
-});
-$(window).click((e) => {
-    if (e.target == eModal) {
-        eModal.css("display", "none");
-    }
-});
-
-$(".reviewtitle").click((e) => {
-	$redetail = $(e.target).closest("li").next();
-	if ($redetail.css("display") == "none"){
-		$redetail.css("display", "inline-block");
+$(".reviewTabList").click((e) => {
+	$(".reviewTabList").removeClass("tabChoice");
+	$(e.target).addClass("tabChoice");
+	let $dataName = $(e.target).data("name"); 
+	if ($dataName == "receiveReview"){
+		$("#sendReview").css("display", "none");
+		$("#" + $dataName).css("display", "block");
 	} else {
-		$redetail.css("display", "none");
+		$("#receiveReview").css("display", "none");
+		$("#" + $dataName).css("display", "block");
 	}
 });
-$("body").on("click", ".conclose", (e) => {
-	$(e.target).closest("li").remove();
+
+
+// 후기제목 클릭시 후기상세글 노출
+$(".reviewTitle").click((e) => {
+	$reDetail = $(e.target).closest("li").next();
+	if ($reDetail.css("display") == "none"){
+		$reDetail.css("display", "inline-block");
+	} else {
+		$reDetail.css("display", "none");
+	}
 });
-$("#tothetop").click((e) => {
-	var htmloffset = jQuery( 'html' ).offset();
-    jQuery( 'html, body' ).animate( { scrollTop : htmloffset.top }, 400 );
+
+// 페이지 상단으로 이동
+$("#toTheTop").click((e) => {
+	let htmlOffset = jQuery( 'html' ).offset();
+    jQuery( 'html, body' ).animate( { scrollTop : htmlOffset.top }, 400 );
 });
