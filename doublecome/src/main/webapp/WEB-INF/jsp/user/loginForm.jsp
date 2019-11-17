@@ -36,40 +36,15 @@
       <input type="text" placeholder="이메일" name="userEmail"/>
       <input type="password" placeholder="비밀번호" name="userPass"/>
       <button>로그인</button>
-      <a class="rg">회원 가입</a>
+      <a class="rg" href="/doublecome/user/joinForm.do">회원 가입</a>
       <a >naver</a>
       <a >kakao</a>
     </form>
   </div>
   
-  <div class="cta"><a href="http://andytran.me">Forgot your password?</a></div>
+  <div class="cta"><a href="<c:url value="/user/findEmailForm.do" />">아이디/비밀번호 찾기</a></div>
 </div>
         
 </body>
 <script src="<c:url value="/resources/js/user/loginForm.js" />"></script>
 </html>
-<!-- 
-
-	 <div id="background" class="hidelogin">
-         <div id="loginForm">
-             <p id="login">로그인</p>
-             <form action="<c:url value="/user/login.do"/>" method="post">
-             <div id="loginId">
-                 <input name="userEmail" type="text" placeholder="Email Address">
-                </div>
-            <div id="loginPass">
-                <input name="userPass" type="password" placeholder="Password">
-            </div>
-            <button id="loginDo">로그인</button>
-        </form>
-        
-        <a id="naverLogin"></a >
-        <a id="kakaoLogin"></a >
-          	
-            <a id="findId">아이디 찾기</a>
-            <a id="findPass">비밀번호 찾기</a>
-        </div>
-    </div>
-<c:import url="/WEB-INF/jsp/user/findIdForm.jsp" />
-<c:import url="/WEB-INF/jsp/user/findPassForm.jsp" /> 
- -->

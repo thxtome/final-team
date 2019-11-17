@@ -38,7 +38,7 @@
       <input type="password" placeholder="비밀번호 확인" name="userPassConfirm"/>
       <div id="passConfirmCheck" class="alert"></div>
       <input type="tel" placeholder="핸드폰 번호" name="userPhnum"/>
-      <div id="phnumCheck" class="alert"></div>
+      <div id="phnumCheck" class="alert">번호 인증하기</div>
       <input type="text" placeholder="아이디" name="userNickname"/>
       <div id="idCheck" class="alert"></div>
       <button>가입</button>

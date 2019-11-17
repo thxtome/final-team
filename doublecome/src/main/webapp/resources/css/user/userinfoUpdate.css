@@ -2,9 +2,9 @@
 		margin: 0%;
 	}
 a:link { color: red; text-decoration: none;}
- a:visited { color: black; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
 
-출처: https://it77.tistory.com/126 [시원한물냉의 사람사는 이야기]
+
 	#bg{
 		/*background: rgb(253, 247, 247);*/
 	}
@@ -17,9 +17,20 @@ a:link { color: red; text-decoration: none;}
 		background: white;
 	}
 	
+	#title{
+		position: relative;
+	    left: 25px;
+	    top: 25px;
+	    font-size: 25px;
+	}
+	
+	#infoBox{
+		position: relative;
+	   	top: 50px;
+	}
 	#pfimgbox{
-        left: 125px;
-        top: 0px;
+        left: 100px; 
+        top: 25px;
 		position: absolute;
 		/*width: 200px;
 		height: 200px;*/
@@ -46,25 +57,44 @@ a:link { color: red; text-decoration: none;}
     }
     */
 
-	#registDoBtn{
+	#updateFormBtn{
+		z-index: 100;
 		position: absolute;
-		width: 100px;
-		height: 50px;
-		right: 50px;
-		top: 430px;
+		width: 120px;
+		height: 40px;
+		left: 700px;
+		top: 150px;
 		line-height: 40px;
         text-align: center;
 		font: bold;
-		font-size: 30px;
+		font-size: 15px;
 
         color: white;
 		background: #DB1D3B;
 		border: 0;
 	}
-	#registBox div{
+
+#historyGoBtn{
 		position: absolute;
+		width: 120px;
+		height: 40px;
+		left: 700px;
+		top: 100px;
+		line-height: 40px;
+        text-align: center;
+		font: bold;
+		font-size: 15px;
+
+        color: white;
+		background: #DB1D3B;
+		border: 0;
+	}
+
+
+	#registBox div{
+		position: relative;
 		/*width: 600px;*/
-		height: 30px;
+		height: 0px;
 		left: 300px;
 		/*border: 1px solid #000000;*/
 		
@@ -119,7 +149,7 @@ a:link { color: red; text-decoration: none;}
 		
 	}
 	input:focus {outline:none;}
-	#registBox div > #registInput:nth-child(4){
+	#registBox div > #registInput:nth-child(1){
 		
 		left: 330px;
 		top: 25px;
@@ -154,12 +184,7 @@ html {
   } */
   
   .uploader {
-	display: block;
-	margin: 0 auto;
-	width: 200px;
-	height: 200px;
-	max-width: 90vw;
-	max-height: 90vh;
+	
   }
   
   .uploader__input {
@@ -211,8 +236,8 @@ html {
 /*	left: 0.5em;
 	top: 0em; */
 	display: block;
-	width: 200px;
-	height: 200px;
+	width: 100px;
+	height: 100px;
 	border-radius: 3%;
 	z-index: 1;
 	opacity: 0;
