@@ -1,3 +1,5 @@
+$('.sidebar, .nav').stick_in_parent("#wrapper");
+
 let galleryThumbs = new Swiper('.gallery-thumbs', {
     spaceBetween: 10,
     slidesPerView: 4,
@@ -76,20 +78,18 @@ $(document).ready(function(){
 
 $(window).scroll(function () {
   height = $(document).scrollTop();
-  if ($("#services").offset().top-70 < height && 
-      $("#portfolio").offset().top-70 > height) {
+  if ($("#auction_contets").offset().top-60 < height && 
+      $("#inquiry").offset().top-80 > height) {
         $(".nav").children().removeClass("movenav")
         $(".nav1").addClass("movenav")
-      } else if ($("#portfolio").offset().top-70 < height &&
-      $("#about").offset().top-70 > height
+      } else if ($("#inquiry").offset().top-80 < height &&
+      $("#seller_review").offset().top-80 > height
       ) {
         $(".nav").children().removeClass("movenav")
         $(".nav2").addClass("movenav")
-      } else if ($("#about").offset().top-70 < height
+      } else if ($("#seller_review").offset().top-80 < height
       ) {
         $(".nav").children().removeClass("movenav")
         $(".nav3").addClass("movenav")
       }
 })
-
-$('#sidebar, .nav').stick_in_parent();

@@ -34,13 +34,13 @@ body a:hover {
 .Button--bid {
     position: relative;
     display: block;
-    width: 300px;
-    height: 48px;
+    width: 250px;
+    height: 43px;
     margin: 0 auto;
     border: 1px solid #E30921;
     color: #fff;
     background-color: #E30921;
-    line-height: 48px;
+    line-height: 43px;
     text-align: center;
     border-radius: 4px;
     font-family: inherit;
@@ -95,17 +95,16 @@ body a:hover {
 .Button--buynow {
     position: relative;
     display: block;
-    width: 300px;
-    height: 48px;
+    width: 250px;
+    height: 43px;
     margin: 0 auto;
     border: 1px solid #E30921;
     color: #fff;
     background-color: #E30921;
-    line-height: 48px;
+    line-height: 43px;
     text-align: center;
     border-radius: 4px;
     font-family: inherit;
-    vertical-align: bottom;
     cursor: pointer;
     -webkit-transition: opacity .1s ease-out;
     -moz-transition: opacity .1s ease-out;
@@ -253,7 +252,7 @@ body a:hover {
 .Count__count {
     float: left;
     margin: 6px 0 4px 0;
-    padding: 0 13px;
+    padding: 8px 10px;
 }
 .Count__count--sideLine {
     border-left: 1px dotted #ccc;
@@ -263,7 +262,8 @@ body a:hover {
     margin-bottom: 5px;
     font-size: 81.25%}
 .Count__number {
-    font-size: 150%}
+    font-size: 130%
+}
 .Count__unit {
     font-size: 58.33333%}
 .Count__emphasis {
@@ -362,15 +362,22 @@ body a:hover {
     padding: 0;
 }
 .Seller__subCard.cvr273 .Seller__ratingTitle {
-    width: 150px;
+    width: 122px;
     font-size: 12px;
 }
 .Seller__ratingTitle {
     float: left;
+    line-height: 30px
 }
 .Seller__subCard.cvr273 .Seller__ratingCount {
-    width: 150px;
+    width: 134px;
     font-size: 12px;
     border-left: 1px solid #ccc;
     float: left;
+    margin-left: 15px;
+    padding-left: 11px;
+}
+.Seller__card {
+    padding-bottom: 12px;
+    padding-top: 12px;
 }
