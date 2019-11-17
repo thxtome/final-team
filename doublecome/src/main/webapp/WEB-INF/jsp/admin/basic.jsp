@@ -35,7 +35,7 @@
 			<div class="infos">
                 <div>
                     <div>
-                        <h2><i class="fas fa-user"></i> 회원 정보</h2>
+                        <p><i class="fas fa-user"></i> 회원 정보</p>
                         <div>
                             <div>
                                 <span>전체 회원수 </span>  <span class="data">1</span> <span>명</span>
@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <div>
-                        <h2><i class="fas fa-stamp"></i> 경매 정보</h2>
+                        <p><i class="fas fa-stamp"></i> 경매 정보</p>
                         <div>
                             <div>
                                 <span>전체 경매수 </span> <span class="data">1</span> <span>개</span>
@@ -67,7 +67,7 @@
                 </div>
                 <div>
                     <div>
-                        <h2><i class="fas fa-handshake"></i> 거래 정보</h2>
+                        <p><i class="fas fa-handshake"></i> 거래 정보</p>
                         <div>
                             <div>
                                 <span>전체 거래수 </span> <span class="data">1</span> <span>개</span>
@@ -83,9 +83,22 @@
                 </div>
 
             </div>
-            <h1>월 통계</h1>
+            <div>
+				<h2>월 통계</h2>
+			</div>
             <div class="chart">
                 <svg></svg>
+                <div class="legend">
+                	<div>
+						<div></div><span>월별 가입자수</span>                	
+                	</div>
+                	<div>
+						<div></div><span>월별 경매 등록수</span>                	
+                	</div>
+                	<div>
+						<div></div><span>월별 거래 등록수</span>                	
+                	</div>
+                </div>
             </div>
 		</div>
 	</div>
