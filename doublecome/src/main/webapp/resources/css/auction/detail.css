@@ -64,6 +64,7 @@ textarea {
 .table-responsive {
     margin-top: 20px;
     border-top: 1px solid gray;
+    border-bottom: 1px solid #c3c3c3
 }
 #seller_detail {
     border: 1px solid gray;
@@ -305,4 +306,13 @@ section {
 .grade, .review_contents_writer {
 	line-height: 70px;
 	text-align: center;
+}
+.moreBtn {
+	width: 550px;
+    height: 40px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: #FFF;
 }

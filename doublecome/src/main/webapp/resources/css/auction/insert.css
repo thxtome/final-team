@@ -73,9 +73,6 @@ a:visited {
     color: gray;
 	cursor: pointer;
 }
-.note-editing-area {
-	border: 1px solid gray;
-}
 .won {
 	display: inline;
     position: relative;
@@ -94,4 +91,16 @@ a:visited {
 }
 .line_height_clean {
 	height: 40px;
+}
+.img_button {
+    width: 20px;
+    height: 12px;
+    cursor  : pointer;
+    border  : none;
+    margin      : 0px;
+    padding     : 0px;
+}
+.upload_btn {
+	font-weight: normal;
+	cursor: pointer;
 }

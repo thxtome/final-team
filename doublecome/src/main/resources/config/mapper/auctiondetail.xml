@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.doublecome.repository.mapper.AuctionDetailMapper">
+	<!--  카테고리 리스트 가져오기 -->
+	<select id="auctiondetail" resultType="Auction" parameterType="int">
+		select *
+		from auction
+		where auction_no = #{auctionNo}
+	</select>
+</mapper>

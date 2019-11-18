@@ -467,6 +467,7 @@
 						
 						</div>
 					</section>
+					<button class="moreBtn" type="button">더 보기 <span class="glyphicon glyphicon-menu-down"></span></button>
 				</div>
 			</div>
 		</div>

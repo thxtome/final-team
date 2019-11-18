@@ -14,9 +14,6 @@ public class AuctionController {
 	@Autowired
 	private AuctionServiceImpl service;
 	
-	@RequestMapping("/detailAuction.do")
-	public void auctionDetail() {}
-
 	@RequestMapping("/insertAuction.do")
 	public void auctionInsert() {}
 	
