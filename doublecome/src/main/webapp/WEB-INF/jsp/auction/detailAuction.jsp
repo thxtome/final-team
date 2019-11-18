@@ -258,8 +258,8 @@
 								<div class="card">
 									<div class="card-body">
 										<div class="row">
-											<div class="col-xs-11 pdct_inquiry_item">
-												<p class="inquiry_name col-xs-11">
+											<div class="col-xs-12 pdct_inquiry_item">
+												<p class="inquiry_name col-xs-12">
 													<strong>나승민아님</strong> <span class="inquiry_minute">2019-11-11</span>
 												</p>
 												<div class="clearfix"></div>
@@ -274,9 +274,9 @@
 										<div class="card-inner">
 											<div class="card-body">
 												<div class="row">
-													<div class="col-xs-11 pdct_inquiry_item">
-														<p class="inquiry_name col-xs-11">
-															<strong>SM</strong> <span class="inquiry_minute">2019-11-11</span>
+													<div class="col-xs-12 pdct_inquiry_inner_item">
+														<p class="inquiry_name col-xs-12">
+															<i class="fab fa-replyd"></i><strong>SM</strong> <span class="inquiry_minute">2019-11-11</span>
 														</p>
 														<div class="clearfix"></div>
 														<p>은율 마유 폼클렌징, 150g, 3개 상품은 한 개의 제품 박스에 한 개씩 포장되어있는 점
@@ -288,8 +288,8 @@
 									</div>
 									<div class="card-body">
 										<div class="row">
-											<div class="col-xs-11 pdct_inquiry_item">
-												<p class="inquiry_name col-xs-11">
+											<div class="col-xs-12 pdct_inquiry_item">
+												<p class="inquiry_name col-xs-12">
 													<strong>내가승민임</strong> <span class="inquiry_minute">2019-11-11</span>
 												<div class="clearfix"></div>
 												<p>남.여공용으로도쓸수있나요?남자스킨향날까봐서요</p>
