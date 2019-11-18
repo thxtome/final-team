@@ -84,7 +84,7 @@ textarea {
 }
 .button {
     position: relative;
-    left: 86%;
+    left: 44%;
     background: #DB1D3B;
     border: none;
     padding: 10px 25px 10px 25px;
@@ -150,7 +150,6 @@ textarea {
     margin-right: 15px;
 }
 .card-inner {
-    margin-left: 4rem;
     background: #F2F2F2;
 }
 img {
@@ -198,9 +197,6 @@ section {
 .inquiry_guidance {
     list-style: none;
 }
-.product_inquiry {
-    padding-bottom: 10px;
-}
 .inquiry_guidance {
     margin-top: 17px;
     font-size: 85%;
@@ -230,6 +226,19 @@ section {
 .pdct_inquiry_item {
     width: 90%;
     padding: 20px 10px 20px 0;
+    border-bottom: 1px solid lightgray;
+}
+
+.card .card-body:nth-child(1) > .row .pdct_inquiry_item{
+    border-top: 1px solid black;
+	
+}
+
+.pdct_inquiry_inner_item {
+    width: 90%;
+    padding: 20px 10px 20px 0;
+	background: #F2F2F2;	
+    border-bottom: 1px solid lightgray;
 }
 .accordion {
   background-color: #F2F2F2;
@@ -315,4 +324,8 @@ section {
     cursor: pointer;
     margin-top: 20px;
     background-color: #FFF;
+}
+#tab-1 {
+	border-bottom: 2px solid gray;
+	padding-bottom: 20px;
 }
