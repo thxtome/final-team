@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.lineChartType {
+	margin-bottom: 20px;
+}
+
+.lineChartType span {
+	margin: 20px 10px 0px 30px;
+	color: lightgray;
+	cursor: pointer;
+}
+
+.clickedType {
+	color: black !important;
+	font-weight: bold;
+}
+
+#lineChart {
+	width: 1000px;
+}
+
+.chartGroup {
+	width: 1200px;
+	height: 300px;
+}
+
+#pieChart1,#pieChart2{
+	width: 500px;
+	height: 270px;
+	float: left;
+}
+
+.c3-chart-arcs-title {
+	font-weight: bold;
+	font-size: 15px;
+}

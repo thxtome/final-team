@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/sideBar.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/content.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/basic.css"/>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 
@@ -86,25 +87,14 @@
             <div>
 				<h4>월별 개별 항목 통계</h4>
 			</div>
-            <div class="chart">
-                <svg></svg>
-                <div class="legend">
-                	<div>
-						<div></div><span>월별 가입자수</span>                	
-                	</div>
-                	<div>
-						<div></div><span>월별 경매 등록수</span>                	
-                	</div>
-                	<div>
-						<div></div><span>월별 거래 등록수</span>                	
-                	</div>
-                </div>
-            </div>
+            <div id="lineChart"></div>
 		</div>
 	</div>
-	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
+	<script src="https://d3js.org/d3.v3.min.js"></script>     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 	<script src="<c:url value="/resources/js/admin/basic.js"/>"></script>
+	
 </body>
 
 </html>

@@ -164,6 +164,7 @@
 				</tbody>
 			</table>
 		</div>
+		<c:import url="/WEB-INF/jsp/admin/reportModal.jsp" />
 	</div>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
 	<script src="<c:url value="/resources/js/admin/retrieveReported.js"/>"></script>
