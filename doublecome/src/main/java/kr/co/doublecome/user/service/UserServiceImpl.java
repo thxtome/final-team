@@ -17,6 +17,24 @@ public class UserServiceImpl implements UserService{
 	public void insertUser(User user) {
 	mapper.insertUser(user);	
 	}
+
+	@Override
+	public User selectUserInfo(User user) {
+		mapper.selectUserInfo(user);
+		return user;
+	}
+
+	@Override
+	public void updateUser(User user) {
+		mapper.updateUser(user);
+	}
+
+	@Override
+	public String findEmail(String userPhnum) {
+		return mapper.findEmail(userPhnum);
+	}
+	
+	
 	
 	
 }

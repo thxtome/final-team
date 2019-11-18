@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/user/userinfo.css"/>"> 
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/user/userinfoUpdate.css"/>"> 
 
 
 <style>
@@ -52,16 +52,17 @@
 				<div id="registInputBox1" class="registInputBox">
 						<i class="far fa-envelope fa-1x" id="icon"></i>
 						
-						<input id="registInput" name="userEmail" type="text" placeholder="이메일 ">
+						<input id="userEmail" name="userEmail" type="text" value="${user.userEmail}" class="registInput"
+						placeholder="${user.userEmail}">
 						
 						<div id="alert"></div>
 				</div>
 				<div id="registInputBox2" class="registInputBox">
 						<i class="fas fa-unlock-alt fa-1x" id="icon"></i>
 						
-						<input id="registInput" name="userPass" type="password" placeholder="비밀번호">
+						<input id="userPass" name="userPass" type="password" value="${user.userPass}" class="registInput">
 				
-						<input id="registInput" name="userPassConfirm" type="password" placeholder="비밀번호 확인">
+						<input id="userPassConfirm" name="userPassConfirm" type="password" value="${user.userPass}" class="registInput">
 						
 						<div id="alert"></div>
 						
@@ -72,14 +73,14 @@
 				<div id="registInputBox3" class="registInputBox">
 						<i class="fas fa-mobile-alt fa-1x" id="icon"></i>
 						
-						<input id="registInput" name="userPhnum" type="text" placeholder="핸드폰 번호">
+						<input id="userPhnum" name="userPhnum" type="text" value="${user.userPhnum}" class="registInput">
 						
 						<div id="alert"></div>
 				</div>
 				<div id="registInputBox4" class="registInputBox">
 						<i class="fas fa-user fa-1x" id="icon"></i>
 						
-						<input id="registInput" name="userNickname" type="text" placeholder="별명">
+						<input id="userNickname" name="userNickname" type="text" value="${user.userNickname}" class="registInput">
 						<div id="alert"></div>
 				</div>
 			</span>
@@ -88,6 +89,6 @@
 		
 	</div>
 	</div>
-	<script src="<c:url value="/resources/js/user/userInfo.js" />" ></script>
+	<script src="<c:url value="/resources/js/user/userInfoUpdate.js" />" ></script>
 </body>
 </html>

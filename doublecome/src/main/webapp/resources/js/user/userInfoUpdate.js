@@ -1,3 +1,7 @@
+let email  = $('#userEmail').val();
+email["placeholder"] = "email";
+
+
 function upload() {
 
     var percentage = null,
@@ -121,4 +125,6 @@ function upload() {
   }
   
   upload();
+  
+ 
   

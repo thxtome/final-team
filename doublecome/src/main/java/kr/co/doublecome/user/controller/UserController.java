@@ -31,13 +31,26 @@ public class UserController {
 	public void joinForm(User user) throws Exception{}
 
 	@RequestMapping("/userInfo.do")
-	public void userInfo(User user) throws Exception{}
+	public void userInfo(User user) throws Exception{
+		service.selectUserInfo(user);
+	}
 
 	@RequestMapping("/userInfoUpdate.do")
-	public void userInfoUpdate(User user) throws Exception{}
+	public void userInfoUpdate(User user) throws Exception{
+		service.selectUserInfo(user);
+	}
+	@RequestMapping("/updateUser.do")
+	public void updateUser(User user) throws Exception{
+		service.updateUser(user);
+	}
+	
 	
 	@RequestMapping("/findEmailForm.do")
-	public void findEmail(User user) throws Exception{}
+	public void findEmailForm(User user) throws Exception{}
+	@RequestMapping("/findEmail.do")
+	public String findEmail(String userPhnum) throws Exception{
+		return service.findEmail(userPhnum);
+	}
 	
 	@RequestMapping("/findPassForm.do")
 	public void findPass(User user) throws Exception{}

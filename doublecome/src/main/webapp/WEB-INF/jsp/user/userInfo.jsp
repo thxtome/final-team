@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,15 +33,15 @@
 			<span id="pfimgbox"> 
 						<span class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" ></span>
 						
-						<label class="uploader__label" for="file-upload">
-							<span class="uploader__wrapper">
-								<img class="uploader__file hidden" src="#" alt="">
+						<div class="uploader__label" for="file-upload">
+							
+								<img  src="<c:url value="/resources/css/user/defaultpfimg.jpeg" />" alt="">
 								<!-- <svg class="uploader__svg" xmlns="http://www.w3.org/2000/svg" width="98px" height="90px" viewBox="0 0 98 90">
 									<path class="uploader__clipalt" d="M47.559,12.453L9.966,50.05 c0,0-16.188,15.611-0.892,30.908c15.297,15.301,30.995-0.804,30.995-0.804l50.666-50.669c0,0,10.814-10.891-0.268-21.981 c-11.087-11.088-21.97-0.288-21.97-0.288L24.221,51.486c0,0-10.736,8.541-2.432,16.921c8.307,8.384,16.832-2.521,16.832-2.521 l32.535-32.531"/>
 								  <path class="uploader__clip" d="M47.559,12.453L9.966,50.05 c0,0-16.188,15.611-0.892,30.908c15.297,15.301,30.995-0.804,30.995-0.804l50.666-50.669c0,0,10.814-10.891-0.268-21.981 c-11.087-11.088-21.97-0.288-21.97-0.288L24.221,51.486c0,0-10.736,8.541-2.432,16.921c8.307,8.384,16.832-2.521,16.832-2.521 l32.535-32.531"/>
 								</svg> -->
-							</span> 
-						</label> 
+							 
+						</div> 
 	        </span>
         
 			<p><a id="updateFormBtn" href="<c:url value="/user/userInfoUpdate.do"/>">개인정보 수정</a></p>
@@ -47,16 +49,18 @@
 			
 		
 			<span id="registInputBox">
+			<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.user" var="user" />
 				<div id="registInputBox1" class="registInputBox">
 						<i class="far fa-envelope fa-1x" id="icon"></i>
 						
-						<span id="registInput" name="userEmail">ㅋ@ㅋ</span>
+						<span id="registInput" >${user.userEmail}</span>
 						
 						<div id="alert"></div>
 				</div>
 				<div id="registInputBox2" class="registInputBox">
 						<i class="fas fa-unlock-alt fa-1x" id="icon"></i>
-						
+						<div id="pass" style="display:none;">${user.userPass}</div>
 						<input id="registInput" name="userPass" type="password" placeholder="비밀번호">
 						
 						<div id="alert"></div>
@@ -67,25 +71,26 @@
 				
 				<div id="registInputBox3" class="registInputBox">
 						<i class="fas fa-mobile-alt fa-1x" id="icon"></i>
-						
-						<span id="registInput" name="userPhnum">01077278287</span>
+						<span id="registInput" >${user.userPhnum}</span>
 						
 						<div id="alert"></div>
 				</div>
 				<div id="registInputBox4" class="registInputBox">
 						<i class="fas fa-user fa-1x" id="icon"></i>
 						
-						<span id="registInput" name="userNickname">ㅋ</span>
+						<span id="registInput" >${user.userNickname}</span>
 						<div id="alert"></div>
 				</div>
+				</sec:authorize>
 			</span>
 		</form>
 	</div>
-		<span id="title"></span>
+		<span id="title" style="left: 420px; 
+								top: -10px;">입찰 중인 경매</span>
 		<c:forEach  begin="1" end="1" var="1">
 		<a id="aution" href="#">
 		<div class="card_container">
-		  <img src="" alt="Avatar" class="card_imag">
+		  <img src="<c:url value="/resources/css/user/defaultpfimg.jpeg" />" alt="Avatar" class="card_imag">
 		  <div class="vertical-line" style="height: 120px;" /></div>
 		  <p><span>경메 타이틀</span></p>
 		  <p>
@@ -100,7 +105,7 @@
 		</a>
 		<a id="aution" href="#">
 		<div class="card_container">
-		  <img src="#" alt="Avatar" class="card_imag">
+		  <img src="<c:url value="/resources/css/user/defaultpfimg.jpeg" />" alt="Avatar" class="card_imag">
 		  <div class="vertical-line" style="height: 120px;" /></div>
 		  <p><span>경메 타이틀</span></p>
 		  <p>
@@ -115,7 +120,7 @@
 		</a>
 		<a id="aution" href="#">
 		<div class="card_container">
-		  <img src="" alt="Avatar" class="card_imag">
+		  <img src="<c:url value="/resources/css/user/defaultpfimg.jpeg" />" alt="Avatar" class="card_imag">
 		  <div class="vertical-line" style="height: 120px;" /></div>
 		  <p><span>경메 타이틀</span></p>
 		  <p>

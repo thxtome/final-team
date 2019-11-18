@@ -12,4 +12,7 @@ public class User {
 	private int userType;
 	private int userCnt;
 	private int fileGroupCode;
+	
+	
+	
 }

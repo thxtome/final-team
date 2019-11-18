@@ -15,8 +15,24 @@
 		 where user_email = #{userEmail}
 	</select>
 	
+	<select id="findEmail" parameterType="string" resultType="string">
+		select *
+		from user
+		where user_phnum = #{userPhnum}
+	</select>
+	
+	
+	
 	<insert id="insertUser" parameterType="User">
 	  insert into user(user_email, user_pass, user_phnum, user_nickname
  	  ) values (#{userEmail}, #{userPass},#{userPhnum},#{userNickname});
 	</insert>
-</mapper>
+	
+	<update id="updateUser"  parameterType="User">
+		update user 
+		   set user_email = ${userEmail},
+		   	   user_pass = ${userPass},
+		   	   user_nickname = ${userNickname}
+		 where user_phnum = ${userPhnum}
+	</update>
+</mapper> 

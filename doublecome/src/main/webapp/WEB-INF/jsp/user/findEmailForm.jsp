@@ -11,7 +11,6 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/user/findEmail.css"/>"> 
     </head>
     <body>
-    <c:import url="/WEB-INF/jsp/include/header.jsp" />
        <div class="ForgotPassword">
 			<a class="ForgotEmail__title">
 			
@@ -23,6 +22,7 @@
 				비밀번호 찾기
 			
 			</a>
+			<form method="post" action="<c:url value="/user/findEmail.do" />">
 			<div class="ForgotPassword__inputWrapper">
 				<input type="text" placeholder="번호" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">
 			</div>
@@ -31,10 +31,11 @@
 			<div class="ForgotPassword__inputWrapper">
 				<input type="text" placeholder="johnsmith@rapid.com" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">
 			</div>
-			<div class="ForgotPassword__button">조회</div>
+			<button class="ForgotPassword__button">조회</button>
 			<div class="ForgotPassword__cancel">
 			<a href="<c:url value="/user/loginForm.do" />">취소</a>
 			</div>
+			</form>
 		</div>
 		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
     </body>
