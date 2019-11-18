@@ -6,14 +6,14 @@
     margin: auto;
     text-align: center;
 }
-#retrieveReviewHead{
+#addReviewHead{
     position: relative;
     width: 850px;
 	font-size: 30px;
 	margin: 30px auto;
 	font-weight: bold;
 }
-.retrieveReviewContent {
+.addReviewContent {
     background-color: #fefefe;
     margin: 50px auto;
     padding: 20px;
@@ -37,7 +37,6 @@
 .auctionTitle{
     display: grid;
     width: 700px;
-/*     height: 50px; */
     grid-template-columns: 100px 600px;
     border-top: 1px solid #ddd;
 }

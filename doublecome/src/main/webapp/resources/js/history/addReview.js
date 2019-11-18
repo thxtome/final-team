@@ -5,7 +5,7 @@ $(".scoreBar").find("span").click((e) => {
 });
 
 // 후기작성 서머노트
-$("#summernote").summernote(
+$('#summernote').summernote(
 		{
 			height : 300,
 			width : 500,
@@ -14,4 +14,3 @@ $("#summernote").summernote(
 		    resize: false,
 		    toolbar : ['insert', ['picture']]
 });
-

@@ -63,10 +63,10 @@
 			</div>
 		</div>
 	</div>
-	<script
-		src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
-	<script src="<c:url value="/resources/js/history/retrieveReview.js"/>"></script>
+	<script src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
+	<script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/summernote/summernote.js" />"></script>
+	<script src="<c:url value="/resources/js/history/retrieveReview.js"/>"></script>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 </body>
 </html>

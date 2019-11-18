@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.doublecome.repository.mapper.HistoryMapper">
+	<select id="selectReceiveReview" resultType="Review">
+		select r.*, a.auction_title, u.user_nickname as reviewer_nickname
+		  from review r
+		 inner join deal d
+		    on r.deal_no = d.deal_no
+		 inner join auction a
+		    on d.auction_no = a.auction_no
+		 inner join user u 
+		    on u.user_email = r.review_sender
+		 where r.review_receiver = 'c@c';
+	</select>
+</mapper>

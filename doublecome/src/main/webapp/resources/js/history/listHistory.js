@@ -1,5 +1,6 @@
 // 네비게이션바 클릭시 이동
 let $navBar = $("#navBar");
+let $left = $(".purchaseTabList").offset().left;
 let navTop = $navBar.offset().top;
 $navBar.find("a").click((e) => {
 	let topTarget = '';
@@ -31,6 +32,7 @@ $(window).scroll(function () {
     height = $(document).scrollTop();
     if (height >= navTop){
         $navBar.addClass("barFixed");
+        $navBar.css("left", $left);
         if (height > $("#purchaseHead").offset().top-60 && height < $("#salesHead").offset().top-70){
         	navFun("a:eq(0)");
         } else if (height > $("#salesHead").offset().top-70 && height < $("#reviewHead").offset().top-100){
@@ -69,7 +71,7 @@ $(".reviewTabList").click((e) => {
 
 
 // 후기제목 클릭시 후기상세글 노출
-$(".reviewTitle").click((e) => {
+$(".preView").click((e) => {
 	$reDetail = $(e.target).closest("li").next();
 	if ($reDetail.css("display") == "none"){
 		$reDetail.css("display", "inline-block");
@@ -77,7 +79,47 @@ $(".reviewTitle").click((e) => {
 		$reDetail.css("display", "none");
 	}
 });
-
+/*
+// 후기 출력
+function makeReviewList(list){
+	let $ul = $("<ul></ul>");
+	$.each(list, (i, c) => {
+		$ul.append(`
+				<li class="preView">
+				<div class="scoreAsrea">
+				<div class="score"></div>
+				<div class="scoreForm">점</div>
+				</div>
+				<div class="contentArea">
+				<div class="auctionTitle">${c.auctionTitle}</div>
+				<div class="reviewTitle">${c.reviewTitle}</div>
+				<div class="reviewDate">${c.reviewRegDate}</div>
+				</div>
+				<div class="writerArea">
+				<a class="reviewer">${c.reviewSender}</a>
+				</div>
+				<div class="editdel">
+				<a href="editReview.do" class="editreview">수정</a> / <a class="delreview">삭제</a>
+				</div>
+				</li>
+				<li class="reviewDetail">
+				<div class="reviewContent">
+				<div class="profileDiv">
+				<img class="profileImg"
+				src="<c:url value="/resources/images/profileImg.png"/>" />
+				</div>
+				<div class="nicknameDiv">${c.reivewSender}</div>
+				<div class="regdateDiv">${c.reviewRegDate}</div>
+				<div class="onelineDiv">${c.reviewTitle}</div>
+				<div class="reviewDiv">${c.reviewContent}</div>
+				</div>
+				</li>
+		`);
+	});
+	$("reviewCon").html($ul);
+};
+makeReviewList(receiveList);
+*/
 // 페이지 상단으로 이동
 $("#toTheTop").click((e) => {
 	let htmlOffset = jQuery( 'html' ).offset();

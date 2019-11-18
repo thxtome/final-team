@@ -25,11 +25,14 @@
 	font-size: 40px;
 	text-align: center;
 	line-height: 150px;
+	border-right: 1px solid black;
 }
 #purchaseDeal, #salesDeal, #reviewDeal{
-	border-right: 1px solid #FFE6E6;
-	background-color: #FFC8C8;
-	color: white;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+	background-color: white;
+	color: black;
 }
 #purchaseDeal > div, #salesDeal > div, #reviewDeal > div{
 	margin: 20px 70px;
@@ -117,8 +120,6 @@
     list-style: none;
     width: 900px;
     height: 50px; 
-/*     margin-left: 50px; */
-/*     margin-top: 0; */
 	margin: auto;
     padding: 0;
 }
@@ -193,6 +194,7 @@
     height: 120px;
     border-bottom: 1px solid #c3c3c3;
     border-top: 1px solid #c3c3c3;
+    cursor: pointer;
 }
 #reviewCon ul li > div{
     float: left;
@@ -217,11 +219,10 @@
     margin: 0;
 }
 .writerArea{
-    /* border: 1px solid black; */
     width: 150px;
     height: 80px;
     text-align: center;
-    line-height: 40px;
+    line-height: 80px;
     font-size: 13px;
 }
 .score{
@@ -404,7 +405,7 @@
 	width: 600px;
 /* 	height: 500px; */
 	grid-template-columns: 0.85fr 0.45fr 1fr;
-  	grid-template-rows: 40px 40px 200px;
+/*   	grid-template-rows: 40px 40px 200px; */
 	grid-template-areas:
 	"profileDiv nicknameDiv regdateDiv"
 	"profileDiv onelineDiv onelineDiv"
@@ -437,6 +438,7 @@
 	grid-area: reviewDiv;
 	line-height: 20px;
 	width: 400px;
+	min-height: 100px;
 	margin: 10px auto;
 	padding-top: 15px;
 	text-align: left;
