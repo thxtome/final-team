@@ -91,8 +91,6 @@
 				</c:choose>
 			</div>
 		</div>
-
-		<div><a class="auction_list" href="<c:url value="/auction/detailAuction.do" />">경매 상세 페이지로 이동</a></div>
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -103,5 +101,6 @@
 			crossorigin="anonymous"></script>
 
 		<script src="<c:url value="/resources/js/common/countdown.js" />"></script>
+		
 </body>
 </html>

@@ -19,7 +19,7 @@
 	  	inner join bid b
 		   on a.auction_no = b.auction_no
 		  and auction_condition = 1
-          and str_to_date(a.auction_limit_date, "%Y-%m-%d") > str_to_date(date_format(now(), "%Y-%m-%d"), "%Y-%m-%d")
 		order by bid_cnt desc
 	</select>
 </mapper>
+<!--           and str_to_date(a.auction_limit_date, "%Y-%m-%d") > str_to_date(date_format(now(), "%Y-%m-%d"), "%Y-%m-%d") -->

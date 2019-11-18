@@ -17,6 +17,8 @@ public class MainService {
 	
 	@RequestMapping("/main.do")
 	public List<Auction> mainList() {
+		System.out.println(mapper.mainAuctionList());
 		return mapper.mainAuctionList();
+		
 	}
 }

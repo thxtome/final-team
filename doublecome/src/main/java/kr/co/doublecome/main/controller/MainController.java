@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.doublecome.main.service.MainService;
 
-@Controller
+@Controller("kr.co.doublecome.main.controller.MainController")
 public class MainController {
 	@Autowired
 	private MainService service;
@@ -15,5 +15,6 @@ public class MainController {
 	@RequestMapping("/main.do")
 	public void main(Model model) {
 		model.addAttribute("auclist", service.mainList());
+		System.out.println(service.mainList());
 	}
 }
