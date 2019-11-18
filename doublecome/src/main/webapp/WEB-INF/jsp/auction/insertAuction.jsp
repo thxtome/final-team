@@ -46,21 +46,20 @@
 						</dd>
 						
 						 <dt class="col-xs-3 menu">경매 시작가</dt>
-            <dd class="col-xs-9">
+            <dd class="col-xs-9 line_height_clean">
               <dl class="row">
-                <dd class="col-xs-4">
-							<input type="text" class="start"/><p class="won">원</p>
+                <dd class="col-xs-4 line_clean">
+					<p class="won">원</p><input type="text" class="start inputwon"/>
                 </dd>
                 <dt class="col-xs-2 menu">즉시 구매가</dt>
                 <dd class="col-xs-4">
-							<input type="text" class="buy"/><p class="won">원</p>
+                	<p class="won">원</p><input type="text" class="buy inputwon"/>
                 </dd>
               </dl>
             </dd> 
-						<dt class="col-xs-3 menu">파일첨부</dt>
-						<dd class="col-xs-3 attach">
+						<dt class="col-xs-2 menu">파일첨부</dt>
+						<dd class="col-xs-2 attach">
 							<a class="attach glyphicon glyphicon-picture">사진</a>
-							<a class="attach glyphicon glyphicon-film">동영상</a>
 						</dd>
 
 					</dl>

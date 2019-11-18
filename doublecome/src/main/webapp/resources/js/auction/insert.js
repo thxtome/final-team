@@ -30,7 +30,7 @@
 		 //3자리 단위마다 콤마 생성
 		   function addCommas(x) {
 			 let val = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			 if(val.substr((val.length - 3, 3)) != "000") {
+			 if(val.substr((val.length - 3, 2)) != "000") {
 				 alert("입력은 천원단위 입니다.")
 				 return;
 			 }

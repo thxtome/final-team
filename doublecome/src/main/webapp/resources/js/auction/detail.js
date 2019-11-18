@@ -78,18 +78,45 @@ $(document).ready(function(){
 
 $(window).scroll(function () {
   height = $(document).scrollTop();
-  if ($("#auction_contets").offset().top-60 < height && 
-      $("#inquiry").offset().top-80 > height) {
+  if ($("#nav1").offset().top-80 < height && 
+      $("#nav2").offset().top-80 > height) {
         $(".nav").children().removeClass("movenav")
         $(".nav1").addClass("movenav")
-      } else if ($("#inquiry").offset().top-80 < height &&
-      $("#seller_review").offset().top-80 > height
+      } else if ($("#nav2").offset().top-80 < height &&
+      $("#nav3").offset().top-80 > height
       ) {
         $(".nav").children().removeClass("movenav")
         $(".nav2").addClass("movenav")
-      } else if ($("#seller_review").offset().top-80 < height
+      } else if ($("#nav3").offset().top-80 < height
       ) {
         $(".nav").children().removeClass("movenav")
         $(".nav3").addClass("movenav")
       }
 })
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+
+//$(document).ready(function(){
+//	$('.nav-item').click(function(e){
+//		classes = $(e.target).data("nav");
+//		let movepoint = '#' + classes;
+//		let addcss = '.' + classes;
+//		let offset = $(movepoint).offset().top - 50;
+//        $(addcss).addClass("movenav")
+//        $(".nav").children().removeClass("movenav")
+//        $('html').animate({scrollTop : offset}, 300);
+//	});
+//});
