@@ -7,8 +7,9 @@ $(".category").click(e => {
 	selectCheck(e);
 })
 // 필터창에 삭제 하기 
-$(".options").click(e => {
-	$("a").remove(e.target)
+$("body").on("click",".options",e => {
+	console.log("aaa")
+	$(e.target).remove()
 })
 // 시간별로 검색
 $("#date li").click(e=> {
