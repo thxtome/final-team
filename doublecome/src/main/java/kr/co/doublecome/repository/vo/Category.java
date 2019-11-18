@@ -6,4 +6,5 @@ import lombok.Data;
 public class Category {
 	private int categoryCode;
 	private String categoryName;
+	private String categoryIcon;
 }

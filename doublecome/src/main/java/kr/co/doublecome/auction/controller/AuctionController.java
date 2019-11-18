@@ -5,14 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.doublecome.auction.service.AuctionService;
+import kr.co.doublecome.auction.service.AuctionServiceImpl;
 
 @Controller("kr.co.doublecome.auction.controller")
 @RequestMapping("/auction")
 public class AuctionController {
 	
 	@Autowired
-	private AuctionService service;
+	private AuctionServiceImpl service;
 	
 	@RequestMapping("/detailAuction.do")
 	public void auctionDetail() {}

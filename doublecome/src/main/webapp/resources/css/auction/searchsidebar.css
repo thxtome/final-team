@@ -16,9 +16,10 @@ footer {
 	
 }
 #sidebar{
+	
 	float:left;
 	background:#fff;
-	width:275px;	
+	width:251px;	
     border-right:1px solid #eee;
     border-left:1px solid #eee;
 }

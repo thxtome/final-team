@@ -1,9 +1,18 @@
+.category > i {
+	width : 30px;
+}
+.selected {
+	color : #DB1D3B !important;
+	font-weight: bold !important;
+}
 .option_selectbar {
 	width : 980px;
 	height : 45px;
 	background : #F2F2F2;
 }
-
+#sidebar a {
+	color: black;
+}
 .card-body {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
@@ -12,7 +21,53 @@
 .card-body > .card-title {
 	line-height : 42px;
 }
+.categorylist li {
+	height : 30px;
+}
+.categorylist li > a {
+	display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+.option_selectbar .del {
+    display: inline-block;
+    overflow: hidden;
+    width: 9px;
+    height: 9px;
+    margin: -2px 10px 0 6px;
+    background: url(https://ssl.pstatic.net/imgshopping/static/pc-real-2019/img/search/sp_search_v8.png) no-repeat -180px -50px;
+    line-height: 9999px;
+    vertical-align: middle;
+}
+.option_selectbar .clear{
+	margin-left : 14px;
+}
+.option_selectbar .bar {
+	margin: 0 12px;
+    padding: 0 2px;
+    color: #d8d8d8;
+}
+.option_selectbar .clear, .option_selectbar .options {
+	display: inline-block;
+    overflow: hidden;
+    font-size: 12px;
+    color: #6b6b6a;
+    vertical-align: middle;
+    line-height: 45px;
+    font-family: gulim;
+}
+.option_selectbar .options:hover{
+	text-decoration: none;
+}
 
+.option_selectbar .clear .option-clean {
+    display: inline-block;
+    overflow: hidden;
+    width: 12px;
+    height: 13px;
+    margin: -2px 5px 0 0;
+    background: url(https://ssl.pstatic.net/imgshopping/static/pc-real-2019/img/search/sp_search_v8.png) no-repeat -175px -30px;
+    vertical-align: middle;
+}
 .sort_list li {
 	float : left;
 	list-style:none;
@@ -23,9 +78,13 @@
 .sort_list {
 	margin :0;
 }
+.view_count > select {
+	height : 22px;
+}
 .sort_list:last-child {
 	margin-left : 0;
 }
+
 .sort_list li a{
 	font-family: gulim;
     color: #959595;

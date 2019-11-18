@@ -15,6 +15,5 @@ public class MainController {
 	@RequestMapping("/main.do")
 	public void main(Model model) {
 		model.addAttribute("auclist", service.mainList());
-		System.out.println(service.mainList());
 	}
 }

@@ -17,6 +17,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     type="text/css">
+
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchsidebar.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchcontent.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchbar.css" />">
@@ -26,14 +27,14 @@
 <c:import url="/WEB-INF/jsp/include/header.jsp" />
   <div id="wrapper">
     <div id="sidebar">
-      <div class="checklist box-line">
+      <div class="checklist box-line" id="price_filter">
           <h3>가격</h3>
           <ul>
-            <li><a href="">2만원 미만</a></li>
-            <li><a href="">2만원 ~ 5만원</a></li>
-            <li><a href="">5만원 ~ 10만원</a></li>
-            <li><a href="">10만원 ~ 20만원</a></li>
-            <li><a href="">20만원 이상</a></li>
+            <li><a href="#" title="2만원 미만">2만원 미만</a></li>
+            <li><a href="#" title="2만원 ~ 5만원">2만원 ~ 5만원</a></li>
+            <li><a href="#" title="5만원 ~ 10만원">5만원 ~ 10만원</a></li>
+            <li><a href="#" title="10만원 ~ 20만원">10만원 ~ 20만원</a></li>
+            <li><a href="#" title="20만원 이상">20만원 이상</a></li>
             <li>
               <input class="price-choice" type="text" numberOnly/> ~
               <input class="price-choice" type="text" numberOnly/>
@@ -41,37 +42,45 @@
             </li>
           </ul>
       </div>
-      <div class="checklist box-line">
+      <div class="checklist categorylist box-line">
         <h3>카데고리</h3>
         <ul>
         <c:forEach var="category" items="${category}">
           <li>
-            <input type="checkbox" id="category${category.categoryCode}"/><label for="${category.categoryCode }">${category.categoryName}</label>
+          	<a class="category" id="category${category.categoryCode}" 
+          	href="#" data-selected="" title="${category.categoryName}">
+          		<i class="fas fa-${category.categoryIcon}"></i>
+				${category.categoryName}
+          	</a>
           </li>	        
         </c:forEach>
         </ul>
       </div>
-      <div class="checklist box-line">
+      <div class="checklist box-line" id="date">
           <h3>시간</h3>
           <ul>
-            <li><a href="">1일 미만</a></li>
-            <li><a href="">1일 ~ 2일</a></li>
-            <li><a href="">2일 이상</a></li>
+            <li><a href="#" title="1일 미만">1일 미만</a></li>
+            <li><a href="#" title="3일~5일">3일~5일</a></li>
+            <li><a href="#" title="5일 이상">5일 이상</a></li>
           </ul>
       </div>
-      <div class="checklist box-line">
+      <div class="checklist box-line" id="bidcount">
           <h3>입찰</h3>
           <ul>
-            <li><a href="">1건 미만</a></li>
-            <li><a href="">5건 ~ 10건</a></li>
-            <li><a href="">10건 이상</a></li>
+            <li><a href="#" title="1건 미만">1건 미만</a></li>
+            <li><a href="#" title="5건 ~ 10건">5건 ~ 10건</a></li>
+            <li><a href="#" title="10건 이상">10건 이상</a></li>
           </ul>
       </div>
     </div>
     <div class="layout-right">
       <div class="py-4 bg-light">
-      	<div class="option_selectbar">
-      		
+      	<div class="option_selectbar" id="selectbar">
+      		<a id="resetfilter" href="" class="clear">
+      			<span class="option-clean"></span>
+      			전체해제
+      		</a>
+      		<span class="bar">|</span>
       	</div>
         <div class="container w-75">
           <div class="row">
@@ -87,10 +96,10 @@
 						<li  id="_sort_review"><a href="#" data-filter-name="sort" data-filter-value="review" title="입찰 많은순"><span></span>입찰횟수순</a></li>
 					</ul>
 					<span class="view_count">
-						<select style="height:height: 22px">
+						<select >
 							<option selected="selected" value="1">10개씩 보기</option>
-							<option value="1">20개씩 보기</option>
-							<option value="1">40개씩 보기</option>
+							<option value="2">20개씩 보기</option>
+							<option value="3">40개씩 보기</option>
 						</select>
 					</span>
 		      	</div>
@@ -243,6 +252,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"
     style=""></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <script>
     $("input:text[numberOnly]").on("keyup", function() {
       $(this).val($(this).val().replace(/[^0-9]/g,""));
