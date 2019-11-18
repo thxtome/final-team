@@ -84,7 +84,7 @@
 
             </div>
             <div>
-				<h2>월 통계</h2>
+				<h4>월별 개별 항목 통계</h4>
 			</div>
             <div class="chart">
                 <svg></svg>

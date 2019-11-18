@@ -13,6 +13,12 @@ public class AdminController {
 	@RequestMapping("/retrieveUser.do")
 	public void retrieveUser() {}
 	
+	@RequestMapping("/retrieveReportedUser.do")
+	public void retrieveReportedUser() {}
+	
+	@RequestMapping("/retrieveReportedAuction.do")
+	public void retrieveReportedAuction() {}
+	
 	@RequestMapping("/retrieveAuction.do")
 	public void retrieveAuction() {}
 	

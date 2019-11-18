@@ -23,7 +23,7 @@
 <body>
 	<div class="adminPage">
 		<div class="adminSideBar">
-			<input type="hidden" id="innerIndex" value="5">
+			<input type="hidden" id="innerIndex" value="7">
 			<c:import url="/WEB-INF/jsp/admin/sideBar.jsp" />
 		</div>
 

@@ -126,7 +126,7 @@ p[class=labels] {
     margin-left: 10px;
 }
 
-.dataFilters>div:nth-child(2) {
+.dataFilters>div:nth-of-type(2) {
     float: right;
     margin-left: 10px;
 }

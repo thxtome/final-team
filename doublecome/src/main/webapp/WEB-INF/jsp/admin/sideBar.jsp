@@ -17,6 +17,9 @@
 	<div class="moveItem" data-action="retrieveUser.do">
 		<p>전체 회원 조회</p>
 	</div>
+	<div class="moveItem" data-action="retrieveReportedUser.do">
+		<p>신고 회원 관리</p>
+	</div>
 	<div class="moveItem">
 		<p>회원 통계</p>
 	</div>
@@ -30,6 +33,9 @@
 	</div>
 	<div class="moveItem" data-action="retrieveAuction.do">
 		<p>전체 경매 조회</p>
+	</div>
+	<div class="moveItem" data-action="retrieveReportedAuction.do">
+		<p>신고 경매 관리</p>
 	</div>
 	<div class="moveItem">
 		<p>경매 통계</p>

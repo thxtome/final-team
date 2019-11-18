@@ -18,18 +18,20 @@
 	href="<c:url value="/resources/css/admin/content.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/admin/retrieveAuction.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/admin/retrieveReported.css"/>">
 </head>
 
 <body>
 	<div class="adminPage">
 		<div class="adminSideBar">
-			<input type="hidden" id="innerIndex" value="4">
+			<input type="hidden" id="innerIndex" value="5">
 			<c:import url="/WEB-INF/jsp/admin/sideBar.jsp" />
 		</div>
 
 		<div class="adminContent">
 			<div>
-				<h2>전체 경매 조회</h2>
+				<h2>신고 경매 관리</h2>
 			</div>
 
 			<div id="searchBar">
@@ -75,6 +77,11 @@
 							<td>마감날짜</td>
 							<td><input type="date" name="" id=""> <span>~</span>
 								<input type="date" name="" id=""></td>
+							<td>신고 수</td>
+							<td>
+								<p class="labels">회</p> <input type="text"> <span>~</span>
+								<p class="labels">회</p> <input type="text">
+							</td>	
 						</tr>
 						<tfoot>
 							<tr>
@@ -87,12 +94,14 @@
 				</form>
 			</div>
 			<div class="dataFilters">
+			<input type="button" class="removeUserBtn" value="탈퇴">
 				<div>
 					<ul>
 						<li>&#149;경매번호순</li>
 						<li>&#149;이메일순</li>
-						<li>&#149;높은 입찰가순</li>
 						<li>&#149;마감날짜순</li>
+						<li>&#149;높은 입찰가순</li>
+						<li>&#149;높은 신고수순</li>
 					</ul>
 				</div>
 				<div>
@@ -112,62 +121,76 @@
 			<table class="dataContent">
 				<thead>
 					<tr>
+						<th><input type="checkbox"></th>
 						<th>번호</th>
 						<th>제목</th>
 						<th>판매자</th>
 						<th>입찰가</th>
 						<th>카테고리</th>
 						<th>마감날짜</th>
+						<th>신고수</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
+						<td><input type="checkbox"></td>
 						<td>1</td>
 						<td>아이폰 사세요 싸게 드립니다</td>
 						<td>park</td>
 						<td>180,000</td>
 						<td>전자기기</td>
 						<td>2019-11-15</td>
+						<td>10</td>
 					</tr>
 					<tr>
+						<td><input type="checkbox"></td>
 						<td>1</td>
 						<td>아이폰 사세요 싸게 드립니다</td>
 						<td>park</td>
 						<td>180,000</td>
 						<td>전자기기</td>
 						<td>2019-11-15</td>
+						<td>10</td>
 					</tr>
 					<tr>
+						<td><input type="checkbox"></td>
 						<td>1</td>
 						<td>아이폰 사세요 싸게 드립니다</td>
 						<td>park</td>
 						<td>180,000</td>
 						<td>전자기기</td>
 						<td>2019-11-15</td>
+						<td>10</td>
 					</tr>
 					<tr>
+						<td><input type="checkbox"></td>
 						<td>1</td>
 						<td>아이폰 사세요 싸게 드립니다</td>
 						<td>park</td>
 						<td>180,000</td>
 						<td>전자기기</td>
 						<td>2019-11-15</td>
+						<td>10</td>
 					</tr>
 					<tr>
+						<td><input type="checkbox"></td>
 						<td>1</td>
 						<td>아이폰 사세요 싸게 드립니다</td>
 						<td>park</td>
 						<td>180,000</td>
 						<td>전자기기</td>
 						<td>2019-11-15</td>
+						<td>10</td>
 					</tr>
 					<tr>
+						<td><input type="checkbox"></td>
 						<td>1</td>
 						<td>아이폰 사세요 싸게 드립니다</td>
 						<td>park</td>
 						<td>180,000</td>
 						<td>전자기기</td>
 						<td>2019-11-15</td>
+						<td>10</td>
 					</tr>
 				</tbody>
 			</table>
@@ -175,6 +198,7 @@
 	</div>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
 	<script src="<c:url value="/resources/js/admin/retrieveAuction.js"/>"></script>
+	<script src="<c:url value="/resources/js/admin/retrieveReported.js"/>"></script>
 
 </body>
 
