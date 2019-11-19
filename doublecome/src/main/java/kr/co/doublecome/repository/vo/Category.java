@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Category {
-	private int categoryCode;
-	private String categoryName;
-	private String categoryIcon;
+	private int categoryCode;				// 카테고리 번호
+	private String categoryName;			// 카테고리 이름
+	private String categoryIcon;			// 카테고리 아이콘
 }
