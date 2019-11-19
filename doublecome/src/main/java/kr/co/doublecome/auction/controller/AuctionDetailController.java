@@ -17,5 +17,6 @@ public class AuctionDetailController {
 	public void auctionDetail(int no, String userEmail, Model model) {
 		model.addAttribute("auction", service.auctiondetail(no));
 		model.addAttribute("user", service.userInfo(userEmail));
+		model.addAttribute("review", service.selectReceiveReview(userEmail));
 	}
 }

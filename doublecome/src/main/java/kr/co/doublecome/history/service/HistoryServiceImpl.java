@@ -12,8 +12,9 @@ import kr.co.doublecome.repository.vo.Review;
 public class HistoryServiceImpl implements HistoryService{
 	@Autowired
 	private HistoryMapper mapper;
-	public List<Review> receiveReviewList(){
-		return mapper.selectReceiveReview();
+	
+	public List<Review> receiveReviewList(String userEmail){
+		return mapper.selectReceiveReview(userEmail);
 	}
 	
 }

@@ -12,7 +12,6 @@ public class Auction {
 	private int auctionBuyNow;
 	private int auctionMinPrice;
 	private int auctionCondition;
-	private String user_email;
 	private int fileGroupCode;
 	private int categoryCode;
 	private int maxPrice;
@@ -21,4 +20,7 @@ public class Auction {
 	private double score;
 	private String userNickname;
 	
+	private int inquiryNo;
+	private String inquiryContent;
+	private int inquiryParent;
 }

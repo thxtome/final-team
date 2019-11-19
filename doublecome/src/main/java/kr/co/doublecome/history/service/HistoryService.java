@@ -5,5 +5,5 @@ import java.util.List;
 import kr.co.doublecome.repository.vo.Review;
 
 public interface HistoryService {
-	public List<Review> receiveReviewList();
+	public List<Review> receiveReviewList(String userEmail);
 }

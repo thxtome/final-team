@@ -11,6 +11,6 @@
 		from auction a
 		left join bid b
 		on a.auction_no = b.auction_no
-		where a.auction_no = 10;
+		where a.auction_no = #{auctionNo};
 	</select>
 </mapper>
