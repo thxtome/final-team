@@ -6,16 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/common/normalize.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/auction/bootstrap.min.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/summernote/summernote.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/history/listHistory.css"/>">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet" href="<c:url value="/resources/css/common/normalize.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/auction/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/summernote/summernote.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/history/listHistory.css"/>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 </head>
 <body>
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
@@ -24,15 +19,15 @@
 			<div id="myDeal">MY거래</div>
 			<div id="purchaseDeal">
 				<div>구매내역</div>
-				<span>0</span> <span>회</span>
+				<span>${userHistory.buyCnt}</span> <span>회</span>
 			</div>
 			<div id="salesDeal">
-				<div>판매판매</div>
-				<span>0</span> <span>회</span>
+				<div>판매내역</div>
+				<span>${userHistory.sellCnt}</span> <span>회</span>
 			</div>
 			<div id="reviewDeal">
 				<div>후기</div>
-				<span>0</span> <span>개</span>
+				<span>${userHistory.userCnt}</span> <span>개</span>
 			</div>
 		</div>
 		<div>
@@ -51,42 +46,42 @@
 					<li><span class="purchaseTabList tabChoice">거래 진행</span></li>
 					<li><span class="purchaseTabList">거래 완료</span></li>
 				</ul>
-
-				<div class="listCon">
-					<div class="listHead">
-						<span class="listDate"> <span class="dateTitle">마감
-								날짜 </span> <span class="dateContent">2019-11-20</span>
-						</span> <span class="detailCon"> <a>입찰금 <strong>281,000</strong>원
-						</a>
-						</span>
+				<c:forEach var="s" items="saleHistory">
+					<div class="listCon">
+						<div class="listHead">
+							<span class="listDate"> <span class="dateTitle">마감
+									날짜 </span> <span class="dateContent">${s.auctionLimitDate}</span>
+							</span> <span class="detailCon"> <a>입찰금 <strong>281,000</strong>원
+							</a>
+							</span>
+						</div>
+						<div class="listBody">
+							<ul>
+								<li>
+									<div class="productImg">
+										<img class="imgCon"
+											src="<c:url value="/resources/images/profileImg.png"/>">
+									</div>
+								</li>
+								<li>
+									<div class="productInfo">
+										<a class="listTitle">날이면 날마다 오는 기회가 아닙니다. 싸게싸게 입찰하세요. 실사용
+											1회입니다~ 마이크 커버 팝니다.</a>
+										<div class="listRegDate">2019-11-01</div>
+									</div>
+								</li>
+								<li>
+									<div class="writerInfo">
+										<a class="auctionWriter">박호섭이</a>
+										<div>3.2점</div>
+										<a class="reportBtn"><strong>신고</strong></a> <a
+											class="reviewBtn"><strong>후기등록</strong></a>
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div>
-					<div class="listBody">
-						<ul>
-							<li>
-								<div class="productImg">
-									<img class="imgCon"
-										src="<c:url value="/resources/images/profileImg.png"/>">
-								</div>
-							</li>
-							<li>
-								<div class="productInfo">
-									<a class="listTitle">날이면 날마다 오는 기회가 아닙니다. 싸게싸게 입찰하세요. 실사용
-										1회입니다~ 마이크 커버 팝니다.</a>
-									<div class="listRegDate">2019-11-01</div>
-								</div>
-							</li>
-							<li>
-								<div class="writerInfo">
-									<a class="auctionWriter">박호섭이</a>
-									<div>3.2점</div>
-									<a class="reportBtn"><strong>신고</strong></a> <a
-										href="addReview.do" class="reviewBtn"><strong>후기
-											등록</strong></a>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 			<div>
 				<div id="salesHead">판매내역</div>
@@ -122,9 +117,8 @@
 								<div class="writerInfo">
 									<a class="auctionWriter">채채채미니</a>
 									<div>9.5점</div>
-									<a href="reportModal.do" class="reportBtn"><strong>신고</strong></a> <a
-										href="addReview.do" class="reviewBtn"><strong>후기
-											등록</strong></a>
+									<a class="reportBtn"><strong>신고</strong></a> <a
+										class="reviewBtn"><strong>후기등록</strong></a>
 								</div>
 							</li>
 						</ul>
@@ -151,37 +145,38 @@
 					</div>
 					<div id="reviewCon">
 						<ul>
-						<c:forEach var="list" items="${receiveReview}" >
-							<li class="preView">
-								<div class="scoreArea">
-									<div class="score">${list.reviewScore}</div>
-									<div class="scoreForm">점</div>
-								</div>
-								<div class="contentArea">
-									<div class="auctionTitle">${list.auctionTitle}</div>
-									<div class="reviewTitle">${list.reviewTitle}</div>
-									<div class="reviewDate">${list.reviewRegDate}</div>
-								</div>
-								<div class="writerArea">
-									<a class="reviewer">${list.reviewerNickname}</a>
-								</div>
-								<div class="editdel">
-									<a href="editReview.do" class="editreview">수정</a> / <a class="delreview">삭제</a>
-								</div>
-							</li>
-							<li class="reviewDetail">
-								<div class="reviewContent">
-									<div class="profileDiv">
-										<img class="profileImg"
-											src="<c:url value="/resources/images/profileImg.png"/>" />
+							<c:forEach var="list" items="${receiveReview}">
+								<li class="preView">
+									<div class="scoreArea">
+										<div class="score">${list.reviewScore}</div>
+										<div class="scoreForm">점</div>
 									</div>
-									<div class="nicknameDiv">${list.reviewerNickname}</div>
-									<div class="regdateDiv">${list.reviewRegDate}</div>
-									<div class="onelineDiv">${list.reviewTitle}</div>
-									<div class="reviewDiv">${list.reviewContent}</div>
-								</div>
-							</li>
-						</c:forEach>
+									<div class="contentArea">
+										<div class="auctionTitle">${list.auctionTitle}${list.auctionTitle}${list.auctionTitle}</div>
+										<div class="reviewTitle">${list.reviewTitle}${list.reviewTitle}${list.reviewTitle}</div>
+										<div class="reviewDate">${list.reviewRegDate}</div>
+									</div>
+									<div class="writerArea">
+										<a class="reviewer">${list.reviewerNickname}</a>
+									</div>
+									<div class="editdel">
+										<a href="editReview.do" class="editreview">수정</a> / <a
+											class="delreview">삭제</a>
+									</div>
+								</li>
+								<li class="reviewDetail">
+									<div class="reviewContent">
+										<div class="profileDiv">
+											<img class="profileImg"
+												src="<c:url value="/resources/images/profileImg.png"/>" />
+										</div>
+										<div class="nicknameDiv">${list.reviewerNickname}</div>
+										<div class="regdateDiv">${list.reviewRegDate}</div>
+										<div class="onelineDiv">${list.reviewTitle}</div>
+										<div class="reviewDiv">${list.reviewContent}</div>
+									</div>
+								</li>
+							</c:forEach>
 							<!-- 
 							<li class="preView">
 								<div class="scoreArea">
@@ -459,13 +454,54 @@
 				</div>
 				<button id="moreBtn" type="button">더 보기</button>
 			</div>
+			
 		</div>
-		<c:import url="/WEB-INF/jsp/admin/reportModal.jsp" />
+		<div id="addReviewModal" class="reviewModal">
+			<div class="reviewModalContent">
+				<span class="reviewModalClose">&times;</span>
+				<div class="addReviewContent" data-value="헤이">
+					<div id="reviewForm">
+						<form id="rform">
+							<div class="auctionTitleDiv">
+								<div>경매글</div>
+								<div>날이면 날마다 오는 기회가 아닙니다. 싸게싸게 입찰하세요. 실사용 1회입니다~ 마이크 커버
+									팝니다.</div>
+							</div>
+							<div class="scoreDiv">
+								<div class="scoreLibel">신뢰도</div>
+								<div class="scoreCon">
+									<div class="scoreBar">
+										<span>1</span> <span>2</span> <span>3</span> <span>4</span> <span>5</span>
+										<span>6</span> <span>7</span> <span>8</span> <span>9</span> <span>10</span>
+									</div>
+								</div>
+							</div>
+							<div class="reviewTitleDiv">
+								<div>한줄요약</div>
+								<div>
+									<input type="text" />
+								</div>
+							</div>
+							<div class="reviewCondiv">
+								<div>구매후기</div>
+								<div>
+									<div id="summernote"></div>
+								</div>
+							</div>
+							<div class="regitbtn">
+								<button type="submit">등록</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
-	<script
-		src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
+	<script src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
+	<script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/summernote/summernote.js" />"></script>
-	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	<script src="<c:url value="/resources/js/history/listHistory.js"/>"></script>
+	<c:import url="/WEB-INF/jsp/admin/reportModal.jsp" />
 </body>
 </html>

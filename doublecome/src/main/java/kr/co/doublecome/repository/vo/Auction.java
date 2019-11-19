@@ -17,6 +17,7 @@ public class Auction {
 	private int categoryCode;
 	private int maxPrice;
 	private int bidCnt;
+	private int bidPrice;
 	private String userEmail;
 	private double score;
 	private String userNickname;

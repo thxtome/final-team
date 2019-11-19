@@ -111,7 +111,7 @@
     border: 2px solid #DB1D3B;
     border-bottom: none;
     width: 150px;
-    height: 43px;
+    height: 44px;
     line-height: 47px;
     font-weight: bold;
     z-index: 1;
@@ -242,19 +242,21 @@
     font-weight: bold;
     color: black;
 }
-.reviewTitle{
-	cursor: pointer;
+.reviewTitle, .auctionTitle{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .reviewTitle:hover{
 	text-decoration: underline;
 }
 .listCon{
     width: 900px;
-    height: 260px;
     border: 1px solid #e7e7e7;
     margin-left: 0;
     margin-top: 40px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+/*     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+    border-radius: 4px;
 }
 .listHead{
     display: inline-block;
@@ -387,7 +389,7 @@
 .reviewDetail{
 	display: none;
 	margin: auto;
-	width: 880px;
+	width: 900px;
 /* 	height: 500px; */
 }
 .editdel{
@@ -399,24 +401,25 @@
 	cursor: pointer;
 }
 .reviewContent{
-	margin-left: 120px;
+	margin-left: 50px;
 	font-size: 13px;
 	display: grid;
-	width: 600px;
+	width: 750px;
 /* 	height: 500px; */
-	grid-template-columns: 0.85fr 0.45fr 1fr;
+	grid-template-columns: 1fr 4fr 4fr;
 /*   	grid-template-rows: 40px 40px 200px; */
 	grid-template-areas:
 	"profileDiv nicknameDiv regdateDiv"
 	"profileDiv onelineDiv onelineDiv"
 	"reviewDiv reviewDiv reviewDiv";
+/* 	border: 1px solid #C3C3C3; */
 }
 .profileImg{
 	display: inline-block;
 	width: 75px;
 	height: 75px;
 	border-radius: 50%;
-	margin-left: 100px;
+/* 	margin-left: 100px; */
 }
 .profileDiv, .nicknameDiv, .onelineDiv, .regdateDiv{
 	line-height: 36px;
@@ -430,6 +433,7 @@
 }
 .regdateDiv{
 	grid-area: regdateDiv;
+	text-align: right;
 }
 .onelineDiv{
 	grid-area: onelineDiv;
@@ -437,12 +441,12 @@
 .reviewDiv{
 	grid-area: reviewDiv;
 	line-height: 20px;
-	width: 400px;
+	width: 750px;
 	min-height: 100px;
 	margin: 10px auto;
 	padding-top: 15px;
 	text-align: left;
-	border-top: 1px solid #C3C3C3;
+/* 	border-top: 1px solid #C3C3C3; */
 }
 #searchType {
     width: 100%;
@@ -491,4 +495,166 @@
 	 bottom: 50px; 
 	 right: 50px; 
 	 cursor: pointer;
+}
+
+.reviewModal {
+	display: none; 
+	position: fixed; 
+	z-index: 3; 
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto; 
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.reviewModalContent {
+	width: 900px;
+	height: 600px;
+	background-color: #fefefe;
+	margin: 65px auto; 
+	padding: 20px;
+	border: 1px solid #888;
+	border-radius: 4px;
+}
+.reviewModalClose {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.reviewModalClose:hover, .reviewModalClose:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+.addReviewContent {
+    font-family: Roboto;
+    margin: auto;
+    text-align: center;
+    background-color: #fefefe;
+    padding: 20px;
+    width: 800px;                        
+    border: 1px solid #ddd;
+}
+.reviewForm{
+    width: 800px;
+/*     height: 550px; */
+}
+#rform{
+	text-align: center;
+	margin: auto 25px;
+}
+.reviewTitle{
+	cursor: pointer;
+}
+.reviewTitle:hover{
+	font-weight: bold;
+}
+.auctionTitleDiv{
+    display: grid;
+    width: 700px;
+    grid-template-columns: 100px 600px;
+    border-top: 1px solid #ddd;
+}
+.reviewTitleDiv{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.scoreDiv, .reviewTitleDiv, .photoDiv{
+    display: grid;
+    width: 700px;
+    height: 50px;
+    grid-template-columns: 100px 600px;
+    border-top: 1px solid #ddd;
+}
+.reviewCondiv{
+    display: grid;
+    width: 700px;
+/*     height: 400px; */
+    grid-template-columns: 100px 600px;
+    border-top: 1px solid #ddd;
+}
+.regitbtn {
+    width: 700px;
+    height: 40px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    line-height: 30px;
+}
+.auctionTitleDiv > div:nth-child(1),
+.scoreDiv > div:nth-child(1), 
+.reviewTitleDiv > div:nth-child(1), 
+.photoDiv > div:nth-child(1){
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.auctionTitleDiv > div:nth-child(2),
+.scoreDiv > div:nth-child(2), 
+.reviewTitleDiv > div:nth-child(2), 
+.photoDiv > div:nth-child(2){
+    text-align: center;
+    line-height: 50px;
+    font-size: 13px;
+}
+.photoDiv div:last-child {
+    text-align: center;
+    font-size: 12px;
+    color: #888888;
+}
+.reviewTitleDiv > div > input{
+    width: 500px;
+    height: 30px;
+    font-size: 13px;
+}
+.reviewCondiv > div:nth-child(1){
+    text-align: center;
+    font-size: 15px;
+    margin: auto;
+    font-weight: bold;
+}
+.reviewCondiv > div:nth-child(2){
+    margin: 2px auto;
+}
+
+.scoreBar span{
+	display: inline-block;
+	text-align: center;
+	line-height: 18px;
+    padding-right: 5px;
+    margin-right: 10px;
+    font-size: 18px;
+    width: 15px;
+    height: 15px;
+}
+.scoreBar span:hover{
+    cursor: pointer;
+    font-weight: bold;
+    /* font-size: 20px; */
+    color: #FF3B58;
+}
+.scorechoice{
+    font-size: 20px;
+    border-radius: 50%;
+    color: #FF3B58;
+    font-weight: bold;
+}
+.regitbtn button{
+    border: none;
+    width: 80px;
+    height: 27px;
+    background-color: #DB1D3B;
+    border-bottom :2px solid rgb(170, 26, 15);
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+#summernote{
+	margin-top: 20px;
 }

@@ -11,5 +11,6 @@ public class History {
 	private int userCnt;
 	private int fileGroupCode;
 	private int sellCnt;
+	private int buyCnt;
 	
 }

@@ -14,8 +14,10 @@ public class HistoryController {
 	private HistoryService service;
 	
 	@RequestMapping("/listHistory.do")
-	public void listHistory(Model model) {
-		model.addAttribute("receiveReview", service.receiveReviewList());
+	public void listHistory(String userEmail, Model model) {
+		model.addAttribute("receiveReview", service.receiveReviewList(userEmail));
+		model.addAttribute("userHistory", service.receiveUserInfo(userEmail));
+		model.addAttribute("saleHistory", service.receiveSaleHistory(userEmail));
 	}
 	
 	@RequestMapping("/addReview.do")

@@ -69,15 +69,52 @@ $(".reviewTabList").click((e) => {
 	}
 });
 
+let $addReviewModal = $("#addReviewModal");
+$("body").on("click", ".reviewBtn", (e) => {
+	console.log($("#addReviewModal").html());
+	$addReviewModal.css("display","block");
+});
+
+$("body").on("click", ".reviewModalClose", (e) => {
+	$addReviewModal.css("display","none");
+});
+
+window.onclick = function(event) {
+ if (event.target == $addReviewModal) {
+ 	$addReviewModal.css("display","none");
+ }
+}
+//후기등록 score바
+$(".scoreBar").find("span").click((e) => {
+	$(".scoreBar").find("span").removeClass("scorechoice");
+	$(e.target).addClass("scorechoice");
+});
+
+// 후기작성 서머노트
+$('#summernote').summernote(
+		{
+			height : 250,
+			width : 500,
+		    disableResize: true,
+		    disableResizeEditor: true,
+		    resize: false,
+		    toolbar : ['insert', ['picture']]
+});
+
 
 // 후기제목 클릭시 후기상세글 노출
-$(".preView").click((e) => {
+$("body").on("click" ,".preView", (e) => {
 	$reDetail = $(e.target).closest("li").next();
 	if ($reDetail.css("display") == "none"){
 		$reDetail.css("display", "inline-block");
 	} else {
 		$reDetail.css("display", "none");
 	}
+});
+
+// 후기 경매글제목 클릭시 해당 경매글로 이동
+$("body").on("click" ,".auctionTitle", (e) => {
+	alert("이동");
 });
 /*
 // 후기 출력

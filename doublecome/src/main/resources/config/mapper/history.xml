@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.doublecome.repository.mapper.HistoryMapper">
-	<select id="selectReceiveReview" resultType="Review">
+
+	<!-- 받은 후기 목록 -->
+	<select id="selectReceiveReview" resultType="Review" parameterType="String">
 		select r.*, a.auction_title, u.user_nickname as reviewer_nickname
 		  from review r
 		 inner join deal d
@@ -11,16 +13,31 @@
 		    on d.auction_no = a.auction_no
 		 inner join user u 
 		    on u.user_email = r.review_sender
-		 where r.review_receiver = 'c@c';
+		 where r.review_receiver = #{userEmail};
 	</select>
 	
+	<!-- 구매횟수, 판매횟수, 후기갯수 -->
 	<select id="userInfo" resultType="History" parameterType="String">
 		select u.*,
-		count(d.user_email_seller) over(partition by d.user_email_seller) as sell_cnt
-		from user u
-		left join deal d
-		on u.user_email = d.user_email_seller
-		and d.deal_condition = 2
-		where user_email = #{userEmail};
+			   count(ds.user_email_seller) over(partition by ds.user_email_seller) as sell_cnt,
+			   count(db.user_email_buyer) over(partition by db.user_email_buyer) as buy_cnt
+		  from user u
+		  left join deal ds
+		    on u.user_email = ds.user_email_seller
+		  left join deal db
+		    on u.uesr_email = db.user_email_buyer
+		   and d.deal_condition = 2
+		 where user_email = #{userEmail};
+	</select>
+	
+	<!-- 판매내역 -->
+	<select id="saleHistory" resultType="Auction" parameterType="String">
+		select distinct a.*, max(b.bid_price) over(partition by b.auction_no) as bid_price
+		  from auction a
+		  left join deal d
+		   on a.user_email = d.user_email_seller
+	    inner join bid b
+           on a.auction_no = b.auction_no
+		where a.user_email = #{userEmail};
 	</select>
 </mapper>

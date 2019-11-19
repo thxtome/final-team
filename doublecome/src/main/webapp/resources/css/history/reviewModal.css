@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+.reviewModal {
+	display: none; 
+	position: fixed; 
+	z-index: 3; 
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto; 
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.reviewModalContent {
+	background-color: #fefefe;
+	margin: 15% auto; 
+	padding: 20px;
+	border: 1px solid #888;
+	border-radius: 4px;
+	width: 50%; 
+}
+/* The Close Button */
+.reviewModalClose {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.reviewModalClose:hover, .reviewModalClose:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+#addReviewContent{
+    width: 1000px;
+}
+.addReviewContent {
+    position: relative;
+    display: none;
+    font-family: Roboto;
+    margin: auto;
+    text-align: center;
+    background-color: #fefefe;
+    padding: 20px;
+    width: 900px;                        
+    border: 1px solid #ddd;
+}
+.reviewForm{
+    width: 800px;
+/*     height: 550px; */
+}
+#rform{
+	text-align: center;
+	margin: auto 25px;
+}
+.reviewTitle{
+	cursor: pointer;
+}
+.reviewTitle:hover{
+	font-weight: bold;
+}
+.auctionTitleDiv{
+    display: grid;
+    width: 800px;
+    grid-template-columns: 100px 700px;
+    border-top: 1px solid #ddd;
+}
+.scoreDiv, .reviewTitleDiv, .photoDiv{
+    display: grid;
+    width: 800px;
+    height: 50px;
+    grid-template-columns: 100px 700px;
+    border-top: 1px solid #ddd;
+}
+.reviewCondiv{
+    display: grid;
+    width: 800px;
+/*     height: 400px; */
+    grid-template-columns: 100px 700px;
+    border-top: 1px solid #ddd;
+}
+.regitbtn {
+    width: 800px;
+    height: 40px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    line-height: 30px;
+}
+.auctionTitleDiv > div:nth-child(1),
+.scoreDiv > div:nth-child(1), 
+.reviewTitleDiv > div:nth-child(1), 
+.photoDiv > div:nth-child(1){
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.auctionTitleDiv > div:nth-child(2),
+.scoreDiv > div:nth-child(2), 
+.reviewTitleDiv > div:nth-child(2), 
+.photoDiv > div:nth-child(2){
+    text-align: center;
+    line-height: 50px;
+    font-size: 13px;
+}
+.photoDiv div:last-child {
+    text-align: center;
+    font-size: 12px;
+    color: #888888;
+}
+.reviewTitleDiv > div > input{
+    width: 500px;
+    height: 30px;
+    font-size: 13px;
+}
+.reviewCondiv > div:nth-child(1){
+    text-align: center;
+    font-size: 15px;
+    margin: auto;
+    font-weight: bold;
+}
+.reviewCondiv > div:nth-child(2){
+    margin: 2px auto;
+}
+
+.scoreBar span{
+	display: inline-block;
+	text-align: center;
+	line-height: 18px;
+    padding-right: 5px;
+    margin-right: 10px;
+    font-size: 18px;
+    width: 15px;
+    height: 15px;
+}
+.scoreBar span:hover{
+    cursor: pointer;
+    font-weight: bold;
+    /* font-size: 20px; */
+    color: #FF3B58;
+}
+.scorechoice{
+    font-size: 20px;
+    border-radius: 50%;
+    color: #FF3B58;
+    font-weight: bold;
+}
+.regitbtn button{
+    border: none;
+    width: 80px;
+    height: 27px;
+    background-color: #DB1D3B;
+    border-bottom :2px solid rgb(170, 26, 15);
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+#summernote{
+	margin-top: 20px;
+}
