@@ -27,15 +27,15 @@ $("a.category").click(e => {
 	selectCheck(e);
 })
 // 시간별로 검색
-$("#date a").click(e=> {
+$("#date li a").click(e=> {
 	selectCheck(e);
 })
 // 날짜별로 검색
-$("#price_filter a").click(e => {
+$("#price_filter li a").click(e => {
 	selectCheck(e);
 })
 // 입찰순으로 보기
-$("#bidcount a").click(e => {
+$("#bidcount li a").click(e => {
 	selectCheck(e);
 })
 $(".price_srh").click(e => {

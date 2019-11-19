@@ -21,6 +21,7 @@
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchsidebar.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchcontent.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchbar.css" />">
+<link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -41,8 +42,8 @@
         </c:forEach>
         </ul>
       </div>
-      <div class="checklist box-line" id="price_filter">
-          <h3>가격</h3>
+      <div class="checklist box-line accordion" id="price_filter">
+          <a href="#"><h3>가격</h3></a>
           <ul>
             <li><a class="price-filter cnkfilter" href="#" data-selected="" data-value="2만원 미만" title="2만원 미만">2만원 미만</a></li>
             <li><a class="price-filter cnkfilter" href="#" data-selected="" data-value="2만원  ~ 5만원" title="2만원 ~ 5만원">2만원 ~ 5만원</a></li>
@@ -56,16 +57,16 @@
             </li>
           </ul>
       </div>
-      <div class="checklist box-line" id="date">
-          <h3>시간</h3>
+      <div class="checklist box-line accordion" id="date">
+          <a href="#"><h3>시간</h3></a>
           <ul>
             <li><a class="time-filter cnkfilter" href="#" data-selected="" data-value="1일 미만" title="1일 미만">1일 미만</a></li>
             <li><a class="time-filter cnkfilter" href="#" data-selected="" data-value="3일 ~ 5일" title="3일~5일">3일~5일</a></li>
             <li><a class="time-filter cnkfilter" href="#" data-selected="" data-value="5일 이상" title="5일 이상">5일 이상</a></li>
           </ul>
       </div>
-      <div class="checklist box-line" id="bidcount">
-          <h3>입찰</h3>
+      <div class="checklist box-line accordion" id="bidcount">
+          <a href="#"><h3>입찰</h3></a>
           <ul>
             <li><a class="bid-filter cnkfilter" href="#" data-selected="" data-value="1건 미만" title="1건 미만">1건 미만</a></li>
             <li><a class="bid-filter cnkfilter" href="#" data-selected="" data-value="5건 ~ 10건" title="5건 ~ 10건">5건 ~ 10건</a></li>
@@ -73,6 +74,7 @@
           </ul>
       </div>
     </div>
+    
     <div class="layout-right">
       <div class="py-4 bg-light">
       	<div class="option_selectbar" id="selectbar">
@@ -259,6 +261,7 @@
   });
   </script>
   <script src="<c:url value="/resources/js/auction/searchauction.js" />"></script>
+  <script src="<c:url value="/resources/js/auction/accordion.js" />"></script>
 </body>
 
 </html>
