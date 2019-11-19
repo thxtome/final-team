@@ -121,8 +121,10 @@ $('.nav-item').click(function(e){
 $('.review_pdct_title').click(() => {
 	alert("aaa")
 })
+
 function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
 $(".nowprice").html(numberWithCommas($(".nowprice").html()))
 $(".buyprice").html(numberWithCommas($(".buyprice").html()))

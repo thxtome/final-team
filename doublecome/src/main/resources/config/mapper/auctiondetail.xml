@@ -15,9 +15,11 @@
 	</select>
 	
 	<select id="retrieveinquiry" resultType="Auction" parameterType="int">
-		select *
-		from inquiry
-		where auction_no = #{auctionNo}
-        order by inquiry_no desc;
+			select i.*, u.*
+			from inquiry i
+			inner join user u
+			on i.user_email = u.user_email
+			where auction_no = #{auctionNo}
+			order by IF(ISNULL(inquiry_parent), inquiry_no, inquiry_parent) desc;
 	</select>
 </mapper>

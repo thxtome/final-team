@@ -28,7 +28,7 @@ textarea {
     width: 666px;
     margin-bottom: 35px;
 }
-#inquiry-contents {
+.form-control {
     width: 100%;
     height: 150px;
     resize: none;
@@ -155,9 +155,6 @@ textarea {
 img {
     width: 100px;
     height: 100px;
-}
-.inquiry_container {
-    margin-top: 20px;
 }
 .card {
     padding: 20px;
@@ -338,4 +335,13 @@ section {
 .empty_review {
 	padding: 40px 0 40px;
 	text-align: center;
+}
+.inquiry_box {
+	height: 70px;
+}
+.empty_inquiry {
+	padding: 30px 0 30px;
+	text-align: center;
+	border-top: 1px solid #c3c3c3;
+	border-bottom: 1px solid #c3c3c3;
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +25,7 @@
 <body>
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	<div id="wrapper">
+			
 		<div id="contents">
 			<div>
 				<div class="writer_btns">
@@ -247,8 +249,20 @@
 								<div class="inquiry_submit pdct_inquiry">
 									<h4>문의 내용</h4>
 									<form id="productInquiry">
-										<textarea class="form-control" id="inquiry-contents"
+									<sec:authorize access="isAuthenticated()">
+									<sec:authentication property="principal.user" var="log" />
+									<c:choose>
+										<c:when test="${empty log}">
+										<textarea class="form-control"
 											placeholder="로그인 후 작성하실 수 있습니다"></textarea>
+										</c:when>
+										<c:otherwise>
+										<textarea class="form-control" id="inquiry-contents"
+											placeholder="문의내용을 작성해주세요">
+										</textarea>										
+										</c:otherwise>
+									</c:choose>	
+									</sec:authorize>
 									</form>
 									<button class="button">등록</button>
 								</div>
@@ -258,57 +272,55 @@
 								<div class="card">
 								<c:choose>
 									<c:when test="${empty inquiry}">
-										<div>문의가 없습니다.</div>
+										<div class="inquiry_box">
+											<div class="empty_inquiry">작성된 문의가 없습니다.</div>
+										</div>
 									</c:when>
 								</c:choose>
-								<c:forEach items="${inquiry}" var="inquiry">
-								</c:forEach>
-								
+								<c:forEach items="${inquiry}" var="inq">
+									<c:choose>
+									
+									<c:when test="${inq.inquiryParent eq '0'}">
 									<div class="card-body">
 										<div class="row">
 											<div class="col-xs-12 pdct_inquiry_item">
 												<p class="inquiry_name col-xs-12">
-													<strong>나승민아님</strong> <span class="inquiry_minute">2019-11-11</span>
+													<strong>${inq.userNickname}</strong> <span class="inquiry_minute">${inq.inquiryRegDate}</span>
 												</p>
 												<div class="clearfix"></div>
-												<p>각각 개별포장으로 되어 있나요???</p>
-												<!-- <p>
+												<p>${inq.inquiryContent}</p>
+												<div id="ans${inq.inquiryNo}">
+													<p>
                                                     <a class="float-right btn btn-outline-primary ml-2 reply"
                                                         id="btn1">답변</a>
-                                                </p> -->
-												<div class="insertbox" id="insertbox1"></div>
+                                                	</p>
+													<div class="insertbox" id="insertbox1"></div>	
+												</div>											
 											</div>
 										</div>
-										<div class="card-inner">
-											<div class="card-body">
-												<div class="row">
-													<div class="col-xs-12 pdct_inquiry_inner_item">
-														<p class="inquiry_name col-xs-12">
-															<i class="fab fa-replyd"></i><strong>SM</strong> <span class="inquiry_minute">2019-11-11</span>
-														</p>
-														<div class="clearfix"></div>
-														<p>은율 마유 폼클렌징, 150g, 3개 상품은 한 개의 제품 박스에 한 개씩 포장되어있는 점
-															참고하여 이용 부탁드립니다.</p>
+									</div>
+									</c:when>
+												<c:otherwise>
+													<div class="card-inner">
+														<div class="card-body">
+															<div class="row">
+																<div class="col-xs-12 pdct_inquiry_inner_item">
+																	<p class="inquiry_name col-xs-12">
+																		<i class="fab fa-replyd"></i><strong>${inq.userNickname}</strong> <span class="inquiry_minute">${inq.inquiryRegDate}</span>
+																	</p>
+																	<div class="clearfix"></div>
+																	<p>${inq.inquiryContent}</p>
+																</div>
+															</div>
+														</div>
 													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="row">
-											<div class="col-xs-12 pdct_inquiry_item">
-												<p class="inquiry_name col-xs-12">
-													<strong>내가승민임</strong> <span class="inquiry_minute">2019-11-11</span>
-												<div class="clearfix"></div>
-												<p>남.여공용으로도쓸수있나요?남자스킨향날까봐서요</p>
-												<p>
-													<a class="float-right btn btn-outline-primary ml-2 reply"
-														id="btn2">답변</a>
-												</p>
-												<div class="insertbox" id="insertbox2"></div>
-											</div>
-										</div>
-									</div>
+													<script type="text/javascript">
+														$("#ans${inq.inquiryParent}").remove()
+													</script>
+												</c:otherwise>
+									</c:choose>
+								</c:forEach>
+
 								</div>
 							</div>
 						</div>
@@ -401,6 +413,7 @@
 			<textarea class="form-control inquiry-contents"></textarea>
 			<button class="reply_button">등록</button>
 		</form>
+	</div>
 	</div>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	<script
