@@ -9,7 +9,7 @@ footer {
 	border-top:1px solid #eee;
 }
 #wrapper{
-	width: 1300px;
+	width: 1250px;
     background:#fff;
     margin : 0 auto;
 	display: flex;
@@ -63,10 +63,6 @@ input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
 	overflow: hidden;
 	clip:rect(0,0,0,0);
 	border: 0
-}
-.price-choice {
-	width:73px;
-	height: 23px;
 }
 .checklist ul {
 	padding: 0;

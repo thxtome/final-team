@@ -17,7 +17,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     type="text/css">
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchsidebar.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchcontent.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchbar.css" />">
@@ -32,7 +32,7 @@
         <ul>
         <c:forEach var="category" items="${category}" >
           <li>
-       		<i class="fas fa-${category.categoryIcon}"></i>
+       		<i class="fas fa-${category.categoryIcon} category-filter"></i>
           	<a class="category cnkfilter" id="category${category.categoryCode}" 
           	href="#" data-selected="" data-value="${category.categoryCode}" title="${category.categoryName}">
 				${category.categoryName}
@@ -44,32 +44,32 @@
       <div class="checklist box-line" id="price_filter">
           <h3>가격</h3>
           <ul>
-            <li><a class="cnkfilter" href="#" data-selected="" data-value="1" title="2만원 미만">2만원 미만</a></li>
-            <li><a class="cnkfilter" href="#" data-selected="" data-value="2" title="2만원 ~ 5만원">2만원 ~ 5만원</a></li>
-            <li><a class="cnkfilter" href="#" data-selected="" data-value="3" title="5만원 ~ 10만원">5만원 ~ 10만원</a></li>
-            <li><a class="cnkfilter" href="#" data-selected="" data-value="4" title="10만원 ~ 20만원">10만원 ~ 20만원</a></li>
-            <li><a class="cnkfilter" href="#" data-selected="" data-value="5" title="20만원 이상">20만원 이상</a></li>
+            <li><a class="price-filter cnkfilter" href="#" data-selected="" data-value="2만원 미만" title="2만원 미만">2만원 미만</a></li>
+            <li><a class="price-filter cnkfilter" href="#" data-selected="" data-value="2만원  ~ 5만원" title="2만원 ~ 5만원">2만원 ~ 5만원</a></li>
+            <li><a class="price-filter cnkfilter" href="#" data-selected="" data-value="5만원  ~ 10만원" title="5만원 ~ 10만원">5만원 ~ 10만원</a></li>
+            <li><a class="price-filter cnkfilter" href="#" data-selected="" data-value="10만원  ~ 20만원" title="10만원 ~ 20만원">10만원 ~ 20만원</a></li>
+            <li><a class="price-filter cnkfilter" href="#" data-selected="" data-value="20만원 이상" title="20만원 이상">20만원 이상</a></li>
             <li>
-              <input class="price-choice" type="text" numberOnly/> ~
-              <input class="price-choice" type="text" numberOnly/>
-              <a href="" class="price_srh"></a>
+              <input class="price-filter cnkfilter" data-value="" id="num1" data-selected="price" type="text" numberOnly/> ~
+              <input class="price-filter cnkfilter" data-value="" id="num2" data-selected="price" type="text" numberOnly/>
+              <a href="#" class="price_srh"></a>
             </li>
           </ul>
       </div>
       <div class="checklist box-line" id="date">
           <h3>시간</h3>
           <ul>
-            <li><a class="cnkfilter" href="#" data-selected="" title="1일 미만">1일 미만</a></li>
-            <li><a class="cnkfilter" href="#" data-selected="" title="3일~5일">3일~5일</a></li>
-            <li><a class="cnkfilter" href="#" data-selected="" title="5일 이상">5일 이상</a></li>
+            <li><a class="time-filter cnkfilter" href="#" data-selected="" data-value="1일 미만" title="1일 미만">1일 미만</a></li>
+            <li><a class="time-filter cnkfilter" href="#" data-selected="" data-value="3일 ~ 5일" title="3일~5일">3일~5일</a></li>
+            <li><a class="time-filter cnkfilter" href="#" data-selected="" data-value="5일 이상" title="5일 이상">5일 이상</a></li>
           </ul>
       </div>
       <div class="checklist box-line" id="bidcount">
           <h3>입찰</h3>
           <ul>
-            <li><a class="cnkfilter" href="#" data-selected="" title="1건 미만">1건 미만</a></li>
-            <li><a class="cnkfilter" href="#" data-selected="" title="5건 ~ 10건">5건 ~ 10건</a></li>
-            <li><a class="cnkfilter" href="#" data-selected="" title="10건 이상">10건 이상</a></li>
+            <li><a class="bid-filter cnkfilter" href="#" data-selected="" data-value="1건 미만" title="1건 미만">1건 미만</a></li>
+            <li><a class="bid-filter cnkfilter" href="#" data-selected="" data-value="5건 ~ 10건" title="5건 ~ 10건">5건 ~ 10건</a></li>
+            <li><a class="bid-filter cnkfilter" href="#" data-selected="" data-value="10건 이상" title="10건 이상">10건 이상</a></li>
           </ul>
       </div>
     </div>

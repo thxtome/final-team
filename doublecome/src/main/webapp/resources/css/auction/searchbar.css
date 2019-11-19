@@ -18,6 +18,10 @@
 	grid-template-columns: 1fr 2fr;
 	height : 40px;
 }
+input[data-selected="price"] {
+	width:72px;
+	height: 23px;
+}
 .card-body > .card-title {
 	line-height : 42px;
 }
@@ -77,6 +81,7 @@
 }
 .sort_list {
 	margin :0;
+	padding-left: 107px;
 }
 .view_count > select {
 	height : 22px;
