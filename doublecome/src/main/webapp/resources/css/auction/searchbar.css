@@ -24,7 +24,7 @@
 .categorylist li {
 	height : 30px;
 }
-.categorylist li > a {
+.categorylist li {
 	display: grid;
     grid-template-columns: 1fr 5fr;
 }
