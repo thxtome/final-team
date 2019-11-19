@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="kr.co.doublecome.repository.mapper.AdminMapper">
+
+	<select id="selectUserForAdmin" parameterType="SearchUser"
+		resultType="User">
+		select *
+		  from (select distinct
+					   u.*,
+					   ifnull(cnt1,0) + ifnull(cnt2,0) as user_deal_cnt,
+					   ifnull(user_review_cnt,0) as review_cnt
+				  from user u
+				  left outer join (select deal.user_email_buyer,
+										  count(*) over(partition by deal.user_email_buyer) as cnt1
+									 from deal) d1
+					on u.user_email = d1.user_email_buyer
+				  left outer join (select deal.user_email_seller,
+										  count(*) over(partition by deal.user_email_seller) as cnt2
+									 from deal) d2
+					on u.user_email = d2.user_email_seller
+				  left outer join (select review_receiver,
+										  count(*) as user_review_cnt
+								     from review) r
+					on u.user_email = r.review_receiver) full
+					
+			 
+			 <where>
+					<choose>
+						<when test="startScore != null and endScore != null">
+							 user_score between #{startScore} and #{endScore}
+						</when>
+						<when test="startScore == null and endScore != null">
+							 user_score <![CDATA[<]]> #{endScore}
+						</when>
+						<when test="startScore != null and endScore == null">
+							 user_score <![CDATA[>]]> #{startScore} 
+						</when>
+					</choose>
+					
+					<choose>
+						<when test="startDealCnt != null and endDealCnt != null">
+							 user_deal_cnt between #{startDealCnt} and #{endDealCnt}
+						</when>
+						<when test="startDealCnt == null and endDealCnt != null">
+							 user_deal_cnt <![CDATA[<]]> #{endDealCnt}
+						</when>
+						<when test="startDealCnt != null and endDealCnt == null">
+							 user_deal_cnt <![CDATA[>]]> #{startDealCnt} 
+						</when>
+					</choose>
+					
+					<choose>
+						<when test="startReviewCnt != null and endReviewCnt != null">
+							 user_review_cnt between #{startReviewCnt} and #{endDealCnt}
+						</when>
+						<when test="startReviewCnt == null and endReviewCnt != null">
+							 user_review_cnt <![CDATA[<]]> #{endReviewCnt}
+						</when>
+						<when test="startReviewCnt != null and endReviewCnt == null">
+							 user_review_cnt <![CDATA[>]]> #{endReviewCnt} 
+						</when>
+					</choose>
+					
+				<choose>
+					<when test="SearchType == 'userEmail'">
+						and	user_email like CONCAT('%',#{keyword},'%')
+					</when>
+					<when test="SearchType == 'userNickname'">
+						and	user_nickname like CONCAT('%',#{keyword},'%')
+					</when>
+					<when test="SearchType == 'userPhnum'">
+						and	user_phnum like CONCAT('%',#{keyword},'%')
+					</when>						
+				</choose>
+		</where>		 
+		limit #{begin},#{listSize};
+	</select>
+
+</mapper>

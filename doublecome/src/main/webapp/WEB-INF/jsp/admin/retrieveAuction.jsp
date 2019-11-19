@@ -31,7 +31,7 @@
 			<div>
 				<h2>전체 경매 조회</h2>
 			</div>
-
+			<button id="openReportModal">aaa</button>
 			<div id="searchBar">
 				<form action="" name="searchForm">
 					<table class="dataSearch">
@@ -172,6 +172,7 @@
 				</tbody>
 			</table>
 		</div>
+		<c:import url="/WEB-INF/jsp/include/addReportModal.jsp" />
 	</div>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
 	<script src="<c:url value="/resources/js/admin/retrieveAuction.js"/>"></script>
