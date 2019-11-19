@@ -11,18 +11,35 @@
 		 inner join auction a
 		    on d.auction_no = a.auction_no
 		 inner join user u 
-		    on u.user_email = r.review_sender
+		    on u.user_email = r.review_receiver
 		 where r.review_receiver = #{userEmail}
+	</select>
+	
+	<!-- 보낸 후기 목록 -->
+	<select id="selectSendReview" resultType="Review" parameterType="String">
+		select r.*, a.auction_title, u.user_nickname as reviewer_nickname
+		  from review r
+		 inner join deal d
+		    on r.deal_no = d.deal_no
+		 inner join auction a
+		    on d.auction_no = a.auction_no
+		 inner join user u 
+		    on u.user_email = r.review_sender
+		 where r.review_sender = #{userEmail}
 	</select>
 	
 	<!-- 구매횟수, 판매횟수, 후기갯수 -->
 	<select id="userInfo" resultType="History" parameterType="String">
 		select u.*,
-			   count(d.user_email_seller) over(partition by d.user_email_seller) as sell_cnt
+			   count(ds.user_email_seller) over(partition by ds.user_email_seller) as sell_cnt,
+			   count(db.user_email_buyer) over(partition by db.user_email_buyer) as buy_cnt
 		  from user u
-		  left join deal d
-		    on u.user_email = d.user_email_seller
-		   and d.deal_condition = 2
+		  left join deal ds
+		    on u.user_email = ds.user_email_seller
+		   and ds.deal_condition = 2
+		  left join deal db
+		    on u.user_email = db.user_email_buyer
+		   and db.deal_condition = 2
 		 where user_email = #{userEmail}
 	</select>
 	
@@ -32,8 +49,20 @@
 		  from auction a
 		  left join deal d
 		   on a.user_email = d.user_email_seller
+		  and a.auction_no = d.auction_no
 	    inner join bid b
            on a.auction_no = b.auction_no
 		where a.user_email = #{userEmail}
+	</select>
+	
+	<!-- 구매내역 -->
+	<select id="buyHistory" resultType="Auction" parameterType="String">
+		select distinct a.*, max(b.bid_price) over(partition by b.auction_no) as max_price
+		  from auction a
+		  left join deal d
+		    on a.auction_no = d.auction_no
+	     inner join bid b
+            on a.auction_no = b.auction_no
+	   	 where b.user_email = #{userEmail}
 	</select>
 </mapper>

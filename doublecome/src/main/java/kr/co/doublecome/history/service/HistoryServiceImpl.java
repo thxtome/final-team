@@ -14,13 +14,20 @@ import kr.co.doublecome.repository.vo.Review;
 public class HistoryServiceImpl implements HistoryService{
 	@Autowired
 	private HistoryMapper mapper;
+	
 	public List<Review> receiveReviewList(String userEmail){
 		return mapper.selectReceiveReview(userEmail);
+	}
+	public List<Review> sendReviewList(String userEmail){
+		return mapper.selectSendReview(userEmail);
 	}
 	public History receiveUserInfo(String userEmail) {
 		return mapper.userInfo(userEmail);
 	}
 	public List<Auction> receiveSaleHistory(String userEmail) {
 		return mapper.saleHistory(userEmail);
+	}
+	public List<Auction> receiveBuyHistory(String userEmail){
+		return mapper.buyHistory(userEmail);
 	}
 }
