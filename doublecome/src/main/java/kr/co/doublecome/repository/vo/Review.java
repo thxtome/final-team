@@ -4,14 +4,14 @@ import lombok.Data;
 
 @Data
 public class Review {
-	private String auctionTitle;
-	private int reviewNo;
-	private String reviewTitle;
-	private String reviewContent;
-	private String reviewRegDate;
-	private int dealNo;
-	private String reviewerNickname;
-	private String reviewSender;
-	private String reviewReceiver;
-	private int reviewScore;
+	private String auctionTitle;				// 경매글 제목
+	private int reviewNo;						// 후기글 번호
+	private String reviewTitle;					// 후기글 제목
+	private String reviewContent;				// 후기글 내용
+	private String reviewRegDate;				// 후기글 작성일
+	private int dealNo;							// 거래 번호
+	private String reviewerNickname;			// 후기글쓴이 닉네임
+	private String reviewSender;				// 후기글 작성한 사용자 이메일
+	private String reviewReceiver;				// 후기글 받은 사용자 이메일
+	private int reviewScore;					// 평가 점수
 }
