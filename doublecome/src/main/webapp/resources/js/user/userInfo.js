@@ -9,3 +9,11 @@ $('a').click( (e) => {
 		return;
 	}
 })*/
+($.ajax({
+	url: "/doublecome/user/bidList.do",
+	data: {email: $("#registInput").html()},
+	success: (result) =>{console.log(result, "z")
+						
+					$('#bidList').html(result)}
+}))
+

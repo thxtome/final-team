@@ -1,9 +1,12 @@
 package kr.co.doublecome.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.doublecome.repository.mapper.UserMapper;
+import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.User;
 
 @Service
@@ -30,9 +33,24 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User findEmail(User userPhnum) {
-		return mapper.findEmail(userPhnum);
+	public User findEmail(User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
+
+	@Override
+	public List<Auction> mybidAuction(User user) {
+		
+		return mapper.mybidAuction(user);
+	}
+
+	@Override
+	public List<Auction> bidList(String email) {
+		
+		return mapper.bidList(email);
+	}
+
 	
 	
 	

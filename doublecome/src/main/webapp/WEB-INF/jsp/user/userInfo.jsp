@@ -2,8 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,12 +44,12 @@
 	        </span>
         
 			<p><a id="updateFormBtn" href="<c:url value="/user/userInfoUpdate.do"/>">개인정보 수정</a></p>
-		    <p><a id="historyGoBtn" href="<c:url value="/mypage/mypage.do"/>">거래/후기 내역</a></p>
+		    <p><a id="historyGoBtn" href="<c:url value="/history/listHistory.do" />">거래/후기 내역</a></p>
 			
 		
 			<span id="registInputBox">
 			<sec:authorize access="isAuthenticated()">
-			<sec:authentication property="principal.user" var="user" />
+			<sec:authentication property="principal.user" var="user" /> 
 				<div id="registInputBox1" class="registInputBox">
 						<i class="far fa-envelope fa-1x" id="icon"></i>
 						
@@ -81,59 +80,34 @@
 						<span id="registInput" >${user.userNickname}</span>
 						<div id="alert"></div>
 				</div>
-				</sec:authorize>
+				</sec:authorize> 
 			</span>
 		</form>
 	</div>
 		<span id="title" style="left: 420px; 
 								top: -10px;">입찰 중인 경매</span>
-		<c:forEach  begin="1" end="1" var="1">
+		<c:if test="${empty auction}">
+			입찰 중인 경매가 없습니다
+		</c:if>
+		<div id="bidList">
+		<c:forEach  items="${auction}" var="a">
 		<a id="aution" href="#">
 		<div class="card_container">
 		  <img src="<c:url value="/resources/css/user/defaultpfimg.jpeg" />" alt="Avatar" class="card_imag">
 		  <div class="vertical-line" style="height: 120px;" /></div>
-		  <p><span>경메 타이틀</span></p>
+		  <p><span>${a.auctionTitle}</span></p>
 		  <p>
 		  </p>
 		  <span>
 			현재 입찰가		
 		  </span>
 		  <span>
-			남은 시간		  		  
-		  </span>
-		</div>
-		</a>
-		<a id="aution" href="#">
-		<div class="card_container">
-		  <img src="<c:url value="/resources/css/user/defaultpfimg.jpeg" />" alt="Avatar" class="card_imag">
-		  <div class="vertical-line" style="height: 120px;" /></div>
-		  <p><span>경메 타이틀</span></p>
-		  <p>
-		  </p>
-		  <span>
-			현재 입찰가		
-		  </span>
-		  <span>
-			남은 시간		  		  
-		  </span>
-		</div>
-		</a>
-		<a id="aution" href="#">
-		<div class="card_container">
-		  <img src="<c:url value="/resources/css/user/defaultpfimg.jpeg" />" alt="Avatar" class="card_imag">
-		  <div class="vertical-line" style="height: 120px;" /></div>
-		  <p><span>경메 타이틀</span></p>
-		  <p>
-		  </p>
-		  <span>
-			현재 입찰가		
-		  </span>
-		  <span>
-			남은 시간		  		  
+			${a.auctionLimitDate}	  		  
 		  </span>
 		</div>
 		</a>
 		</c:forEach>
+		</div>
 	</span>
 	<script src="<c:url value="/resources/js/user/userInfo.js" />" ></script>
 </body>

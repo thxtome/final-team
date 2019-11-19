@@ -21,6 +21,27 @@
 		where user_phnum = #{userPhnum}
 	</select>
 	
+	<select id="mybidAuction" parameterType="User" resultType="Auction">
+		select a.*, RANK() OVER (ORDER BY a.auction_limit_date ) as rk
+		  from auction a
+		 inner join bid b
+		    on a.auction_no = b.auction_no
+		 where b.user_email = #{userEmail}
+	</select>
+	
+	<select id="bidList" parameterType="string" resultType="Auction">
+		select a.*,
+		(select count(auction_no)
+		 from bid
+		where user_email = 'p@p') as bid_cnt,
+		 RANK() OVER (ORDER BY a.auction_limit_date ) as rk
+		  from auction a
+		 inner join bid b
+		    on a.auction_no = b.auction_no
+		 where b.user_email = #{email}
+	</select>
+	
+	
 	
 	
 	<insert id="insertUser" parameterType="User">

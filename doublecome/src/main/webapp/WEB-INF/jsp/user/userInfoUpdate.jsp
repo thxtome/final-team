@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,10 +50,12 @@
 			
 		
 			<span id="registInputBox">
+			<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.user" var="user" /> 
 				<div id="registInputBox1" class="registInputBox">
 						<i class="far fa-envelope fa-1x" id="icon"></i>
 						
-						<input id="userEmail" name="userEmail" type="text" value="${user.userEmail}" class="registInput"
+						<input id="userEmail" name="userEmail" type="text" value="" class="registInput"
 						placeholder="${user.userEmail}">
 						
 						<div id="alert"></div>
@@ -60,9 +63,9 @@
 				<div id="registInputBox2" class="registInputBox">
 						<i class="fas fa-unlock-alt fa-1x" id="icon"></i>
 						
-						<input id="userPass" name="userPass" type="password" value="${user.userPass}" class="registInput">
+						<input id="userPass" name="userPass" type="password" value="" placeholder="비밀번호" class="registInput">
 				
-						<input id="userPassConfirm" name="userPassConfirm" type="password" value="${user.userPass}" class="registInput">
+						<input id="userPassConfirm" name="userPassConfirm" type="password" value="" placeholder="비밀번호 확인"  class="registInput">
 						
 						<div id="alert"></div>
 						
@@ -73,16 +76,17 @@
 				<div id="registInputBox3" class="registInputBox">
 						<i class="fas fa-mobile-alt fa-1x" id="icon"></i>
 						
-						<input id="userPhnum" name="userPhnum" type="text" value="${user.userPhnum}" class="registInput">
+						<input id="userPhnum" name="userPhnum" type="text" value="" placeholder="${user.userPhnum}" class="registInput">
 						
 						<div id="alert"></div>
 				</div>
 				<div id="registInputBox4" class="registInputBox">
 						<i class="fas fa-user fa-1x" id="icon"></i>
 						
-						<input id="userNickname" name="userNickname" type="text" value="${user.userNickname}" class="registInput">
+						<input id="userNickname" name="userNickname" type="text" value="" placeholder="${user.userNickname}"  class="registInput">
 						<div id="alert"></div>
 				</div>
+				</sec:authorize> 
 			</span>
 		</form>
 			

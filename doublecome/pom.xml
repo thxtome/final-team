@@ -12,10 +12,27 @@
 
 	<properties>
 		<spring.version>5.2.1.RELEASE</spring.version>
+		<jacksion.version>2.10.1</jacksion.version>
 	</properties>
 
 	<dependencies>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>${jacksion.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>${jacksion.version}</version>
+		</dependency>
 
+
+		
 
 
 
