@@ -182,13 +182,13 @@
 											<!--<a href="#" class="Seller__followButton">フォロー</a>-->
 											<dl class="Seller__rating">
 												<dd class="Seller__ratingTitle">
-													거래횟수：<span class="Seller__ratingSum">12</span> 회
+													거래횟수：<span class="Seller__ratingSum">${user.sellCnt}</span> 회
 												</dd>
 												<dd class="Seller__ratingCount">
-													<span class="Seller__ratingGood">평가점수 : <span>4.4</span>점
+													<span class="Seller__ratingGood">평가점수 : <span>${user.userScore}</span>점
 													</span>
 													<div>
-														(<span>12</span>회)
+														(<span>${user.userCnt}</span>회)
 													</div>
 												</dd>
 											</dl>
