@@ -9,7 +9,7 @@ public class Auction {
 	private String auctionContent;
 	private String auctionRegDate;
 	private String auctionLimitDate;
-	private int auctionBuyPrice;
+	private int auctionBuyNow;
 	private int auctionMinPrice;
 	private int auctionCondition;
 	private String user_email;
@@ -17,4 +17,8 @@ public class Auction {
 	private int categoryCode;
 	private int maxPrice;
 	private int bidCnt;
+	private String userEmail;
+	private double score;
+	private String userNickname;
+	
 }

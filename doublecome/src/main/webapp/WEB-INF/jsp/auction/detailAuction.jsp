@@ -30,7 +30,7 @@
 					<button class="remove_btn writer_btn">삭제</button>
 					<button class="edit_btn writer_btn">수정</button>
 				</div>
-				<h2 id="auction-title">글 제목</h2>
+				<h2 id="auction-title">${auction.auctionTitle}</h2>
 			</div>
 			<div id="top">
 				<div id="slide">
@@ -94,7 +94,7 @@
 												<dl class="Count_top">
 													<dt class="Count__title">입찰인원</dt>
 													<dd class="Count__number">
-														<span id="now_bid">1</span> 명입찰
+														<span id="now_bid">${auction.bidCnt}</span> 명입찰
 													</dd>
 												</dl>
 											</li>
@@ -139,8 +139,8 @@
 											<div class="CouponPh2 is-hide"></div>
 										</div>
 										<dl class="Price__body">
-											<dt class="Price__title">현재 최고가</dt>
-											<dd class="Price__value">18,000원</dd>
+											<dt class="Price__title">${auction.maxPrice}</dt>
+											<dd class="Price__value">${auction.bidCnt}</dd>
 										</dl>
 										<div class="Price__buttonArea">
 											<a href="#"
@@ -153,7 +153,7 @@
 										<div class="PriceUse is-hide"></div>
 										<dl class="Price__body ">
 											<dt class="Price__title">즉시 구매가</dt>
-											<dd class="Price__value">50,000원</dd>
+											<dd class="Price__value">${auction.auctionBuyNow}</dd>
 										</dl>
 										<dd class="Price__buttonArea">
 
@@ -175,7 +175,7 @@
 										</dt>
 										<dl class="Seller__card">
 											<p>
-												닉네임 : <span>SM</span>
+												닉네임 : <span>${user.userEmail}</span>
 											</p>
 										</dl>
 										<dd class="Seller__subCard cvr273">

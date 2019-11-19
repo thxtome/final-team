@@ -65,7 +65,7 @@
 					<c:otherwise>
 						<c:forEach items="${auclist}" var="list">
 							<div class="col-md-4 p-2" >
-								<a class="auction_list" href="<c:url value="/auction/detailAuction.do" />">
+								<a class="auction_list" href="<c:url value="/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}" />">
 									<div class="card box-shadow">
 										<img class="card-img-top w-100"
 											src="<c:url value="/resources/images/macbook.jpg"/>"

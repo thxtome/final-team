@@ -109,14 +109,15 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 
-//$(document).ready(function(){
-//	$('.nav-item').click(function(e){
-//		classes = $(e.target).data("nav");
-//		let movepoint = '#' + classes;
-//		let addcss = '.' + classes;
-//		let offset = $(movepoint).offset().top - 50;
-//        $(addcss).addClass("movenav")
-//        $(".nav").children().removeClass("movenav")
-//        $('html').animate({scrollTop : offset}, 300);
-//	});
-//});
+$('.nav-item').click(function(e){
+	classes = $(e.target).data("nav");
+	let movepoint = '#' + classes;
+	let addcss = '.' + classes;
+	let offset = $(movepoint).offset().top - 60;
+    $(addcss).addClass("movenav")
+    $(".nav").children().removeClass("movenav")
+    $('html').animate({scrollTop : offset}, 400);
+});
+$('.review_pdct_title').click(() => {
+	alert("aaa")
+})

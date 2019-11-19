@@ -13,4 +13,14 @@
 		    on u.user_email = r.review_sender
 		 where r.review_receiver = 'c@c';
 	</select>
+	
+	<select id="userInfo" resultType="History" parameterType="String">
+		select u.*,
+		count(d.user_email_seller) over(partition by d.user_email_seller) as sell_cnt
+		from user u
+		left join deal d
+		on u.user_email = d.user_email_seller
+		and d.deal_condition = 2
+		where user_email = #{userEmail};
+	</select>
 </mapper>

@@ -14,7 +14,8 @@ public class AuctionDetailController {
 	private AuctionDetailService service;
 	
 	@RequestMapping("/detailAuction.do")
-	public void auctionDetail(int no, Model model) {
+	public void auctionDetail(int no, String userEmail, Model model) {
 		model.addAttribute("auction", service.auctiondetail(no));
+		model.addAttribute("user", service.userInfo(userEmail));
 	}
 }
