@@ -139,8 +139,8 @@
 											<div class="CouponPh2 is-hide"></div>
 										</div>
 										<dl class="Price__body">
-											<dt class="Price__title">${auction.maxPrice}</dt>
-											<dd class="Price__value">${auction.bidCnt}</dd>
+											<dt class="Price__title">현재 최고가</dt>
+											<dd class="Price__value"><span class="nowprice">${auction.maxPrice}</span><span>원</span></dd>
 										</dl>
 										<div class="Price__buttonArea">
 											<a href="#"
@@ -153,16 +153,16 @@
 										<div class="PriceUse is-hide"></div>
 										<dl class="Price__body ">
 											<dt class="Price__title">즉시 구매가</dt>
-											<dd class="Price__value">${auction.auctionBuyNow}</dd>
+											<dd class="Price__value"><span class="buyprice">${auction.auctionBuyNow}</span><span>원</span></dd>
 										</dl>
-										<dd class="Price__buttonArea">
+										<div class="Price__buttonArea">
 
 											<a href="#"
 												class="Button Button--buynow js-modal-show rapidnofollow"
 												rel="nofollow" data-modal-name="error"
 												data-ylk="rsec:byitnw;pos:1" data-rapid_p="9">즉시 구매하기</a>
 
-										</dd>
+										</div>
 										<div id="auc_detail_ymobile_pc"></div>
 									</div>
 								</li>
@@ -175,7 +175,7 @@
 										</dt>
 										<dl class="Seller__card">
 											<p>
-												닉네임 : <span>${user.userEmail}</span>
+												닉네임 : <span>${user.userNickname}</span>
 											</p>
 										</dl>
 										<dd class="Seller__subCard cvr273">
@@ -314,37 +314,42 @@
 									<tbody id="seller_detail">
 										<tr>
 											<td id="table_col">판매자 닉네임</td>
-											<td>SM</td>
+											<td>${user.userNickname}</td>
 										</tr>
 										<tr>
 											<td>평점</td>
-											<td><span id="grade_point">4.4</span> (<span
-												id="grade_count">12</span>)</td>
+											<td><span id="grade_point">${user.userScore}</span> (<span
+												id="grade_count">${user.userCnt}</span>)</td>
 										</tr>
 										<tr>
 											<td>판매 횟수</td>
-											<td><span id="sell_count">20</span> 회</td>
+											<td><span id="sell_count">${user.sellCnt}</span> 회</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-
+							<c:choose>
+							<c:when test="${empty review}">
+								<div class="review_box">
+									<div class="empty_review">작성된 리뷰가 없습니다.</div>
+								</div>
+							</c:when>
+							</c:choose>
+							<c:forEach items="${review}" var="review">
 							<button class="accordion">
 								<div class="col-xs-12">
 									<div class="col-xs-2">
 										<p class="grade">
-											<span class="grade_point">8</span><span>점</span>
+											<span class="grade_point">${review.reviewScore}</span><span>점</span>
 										</p>
 									</div>
 									<div class="col-xs-8 text-center">
-										<p class="review_title review_pdct_title">실착용 5회 HEAD
-											어글리슈즈 팔아요~ 상태 좋아요. 실착용 5회 HEAD 어글리슈즈 팔아요~ 상태 좋아요.</p>
-										<p class="review_title review_title">거래 매너 좋으신데, 연락이 늦어서
-											불편했어요.</p>
-										<p class="review_title review_regdate">2019.11.15</p>
+										<p class="review_title review_pdct_title">${review.auctionTitle}</p>
+										<p class="review_title review_title">${review.reviewTitle}</p>
+										<p class="review_title review_regdate">${review.reviewRegDate}</p>
 									</div>
 									<div class="review_contents_writer col-xs-2">
-										<p class="review_writer">JP</p>
+										<p class="review_writer">${review.reviewerNickname}</p>
 									</div>
 								</div>
 
@@ -359,115 +364,25 @@
 											</div>
 											<div class="col-xs-7 review_contents_title">
 												<p>
-													<span class="review_writer">JP</span><span
-														class="review_contents_regdate">2019.11.15</span>
+													<span class="review_writer">${review.reviewerNickname}</span><span
+														class="review_contents_regdate">${review.reviewRegDate}</span>
 												</p>
-												<p>거래 매너 좋으신데, 연락이 늦어서 불편했어요.</p>
+												<p>${review.reviewTitle}</p>
 											</div>
 										</div>
 									</div>
 									<div class="col-xs-10 review_contents_contents">
 										<div class="clearfix"></div>
-										<p>궁금한것 잘 대답해주시고, 물건도 잘 받았는데 연락이 너무 안 돼서 좀 짜증났어요. 결과가 좋으면
-											되긴하지만... 기다리는건 좋지 않더라구요. 다음에 다른 사람과 거래하게 되시면 연락은 바로바로 받으셨으면
-											합니다.</p>
+										<p>${review.reviewContent}</p>
 									</div>
 								</div>
 							</div>
-							<button class="accordion">
-								<div class="col-xs-12">
-									<div class="col-xs-2">
-										<p class="grade">
-											<span class="grade_point">8</span><span>점</span>
-										</p>
-									</div>
-									<div class="col-xs-8 text-center">
-										<p class="review_title review_pdct_title">실착용 5회 HEAD
-											어글리슈즈 팔아요~ 상태 좋아요. 실착용 5회 HEAD 어글리슈즈 팔아요~ 상태 좋아요.</p>
-										<p class="review_title review_title">거래 매너 좋으신데, 연락이 늦어서
-											불편했어요.</p>
-										<p class="review_title review_regdate">2019.11.15</p>
-									</div>
-									<div class="review_contents_writer col-xs-2">
-										<p class="review_writer">JP</p>
-									</div>
-								</div>
-
-							</button>
-							<div class="accor">
-								<div class="accor_contents">
-									<div class="review_contents_top row">
-										<div class="review_top col-xs-10">
-											<div class="col-xs-3">
-												<img src="https://image.ibb.co/jw55Ex/def_face.jpg"
-													class="review_img img-rounded img-fluid" />
-											</div>
-											<div class="col-xs-7 review_contents_title">
-												<p>
-													<span class="review_writer">JP</span><span
-														class="review_contents_regdate">2019.11.15</span>
-												</p>
-												<p>거래 매너 좋으신데, 연락이 늦어서 불편했어요.</p>
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-10 review_contents_contents">
-										<div class="clearfix"></div>
-										<p>궁금한것 잘 대답해주시고, 물건도 잘 받았는데 연락이 너무 안 돼서 좀 짜증났어요. 결과가 좋으면
-											되긴하지만... 기다리는건 좋지 않더라구요. 다음에 다른 사람과 거래하게 되시면 연락은 바로바로 받으셨으면
-											합니다.</p>
-									</div>
-								</div>
-							</div>
-							<button class="accordion">
-								<div class="col-xs-12">
-									<div class="col-xs-2">
-										<p class="grade">
-											<span class="grade_point">8</span><span>점</span>
-										</p>
-									</div>
-									<div class="col-xs-8 text-center">
-										<p class="review_title review_pdct_title">실착용 5회 HEAD
-											어글리슈즈 팔아요~ 상태 좋아요. 실착용 5회 HEAD 어글리슈즈 팔아요~ 상태 좋아요.</p>
-										<p class="review_title review_title">거래 매너 좋으신데, 연락이 늦어서
-											불편했어요.</p>
-										<p class="review_title review_regdate">2019.11.15</p>
-									</div>
-									<div class="review_contents_writer col-xs-2">
-										<p class="review_writer">JP</p>
-									</div>
-								</div>
-
-							</button>
-							<div class="accor">
-								<div class="accor_contents">
-									<div class="review_contents_top row">
-										<div class="review_top col-xs-10">
-											<div class="col-xs-3">
-												<img src="https://image.ibb.co/jw55Ex/def_face.jpg"
-													class="review_img img-rounded img-fluid" />
-											</div>
-											<div class="col-xs-7 review_contents_title">
-												<p>
-													<span class="review_writer">JP</span><span
-														class="review_contents_regdate">2019.11.15</span>
-												</p>
-												<p>거래 매너 좋으신데, 연락이 늦어서 불편했어요.</p>
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-10 review_contents_contents">
-										<div class="clearfix"></div>
-										<p>궁금한것 잘 대답해주시고, 물건도 잘 받았는데 연락이 너무 안 돼서 좀 짜증났어요. 결과가 좋으면
-											되긴하지만... 기다리는건 좋지 않더라구요. 다음에 다른 사람과 거래하게 되시면 연락은 바로바로 받으셨으면
-											합니다.</p>
-									</div>
-								</div>
-							</div>
-						
-						</div>
-					</section>
+							</c:forEach>
+					<c:choose>
+					<c:when test="${not empty review}">
 					<button class="moreBtn" type="button">더 보기 <span class="glyphicon glyphicon-menu-down"></span></button>
+					</c:when>
+					</c:choose>
 				</div>
 			</div>
 		</div>

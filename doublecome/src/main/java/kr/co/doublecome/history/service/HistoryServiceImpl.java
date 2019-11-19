@@ -23,5 +23,4 @@ public class HistoryServiceImpl implements HistoryService{
 	public List<Auction> receiveSaleHistory(String userEmail) {
 		return mapper.saleHistory(userEmail);
 	}
-	
 }

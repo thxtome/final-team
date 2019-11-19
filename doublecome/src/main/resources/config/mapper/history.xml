@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.doublecome.repository.mapper.HistoryMapper">
-
 	<!-- 받은 후기 목록 -->
 	<select id="selectReceiveReview" resultType="Review" parameterType="String">
 		select r.*, a.auction_title, u.user_nickname as reviewer_nickname

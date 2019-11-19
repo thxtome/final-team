@@ -297,10 +297,6 @@ body a:hover {
 .Price__buttonArea {
     padding: 0 0 15px;
 }
-.Price--buynow .Price__value {
-    color: #E30921;
-    font-size: 24px;
-}
 .Seller__other {
     display: inline-block;
 }
