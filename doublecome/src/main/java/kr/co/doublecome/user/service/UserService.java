@@ -6,5 +6,5 @@ public interface UserService {
 	public void insertUser(User user);
 	public void updateUser(User user);
 	public User selectUserInfo(User user);
-	public String findEmail(String userPhnum);
+	public User findEmail(User user);
 }

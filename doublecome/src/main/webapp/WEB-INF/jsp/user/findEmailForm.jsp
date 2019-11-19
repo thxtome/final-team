@@ -22,21 +22,21 @@
 				비밀번호 찾기
 			
 			</a>
-			<form method="post" action="<c:url value="/user/findEmail.do" />">
+			<form method="post" action="<c:url value="/user/findEmailForm.do" />">
 			<div class="ForgotPassword__inputWrapper">
-				<input type="text" placeholder="번호" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">
+				<input name="userPhnum" type="text" placeholder="번호" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">
 			</div>
-			<div id="emailCheck" class="ForgotPassword__error">알맞은 번호를 입력하세요</div>
-			<div id="numberCheck" class="ForgotPassword__upperError">번호와 일치하는 메일이 없습니다.</div>
+			<div id="emailCheck" class="ForgotPassword__error" style="visibility:hidden;">알맞은 번호를 입력하세요</div>
 			<div class="ForgotPassword__inputWrapper">
-				<input type="text" placeholder="johnsmith@rapid.com" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">
+				<!-- <input type="text" placeholder="johnsmith@rapid.com" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error"> -->
+				<div class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">${user.userEmail}</div>
 			</div>
+			<div id="numberCheck" class="ForgotPassword__upperError" style="visibility:hidden;">번호와 일치하는 메일이 없습니다.</div>
 			<button class="ForgotPassword__button">조회</button>
 			<div class="ForgotPassword__cancel">
-			<a href="<c:url value="/user/loginForm.do" />">취소</a>
+			<a href="<c:url value="/main.do" />">취소</a>
 			</div>
 			</form>
 		</div>
-		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
     </body>
     </html>

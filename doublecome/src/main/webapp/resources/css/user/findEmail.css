@@ -46,7 +46,7 @@ a:visited { color: black; text-decoration: none;}
   border: 1px solid #c41230;
   border-radius: 4px;
   background-color: rgba(196, 18, 48, 0.2);
-  margin-top: 35px;
+  margin-bottom: 35px;
 }
 .ForgotPassword .ForgotPassword__inputWrapper {
   position: relative;
@@ -110,7 +110,7 @@ a:visited { color: black; text-decoration: none;}
   font-size: 12px;
   color: #c41230;
   font-weight: 600;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 .ForgotPassword__button {
   width: 400px;

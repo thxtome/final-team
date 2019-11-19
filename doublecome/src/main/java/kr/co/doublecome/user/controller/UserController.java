@@ -5,6 +5,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.InternalResourceView;
 
 import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.user.service.UserService;
@@ -46,11 +48,22 @@ public class UserController {
 	
 	
 	@RequestMapping("/findEmailForm.do")
-	public void findEmailForm(User user) throws Exception{}
-	@RequestMapping("/findEmail.do")
-	public String findEmail(String userPhnum) throws Exception{
-		return service.findEmail(userPhnum);
+	public void findEmailForm(User user,  Model model) throws Exception{
+		System.out.println(user.getUserPhnum());		
+		System.out.println(service.findEmail(user));		
+		model.addAttribute("user", service.findEmail(user));
 	}
+	
+	/*
+	 * @RequestMapping("/findEmail.do") public View findEmail(String userPhnum)
+	 * throws Exception{ service.findEmail(userPhnum);
+	 * 
+	 * View view = new InternalResourceView("/WEB-INF/jsp/user/findEmailForm.jsp");
+	 * return view;
+	 *	}
+	 */
+	
+		
 	
 	@RequestMapping("/findPassForm.do")
 	public void findPass(User user) throws Exception{}

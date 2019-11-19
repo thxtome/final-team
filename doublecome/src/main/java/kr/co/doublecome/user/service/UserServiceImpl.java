@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String findEmail(String userPhnum) {
+	public User findEmail(User userPhnum) {
 		return mapper.findEmail(userPhnum);
 	}
 	

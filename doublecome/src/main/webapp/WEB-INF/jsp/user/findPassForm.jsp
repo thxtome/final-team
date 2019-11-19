@@ -24,19 +24,18 @@
 			</a>
 			<form method="post" action="">
 			<div class="ForgotPassword__inputWrapper">
-				<input type="text" placeholder="번호" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">
+				<input type="text" placeholder="이메일" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">
 			</div>
-			<div id="emailCheck" class="ForgotPassword__error">옳바른 메일 형식을 입력하세요</div>
-			<div id="numberCheck" class="ForgotPassword__upperError">가입된 메일이 아닙니다</div>
-			<div class="ForgotPassword__inputWrapper">
+			<!-- <div id="emailCheck" class="ForgotPassword__error">옳바른 메일 형식을 입력하세요</div> -->
+			<!-- <div class="ForgotPassword__inputWrapper">
 				<input type="text" placeholder="johnsmith@rapid.com" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">
-			</div>
+			</div> -->
+			<div id="numberCheck" class="ForgotPassword__upperError" style="visibility:hidden;">가입된 메일이 아닙니다</div>
 			<button class="ForgotPassword__button">전송</button>
 			<div class="ForgotPassword__cancel">
-			<a href="<c:url value="/user/loginForm.do" />">취소</a>
+			<a href="<c:url value="/main.do" />">취소</a>
 			</div>
 			</form>
 		</div>
-		<%-- <c:import url="/WEB-INF/jsp/include/footer.jsp" /> --%>
     </body>
     </html>
