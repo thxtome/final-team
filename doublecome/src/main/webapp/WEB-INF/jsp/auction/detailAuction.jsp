@@ -256,6 +256,14 @@
 
 							<div class="inquiry_container">
 								<div class="card">
+								<c:choose>
+									<c:when test="${empty inquiry}">
+										<div>문의가 없습니다.</div>
+									</c:when>
+								</c:choose>
+								<c:forEach items="${inquiry}" var="inquiry">
+								</c:forEach>
+								
 									<div class="card-body">
 										<div class="row">
 											<div class="col-xs-12 pdct_inquiry_item">
@@ -384,6 +392,7 @@
 					</c:when>
 					</c:choose>
 				</div>
+				</section>
 			</div>
 		</div>
 	</div>

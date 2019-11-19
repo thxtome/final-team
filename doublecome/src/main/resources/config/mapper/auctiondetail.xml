@@ -11,6 +11,13 @@
 		from auction a
 		left join bid b
 		on a.auction_no = b.auction_no
-		where a.auction_no = #{auctionNo};
+		where a.auction_no = #{auctionNo}
+	</select>
+	
+	<select id="retrieveinquiry" resultType="Auction" parameterType="int">
+		select *
+		from inquiry
+		where auction_no = #{auctionNo}
+        order by inquiry_no desc;
 	</select>
 </mapper>

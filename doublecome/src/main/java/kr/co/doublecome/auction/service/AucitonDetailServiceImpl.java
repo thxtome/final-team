@@ -31,4 +31,8 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	public List<Review> selectReceiveReview(String userEmail) {
 		return Hmapper.selectReceiveReview(userEmail);
 	}
+	
+	public List<Auction> retrieveinquiry(int no) {
+		return mapper.retrieveinquiry(no);
+	}
 }

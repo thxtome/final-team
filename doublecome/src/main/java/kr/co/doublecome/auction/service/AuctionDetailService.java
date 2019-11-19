@@ -11,4 +11,5 @@ public interface AuctionDetailService {
 	Auction auctiondetail(int no);
 	History userInfo(String userEmail);
 	List<Review> selectReceiveReview(String userEmail);
+	List<Auction> retrieveinquiry(int no);
 }

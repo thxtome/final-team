@@ -18,5 +18,7 @@ public class AuctionDetailController {
 		model.addAttribute("auction", service.auctiondetail(no));
 		model.addAttribute("user", service.userInfo(userEmail));
 		model.addAttribute("review", service.selectReceiveReview(userEmail));
+		model.addAttribute("inquiry", service.retrieveinquiry(no));
+		
 	}
 }
