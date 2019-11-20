@@ -15,7 +15,7 @@
 		 where user_email = #{userEmail}
 	</select>
 	
-	<select id="findEmail" parameterType="string" resultType="User">
+	<select id="findEmail" parameterType="User" resultType="User">
 		select *
 		from user
 		where user_phnum = #{userPhnum}

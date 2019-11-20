@@ -86,11 +86,9 @@
 	</div>
 		<span id="title" style="left: 420px; 
 								top: -10px;">입찰 중인 경매</span>
-		<c:if test="${empty auction}">
-			입찰 중인 경매가 없습니다
-		</c:if>
+		
 		<div id="bidList">
-		<c:forEach  items="${auction}" var="a">
+		<%-- <c:forEach  items="${auction}" var="a">
 		<a id="aution" href="#">
 		<div class="card_container">
 		  <img src="<c:url value="/resources/css/user/defaultpfimg.jpeg" />" alt="Avatar" class="card_imag">
@@ -106,7 +104,7 @@
 		  </span>
 		</div>
 		</a>
-		</c:forEach>
+		</c:forEach> --%>
 		</div>
 	</span>
 	<script src="<c:url value="/resources/js/user/userInfo.js" />" ></script>

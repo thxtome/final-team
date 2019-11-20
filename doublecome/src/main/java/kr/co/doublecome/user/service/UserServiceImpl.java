@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User findEmail(User user) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return mapper.findEmail(user);
 	}
 	
 

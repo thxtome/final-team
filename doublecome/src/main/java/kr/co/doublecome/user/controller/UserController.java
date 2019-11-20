@@ -27,6 +27,8 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder encoder;
 	
+	
+	//로그인
 	@RequestMapping("/loginForm.do")
 	public void loginForm(String result, Model model) throws Exception{
 		if(result != null) {
@@ -34,61 +36,62 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping("/joinForm.do")
-	public void joinForm(User user) throws Exception{}
 
 
-	@RequestMapping("/userInfoUpdate.do")
-	public void userInfoUpdate(User user, Model model) throws Exception{
-		System.out.println(service.selectUserInfo(user));
-		model.addAttribute("user", service.selectUserInfo(user));
-		/* service.selectUserInfo(user); */
-	}
-	@RequestMapping("/updateUser.do")
-	public void updateUser(User user) throws Exception{
-		service.updateUser(user);
-	}
 	
 	
 	@RequestMapping("/findEmailForm.do")
 	public void findEmailForm(User user,  Model model) throws Exception{
 		/* service.findEmail(user); */
+		System.out.println(service.findEmail(user) + "z");
 		model.addAttribute("user", service.findEmail(user));
 	}
-	
-		
 	
 	@RequestMapping("/findPassForm.do")
 	public void findPass(User user) throws Exception{}
 	
 	
 
-	
+	//회원 가입
+	@RequestMapping("/joinForm.do")
+	public void joinForm(User user) throws Exception{}
 	@RequestMapping("/insert.do")
 	public String insertUser(User user) throws Exception{
 		user.setUserPass(encoder.encode(user.getUserPass()));	
 		service.insertUser(user);
 		return "redirect:" + "/main.do";
 	}
-	@RequestMapping("/userInfo.do")
-	public void userInfo(User user, Model model, @RequestParam(value="email", required=false) String email) throws Exception{
-		/* service.selectUserInfo(user); */
-		user.setUserEmail(email);
-		model.addAttribute("auction", service.mybidAuction(user));
+	
+	
+	//마이페이지 
+	@RequestMapping("/userInfoUpdate.do")
+	public void userInfoUpdate(/* User user, Model model */) throws Exception{
+		/*System.out.println(service.selectUserInfo(user));
+		model.addAttribute("user", service.selectUserInfo(user));
+		 service.selectUserInfo(user); */
 	}
+	@RequestMapping("/updateUser.do")
+	public void updateUser(User user) throws Exception{
+		service.updateUser(user);
+	}
+	@RequestMapping("/userInfo.do")
+	public void userInfo(/*User user, Model model, @RequestParam(value="email", required=false) String email*/) throws Exception{
+		/* service.selectUserInfo(user); 
+		 * user.setUserEmail(email); model.addAttribute("auction",
+		 * service.mybidAuction(user));
+		 */
+	}
+	
 	@RequestMapping("/bidList.do")
 	@ResponseBody
 	public List<Auction> bidList( String email) throws Exception{
-		/*
-		 * User u = new User(); System.out.println(email); u.setUserEmail(email);
-		 */
-		System.out.println(service.bidList(email));
 		
-		
+		/*System.out.println(service.bidList(email));*/
 		return service.bidList(email);	
 		
 	}
-/*	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+/*	
+ 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
