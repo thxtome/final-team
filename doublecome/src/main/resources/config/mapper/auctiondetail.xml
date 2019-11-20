@@ -22,4 +22,8 @@
 			where auction_no = #{auctionNo}
 			order by IF(ISNULL(inquiry_parent), inquiry_no, inquiry_parent) desc;
 	</select>
+	
+	<insert id="insertInquiry" parameterType="Inquiry">
+		
+	</insert>
 </mapper>
