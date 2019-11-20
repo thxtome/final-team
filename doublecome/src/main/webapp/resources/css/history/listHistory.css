@@ -58,7 +58,7 @@
     position: relative;
     width: 900px;
     height: 50px;
-    margin-top: 30px;
+    margin-top: 100px;
     
     font-style: normal;
     font-weight: bold;
@@ -242,6 +242,10 @@
     font-weight: bold;
     color: black;
 }
+.noBtn{
+	text-align: right;
+}
+
 .reviewTitle, .auctionTitle{
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -252,7 +256,7 @@
 }
 .listCon{
     width: 900px;
-    border: 1px solid #e7e7e7;
+    border: 1px solid #c3c3c3;
     margin-left: 0;
     margin-top: 40px;
 /*     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
@@ -261,10 +265,11 @@
 .listHead{
     display: inline-block;
     /* float: left; */
-    width: 900px;
+    width: 898px;
     height: 60px;
     background:  #F2F2F2;
-    border-bottom: 1px solid #e7e7e7;
+    border-bottom: 1px solid #c3c3c3;
+    font-weight: bold;
 }
 .listDate{
     width: 400px;
@@ -300,15 +305,15 @@
 .listBody{
     display: inline-block;
     width: 900px;
-    height: 200px;
+    height: 150px;
     margin-top: 20px;
 }
 .productImg{
     display: inline-block;
     width: 200px;
-    height: 160px;
+    height: 130px;
     text-align: center;
-    line-height: 150px;
+    line-height: 130px;
 }
 .imgCon{
     width: 120px;
@@ -327,24 +332,30 @@
 }
 .productInfo{
     width: 500px;
-    height: 160px;
+    height: 130px;
+    line-height: 60px;
 }
 .listTitle, .listRegDate{
-    margin-top: 15px;
-    margin-bottom: 15px;
+/*     margin-top: 10px; */
+/*     margin-bottom: 10px; */
     color: black;
 }
 .listTitle{
     display: inline-block;
+    text-decoration: underline;
     font-weight: bold;
     font-size: 14px;
+    margin-top: 10px;
+}
+.listTitle:hover{
+	cursor: pointer;
 }
 .writerInfo{
     float: left;
     width: 200px;
-    height: 160px;
+    height: 130px;
     text-align: center;
-    line-height: 40px;
+    line-height: 30px;
     font-size: 15px;
 }
 
@@ -481,7 +492,7 @@
 	vertical-align: middle;
 	text-align: center;
 	cursor: pointer;
-	margin-top: 20px;
+	margin-top: 50px;
 	margin-left: 70px;
 	margin-bottom: 60px;
 	background-color: #ffffff;
@@ -663,4 +674,7 @@
 	height: 100px;
 	text-align: center;
 	margin-top: 70px;
+}
+.wrapper{
+	margin-top: 100px;
 }

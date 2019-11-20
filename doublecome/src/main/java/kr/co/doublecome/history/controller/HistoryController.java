@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.doublecome.history.service.HistoryService;
+import kr.co.doublecome.repository.vo.Review;
 
 @Controller("kr.co.doublecome.history.controller.HistoryController")
 @RequestMapping("/history")
@@ -23,7 +24,10 @@ public class HistoryController {
 	}
 	
 	@RequestMapping("/addReview.do")
-	public void addReview() {}
+	public String addReview(Review review, Model model) {
+		System.out.println(review);
+		return "redirect:listHistory.do";
+	}
 	
 	@RequestMapping("/editReview.do")
 	public void editReview() {}

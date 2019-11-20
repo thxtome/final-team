@@ -20,9 +20,10 @@ public class Auction {
 	private String userEmail;				// 경매글쓴이
 	private double score;					// 경매글쓴이 평점
 	private String userNickname;			// 경매글쓴이 닉네임
+	private String reviewSender;			// 후기 작성자 이메일
 	
 	private int inquiryNo;					// 문의글 번호
 	private String inquiryContent;			// 문의글 내용
 	private int inquiryParent;				// 답글 여부
-	private String inquiryRegDate;
+	private String inquiryRegDate;			// 문의글 게시일
 }

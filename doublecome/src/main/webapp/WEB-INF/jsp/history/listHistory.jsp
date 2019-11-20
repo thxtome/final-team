@@ -52,58 +52,8 @@
 					<li><span class="purchaseTabList">거래 완료</span></li>
 				</ul>
 				<c:choose>
-					<c:when test="${empty saleHistory}">
-						<div class="emptyBox">구매한 내역이 없습니다.</div>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="s" items="${saleHistory}">
-							<div class="listCon">
-								<div class="listHead">
-									<span class="listDate"> <span class="dateTitle">마감
-											날짜 </span> <span class="dateContent">${s.auctionLimitDate}</span>
-									</span> <span class="detailCon"> <a>입찰금 <strong>${s.bidPrice}</strong>원
-									</a>
-									</span>
-								</div>
-								<div class="listBody">
-									<ul>
-										<li>
-											<div class="productImg">
-												<img class="imgCon"
-													src="<c:url value="/resources/images/profileImg.png"/>">
-											</div>
-										</li>
-										<li>
-											<div class="productInfo">
-												<a class="listTitle">${s.auctionTitle}</a>
-												<div class="listRegDate">${s.auctionRegDate}</div>
-											</div>
-										</li>
-										<li>
-											<div class="writerInfo">
-												<a class="auctionWriter">${s.userEmail}</a>
-												<div>${s.score}점</div>
-												<a class="reportBtn"><strong>신고</strong></a> <a
-													class="reviewBtn"><strong>후기등록</strong></a>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<div>
-				<div id="salesHead">판매내역</div>
-				<ul class="tabHead">
-					<li><span class="salesTabList">입찰</span></li>
-					<li><span class="salesTabList tabChoice">거래 진행</span></li>
-					<li><span class="salesTabList">거래 완료</span></li>
-				</ul>
-				<c:choose>
 					<c:when test="${empty buyHistory}">
-						<div class="emptyBox">판매한 내역이 없습니다.</div>
+						<div class="emptyBox">구매한 내역이 없습니다.</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="b" items="${buyHistory}">
@@ -111,7 +61,7 @@
 								<div class="listHead">
 									<span class="listDate"> <span class="dateTitle">마감
 											날짜 </span> <span class="dateContent">${b.auctionLimitDate}</span>
-									</span> <span class="detailCon"> <a>입찰금 <strong>${b.maxPrice}</strong>원
+									</span> <span class="detailCon"> <a>입찰금 <strong>${b.bidPrice}</strong>원
 									</a>
 									</span>
 								</div>
@@ -131,10 +81,64 @@
 										</li>
 										<li>
 											<div class="writerInfo">
-												<a class="auctionWriter">${b.userEmail}</a>
-												<div>${b.score}점</div>
-												<a class="reportBtn"><strong>신고</strong></a> <a
-													class="reviewBtn"><strong>후기등록</strong></a>
+												<a class="auctionWriter">${b.userNickname}</a>
+												<div>${s.score}점</div>
+												<a class="reportBtn"><strong>신고</strong></a>
+												<c:if test="${empty b.reviewSender}">
+													<a data-no="${b.auctionNo}" class="reviewBtn"><strong>후기등록</strong></a>
+												</c:if> 
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div>
+				<div id="salesHead">판매내역</div>
+				<ul class="tabHead">
+					<li><span class="salesTabList">입찰</span></li>
+					<li><span class="salesTabList tabChoice">거래 진행</span></li>
+					<li><span class="salesTabList">거래 완료</span></li>
+				</ul>
+				<c:choose>
+					<c:when test="${empty saleHistory}">
+						<div class="emptyBox">판매한 내역이 없습니다.</div>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="s" items="${saleHistory}">
+							<div class="listCon">
+								<div class="listHead">
+									<span class="listDate"> <span class="dateTitle">마감
+											날짜 </span> <span class="dateContent">${s.auctionLimitDate}</span>
+									</span> <span class="detailCon"> <a>입찰금 <strong>${s.maxPrice}</strong>원
+									</a>
+									</span>
+								</div>
+								<div class="listBody">
+									<ul>
+										<li>
+											<div class="productImg">
+												<img class="imgCon"
+													src="<c:url value="/resources/images/profileImg.png"/>">
+											</div>
+										</li>
+										<li>
+											<div class="productInfo">
+												<a class="listTitle">${s.auctionTitle}</a>
+												<div class="listRegDate">${s.auctionRegDate}</div>
+											</div>
+										</li>
+										<li>
+											<div class="writerInfo">
+												<a class="auctionWriter">${s.userNickname}</a>
+												<div>${s.score}점</div>
+												<a class="reportBtn"><strong>신고</strong></a>
+												<c:if test="${empty s.reviewSender}">
+													<a data-no="${s.auctionNo}" class="reviewBtn"><strong>후기등록</strong></a>
+												</c:if> 
 											</div>
 										</li>
 									</ul>
@@ -181,12 +185,8 @@
 												<div class="reviewTitle">${rList.reviewTitle}</div>
 												<div class="reviewDate">${rList.reviewRegDate}</div>
 											</div>
-											<div class="writerArea">
-												<a class="reviewer">${rList.reviewerNickname}</a>
-											</div>
-											<div class="editdel">
-												<a href="editReview.do" class="editreview">수정</a> / <a
-													class="delreview">삭제</a>
+											<div class="writerArea noBtn">
+												<a class="reviewer">${rList.senderNickname}</a>
 											</div>
 										</li>
 										<li class="reviewDetail">
@@ -195,7 +195,7 @@
 													<img class="profileImg"
 														src="<c:url value="/resources/images/profileImg.png"/>" />
 												</div>
-												<div class="nicknameDiv">${rList.reviewerNickname}</div>
+												<div class="nicknameDiv">${rList.senderNickname}</div>
 												<div class="regdateDiv">${rList.reviewRegDate}</div>
 												<div class="onelineDiv">${rList.reviewTitle}</div>
 												<div class="reviewDiv">${rList.reviewContent}</div>
@@ -204,8 +204,8 @@
 									</c:forEach>
 								</ul>
 							</div>
-						</div>
 						<button class="moreBtn" type="button">더 보기</button>
+						</div>
 					</c:otherwise>
 				</c:choose>
 				
@@ -239,7 +239,11 @@
 												<div class="reviewDate">${sList.reviewRegDate}</div>
 											</div>
 											<div class="writerArea">
-												<a class="reviewer">${sList.reviewerNickname}</a>
+												<a class="reviewer">${sList.senderNickname}</a>
+											</div>
+											<div class="editdel">
+												<a href="editReview.do" class="editreview">수정</a> / <a
+													class="delreview">삭제</a>
 											</div>
 										</li>
 										<li class="reviewDetail">
@@ -248,7 +252,7 @@
 													<img class="profileImg"
 														src="<c:url value="/resources/images/profileImg.png"/>" />
 												</div>
-												<div class="nicknameDiv">${sList.reviewerNickname}</div>
+												<div class="nicknameDiv">${sList.senderNickname}</div>
 												<div class="regdateDiv">${sList.reviewRegDate}</div>
 												<div class="onelineDiv">${sList.reviewTitle}</div>
 												<div class="reviewDiv">${sList.reviewContent}</div>
@@ -269,35 +273,33 @@
 				<span class="reviewModalClose">&times;</span>
 				<div class="addReviewContent" data-value="헤이">
 					<div id="reviewForm">
-						<form id="rform">
+						<form action="addReview.do" id="rform" method="post">
 							<div class="auctionTitleDiv">
 								<div>경매글</div>
-								<div>날이면 날마다 오는 기회가 아닙니다. 싸게싸게 입찰하세요. 실사용 1회입니다~ 마이크 커버
+								<div id="auctionTitle">날이면 날마다 오는 기회가 아닙니다. 싸게싸게 입찰하세요. 실사용 1회입니다~ 마이크 커버
 									팝니다.</div>
 							</div>
 							<div class="scoreDiv">
 								<div class="scoreLibel">신뢰도</div>
 								<div class="scoreCon">
-									<div class="scoreBar">
-										<span>1</span> <span>2</span> <span>3</span> <span>4</span> <span>5</span>
-										<span>6</span> <span>7</span> <span>8</span> <span>9</span> <span>10</span>
-									</div>
+									<input style="width: 500px; height: 30px" type="text" name="reviewScore" class="scoreBar" />
 								</div>
 							</div>
 							<div class="reviewTitleDiv">
 								<div>한줄요약</div>
 								<div>
-									<input type="text" />
+									<input type="text" name="reviewTitle" />
 								</div>
 							</div>
 							<div class="reviewCondiv">
 								<div>구매후기</div>
 								<div>
-									<div id="summernote"></div>
+									<textarea id="summernote" name="reviewContent"></textarea>
 								</div>
 							</div>
+							<input id="auctionNo" type="hidden" name="auctionNo"/>
 							<div class="regitbtn">
-								<button type="submit">등록</button>
+								<button type="button">등록</button>
 							</div>
 						</form>
 					</div>

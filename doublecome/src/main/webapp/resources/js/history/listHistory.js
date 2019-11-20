@@ -1,3 +1,26 @@
+/*
+	$.post({
+		url: "addReivew.do",
+		dataType: "json",
+		data: {
+			auctionNo: $(e.target).data("no"), 
+			reviewTitle:,
+			reviewContent:,
+			reviewScore:,
+			reviewReceiver:,
+			dealNo:
+			},
+		contentType: "application/x-www-form-urlencoded",
+		success: (result) => {makeCommentList(result)}
+	});
+	$("#writer", "#content").val("");
+*/
+$("body").on("click", ".reviewBtn", (e) => {
+	$("#auctionTitle").html($(e.target).closest("ul").find(".listTitle").html());
+	$("#auctionNo").val($(e.target).data("no"));
+});
+
+
 // 네비게이션바 클릭시 이동
 let $navBar = $("#navBar");
 let $left = $(".purchaseTabList").offset().left;
