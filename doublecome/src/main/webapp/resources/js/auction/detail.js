@@ -10,16 +10,10 @@ function swal() {
         cancelButtonText: '회원가입'
       }).then((result) => {
         if (result.value) {
-          Swal.fire(
-            '로그인페이지 이동'
-          )
-        } else if (
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            Swal.fire(
-              '회원가입 페이지 이동'
-            )
-          }
+            location.href="/doublecome/user/loginForm.do"
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            location.href="/doublecome/user/joinForm.do"
+        }
       })
 }
 
@@ -70,7 +64,17 @@ $("#btn2").click(() => {
 	$("#inquiry_box").css('display', 'block')
   $("#insertbox2").html($("#inquiry_box"))
 })
-  
+
+
+$(".reply").click((e) => {
+	$div = $(e.target).attr("id")
+	$("#inquiry_box").css('display', 'block')
+	$("." + $div).append($("#inquiry_box"))
+	$parent =  $div.replace(/[^0-9]/g,"")
+	$(".inquiryParent").val($parent)
+})
+
+
 $(".Button--bid, .Button--buynow").click(() => {
 	swal()
 })

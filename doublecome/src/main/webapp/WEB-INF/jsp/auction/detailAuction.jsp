@@ -21,8 +21,10 @@
 	href="<c:url value="/resources/css/auction/swiper.min.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/auction/detail.css"/>">
-
-<body>
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://kit.fontawesome.com/71437d7c9e.js" crossorigin="anonymous"></script>
+    <body>
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	<div id="wrapper">
 			
@@ -125,9 +127,9 @@
 												<c:if test="${log.userEmail eq auction.userEmail}">
 													<div id="ans${inq.inquiryNo}">
 														<p>
-														<a class="float-right btn btn-outline-primary ml-2 reply" id="btn1">답변</a>
+														<a class="float-right btn btn-outline-primary ml-2 reply" id="btn${inq.inquiryNo}">답변</a>
                                                 		</p>
-													<div class="insertbox" id="insertbox${inq.inquiryNo}"></div>	
+													<div class="insertbox btn${inq.inquiryNo}" id="insertbox${inq.inquiryNo}"></div>	
 													</div>
 												</c:if>
 												</sec:authorize>										
@@ -141,7 +143,7 @@
 															<div class="row">
 																<div class="col-xs-12 pdct_inquiry_inner_item">
 																	<p class="inquiry_name col-xs-12">
-																		<i class="fab fa-replyd"></i><strong>${inq.userNickname}</strong> <span class="inquiry_minute">${inq.inquiryRegDate}</span>
+																		<i class="fab fa-replyd fa-lg"></i><strong> ${inq.userNickname}</strong> <span class="inquiry_minute">${inq.inquiryRegDate}</span>
 																	</p>
 																	<div class="clearfix"></div>
 																	<p>${inq.inquiryContent}</p>
@@ -244,8 +246,10 @@
 		</div>
 	</div>
 	<div id="inquiry_box">
-		<form id="replyForm">
-			<textarea class="form-control inquiry-contents"></textarea>
+		<form id="replyForm" method="post" action="inquiry_add.do">
+			<textarea class="form-control inquiry-contents" name="inquiryContent"></textarea>
+			<input type="hidden" name="auctionNo" value="${auction.auctionNo}">
+			<input type="hidden" name="inquiryParent" class="inquiryParent" value="${inq.inquiryNo}">
 			<button class="reply_button">등록</button>
 		</form>
 	</div>

@@ -8,7 +8,7 @@ public class Inquiry {
 
 	private int inquiryNo;
 	private String inquiryContent;
-	private int inquiryParent;
+	private Integer inquiryParent;
 	private LocalDateTime inquiryRegDate;
 	private int auctionNo;
 	private String userEmail;

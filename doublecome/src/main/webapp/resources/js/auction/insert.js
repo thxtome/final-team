@@ -22,12 +22,21 @@ $('#summernote').summernote(
 			]
 });
 
+let sysdate = new Date()
+let year = sysdate.getFullYear()
+let month = sysdate.getMonth() + 1
+let day = sysdate.getDate()
+let maxDay = sysdate.getDate() + 7
+let hour = sysdate.getHours()
+let minute = sysdate.getMinutes()
+$now = year + "-" + month + "-" + day + " " + hour + ":" + minute
 
+$max = year + "-" + month + "-" + maxDay + " " + hour + ":" + minute
 $(function () {
     $('#datetimepicker').datetimepicker({
-        minDate:'2019-11-13',
-        maxDate:'2019-12-14',
-        defaultDate:'2019-11-15 11:00'
+        minDate:$now,
+        maxDate:$max,
+        defaultDate:$now
     });
 });
 function addCommas(x) {
@@ -63,4 +72,9 @@ $(".start, .buy").on("focus", function() {
 	
 $(".start, .buy").click((e) => {
 	   $($(e.target)).val("")
+})
+$(".fileUpIcon").hover(() => {
+	$(".hoverNotification").show();
+},() => {
+  $(".hoverNotification").hide();
 })

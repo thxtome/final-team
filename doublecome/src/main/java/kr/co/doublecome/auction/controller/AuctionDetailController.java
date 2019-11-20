@@ -31,7 +31,7 @@ public class AuctionDetailController {
 	public String insertInquiry(@RequestHeader(value="referer") String referer, Inquiry inquiry, Principal principal) {
 		inquiry.setUserEmail(principal.getName());
 		service.insertInquiry(inquiry);
-		System.out.println(referer);
 		return "redirect:" + referer;
 	}
+	
 }

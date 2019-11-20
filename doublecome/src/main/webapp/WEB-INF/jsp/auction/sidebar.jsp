@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,21 +15,7 @@
 					<div class="swiper-container gallery-top">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide"
-								style="background-image: url(./images/nature-1.jpg)"></div>
-							<div class="swiper-slide"
-								style="background-image: url(./images/nature-2.jpg)"></div>
-							<div class="swiper-slide"
-								style="background-image: url(./images/nature-3.jpg)"></div>
-							<div class="swiper-slide"
-								style="background-image: url(./images/nature-4.jpg)"></div>
-							<div class="swiper-slide"
-								style="background-image: url(./images/nature-5.jpg)"></div>
-							<div class="swiper-slide"
-								style="background-image: url(./images/nature-6.jpg)"></div>
-							<div class="swiper-slide"
-								style="background-image: url(./images/nature-7.jpg)"></div>
-							<div class="swiper-slide"
-								style="background-image: url(./images/nature-8.jpg)"></div>
+								style="background-image: url('<c:url value="/file/imgLoad.do?filePath=${auction.filePath}&fileSystemName=${auction.fileSystemName}" />')"></div>
 						</div>
 						<div class="swiper-button-next swiper-button-white"
 							style="position: absolute; color: black; right: -51px;"></div>
@@ -36,25 +24,7 @@
 						<div class="swiper-container gallery-thumbs">
 							<div class="swiper-wrapper">
 								<div class="swiper-slide"
-									style="background-image: url(./images/nature-1.jpg)"></div>
-								<div class="swiper-slide"
-									style="background-image: url(./images/nature-2.jpg)"></div>
-								<div class="swiper-slide"
-									style="background-image: url(./images/nature-3.jpg)"></div>
-								<div class="swiper-slide"
-									style="background-image: url(./images/nature-4.jpg)"></div>
-								<div class="swiper-slide"
-									style="background-image: url(./images/nature-5.jpg)"></div>
-								<div class="swiper-slide"
-									style="background-image: url(./images/nature-6.jpg)"></div>
-								<div class="swiper-slide"
-									style="background-image: url(./images/nature-7.jpg)"></div>
-								<div class="swiper-slide"
-									style="background-image: url(./images/nature-8.jpg)"></div>
-								<div class="swiper-slide"
-									style="background-image: url(./images/nature-9.jpg)"></div>
-								<div class="swiper-slide"
-									style="background-image: url(./images/nature-10.jpg)"></div>
+									style="background-image: url(<spring>)"></div>
 							</div>
 						</div>
 					</div>
