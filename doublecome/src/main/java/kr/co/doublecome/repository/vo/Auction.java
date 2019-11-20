@@ -26,4 +26,10 @@ public class Auction {
 	private String inquiryContent;			// 문의글 내용
 	private int inquiryParent;				// 답글 여부
 	private String inquiryRegDate;			// 문의글 게시일
+	
+	private int fileNo;
+	private String fileOriginName;
+	private String fileSystemName;
+	private String filePath;
+	private String fileThumb;
 }

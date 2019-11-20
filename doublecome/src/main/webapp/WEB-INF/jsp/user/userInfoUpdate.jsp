@@ -50,8 +50,8 @@
 			
 		
 			<span id="registInputBox">
-			<sec:authorize access="isAuthenticated()">
-			<sec:authentication property="principal.user" var="user" /> 
+			<%-- <sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.user" var="user" /> --%> 
 				<div id="registInputBox1" class="registInputBox">
 						<i class="far fa-envelope fa-1x" id="icon"></i>
 						
@@ -86,7 +86,7 @@
 						<input id="userNickname" name="userNickname" type="text" value="" placeholder="${user.userNickname}"  class="registInput">
 						<div id="alert"></div>
 				</div>
-				</sec:authorize> 
+				<%-- </sec:authorize> --%> 
 			</span>
 		</form>
 			

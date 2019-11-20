@@ -7,4 +7,5 @@ import kr.co.doublecome.repository.vo.History;
 
 public interface AuctionService {
 	List<Category> listCategory();
+	
 }

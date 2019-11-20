@@ -6,6 +6,9 @@
     grid-template-columns: 4fr 7fr 4fr;
     grid-template-rows: 140px 60px;
 }
+.topContent .titleToMain{
+	 color: #DB1D3B;
+}
 
 
 .topContent>div:first-child>div:first-child {

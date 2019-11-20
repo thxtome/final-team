@@ -140,7 +140,7 @@ a:visited { color: black; text-decoration: none;}
 		/*background: #FF6464;*/
 		
 	}
-	#registBox .registInputBox > #registInput{
+	#registBox .registInputBox > .registInput{
 		
 		width: 250px;
 		height: 30px;
@@ -329,3 +329,11 @@ html {
   margin: 15px 0px 0px 15px;
   width:90px;
 }
+
+.card_title{
+	
+}
+.card_content{
+	
+}
+

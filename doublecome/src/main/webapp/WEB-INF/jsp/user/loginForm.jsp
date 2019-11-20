@@ -19,11 +19,13 @@
 <!-- Button Mixin-->
 <!-- Pen Title-->
 <div class="topContent">
+
 <div class="pen-title">
-  <div>누구나 쉬운 경매!</div>
-		<div>더블</div>
-		<div>로와</div>
+  <div><a href="<c:url value="/main.do" />">누구나 쉬운 경매!</a></div>
+		<div><a class="titleToMain" href="<c:url value="/main.do" />">더블</a></div>
+		<div><a class="titleToMain" href="<c:url value="/main.do" />">로와</a></div>
 </div>
+
 </div>
 <!-- Form Module-->
 <div class="module form-module">

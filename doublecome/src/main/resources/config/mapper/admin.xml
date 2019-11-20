@@ -6,11 +6,11 @@
 
 	<select id="selectUserForAdmin" parameterType="SearchUser"
 		resultType="User">
-		select *
+		select full.*,
+			   count(*) over() as user_cnt	
 		  from (select distinct
 					   u.*,
-					   ifnull(cnt1,0) + ifnull(cnt2,0) as user_deal_cnt,
-					   ifnull(user_review_cnt,0) as review_cnt
+					   ifnull(cnt1,0) + ifnull(cnt2,0) as user_deal_cnt
 				  from user u
 				  left outer join (select deal.user_email_buyer,
 										  count(*) over(partition by deal.user_email_buyer) as cnt1
@@ -19,47 +19,42 @@
 				  left outer join (select deal.user_email_seller,
 										  count(*) over(partition by deal.user_email_seller) as cnt2
 									 from deal) d2
-					on u.user_email = d2.user_email_seller
-				  left outer join (select review_receiver,
-										  count(*) as user_review_cnt
-								     from review) r
-					on u.user_email = r.review_receiver) full
+					on u.user_email = d2.user_email_seller	) full
 					
-			 
-			 <where>
+		 <where>
 					<choose>
 						<when test="startScore != null and endScore != null">
-							 user_score between #{startScore} and #{endScore}
+							and user_score between #{startScore} and #{endScore} + 0.1
 						</when>
 						<when test="startScore == null and endScore != null">
-							 user_score <![CDATA[<]]> #{endScore}
+							and user_score <![CDATA[<]]>= #{endScore}
 						</when>
 						<when test="startScore != null and endScore == null">
-							 user_score <![CDATA[>]]> #{startScore} 
+							and user_score <![CDATA[>]]>= #{startScore} 
 						</when>
 					</choose>
 					
 					<choose>
 						<when test="startDealCnt != null and endDealCnt != null">
-							 user_deal_cnt between #{startDealCnt} and #{endDealCnt}
+							and user_deal_cnt between #{startDealCnt} and #{endDealCnt} + 1
 						</when>
 						<when test="startDealCnt == null and endDealCnt != null">
-							 user_deal_cnt <![CDATA[<]]> #{endDealCnt}
+							and user_deal_cnt <![CDATA[<]]> #{endDealCnt} + 1
 						</when>
 						<when test="startDealCnt != null and endDealCnt == null">
-							 user_deal_cnt <![CDATA[>]]> #{startDealCnt} 
+							and user_deal_cnt <![CDATA[>]]> #{startDealCnt} - 1  
 						</when>
 					</choose>
 					
 					<choose>
 						<when test="startReviewCnt != null and endReviewCnt != null">
-							 user_review_cnt between #{startReviewCnt} and #{endDealCnt}
+							and user_review_cnt between #{startReviewCnt} and #{endDealCnt} + 1
 						</when>
 						<when test="startReviewCnt == null and endReviewCnt != null">
-							 user_review_cnt <![CDATA[<]]> #{endReviewCnt}
+							and user_review_cnt <![CDATA[<]]> #{endReviewCnt} + 1
 						</when>
 						<when test="startReviewCnt != null and endReviewCnt == null">
-							 user_review_cnt <![CDATA[>]]> #{endReviewCnt} 
+							and user_review_cnt <![CDATA[>]]> #{startReviewCnt} - 1 
 						</when>
 					</choose>
 					
@@ -74,8 +69,24 @@
 						and	user_phnum like CONCAT('%',#{keyword},'%')
 					</when>						
 				</choose>
-		</where>		 
-		limit #{begin},#{listSize};
+		</where>			
+		
+		<choose>
+			<when test='sort == "userEamil"'>
+				order by user_email		
+			</when>
+			<when test='sort == "userNickname"'>
+				order by user_nickname		
+			</when>
+			<when test='sort == "userDealCnt"'>
+				order by user_deal_cnt desc		
+			</when>
+			<when test='sort == "userReviewCnt"'>
+				order by user_review_cnt desc		
+			</when>
+		</choose>
+		
+		limit #{begin},#{listSize}
 	</select>
 
 </mapper>

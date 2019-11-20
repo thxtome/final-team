@@ -15,13 +15,20 @@ footer {
 	display: flex;
 	
 }
-.accordion > a > h3 {
+.checklist li a:hover{
+	cursor:pointer
+}
+.accordion > div > h3{
 	margin:0;
+	padding:0;
 }
-.accordion > a {
-	text-decoration: none;
+.accordion ul li a{
+	transition: 0.2s linear;
 }
-.accordion > a:hover{
+.accordion > div:hover{
+	margin:0;
+	padding:0;
+	cursor:pointer;
 	text-decoration: none;
 }
 #sidebar{

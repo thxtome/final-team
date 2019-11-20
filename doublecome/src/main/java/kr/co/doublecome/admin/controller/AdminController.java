@@ -2,11 +2,13 @@ package kr.co.doublecome.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.admin.service.AdminService;
+import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.SearchUser;
-import kr.co.doublecome.repository.vo.User;
 
 @Controller
 @RequestMapping("/admin")
@@ -20,9 +22,7 @@ public class AdminController {
 	public void basic() {}
 	
 	@RequestMapping("/retrieveUser.do")
-	public void retrieveUser(SearchUser su) {
-		service.retrieveUserForAdmin(su);
-	}
+	public void retrieveUser(SearchUser su) {}
 	
 	@RequestMapping("/retrieveReportedUser.do")
 	public void retrieveReportedUser() {}
@@ -47,5 +47,12 @@ public class AdminController {
 	
 	@RequestMapping("/retrieveReport.do")
 	public void retrieveReport() {}
+	
+	@RequestMapping("/searchUser.do")
+	@ResponseBody 
+	public AjaxPage searchUser(@RequestBody SearchUser su) {
+		System.out.println(su.getKeyword());
+		return service.retrieveUserForAdmin(su);
+	}
 	
 }

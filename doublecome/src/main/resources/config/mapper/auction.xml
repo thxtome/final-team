@@ -7,4 +7,26 @@
 		select *
 		  from category
 	</select>
+	<select id="listAuction" resultType="Auction" parameterType="SearchAuction">
+		select distinct
+			a.auction_no,
+			a.auction_title,
+			a.auction_reg_date,
+			a.auction_limit_date,
+			a.auction_min_price,
+			a.auction_buy_now,
+			a.auction_min_price,
+			a.file_group_code,
+			a.user_email,
+			max(b.bid_price) over(partition by  a.auction_no) as max_price,
+			count(b.bid_no) over(partition by  a.auction_no) as bid_cnt
+	 	 from auction a 
+	  	inner join bid b
+		   on a.auction_no = b.auction_no
+		  and auction_condition = 1
+	  	<if test="categoryCode != 0">
+	  		and category_code = #{categoryCode}
+	  	</if>
+		order by bid_cnt desc
+	</select>
 </mapper>

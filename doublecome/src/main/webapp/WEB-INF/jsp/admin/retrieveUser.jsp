@@ -30,37 +30,37 @@
 			</div>
 
 			<div id="searchBar">
-				<form action="" name="searchForm">
+				<form action="" id="searchForm" data-action="searchUser.do">
 					<table class="dataSearch">
 						<tr>
 							<td>검색항목</td>
-							<td><select>
+							<td><select name="searchType">
 									<option value="userEmail">이메일</option>
 									<option value="userNickname">닉네임</option>
 									<option value="userPhnum">전화번호</option>
-							</select> <input type="text" class="searchWord"></input></td>
+							</select> <input type="text" name="keyword" class="keyword"></input></td>
 							<td>거래수</td>
 							<td>
-								<p class="labels">회</p> <input type="text"> <span>~</span>
-								<p class="labels">회</p> <input type="text">
+								<p class="labels">회</p> <input type="text" name="startDealCnt"> <span>~</span>
+								<p class="labels">회</p> <input type="text" name="endDealCnt">
 							</td>
 						</tr>
 						<tr>
 							<td>평점</td>
 							<td>
-								<p class="labels">점</p> <input type="text"> <span>~</span>
-								<p class="labels">점</p> <input type="text">
+								<p class="labels">점</p> <input type="text" name="startScore"> <span>~</span>
+								<p class="labels">점</p> <input type="text" name="endScore">
 							</td>
 							<td>후기수</td>
 							<td>
-								<p class="labels">회</p> <input type="text"> <span>~</span>
-								<p class="labels">회</p> <input type="text">
+								<p class="labels">회</p> <input type="text" name="startReviewCnt"> <span>~</span>
+								<p class="labels">회</p> <input type="text" name="endReviewCnt">
 							</td>
 						</tr>
 						<tfoot>
 							<tr>
 								<td colspan="4">
-									<button>검색</button>
+									<button type="button" id="searchBtn">검색</button>
 								</td>
 							</tr>
 						</tfoot>
@@ -70,14 +70,14 @@
 			<div class="dataFilters">
 				<div>
 					<ul>
-						<li>&#149;아이디순</li>
-						<li>&#149;닉네임순</li>
-						<li>&#149;높은 거래수순</li>
-						<li>&#149;높은 후기수순</li>
+						<li data-sort="userEmail">&#149;아이디순</li>
+						<li data-sort="userNickname">&#149;닉네임순</li>
+						<li data-sort="userDealCnt">&#149;높은 거래수순</li>
+						<li data-sort="userReviewCnt">&#149;높은 후기수순</li>
 					</ul>
 				</div>
 				<div>
-					<select>
+					<select id="listSize">
 						<option value="10">10개씩 보기</option>
 						<option value="25">25개씩 보기</option>
 						<option value="50">50개씩 보기</option>
@@ -102,59 +102,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>p@p</td>
-						<td>park</td>
-						<td>010-1111-11111</td>
-						<td>20</td>
-						<td>8.5</td>
-						<td>20</td>
-					</tr>
-					<tr>
-						<td>p@p</td>
-						<td>park</td>
-						<td>010-1111-11111</td>
-						<td>20</td>
-						<td>8.5</td>
-						<td>20</td>
-					</tr>
-					<tr>
-						<td>p@p</td>
-						<td>park</td>
-						<td>010-1111-11111</td>
-						<td>20</td>
-						<td>8.5</td>
-						<td>20</td>
-					</tr>
-					<tr>
-						<td>p@p</td>
-						<td>park</td>
-						<td>010-1111-11111</td>
-						<td>20</td>
-						<td>8.5</td>
-						<td>20</td>
-					</tr>
-					<tr>
-						<td>p@p</td>
-						<td>park</td>
-						<td>010-1111-11111</td>
-						<td>20</td>
-						<td>8.5</td>
-						<td>20</td>
-					</tr>
-					<tr>
-						<td>p@p</td>
-						<td>park</td>
-						<td>010-1111-11111</td>
-						<td>20</td>
-						<td>8.5</td>
-						<td>20</td>
-					</tr>
+
 				</tbody>
 			</table>
+			<c:import url="/WEB-INF/jsp/include/pagination.jsp" />
 		</div>
 	</div>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
+	<script src="<c:url value="/resources/js/admin/retrieveUser.js"/>"></script>
 </body>
 
 </html>

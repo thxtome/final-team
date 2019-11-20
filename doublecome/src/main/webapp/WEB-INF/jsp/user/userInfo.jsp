@@ -53,14 +53,14 @@
 				<div id="registInputBox1" class="registInputBox">
 						<i class="far fa-envelope fa-1x" id="icon"></i>
 						
-						<span id="registInput" >${user.userEmail}</span>
+						<span id="email"  class="registInput">${user.userEmail}</span>
 						
 						<div id="alert"></div>
 				</div>
 				<div id="registInputBox2" class="registInputBox">
 						<i class="fas fa-unlock-alt fa-1x" id="icon"></i>
 						<div id="pass" style="display:none;">${user.userPass}</div>
-						<input id="registInput" name="userPass" type="password" placeholder="비밀번호">
+						<input id="registInput" class="registInput" name="userPass" type="password" placeholder="비밀번호">
 						
 						<div id="alert"></div>
 						
@@ -70,14 +70,14 @@
 				
 				<div id="registInputBox3" class="registInputBox">
 						<i class="fas fa-mobile-alt fa-1x" id="icon"></i>
-						<span id="registInput" >${user.userPhnum}</span>
+						<span id="phnum" class="registInput">${user.userPhnum}</span>
 						
 						<div id="alert"></div>
 				</div>
 				<div id="registInputBox4" class="registInputBox">
 						<i class="fas fa-user fa-1x" id="icon"></i>
 						
-						<span id="registInput" >${user.userNickname}</span>
+						<span id="nickname"  class="registInput">${user.userNickname}</span>
 						<div id="alert"></div>
 				</div>
 				</sec:authorize> 
@@ -86,11 +86,9 @@
 	</div>
 		<span id="title" style="left: 420px; 
 								top: -10px;">입찰 중인 경매</span>
-		<c:if test="${empty auction}">
-			입찰 중인 경매가 없습니다
-		</c:if>
+		
 		<div id="bidList">
-		<c:forEach  items="${auction}" var="a">
+		<%-- <c:forEach  items="${auction}" var="a">
 		<a id="aution" href="#">
 		<div class="card_container">
 		  <img src="<c:url value="/resources/css/user/defaultpfimg.jpeg" />" alt="Avatar" class="card_imag">
@@ -106,7 +104,7 @@
 		  </span>
 		</div>
 		</a>
-		</c:forEach>
+		</c:forEach> --%>
 		</div>
 	</span>
 	<script src="<c:url value="/resources/js/user/userInfo.js" />" ></script>

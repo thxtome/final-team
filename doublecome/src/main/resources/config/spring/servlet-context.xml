@@ -31,7 +31,6 @@
 	<mvc:default-servlet-handler />
 
 	<mvc:resources mapping="/resources/../**" location="/resources/../**" />
-
 	<!-- 페이지 이동 설정 -->
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
@@ -41,4 +40,26 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10485760"></property>
 	</bean>
+	
+	
+	<!--구글 계정으로  메일 발송 -->
+	<bean id="mailSend" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		 <property name="host" value="smtp.gmail.com" />
+			  <property name="port" value="587" /> 
+				  <property name="username" value="namsu9191@gmail.com" /> 
+				  <property name="password" value="park9!9!" /> 
+				  <property name="javaMailProperties"> 
+				  <props> 
+					  <prop key="mail.smtp.auth">true</prop> 
+					  <prop key="mail.smtp.starttls.enable">true</prop>
+				  </props>
+			  </property>
+	 </bean>
+	 <!-- 
+	 직접 보내는게 아니라
+	 smtp로 메일을 보내기 위해서  구글계정 인증이 필요
+	 https://darkhorizon.tistory.com/324 참조
+	 아니면 계정 보안수준 조정
+	 https://myaccount.google.com/lesssecureapps
+	  -->
 </beans>

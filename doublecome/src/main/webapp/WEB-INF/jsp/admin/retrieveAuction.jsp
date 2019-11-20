@@ -31,21 +31,20 @@
 			<div>
 				<h2>전체 경매 조회</h2>
 			</div>
-			<button id="openReportModal">aaa</button>
 			<div id="searchBar">
-				<form action="" name="searchForm">
+				<form action="" name="searchForm" id="searchForm" data-action="searchAuction.do">
 					<table class="dataSearch">
 						<tr>
 							<td>검색항목</td>
-							<td><select>
+							<td><select name="searchType">
 									<option value="auctionNo">경매 번호</option>
 									<option value="auctionTitle">경매 제목</option>
 									<option value="userEmail">판매자 이메일</option>
-							</select> <input type="text" class="searchWord"></input></td>
+							</select> <input type="text" name="keyword" class="searchWord"></input></td>
 							<td>입찰가</td>
 							<td>
-								<p class="labels">원</p> <input type="text"> <span>~</span>
-								<p class="labels">원</p> <input type="text">
+								<p class="labels">원</p> <input name="startPrice" type="text"> <span>~</span>
+								<p class="labels">원</p> <input name="endPrice" type="text">
 							</td>
 						</tr>
 						<tr>
@@ -53,33 +52,33 @@
 							<td colspan="3">
 								<div class="categoryBox">
 									<div>
-										<label for="category1">마취침</label> <input type="checkbox"
-											id="category1">
+										<label for="category1">마취침</label> <input name="category" type="checkbox"
+											id="category1" value="1">
 									</div>
 									<div>
-										<label for="category2">메스</label> <input type="checkbox"
-											id="category2">
+										<label for="category2">메스</label> <input name="category" type="checkbox"
+											id="category2" value="2">
 									</div>
 									<div>
-										<label for="category3">니퍼</label> <input type="checkbox"
-											id="category3">
+										<label for="category3">니퍼</label> <input name="category" type="checkbox"
+											id="category3" value="3">
 									</div>
 									<div>
-										<label for="category4">몽키스페너</label> <input type="checkbox"
-											id="category4">
+										<label for="category4">몽키스페너</label> <input name="category" type="checkbox"
+											id="category4" value="4">
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>마감날짜</td>
-							<td><input type="date" name="" id=""> <span>~</span>
-								<input type="date" name="" id=""></td>
+							<td><input type="date" name="startDate" id=""> <span>~</span>
+								<input type="date" name="endDate" id=""></td>
 						</tr>
 						<tfoot>
 							<tr>
 								<td colspan="4">
-									<button>검색</button>
+									<button id="searchBtn" type="button">검색</button>
 								</td>
 							</tr>
 						</tfoot>

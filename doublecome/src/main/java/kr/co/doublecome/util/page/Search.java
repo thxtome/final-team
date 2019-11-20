@@ -25,5 +25,5 @@ public class Search extends Page{
 	
 	private String SearchType;
 	private String keyword;
-	private String filter;	
+	private String sort;	
 }

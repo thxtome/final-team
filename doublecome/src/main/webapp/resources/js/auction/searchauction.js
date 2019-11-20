@@ -1,6 +1,8 @@
+
 $("#sort_list a").click(e => {
 	$("#sort_list span").removeClass("on")
 	$(e.target).find("span").addClass("on");
+	selectCheck(e);
 })
 $("body").on("click",".options", e => {
 	let arr = $(".cnkfilter");
@@ -14,6 +16,9 @@ $("body").on("click",".options", e => {
 		}
 		return
 	}
+	if ($(e.target).attr("class") == "sort_list"){
+		$("#sort_list span").removeClass("on")		
+	}
 	$(e.target).remove()
 	for (let filter of arr) {
 		if ($(e.target).data("value") == filter.dataset.value) {
@@ -22,6 +27,7 @@ $("body").on("click",".options", e => {
 		}
 	}
 })
+
 // 카테고리별 보기 
 $("a.category").click(e => {
 	selectCheck(e);
@@ -44,7 +50,7 @@ $(".price_srh").click(e => {
 function selectCheck(e) {
 	let $event = $(e.target);
 	let clz = $event.attr('class').replace(/cnkfilter/,"")
-	if ($event.data("selected") === true) {
+	if ($event.data("selected") == true) {
 		$event.removeClass("selected")
 		$event.prev().removeClass("selected")
 		$event.data("selected",false) 
@@ -57,6 +63,7 @@ function selectCheck(e) {
 		}
 		return;
 	}
+	
 	let chkArr = $("."+clz);
 	for (let filter of chkArr ) {
 		$(filter).removeClass("selected");
@@ -74,9 +81,9 @@ function selectCheck(e) {
 	if($event.attr('class') == "price_srh") {
 		if ($("#num1").val() >= $("#num2").val() && $("#num2").val() !== "") {
 			Swal.fire({
-			  icon: 'error',
-			  text: '시작금액보다 종료금액이 더 적거나 같을수 없습니다',
-			  confirmButtonText : '확인'
+				icon: 'error',
+				text: '시작금액보다 종료금액이 더 적거나 같을수 없습니다',
+				confirmButtonText : '확인'
 			})
 			return
 		}
@@ -85,10 +92,12 @@ function selectCheck(e) {
 		} else {			
 			title = $("#num1").val() + "원 ~ " + $("#num2").val() +"원"
 		}
+		dataValue = "price-choice";
+	} else if($event.attr('class') != "order"){
+		$event.prev().addClass("selected")
+		$event.addClass("selected")		
 	}
-	$event.data("selected",true) 
-	$event.prev().addClass("selected")
-	$event.addClass("selected")
+	$event.data("selected",true)
 	$("#selectbar").append(
 		`<a href="#" data-value="${dataValue}" class="options selected">
 		${title}
@@ -97,3 +106,17 @@ function selectCheck(e) {
 		`
 	)
 }
+$("#num1, #num2").keyup(e=> {
+	e.target.value = comma(uncomma(e.target.value));	
+})
+
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+

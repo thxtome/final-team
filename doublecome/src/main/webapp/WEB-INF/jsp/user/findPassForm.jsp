@@ -22,9 +22,9 @@
 				비밀번호 찾기
 			
 			</a>
-			<form method="post" action="">
+			<form method="post" action="<c:url value="/mail/findPass.do" />">
 			<div class="ForgotPassword__inputWrapper">
-				<input type="text" placeholder="이메일" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">
+				<input name="email" type="text" placeholder="이메일" class="ForgotPassword__inputWrapper__input ForgotPassword__inputWrapper__input--error">
 			</div>
 			<!-- <div id="emailCheck" class="ForgotPassword__error">옳바른 메일 형식을 입력하세요</div> -->
 			<!-- <div class="ForgotPassword__inputWrapper">

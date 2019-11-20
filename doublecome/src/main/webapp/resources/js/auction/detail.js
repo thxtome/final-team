@@ -1,3 +1,22 @@
+function swal() {
+    Swal.fire({
+        title: '로그인이 필요한 페이지입니다',
+        text: "회원가입 혹은 로그인후 진행해주세요",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '로그인',
+        cancelButtonText: '회원가입'
+      }).then((result) => {
+        if (result.value) {
+            location.href="/doublecome/user/loginForm.do"
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            location.href="/doublecome/user/joinForm.do"
+        }
+      })
+}
+
 $('.sidebar, .nav').stick_in_parent("#wrapper");
 
 let galleryThumbs = new Swiper('.gallery-thumbs', {
@@ -45,30 +64,19 @@ $("#btn2").click(() => {
 	$("#inquiry_box").css('display', 'block')
   $("#insertbox2").html($("#inquiry_box"))
 })
-  
+
+
+$(".reply").click((e) => {
+	$div = $(e.target).attr("id")
+	$("#inquiry_box").css('display', 'block')
+	$("." + $div).append($("#inquiry_box"))
+	$parent =  $div.replace(/[^0-9]/g,"")
+	$(".inquiryParent").val($parent)
+})
+
+
 $(".Button--bid, .Button--buynow").click(() => {
-    Swal.fire({
-        title: '로그인이 필요한 페이지입니다',
-        text: "회원가입 혹은 로그인후 진행해주세요",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '로그인',
-        cancelButtonText: '회원가입'
-      }).then((result) => {
-        if (result.value) {
-          Swal.fire(
-            '로그인페이지 이동'
-          )
-        } else if (
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            Swal.fire(
-              '회원가입 페이지 이동'
-            )
-          }
-      })
+	swal()
 })
 
 $(document).ready(function(){
@@ -123,8 +131,12 @@ $('.review_pdct_title').click(() => {
 })
 
 function numberWithCommas(x) {
-//    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 $(".nowprice").html(numberWithCommas($(".nowprice").html()))
 $(".buyprice").html(numberWithCommas($(".buyprice").html()))
+
+$(".logout").click(() => {
+	swal();
+})
