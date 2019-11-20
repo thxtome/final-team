@@ -18,7 +18,7 @@
 	grid-template-columns: 1fr 2fr;
 	height : 40px;
 }
-input[data-selected="price"] {
+#num1, #num2 {
 	width:72px;
 	height: 23px;
 }
