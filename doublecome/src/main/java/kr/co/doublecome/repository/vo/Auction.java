@@ -20,7 +20,6 @@ public class Auction {
 	private String userEmail;				// 경매글쓴이
 	private double score;					// 경매글쓴이 평점
 	private String userNickname;			// 경매글쓴이 닉네임
-	
 	private int inquiryNo;					// 문의글 번호
 	private String inquiryContent;			// 문의글 내용
 	private int inquiryParent;				// 답글 여부

@@ -63,7 +63,7 @@
 		</div>
 		<div>
 			<div>
-				<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/auction/searchAuction.do" />">경매찾기</a></span>
+				<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/auction/searchAuction.do?categoryCode=0&categoryName=전체" />">경매찾기</a></span>
 			</div>
 			<div>카테고리2</div>
 			<div>카테고리3</div>
