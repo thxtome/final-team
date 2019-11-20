@@ -21,8 +21,8 @@ public class SearchUser extends Search{
 		super(pageNo, listSize);
 	}
 	
-	private double startScore;
-	private double endScore;
+	private Double startScore;
+	private Double endScore;
 	private Integer startDealCnt;
 	private Integer endDealCnt;	
 	private Integer startReviewCnt;
