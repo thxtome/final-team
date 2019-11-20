@@ -24,6 +24,7 @@
 	</select>
 	
 	<insert id="insertInquiry" parameterType="Inquiry">
-		
+		insert into inquiry (inquiry_content, inquiry_parent, auction_no, user_email)
+		values (#{inquiryContent}, #{inquiryParent}, #{auctionNo}, #{userEmail})
 	</insert>
 </mapper>

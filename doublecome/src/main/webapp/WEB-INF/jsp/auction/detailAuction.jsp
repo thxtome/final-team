@@ -84,17 +84,16 @@
 								</div>
 								<div class="inquiry_submit pdct_inquiry">
 									<h4>문의 내용</h4>
-									<form id="productInquiry" method="post" action="inquiry_add">
+									<form id="productInquiry" method="post" action="inquiry_add.do">
 									<sec:authorize access="isAnonymous()">
 										<textarea class="form-control inquiry_textarea logout"
 											placeholder="로그인 후 작성하실 수 있습니다"></textarea>
 									</sec:authorize>
 									<sec:authorize access="isAuthenticated()">
 										<textarea class="form-control inquiry_textarea"
-											placeholder="문의내용을 작성해주세요"></textarea>
+											placeholder="문의내용을 작성해주세요" name="inquiryContent"></textarea>
 									</sec:authorize>
 									<input type="hidden" name="auctionNo" value="${auction.auctionNo}">
-									<input type="hidden" name="userEmail" value="${auction.auctionNo}">
 									<button class="button">등록</button>
 									</form>
 								</div>

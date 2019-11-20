@@ -9,6 +9,7 @@ import kr.co.doublecome.repository.mapper.AuctionDetailMapper;
 import kr.co.doublecome.repository.mapper.HistoryMapper;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.History;
+import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.Review;
 
 @Service("kr.co.doublecome.auction.service.AucitonDetailServiceImpl")
@@ -34,5 +35,9 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	
 	public List<Auction> retrieveinquiry(int no) {
 		return mapper.retrieveinquiry(no);
+	}
+	
+	public void insertInquiry(Inquiry inquiry) {
+		mapper.insertInquiry(inquiry);
 	}
 }
