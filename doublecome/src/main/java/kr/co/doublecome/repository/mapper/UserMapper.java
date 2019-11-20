@@ -11,6 +11,7 @@ public interface UserMapper {
 	public void insertUser(User user);
 	public void updateUser(User user);
 	public User findEmail(User userPhnum);
+	public String findPass(String email);
 	public List<Auction> mybidAuction(User user);
 	public List<Auction> bidList(String email);
 	

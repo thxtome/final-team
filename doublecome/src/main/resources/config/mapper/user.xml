@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.doublecome.repository.mapper.UserMapper">
+
 	<select id="selectUserInfo" parameterType="User" resultType="User">
 		select * 
 		  from user
@@ -14,13 +15,20 @@
 		  from user
 		 where user_email = #{userEmail}
 	</select>
-	
+	<!-- 이메일 찾기 -->	
 	<select id="findEmail" parameterType="User" resultType="User">
 		select *
 		from user
 		where user_phnum = #{userPhnum}
 	</select>
+	<!-- 비밀번호 찾기 -->
+	<select id="findPass" parameterType="string" resultType="string">
+		select user_pass
+		from user
+		where user_email = #{email}
+	</select>
 	
+	<!-- 마이페이지 입찰 리스트 -->
 	<select id="mybidAuction" parameterType="User" resultType="Auction">
 		select a.*, RANK() OVER (ORDER BY a.auction_limit_date ) as rk
 		  from auction a
@@ -28,12 +36,11 @@
 		    on a.auction_no = b.auction_no
 		 where b.user_email = #{userEmail}
 	</select>
-	
 	<select id="bidList" parameterType="string" resultType="Auction">
 		select a.*,
 		(select count(auction_no)
 		 from bid
-		where user_email = 'p@p') as bid_cnt,
+		where user_email = #{email}) as bid_cnt,
 		 RANK() OVER (ORDER BY a.auction_limit_date ) as rk
 		  from auction a
 		 inner join bid b

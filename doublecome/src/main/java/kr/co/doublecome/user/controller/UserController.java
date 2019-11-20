@@ -39,14 +39,12 @@ public class UserController {
 
 
 	
-	
+	//이메일 찾기 페이지, 이메일 찾기
 	@RequestMapping("/findEmailForm.do")
 	public void findEmailForm(User user,  Model model) throws Exception{
-		/* service.findEmail(user); */
-		System.out.println(service.findEmail(user) + "z");
 		model.addAttribute("user", service.findEmail(user));
 	}
-	
+	//비밀번호 찾기 페이지
 	@RequestMapping("/findPassForm.do")
 	public void findPass(User user) throws Exception{}
 	
@@ -64,22 +62,23 @@ public class UserController {
 	
 	
 	//마이페이지 
-	@RequestMapping("/userInfoUpdate.do")
-	public void userInfoUpdate(/* User user, Model model */) throws Exception{
-		/*System.out.println(service.selectUserInfo(user));
-		model.addAttribute("user", service.selectUserInfo(user));
-		 service.selectUserInfo(user); */
-	}
-	@RequestMapping("/updateUser.do")
-	public void updateUser(User user) throws Exception{
-		service.updateUser(user);
-	}
 	@RequestMapping("/userInfo.do")
 	public void userInfo(/*User user, Model model, @RequestParam(value="email", required=false) String email*/) throws Exception{
 		/* service.selectUserInfo(user); 
 		 * user.setUserEmail(email); model.addAttribute("auction",
 		 * service.mybidAuction(user));
 		 */
+	}
+	@RequestMapping("/userInfoUpdate.do")
+	public void userInfoUpdate( User user /*, Model model */) throws Exception{
+		/*System.out.println(service.selectUserInfo(user));
+		model.addAttribute("user", service.selectUserInfo(user));
+		 service.selectUserInfo(user); */
+	}
+	
+	@RequestMapping("/updateUser.do")
+	public void updateUser(User user) throws Exception{
+		service.updateUser(user);
 	}
 	
 	@RequestMapping("/bidList.do")

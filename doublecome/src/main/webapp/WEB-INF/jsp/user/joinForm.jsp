@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/common/normalize.css"/>">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
  <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/user/joinform.css"/>"> 
 
@@ -17,9 +18,9 @@
 <!-- Pen Title-->
   <div class="topContent">
 <div class="pen-title">
-  <div>누구나 쉬운 경매!</div>
-		<div>더블</div>
-		<div>로와</div>
+  <div><a href="<c:url value="/main.do" />">누구나 쉬운 경매!</a></div>
+		<div><a class="titleToMain" href="<c:url value="/main.do" />">더블</a></div>
+		<div><a class="titleToMain" href="<c:url value="/main.do" />">로와</a></div>
 </div>
 </div>
 <!-- Form Module-->
@@ -39,7 +40,7 @@
       <div id="passConfirmCheck" class="alert"></div>
       <input type="tel" placeholder="핸드폰 번호" name="userPhnum"/>
       <div id="phnumCheck" class="alert">번호 인증하기</div>
-      <input type="text" placeholder="아이디" name="userNickname"/>
+      <input type="text" placeholder="별명" name="userNickname"/>
       <div id="idCheck" class="alert"></div>
       <button>가입</button>
     </form>
