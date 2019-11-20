@@ -1,7 +1,6 @@
 package kr.co.doublecome.repository.vo;
 
 import java.time.LocalDateTime;
-
 import lombok.Data;
 
 @Data	

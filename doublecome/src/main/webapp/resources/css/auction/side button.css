@@ -350,8 +350,8 @@ body a:hover {
 
   .side_seller_info {
       padding: 15px;
-      padding-bottom: 24px;
-      padding-top: 24px;
+/*       padding-bottom: 24px; */
+/*       padding-top: 24px; */
   }
   blockquote, dd, div, dl, dt, fieldset, form, input, li, ol, p, pre, ul {
     margin: 0;
