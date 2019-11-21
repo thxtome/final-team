@@ -172,7 +172,7 @@
   <script>
 	  $(document).ready(e => {
 			$("#selectbar").append(
-				`<a href="#" data-value="${selectCategery.categoryCode}" class="options selected">
+				`<a href="#" data-value="${selectCategery.categoryCode}" class="options selected category ">
 				${selectCategery.categoryName}
 					<span class="del"></span>
 				</a>
