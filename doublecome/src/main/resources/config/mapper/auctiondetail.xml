@@ -39,7 +39,9 @@
 	</insert>
 	
 	<insert id="addAuction" parameterType="Auction">
-		insert into Auction (auction_title, auction_title, auction_content, auction_limit_date, auction_buy_now, auction_min_price, user_email, file_group_code, category_code)
+		insert into Auction (auction_title, auction_content, auction_limit_date, auction_buy_now, auction_min_price, user_email, file_group_code, category_code)
 		values ()
 	</insert>
+	
+	
 </mapper>

@@ -1,5 +1,9 @@
 package kr.co.doublecome.repository.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -11,4 +15,5 @@ public class UtilFile {
 	private String fileSystemName;
 	private String filePath;
 	private String fileThumb;
+	private List<MultipartFile> attach;
 }

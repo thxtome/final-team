@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import kr.co.doublecome.auction.service.AuctionDetailService;
 import kr.co.doublecome.repository.vo.Inquiry;
 
@@ -25,6 +23,12 @@ public class AuctionDetailController {
 		model.addAttribute("user", service.userInfo(userEmail));
 		model.addAttribute("review", service.selectReceiveReview(userEmail));
 		model.addAttribute("inquiry", service.retrieveinquiry(no));
+	}
+	
+	
+	@RequestMapping("/insertAuction.do")
+	public void auctionInsert(Model model) {
+		model.addAttribute("category", service.categoryList());
 	}
 	
 	@RequestMapping("/inquiry_add.do")

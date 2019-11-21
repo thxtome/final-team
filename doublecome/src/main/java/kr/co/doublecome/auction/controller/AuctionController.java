@@ -17,9 +17,6 @@ public class AuctionController {
 	@Autowired
 	private AuctionServiceImpl service;
 	
-	@RequestMapping("/insertAuction.do")
-	public void auctionInsert() {}
-	
 	@RequestMapping("/searchAuction.do")
 	public void auctionList(int categoryCode, String categoryName, Model model) {
 		SearchAuction search = new SearchAuction();

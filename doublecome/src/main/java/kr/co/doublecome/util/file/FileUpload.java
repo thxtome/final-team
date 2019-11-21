@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import kr.co.doublecome.repository.vo.UtilFile;
@@ -18,23 +19,22 @@ import kr.co.doublecome.repository.vo.UtilFile;
 public class FileUpload {
 
 	public void folderMake() {
-		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd");
-		String filePath = "/auction" + sdf.format(new Date());
-		File file = new File("c:/java/upload" + filePath);
-		if(file.exists() == false) file.mkdirs();
 	}
 	
 	@RequestMapping("/upload.do")
-	public String upload02(List<MultipartFile> attach) throws Exception {
-		System.out.println("attach.size() : " + attach.size());
-		for (MultipartFile file : attach) {
-			if (file.isEmpty()) continue;
+	public String upload02(UtilFile uFile) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
+		String filePath = "/auction" + sdf.format(new Date());
+		for (MultipartFile mFile : uFile.getAttach()) {
+			if (mFile.isEmpty()) continue;
 			
-			String orgName = file.getOriginalFilename();
-			long size = file.getSize();
+			String orgName = mFile.getOriginalFilename();
+			long size = mFile.getSize();
 			System.out.println("파일명 : " + orgName);
 			System.out.println("파일크기 : " + size);
-			file.transferTo(new File("c:/java/upload/" + orgName));
+			File file = new File("c:/java/upload" + filePath + orgName);
+			if(file.exists() == false) file.mkdirs();
+			mFile.transferTo(file);
 		}
 		return "redirect:/main.do";
 	}
