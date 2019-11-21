@@ -1,6 +1,3 @@
-let email  = $('#userEmail').val();
-email["placeholder"] = "email";
-
 
 function upload() {
 

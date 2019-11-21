@@ -28,7 +28,7 @@
 					  
 		
 				
-		<form id="infoBox" method="post" action="/doublecome/user/insert.do" class="uploader" enctype="multipart/form-data">
+		<div id="infoBox" method="post" action="/doublecome/user/userInfoUpdate.do" class="uploader" enctype="multipart/form-data">
 			<span id="pfimgbox"> 
 						<span class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" ></span>
 						
@@ -43,13 +43,22 @@
 						</div> 
 	        </span>
         
-			<p><a id="updateFormBtn" href="<c:url value="/user/userInfoUpdate.do"/>">개인정보 수정</a></p>
-		    <p><a id="historyGoBtn" href="<c:url value="/history/listHistory.do" />">거래/후기 내역</a></p>
+			<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.user" var="user" />
+			
+			
+			<form method="post" action="<c:url value="/user/userInfoUpdate.do"/>">
+			<input type="hidden" value="${user.userEmail}" name="userEmail"/>
+			<%-- <input type="hidden" value="${user.userPass}" name="userPass"/> --%>
+			<button id="updateFormBtn" href="<c:url value="/user/userInfoUpdate.do"/>">개인정보 수정</button>
+			</form>
+		    <form method="post" action="<c:url value="/history/listHistory.do"/>">
+		    <input type="hidden" value="${user.userEmail}" name="userEmail"/>
+		    <button id="historyGoBtn" href="<c:url value="/history/listHistory.do" />">거래/후기 내역</button>
+		    </form>
 			
 		
 			<span id="registInputBox">
-			<sec:authorize access="isAuthenticated()">
-			<sec:authentication property="principal.user" var="user" /> 
 				<div id="registInputBox1" class="registInputBox">
 						<i class="far fa-envelope fa-1x" id="icon"></i>
 						
@@ -57,16 +66,13 @@
 						
 						<div id="alert"></div>
 				</div>
-				<div id="registInputBox2" class="registInputBox">
+				<%-- <div id="registInputBox2" class="registInputBox">
 						<i class="fas fa-unlock-alt fa-1x" id="icon"></i>
 						<div id="pass" style="display:none;">${user.userPass}</div>
 						<input id="registInput" class="registInput" name="userPass" type="password" placeholder="비밀번호">
 						
 						<div id="alert"></div>
-						
-						<!-- <input id="registInput" name="userPassConfirm" type="password" placeholder="비밀번호 확인"> -->
-						
-				</div>
+				</div> --%>
 				
 				<div id="registInputBox3" class="registInputBox">
 						<i class="fas fa-mobile-alt fa-1x" id="icon"></i>
@@ -80,9 +86,9 @@
 						<span id="nickname"  class="registInput">${user.userNickname}</span>
 						<div id="alert"></div>
 				</div>
-				</sec:authorize> 
+				</sec:authorize>
 			</span>
-		</form>
+		</div>
 	</div>
 		<span id="title" style="left: 420px; 
 								top: -10px;">입찰 중인 경매</span>

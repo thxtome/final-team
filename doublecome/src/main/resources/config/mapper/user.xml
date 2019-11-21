@@ -58,9 +58,8 @@
 	
 	<update id="updateUser"  parameterType="User">
 		update user 
-		   set user_email = ${userEmail},
-		   	   user_pass = ${userPass},
-		   	   user_nickname = ${userNickname}
-		 where user_phnum = ${userPhnum}
+		   set user_pass = #{userPass},
+		   	   user_nickname = #{userNickname}
+		 where user_phnum = #{userPhnum}
 	</update>
 </mapper> 

@@ -11,6 +11,7 @@ public interface UserService {
 	public User selectUserInfo(User user);
 	public User findEmail(User user);
 	public String findPass(String email);
+	public User selectUserInfoByName(String userName);
 	public List<Auction> mybidAuction(User user);
 	public List<Auction> bidList(String email);
 }

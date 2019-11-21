@@ -28,9 +28,9 @@
 					  
 		
 				
-		<form id="infoBox" method="post" action="/doublecome/user/insert.do" class="uploader" enctype="multipart/form-data">
+		<form id="infoBox" method="post" action="<c:url value="/user/userUpdate.do"/>" class="uploader" enctype="multipart/form-data">
 			<span id="pfimgbox"> 
-						<input class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" />
+						<!-- <input class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" /> -->
 						
 						<label class="uploader__label" for="file-upload">
 							<span class="uploader__wrapper">
@@ -43,20 +43,18 @@
 						</label>
 	        </span>
         
-			<a id="updateFormBtn" href="<c:url value="/user/userInfo.do"/>">수정</a>
-		   <!-- 
-		    <a id="historyGoBtn" href="<c:url value="/mypage/mypage.do"/>">거래/후기 내역</a>
-		    --> 
+			<button id="updateFormBtn" href="<c:url value="/user/userInfo.do"/>">수정</button>
+		  
 			
 		
 			<span id="registInputBox">
 			<%-- <sec:authorize access="isAuthenticated()">
-			<sec:authentication property="principal.user" var="user" /> --%> 
+			<sec:authentication property="principal.user" var="user" />  --%>
 				<div id="registInputBox1" class="registInputBox">
 						<i class="far fa-envelope fa-1x" id="icon"></i>
 						
-						<input id="userEmail" name="userEmail" type="text" value="" class="registInput"
-						placeholder="${user.userEmail}">
+						<input id="userEmail" name="userEmail" type="text" value="${user.userEmail}" class="registInput"
+						placeholder="${user.userEmail}" readonly/>
 						
 						<div id="alert"></div>
 				</div>
@@ -65,7 +63,7 @@
 						
 						<input id="userPass" name="userPass" type="password" value="" placeholder="비밀번호" class="registInput">
 				
-						<input id="userPassConfirm" name="userPassConfirm" type="password" value="" placeholder="비밀번호 확인"  class="registInput">
+						<input id="userPassConfirm" type="password" value="" placeholder="비밀번호 확인"  class="registInput">
 						
 						<div id="alert"></div>
 						
@@ -76,7 +74,7 @@
 				<div id="registInputBox3" class="registInputBox">
 						<i class="fas fa-mobile-alt fa-1x" id="icon"></i>
 						
-						<input id="userPhnum" name="userPhnum" type="text" value="" placeholder="${user.userPhnum}" class="registInput">
+						<input readonly id="userPhnum" name="userPhnum" type="text" value="${user.userPhnum}" placeholder="${user.userPhnum}" class="registInput">
 						
 						<div id="alert"></div>
 				</div>
@@ -86,7 +84,7 @@
 						<input id="userNickname" name="userNickname" type="text" value="" placeholder="${user.userNickname}"  class="registInput">
 						<div id="alert"></div>
 				</div>
-				<%-- </sec:authorize> --%> 
+				<%-- </sec:authorize> --%>
 			</span>
 		</form>
 			

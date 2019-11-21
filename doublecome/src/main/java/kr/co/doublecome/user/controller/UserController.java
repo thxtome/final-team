@@ -63,47 +63,27 @@ public class UserController {
 	
 	//마이페이지 
 	@RequestMapping("/userInfo.do")
-	public void userInfo(/*User user, Model model, @RequestParam(value="email", required=false) String email*/) throws Exception{
-		/* service.selectUserInfo(user); 
-		 * user.setUserEmail(email); model.addAttribute("auction",
-		 * service.mybidAuction(user));
-		 */
+	public void userInfo() throws Exception{
 	}
 	@RequestMapping("/userInfoUpdate.do")
-	public void userInfoUpdate( User user /*, Model model */) throws Exception{
-		/*System.out.println(service.selectUserInfo(user));
-		model.addAttribute("user", service.selectUserInfo(user));
-		 service.selectUserInfo(user); */
+	public void userInfoUpdate( String userEmail , Model model ) throws Exception{
+		model.addAttribute("user", service.selectUserInfoByName(userEmail));
 	}
 	
-	@RequestMapping("/updateUser.do")
-	public void updateUser(User user) throws Exception{
+	@RequestMapping("/userUpdate.do")
+	public String updateUser(User user) throws Exception{
+		System.out.println("/updateUser.do");
+		user.setUserPass(encoder.encode(user.getUserPass()));
 		service.updateUser(user);
+		return "redirect:/main.do";
 	}
 	
 	@RequestMapping("/bidList.do")
 	@ResponseBody
 	public List<Auction> bidList( String email) throws Exception{
-		
-		/*System.out.println(service.bidList(email));*/
 		return service.bidList(email);	
 		
 	}
-/*	
- 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>${jacksion.version}</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-core</artifactId>
-		    <version>${jacksion.version}</version>
-		</dependency> 
-		pom.xml에 추가
-		*/
+
 
 }	
