@@ -23,7 +23,7 @@ public class Search extends Page{
 		super(pageNo, listSize);
 	}
 	
-	private String SearchType;
+	private String searchType;
 	private String keyword;
 	private String sort;	
 }

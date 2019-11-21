@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="kr.co.doublecome.repository.mapper.AdminMapper">
-
+<!-- 유저 검색 쿼리 -->
 	<select id="selectUserForAdmin" parameterType="SearchUser"
 		resultType="User">
 		select full.*,
@@ -87,13 +87,13 @@
 					</choose>
 					
 				<choose>
-					<when test="SearchType == 'userEmail'">
+					<when test="searchType == 'userEmail'">
 						and	user_email like CONCAT('%',#{keyword},'%')
 					</when>
-					<when test="SearchType == 'userNickname'">
+					<when test="searchType == 'userNickname'">
 						and	user_nickname like CONCAT('%',#{keyword},'%')
 					</when>
-					<when test="SearchType == 'userPhnum'">
+					<when test="searchType == 'userPhnum'">
 						and	user_phnum like CONCAT('%',#{keyword},'%')
 					</when>						
 				</choose>
@@ -119,7 +119,8 @@
 		
 		limit #{begin},#{listSize}
 	</select>
-
+	
+<!-- 신고 조회 -->
 	<select id="selectReportByUserEmail" parameterType="SearchUser" resultType="Report">
 		select *, 
 		 	   count(*) over() as report_cnt,
@@ -131,6 +132,7 @@
 		 limit #{begin},#{listSize}
 	</select>
 	
+<!-- 유저 삭제 -->	
 	<delete id="deleteUser" parameterType="java.util.List" >
 		delete
 		  from user
@@ -140,5 +142,81 @@
 		 </foreach>  
 	</delete>
 
+
+<!-- 경매 검색 쿼리 -->
+	<select id="selectAuctionForAdmin" parameterType="SearchAuction" resultType="Auction">
+		select a.*,
+	   		   count(*) over() as auction_cnt,
+       	  	   ifnull(bid_price,0) as bid_price,
+       	  	   c.category_name
+  	      from auction a
+  		  left outer join (select distinct max(bid_price) over(partition by auction_no) as bid_price,
+						          auction_no 
+			   			     from bid ) d
+    	    on a.auction_no = d.auction_no
+    	 inner join category c
+            on a.category_code = c.category_code  
+  		 
+  		 <where>
+  		 
+  		 	<choose>
+				<when test="startPrice != null and endPrice != null">
+					and bid_price between #{startPrice} and #{endPrice}
+				</when>
+				<when test="startPrice == null and endPrice != null">
+					and bid_price <![CDATA[<]]>= #{endPrice}
+				</when>
+				<when test="startPrice != null and endPrice == null">
+					and bid_price <![CDATA[>]]>= #{startPrice} 
+				</when>
+			</choose>
+			
+			<choose>
+				<when test="startLimitDate != null and endLimitDate != null">
+					and auction_limit_date between #{startLimitDate} and #{endLimitDate}
+				</when>
+				<when test="startLimitDate == null and endLimitDate != null">
+					and auction_limit_date <![CDATA[<]]>= #{endLimitDate}
+				</when>
+				<when test="startLimitDate != null and endLimitDate == null">
+					and auction_limit_date <![CDATA[>]]>= #{startLimitDate} 
+				</when>
+			</choose>
+  		 	
+  		  		and a.category_code in 
+  		  		<foreach collection="categories" item="staff" open="(" close=")" separator=",">
+		 			#{staff}
+				 </foreach> 
+  		 
+  		 	<choose>
+					<when test="searchType == 'auctionNo'">
+						and	a.auction_no like CONCAT('%',#{keyword},'%')
+					</when>
+					<when test="searchType == 'auctionTitle'">
+						and	a.auction_title like CONCAT('%',#{keyword},'%')
+					</when>
+					<when test="searchType == 'userEmail'">
+						and	a.user_email like CONCAT('%',#{keyword},'%')
+					</when>						
+				</choose>
+  		 </where>
+  		 
+  		 <choose>
+			<when test='sort == "auctionNo"'>
+				order by a.auction_no		
+			</when>
+			<when test='sort == "userEmail"'>
+				order by user_email		
+			</when>
+			<when test='sort == "bidPrice"'>
+				order by bid_price desc		
+			</when>
+			<when test='sort == "auctionLimitDate"'>
+				order by a.auction_limit_date		
+			</when>
+		</choose>
+  		 
+  		 limit #{begin},#{listSize}
+	</select>
 
 </mapper>
