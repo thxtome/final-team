@@ -9,7 +9,6 @@ import kr.co.doublecome.repository.mapper.AuctionMapper;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Category;
 import kr.co.doublecome.repository.vo.SearchAuction;
-import kr.co.doublecome.util.page.Search;
 
 @Service("kr.co.doublecome.auction.service.AuctionService")
 public class AuctionServiceImpl implements AuctionService {

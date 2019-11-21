@@ -26,8 +26,7 @@ public class UserServiceImpl implements UserService{
 	//마이페이지
 	@Override
 	public User selectUserInfo(User user) {
-		mapper.selectUserInfo(user);
-		return user;
+		return mapper.selectUserInfo(user);
 	}
 	//마이페이지 - 개인정보 수정
 	@Override

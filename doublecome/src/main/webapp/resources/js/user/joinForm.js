@@ -1,18 +1,118 @@
-function upload() {
+$('#userEmail').keyup( (e) => {
+let emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
+ 
+if(!emailRule.test($("input[id='userEmail']").val())) {            
+            //경고
+            $('#userEmail').next().text('잘못된 이메일 형식입니다.');
+            
+            ;
+}else  $('#userEmail').next().text("");
 
+
+
+});
+
+$('#userPhnum').keyup( (e) => {
+  let phnumRule = /^\d{3}\d{3,4}\d{4}$/;// 핸드폰 번호 정규식
+  
+  if(!phnumRule.test($("input[id='userPhnum']").val())) {            
+              //경고
+              $('#userPhnum').next().text('잘못된 번호 형식입니다.');
+              
+              
+  }else $('#userPhnum').next().text("");
+
+});
+
+
+$('#userPass').keyup( (e) => {
+ /* function chkPwd(str){ */
+    console.log($('#userPass').val());
+
+    var pw = $('#userPass').val();
+    let cpw = $('#userPassConfirm').val();
+   
+    var num = pw.search(/[0-9]/g);
+   
+    var eng = pw.search(/[a-z]/ig);
+   
+    var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi); 
+
+   
+    
+    
+    if(pw.length < 8 || pw.length > 20){
+      $('#userPass').next().text("8자리 ~ 20자리 이내로 입력해주세요.");
+      
+      
+      return false;
+      
+    } else 
+      $('#userPass').next().text(""); 
+    
+    if(pw.search(/₩s/) != -1){
+      $('#userPass').next().text("비밀번호는 공백업이 입력해주세요.");
+      
+      
+      return false;
+      
+    }else $('#userPass').next().text("");
+
+     if(num < 0 || eng < 0 || spe < 0 ){
+      $('#userPass').next().text("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+      
+      
+      return false;
+      
+    }else $('#userPass').next().text("");
+     
+    
+    
+    
+    /*
+    return true;
+   
+  }
+  if(!chkPwd( $.trim($('#mpassword').val()))){
+   
+    $('#mpassword').val('');
+    
+    $('#mpassword').focus();
+    
+      return false;
+      
+    }
+    */
+  });
+
+   /*$('#userPassConfirm').focusin( () => {*/
+
+    $('#userPassConfirm').keyup( () => {
+      if($('#userPass').val() !== $('#userPassConfirm').val()) {      
+        $('#userPassConfirm').next().text("비밀 번호가 다릅니다");
+      }else $('#userPassConfirm').next().text("");
+    });
+
+  /*  })*/
+  
+  
+  
+  /*파일 업로드*/
+  /*function upload() {
+    
     var percentage = null,
-        clippaper = document.querySelector('.uploader__clip'),
-        clippaperLength = clippaper.getTotalLength();
-        clippaper.style.strokeDasharray = clippaperLength;
-        clippaper.style.strokeDashoffset = -clippaperLength;
+    clippaper = document.querySelector('.uploader__clip'),
+    clippaperLength = clippaper.getTotalLength();
+    clippaper.style.strokeDasharray = clippaperLength;
+    clippaper.style.strokeDashoffset = -clippaperLength;
   
     function Init() {
-  
+      
       var fileSelect    = document.querySelector('.uploader__input'),
-          fileDrag      = document.querySelector('.uploader__label'),
+      fileDrag      = document.querySelector('.uploader__label'),
           fileSize      = null;
-  
-      fileSelect.addEventListener('change', fileSelectHandler, false);
+          
+          fileSelect.addEventListener('change', fileSelectHandler, false);
   
       // Is XHR2 available?
       var xhr = new XMLHttpRequest();
@@ -121,4 +221,4 @@ function upload() {
   }
   
   upload();
-  
+  */
