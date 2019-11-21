@@ -1,6 +1,6 @@
 package kr.co.doublecome.repository.vo;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -16,6 +16,6 @@ public class User {
 	private int userReportedCnt;			// 받은 신고글 갯수
 	private int userDealCnt;				// 사거나 판 거래 개수
 	private int fileGroupCode;				// 프로필 사진 파일 그룹 코드
-	private LocalDateTime userRegDate;      // 등록 날짜	
+	private Date userRegDate;      			// 등록 날짜	
 	private int userCnt;                    // 유저수
 }
