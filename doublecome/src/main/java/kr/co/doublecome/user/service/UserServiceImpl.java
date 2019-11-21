@@ -55,6 +55,13 @@ public class UserServiceImpl implements UserService{
 	public String findPass(String email) {
 		return mapper.findPass(email);
 	}
+	//비밀번호 찾기 - 개인정보 수정페이지
+	@Override
+	public User selectUserInfoByName(String userName) {
+		
+		return mapper.selectUserInfoByName(userName);
+	}
+
 
 	
 	

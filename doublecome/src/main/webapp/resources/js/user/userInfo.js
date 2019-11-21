@@ -1,8 +1,9 @@
 
 ($.ajax({
 	url: "/doublecome/user/bidList.do",
-	data: {email: $("#registInput").html()},
-	success: (result) =>{console.log(result[0])
+	data: {email: $("#email").html()},
+	success: (result) =>{console.log(result[0]);
+						
 						
 							for(i = 0; i < result.length; i++){
 								$('#bidList').append(
@@ -21,3 +22,15 @@
 				
 						}
 }));
+/*
+$('#updateFormBtn').click( ()=> {
+	alert($('#email').html());
+	$.ajax({
+		url: "/doublecome/user/userInfoUpdate.do",
+		data: {userEmail: $('#email').html(),
+				userPass: $('#pass').html(),
+				userPhnum: $('#phnum').html,
+				userNickname: $('#nickname').html}
+	})
+});
+*/

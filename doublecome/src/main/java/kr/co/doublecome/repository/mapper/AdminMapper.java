@@ -9,5 +9,5 @@ import kr.co.doublecome.repository.vo.User;
 public interface AdminMapper {
 	public List<User> selectUserForAdmin(SearchUser su);
 	public List<Report> selectReportByUserEmail(SearchUser su);
-	
+	public void deleteUser(List<String> userEmails);
 }

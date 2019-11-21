@@ -1,5 +1,5 @@
 //체크박스 선택 코드========================================================================
-$(".dataContent input[type=checkbox]:eq(0)").click(()=>{
+$(".dataContent").on("click","input[type=checkbox]:eq(0)",()=>{
 	let $checks =  $(".dataContent input[type=checkbox]")
 	if($checks.filter(":eq(0)").prop("checked") == true){
 		$checks.prop("checked",true);
@@ -9,12 +9,12 @@ $(".dataContent input[type=checkbox]:eq(0)").click(()=>{
 })
 
 
-$(".dataContent input[type=checkbox]:gt(0)").click((e)=>{
+$(".dataContent").on("click","input[type=checkbox]:gt(0)",(e)=>{
 	let $allChecks = $(".dataContent input[type=checkbox]");
     let $checks = $allChecks.filter(":gt(0)");
 	let $allCheck = $allChecks.filter(":eq(0)");
     let check = $(e.target).prop("checked");
-    if(check === true && $checks.filter(":checked").length === 6){
+    if(check === true && $checks.filter(":checked").length === $checks.length){
     	$allCheck.prop("checked",true)
     } 
 
@@ -90,7 +90,7 @@ pg.movePage($(".reportContent"),(pageNo)=>{
 	listReport(userEmail,pageNo)
 })
 
-//날짜변환
+//날짜변환========================================================================================================
 function format(date){
     var year = date.year;		//yyyy
     var month = date.monthValue;		//MM
@@ -101,7 +101,32 @@ function format(date){
 }
 
 
-//신고목록 리셋
+//신고목록 리셋========================================================================================================
 function resetReport() {
 	$(".reportContent").html("");
 }
+
+//유저 삭제=============================================================================================================
+$(".removeUserBtn").click(()=>{
+	removeUser();
+})
+
+function removeUser(){
+	let data = {};
+	let userEmails = new Array;
+	$(".dataContent input[type=checkbox]:gt(0):checked").each((index,ele)=>{
+		userEmails.push($(ele).val());
+	});
+	console.log(userEmails);
+	
+	
+	$.ajax({
+		url:"removeUser.do",
+		type:"POST",
+		data:JSON.stringify(userEmails),
+		contentType:"application/json",
+		success: ()=>{
+				search(searchQuery);
+		}
+	});
+} 

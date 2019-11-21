@@ -3,6 +3,7 @@ package kr.co.doublecome.auction.service;
 import java.util.List;
 
 import kr.co.doublecome.repository.vo.Auction;
+import kr.co.doublecome.repository.vo.Category;
 import kr.co.doublecome.repository.vo.History;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.Review;
@@ -14,4 +15,6 @@ public interface AuctionDetailService {
 	List<Review> selectReceiveReview(String userEmail);
 	List<Auction> retrieveinquiry(int no);
 	void insertInquiry(Inquiry inquiry);
+	List<Category> categoryList();
+	
 }

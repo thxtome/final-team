@@ -206,7 +206,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 										<p class="review_title review_regdate">${review.reviewRegDate}</p>
 									</div>
 									<div class="review_contents_writer col-xs-2">
-										<p class="review_writer">${review.reviewerNickname}</p>
+										<p class="review_writer">${review.senderNickname}</p>
 									</div>
 								</div>
 
@@ -221,7 +221,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 											</div>
 											<div class="col-xs-7 review_contents_title">
 												<p>
-													<span class="review_writer">${review.reviewerNickname}</span><span
+													<span class="review_writer">${review.senderNickname}</span><span
 														class="review_contents_regdate">${review.reviewRegDate}</span>
 												</p>
 												<p>${review.reviewTitle}</p>
