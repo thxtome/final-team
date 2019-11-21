@@ -1,24 +1,24 @@
  let pg = {print: print,
-                          movePage: function(func){
-                            $("body").on("click",".page",(e)=>{
+                          movePage: function($ele,func){
+                            $ele.on("click",".page",(e)=>{
                                 func($(e.target).text());
                             })
                           },
 
-                          movePrevTab: function(func){
-                            $("body").on("click",".pageArrowPrev",(e)=>{
+                          movePrevTab: function($ele,func){
+                        	  $ele.on("click",".pageArrowPrev",(e)=>{
                                 func($(e.target).closest("div").data("pageno"));
                             })
                           },
 
-                          moveNextTab: function(func){
-                            $("body").on("click",".pageArrowNext",(e)=>{
+                          moveNextTab: function($ele,func){
+                        	  $ele.on("click",".pageArrowNext",(e)=>{
                                 func($(e.target).closest("div").data("pageno"));
                             })
                           }
                 };                   
 
-        function print(pr) {
+        function print($ele,pr) {
             let $pageContent = $("<div></div"); 
 
             if(pr == undefined){
@@ -57,7 +57,7 @@
                 $pageContent.append($(`<div class="pageArrowNext" data-pageNo=${endPage+1}><i class="fas fa-chevron-right"></i></div>`));
             }
             
-            $(".pagination").html($pageContent)
+            $ele.find(".pagination").html($pageContent)
         }
         
         

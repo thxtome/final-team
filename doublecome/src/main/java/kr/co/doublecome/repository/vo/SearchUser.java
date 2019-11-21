@@ -27,5 +27,7 @@ public class SearchUser extends Search{
 	private Integer endDealCnt;	
 	private Integer startReviewCnt;
 	private Integer endReviewCnt;
-	
+	private Integer startReportedCnt;
+	private Integer endReportedCnt;
+	private Integer type;
 }

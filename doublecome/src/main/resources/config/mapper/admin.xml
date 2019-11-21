@@ -10,6 +10,9 @@
 			   count(*) over() as user_cnt	
 		  from (select distinct
 					   u.*,
+					   <if test="type != null">
+						   ifnull(user_reported_cnt,0) as user_reported_cnt,
+					   </if>
 					   ifnull(cnt1,0) + ifnull(cnt2,0) as user_deal_cnt
 				  from user u
 				  left outer join (select deal.user_email_buyer,
@@ -19,12 +22,37 @@
 				  left outer join (select deal.user_email_seller,
 										  count(*) over(partition by deal.user_email_seller) as cnt2
 									 from deal) d2
-					on u.user_email = d2.user_email_seller	) full
+					on u.user_email = d2.user_email_seller	
+					
+					<if test="type != null">
+		 		  left outer join (select report_receiver,             
+								    count(*) over(partition by report_receiver) as user_reported_cnt           
+                                	 from report) r      
+		    	  	on u.user_email = r.report_receiver	
+		 			</if>
+					
+					
+					) full
 					
 		 <where>
+		 		<if test="type != null">
+		 			and user_reported_cnt > 0
+		 			<choose>
+						<when test="startReportedCnt!= null and endReportedCnt != null">
+							and user_reported_cnt between #{startReportedCnt} and #{endReportedCnt}
+						</when>
+						<when test="startReportedCnt == null and endReportedCnt != null">
+							and user_reported_cnt <![CDATA[<]]>= #{endReportedCnt}
+						</when>
+						<when test="startReportedCnt != null and endReportedCnt == null">
+							and user_reported_cnt <![CDATA[>]]>= #{startReportedCnt} 
+						</when>
+					</choose>
+		 		</if>
+		 		
 					<choose>
 						<when test="startScore != null and endScore != null">
-							and user_score between #{startScore} and #{endScore} + 0.1
+							and user_score between #{startScore} and #{endScore}
 						</when>
 						<when test="startScore == null and endScore != null">
 							and user_score <![CDATA[<]]>= #{endScore}
@@ -36,7 +64,7 @@
 					
 					<choose>
 						<when test="startDealCnt != null and endDealCnt != null">
-							and user_deal_cnt between #{startDealCnt} and #{endDealCnt} + 1
+							and user_deal_cnt between #{startDealCnt} and #{endDealCnt}
 						</when>
 						<when test="startDealCnt == null and endDealCnt != null">
 							and user_deal_cnt <![CDATA[<]]> #{endDealCnt} + 1
@@ -48,7 +76,7 @@
 					
 					<choose>
 						<when test="startReviewCnt != null and endReviewCnt != null">
-							and user_review_cnt between #{startReviewCnt} and #{endDealCnt} + 1
+							and user_review_cnt between #{startReviewCnt} and #{endDealCnt}
 						</when>
 						<when test="startReviewCnt == null and endReviewCnt != null">
 							and user_review_cnt <![CDATA[<]]> #{endReviewCnt} + 1
@@ -84,9 +112,23 @@
 			<when test='sort == "userReviewCnt"'>
 				order by user_review_cnt desc		
 			</when>
+			<when test='sort == "userReportedCnt"'>
+				order by user_reported_cnt desc		
+			</when>
 		</choose>
 		
 		limit #{begin},#{listSize}
+	</select>
+
+	<select id="selectReportByUserEmail" parameterType="SearchUser" resultType="Report">
+		select *, 
+		 	   count(*) over() as report_cnt,
+         	   rt.report_type_name
+		  from report r
+  		 inner join report_type rt
+	  	    on r.report_type_code = rt.report_type_code  
+		 where report_receiver = #{keyword}
+		 limit #{begin},#{listSize}
 	</select>
 
 </mapper>

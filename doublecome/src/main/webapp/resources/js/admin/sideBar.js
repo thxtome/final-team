@@ -77,14 +77,14 @@ function makeParams($form){
 	
 	//리스트사이즈 유지
 	data.listSize = $("#listSize").val(); 
-	
+	console.log(data)
 	return data;
 }
 
 //검색창 리셋
 function resetParams($form){
 	let $formDataSelect = $form.find("select");
-	let $formDataInput = $form.find("input").not("input[type=checkbox]");
+	let $formDataInput = $form.find("input").not("input[type=checkbox], input[type=hidden]");
 	let $formDataCheck = $form.find("input[type=checkbox]:checked");
 	
 	$formDataInput.each((index,ele)=>{
@@ -92,7 +92,7 @@ function resetParams($form){
 	});
 	
 	$formDataSelect.each((index,ele)=>{
-		ele.selectedIndex = 1;
+		ele.selectedIndex = 0;
 	});
 	
 
@@ -100,3 +100,23 @@ function resetParams($form){
 		$(ele).attr("checked",false);
 	});
 }
+
+//페이지 이동
+pg.movePage($(".adminContent"),(pageNo) =>{
+	searchQuery.pageNo = pageNo;
+	search(searchQuery);
+})
+
+//리스트사이즈 변경
+$("#listSize").on("change",()=>{
+	searchQuery.pageNo = 1;
+	searchQuery.listSize = $("#listSize").val(); 
+	search(searchQuery);
+})
+
+//정렬 이벤트
+$(".dataFilters li").click((e)=>{
+	searchQuery.sort = $(e.target).data("sort");
+	search(searchQuery);
+})
+

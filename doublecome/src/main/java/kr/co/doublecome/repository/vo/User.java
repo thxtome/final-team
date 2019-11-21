@@ -13,6 +13,7 @@ public class User {
 	private String userNickname;			// 사용자 닉네임
 	private int userType;					// 사용자 타입 - 받은 후기글 갯수에 따라 변화
 	private int userReviewCnt;				// 받은 후기글 갯수
+	private int userReportedCnt;			// 받은 신고글 갯수
 	private int userDealCnt;				// 사거나 판 거래 개수
 	private int fileGroupCode;				// 프로필 사진 파일 그룹 코드
 	private LocalDateTime userRegDate;      // 등록 날짜	

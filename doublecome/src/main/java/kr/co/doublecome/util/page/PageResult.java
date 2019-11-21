@@ -18,7 +18,6 @@ public class PageResult {
 	public PageResult(int pageNo, int count, int listSize, int tabSize) {
 		this.pageNo = pageNo;
 		this.count = count;
-		
 		int lastPage = (int)Math.ceil(count / (double)listSize);
 		int currTab = (int)Math.ceil(pageNo / (double)tabSize);
 		this.beginPage = (currTab - 1) * tabSize + 1;

@@ -67,6 +67,7 @@
 					</table>
 				</form>
 			</div>
+			
 			<div class="dataFilters">
 				<div>
 					<ul>

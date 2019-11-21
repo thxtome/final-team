@@ -5,9 +5,11 @@ function success(result){
 	let $tbody = $("<tbody></tbody>")
 	if(result.list.length == 0){
 		$(".dataContent tbody").html($("<tr><td style=text-align:center colspan='6'>검색결과가 없습니다.</td></tr>"));
+		pg.print($(".adminContent"),result.pr);
 		return;
 	}
 	result.list.forEach((user)=>{
+		$("#dataCount").text(user.userCnt)
 		let $tr = $("<tr></tr>")
 		$tr.append($(`<td>${user.userEmail}</td>`));
 		$tr.append($(`<td>${user.userNickname}</td>`));
@@ -20,27 +22,10 @@ function success(result){
 		
 	$(".dataContent tbody").html($tbody.html())
 	
-	pg.print(result.pr);
+	pg.print($(".adminContent"),result.pr);
 }
 
-//페이지 이동
-pg.movePage((pageNo)=>{
-	searchQuery.pageNo = pageNo;
-	search(searchQuery);
-})
 
-//리스트사이즈 변경
-$("#listSize").on("change",()=>{
-	searchQuery.pageNo = 1;
-	searchQuery.listSize = $("#listSize").val(); 
-	search(searchQuery);
-})
-
-//정렬 이벤트
-$(".dataFilters li").click((e)=>{
-	searchQuery.sort = $(e.target).data("sort");
-	search(searchQuery);
-})
 
 
 
