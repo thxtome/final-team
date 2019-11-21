@@ -33,8 +33,8 @@ public class MailSendController {
 			@Override 
 			public void prepare(MimeMessage mimeMessage) throws Exception { 
 				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8"); 
-				helper.setFrom("namsu9191@gmail.com"/*email*/);  					// 보내는사람 생략하면 정상작동을 안함 xml과 다르면 전송 안됨
-				helper.setTo("parknamsu91@naver.com"); 						// 받는사람 이메일
+				helper.setFrom(""/*email*/);  					// 보내는사람 생략하면 정상작동을 안함 xml과 다르면 전송 안됨
+				helper.setTo(""); 						// 받는사람 이메일
 				helper.setSubject("누구나 쉬운 경매! 더불로와 - 비밀번호 찾기"); 			// 메일제목은 생략이 가능하다
 				helper.setText(
 						"아래 링크로 이동해 비밀번호를 다시 설정 하세요<br>" +
