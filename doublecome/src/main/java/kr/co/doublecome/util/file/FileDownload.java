@@ -23,36 +23,12 @@ public class FileDownload {
 	@Autowired
 	private AucitonDetailServiceImpl service;
 	
-	@RequestMapping("/upload.do")
-	public int upload(UtilFile uFile) throws Exception {
-		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
-		String filePath = "/auction" + sdf.format(new Date());
-		int groupCode = service.maxFileGroupCode() + 1;
-		for (MultipartFile mFile : uFile.getAttach()) {
-			if (mFile.isEmpty()) continue;
-			
-			String orgName = mFile.getOriginalFilename();
-			String ext = orgName.substring(orgName.lastIndexOf("."));
-			String sysName = UUID.randomUUID().toString() + ext;
-			File file = new File("c:/java/upload" + filePath + sysName);
-			if(file.exists() == false) file.mkdirs();
-			mFile.transferTo(file);
-			uFile.setFileGroupCode(groupCode);
-			uFile.setFileOriginName(orgName);
-			uFile.setFileSystemName(sysName);
-			uFile.setFilePath("c:/java/upload" + filePath);
-			service.addFile(uFile);
-		}
-		return groupCode;
-	}
-	
 	@RequestMapping("/imgLoad.do")
 	public void imgLoad(UtilFile f, HttpServletResponse res) throws Exception {
 		
 		String fileDir = f.getFilePath();
 		String fileName = f.getFileSystemName();
-		String path = "C:\\java\\upload" + "\\" + fileDir;
-		File file = new File(path, fileName);
+		File file = new File(fileDir, fileName);
 		
         res.setHeader("Content-Length", String.valueOf(file.length()));
         res.setHeader("Content-Disposition", "inline;");

@@ -6,14 +6,11 @@
 	<!-- 옥션 해당페이지 retrieve -->
 	<select id="auctiondetail" resultType="Auction" parameterType="int">
 		select distinct a.*,
-        f.*,
 		count(b.auction_no) over(partition by b.auction_no) as bid_cnt,
 		max(b.bid_price) over(partition by b.auction_no) as max_price
 		from auction a
 		left join bid b
 		on a.auction_no = b.auction_no
-        left join file f
-        on a.file_group_code = f.file_group_code
 		where a.auction_no = #{auctionNo}
 	</select>
 	
@@ -45,7 +42,7 @@
 	
 	<select id="maxFileGroupCode" resultType="int">
 		select max(file_group_code)
-		from file;
+		from file
 	</select>
 	
 	<insert id="addFile" parameterType="UtilFile">
@@ -55,7 +52,9 @@
 	
 	<select id="retrieveFile" parameterType="int" resultType="UtilFile">
 		select *
-		from file
-		where file_group_code = #{fileGroupCode};
+		from file f
+		inner join auction a
+		on f.file_group_code = a.file_group_code
+		where a.auction_no = #{auctionNo}
 	</select>
 </mapper>

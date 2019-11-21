@@ -57,15 +57,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 
 					<section id="nav1">
 						<div id="tab-1">
-							<div id="auction-board">글작성내용</div>
-							<div>글 내용</div>
-							<div>글 내용</div>
-							<div>글 내용</div>
-							<div>글 내용</div>
-							<div>글 내용</div>
-							<div>글 내용</div>
-							<div>글 내용</div>
-							<div>글 내용</div>
+							<div id="auction-board">${auction.auctionContent}</div>
 						</div>
 					</section>
 

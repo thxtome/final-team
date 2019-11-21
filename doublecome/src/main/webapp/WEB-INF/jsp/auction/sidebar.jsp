@@ -14,8 +14,10 @@
 				<div id="slide">
 					<div class="swiper-container gallery-top">
 						<div class="swiper-wrapper">
+						<c:forEach items="${file}" var="f">
 							<div class="swiper-slide"
-								style="background-image: url('<c:url value="/file/imgLoad.do?filePath=${auction.filePath}&fileSystemName=${auction.fileSystemName}" />')"></div>
+								style="background-image: url('<c:url value="/file/imgLoad.do?filePath=${f.filePath}&fileSystemName=${f.fileSystemName}" />')"></div>
+						</c:forEach>
 						</div>
 						<div class="swiper-button-next swiper-button-white"
 							style="position: absolute; color: black; right: -51px;"></div>
@@ -23,8 +25,10 @@
 							style="position: absolute; color: black; left: -51px;"></div>
 						<div class="swiper-container gallery-thumbs">
 							<div class="swiper-wrapper">
+							<c:forEach items="${file}" var="f">
 								<div class="swiper-slide"
-									style="background-image: url(<spring>)"></div>
+									style="background-image: url('<c:url value="/file/imgLoad.do?filePath=${f.filePath}&fileSystemName=${f.fileSystemName}" />')"></div>
+							</c:forEach>
 							</div>
 						</div>
 					</div>
@@ -51,7 +55,7 @@
 														<div class="middle">
 															<div class="inner">
 																<div class="counter-class"
-																	data-date="2019-11-24 23:58:58">
+																	data-date="${auction.auctionLimitDate}">
 																	<div class="timer-font">
 																		<span class="counter-days"></span> 일
 																	</div>

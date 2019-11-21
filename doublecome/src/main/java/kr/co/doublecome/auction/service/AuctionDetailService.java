@@ -20,4 +20,5 @@ public interface AuctionDetailService {
 	void addFile(UtilFile file);
 	int maxFileGroupCode();
 	void addAuction(Auction auction);
+	List<UtilFile> retrieveFile(int no);
 }

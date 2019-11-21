@@ -1,15 +1,9 @@
 package kr.co.doublecome.auction.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.doublecome.repository.mapper.AuctionDetailMapper;
 import kr.co.doublecome.repository.mapper.AuctionMapper;
@@ -67,5 +61,9 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	
 	public void addAuction(Auction auction) {
 		mapper.addAuction(auction);
+	}
+	
+	public List<UtilFile> retrieveFile(int no) {
+		return mapper.retrieveFile(no);
 	}
 }

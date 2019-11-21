@@ -14,4 +14,5 @@ public interface AuctionDetailMapper {
 	void addFile(UtilFile file);
 	int maxFileGroupCode();
 	void addAuction(Auction auction);
+	List<UtilFile> retrieveFile(int no);
 }
