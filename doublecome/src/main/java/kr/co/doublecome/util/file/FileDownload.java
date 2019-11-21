@@ -4,39 +4,46 @@ import java.io.File;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+
+import kr.co.doublecome.auction.service.AucitonDetailServiceImpl;
 import kr.co.doublecome.repository.vo.UtilFile;
 
 @Controller
 @RequestMapping("/file")
-public class FileUpload {
+public class FileDownload {
 
-	public void folderMake() {
-	}
+	@Autowired
+	private AucitonDetailServiceImpl service;
 	
 	@RequestMapping("/upload.do")
-	public String upload02(UtilFile uFile) throws Exception {
+	public int upload(UtilFile uFile) throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
 		String filePath = "/auction" + sdf.format(new Date());
+		int groupCode = service.maxFileGroupCode() + 1;
 		for (MultipartFile mFile : uFile.getAttach()) {
 			if (mFile.isEmpty()) continue;
 			
 			String orgName = mFile.getOriginalFilename();
-			long size = mFile.getSize();
-			System.out.println("파일명 : " + orgName);
-			System.out.println("파일크기 : " + size);
-			File file = new File("c:/java/upload" + filePath + orgName);
+			String ext = orgName.substring(orgName.lastIndexOf("."));
+			String sysName = UUID.randomUUID().toString() + ext;
+			File file = new File("c:/java/upload" + filePath + sysName);
 			if(file.exists() == false) file.mkdirs();
 			mFile.transferTo(file);
+			uFile.setFileGroupCode(groupCode);
+			uFile.setFileOriginName(orgName);
+			uFile.setFileSystemName(sysName);
+			uFile.setFilePath("c:/java/upload" + filePath);
+			service.addFile(uFile);
 		}
-		return "redirect:/main.do";
+		return groupCode;
 	}
 	
 	@RequestMapping("/imgLoad.do")

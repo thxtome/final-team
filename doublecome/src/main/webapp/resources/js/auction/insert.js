@@ -1,3 +1,7 @@
+$(".category").click(() => {
+	$(".catg").val($("select[name=catg]").val())
+})
+
 $('#summernote').summernote(
 	{
 		height : 400,
@@ -28,20 +32,22 @@ let month = sysdate.getMonth() + 1
 let day = sysdate.getDate()
 let maxDay = sysdate.getDate() + 7
 let hour = sysdate.getHours()
+let minHour = sysdate.getHours() + 6
 let minute = sysdate.getMinutes()
-$now = year + "-" + month + "-" + day + " " + hour + ":" + minute
+$now = year + "-" + month + "-" + day + " " + minHour + ":" + minute
 
 $max = year + "-" + month + "-" + maxDay + " " + hour + ":" + minute
 $(function () {
     $('#datetimepicker').datetimepicker({
-        minDate:$now,
+    	format: 'YYYY-MM-DD HH:mm',
+    	minDate:$now,
         maxDate:$max,
-        defaultDate:$now
+        defaultDate:$now,
     });
 });
 function addCommas(x) {
 	 let val = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	 if(val.substr((val.length - 3, 2)) != "000") {
+	 if(!val.endsWith("000")) {
 		 alert("입력은 천원단위 입니다.")
 		 return;
 	 }
@@ -78,3 +84,4 @@ $(".fileUpIcon").hover(() => {
 },() => {
   $(".hoverNotification").hide();
 })
+

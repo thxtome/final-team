@@ -24,7 +24,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	<div id="wrapper">
 		<div class="contents">
-			<form id="insertForm" method="post" enctype="multipart/form-data" action="/file/upload.do">
+			<form id="insertForm" method="post" enctype="multipart/form-data" action="addAuction.do">
 				<div class="formbox">
 					<dl class="row">
 						<dt class="col-xs-3 menu">제목</dt>
@@ -33,9 +33,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 						</dd>
 						<dt class="col-xs-3 menu">카테고리</dt>
 						<dd class="col-xs-9">
-							<select class="category">
+							<select name="catg" class="category">
 							<c:forEach items="${category}" var="cat">
-								<option value="${cat.categoryCode}">${cat.categoryName}</option>							
+								<option class="selecC" value="${cat.categoryCode}">${cat.categoryName}</option>
 							</c:forEach>
 							</select>
 						</dd>
@@ -72,10 +72,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 						</dd>
 					</dl>
 				</div>
-				<div name="auctionContent" id="summernote"></div>
+				<textarea id="summernote" name="auctionContent" ></textarea> 
 				<div class="submit">
-					<button class="button">확인</button>
+					<button class="button">등록</button>
 				</div>
+				<input type="hidden" class="catg" name="categoryCode" value="" />
 			</form>
 		</div>
 	</div>

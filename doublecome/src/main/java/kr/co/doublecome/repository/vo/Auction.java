@@ -1,5 +1,7 @@
 package kr.co.doublecome.repository.vo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data	
@@ -8,9 +10,10 @@ public class Auction {
 	private String auctionTitle;			// 경매글 제목
 	private String auctionContent;			// 경매글 내용
 	private String auctionRegDate;     		// 경매글 작성일
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private String auctionLimitDate; 		// 경매 기한
-	private int auctionBuyNow;				// 즉시 구매가
-	private int auctionMinPrice;			// 경매 시작가
+	private String auctionBuyNow;				// 즉시 구매가
+	private String auctionMinPrice;			// 경매 시작가
 	private int auctionCondition;			// 경매 진행 상태
 	private int fileGroupCode; 				// 파일 그룹코드
 	private int categoryCode;				// 카테고리

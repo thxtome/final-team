@@ -12,7 +12,7 @@
 		from auction a
 		left join bid b
 		on a.auction_no = b.auction_no
-        inner join file f
+        left join file f
         on a.file_group_code = f.file_group_code
 		where a.auction_no = #{auctionNo}
 	</select>
@@ -39,9 +39,23 @@
 	</insert>
 	
 	<insert id="addAuction" parameterType="Auction">
-		insert into Auction (auction_title, auction_content, auction_limit_date, auction_buy_now, auction_min_price, user_email, file_group_code, category_code)
-		values ()
+		insert into auction (auction_title, auction_content, auction_limit_date, auction_buy_now, auction_min_price, user_email, file_group_code, category_code)
+		values (#{auctionTitle}, #{auctionContent}, #{auctionLimitDate}, #{auctionBuyNow}, #{auctionMinPrice}, #{userEmail}, #{fileGroupCode}, #{categoryCode})
 	</insert>
 	
+	<select id="maxFileGroupCode" resultType="int">
+		select max(file_group_code)
+		from file;
+	</select>
 	
+	<insert id="addFile" parameterType="UtilFile">
+		insert into file (file_group_code, file_origin_name, file_system_name, file_path)
+		values (#{fileGroupCode}, #{fileOriginName}, #{fileSystemName}, #{filePath})
+	</insert>
+	
+	<select id="retrieveFile" parameterType="int" resultType="UtilFile">
+		select *
+		from file
+		where file_group_code = #{fileGroupCode};
+	</select>
 </mapper>
