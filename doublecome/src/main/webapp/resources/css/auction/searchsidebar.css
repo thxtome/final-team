@@ -61,7 +61,7 @@ footer {
 .box-line {
 	border-bottom: 1px solid #eee;
 }
-.price_srh {
+#price_choice  {
 	display: inline-block;
 	overflow: hidden;
 	width: 23px;

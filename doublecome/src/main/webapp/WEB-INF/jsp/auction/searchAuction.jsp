@@ -52,9 +52,9 @@
             <li><a class="price-filter cnkfilter" data-selected="" data-value="10만원  ~ 20만원" title="10만원 ~ 20만원">10만원 ~ 20만원</a></li>
             <li><a class="price-filter cnkfilter" data-selected="" data-value="20만원 이상" title="20만원 이상">20만원 이상</a></li>
             <li>
-              <input class="price-filter cnkfilter" data-value="price-choice" id="num1" data-selected="" type="text" numberOnly/> ~
-              <input class="price-filter cnkfilter" data-value="price-choice" id="num2" data-selected="" type="text" numberOnly/>
-              <a class="price_srh" data-selected="" data-value="price-choice"></a>
+              <input class="price-filter cnkfilter" data-value="" id="num1" data-selected="" type="text" numberOnly/> ~
+              <input class="price-filter cnkfilter" data-value="" id="num2" data-selected="" type="text" numberOnly/>
+              <a id="price_choice" class="price-filter" data-selected="" data-value="price"></a>
             </li>
           </ul>
       </div>

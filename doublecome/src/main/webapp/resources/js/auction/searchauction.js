@@ -2,7 +2,6 @@
 $("#sort_list a").click(e => {
 	$("#sort_list span").removeClass("on")
 	$(e.target).find("span").addClass("on");
-	selectCheck(e);
 })
 $("body").on("click",".options", e => {
 	let arr = $(".cnkfilter");
@@ -15,9 +14,6 @@ $("body").on("click",".options", e => {
 			}
 		}
 		return
-	}
-	if ($(e.target).attr("class") == "sort_list"){
-		$("#sort_list span").removeClass("on")		
 	}
 	$(e.target).remove()
 	for (let filter of arr) {
@@ -77,9 +73,11 @@ function selectCheck(e) {
 		}
 	}
 	let title = e.target.title;
-	let dataValue = e.target.dataset.value;
-	if($event.attr('class') == "price_srh") {
-		if ($("#num1").val() >= $("#num2").val() && $("#num2").val() !== "") {
+	let datavalue = e.target.dataset.value;
+	if($event.data("value") == "price") {
+		let num1 = parseInt($("#num1").val())
+		let num2 = parseInt($("#num2").val())
+		if (num1 >= num2 && num2 !== "") {
 			Swal.fire({
 				icon: 'error',
 				text: '시작금액보다 종료금액이 더 적거나 같을수 없습니다',
@@ -87,28 +85,32 @@ function selectCheck(e) {
 			})
 			return
 		}
-		if ($("#num2").val() == "") {
-			title = $("#num1").val() + "원 ~ "
+		if (num2 == "") {
+			title = comma(uncomma(num1)) + "원 ~ "
 		} else {			
-			title = $("#num1").val() + "원 ~ " + $("#num2").val() +"원"
+			title = comma(uncomma(num1)) + "원 ~ " + comma(uncomma(num2)) +"원"
 		}
-		dataValue = "price-choice";
-	} else if($event.attr('class') != "order"){
+		$("#selectbar").append(
+			`<a href="#" data-value="price" class="options selected">
+			${title}
+				<span class="del"></span>
+			</a>
+				`
+		)
+		return
+	} else {
 		$event.prev().addClass("selected")
 		$event.addClass("selected")		
 	}
 	$event.data("selected",true)
 	$("#selectbar").append(
-		`<a href="#" data-value="${dataValue}" class="options selected">
+		`<a href="#" data-value="${datavalue}" class="options selected">
 		${title}
 			<span class="del"></span>
 		</a>
 		`
 	)
 }
-$("#num1, #num2").keyup(e=> {
-	e.target.value = comma(uncomma(e.target.value));	
-})
 
 function comma(str) {
     str = String(str);
