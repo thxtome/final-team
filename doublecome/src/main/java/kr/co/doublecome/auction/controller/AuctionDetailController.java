@@ -48,7 +48,7 @@ public class AuctionDetailController {
 	@RequestMapping("/addAuction.do")
 	public String addAuction(@RequestHeader(value = "referer") String referer, Principal principal, Auction auction, UtilFile uFile) throws Exception {
 		
-		int groupCode = fileService.uploadFile(uFile);
+		int groupCode = fileService.uploadFile(uFile).getFileGroupCode();
 		
 		auction.setUserEmail(principal.getName());
 		auction.setAuctionBuyNow(auction.getAuctionBuyNow().replaceAll(",", ""));

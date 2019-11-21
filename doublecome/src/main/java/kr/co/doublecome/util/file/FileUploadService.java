@@ -24,7 +24,8 @@ public class FileUploadService {
 	@Autowired
 	private AuctionDetailMapper mapper;
 	
-	public int uploadFile(UtilFile uFile) {
+	public UtilFile uploadFile(UtilFile uFile) {
+		UtilFile utilFile = new UtilFile();
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
 		String filePath = "/auction" + sdf.format(new Date());
 		int groupCode = mapper.maxFileGroupCode() + 1;
@@ -45,8 +46,10 @@ public class FileUploadService {
 			uFile.setFileSystemName(sysName);
 			uFile.setFilePath("c:/java/upload" + filePath);
 			mapper.addFile(uFile);
+			utilFile.setFileGroupCode(groupCode);
+			utilFile.setFilePath("c:/java/upload" + filePath);
 		}
-		return groupCode;
+		return utilFile;
 	}
 	
 }
