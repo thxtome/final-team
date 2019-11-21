@@ -62,6 +62,9 @@ public class AdminServiceImpl implements AdminService{
 		ap.setPr(new PageResult(su.getPageNo(), count, 5, 5));
 
 		return ap;
-				
+	}
+	
+	public void removeUser(List<String> userEmails) {
+		mapper.deleteUser(userEmails);
 	}
 }

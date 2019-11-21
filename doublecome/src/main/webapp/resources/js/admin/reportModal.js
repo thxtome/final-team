@@ -1,4 +1,4 @@
-$(".dataContent").on("click","td:gt(1)",(e)=>{
+$(".dataContent").on("click"," tr > td:not(td:has(input))",(e)=>{
 	let userEmail = $(e.target).closest("tr").attr("email");
 	let pageNo = 1;
 	listReport(userEmail,pageNo);

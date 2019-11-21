@@ -130,5 +130,15 @@
 		 where report_receiver = #{keyword}
 		 limit #{begin},#{listSize}
 	</select>
+	
+	<delete id="deleteUser" parameterType="java.util.List" >
+		delete
+		  from user
+		 where user_email in 
+		 <foreach collection="list" item="userEmail" open="(" close=")" separator=",">
+		 	#{userEmail}
+		 </foreach>  
+	</delete>
+
 
 </mapper>
