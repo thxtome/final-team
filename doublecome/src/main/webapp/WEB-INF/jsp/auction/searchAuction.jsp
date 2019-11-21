@@ -8,21 +8,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- PAGE settings -->
-  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
   <title>Album</title>
-  <meta name="description" content="Wireframe design of an album page by Pingendo">
-  <meta name="keywords" content="Pingendo bootstrap example template wireframe album ">
-  <meta name="author" content="Pingendo">
-  <!-- CSS dependencies -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    type="text/css">
+ 
+<!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" -->
+<!--     type="text/css"> -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchsidebar.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchcontent.css" />">
   <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/auction/searchbar.css" />">
-<link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -36,7 +31,8 @@
           <li>
        		<i class="fas fa-${category.categoryIcon} category-filter"></i>
           	<a class="category cnkfilter" id="category${category.categoryCode}" 
-          	data-selected="" data-value="${category.categoryCode}" title="${category.categoryName}">
+     		href="<c:url value="/auction/searchActionList.do" />"
+          	data-selected="" data-name="categoryCode" data-value="${category.categoryCode}" title="${category.categoryName}">
 				${category.categoryName}
           	</a>
           </li>	        
@@ -46,32 +42,32 @@
       <div class="checklist box-line accordion" id="price_filter">
           <div><h3>가격</h3></div>
           <ul>
-            <li><a class="price-filter cnkfilter" data-selected="" data-value="2만원 미만" title="2만원 미만">2만원 미만</a></li>
-            <li><a class="price-filter cnkfilter" data-selected="" data-value="2만원  ~ 5만원" title="2만원 ~ 5만원">2만원 ~ 5만원</a></li>
-            <li><a class="price-filter cnkfilter" data-selected="" data-value="5만원  ~ 10만원" title="5만원 ~ 10만원">5만원 ~ 10만원</a></li>
-            <li><a class="price-filter cnkfilter" data-selected="" data-value="10만원  ~ 20만원" title="10만원 ~ 20만원">10만원 ~ 20만원</a></li>
-            <li><a class="price-filter cnkfilter" data-selected="" data-value="20만원 이상" title="20만원 이상">20만원 이상</a></li>
+            <li><a class="price-filter cnkfilter" data-name="priceChoce" data-selected="" data-value="2" title="2만원 미만">2만원 미만</a></li>
+            <li><a class="price-filter cnkfilter" data-name="priceChoce" data-selected="" data-value="2~5" title="2만원 ~ 5만원">2만원 ~ 5만원</a></li>
+            <li><a class="price-filter cnkfilter" data-name="priceChoce" data-selected="" data-value="5~10" title="5만원 ~ 10만원">5만원 ~ 10만원</a></li>
+            <li><a class="price-filter cnkfilter" data-name="priceChoce" data-selected="" data-value="10~20" title="10만원 ~ 20만원">10만원 ~ 20만원</a></li>
+            <li><a class="price-filter cnkfilter" data-name="priceChoce" data-selected="" data-value="20" title="20만원 이상">20만원 이상</a></li>
             <li>
-              <input class="price-filter cnkfilter" data-value="" id="num1" data-selected="" type="text" numberOnly/> ~
-              <input class="price-filter cnkfilter" data-value="" id="num2" data-selected="" type="text" numberOnly/>
-              <a id="price_choice" class="price-filter" data-selected="" data-value="price"></a>
+              <input class="price-filter cnkfilter" data-name="priceChoce" data-value="" id="num1" data-selected="" type="text" numberOnly/> ~
+              <input class="price-filter cnkfilter" data-name="priceChoce" data-value="" id="num2" data-selected="" type="text" numberOnly/>
+              <a id="price_choice" class="price-filter" data-name="priceChoce" data-selected="" data-value="priceChoice"></a>
             </li>
           </ul>
       </div>
       <div class="checklist box-line accordion" id="date">
           <div><h3>시간</h3></div>
           <ul>
-            <li><a class="time-filter cnkfilter" data-selected="" data-value="1일 미만" title="1일 미만">1일 미만</a></li>
-            <li><a class="time-filter cnkfilter" data-selected="" data-value="3일 ~ 5일" title="3일~5일">3일~5일</a></li>
-            <li><a class="time-filter cnkfilter" data-selected="" data-value="5일 이상" title="5일 이상">5일 이상</a></li>
+            <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="1" title="1일 미만">1일 미만</a></li>
+            <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="3~5" title="3일~5일">3일~5일</a></li>
+            <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="5" title="5일 이상">5일 이상</a></li>
           </ul>
       </div>
       <div class="checklist box-line accordion" id="bidcount">
           <div><h3>입찰</h3></div>
           <ul>
-            <li><a class="bid-filter cnkfilter" data-selected="" data-value="1건 미만" title="1건 미만">1건 미만</a></li>
-            <li><a class="bid-filter cnkfilter" data-selected="" data-value="5건 ~ 10건" title="5건 ~ 10건">5건 ~ 10건</a></li>
-            <li><a class="bid-filter cnkfilter" data-selected="" data-value="10건 이상" title="10건 이상">10건 이상</a></li>
+            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="1건 미만" title="1건 미만">1건 미만</a></li>
+            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="5건 ~ 10건" title="5건 ~ 10건">5건 ~ 10건</a></li>
+            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="10건 이상" title="10건 이상">10건 이상</a></li>
           </ul>
       </div>
     </div>
@@ -111,7 +107,7 @@
           </div>
         </div>
         <div class="container w-75">
-          <div class="row">
+          <div class="row" id="list_view">
        		<c:choose>
 					<c:when test="${empty auctionlist}">
 						<div class="col-md-12">
@@ -148,39 +144,44 @@
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+				</div>
             </div>
           </div>
         </div>
       </div>
     </div>
  <c:import url="/WEB-INF/jsp/include/footer.jsp" />
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"
-    style=""></script>
-  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+ 
   <script src="<c:url value="/resources/js/common/countdown.js" />"></script>
   <script>
     $("input:text[numberOnly]").on("keyup", function() {
       $(this).val($(this).val().replace(/[^0-9]/g,""));
   });
   </script>
+  <script src="<c:url value="/resources/js/auction/searchauction.js" />"></script>
   <script>
 	  $(document).ready(e => {
 			$("#selectbar").append(
-				`<a href="#" data-value="${selectCategery.categoryCode}" class="options selected category ">
+				`<a href="#" data-name="categoryCode" data-value="${selectCategery.categoryCode}" class="options selected category ">
 				${selectCategery.categoryName}
 					<span class="del"></span>
 				</a>
 				`
 			)
+			let loadchk = $(".category");
+			let optiondata = $(".options");
+			for(let value of loadchk) {
+				for (let optionval of optiondata) {
+					if (value.dataset.value == optionval.dataset.value) {
+						$(value).addClass("selected")	
+						$(value).prev().addClass("selected")
+						return
+					}
+				}
+			}
 		})
   </script>
-  <script src="<c:url value="/resources/js/auction/searchauction.js" />"></script>
   <script src="<c:url value="/resources/js/auction/accordion.js" />"></script>
 </body>
 
