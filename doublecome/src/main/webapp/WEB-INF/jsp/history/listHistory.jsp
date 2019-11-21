@@ -192,8 +192,7 @@
 										<li class="reviewDetail">
 											<div class="reviewContent">
 												<div class="profileDiv">
-													<img class="profileImg"
-														src="<c:url value="/resources/images/profileImg.png"/>" />
+													<img class="profileImg" src="<c:url value="/resources/images/profileImg.png"/>" />
 												</div>
 												<div class="nicknameDiv">${rList.senderNickname}</div>
 												<div class="regdateDiv">${rList.reviewRegDate}</div>
@@ -225,8 +224,8 @@
 									</ul>
 								</div>
 							</div>
-							<c:forEach var="sList" items="${sendReview}">
-								<div id="reviewCon">
+							<div id="reviewCon">
+								<c:forEach var="sList" items="${sendReview}">
 									<ul>
 										<li class="preView">
 											<div class="scoreArea">
@@ -242,8 +241,7 @@
 												<a class="reviewer">${sList.senderNickname}</a>
 											</div>
 											<div class="editdel">
-												<a href="editReview.do" class="editreview">수정</a> / <a
-													class="delreview">삭제</a>
+												<a data-no="${sList.auctionNo}" class="editreview">수정</a> / <a class="delreview">삭제</a>
 											</div>
 										</li>
 										<li class="reviewDetail">
@@ -259,9 +257,9 @@
 											</div>
 										</li>
 									</ul>
-								</div>
-							</c:forEach>
-						<button class="moreBtn" type="button">더 보기</button>
+								</c:forEach>
+							</div>
+							<button class="moreBtn" type="button">더 보기</button>
 						</div>
 					</c:otherwise>
 				</c:choose>
@@ -276,8 +274,7 @@
 						<form action="addReview.do" id="rform" method="post">
 							<div class="auctionTitleDiv">
 								<div>경매글</div>
-								<div id="auctionTitle">날이면 날마다 오는 기회가 아닙니다. 싸게싸게 입찰하세요. 실사용 1회입니다~ 마이크 커버
-									팝니다.</div>
+								<div id="auctionTitle"></div>
 							</div>
 							<div class="scoreDiv">
 								<div class="scoreLibel">신뢰도</div>
@@ -297,9 +294,9 @@
 									<textarea id="summernote" name="reviewContent"></textarea>
 								</div>
 							</div>
-							<input id="auctionNo" type="hidden" name="auctionNo"/>
+							<input id="auctionNo" type="hidden" name="auctionNo" value=""/>
 							<div class="regitbtn">
-								<button type="button">등록</button>
+								<button type="submit">등록</button>
 							</div>
 						</form>
 					</div>

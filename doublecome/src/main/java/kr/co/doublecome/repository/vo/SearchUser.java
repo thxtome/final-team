@@ -1,6 +1,5 @@
 package kr.co.doublecome.repository.vo;
 
-import kr.co.doublecome.util.page.Search;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

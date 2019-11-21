@@ -1,10 +1,9 @@
 package kr.co.doublecome.repository.vo;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import kr.co.doublecome.util.page.Search;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -31,9 +30,9 @@ public class SearchAuction extends Search{
 	private Integer[] categories;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private LocalDateTime startLimitDate; 
+	private Date startLimitDate; 
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private LocalDateTime endLimitDate; 
+	private Date endLimitDate; 
 	
 }

@@ -1,4 +1,4 @@
-package kr.co.doublecome.util.page;
+package kr.co.doublecome.repository.vo;
 
 import kr.co.doublecome.repository.vo.Page;
 import lombok.Data;

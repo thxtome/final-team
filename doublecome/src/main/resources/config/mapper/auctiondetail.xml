@@ -14,13 +14,16 @@
 		where a.auction_no = #{auctionNo}
 	</select>
 	
-	<select id="retrieveinquiry" resultType="Auction" parameterType="int">
-			select i.*, u.*
+	<select id="retrieveinquiry" resultType="Auction" parameterType="Search">
+			select i.*, u.* , 
+            count(i.user_email) over() as inquiry_cnt
 			from inquiry i
 			inner join user u
 			on i.user_email = u.user_email
-			where auction_no = #{auctionNo}
-			order by IF(ISNULL(inquiry_parent), inquiry_no, inquiry_parent) desc;
+			where auction_no = #{keyword}
+			order by IF(ISNULL(inquiry_parent), inquiry_no, inquiry_parent) desc
+			
+			limit #{begin},#{listSize}
 	</select>
 	
 	<insert id="insertInquiry" parameterType="Inquiry">

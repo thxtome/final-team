@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.doublecome.repository.mapper.UserMapper">
-
+	
 	<select id="selectUserInfo" parameterType="User" resultType="User">
 		select * 
 		  from user
@@ -15,6 +15,9 @@
 		  from user
 		 where user_email = #{userEmail}
 	</select>
+	
+	
+	
 	<!-- 이메일 찾기 -->	
 	<select id="findEmail" parameterType="User" resultType="User">
 		select *
@@ -28,14 +31,14 @@
 		where user_email = #{email}
 	</select>
 	
-	<!-- 마이페이지 입찰 리스트 -->
-	<select id="mybidAuction" parameterType="User" resultType="Auction">
+	<!-- <select id="mybidAuction" parameterType="User" resultType="Auction">
 		select a.*, RANK() OVER (ORDER BY a.auction_limit_date ) as rk
 		  from auction a
 		 inner join bid b
 		    on a.auction_no = b.auction_no
 		 where b.user_email = #{userEmail}
-	</select>
+	</select> -->
+	<!-- 마이페이지 입찰 리스트 -->
 	<select id="bidList" parameterType="string" resultType="Auction">
 		select a.*,
 		(select count(auction_no)
@@ -50,16 +53,35 @@
 	
 	
 	
-	
+	<!-- 회원 가입 -->
 	<insert id="insertUser" parameterType="User">
 	  insert into user(user_email, user_pass, user_phnum, user_nickname
  	  ) values (#{userEmail}, #{userPass},#{userPhnum},#{userNickname});
 	</insert>
-	
+	<!-- 회원 정보 수정 -->
 	<update id="updateUser"  parameterType="User">
 		update user 
 		   set user_pass = #{userPass},
 		   	   user_nickname = #{userNickname}
 		 where user_phnum = #{userPhnum}
 	</update>
+	
+	
+	<!-- 회원가입 유효성검사 -->
+	<select id="checkEmail" parameterType="String" resultType="int">
+		select count(user_email)
+		  from user
+		 where user_email = #{userEmail}
+	</select>
+	<select id="checkPhnum" parameterType="String" resultType="int">
+		select count(user_phnum)
+		  from user
+		 where user_phnum = #{userPhnum}
+	</select>
+	<select id="checkNickname" parameterType="String" resultType="int">
+		select count(user_nickname)
+		  from user
+		 where user_nickname = #{userNickname}
+	</select>
+	
 </mapper> 

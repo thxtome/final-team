@@ -15,11 +15,6 @@
 	});
 	$("#writer", "#content").val("");
 */
-$("body").on("click", ".reviewBtn", (e) => {
-	$("#auctionTitle").html($(e.target).closest("ul").find(".listTitle").html());
-	$("#auctionNo").val($(e.target).data("no"));
-});
-
 
 // 네비게이션바 클릭시 이동
 let $navBar = $("#navBar");
@@ -94,9 +89,21 @@ $(".reviewTabList").click((e) => {
 
 let $addReviewModal = $("#addReviewModal");
 $("body").on("click", ".reviewBtn", (e) => {
-	console.log($("#addReviewModal").html());
+	$("#auctionTitle").html($(e.target).closest("ul").find(".listTitle").html());
+	$("#auctionNo").val($(e.target).data("no"));
+	$(".regitbtn > button").html("등록");
 	$addReviewModal.css("display","block");
 });
+
+//$("body").on("click", ".editreview", (e) => {
+//	let $ul = $(e.target).closest("ul");
+//	$("#auctionTitle").html($ul.find(".auctionTitle").html());
+//	$("#auctionNo").val($(e.target).data("no"));
+//	$(".regitbtn > button").html("수정");
+//	$(".scoreCon > input").val($ul.find(".score").val());
+//	$("")
+//	$addReviewModal.css("display","block");
+//});
 
 $("body").on("click", ".reviewModalClose", (e) => {
 	$addReviewModal.css("display","none");
@@ -121,9 +128,57 @@ $('#summernote').summernote(
 		    disableResize: true,
 		    disableResizeEditor: true,
 		    resize: false,
-		    toolbar : ['insert', ['picture']]
+		    toolbar : ['insert', ['picture']],
+		    focus: true,
+		    callbacks: {
+		    	onImageUpload: function(files, editor, welEditable) {
+		        for (var i = files.length - 1; i >= 0; i--) {
+		        	sendFile(files[i], this);
+		          }
+		        }
+		      }
+
 });
 
+function sendFile(file, editor) {
+    // 파일 전송을 위한 폼생성
+		data = new FormData();
+	    data.append("uploadFile", file);
+	    $.ajax({ // ajax를 통해 파일 업로드 처리
+	        data : data,
+	        type : "POST",
+	        url : "fileUpload.do",
+	        cache : false,
+	        contentType : false,
+	        processData : false,
+	        success : function(data) { // 처리가 성공할 경우
+            // 에디터에 이미지 출력
+	        	$(editor).summernote('editor.insertImage', data.url);
+	        }
+	    });
+	}
+
+
+
+
+//function sendFile(file, el) {
+////	  var contextPath = "${pageContext.request.contextPath}";
+//  var form_data = new FormData();
+//  form_data.append('file', file);
+//  $.ajax({
+//    data: form_data,
+//    type: "POST",
+//    url: 'file.do',
+//    cache: false,
+//    contentType: false,
+//    enctype: 'multipart/form-data',
+//    processData: false,
+//    success: function(url) {
+//    	alert(url);	 
+//    	$(el).summernote('editor.insertImage', url);
+//    }
+//  });
+//}
 
 // 후기제목 클릭시 후기상세글 노출
 $("body").on("click" ,".preView", (e) => {

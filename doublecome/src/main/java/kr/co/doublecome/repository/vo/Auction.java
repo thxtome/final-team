@@ -1,6 +1,7 @@
 package kr.co.doublecome.repository.vo;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,10 +12,11 @@ public class Auction {
 	private int auctionNo;					// 경매글 번호
 	private String auctionTitle;			// 경매글 제목
 	private String auctionContent;			// 경매글 내용
-	private LocalDateTime auctionRegDate;     		// 경매글 작성일
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-	private LocalDateTime auctionLimitDate; 		// 경매 기한
-	private String auctionBuyNow;				// 즉시 구매가
+	private Date auctionRegDate;     		// 경매글 작성일
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date auctionLimitDate; 			// 경매 기한
+	private String auctionBuyNow;			// 즉시 구매가
 	private String auctionMinPrice;			// 경매 시작가
 	private int auctionCondition;			// 경매 진행 상태
 	private int fileGroupCode; 				// 파일 그룹코드

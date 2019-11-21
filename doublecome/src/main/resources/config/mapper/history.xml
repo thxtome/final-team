@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.doublecome.repository.mapper.HistoryMapper">
-	<!-- 공통 페이징 header -->
-	<sql id="commonPagingHeader">
-		select r.* 
-		  from (
-	</sql>
-	
+<mapper namespace="kr.co.doublecome.repository.mapper.HistoryMapper">	
 	<!-- 공통 페이징 footer -->
 	<sql id="commonPagingFooter">
-		) r
-		limit #{pageLength} offset #{pageStart}
+		limit #{begin}, #{listSize}
 	</sql>
 	
 	<!-- 받은 후기 개수 -->
@@ -43,7 +36,7 @@
 	
 	<!-- 보낸 후기 목록 -->
 	<select id="selectSendReview" resultType="Review" parameterType="String">
-		select r.*, a.auction_title, u.user_nickname as sender_nickname
+		select r.*, a.auction_no, a.auction_title, u.user_nickname as sender_nickname
 		  from review r
 		 inner join deal d
 		    on r.deal_no = d.deal_no
@@ -52,6 +45,7 @@
 		 inner join user u 
 		    on u.user_email = r.review_sender
 		 where r.review_sender = #{userEmail}
+<!-- 		 <include refid="commonPagingFooter" /> -->
 	</select>
 	
 	<!-- 구매횟수, 판매횟수, 후기갯수 -->
@@ -72,7 +66,7 @@
 	<!-- 판매내역 -->
 	<select id="saleHistory" resultType="Auction" parameterType="String">
 		select distinct a.*, 
-		       max(b.bid_price) over(partition by b.auction_no) as bid_price,
+		       max(b.bid_price) over(partition by b.auction_no) as max_price,
 		       r.review_sender,
 		       u.user_nickname
 		  from auction a
@@ -92,14 +86,13 @@
 	<!-- 구매내역 -->
 	<select id="buyHistory" resultType="Auction" parameterType="String">
 		select distinct a.*, 
-			   max(b.bid_price) over(partition by b.auction_no) as max_price,
+			   max(b.bid_price) over(partition by b.auction_no) as bid_price,
 			   u.user_nickname
 		  from auction a
 		 inner join user u
 		    on a.user_email = u.user_email
 		  left join deal d
-		    on a.user_email = d.user_email_buyer 
-		   and a.auction_no = d.auction_no
+		    on a.auction_no = d.auction_no
 	      left join bid b
             on a.auction_no = b.auction_no
           left join review r
@@ -107,4 +100,28 @@
            and a.user_email = r.review_sender
 	   	 where d.user_email_buyer = #{userEmail}
 	</select>
+	
+	<!-- 후기 등록시 거래정보  -->
+	<select id="dealInfo" parameterType="int" resultType="Deal">
+		select *
+		  from deal
+		 where auction_no = #{auctionNo} 
+	</select>
+	
+	<!-- 후기등록 -->
+	<insert id="addReview" parameterType="Review" >
+		<selectKey order="AFTER">
+			update user set user_review_cnt = user_review_cnt + 1;
+		</selectKey>
+		insert into review (
+		review_title, review_content, deal_no, review_sender, review_receiver, review_score
+		) values (
+			#{reviewTitle},
+			#{reviewContent},
+			#{dealNo},
+			#{reviewSender},
+			#{reviewReceiver},
+			#{reviewScore}
+		)
+	</insert>
 </mapper>
