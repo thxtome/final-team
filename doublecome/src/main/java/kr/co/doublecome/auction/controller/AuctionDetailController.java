@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.doublecome.auction.service.AuctionDetailService;
+import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.UtilFile;
@@ -28,7 +29,9 @@ public class AuctionDetailController {
 		model.addAttribute("auction", service.auctiondetail(no));
 		model.addAttribute("user", service.userInfo(userEmail));
 		model.addAttribute("review", service.selectReceiveReview(userEmail));
-		model.addAttribute("inquiry", service.retrieveinquiry(no));
+		AjaxPage ap = service.retrieveinquiry(no);
+		model.addAttribute("inquiry", ap.getList());
+		model.addAttribute("pr", ap.getPr());
 		model.addAttribute("file", service.retrieveFile(no));
 	}
 	
