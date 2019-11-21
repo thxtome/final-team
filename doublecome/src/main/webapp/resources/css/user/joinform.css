@@ -170,8 +170,11 @@ body {
   transition: 0.3s ease;
 }
 .form-module .alert{
-	height: 15px;
+	color: #DB1D3B;
+    font-size: 12px;
+    height: 15px;
     width: 240px;
+    font-weight: bolder;
 }
 .form-module input:focus {
   border: 1px solid #33b5e5;

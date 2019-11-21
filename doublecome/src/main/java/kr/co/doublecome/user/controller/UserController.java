@@ -66,8 +66,14 @@ public class UserController {
 	public void userInfo() throws Exception{
 	}
 	@RequestMapping("/userInfoUpdate.do")
-	public void userInfoUpdate( String userEmail , Model model ) throws Exception{
-		model.addAttribute("user", service.selectUserInfoByName(userEmail));
+	public void userInfoUpdate(
+			@RequestParam(value="userEmail") String userEmail,
+			@RequestParam(value="userPass") String userPass,		
+			Model model  ) throws Exception{
+		User user = new User();
+		user.setUserEmail(userEmail);
+		user.setUserPass(userPass);
+		model.addAttribute("user", service.selectUserInfo(user));
 	}
 	
 	@RequestMapping("/userUpdate.do")

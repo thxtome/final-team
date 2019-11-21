@@ -140,3 +140,11 @@ $(".buyprice").html(numberWithCommas($(".buyprice").html()))
 $(".logout").click(() => {
 	swal();
 })
+
+pg.print($("#nav2"));
+pg.movePage($("#nav2"),(pageNo) =>{
+	console.log(pageNo)
+})
+
+
+

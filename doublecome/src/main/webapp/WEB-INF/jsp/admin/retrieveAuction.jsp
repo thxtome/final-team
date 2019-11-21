@@ -51,29 +51,23 @@
 							<td>카테고리</td>
 							<td colspan="3">
 								<div class="categoryBox">
+								<div>
+									<label for="categoryAll" id="categoryAllLabel">전체</label> <input type="checkbox"
+											id="categoryAll" value="">
+								</div>
+								<c:forEach var="category" items="${categories}" varStatus="st" begin="1">
 									<div>
-										<label for="category1">마취침</label> <input name="category" type="checkbox"
-											id="category1" value="1">
-									</div>
-									<div>
-										<label for="category2">메스</label> <input name="category" type="checkbox"
-											id="category2" value="2">
-									</div>
-									<div>
-										<label for="category3">니퍼</label> <input name="category" type="checkbox"
-											id="category3" value="3">
-									</div>
-									<div>
-										<label for="category4">몽키스페너</label> <input name="category" type="checkbox"
-											id="category4" value="4">
-									</div>
+										<label for="category${st.count}">${category.categoryName}</label> <input name="categories" type="checkbox"
+											id="category${st.count}" value="${category.categoryCode}">
+									</div>								
+								</c:forEach>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>마감날짜</td>
-							<td><input type="date" name="startDate" id=""> <span>~</span>
-								<input type="date" name="endDate" id=""></td>
+							<td><input type="date" name="startLimitDate" id=""> <span>~</span>
+								<input type="date" name="endLimitDate" id=""></td>
 						</tr>
 						<tfoot>
 							<tr>
@@ -88,14 +82,14 @@
 			<div class="dataFilters">
 				<div>
 					<ul>
-						<li>&#149;경매번호순</li>
-						<li>&#149;이메일순</li>
-						<li>&#149;높은 입찰가순</li>
-						<li>&#149;마감날짜순</li>
+						<li data-sort="auctionNo">&#149;경매번호순</li>
+						<li data-sort="userEmail">&#149;이메일순</li>
+						<li data-sort="bidPrice">&#149;높은 입찰가순</li>
+						<li data-sort="auctionLimitDate">&#149;마감날짜순</li>
 					</ul>
 				</div>
 				<div>
-					<select>
+					<select id="listSize">
 						<option value="10">10개씩 보기</option>
 						<option value="25">25개씩 보기</option>
 						<option value="50">50개씩 보기</option>
@@ -170,8 +164,8 @@
 					</tr>
 				</tbody>
 			</table>
+		<c:import url="/WEB-INF/jsp/include/pagination.jsp" />
 		</div>
-		<c:import url="/WEB-INF/jsp/include/addReportModal.jsp" />
 	</div>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
 	<script src="<c:url value="/resources/js/admin/retrieveAuction.js"/>"></script>

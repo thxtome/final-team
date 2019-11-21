@@ -59,6 +59,8 @@ function makeParams($form){
 
 	data["keyword"] = "";
 	
+	data["categories"] = [-1];
+	
 	$formData.each((index,ele)=>{
 		if(ele.value != ""){
 			data[ele.name] = ele.value;			
@@ -67,6 +69,7 @@ function makeParams($form){
 	
 	let names = new Array;
 	$formDataCheck.each((index,ele)=>{
+		if(ele.name == "") return true;
 		if(names.includes(ele.name)){
 			data[ele.name].push(ele.value) 
 		} else {
@@ -77,6 +80,7 @@ function makeParams($form){
 	
 	//리스트사이즈 유지
 	data.listSize = $("#listSize").val(); 
+	
 	console.log(data)
 	return data;
 }
@@ -96,9 +100,9 @@ function resetParams($form){
 	});
 	
 
-	$formDataCheck.each((index,ele)=>{
-		$(ele).attr("checked",false);
-	});
+//	$formDataCheck.each((index,ele)=>{
+//		$(ele).prop("checked",false);
+//	});
 }
 
 //페이지 이동
@@ -116,6 +120,7 @@ $("#listSize").on("change",()=>{
 
 //정렬 이벤트
 $(".dataFilters li").click((e)=>{
+	searchQuery.pageNo = 1;
 	searchQuery.sort = $(e.target).data("sort");
 	search(searchQuery);
 })

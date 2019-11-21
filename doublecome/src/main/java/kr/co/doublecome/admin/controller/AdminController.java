@@ -1,16 +1,17 @@
 package kr.co.doublecome.admin.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.admin.service.AdminService;
 import kr.co.doublecome.repository.vo.AjaxPage;
+import kr.co.doublecome.repository.vo.SearchAuction;
 import kr.co.doublecome.repository.vo.SearchUser;
 
 @Controller
@@ -34,13 +35,16 @@ public class AdminController {
 	public void retrieveUserStatistics() {}
 	
 	@RequestMapping("/retrieveReportedAuction.do")
-	public void retrieveReportedAuction() {}
+	public void retrieveReportedAuction() {
+	}
 	
 	@RequestMapping("/retrieveAuctionStatistics.do")
 	public void retrieveAuctionStatistics() {}
 	
 	@RequestMapping("/retrieveAuction.do")
-	public void retrieveAuction() {}
+	public void retrieveAuction(Model model) {
+		model.addAttribute("categories", service.retrieveCategories());		
+	}
 	
 	@RequestMapping("/retrieveDeal.do")
 	public void retrieveDeal() {}
@@ -57,6 +61,12 @@ public class AdminController {
 		return service.retrieveUserForAdmin(su);
 	}
 	
+	@RequestMapping("searchAuction.do")
+	@ResponseBody 
+	public AjaxPage searchUser(@RequestBody SearchAuction sa) {
+		return service.retrieveAuctionForAdmin(sa);
+	}
+	
 	@RequestMapping("/detailReport.do")
 	@ResponseBody 
 	public AjaxPage retrieveReport(String userEmail, SearchUser su) {
@@ -71,4 +81,6 @@ public class AdminController {
 	public void removeUser(@RequestBody List<String> userEmails) {
 		service.removeUser(userEmails);
 	}
+	
+	
 }
