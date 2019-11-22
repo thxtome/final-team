@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -109,7 +110,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 										<div class="row">
 											<div class="col-xs-12 pdct_inquiry_item">
 												<p class="inquiry_name col-xs-12">
-													<strong>${inq.userNickname}</strong> <span class="inquiry_minute">${inq.inquiryRegDate}</span>
+													<strong>${inq.userNickname}</strong> <span class="inquiry_minute"><fmt:formatDate value="${inq.inquiryRegDate}" pattern="yyyy-MM-dd HH:mm"/></span>
 												</p>
 												<div class="clearfix"></div>
 												<p>${inq.inquiryContent}</p>
@@ -134,7 +135,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 															<div class="row">
 																<div class="col-xs-12 pdct_inquiry_inner_item">
 																	<p class="inquiry_name col-xs-12">
-																		<i class="fab fa-replyd fa-lg"></i><strong> ${inq.userNickname}</strong> <span class="inquiry_minute">${inq.inquiryRegDate}</span>
+																		<i class="fab fa-replyd fa-lg"></i><strong> ${inq.userNickname}</strong> <span class="inquiry_minute"><fmt:formatDate value="${inq.inquiryRegDate}" pattern="yyyy-MM-dd HH:mm"/></span>
 																	</p>
 																	<div class="clearfix"></div>
 																	<p>${inq.inquiryContent}</p>
@@ -197,7 +198,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 									<div class="col-xs-8 text-center">
 										<p class="review_title review_pdct_title">${review.auctionTitle}</p>
 										<p class="review_title review_title">${review.reviewTitle}</p>
-										<p class="review_title review_regdate">${review.reviewRegDate}</p>
+										<p class="review_title review_regdate"><fmt:formatDate value="${review.reviewRegDate}" pattern="yyyy-MM-dd"/></p>
 									</div>
 									<div class="review_contents_writer col-xs-2">
 										<p class="review_writer">${review.senderNickname}</p>
@@ -216,7 +217,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 											<div class="col-xs-7 review_contents_title">
 												<p>
 													<span class="review_writer">${review.senderNickname}</span><span
-														class="review_contents_regdate">${review.reviewRegDate}</span>
+														class="review_contents_regdate"><fmt:formatDate value="${review.reviewRegDate}" pattern="yyyy-MM-dd"/></span>
 												</p>
 												<p>${review.reviewTitle}</p>
 											</div>

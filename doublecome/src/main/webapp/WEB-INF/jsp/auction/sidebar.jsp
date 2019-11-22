@@ -4,8 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +57,7 @@
 														<div class="middle">
 															<div class="inner">
 																<div class="counter-class"
-																	data-date="<fmt:formatDate value="${auction.auctionLimitDate}" pattern="yyyy-MM-dd"/>">
+																	data-date="<fmt:formatDate value="${auction.auctionLimitDate}" pattern="yyyy-MM-dd HH:mm:dd"/>">
 																	<div class="timer-font">
 																		<span class="counter-days"></span> 일
 																	</div>

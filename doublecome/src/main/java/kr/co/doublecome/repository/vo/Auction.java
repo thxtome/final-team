@@ -1,6 +1,5 @@
 package kr.co.doublecome.repository.vo;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;

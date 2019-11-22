@@ -1,6 +1,8 @@
 package kr.co.doublecome.repository.vo;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -12,7 +14,8 @@ public class Review {
 	private int reviewNo;						// 후기글 번호
 	private String reviewTitle;					// 후기글 제목
 	private String reviewContent;				// 후기글 내용
-	private LocalDateTime reviewRegDate;		// 후기글 작성일
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date reviewRegDate;		// 후기글 작성일
 	private int dealNo;							// 거래 번호
 	private String senderNickname;				// 후기글쓴이 닉네임
 	private String reviewSender;				// 후기글 작성한 사용자 이메일
