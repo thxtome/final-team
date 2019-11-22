@@ -62,14 +62,10 @@ public class AuctionDetailController {
 		return "redirect:/main.do";
 	}
 	
-//	@RequestMapping("/updateAuction.do")
-//	public void updateAuction(int no, Model model) {
-//		model.addAttribute("auction", service.auctiondetail(no));
-//	}
-	
 	@RequestMapping("/deleteAuction.do")
-	public void updateAuction(int no, Model model) {
+	public String updateAuction(int no, Model model) {
 		service.deleteAuction(no);
+		return "redirect:/main.do";
 	}
 	
 }

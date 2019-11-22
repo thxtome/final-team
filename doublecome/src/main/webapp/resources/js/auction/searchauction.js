@@ -104,7 +104,7 @@ function makeAuctionlist(data) {
 		}
 		$auctionField += `
 		<div class='col-md-4 p-2' >
-			<a class="auction_list" href="/doublecome/WEB-INF/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}">
+			<a class="auction_list" href="/doublecome/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}&pageNo=0>
 				<div class="card box-shadow">
 					<img class="card-img-top w-100"
 						src="/doublecome/resources/images/macbook.jpg"

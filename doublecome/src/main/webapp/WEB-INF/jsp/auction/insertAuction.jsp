@@ -83,11 +83,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 		<div class="hoverNotification">
 		<div>메인에 등록할 사진을 업로드 해주세요</div>
 	</div>
-	<form method="post" enctype="multipart/form-data"
-		action="<c:url value="/file/upload.do"/>">
-		<input type="file" name="attach" multiple="multiple" />
-		<button>업로드</button>
-	</form>
 	<script src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/js/datetimepicker/moment.js" />"></script>

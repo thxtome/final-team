@@ -21,7 +21,7 @@
             b.bid_cnt,
             b.max_price
 	 	 from auction a 
-	  	inner join(select auction_no,
+	  	 left outer join(select auction_no,
 	  					  IFNULL(max(bid_price) over(partition by auction_no),0) as max_price,
 					  	  count(bid_no) over(partition by auction_no) as bid_cnt
 					 from bid) b
@@ -30,17 +30,5 @@
 	  	<if test="categoryCode != 0">
 	  		and category_code = #{categoryCode}
 	  	</if>
-	  	<choose>
-			<when test="endPrice == 0 and startPrice != 2">
-				and max_price >= #{startPrice}
-			</when>
-			<when  test="endPrice == 0 and startPrice == 2">
-				and 20000 >= max_price
-			</when>	
-			<otherwise>
-				and max_price between ${startPrice} and #{endPrice}
-			</otherwise>			
-		</choose>
-		order by bid_cnt desc
 	</select>
 </mapper>
