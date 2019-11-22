@@ -84,6 +84,12 @@ public class AdminController {
 		service.removeUser(userEmails);
 	}
 	
+	@RequestMapping("/removeCategories.do")
+	@ResponseBody 
+	public void removeCategories(@RequestBody List<String> categoryCodes) {
+		service.removeCategories(categoryCodes);
+	}
+	
 	@RequestMapping("/retrieveCategories.do")
 	@ResponseBody 
 	public AjaxPage retrieveCategories(@RequestBody Search search) {

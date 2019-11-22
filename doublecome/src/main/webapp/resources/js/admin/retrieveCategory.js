@@ -18,7 +18,8 @@
 
   //등록버튼시 모달 띄우기
   $(".addCategoryBtn > button").click((e)=>{
-      $("#eventBtn").text("등록").attr("action","addCategory.do");
+      $("#eventBtn").text("등록");
+      $("#eventBtn").attr("action","addCategory.do")
       $(".adminModal").show();
   });
   
@@ -40,7 +41,7 @@
   }
 //모달 이벤트버튼 클릭시
   $(".adminModal").on("click","#eventBtn",()=>{
-	  console.log($("#eventbtn").attr("action"))
+	  eventCategory($("#eventBtn").attr("action"))
   })
   
   let contextPath = window.location.pathname.substr(0,window.location.pathname.indexOf("/",2));
@@ -106,7 +107,7 @@
       }
   })
   
-// 수정시 ajax
+// 등록 및 수정  ajax
   function eventCategory(url) {	  
 	  let data = makeParams($(".adminModal form"));
 		  
@@ -121,5 +122,34 @@
 			  }
 		  })
   }
+  
+//카테고리 삭제=============================================================================================================
+  $(".removeCategoriesBtn").click(()=>{
+	  removeCategories();
+  })
+
+  function removeCategories(){
+  	let data = {};
+  	let categoryCodes = new Array;
+  	$(".dataContent input[type=checkbox]:gt(0):checked").each((index,ele)=>{
+  		categoryCodes.push($(ele).val());
+  	});
+  	console.log(categoryCodes);
+	
+  	
+  	$.ajax({
+  		url:"removeCategories.do",
+  		type:"POST",
+  		data:JSON.stringify(categoryCodes),
+  		contentType:"application/json",
+  		success: ()=>{
+  			 search();
+			 modalClose();
+  		}
+  	});
+  } 
+  
+  
+  
   
   

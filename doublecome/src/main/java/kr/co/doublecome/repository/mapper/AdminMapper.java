@@ -18,4 +18,5 @@ public interface AdminMapper {
 	public List<Category> selectCategoriesForAdmin(Search search);
 	public void updateCategory(Category cat);
 	public void insertCategory(Category cat);
+	public void deleteCategory(List<String> categoryCodes);
 }

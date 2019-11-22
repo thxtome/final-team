@@ -53,7 +53,7 @@ function search(data){
 //검색 조건을 객체로 만드는 함수
 function makeParams($form){
 	let data = {};
-	let $formData = $form.find("input[type=text], input[type=date], input[type=radio]:checked, select");
+	let $formData = $form.find("input[type=text], input[type=date], input[type=hidden], input[type=radio]:checked, select");
 	let $formDataCheck = $form.find("input[type=checkbox]:checked");
 	
 

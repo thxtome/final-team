@@ -63,7 +63,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<tr><td style=text-align:center colspan='5'>검색결과가 없습니다.</td></tr>
+						<tr><td style=text-align:center colspan='5'>검색결과가 없습니다.</td>
 					</tr>
 				</tbody>
 			</table>

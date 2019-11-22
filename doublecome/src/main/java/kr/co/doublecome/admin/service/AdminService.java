@@ -17,4 +17,5 @@ public interface AdminService {
 	public List<Category> retrieveCategoryForAucion();
 	public void editCategory(Category cat);
 	public void addCategory(Category cat);
+	public void removeCategories(List<String> categoryCodes);
 }

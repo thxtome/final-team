@@ -52,6 +52,11 @@ public class AdminServiceImpl implements AdminService{
 		mapper.updateCategory(cat);
 	}
 
+	public void removeCategories(List<String> categoryCodes) {
+		mapper.deleteCategory(categoryCodes);
+	}
+
+
 	@Override
 	public void addCategory(Category cat) {
 		mapper.insertCategory(cat);		

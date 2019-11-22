@@ -244,6 +244,7 @@
 		 limit #{begin},#{listSize}
 	</select>
 	
+	<!-- 카테고리 수정-->	
 	<update id="updateCategory" parameterType="Category">
 		update category
 		   set category_name = #{categoryName},
@@ -252,8 +253,19 @@
 		where category_code = #{categoryCode}   	   
 	</update>
 	
+	<!-- 카테고리 등록-->	
 	<insert id="insertCategory" parameterType="Category">
 		insert into category(category_name, category_code, category_display
 		) values (#{categoryName}, #{categoryCode}, #{categoryDisplay})
 	</insert>
+	
+	<!-- 카테고리 삭제 -->	
+	<delete id="deleteCategory" parameterType="java.util.List" >
+		delete
+		  from category
+		 where category_code in 
+		 <foreach collection="list" item="code" open="(" close=")" separator=",">
+		 	#{code}
+		 </foreach>  
+	</delete>
 </mapper>
