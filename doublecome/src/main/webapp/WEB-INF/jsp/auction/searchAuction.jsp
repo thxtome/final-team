@@ -42,32 +42,32 @@
       <div class="checklist box-line accordion" id="price_filter">
           <div><h3>가격</h3></div>
           <ul>
-            <li><a class="price-filter cnkfilter" data-name="priceChoce" data-selected="" data-value="2" title="2만원 미만">2만원 미만</a></li>
-            <li><a class="price-filter cnkfilter" data-name="priceChoce" data-selected="" data-value="2~5" title="2만원 ~ 5만원">2만원 ~ 5만원</a></li>
-            <li><a class="price-filter cnkfilter" data-name="priceChoce" data-selected="" data-value="5~10" title="5만원 ~ 10만원">5만원 ~ 10만원</a></li>
-            <li><a class="price-filter cnkfilter" data-name="priceChoce" data-selected="" data-value="10~20" title="10만원 ~ 20만원">10만원 ~ 20만원</a></li>
-            <li><a class="price-filter cnkfilter" data-name="priceChoce" data-selected="" data-value="20" title="20만원 이상">20만원 이상</a></li>
+            <li><a class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="2~" title="2만원 미만">2만원 미만</a></li>
+            <li><a class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="2~5" title="2만원 ~ 5만원">2만원 ~ 5만원</a></li>
+            <li><a class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="5~10" title="5만원 ~ 10만원">5만원 ~ 10만원</a></li>
+            <li><a class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="10~20" title="10만원 ~ 20만원">10만원 ~ 20만원</a></li>
+            <li><a class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="20~" title="20만원 이상">20만원 이상</a></li>
             <li>
-              <input class="price-filter cnkfilter" data-name="priceChoce" data-value="" id="num1" data-selected="" type="text" numberOnly/> ~
-              <input class="price-filter cnkfilter" data-name="priceChoce" data-value="" id="num2" data-selected="" type="text" numberOnly/>
-              <a id="price_choice" class="price-filter" data-name="priceChoce" data-selected="" data-value="priceChoice"></a>
+              <input class="price-filter cnkfilter" data-name="priceChoice" data-value="" id="num1" data-selected="" type="text" numberOnly/> ~
+              <input class="price-filter cnkfilter" data-name="priceChoice" data-value="" id="num2" data-selected="" type="text" numberOnly/>
+              <a id="price_choice" class="price-filter" data-name="priceChoice" data-selected="" data-value="priceChoice"></a>
             </li>
           </ul>
       </div>
       <div class="checklist box-line accordion" id="date">
           <div><h3>시간</h3></div>
           <ul>
-            <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="1" title="1일 미만">1일 미만</a></li>
+            <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="1~" title="1일 미만">1일 미만</a></li>
+            <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="1~3" title="1일~3일">1일~3일 </a></li>
             <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="3~5" title="3일~5일">3일~5일</a></li>
-            <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="5" title="5일 이상">5일 이상</a></li>
           </ul>
       </div>
       <div class="checklist box-line accordion" id="bidcount">
           <div><h3>입찰</h3></div>
           <ul>
-            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="1건 미만" title="1건 미만">1건 미만</a></li>
-            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="5건 ~ 10건" title="5건 ~ 10건">5건 ~ 10건</a></li>
-            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="10건 이상" title="10건 이상">10건 이상</a></li>
+            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="1~" title="1건 미만">1건 이상</a></li>
+            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="5~10" title="5건 ~ 10건">5건 ~ 10건</a></li>
+            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="10~" title="10건 이상">10건 이상</a></li>
           </ul>
       </div>
     </div>

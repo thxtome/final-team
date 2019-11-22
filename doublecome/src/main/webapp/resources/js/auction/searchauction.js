@@ -1,81 +1,109 @@
 $(document).ready(e => {
-	
-// 카테고리별 보기 
-	$("a.category").unbind("click").click(e => {
-		// filterbar 필터 추가
-		selectCheck(e);
-		//ajax 처리
-		e.preventDefault();
-		let sendData = "{";
-		let json;
-		let filter = $(".options")
-		let ele = e.target;
-		let flag = true;
-		for (let option of filter){
-			if (flag == true) {
-				sendData = sendData + '"'+ $(option).data("name") + '"' + " : " + $(option).data("value")
-				flag = false;
-			} else {
-				sendData = sendData + "," + '"'+ $(option).data("name") + '"'+ " : " + $(option).data("value")				
-			}
-		}
-		sendData += "}";
-		let sadasd = JSON.stringify({categoryCode : 1})
-		console.log(sadasd)
-		console.log(sendData)
-		console.log($(ele).attr("href"))
-		let options = {
-			url : $(ele).attr("href"),
-			type : "POST",
-			contentType : "application/json",
-			data : sendData
-		}
-		$.ajax(options).done(data => {
-			$("#list_view").html(makeAuctionlist(data))
-			console.log(data)
-		})
-		.fail(() => {
-			 alert("ajax 처리 에러발생");
-		 });
-	})
 	$("#date li a").unbind("click").click(e=> {
 		selectCheck(e);
+		searchAjax(e);
 	})
 	// 날짜별로 검색
-	$("#price_filter li a").unbind("click").click(e => {
+	$("#price_filter li a, #price_choice").unbind("click").click(e => {
 		selectCheck(e);
+		searchAjax(e);
 	})
 	// 입찰순으로 보기
 	$("#bidcount li a").unbind("click").click(e => {
 		selectCheck(e);
-	})
-	$("#price_choice").unbind("click").click(e => {
-		selectCheck(e)
+		searchAjax(e);
 	})
 	$("#sort_list a").click(e => {
 		$("#sort_list span").removeClass("on")
 		$(e.target).find("span").addClass("on");
 	})
+// 카테고리별 보기 
+	$("a.category").unbind("click").click(e => {
+		selectCheck(e);
+		searchAjax(e);
+	})
 })
+//ajax 처리
+function searchAjax(e) {
+	e.preventDefault();
+	let sendData = "{";
+	let filter = $(".options")
+	let ele = e.target;
+	let flag = true;
+	let priceChoice = [];
+	let limits = [];
+	let bidCount = [];
+	
+	for (let option of filter){
+		if (flag == true) {
+			sendData = sendData + '"'+ $(option).data("name") + '"' + " : " + $(option).data("value")
+			flag = false;
+		} else if ($(option).data("name") == "priceChoice") {
+			let startPrice ="startPrice"
+			let endPrice = "endPrice"
+			priceChoice = $(option).data("value").split("\~");
+			if(priceChoice[1] == "") {
+				sendData += ","+ '"'+ startPrice+ '"' + " : " + priceChoice[0]
+			} else {
+				sendData += ","+ '"'+ startPrice + '"' + " : " + priceChoice[0]
+				+","+ '"'+ endPrice + '"' + " : " + priceChoice[1]				
+			}
+		} else if ($(option).data("name") == "limits") {
+			let startLimit ="startLimit"
+			let endLimit = "endLimit"
+			limits = $(option).data("value").split("\~");
+			if(limits[1] == "") {
+				sendData += ","+ '"'+ startLimit+ '"' + " : " + limits[0]
+			} else {
+				sendData += ","+ '"'+ startLimit+ '"' + " : " + limits[0]
+				+","+ '"'+ endLimit + '"' + " : " + limits[1]				
+			}
+		} else if ($(option).data("name") == "bidCount") {
+			let startBidCount ="startBidCount"
+			let endBidCount = "endBidCount"
+			bidCount = $(option).data("value").split("\~");
+			if(bidCount[1] == "") {
+				sendData += ","+ '"'+ startBidCount+ '"' + " : " + bidCount[0]
+			} else {
+				sendData += ","+ '"'+ startBidCount+ '"' + " : " + bidCount[0]
+				+","+ '"'+ endBidCount + '"' + " : " + bidCount[1]				
+			}
+		}  else	{
+			sendData = sendData + "," + '"'+ $(option).data("name") + '"'+ " : " + $(option).data("value")				
+		}
+	}
+	sendData += "}";
+	let options = {
+		url : $(ele).attr("href"),
+		type : "POST",
+		contentType : "application/json",
+		data : sendData
+	}
+	$.ajax(options).done(data => {
+		$("#list_view").html(makeAuctionlist(data))
+		console.log(data)
+	})
+	.fail(() => {
+		 alert("ajax 처리 에러발생");
+	 });
+}
 function makeAuctionlist(data) {
-	let $auctionField = $("<div class='col-md-4 p-2' ></div>");
+	let $auctionField ="";
 	if(data.length == 0) {
-		$auctionField = $("<div class='col-md-12'></div>")
-		return $auctionField.append(`
-			<div class="col-md-12">
+		return $auctionField = `
 				<div class="card-body" >
 					<h5 class="card-title m-0" style="text-shadow: 0px 0px 1px black;">
 					등록되어있는 경매가 존재하지 않습니다.</h5>
 				</div>
-			</div>
-		`)
+		`
 	}
 	$.each(data, (i, list) => {
 		let maxPrice = list.maxPrice;
 		if(list.maxPrice == null){
 			maxPrice == list.minprice
 		}
-		$auctionField.append(`
+		$auctionField += `
+		<div class='col-md-4 p-2' >
 			<a class="auction_list" href="/doublecome/WEB-INF/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}">
 				<div class="card box-shadow">
 					<img class="card-img-top w-100"
@@ -89,8 +117,10 @@ function makeAuctionlist(data) {
 					</div>
 				</div>
 			</a>
-		`)
+		</div>
+		`
 	})
+	console.log($auctionField)
 	return $auctionField
 }
 $(document).on("click",".options", e => {
@@ -177,8 +207,9 @@ function selectCheck(e) {
 			title = comma(uncomma(num1)) + "원 ~ " + comma(uncomma(num2)) +"원"
 			priceChoice = num1+"~"+num2
 		}
+		datavalue = num1 + "~" + num2
 		$("#selectbar").append(
-			`<a href="#" name="${priceChoice}" data-name="${auctionName} data-value="price" class="options selected">
+			`<a href="#" name="${priceChoice}" data-name="${auctionName} data-value="${datavalue}" class="options selected">
 			${title}
 				<span class="del"></span>
 			</a>
@@ -189,7 +220,6 @@ function selectCheck(e) {
 	$event.addClass("selected")		
 	$event.prev().addClass("selected")
 	$event.data("selected",true)
-	console.log(auctionName)
 	$("#selectbar").append(
 		`<a href="#" data-value="${datavalue}" data-name="${auctionName}" class="options selected ${clz}">
 		${title}

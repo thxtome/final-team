@@ -24,9 +24,13 @@ public class SearchAuction extends Search{
 	}
 	
 	private int categoryCode;
+	private int startLimit;
+	private int endLimit;
+	private int startBidCount;
+	private int endBidCount;
+	private int startPrice;
+	private int endPrice;
 	
-	private Integer startPrice;
-	private Integer endPrice;
 	private Integer[] categories;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
