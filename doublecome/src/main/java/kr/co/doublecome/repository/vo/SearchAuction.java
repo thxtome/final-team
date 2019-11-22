@@ -23,13 +23,13 @@ public class SearchAuction extends Search{
 		super(pageNo, listSize);
 	}
 	
-	private int categoryCode;
-	private int startLimit;
-	private int endLimit;
-	private int startBidCount;
-	private int endBidCount;
+	private Integer categoryCode;
+	private Integer startLimit;
+	private Integer startBidCount;
+	private Integer endBidCount;
 	private Integer startPrice;
 	private Integer endPrice;
+	private String sortList;
 	
 	private Integer[] categories;
 	

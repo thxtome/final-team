@@ -18,11 +18,11 @@
 			a.auction_min_price,
 			a.file_group_code,
 			a.user_email,
-            b.bid_cnt,
-            b.max_price
+            ifnull(b.bid_cnt,0)as bidCnt,
+            ifnull(b.max_price, a.auction_min_price) as maxPrice
 	 	 from auction a 
-	  	 left outer join(select auction_no,
-	  					  IFNULL(max(bid_price) over(partition by auction_no),0) as max_price,
+	  	 left join(select auction_no,
+	  					  max(bid_price) over(partition by auction_no) as max_price,
 					  	  count(bid_no) over(partition by auction_no) as bid_cnt
 					 from bid) b
 		   on a.auction_no = b.auction_no
@@ -30,5 +30,22 @@
 	  	<if test="categoryCode != 0">
 	  		and category_code = #{categoryCode}
 	  	</if>
+	  	<if test="startPrice != null">
+			and ifnull(max_price, a.auction_min_price) between #{startPrice} and #{endPrice} 			
+	  	</if>
+	  	<if test="startLimit != null">
+	  		and a.auction_limit_date <![CDATA[<=]]> DATE_SUB(NOW(), INTERVAL #{startLimit} DAY)
+	  	</if>
+	  	<if test="startBidCount != null">
+	  		and ifnull(b.bid_cnt,0) between #{startBidCount} and #{endBidCount}
+	  	</if>
+	  	<choose>
+		  	<when test="sortList != null">
+	  		order by #{sortList} desc
+		  	</when> 
+			<otherwise>
+				order by a.auction_reg_date desc
+			</otherwise>	  			
+	  	</choose>
 	</select>
 </mapper>

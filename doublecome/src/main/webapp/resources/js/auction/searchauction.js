@@ -1,25 +1,11 @@
 $(document).ready(e => {
-	$("#date li a").unbind("click").click(e=> {
-		selectCheck(e);
-		searchAjax(e);
-	})
-	// 날짜별로 검색
-	$("#price_filter li a, #price_choice").unbind("click").click(e => {
-		selectCheck(e);
-		searchAjax(e);
-	})
-	// 입찰순으로 보기
-	$("#bidcount li a").unbind("click").click(e => {
+	$("#price_filter li a, #price_choice, #bidcount li a, a.category, #date li a").unbind("click").click(e => {
 		selectCheck(e);
 		searchAjax(e);
 	})
 	$("#sort_list a").click(e => {
 		$("#sort_list span").removeClass("on")
 		$(e.target).find("span").addClass("on");
-	})
-// 카테고리별 보기 
-	$("a.category").unbind("click").click(e => {
-		selectCheck(e);
 		searchAjax(e);
 	})
 })
@@ -28,12 +14,11 @@ function searchAjax(e) {
 	e.preventDefault();
 	let sendData = "{";
 	let filter = $(".options")
+	
 	let ele = e.target;
 	let flag = true;
 	let priceChoice = [];
 	let limits = [];
-	let bidCount = [];
-	
 	for (let option of filter){
 		if (flag == true) {
 			sendData = sendData + '"'+ $(option).data("name") + '"' + " : " + $(option).data("value")
@@ -41,38 +26,32 @@ function searchAjax(e) {
 		} else if ($(option).data("name") == "priceChoice") {
 			let startPrice ="startPrice"
 			let endPrice = "endPrice"
-			priceChoice = $(option).data("value").split("\~");
-			if(priceChoice[1] == "") {
-				sendData += ","+ '"'+ startPrice+ '"' + " : " + priceChoice[0]
-			} else {
-				sendData += ","+ '"'+ startPrice + '"' + " : " + priceChoice[0]
-				+","+ '"'+ endPrice + '"' + " : " + priceChoice[1]				
-			}
+			priceChoice = $(option).data("value").split("-");
+			sendData += ","+ '"'+ startPrice + '"' + " : " + priceChoice[0]
+			+","+ '"'+ endPrice + '"' + " : " + priceChoice[1]				
 		} else if ($(option).data("name") == "limits") {
 			let startLimit ="startLimit"
-			let endLimit = "endLimit"
-			limits = $(option).data("value").split("\~");
-			if(limits[1] == "") {
-				sendData += ","+ '"'+ startLimit+ '"' + " : " + limits[0]
-			} else {
-				sendData += ","+ '"'+ startLimit+ '"' + " : " + limits[0]
-				+","+ '"'+ endLimit + '"' + " : " + limits[1]				
-			}
+			limit = $(option).data("value");
+			sendData += ","+ '"'+ startLimit+ '"' + " : " + limit
 		} else if ($(option).data("name") == "bidCount") {
 			let startBidCount ="startBidCount"
 			let endBidCount = "endBidCount"
-			bidCount = $(option).data("value").split("\~");
-			if(bidCount[1] == "") {
-				sendData += ","+ '"'+ startBidCount+ '"' + " : " + bidCount[0]
-			} else {
-				sendData += ","+ '"'+ startBidCount+ '"' + " : " + bidCount[0]
-				+","+ '"'+ endBidCount + '"' + " : " + bidCount[1]				
-			}
+			bidCount = $(option).data("value").split("-");
+			sendData += ","+ '"'+ startBidCount+ '"' + " : " + bidCount[0]
+			+","+ '"'+ endBidCount + '"' + " : " + bidCount[1]				
 		}  else	{
 			sendData = sendData + "," + '"'+ $(option).data("name") + '"'+ " : " + $(option).data("value")				
 		}
 	}
+	if ($(e.target).data("name") == "sorts" ){		
+		let sorts = $(".order");
+		for (let sort of sorts) {
+			if ($(sort).data("name") == "sorts")
+				sendData += +","+ '"'+ $(sort).data("name") + '"' + " : " + $(sort).data("value")	
+		}
+	}
 	sendData += "}";
+	console.log(sendData)
 	let options = {
 		url : $(ele).attr("href"),
 		type : "POST",
@@ -81,7 +60,6 @@ function searchAjax(e) {
 	}
 	$.ajax(options).done(data => {
 		$("#list_view").html(makeAuctionlist(data))
-		console.log(data)
 	})
 	.fail(() => {
 		 alert("ajax 처리 에러발생");
@@ -133,6 +111,7 @@ $(document).on("click",".options", e => {
 			return
 		}
 		$(e.target).parent().remove()
+		searchAjax(e);
 		for (let filter of arr) {
 		if ($(e.target).parent().data("value") == filter.dataset.value) {
 			$(filter).removeClass("selected");
@@ -147,6 +126,7 @@ $(document).on("click",".options", e => {
 		return
 	}
 	$(e.target).remove()		
+	searchAjax(e);
 	for (let filter of arr) {
 		if ($(e.target).data("value") == filter.dataset.value) {
 			$(filter).removeClass("selected");
@@ -188,7 +168,7 @@ function selectCheck(e) {
 	let title = e.target.title;
 	let auctionName = $event.data("name");
 	let datavalue = e.target.dataset.value;
-	let priceChoice = 0;
+	let priceChoice = "";
 	if($event.data("value") == "priceChoice") {
 		let num1 = parseInt($("#num1").val())
 		let num2 = parseInt($("#num2").val())
@@ -200,16 +180,15 @@ function selectCheck(e) {
 			})
 			return
 		}
-		if (num2 == "") {
-			title = comma(uncomma(num1)) + "원 ~ "
-			priceChoice = num1
+		if (($("#num2").val()) == "") {
+			title = comma(uncomma(num1)) + "원  ~"
+			num2 ="123123123"
 		} else {			
-			title = comma(uncomma(num1)) + "원 ~ " + comma(uncomma(num2)) +"원"
-			priceChoice = num1+"~"+num2
+			title = comma(uncomma(num1)) +" ~ "+ comma(uncomma(num2)) +"원"
 		}
-		datavalue = num1 + "~" + num2
+		priceChoice = num1 + "-" + num2
 		$("#selectbar").append(
-			`<a href="#" name="${priceChoice}" data-name="${auctionName} data-value="${datavalue}" class="options selected">
+			`<a href="/doublecome/auction/searchActionList.do" data-name="${auctionName}" data-value="${priceChoice}" class="options selected ">
 			${title}
 				<span class="del"></span>
 			</a>
@@ -221,7 +200,7 @@ function selectCheck(e) {
 	$event.prev().addClass("selected")
 	$event.data("selected",true)
 	$("#selectbar").append(
-		`<a href="#" data-value="${datavalue}" data-name="${auctionName}" class="options selected ${clz}">
+		`<a href="/doublecome/auction/searchActionList.do" data-value="${datavalue}" data-name="${auctionName}" class="options selected ${clz}">
 		${title}
 			<span class="del"></span>
 		</a>

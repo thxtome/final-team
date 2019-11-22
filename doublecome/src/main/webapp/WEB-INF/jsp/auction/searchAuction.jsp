@@ -42,32 +42,32 @@
       <div class="checklist box-line accordion" id="price_filter">
           <div><h3>가격</h3></div>
           <ul>
-            <li><a class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="2~" title="2만원 미만">2만원 미만</a></li>
-            <li><a class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="2~5" title="2만원 ~ 5만원">2만원 ~ 5만원</a></li>
-            <li><a class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="5~10" title="5만원 ~ 10만원">5만원 ~ 10만원</a></li>
-            <li><a class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="10~20" title="10만원 ~ 20만원">10만원 ~ 20만원</a></li>
-            <li><a class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="20~" title="20만원 이상">20만원 이상</a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="0-20000" title="2만원 미만">2만원 미만</a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="20000-50000" title="2만원 ~ 5만원">2만원 ~ 5만원</a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="50000-100000" title="5만원 ~ 10만원">5만원 ~ 10만원</a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="100000-200000" title="10만원 ~ 20만원">10만원 ~ 20만원</a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="price-filter cnkfilter" data-name="priceChoice" data-selected="" data-value="200000-123123111" title="20만원 이상">20만원 이상</a></li>
             <li>
               <input class="price-filter cnkfilter" data-name="priceChoice" data-value="" id="num1" data-selected="" type="text" numberOnly/> ~
               <input class="price-filter cnkfilter" data-name="priceChoice" data-value="" id="num2" data-selected="" type="text" numberOnly/>
-              <a id="price_choice" class="price-filter" data-name="priceChoice" data-selected="" data-value="priceChoice"></a>
+              <a href="<c:url value="/auction/searchActionList.do" />" id="price_choice" class="price-filter" data-name="priceChoice" data-selected="" data-value="priceChoice"></a>
             </li>
           </ul>
       </div>
       <div class="checklist box-line accordion" id="date">
           <div><h3>시간</h3></div>
           <ul>
-            <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="1~" title="1일 미만">1일 미만</a></li>
-            <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="1~3" title="1일~3일">1일~3일 </a></li>
-            <li><a class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="3~5" title="3일~5일">3일~5일</a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="1" title="오늘까지">오늘까지</a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="2" title="내일까지">내일까지 </a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="time-filter cnkfilter" data-name="limits" data-selected="" data-value="3" title="3일 이상" >3일 이상 </a></li>
           </ul>
       </div>
       <div class="checklist box-line accordion" id="bidcount">
           <div><h3>입찰</h3></div>
           <ul>
-            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="1~" title="1건 미만">1건 이상</a></li>
-            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="5~10" title="5건 ~ 10건">5건 ~ 10건</a></li>
-            <li><a class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="10~" title="10건 이상">10건 이상</a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="3-777777" title="3건이상">3건 이상</a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="5-777777" title="5건이상">5건 이상</a></li>
+            <li><a href="<c:url value="/auction/searchActionList.do" />" class="bid-filter cnkfilter" data-name="bidCount" data-selected="" data-value="10-777777" title="10건이상">10건 이상</a></li>
           </ul>
       </div>
     </div>
@@ -88,11 +88,10 @@
                 <h5 class="card-title m-0" style="	text-shadow: 0px 0px 1px black;">Best Auction</h5>
                	<div class="sort_area">
 		      		<ul class="sort_list" id="sort_list">
-						<li><a class="order" href="#" data-selected="" data-value="rel" title="랭킹순"><span></span>랭킹순</a></li>
-						<li><a class="order" href="#" data-selected="" data-value="price_asc" title="낮은 가격순"><span></span>낮은 가격순</a></li>
-						<li><a class="order" href="#" data-selected="" data-value="price_dsc" title="높은 가격순"><span></span>높은 가격순</a></li>
-						<li><a class="order" href="#" data-selected="" data-value="date" title="등록일순"><span></span>등록일순</a></li>
-						<li><a class="order" href="#" data-selected="" data-value="review" title="입찰 많은순"><span></span>입찰횟수순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="min_price" title="낮은 가격순"><span></span>낮은 가격순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="max_price" title="높은 가격순"><span></span>높은 가격순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="auction_leg_date" title="등록일순"><span></span>등록일순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="bid_count" title="입찰 많은순"><span></span>입찰횟수순</a></li>
 					</ul>
 					<span class="view_count">
 						<select id="view">

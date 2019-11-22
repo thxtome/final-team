@@ -36,6 +36,8 @@ public class AuctionController {
 	@ResponseBody
 	public List<Auction> auctionSearchList(@RequestBody SearchAuction search) {
 		System.out.println(search.getCategoryCode());
+		System.out.println(search.getStartPrice());
+		System.out.println(search.getEndPrice());
 		return service.auctionList(search);
 	}
 }
