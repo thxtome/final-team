@@ -81,7 +81,7 @@ public class UserController {
 		System.out.println("/updateUser.do");
 		user.setUserPass(encoder.encode(user.getUserPass()));
 		service.updateUser(user);
-		return "redirect:/main.do";
+		return "redirect:/main.do?userEmail=" + user.getUserEmail();
 	}
 	
 	@RequestMapping("/bidList.do")
