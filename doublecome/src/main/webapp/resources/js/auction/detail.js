@@ -143,9 +143,6 @@ $('.nav-item').click(function(e){
     $(".nav").children().removeClass("movenav")
     $('html').animate({scrollTop : offset}, 400);
 });
-$('.review_pdct_title').click(() => {
-	alert("aaa")
-})
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
