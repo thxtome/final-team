@@ -43,22 +43,24 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 		return hMapper.selectReceiveReview(userEmail);
 	}
 	
-	public AjaxPage retrieveinquiry(int no) {
+	public AjaxPage retrieveinquiry(int no, int pageNo) {
 		AjaxPage ap = new AjaxPage();
-		Search search = new Search();
+		if(pageNo == 0) {
+			pageNo = 1;
+		}
+		Search search = new Search(pageNo);
 		search.setKeyword(String.valueOf(no));	
 		List<Object> list = new ArrayList<Object>();
 		
-		for(Auction auction : mapper.retrieveinquiry(search)) {
-			list.add(auction);
+		for(Inquiry inquiry : mapper.retrieveinquiry(search)) {
+			list.add(inquiry);
 		}
 		int count = 0;
 		
 		if(!list.isEmpty()) {
-			Auction a = (Auction)list.get(0);
-			count = a.getAuctionCnt();
+			Inquiry a = (Inquiry)list.get(0);
+			count = a.getInquiryCnt();
 		}
-		
 		PageResult pr =  new PageResult(search.getPageNo(),count);
 		ap.setList(list);
 		ap.setPr(pr);
@@ -87,5 +89,9 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	
 	public List<UtilFile> retrieveFile(int no) {
 		return mapper.retrieveFile(no);
+	}
+	
+	public void deleteAuction(int no) {
+		mapper.deleteAuction(no);
 	}
 }

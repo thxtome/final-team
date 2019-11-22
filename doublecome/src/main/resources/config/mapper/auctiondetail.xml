@@ -14,15 +14,14 @@
 		where a.auction_no = #{auctionNo}
 	</select>
 	
-	<select id="retrieveinquiry" resultType="Auction" parameterType="Search">
-			select i.*, u.* , 
+	<select id="retrieveinquiry" resultType="Inquiry" parameterType="Search">
+			select i.*, u.user_nickname , 
             count(i.user_email) over() as inquiry_cnt
 			from inquiry i
 			inner join user u
 			on i.user_email = u.user_email
 			where auction_no = #{keyword}
 			order by IF(ISNULL(inquiry_parent), inquiry_no, inquiry_parent) desc
-			
 			limit #{begin},#{listSize}
 	</select>
 	
@@ -60,4 +59,11 @@
 		on f.file_group_code = a.file_group_code
 		where a.auction_no = #{auctionNo}
 	</select>
+	
+	<delete id="deleteAuction" parameterType="int">
+		delete
+		from auction
+		where auction_no = #{auctionNo}
+	</delete>
+	
 </mapper>

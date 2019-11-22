@@ -17,6 +17,23 @@ function swal() {
       })
 }
 
+$(".remove_btn").click(() => {
+    Swal.fire({
+        title: '게시글을 삭제하시겠습니까',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '확인',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.value) {
+            location.href="/doublecome/auction/deleteAuction.do?no=" + no
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        }
+      })
+})
+
 $('.sidebar, .nav').stick_in_parent("#wrapper");
 
 let galleryThumbs = new Swiper('.gallery-thumbs', {
@@ -141,9 +158,11 @@ $(".logout").click(() => {
 	swal();
 })
 
+
 pg.print($("#nav2"));
 pg.movePage($("#nav2"),(pageNo) =>{
-	console.log(pageNo)
+	let href = location.search.substr(1)
+	location.href = `?no=${no}&userEmail=${email}&pageNo=${pageNo}`
 })
 
 

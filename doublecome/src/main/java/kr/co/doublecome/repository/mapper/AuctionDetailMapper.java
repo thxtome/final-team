@@ -10,10 +10,11 @@ import kr.co.doublecome.repository.vo.UtilFile;
 public interface AuctionDetailMapper {
 	
 	Auction auctiondetail(int no);
-	List<Auction> retrieveinquiry(Search search);
+	List<Inquiry> retrieveinquiry(Search search);
 	void insertInquiry(Inquiry inquiry);
 	void addFile(UtilFile file);
 	int maxFileGroupCode();
 	void addAuction(Auction auction);
 	List<UtilFile> retrieveFile(int no);
+	void deleteAuction(int no);
 }

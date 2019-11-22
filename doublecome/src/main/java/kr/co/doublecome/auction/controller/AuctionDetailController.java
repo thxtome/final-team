@@ -25,11 +25,11 @@ public class AuctionDetailController {
 	private FileUploadService fileService;
 	
 	@RequestMapping("/detailAuction.do")
-	public void auctionDetail(int no, String userEmail, Model model) {
+	public void auctionDetail(int no, String userEmail, Model model, int pageNo ) {
 		model.addAttribute("auction", service.auctiondetail(no));
 		model.addAttribute("user", service.userInfo(userEmail));
 		model.addAttribute("review", service.selectReceiveReview(userEmail));
-		AjaxPage ap = service.retrieveinquiry(no);
+		AjaxPage ap = service.retrieveinquiry(no, pageNo);
 		model.addAttribute("inquiry", ap.getList());
 		model.addAttribute("pr", ap.getPr());
 		model.addAttribute("file", service.retrieveFile(no));
@@ -60,6 +60,16 @@ public class AuctionDetailController {
 		service.addAuction(auction);
 		
 		return "redirect:/main.do";
-
 	}
+	
+//	@RequestMapping("/updateAuction.do")
+//	public void updateAuction(int no, Model model) {
+//		model.addAttribute("auction", service.auctiondetail(no));
+//	}
+	
+	@RequestMapping("/deleteAuction.do")
+	public void updateAuction(int no, Model model) {
+		service.deleteAuction(no);
+	}
+	
 }

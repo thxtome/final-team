@@ -1,6 +1,7 @@
 package kr.co.doublecome.repository.vo;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -9,8 +10,10 @@ public class Inquiry {
 	private int inquiryNo;
 	private String inquiryContent;
 	private Integer inquiryParent;
-	private LocalDateTime inquiryRegDate;
+	private Date inquiryRegDate;
 	private int auctionNo;
 	private String userEmail;
+	private String userNickname;
+	private int inquiryCnt;
 	
 }

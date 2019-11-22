@@ -15,11 +15,12 @@ public interface AuctionDetailService {
 	Auction auctiondetail(int no);
 	History userInfo(String userEmail);
 	List<Review> selectReceiveReview(String userEmail);
-	AjaxPage retrieveinquiry(int no);
+	AjaxPage retrieveinquiry(int no,int pageNo);
 	void insertInquiry(Inquiry inquiry);
 	List<Category> categoryList();
 	void addFile(UtilFile file);
 	int maxFileGroupCode();
 	void addAuction(Auction auction);
 	List<UtilFile> retrieveFile(int no);
+	void deleteAuction(int no);
 }

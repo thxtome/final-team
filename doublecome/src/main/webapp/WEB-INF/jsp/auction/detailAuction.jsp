@@ -34,8 +34,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 			<sec:authentication property="principal.user" var="log"/>
 			<c:if test="${log.userEmail eq auction.userEmail}">
 				<div class="writer_btns">
-					<button class="remove_btn writer_btn">삭제</button>
-					<button class="edit_btn writer_btn">수정</button>
+						<button type="button" class="remove_btn writer_btn">삭제</button>
+<%-- 					<a href="updateAuction.do?no=${auction.auctionNo}"><button class="edit_btn writer_btn">수정</button></a> --%>
 				</div>
 			</c:if>
 			</sec:authorize>
@@ -104,8 +104,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 								</c:choose>
 								<c:forEach items="${inquiry}" var="inq">
 									<c:choose>
-									
-									<c:when test="${inq.inquiryParent eq '0'}">
+									<c:when test="${empty inq.inquiryParent}">
 									<div class="card-body">
 										<div class="row">
 											<div class="col-xs-12 pdct_inquiry_item">
@@ -252,6 +251,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 	<footer>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</footer>
+	<script>
+		let no = ${auction.auctionNo};
+		let email = '${auction.userEmail}';
+	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
@@ -259,6 +262,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 	<script src="<c:url value="/resources/js/auction/loopcounter.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/swiper.min.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/sticky.js" />"></script>
+	
 	<script src="<c:url value="/resources/js/auction/detail.js" />"></script>
 </body>
 
