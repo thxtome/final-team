@@ -62,21 +62,11 @@
 			$tr.append($(`<td>${auction.userEmail}</td>`));
 			$tr.append($(`<td>${auction.bidPrice}</td>`));
 			$tr.append($(`<td>${auction.categoryName}</td>`));
-			$tr.append($(`<td>${format(auction.auctionLimitDate)}</td>`));
+			$tr.append($(`<td>${format(auction.auctionLimitDate,"ymd")}</td>`));
 			$tbody.append($tr);
 		})
 			
 		$(".dataContent tbody").html($tbody.html())
 		
 		pg.print($(".adminContent"),result.pr);
-   }
-   
- //날짜변환========================================================================================================
-   function format(date){
-       var year = date.year;		//yyyy
-       var month = date.monthValue;		//MM
-       month = month >= 10 ? month : '0' + month;	//month 두자리로 저장
-       var day = date.dayOfMonth;			//dd
-       day = day >= 10 ? day : '0' + day;		//day 두자리로 저장
-       return  year + '-' + month + '-' + day;
    }

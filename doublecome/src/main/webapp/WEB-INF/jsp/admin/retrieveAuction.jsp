@@ -167,6 +167,7 @@
 		<c:import url="/WEB-INF/jsp/include/pagination.jsp" />
 		</div>
 	</div>
+	<script src="<c:url value="/resources/js/common/timeFormat.js"/>"></script>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
 	<script src="<c:url value="/resources/js/admin/retrieveAuction.js"/>"></script>
 

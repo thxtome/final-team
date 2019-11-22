@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.admin.service.AdminService;
 import kr.co.doublecome.repository.vo.AjaxPage;
+import kr.co.doublecome.repository.vo.Category;
+import kr.co.doublecome.repository.vo.Search;
 import kr.co.doublecome.repository.vo.SearchAuction;
 import kr.co.doublecome.repository.vo.SearchUser;
 
@@ -43,7 +45,7 @@ public class AdminController {
 	
 	@RequestMapping("/retrieveAuction.do")
 	public void retrieveAuction(Model model) {
-		model.addAttribute("categories", service.retrieveCategories());		
+		model.addAttribute("categories", service.retrieveCategoryForAucion());		
 	}
 	
 	@RequestMapping("/retrieveDeal.do")
@@ -82,5 +84,22 @@ public class AdminController {
 		service.removeUser(userEmails);
 	}
 	
+	@RequestMapping("/retrieveCategories.do")
+	@ResponseBody 
+	public AjaxPage retrieveCategories(@RequestBody Search search) {
+		return service.retrieveCategories(search);
+	}
+	
+	@RequestMapping("/editCategory.do")
+	@ResponseBody 
+	public void editCategories(@RequestBody Category cat) {
+		service.editCategory(cat);
+	}
+	
+	@RequestMapping("/addCategory.do")
+	@ResponseBody 
+	public void addCategories(@RequestBody Category cat) {
+		service.addCategory(cat);
+	}
 	
 }

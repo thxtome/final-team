@@ -218,5 +218,42 @@
   		 
   		 limit #{begin},#{listSize}
 	</select>
-
+	
+	<select id="selectCategoriesForAdmin" parameterType="Search" resultType="Category">
+		select c.*, 
+			   ifnull(a.category_deal_cnt,0) as category_deal_cnt,
+			   count(c.category_code) over() as category_cnt
+		  from category c
+		  left outer join (select count(*) over (partition by category_code) as category_deal_cnt,
+								  category_code
+						     from auction) a
+		    on  c.category_code = a.category_code
+         group by c.category_code    
+         
+         	 <choose>
+			<when test='sort == "categoryCode"'>
+				order by c.category_code		
+			</when>
+			<when test='sort == "categoryName"'>
+				order by c.category_name	
+			</when>
+			<when test='sort == "categoryDealCnt"'>
+				order by category_deal_cnt	desc
+			</when>
+		</choose>
+		 limit #{begin},#{listSize}
+	</select>
+	
+	<update id="updateCategory" parameterType="Category">
+		update category
+		   set category_name = #{categoryName},
+		       category_code = #{categoryCode},
+		   	   category_display = #{categoryDisplay}
+		where category_code = #{categoryCode}   	   
+	</update>
+	
+	<insert id="insertCategory" parameterType="Category">
+		insert into category(category_name, category_code, category_display
+		) values (#{categoryName}, #{categoryCode}, #{categoryDisplay})
+	</insert>
 </mapper>

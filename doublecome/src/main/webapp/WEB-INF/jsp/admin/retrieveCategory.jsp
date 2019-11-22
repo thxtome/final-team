@@ -31,68 +31,44 @@
 			<div>
 				<h2>카테고리 항목</h2>
 			</div>
-
-
+			
+			<div class="dataFilters">
+			<input type="button" class="removeCategoriesBtn" value="삭제 ">
+				<div>
+					<ul>
+						<li data-sort="categoryCode">&#149;순서순</li>
+						<li data-sort="categoryName">&#149;제목순</li>
+						<li data-sort="categoryDealCnt">&#149;높은 경매수순</li>
+					</ul>
+				</div>
+				<div>
+					<select id="listSize">
+						<option value="10">10개씩 보기</option>
+						<option value="25">25개씩 보기</option>
+						<option value="50">50개씩 보기</option>
+					</select> <span>총 개수 : </span> <span id="dataCount">10</span> <span>개</span>
+				</div>
+			</div>
 
 			<table class="dataContent">
 				<thead>
 					<tr>
-						<th>카테고리 순서</th>
+						<th><input type="checkbox"></th>
 						<th>카테고리 제목</th>
+						<th>카테고리 순서</th>
+						<th>노출 여부</th>
 						<th>경매 수</th>
-						<th>등록 날짜</th>
 						<th>비고</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>1</td>
-						<td>전자기기</td>
-						<td>13</td>
-						<td>2019-07-19</td>
-						<td>
-							<button class="editBtn">관리</button>
-						</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>생활용품</td>
-						<td>16</td>
-						<td>2019-08-11</td>
-						<td>
-							<button class="editBtn">관리</button>
-						</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>의류</td>
-						<td>152</td>
-						<td>2019-01-14</td>
-						<td>
-							<button class="editBtn">관리</button>
-						</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>식품</td>
-						<td>123</td>
-						<td>2019-02-13</td>
-						<td>
-							<button class="editBtn">관리</button>
-						</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>휴대기기</td>
-						<td>97</td>
-						<td>2019-03-29</td>
-						<td>
-							<button class="editBtn">관리</button>
-						</td>
+						<tr><td style=text-align:center colspan='5'>검색결과가 없습니다.</td></tr>
 					</tr>
 				</tbody>
 			</table>
-
+			<data id="searchForm" data-action="retrieveCategories.do">
+			<c:import url="/WEB-INF/jsp/include/pagination.jsp" />
 			<div class="addCategoryBtn">
 				<button>등록</button>
 			</div>
@@ -106,18 +82,26 @@
 				<div>
 					<h2>카테고리 관리</h2>
 					<hr style="width: 90%" />
+				<form>
 					<div>
-						<span>카테고리 순서</span> <input type="text">
+						<span>카테고리 제목</span> <input name="categoryName" type="text">
 					</div>
 
 					<div>
-						<span>카테고리 제목</span> <input type="text">
+						<span>카테고리 순서</span> <input name="categoryCode" type="text">
+					</div>
+					
+					<div>
+						<span>노출 여부</span> 
+						<input type="radio" value="1" id="showTrue" name="categoryDisplay"> <label for="showTrue">노출</label>
+						<input type="radio" value="2" id="showFalse" name="categoryDisplay"> <label for="showFalse">비노출</label>
 					</div>
 
 					<div>
-						<button id="eventBtn">수정</button>
-						<button id="cancelBtn">취소</button>
+						<button id="eventBtn" type="button">수정</button>
+						<button id="cancelBtn" type="button">취소</button>
 					</div>
+				</form>
 				</div>
 			</div>
 		</div>

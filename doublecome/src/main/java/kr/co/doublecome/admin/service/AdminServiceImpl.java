@@ -12,6 +12,7 @@ import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Category;
 import kr.co.doublecome.repository.vo.Report;
+import kr.co.doublecome.repository.vo.Search;
 import kr.co.doublecome.repository.vo.SearchAuction;
 import kr.co.doublecome.repository.vo.SearchUser;
 import kr.co.doublecome.repository.vo.User;
@@ -22,7 +23,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	AdminMapper mapper;
-	
+
 	@Autowired
 	AuctionMapper auctionMapper;
 	
@@ -45,7 +46,18 @@ public class AdminServiceImpl implements AdminService{
 		
 		return ap;
 	}
+
 	
+	public void editCategory(Category cat) {
+		mapper.updateCategory(cat);
+	}
+
+	@Override
+	public void addCategory(Category cat) {
+		mapper.insertCategory(cat);		
+	}
+
+
 	public AjaxPage retrieveReport(SearchUser su) {
 		
 		AjaxPage ap = new AjaxPage();
@@ -73,7 +85,30 @@ public class AdminServiceImpl implements AdminService{
 		mapper.deleteUser(userEmails);
 	}
 	
-	public List<Category> retrieveCategories(){
+	public AjaxPage retrieveCategories(Search search){
+		
+		AjaxPage ap = new AjaxPage();
+		List<Object> list = new ArrayList<Object>();
+		List<Category> clist =  mapper.selectCategoriesForAdmin(search);
+		
+		
+		for(Category cat : clist) {
+			list.add((Object)cat);
+		}
+		
+		int count = 0;
+		
+		if(!clist.isEmpty()) {
+			count = clist.get(0).getCategoryCnt();
+		}
+		
+		ap.setList(list);
+		ap.setPr(new PageResult(search.getPageNo(), count, search.getListSize(), 10));
+		
+		return ap;
+	}
+	
+	public List<Category> retrieveCategoryForAucion(){
 		return auctionMapper.categoryList();
 	}
 	

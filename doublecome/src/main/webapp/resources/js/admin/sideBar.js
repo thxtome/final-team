@@ -1,4 +1,4 @@
-let searchQuery;
+let searchQuery = {};
 
 $(".parentItem").click((e) => {
     let target = $(e.target).closest(".parentItem");
@@ -34,7 +34,6 @@ function search(data){
 	let url = $form.data("action");
 	
 	
-	
 	$.ajax({
 		url:url,
 		type:"POST",
@@ -54,8 +53,9 @@ function search(data){
 //검색 조건을 객체로 만드는 함수
 function makeParams($form){
 	let data = {};
-	let $formData = $form.find("input, select").not("input[type=checkbox]");
+	let $formData = $form.find("input[type=text], input[type=date], input[type=radio]:checked, select");
 	let $formDataCheck = $form.find("input[type=checkbox]:checked");
+	
 
 	data["keyword"] = "";
 	
@@ -77,6 +77,8 @@ function makeParams($form){
 			names.push(ele.name)
 		}
 	});
+	
+	
 	
 	//리스트사이즈 유지
 	data.listSize = $("#listSize").val(); 
