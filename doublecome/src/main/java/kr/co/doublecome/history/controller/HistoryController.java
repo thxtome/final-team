@@ -1,6 +1,7 @@
 package kr.co.doublecome.history.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.history.service.HistoryService;
+import kr.co.doublecome.repository.vo.InfinitePage;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.UtilFile;
 import kr.co.doublecome.util.file.FileUploadService;
@@ -23,13 +25,27 @@ public class HistoryController {
 	
 	@RequestMapping("/listHistory.do")
 	public void listHistory(Principal p, Model model) {
+//		System.out.println(userEmail);
 		String userEmail = p.getName();
-		System.out.println(userEmail);
+//		InfinitePage ip = new InfinitePage();
+//		ip.setBegin(0);
+//		ip.setUserEmail(userEmail);
 		model.addAttribute("receiveReview", service.receiveReviewList(userEmail));
-		model.addAttribute("sendReview", service.sendReviewList(userEmail));
+//		model.addAttribute("sendReview", service.sendReviewList(ip));
 		model.addAttribute("userHistory", service.receiveUserInfo(userEmail));
 		model.addAttribute("saleHistory", service.receiveSaleHistory(userEmail));
 		model.addAttribute("buyHistory", service.receiveBuyHistory(userEmail));
+	}
+	
+	@RequestMapping("/retrieveSendReview.do")
+	@ResponseBody
+	public List<Review> retrieveSendReview(InfinitePage ip, Principal p){
+		System.out.println("에이작스 도착");
+		System.out.println("ip");
+		ip.setUserEmail(p.getName());
+		System.out.println(service.sendReviewList(ip));
+		return service.sendReviewList(ip);
+		
 	}
 	
 	@RequestMapping("/addReview.do")

@@ -24,15 +24,18 @@
 			<div id="myDeal">MY거래</div>
 			<div id="purchaseDeal">
 				<div>구매내역</div>
-				<span>${userHistory.buyCnt}</span> <span>회</span>
+<%-- 				<span>${userHistory.buyCnt}</span> <span>회</span> --%>
+				<span>0</span> <span>회</span>
 			</div>
 			<div id="salesDeal">
 				<div>판매내역</div>
-				<span>${userHistory.sellCnt}</span> <span>회</span>
+<%-- 				<span>${userHistory.sellCnt}</span> <span>회</span> --%>
+				<span>0</span> <span>회</span>
 			</div>
 			<div id="reviewDeal">
 				<div>후기</div>
-				<span>${userHistory.userCnt}</span> <span>개</span>
+				<span>0</span> <span>개</span>
+<%-- 				<span>${userHistory.userCnt}</span> <span>개</span> --%>
 			</div>
 		</div>
 		<div>
@@ -85,7 +88,7 @@
 												<div>${s.score}점</div>
 												<a class="reportBtn"><strong>신고</strong></a>
 												<c:if test="${empty b.reviewSender}">
-													<a data-no="${b.auctionNo}" class="reviewBtn"><strong>후기등록</strong></a>
+													<a data-no="${b.auctionNo}" class="reviewBtn">후기등록</a>
 												</c:if> 
 											</div>
 										</li>
@@ -137,7 +140,7 @@
 												<div>${s.score}점</div>
 												<a class="reportBtn"><strong>신고</strong></a>
 												<c:if test="${empty s.reviewSender}">
-													<a data-no="${s.auctionNo}" class="reviewBtn"><strong>후기등록</strong></a>
+													<a data-no="${s.auctionNo}" class="reviewBtn">후기등록</a>
 												</c:if> 
 											</div>
 										</li>
@@ -158,13 +161,13 @@
 				</ul>
 				<c:choose>
 					<c:when test="${empty receiveReview}">
-						<div id="receiveReview">
+						<div class="receiveReview">
 							<div class="emptyBox">받은 후기가 없습니다.</div>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div id="receiveReview">
-							<div id="searchType">
+						<div class="receiveReview">
+							<div class="searchType">
 								<div>
 									<ul>
 										<li>•최신순</li>
@@ -208,15 +211,15 @@
 					</c:otherwise>
 				</c:choose>
 				
-				<c:choose>
-					<c:when test="${empty sendReview}">
-						<div id="sendReview">
-							<div class="emptyBox">받은 후기가 없습니다.</div>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div id="sendReview">
-							<div id="searchType">
+<%-- 				<c:choose> --%>
+<%-- 					<c:when test="${empty sendReview}"> --%>
+<!-- 						<div class="sendReview"> -->
+<!-- 							<div class="emptyBox">받은 후기가 없습니다.</div> -->
+<!-- 						</div> -->
+<%-- 					</c:when> --%>
+<%-- 					<c:otherwise> --%>
+						<div class="sendReview">
+							<div class="searchType">
 								<div>
 									<ul>
 										<li>•최신순</li>
@@ -225,44 +228,44 @@
 								</div>
 							</div>
 							<div id="reviewCon">
-								<c:forEach var="sList" items="${sendReview}">
+<%-- 								<c:forEach var="sList" items="${sendReview}"> --%>
 									<ul>
-										<li class="preView">
-											<div class="scoreArea">
-												<div class="score">${sList.reviewScore}</div>
-												<div class="scoreForm">점</div>
-											</div>
-											<div class="contentArea">
-												<div class="auctionTitle">${sList.auctionTitle}</div>
-												<div class="reviewTitle">${sList.reviewTitle}</div>
-												<div class="reviewDate">${sList.reviewRegDate}</div>
-											</div>
-											<div class="writerArea">
-												<a class="reviewer">${sList.senderNickname}</a>
-											</div>
-											<div class="editdel">
-												<a data-no="${sList.auctionNo}" class="editreview">수정</a> / <a class="delreview">삭제</a>
-											</div>
-										</li>
-										<li class="reviewDetail">
-											<div class="reviewContent">
-												<div class="profileDiv">
-													<img class="profileImg"
-														src="<c:url value="/resources/images/profileImg.png"/>" />
-												</div>
-												<div class="nicknameDiv">${sList.senderNickname}</div>
-												<div class="regdateDiv">${sList.reviewRegDate}</div>
-												<div class="onelineDiv">${sList.reviewTitle}</div>
-												<div class="reviewDiv">${sList.reviewContent}</div>
-											</div>
-										</li>
+<!-- 										<li class="preView"> -->
+<!-- 											<div class="scoreArea"> -->
+<%-- 												<div class="score">${sList.reviewScore}</div> --%>
+<!-- 												<div class="scoreForm">점</div> -->
+<!-- 											</div> -->
+<!-- 											<div class="contentArea"> -->
+<%-- 												<div class="auctionTitle">${sList.auctionTitle}</div> --%>
+<%-- 												<div class="reviewTitle">${sList.reviewTitle}</div> --%>
+<%-- 												<div class="reviewDate">${sList.reviewRegDate}</div> --%>
+<!-- 											</div> -->
+<!-- 											<div class="writerArea"> -->
+<%-- 												<a class="reviewer">${sList.senderNickname}</a> --%>
+<!-- 											</div> -->
+<!-- 											<div class="editdel"> -->
+<%-- 												<a data-no="${sList.auctionNo}" class="editreview">수정</a> / <a class="delreview">삭제</a> --%>
+<!-- 											</div> -->
+<!-- 										</li> -->
+<!-- 										<li class="reviewDetail"> -->
+<!-- 											<div class="reviewContent"> -->
+<!-- 												<div class="profileDiv"> -->
+<!-- 													<img class="profileImg" -->
+<%-- 														src="<c:url value="/resources/images/profileImg.png"/>" /> --%>
+<!-- 												</div> -->
+<%-- 												<div class="nicknameDiv">${sList.senderNickname}</div> --%>
+<%-- 												<div class="regdateDiv">${sList.reviewRegDate}</div> --%>
+<%-- 												<div class="onelineDiv">${sList.reviewTitle}</div> --%>
+<%-- 												<div class="reviewDiv">${sList.reviewContent}</div> --%>
+<!-- 											</div> -->
+<!-- 										</li> -->
 									</ul>
-								</c:forEach>
-							</div>
-							<button class="moreBtn" type="button">더 보기</button>
-						</div>
-					</c:otherwise>
-				</c:choose>
+<%-- 								</c:forEach> --%>
+<!-- 							</div> -->
+<!-- 							<button class="moreBtn" type="button">더 보기</button> -->
+<!-- 						</div> -->
+<%-- 					</c:otherwise> --%>
+<%-- 				</c:choose> --%>
 			</div>
 
 		</div>

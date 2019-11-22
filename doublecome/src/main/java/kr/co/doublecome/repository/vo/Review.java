@@ -18,5 +18,6 @@ public class Review {
 	private String reviewSender;				// 후기글 작성한 사용자 이메일
 	private String reviewReceiver;				// 후기글 받은 사용자 이메일
 	private int reviewScore;					// 평가 점수
-	private int fileGroupCode;
+	private int fileGroupCode;					// 저장된 파일 그룹코드
+	private int reviewCnt;						// 전체 리뷰 개수
 }

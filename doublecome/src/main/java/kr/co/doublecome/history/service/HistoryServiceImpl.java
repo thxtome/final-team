@@ -9,6 +9,7 @@ import kr.co.doublecome.repository.mapper.HistoryMapper;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.History;
+import kr.co.doublecome.repository.vo.InfinitePage;
 import kr.co.doublecome.repository.vo.Review;
 
 @Service("kr.co.doublecome.history.service.HistoryServiceImpl")
@@ -19,8 +20,8 @@ public class HistoryServiceImpl implements HistoryService{
 	public List<Review> receiveReviewList(String userEmail){
 		return mapper.selectReceiveReview(userEmail);
 	}
-	public List<Review> sendReviewList(String userEmail){
-		return mapper.selectSendReview(userEmail);
+	public List<Review> sendReviewList(InfinitePage ip){
+		return mapper.selectSendReview(ip);
 	}
 	public History receiveUserInfo(String userEmail) {
 		return mapper.userInfo(userEmail);

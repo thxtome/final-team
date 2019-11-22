@@ -35,8 +35,12 @@
 	</select>
 	
 	<!-- 보낸 후기 목록 -->
-	<select id="selectSendReview" resultType="Review" parameterType="String">
-		select r.*, a.auction_no, a.auction_title, u.user_nickname as sender_nickname
+	<select id="selectSendReview" resultType="Review" parameterType="InfinitePage">
+		select r.*, 
+			   a.auction_no, 
+			   a.auction_title, 
+			   u.user_nickname as sender_nickname,
+			   count(*) over() as reviewCnt
 		  from review r
 		 inner join deal d
 		    on r.deal_no = d.deal_no
@@ -45,7 +49,8 @@
 		 inner join user u 
 		    on u.user_email = r.review_sender
 		 where r.review_sender = #{userEmail}
-<!-- 		 <include refid="commonPagingFooter" /> -->
+		 order by r.review_no
+		 limit #{begin}, 5
 	</select>
 	
 	<!-- 구매횟수, 판매횟수, 후기갯수 -->
@@ -87,7 +92,8 @@
 	<select id="buyHistory" resultType="Auction" parameterType="String">
 		select distinct a.*, 
 			   max(b.bid_price) over(partition by b.auction_no) as bid_price,
-			   u.user_nickname
+			   u.user_nickname,
+			   r.review_sender
 		  from auction a
 		 inner join user u
 		    on a.user_email = u.user_email
@@ -97,7 +103,7 @@
             on a.auction_no = b.auction_no
           left join review r
             on d.deal_no = r.deal_no
-           and a.user_email = r.review_sender
+           and d.user_email_buyer = r.review_sender
 	   	 where d.user_email_buyer = #{userEmail}
 	</select>
 	
