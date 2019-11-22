@@ -28,8 +28,8 @@ public class SearchAuction extends Search{
 	private int endLimit;
 	private int startBidCount;
 	private int endBidCount;
-	private int startPrice;
-	private int endPrice;
+	private Integer startPrice;
+	private Integer endPrice;
 	
 	private Integer[] categories;
 	
