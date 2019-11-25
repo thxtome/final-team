@@ -30,11 +30,21 @@ public class HistoryController {
 //		InfinitePage ip = new InfinitePage();
 //		ip.setBegin(0);
 //		ip.setUserEmail(userEmail);
-		model.addAttribute("receiveReview", service.receiveReviewList(userEmail));
+//		model.addAttribute("receiveReview", service.receiveReviewList(userEmail));
 //		model.addAttribute("sendReview", service.sendReviewList(ip));
 		model.addAttribute("userHistory", service.receiveUserInfo(userEmail));
 		model.addAttribute("saleHistory", service.receiveSaleHistory(userEmail));
 		model.addAttribute("buyHistory", service.receiveBuyHistory(userEmail));
+	}
+	
+	@RequestMapping("/retrieveReceiveReview.do")
+	@ResponseBody
+	public List<Review> retrieveReceiveReview(InfinitePage ip, Principal p){
+		System.out.println("에이작스 도착");
+		System.out.println("ip");
+		ip.setUserEmail(p.getName());
+		System.out.println(service.receiveReviewList(ip));
+		return service.receiveReviewList(ip);
 	}
 	
 	@RequestMapping("/retrieveSendReview.do")
@@ -45,7 +55,6 @@ public class HistoryController {
 		ip.setUserEmail(p.getName());
 		System.out.println(service.sendReviewList(ip));
 		return service.sendReviewList(ip);
-		
 	}
 	
 	@RequestMapping("/addReview.do")

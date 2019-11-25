@@ -17,8 +17,8 @@ public class HistoryServiceImpl implements HistoryService{
 	@Autowired
 	private HistoryMapper mapper;
 	
-	public List<Review> receiveReviewList(String userEmail){
-		return mapper.selectReceiveReview(userEmail);
+	public List<Review> receiveReviewList(InfinitePage ip){
+		return mapper.selectReceiveReview(ip);
 	}
 	public List<Review> sendReviewList(InfinitePage ip){
 		return mapper.selectSendReview(ip);

@@ -11,7 +11,7 @@ import kr.co.doublecome.repository.vo.Review;
 public interface HistoryMapper {
 	public int receiveReviewCnt(String userEmail);					// 받은 후기 개수
 	public int sendReviewCnt(String userEmail);						// 보낸 후기 개수
-	public List<Review> selectReceiveReview(String userEmail);		// 받은 후기 목록
+	public List<Review> selectReceiveReview(InfinitePage ip);		// 받은 후기 목록
 	public List<Review> selectSendReview(InfinitePage ip);			// 보낸 후기 목록
 	public History userInfo(String userEmail);						// 구매/판매 횟수, 후기갯수
 	public List<Auction> saleHistory(String userEmail);				// 판매 내역 목록
