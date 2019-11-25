@@ -13,6 +13,7 @@ import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Category;
 import kr.co.doublecome.repository.vo.History;
+import kr.co.doublecome.repository.vo.InfinitePage;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
@@ -39,8 +40,8 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 		return hMapper.userInfo(userEmail);
 	}
 	
-	public List<Review> selectReceiveReview(String userEmail) {
-		return hMapper.selectReceiveReview(userEmail);
+	public List<Review> selectReceiveReview(InfinitePage infinitePage) {
+		return hMapper.selectReceiveReview(infinitePage);
 	}
 	
 	public AjaxPage retrieveinquiry(int no, int pageNo) {
