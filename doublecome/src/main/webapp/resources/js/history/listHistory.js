@@ -1,5 +1,6 @@
 /*
 	$.post({
+
 		url: "addReivew.do",
 		dataType: "json",
 		data: {
@@ -15,7 +16,19 @@
 	});
 	$("#writer", "#content").val("");
 */
-
+$(function (){
+reviewListAjax();
+function reviewListAjax(){
+	$.get({
+		url: "retrieveReceiveReview.do",
+		type: "GET",
+		data: {
+			begin: 0
+		},
+		dataType: "json",
+		success: result => makeReviewList(result, "receiveReview")
+	});
+};
 // 네비게이션바 클릭시 이동
 let $navBar = $("#navBar");
 let $left = $(".purchaseTabList").offset().left;
@@ -76,6 +89,7 @@ $(".salesTabList").click((e) => {
 });
 
 let begin = 0;
+let reviewCnt = 0;
 $(".reviewTabList").click((e) => {
 	reviewCnt = 0;
 	begin = 0;
@@ -112,7 +126,6 @@ $(".reviewTabList").click((e) => {
 	}
 });
 function makeReviewList(result, type){
-	console.log(result);
 	let html = ``;
 	if (type == "sendReview"){
 		if (result == null){
@@ -124,7 +137,6 @@ function makeReviewList(result, type){
 			$("#reviewCon > ul").html(html);
 		} else {
 			$.each(result, (i, r) => {
-				console.log(reviewCnt);
 				reviewCnt = r.reviewCnt;
 				html += `
 					<li class="preView">
@@ -175,7 +187,6 @@ function makeReviewList(result, type){
 			$("#reviewCon > ul").html(html);
 		} else {
 			$.each(result, (i, r) => {
-				console.log(reviewCnt);
 				reviewCnt = r.reviewCnt;
 				html += `
 					<li class="preView">
@@ -206,7 +217,7 @@ function makeReviewList(result, type){
 					`;
 			})
 			$("#reviewCon .moreRBtn").remove();
-			if (reviewCnt - (5 * (begin - 1)) > 5){
+			if (reviewCnt - begin - 1 > 5){
 				html += `
 					</div>
 					<button class="moreRBtn" type="button">더 보기</button>
@@ -247,7 +258,6 @@ $("body").on("click", ".moreRBtn", (e) => {
 let $addReviewModal = $("#addReviewModal");
 $("body").on("click", ".reviewBtn", (e) => {
 	$("#auctionTitle").html($(e.target).closest("ul").find(".listTitle").html());
-	console.log($(e.target).data("no"));
 	$("#auctionNo").val($(e.target).data("no"));
 	$(".regitbtn > button").html("등록");
 	$addReviewModal.css("display","block");
@@ -397,4 +407,5 @@ makeReviewList(receiveList);
 $("#toTheTop").click((e) => {
 	let htmlOffset = jQuery( 'html' ).offset();
     jQuery( 'html, body' ).animate( { scrollTop : htmlOffset.top }, 400 );
+});
 });
