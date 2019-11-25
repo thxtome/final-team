@@ -23,8 +23,8 @@
       	  destroy-method="close"
       	  p:driverClassName="${driver}"
       	  p:url="${url}"
-      	  p:username="bitfinalteam"
-      	  p:password="bitfinalteam!"/>
+      	  p:username="root"
+      	  p:password="tmdals2"/>
       
       
       <!-- db관련 경로를 지정해줌 -->

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.co.doublecome.auction.service.AuctionDetailService;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
+import kr.co.doublecome.repository.vo.InfinitePage;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.UtilFile;
 import kr.co.doublecome.util.file.FileUploadService;
@@ -25,10 +26,10 @@ public class AuctionDetailController {
 	private FileUploadService fileService;
 	
 	@RequestMapping("/detailAuction.do")
-	public void auctionDetail(int no, String userEmail, Model model, int pageNo ) {
+	public void auctionDetail(int no, String userEmail, Model model, int pageNo, InfinitePage infinitePage ) {
 		model.addAttribute("auction", service.auctiondetail(no));
 		model.addAttribute("user", service.userInfo(userEmail));
-		model.addAttribute("review", service.selectReceiveReview(userEmail));
+		model.addAttribute("review", service.selectReceiveReview(infinitePage));
 		AjaxPage ap = service.retrieveinquiry(no, pageNo);
 		model.addAttribute("inquiry", ap.getList());
 		model.addAttribute("pr", ap.getPr());
