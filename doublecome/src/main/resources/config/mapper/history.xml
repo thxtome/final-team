@@ -54,7 +54,17 @@
 		 inner join user u 
 		    on u.user_email = r.review_sender
 		 where r.review_sender = #{userEmail}
-		 order by r.review_no
+	 		<choose>
+	 			<when test="search = 'grade'">
+					 order by r.review_score desc, r.review_reg_date
+	 			</when>
+	 			<when test="search = 'recenccy'">
+				 	 order by r.review_reg_date desc
+	 			</when>
+	 			<when test="search = null">
+				 	 order by r.review_reg_date desc
+	 			</when>
+	 		</choose>
 		 limit #{begin}, 5
 	</select>
 	
@@ -120,7 +130,7 @@
 	</select>
 	
 	<!-- 후기등록 -->
-	<insert id="addReview" parameterType="Review" >
+	<insert id="insertReview" parameterType="Review" >
 		<selectKey order="AFTER">
 			update user set user_review_cnt = user_review_cnt + 1;
 		</selectKey>
@@ -135,4 +145,10 @@
 			#{reviewScore}
 		)
 	</insert>
+	
+	<!-- 후기삭제 -->
+	<delete id="deleteReview" parameterType="Review">
+		delete from review
+		 where review_no = #{reviewNo}
+	</delete>
 </mapper>

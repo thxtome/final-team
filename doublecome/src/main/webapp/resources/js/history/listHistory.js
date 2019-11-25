@@ -16,19 +16,9 @@
 	});
 	$("#writer", "#content").val("");
 */
+let begin = 0;
+let reviewCnt = 0;
 $(function (){
-reviewListAjax();
-function reviewListAjax(){
-	$.get({
-		url: "retrieveReceiveReview.do",
-		type: "GET",
-		data: {
-			begin: 0
-		},
-		dataType: "json",
-		success: result => makeReviewList(result, "receiveReview")
-	});
-};
 // 네비게이션바 클릭시 이동
 let $navBar = $("#navBar");
 let $left = $(".purchaseTabList").offset().left;
@@ -78,7 +68,7 @@ $(window).scroll(function () {
     };
 });
 
-//  각 구매내역, 판매내역, 후기 탭 클릭시 색상변화 모듈화하기(e.target문제 해결)
+//  각 구매내역, 판매내역, 후기 탭 클릭시 색상변화 모듈화하기
 $(".purchaseTabList").click((e) => {
 	$(".purchaseTabList").removeClass("tabChoice");
 	$(e.target).addClass("tabChoice");
@@ -87,50 +77,51 @@ $(".salesTabList").click((e) => {
 	$(".salesTabList").removeClass("tabChoice");
 	$(e.target).addClass("tabChoice");
 });
+function reviewListAjax(target, begin, search){
+	console.log(target.data("name"));
+	let $dataName = target.data("name");
+		$.get({
+			url: `retrieve${$dataName}.do`,
+			data: {
+				begin,
+				search
+			},
+			dataType: "json",
+			success: result => makeReviewList(result, $dataName)
+		});
+	$(".SendReview").css("display", "none");
+	$(".ReceiveReview").css("display", "none");
+	$("." + $dataName).css("display", "block");
+}
 
-let begin = 0;
-let reviewCnt = 0;
+// 처음 로딩시 받은후기 목록
+reviewListAjax($(".ReceiveReview"), 0);
+
+// 후기 목록 ajax
 $(".reviewTabList").click((e) => {
 	reviewCnt = 0;
 	begin = 0;
 	$("#reviewCon > ul").html("");
 	$(".reviewTabList").removeClass("tabChoice");
 	$(e.target).addClass("tabChoice");
-	let $dataName = $(e.target).data("name"); 
-	if ($dataName == "receiveReview"){
-		$.get({
-			url: "retrieveReceiveReview.do",
-			type: "GET",
-			data: {
-				begin
-			},
-			dataType: "json",
-			success: result => makeReviewList(result, $dataName)
-		});
-		
-		$(".sendReview").css("display", "none");
-		$("." + $dataName).css("display", "block");
-	} else {
-		$.get({
-			url: "retrieveSendReview.do",
-			type: "GET",
-			data: {
-				begin
-			},
-			dataType: "json",
-			success: result => makeReviewList(result, $dataName)
-		});
-		
-		$(".receiveReview").css("display", "none");
-		$("." + $dataName).css("display", "block");
-	}
+	reviewListAjax($(e.target), begin);
 });
+
+$("body").on("click", ".searchTypeTab", (e) => {
+	$(".searchTypeTab").removeClass("searchTypeChoice");
+	$(e.target).addClass("searchTypeChoice");
+	begin = 0;
+	let $eTarget = $(e.target).closest(".searchFind");
+	reviewListAjax($eTarget, begin, $(e.target).data("search"));
+});
+
+// 후기 목록 출력
 function makeReviewList(result, type){
 	let html = ``;
-	if (type == "sendReview"){
+	if (type == "SendReview"){
 		if (result == null){
 			html = `
-				<div class="sendReview">
+				<div class="SendReview">
 					<div class="emptyBox">보낸 후기가 없습니다.</div>
 				</div>
 			`;
@@ -140,29 +131,33 @@ function makeReviewList(result, type){
 				reviewCnt = r.reviewCnt;
 				html += `
 					<li class="preView">
-					<div class="scoreArea">
-					<div class="score">${r.reviewScore}</div>
-					<div class="scoreForm">점</div>
-					</div>
-					<div class="contentArea">
-					<div class="auctionTitle">${r.auctionTitle}</div>
-					<div class="reviewTitle">${r.reviewTitle}</div>
-					<div class="reviewDate">${r.reviewRegDate}</div>
-					</div>
-					<div class="writerArea noBtn">
-					<a class="reviewer">${r.senderNickname}</a>
-					</div>
+						<div class="scoreArea">
+							<div class="score">${r.reviewScore}</div>
+							<div class="scoreForm">점</div>
+						</div>
+						<div class="contentArea">
+							<div class="auctionTitle">${r.auctionTitle}</div>
+							<div class="reviewTitle">${r.reviewTitle}</div>
+							<div class="reviewDate">${format(r.reviewRegDate,"ymd")}</div>
+						</div>
+						<div class="writerArea">
+							<a class="reviewer">${r.senderNickname}</a>
+						</div>
+						<div class="editdel">
+							<a data-no="${r.auctionNo}" class="editreview">수정</a> / 
+							<a href="removeReview.do?reviewNo=${r.reviewNo}" class="delreview">삭제</a>
+						</div>
 					</li>
 					<li class="reviewDetail">
-					<div class="reviewContent">
-					<div class="profileDiv">
-					<img class="profileImg" src="/doublecome/resources/images/profileImg.png" />
-					</div>
-					<div class="nicknameDiv">${r.senderNickname}</div>
-					<div class="regdateDiv">${r.reviewRegDate}</div>
-					<div class="onelineDiv">${r.reviewTitle}</div>
-					<div class="reviewDiv">${r.reviewContent}</div>
-					</div>
+						<div class="reviewContent">
+							<div class="profileDiv">
+								<img class="profileImg" src="/doublecome/resources/images/profileImg.png" />
+							</div>
+							<div class="nicknameDiv">${r.senderNickname}</div>
+							<div class="regdateDiv">${format(r.reviewRegDate,"ymd")}</div>
+							<div class="onelineDiv">${r.reviewTitle}</div>
+							<div class="reviewDiv">${r.reviewContent}</div>
+						</div>
 					</li>
 					`;
 			})
@@ -170,7 +165,8 @@ function makeReviewList(result, type){
 			if (reviewCnt - (5* (begin - 1)) > 5){
 				html += `
 					</div>
-					<button class="moreSBtn" type="button">더 보기</button>
+					<button data-name="SendReview" class="moreSBtn" type="button">
+					더 보기</button>
 					</div>
 					`;
 			}
@@ -180,13 +176,14 @@ function makeReviewList(result, type){
 	} else {
 		if (result == null){
 			html = `
-				<div class="sendReview">
+				<div class="ReceiveReview">
 				<div class="emptyBox">받은 후기가 없습니다.</div>
 				</div>
 				`;
 			$("#reviewCon > ul").html(html);
 		} else {
 			$.each(result, (i, r) => {
+				console.log(result);
 				reviewCnt = r.reviewCnt;
 				html += `
 					<li class="preView">
@@ -197,7 +194,7 @@ function makeReviewList(result, type){
 					<div class="contentArea">
 					<div class="auctionTitle">${r.auctionTitle}</div>
 					<div class="reviewTitle">${r.reviewTitle}</div>
-					<div class="reviewDate">${r.reviewRegDate}</div>
+					<div class="reviewDate">${format(r.reviewRegDate,"ymd")}</div>
 					</div>
 					<div class="writerArea noBtn">
 					<a class="reviewer">${r.senderNickname}</a>
@@ -209,7 +206,7 @@ function makeReviewList(result, type){
 					<img class="profileImg" src="/doublecome/resources/images/profileImg.png" />
 					</div>
 					<div class="nicknameDiv">${r.senderNickname}</div>
-					<div class="regdateDiv">${r.reviewRegDate}</div>
+					<div class="regdateDiv">${format(r.reviewRegDate,"ymd")}</div>
 					<div class="onelineDiv">${r.reviewTitle}</div>
 					<div class="reviewDiv">${r.reviewContent}</div>
 					</div>
@@ -220,7 +217,8 @@ function makeReviewList(result, type){
 			if (reviewCnt - begin - 1 > 5){
 				html += `
 					</div>
-					<button class="moreRBtn" type="button">더 보기</button>
+					<button data-name="ReceiveReview" class="moreRBtn" type="button">
+					더 보기</button>
 					</div>
 					`;
 			}
@@ -230,30 +228,54 @@ function makeReviewList(result, type){
 		
 	}
 }
-
 $("body").on("click", ".moreSBtn", (e) => {
 	$.get({
 		url: "retrieveSendReview.do",
-		type: "GET",
 		data: {
 			begin
 		},
 		dataType: "json",
-		success: result => makeReviewList(result, "sendReview")
+		success: result => makeReviewList(result, $(e.target).data("name"))
 	});
 });
 
 $("body").on("click", ".moreRBtn", (e) => {
+	console.log(begin);
 	$.get({
 		url: "retrieveReceiveReview.do",
-		type: "GET",
 		data: {
 			begin
 		},
 		dataType: "json",
-		success: result => makeReviewList(result, "receiveReview")
+		success: result => makeReviewList(result, $(e.target).data("name"))
 	});
 });
+
+// 후기 삭제 ajax
+$("body").on("click", ".delreview", (e) => {
+	success("삭제");
+//	console.log($(e.target).data("reviewno"));
+//	
+//	$.get({
+//		url: "removeReview.do",
+//		data : {
+//			reviewNo: $(e.target).data("reviewno")
+//		},
+//		dataType: "json",
+//		success: () => {
+//			reviewListAjax($(".SendReview"), begin);
+//		}
+//	});
+});
+function success(msg){
+	Swal.fire({
+		title: `후기글 ${msg}`,
+		text: `${msg}되었습니다.`,
+		type: 'success',
+		confirmButtonColor: '#3085d6',
+		confirmButtonText: '확인'
+	});
+};
 
 let $addReviewModal = $("#addReviewModal");
 $("body").on("click", ".reviewBtn", (e) => {
@@ -349,8 +371,9 @@ function sendFile(file, editor) {
 //}
 
 // 후기제목 클릭시 후기상세글 노출
-$("body").on("click" ,".preView", (e) => {
-	$reDetail = $(e.target).closest("li").next();
+$("body").on("click" ,".reviewTitle", (e) => {
+	$reDetail = $(e.target).closest(".preView").next();
+//	$reDetail = $(e.target).closest("li").next();
 	if ($reDetail.css("display") == "none"){
 		$reDetail.css("display", "inline-block");
 	} else {
@@ -358,51 +381,6 @@ $("body").on("click" ,".preView", (e) => {
 	}
 });
 
-//// 후기 경매글제목 클릭시 해당 경매글로 이동
-//$("body").on("click" ,".auctionTitle", (e) => {
-//	alert("이동");
-//});
-/*
-// 후기 출력
-function makeReviewList(list){
-	let $ul = $("<ul></ul>");
-	$.each(list, (i, c) => {
-		$ul.append(`
-				<li class="preView">
-				<div class="scoreAsrea">
-				<div class="score"></div>
-				<div class="scoreForm">점</div>
-				</div>
-				<div class="contentArea">
-				<div class="auctionTitle">${c.auctionTitle}</div>
-				<div class="reviewTitle">${c.reviewTitle}</div>
-				<div class="reviewDate">${c.reviewRegDate}</div>
-				</div>
-				<div class="writerArea">
-				<a class="reviewer">${c.reviewSender}</a>
-				</div>
-				<div class="editdel">
-				<a href="editReview.do" class="editreview">수정</a> / <a class="delreview">삭제</a>
-				</div>
-				</li>
-				<li class="reviewDetail">
-				<div class="reviewContent">
-				<div class="profileDiv">
-				<img class="profileImg"
-				src="<c:url value="/resources/images/profileImg.png"/>" />
-				</div>
-				<div class="nicknameDiv">${c.reivewSender}</div>
-				<div class="regdateDiv">${c.reviewRegDate}</div>
-				<div class="onelineDiv">${c.reviewTitle}</div>
-				<div class="reviewDiv">${c.reviewContent}</div>
-				</div>
-				</li>
-		`);
-	});
-	$("reviewCon").html($ul);
-};
-makeReviewList(receiveList);
-*/
 // 페이지 상단으로 이동
 $("#toTheTop").click((e) => {
 	let htmlOffset = jQuery( 'html' ).offset();

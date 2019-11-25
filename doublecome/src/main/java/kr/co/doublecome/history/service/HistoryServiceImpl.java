@@ -32,7 +32,7 @@ public class HistoryServiceImpl implements HistoryService{
 	public List<Auction> receiveBuyHistory(String userEmail){
 		return mapper.buyHistory(userEmail);
 	}
-	public void addReview(Review review) {
+	public void insertReview(Review review) {
 		Deal deal = mapper.dealInfo(review.getAuctionNo());
 		review.setDealNo(deal.getDealNo());
 		if (deal.getUserEmailBuyer().equals(review.getReviewSender())) {
@@ -40,6 +40,9 @@ public class HistoryServiceImpl implements HistoryService{
 		} else {
 			review.setReviewReceiver(deal.getUserEmailBuyer());
 		}
-		mapper.addReview(review);
+		mapper.insertReview(review);
+	}
+	public void deleteReview(Review review) {
+		mapper.deleteReview(review);
 	}
 }

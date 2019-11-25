@@ -23,51 +23,51 @@ public class HistoryController {
 	@Autowired
 	private FileUploadService fileService;
 	
+	// history 처음 로딩시 구매/판매 내역, 후기 목록
 	@RequestMapping("/listHistory.do")
 	public void listHistory(Principal p, Model model) {
-//		System.out.println(userEmail);
 		String userEmail = p.getName();
-//		InfinitePage ip = new InfinitePage();
-//		ip.setBegin(0);
-//		ip.setUserEmail(userEmail);
-//		model.addAttribute("receiveReview", service.receiveReviewList(userEmail));
-//		model.addAttribute("sendReview", service.sendReviewList(ip));
 		model.addAttribute("userHistory", service.receiveUserInfo(userEmail));
 		model.addAttribute("saleHistory", service.receiveSaleHistory(userEmail));
 		model.addAttribute("buyHistory", service.receiveBuyHistory(userEmail));
 	}
 	
+	// 받은 후기 ajax
 	@RequestMapping("/retrieveReceiveReview.do")
 	@ResponseBody
 	public List<Review> retrieveReceiveReview(InfinitePage ip, Principal p){
-		System.out.println("에이작스 도착");
-		System.out.println("ip");
 		ip.setUserEmail(p.getName());
-		System.out.println(service.receiveReviewList(ip));
 		return service.receiveReviewList(ip);
 	}
 	
+	// 보낸후기 ajax
 	@RequestMapping("/retrieveSendReview.do")
 	@ResponseBody
 	public List<Review> retrieveSendReview(InfinitePage ip, Principal p){
-		System.out.println("에이작스 도착");
-		System.out.println("ip");
 		ip.setUserEmail(p.getName());
-		System.out.println(service.sendReviewList(ip));
+		System.out.println(ip.getSearch());
 		return service.sendReviewList(ip);
 	}
 	
+	// 후기등록
 	@RequestMapping("/addReview.do")
 	public String addReview(Principal p, Review review) {
 		review.setReviewSender(p.getName());
-		System.out.println(review);
-		service.addReview(review);
+		service.insertReview(review);
 		
 		return "redirect:listHistory.do";
 	}
 	
+	// 후기 수정
 	@RequestMapping("/editReview.do")
 	public void editReview() {}
+	
+	// 후기삭제
+	@RequestMapping("/removeReview.do")
+	public String removeReview(Review review) {
+		service.deleteReview(review);
+		return "redirect:listHistory.do";
+	}
 	
 	@RequestMapping("/fileUpload.do")
 	@ResponseBody

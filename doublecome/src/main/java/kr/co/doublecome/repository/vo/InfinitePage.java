@@ -6,5 +6,5 @@ import lombok.Data;
 public class InfinitePage {
 	private String userEmail;
 	private int begin;
-	
+	private String search;
 }

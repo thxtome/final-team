@@ -13,5 +13,6 @@ public interface HistoryService {
 	public History receiveUserInfo(String userEmail);
 	public List<Auction> receiveSaleHistory(String userEmail);
 	public List<Auction> receiveBuyHistory(String userEmail);
-	public void addReview(Review review);
+	public void insertReview(Review review);
+	public void deleteReview(Review review);
 }
