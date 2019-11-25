@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserMapper mapper;
 	
-	//회원가입
+	//회원 가입
 	@Override
 	public void insertUser(User user) {
 	mapper.insertUser(user);	
@@ -28,23 +28,20 @@ public class UserServiceImpl implements UserService{
 	public User selectUserInfo(User user) {
 		return mapper.selectUserInfo(user);
 	}
-	//마이페이지 - 개인정보 수정
+	//마이페이지 - 정보 수정
 	@Override
 	public void updateUser(User user) {
 		mapper.updateUser(user);
 	}
 	//마이페이지 - 입찰 리스트
-	@Override
-	public List<Auction> mybidAuction(User user) {
-		return mapper.mybidAuction(user);
-	}
+	
 	@Override
 	public List<Auction> bidList(String email) {	
 		return mapper.bidList(email);
 	}
 
 	
-	//메일 찾기
+	//이메일 찾기
 	@Override
 	public User findEmail(User user) {
 		return mapper.findEmail(user);
@@ -54,11 +51,29 @@ public class UserServiceImpl implements UserService{
 	public String findPass(String email) {
 		return mapper.findPass(email);
 	}
-	//비밀번호 찾기 - 개인정보 수정페이지
+	//鍮꾨�踰덊샇 李얘린 - 媛쒖씤�젙蹂� �닔�젙�럹�씠吏�
 	@Override
 	public User selectUserInfoByName(String userName) {
 		
 		return mapper.selectUserInfoByName(userName);
+	}
+
+
+	@Override
+	public int checkEmail(String userEmail) {
+		return mapper.checkEmail(userEmail);
+	}
+
+
+	@Override
+	public int checkPhnum(String userPhnum) {
+		return mapper.checkPhnum(userPhnum);
+	}
+
+
+	@Override
+	public int checkNickname(String userNickname) {
+		return mapper.checkNickname(userNickname);
 	}
 
 

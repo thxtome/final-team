@@ -59,6 +59,27 @@ public class UserController {
 		service.insertUser(user);
 		return "redirect:" + "/main.do";
 	}
+	//회원 가입 - 이메일 중복 검사
+	@RequestMapping("/checkEmail.do")
+	@ResponseBody
+	public int checkEmail( @RequestParam(value="param") String userEmail) {
+		System.out.println("email" + service.checkEmail(userEmail));
+		return service.checkEmail(userEmail);
+	}
+	//회원 가입 - 번호 중복 검사
+	@RequestMapping("/checkPhnum.do")
+	@ResponseBody
+	public int checkPhnum(@RequestParam(value="param") String userPhnum) {
+		System.out.println("phnum" + service.checkPhnum(userPhnum));
+		return service.checkPhnum(userPhnum);
+	}
+	//회원 가입 - 별명 중복 검사
+	@RequestMapping("/checkNickname.do")
+	@ResponseBody
+	public int checkNickname( @RequestParam(value="param") String userNickname) {
+		System.out.println("userNickname" + service.checkPhnum(userNickname));
+		return service.checkNickname(userNickname);
+	}
 	
 	
 	//마이페이지 

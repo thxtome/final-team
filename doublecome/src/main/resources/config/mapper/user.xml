@@ -68,17 +68,17 @@
 	
 	
 	<!-- 회원가입 유효성검사 -->
-	<select id="checkEmail" parameterType="String" resultType="int">
+	<select id="checkEmail" parameterType="string" resultType="int">
 		select count(user_email)
 		  from user
 		 where user_email = #{userEmail}
 	</select>
-	<select id="checkPhnum" parameterType="String" resultType="int">
+	<select id="checkPhnum" parameterType="string" resultType="int">
 		select count(user_phnum)
 		  from user
 		 where user_phnum = #{userPhnum}
 	</select>
-	<select id="checkNickname" parameterType="String" resultType="int">
+	<select id="checkNickname" parameterType="string" resultType="int">
 		select count(user_nickname)
 		  from user
 		 where user_nickname = #{userNickname}

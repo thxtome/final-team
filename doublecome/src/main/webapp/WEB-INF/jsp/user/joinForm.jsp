@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+ response.setHeader("Cache-Control","no-cache");
+ response.setHeader("Pragma","no-cache");
+ response.setDateHeader("Expires",0);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +38,7 @@
   
   <div class="form">
     <h2>회원 가입</h2>
-    <form method="post" action="<c:url value="/user/insert.do"/>">
+    <form onsubmit="return nullCheck();" method="post" action="<c:url value="/user/insert.do"/>">
       <input type="email" placeholder="이메일" name="userEmail" id="userEmail"/>
       <div id="emailCheck" class="alert"></div>
       <input type="password" placeholder="비밀 번호" name="userPass" id="userPass"/>
@@ -43,7 +49,7 @@
       <div id="phnumCheck" class="alert"></div>
       <input type="text" placeholder="별명" name="userNickname" id="userNickname"/>
       <div id="idCheck" class="alert"></div>
-      <button id="joinBtn">가입</button>
+      <button tpye="submit" id="joinBtn">가입</button>
     </form>
   </div>
 </div>
