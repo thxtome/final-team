@@ -45,4 +45,10 @@ public class HistoryServiceImpl implements HistoryService{
 	public void deleteReview(Review review) {
 		mapper.deleteReview(review);
 	}
+	public Review selectOneReview(Review review) {
+		return mapper.selectOneReview(review);
+	}
+	public void updateReview(Review review) {
+		mapper.updateReview(review);
+	}
 }

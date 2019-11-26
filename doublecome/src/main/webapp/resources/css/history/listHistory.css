@@ -462,7 +462,7 @@
 	margin: 10px auto;
 	padding-top: 15px;
 	text-align: left;
-/* 	border-top: 1px solid #C3C3C3; */
+	border-top: 1px solid #C3C3C3;
 }
 .sortType {
     width: 100%;
@@ -670,6 +670,19 @@
     color: white;
     border-radius: 10px;
     margin-top: 10px;
+}
+.editBtn button{
+	border: none;
+    width: 80px;
+    height: 27px;
+    background-color: #DB1D3B;
+    border-bottom :2px solid rgb(170, 26, 15);
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.editBtn{
+	display: none;
 }
 #summernote{
 	margin-top: 20px;

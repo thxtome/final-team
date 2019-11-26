@@ -146,7 +146,30 @@
 		)
 	</insert>
 	
-	<!-- 후기삭제 -->
+	<!-- 후기 한개  -->
+	<select id="selectOneReview" parameterType="Review" resultType="Review">
+		select r.*, 
+			   a.auction_no,
+			   a.auction_title
+		  from review r
+		 inner join deal d
+		    on r.deal_no = d.deal_no
+		 inner join auction a
+		    on d.auction_no = a.auction_no
+		 where r.review_no = #{reviewNo};
+	</select>
+	
+	<!-- 후기 수정 -->
+	<update id="updateReview" parameterType="Review">
+		update review	
+		   set review_score = #{reviewScore},
+		   	   review_title = #{reviewTitle},
+		       review_content = #{reviewContent}
+		 where review_no = #{reviewNo}
+		  
+	</update>
+	
+	<!-- 후기 삭제 -->
 	<delete id="deleteReview" parameterType="Review">
 		delete from review
 		 where review_no = #{reviewNo}

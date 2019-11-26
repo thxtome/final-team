@@ -193,7 +193,7 @@
 				<span class="reviewModalClose">&times;</span>
 				<div class="addReviewContent" data-value="헤이">
 					<div id="reviewForm">
-						<form action="addReview.do" id="rform" method="post">
+						<form action="" id="rform" method="post">
 							<div class="auctionTitleDiv">
 								<div>경매글</div>
 								<div id="auctionTitle"></div>
@@ -216,10 +216,14 @@
 									<textarea id="summernote" name="reviewContent"></textarea>
 								</div>
 							</div>
-							<input id="auctionNo" type="hidden" name="auctionNo" value=""/>
+							<input id="auctionNo" type="hidden" name="auctionNo" value="0"/>
+							<input id="reviewNo" type="hidden" name="reviewNo" value="0"/>
 							<div class="regitbtn">
-								<button type="submit">등록</button>
+								<button type="submit"></button>
 							</div>
+<!-- 							<div class="editBtn"> -->
+<!-- 								<button type="submit">수정</button> -->
+<!-- 							</div> -->
 						</form>
 					</div>
 				</div>

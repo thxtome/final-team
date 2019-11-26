@@ -149,7 +149,7 @@ function makeReviewList(result, type, sort){
 							<a class="reviewer">${r.senderNickname}</a>
 						</div>
 						<div class="editdel">
-							<a data-no="${r.auctionNo}" class="editreview">수정</a> / 
+							<a data-no="${r.reviewNo}" class="editreview">수정</a> / 
 							<a data-no="${r.reviewNo}" class="delreview">삭제</a>
 						</div>
 					</li>
@@ -273,7 +273,6 @@ function success(msg){
 
 // 후기 삭제 ajax
 $("body").on("click", ".delreview", (e) => {
-	console.log("클릭됨");
 	$.get({
 		url: "removeReview.do",
 		data : {
@@ -289,21 +288,49 @@ $("body").on("click", ".delreview", (e) => {
 
 let $addReviewModal = $("#addReviewModal");
 $("body").on("click", ".reviewBtn", (e) => {
+	$("#reviewForm > form").attr("action","addReview.do");
 	$("#auctionTitle").html($(e.target).closest("ul").find(".listTitle").html());
 	$("#auctionNo").val($(e.target).data("no"));
 	$(".regitbtn > button").html("등록");
 	$addReviewModal.css("display","block");
 });
 
-//$("body").on("click", ".editreview", (e) => {
-//	let $ul = $(e.target).closest("ul");
-//	$("#auctionTitle").html($ul.find(".auctionTitle").html());
-//	$("#auctionNo").val($(e.target).data("no"));
-//	$(".regitbtn > button").html("수정");
-//	$(".scoreCon > input").val($ul.find(".score").val());
-//	$("")
-//	$addReviewModal.css("display","block");
+//후기 수정
+//$("body").on("click", ".editBtn > button", (e) => {
+//	$.get({
+//		url: "editReview.do",
+//		data : {
+//			reviewNo: $(".regitbtn").data("no")
+//		},
+//		success: function() {
+//			console.log("성공");
+//			success("수정");
+//			setTimeout("location.reload()", 1500);
+//		}
+//	});
 //});
+
+// 후기 수정 폼
+$("body").on("click", ".editreview", (e) => {
+	$.get({
+		url: "editReviewForm.do",
+		data : {
+			reviewNo: $(e.target).data("no")
+		},
+		success: result => {
+			$("#reviewForm > form").attr("action","editReview.do");
+			console.log($("#reviewForm > form").attr("action"));
+			$("#auctionTitle").html(result.auctionTitle);
+			$(".scoreCon input").val(result.reviewScore);
+			$(".reviewTitleDiv input").val(result.reviewTitle);
+			$('#summernote').summernote('code', result.reviewContent);
+			$("#reviewNo").val(result.reviewNo);
+			$(".regitbtn > button").html("수정");
+			$addReviewModal.css("display","block");
+		}
+	});
+	
+});
 
 $("body").on("click", ".reviewModalClose", (e) => {
 	$addReviewModal.css("display","none");

@@ -56,9 +56,21 @@ public class HistoryController {
 		return "redirect:listHistory.do";
 	}
 	
+	// 후기 수정폼
+	@RequestMapping("/editReviewForm.do")
+	@ResponseBody
+	public Review editReviewForm(Review review) {
+		System.out.println(service.selectOneReview(review));
+		return service.selectOneReview(review);
+	}
+	
 	// 후기 수정
 	@RequestMapping("/editReview.do")
-	public void editReview() {}
+	public String editReview(Review review) {
+		service.updateReview(review);
+		
+		return "redirect:listHistory.do";
+	}
 	
 	// 후기삭제
 	@RequestMapping("/removeReview.do")
