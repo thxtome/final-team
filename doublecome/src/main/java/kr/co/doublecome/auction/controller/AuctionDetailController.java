@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.doublecome.auction.service.AuctionDetailService;
+import kr.co.doublecome.common.service.FileService;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
-import kr.co.doublecome.repository.vo.InfinitePage;
 import kr.co.doublecome.repository.vo.Inquiry;
+import kr.co.doublecome.repository.vo.Search;
 import kr.co.doublecome.repository.vo.UtilFile;
-import kr.co.doublecome.util.file.FileUploadService;
 
 @Controller("kr.co.doublecome.auction.controller.AuctionDetailController")
 @RequestMapping("/auction")
@@ -23,13 +23,16 @@ public class AuctionDetailController {
 	@Autowired
 	private AuctionDetailService service;
 	@Autowired
-	private FileUploadService fileService;
+	private FileService fileService;
 	
 	@RequestMapping("/detailAuction.do")
-	public void auctionDetail(int no, String userEmail, Model model, int pageNo, InfinitePage infinitePage ) {
+	public void auctionDetail(int no, String userEmail, Model model, int pageNo, Search search ) {
 		model.addAttribute("auction", service.auctiondetail(no));
 		model.addAttribute("user", service.userInfo(userEmail));
-		model.addAttribute("review", service.selectReceiveReview(infinitePage));
+		search.setKeyword(userEmail);
+		search.setPageNo(2);
+		System.out.println(service.selectReceiveReview(search));
+		model.addAttribute("review", service.selectReceiveReview(search));
 		AjaxPage ap = service.retrieveinquiry(no, pageNo);
 		model.addAttribute("inquiry", ap.getList());
 		model.addAttribute("pr", ap.getPr());

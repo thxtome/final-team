@@ -9,13 +9,14 @@ import kr.co.doublecome.repository.vo.History;
 import kr.co.doublecome.repository.vo.InfinitePage;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.Review;
+import kr.co.doublecome.repository.vo.Search;
 import kr.co.doublecome.repository.vo.UtilFile;
 
 public interface AuctionDetailService {
 
 	Auction auctiondetail(int no);
 	History userInfo(String userEmail);
-	List<Review> selectReceiveReview(InfinitePage infinitePage);
+	List<Review> selectReceiveReview(Search search);
 	AjaxPage retrieveinquiry(int no,int pageNo);
 	void insertInquiry(Inquiry inquiry);
 	List<Category> categoryList();

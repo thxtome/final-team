@@ -158,12 +158,12 @@
 					<li><span class="reviewTabList" data-name="SendReview">작성
 							후기</span></li>
 				</ul>
-				<div data-name="ReceiveReview" class="ReceiveReview searchFind">
-					<div class="searchType">
+				<div data-name="ReceiveReview" class="ReceiveReview sortFind">
+					<div class="sortType">
 						<div>
 							<ul>
-								<li class="searchTypeChoice" data-search="recency">•최신순</li>
-								<li data-search="grade">•평점순</li>
+								<li class="sortTypeTab sortTypeChoice" data-sort="recency">•최신순</li>
+								<li class="sortTypeTab" data-sort="grade">•평점순</li>
 							</ul>
 						</div>
 					</div>
@@ -172,12 +172,12 @@
 						</ul>
 					</div>
 				</div>
-				<div data-name="SendReview" class="SendReview searchFind">
-					<div class="searchType">
+				<div data-name="SendReview" class="SendReview sortFind">
+					<div class="sortType">
 						<div>
 							<ul>
-								<li class="searchTypeTab searchTypeChoice" data-search="recency">•최신순</li>
-								<li class="searchTypeTab" data-search="grade">•평점순</li>
+								<li class="sortTypeTab sortTypeChoice" data-sort="recency">•최신순</li>
+								<li class="sortTypeTab" data-sort="grade">•평점순</li>
 							</ul>
 						</div>
 					</div>

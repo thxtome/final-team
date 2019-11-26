@@ -12,7 +12,7 @@ public interface AuctionDetailMapper {
 	Auction auctiondetail(int no);
 	List<Inquiry> retrieveinquiry(Search search);
 	void insertInquiry(Inquiry inquiry);
-	void addFile(UtilFile file);
+	int addFile(UtilFile file);
 	int maxFileGroupCode();
 	void addAuction(Auction auction);
 	List<UtilFile> retrieveFile(int no);

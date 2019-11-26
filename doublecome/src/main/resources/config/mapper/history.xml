@@ -15,7 +15,7 @@
 	</select>
 	
 	<!-- 받은 후기 목록 -->
-	<select id="selectReceiveReview" resultType="Review" parameterType="InfinitePage">
+	<select id="selectReceiveReview" resultType="Review" parameterType="Search">
 		select r.*, 
 			   a.auction_title, 
 			   u.user_nickname as sender_nickname,
@@ -27,7 +27,7 @@
 		    on d.auction_no = a.auction_no
 		 inner join user u 
 		    on u.user_email = r.review_sender
-		 where r.review_receiver = #{userEmail}
+		 where r.review_receiver = #{keyword}
 		 order by review_no
 		 limit #{begin}, 5
 	</select>
@@ -40,7 +40,7 @@
 	</select>
 	
 	<!-- 보낸 후기 목록 -->
-	<select id="selectSendReview" resultType="Review" parameterType="InfinitePage">
+	<select id="selectSendReview" resultType="Review" parameterType="Search">
 		select r.*, 
 			   a.auction_no, 
 			   a.auction_title, 
@@ -53,17 +53,17 @@
 		    on d.auction_no = a.auction_no
 		 inner join user u 
 		    on u.user_email = r.review_sender
-		 where r.review_sender = #{userEmail}
+		 where r.review_sender = #{keyword}
 	 		<choose>
-	 			<when test="search = 'grade'">
-					 order by r.review_score desc, r.review_reg_date
+	 			<when test='sort == "grade"'>
+					 order by r.review_score desc, r.review_reg_date desc
 	 			</when>
-	 			<when test="search = 'recenccy'">
+	 			<when test='sort == "recency"'>
 				 	 order by r.review_reg_date desc
 	 			</when>
-	 			<when test="search = null">
+	 			<otherwise>
 				 	 order by r.review_reg_date desc
-	 			</when>
+	 			</otherwise>
 	 		</choose>
 		 limit #{begin}, 5
 	</select>
@@ -151,4 +151,11 @@
 		delete from review
 		 where review_no = #{reviewNo}
 	</delete>
+	
+	<!-- 파일 정보 -->
+	<select id="selectOneFile" parameterType="UtilFile" resultType="UtilFile">
+		select *
+		  from file
+		 where file_no = #{fileNo}
+	</select>
 </mapper>

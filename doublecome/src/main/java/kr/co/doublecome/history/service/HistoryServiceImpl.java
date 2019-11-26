@@ -9,19 +9,19 @@ import kr.co.doublecome.repository.mapper.HistoryMapper;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.History;
-import kr.co.doublecome.repository.vo.InfinitePage;
 import kr.co.doublecome.repository.vo.Review;
+import kr.co.doublecome.repository.vo.Search;
 
 @Service("kr.co.doublecome.history.service.HistoryServiceImpl")
 public class HistoryServiceImpl implements HistoryService{
 	@Autowired
 	private HistoryMapper mapper;
 	
-	public List<Review> receiveReviewList(InfinitePage ip){
-		return mapper.selectReceiveReview(ip);
+	public List<Review> receiveReviewList(Search search){
+		return mapper.selectReceiveReview(search);
 	}
-	public List<Review> sendReviewList(InfinitePage ip){
-		return mapper.selectSendReview(ip);
+	public List<Review> sendReviewList(Search search){
+		return mapper.selectSendReview(search);
 	}
 	public History receiveUserInfo(String userEmail) {
 		return mapper.userInfo(userEmail);

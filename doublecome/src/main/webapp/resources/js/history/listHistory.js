@@ -16,8 +16,9 @@
 	});
 	$("#writer", "#content").val("");
 */
-let begin = 0;
+let pageNo = 1;
 let reviewCnt = 0;
+let sort = "";
 $(function (){
 // 네비게이션바 클릭시 이동
 let $navBar = $("#navBar");
@@ -77,17 +78,17 @@ $(".salesTabList").click((e) => {
 	$(".salesTabList").removeClass("tabChoice");
 	$(e.target).addClass("tabChoice");
 });
-function reviewListAjax(target, begin, search){
+function reviewListAjax(target, pageNo, sort){
 	console.log(target.data("name"));
 	let $dataName = target.data("name");
 		$.get({
 			url: `retrieve${$dataName}.do`,
 			data: {
-				begin,
-				search
+				pageNo,
+				sort
 			},
 			dataType: "json",
-			success: result => makeReviewList(result, $dataName)
+			success: result => makeReviewList(result, $dataName, sort)
 		});
 	$(".SendReview").css("display", "none");
 	$(".ReceiveReview").css("display", "none");
@@ -95,37 +96,41 @@ function reviewListAjax(target, begin, search){
 }
 
 // 처음 로딩시 받은후기 목록
-reviewListAjax($(".ReceiveReview"), 0);
+reviewListAjax($(".ReceiveReview"), 1);
 
 // 후기 목록 ajax
 $(".reviewTabList").click((e) => {
 	reviewCnt = 0;
-	begin = 0;
+	pageNo = 1;
 	$("#reviewCon > ul").html("");
 	$(".reviewTabList").removeClass("tabChoice");
 	$(e.target).addClass("tabChoice");
-	reviewListAjax($(e.target), begin);
+	reviewListAjax($(e.target), pageNo);
 });
 
-$("body").on("click", ".searchTypeTab", (e) => {
-	$(".searchTypeTab").removeClass("searchTypeChoice");
-	$(e.target).addClass("searchTypeChoice");
-	begin = 0;
-	let $eTarget = $(e.target).closest(".searchFind");
-	reviewListAjax($eTarget, begin, $(e.target).data("search"));
+$("body").on("click", ".sortTypeTab", (e) => {
+	$(".sortTypeTab").removeClass("sortTypeChoice");
+	$(e.target).addClass("sortTypeChoice");
+	pageNo = 1;
+	let $eTarget = $(e.target).closest(".sortFind");
+	sort = $(e.target).data("sort");
+	$("#reviewCon > ul").html("");
+	reviewListAjax($eTarget, pageNo, sort);
 });
 
 // 후기 목록 출력
-function makeReviewList(result, type){
+function makeReviewList(result, type, sort){
+	console.log(sort)
 	let html = ``;
 	if (type == "SendReview"){
-		if (result == null){
+		if (result.length == 0){
+			$(".SendReview").html("");
 			html = `
 				<div class="SendReview">
 					<div class="emptyBox">보낸 후기가 없습니다.</div>
 				</div>
 			`;
-			$("#reviewCon > ul").html(html);
+			$(".SendReview").html(html);
 		} else {
 			$.each(result, (i, r) => {
 				reviewCnt = r.reviewCnt;
@@ -145,7 +150,7 @@ function makeReviewList(result, type){
 						</div>
 						<div class="editdel">
 							<a data-no="${r.auctionNo}" class="editreview">수정</a> / 
-							<a href="removeReview.do?reviewNo=${r.reviewNo}" class="delreview">삭제</a>
+							<a data-no="${r.reviewNo}" class="delreview">삭제</a>
 						</div>
 					</li>
 					<li class="reviewDetail">
@@ -162,7 +167,7 @@ function makeReviewList(result, type){
 					`;
 			})
 			$("#reviewCon .moreSBtn").remove();
-			if (reviewCnt - (5* (begin - 1)) > 5){
+			if (reviewCnt - (5* (pageNo - 1)) > 5){
 				html += `
 					</div>
 					<button data-name="SendReview" class="moreSBtn" type="button">
@@ -171,16 +176,17 @@ function makeReviewList(result, type){
 					`;
 			}
 			$("#reviewCon > ul").append(html);
-			begin += 5;
+			pageNo += 1;
 		}
 	} else {
-		if (result == null){
+		if (result.length == 0){
+			$(".ReceiveReview").html("");
 			html = `
 				<div class="ReceiveReview">
 				<div class="emptyBox">받은 후기가 없습니다.</div>
 				</div>
 				`;
-			$("#reviewCon > ul").html(html);
+			$(".ReceiveReview").html(html);
 		} else {
 			$.each(result, (i, r) => {
 				console.log(result);
@@ -214,7 +220,7 @@ function makeReviewList(result, type){
 					`;
 			})
 			$("#reviewCon .moreRBtn").remove();
-			if (reviewCnt - begin - 1 > 5){
+			if (reviewCnt - pageNo - 1 > 5){
 				html += `
 					</div>
 					<button data-name="ReceiveReview" class="moreRBtn" type="button">
@@ -223,7 +229,7 @@ function makeReviewList(result, type){
 					`;
 			}
 			$("#reviewCon > ul").append(html);
-			begin += 5;
+			pageNo += 1;
 		}
 		
 	}
@@ -232,50 +238,54 @@ $("body").on("click", ".moreSBtn", (e) => {
 	$.get({
 		url: "retrieveSendReview.do",
 		data: {
-			begin
+			pageNo,
+			sort
 		},
 		dataType: "json",
-		success: result => makeReviewList(result, $(e.target).data("name"))
+		success: result => makeReviewList(result, $(e.target).data("name"), sort)
 	});
 });
 
 $("body").on("click", ".moreRBtn", (e) => {
-	console.log(begin);
+	console.log(pageNo);
 	$.get({
 		url: "retrieveReceiveReview.do",
 		data: {
-			begin
+			pageNo,
+			sort
 		},
 		dataType: "json",
-		success: result => makeReviewList(result, $(e.target).data("name"))
+		success: result => makeReviewList(result, $(e.target).data("name"), sort)
 	});
 });
 
-// 후기 삭제 ajax
-$("body").on("click", ".delreview", (e) => {
-	success("삭제");
-//	console.log($(e.target).data("reviewno"));
-//	
-//	$.get({
-//		url: "removeReview.do",
-//		data : {
-//			reviewNo: $(e.target).data("reviewno")
-//		},
-//		dataType: "json",
-//		success: () => {
-//			reviewListAjax($(".SendReview"), begin);
-//		}
-//	});
-});
 function success(msg){
+	console.log("도착");
 	Swal.fire({
 		title: `후기글 ${msg}`,
 		text: `${msg}되었습니다.`,
 		type: 'success',
-		confirmButtonColor: '#3085d6',
-		confirmButtonText: '확인'
+		showConfirmButton: false
+//		confirmButtonColor: '#3085d6',
+//		confirmButtonText: '확인'
 	});
 };
+
+// 후기 삭제 ajax
+$("body").on("click", ".delreview", (e) => {
+	console.log("클릭됨");
+	$.get({
+		url: "removeReview.do",
+		data : {
+			reviewNo: $(e.target).data("no")
+		},
+		success: function() {
+			console.log("성공");
+			success("삭제");
+			setTimeout("location.reload()", 1500);
+		}
+	});
+});
 
 let $addReviewModal = $("#addReviewModal");
 $("body").on("click", ".reviewBtn", (e) => {
@@ -321,7 +331,8 @@ $('#summernote').summernote(
 		    toolbar : ['insert', ['picture']],
 		    focus: true,
 		    callbacks: {
-		    	onImageUpload: function(files, editor, welEditable) {
+		    	onImageUpload: function (files, editor, welEditable) {
+		    		console.log(editor)
 		        for (var i = files.length - 1; i >= 0; i--) {
 		        	sendFile(files[i], this);
 		          }
@@ -329,46 +340,28 @@ $('#summernote').summernote(
 		      }
 
 });
-
+let contextPath = window.location.pathname.substr(0,window.location.pathname.indexOf("/",2));
+console.log(contextPath);
 function sendFile(file, editor) {
+	console.log(editor)
     // 파일 전송을 위한 폼생성
-		data = new FormData();
-	    data.append("uploadFile", file);
+		var data = new FormData();
+	    data.append("file", file);
 	    $.ajax({ // ajax를 통해 파일 업로드 처리
 	        data : data,
 	        type : "POST",
-	        url : "fileUpload.do",
+	        url : contextPath + "/file/photoUpload.do",
 	        cache : false,
 	        contentType : false,
+	        enctype: "multipart/form-data",
 	        processData : false,
-	        success : function(data) { // 처리가 성공할 경우
+	        success : function(url) { // 처리가 성공할 경우
             // 에디터에 이미지 출력
-	        	$(editor).summernote('editor.insertImage', data.url);
+	        	console.log(url);
+	        	$(editor).summernote('editor.insertImage', url);
 	        }
 	    });
 	}
-
-
-
-
-//function sendFile(file, el) {
-////	  var contextPath = "${pageContext.request.contextPath}";
-//  var form_data = new FormData();
-//  form_data.append('file', file);
-//  $.ajax({
-//    data: form_data,
-//    type: "POST",
-//    url: 'file.do',
-//    cache: false,
-//    contentType: false,
-//    enctype: 'multipart/form-data',
-//    processData: false,
-//    success: function(url) {
-//    	alert(url);	 
-//    	$(el).summernote('editor.insertImage', url);
-//    }
-//  });
-//}
 
 // 후기제목 클릭시 후기상세글 노출
 $("body").on("click" ,".reviewTitle", (e) => {

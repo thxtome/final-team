@@ -47,7 +47,11 @@
 		from file
 	</select>
 	
-	<insert id="addFile" parameterType="UtilFile">
+	<insert id="addFile" parameterType="UtilFile" >
+		<selectKey order="AFTER" keyProperty="fileNo" keyColumn="file_no" resultType="int">
+			select max(file_no)
+			  from file
+		</selectKey>
 		insert into file (file_group_code, file_origin_name, file_system_name, file_path)
 		values (#{fileGroupCode}, #{fileOriginName}, #{fileSystemName}, #{filePath})
 	</insert>
