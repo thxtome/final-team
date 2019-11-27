@@ -1,6 +1,6 @@
 $(document).ready(e => {
 	$("#price_filter li a, #price_choice, #bidcount li a, a.category, #date li a").unbind("click").click(e => {
-		selectCheck(e);
+		if (selectCheck(e) == false) return;
 		searchAjax(e);
 	})
 	$("#sort_list a").click(e => {
@@ -14,7 +14,6 @@ function searchAjax(e) {
 	e.preventDefault();
 	let sendData = "{";
 	let filter = $(".options")
-	
 	let ele = e.target;
 	let flag = true;
 	let priceChoice = [];
@@ -43,12 +42,9 @@ function searchAjax(e) {
 			sendData = sendData + "," + '"'+ $(option).data("name") + '"'+ " : " + $(option).data("value")				
 		}
 	}
+	console.log($(e.target).data("value"))
 	if ($(e.target).data("name") == "sorts" ){		
-		let sorts = $(".order");
-		for (let sort of sorts) {
-			if ($(sort).data("name") == "sorts")
-				sendData += +","+ '"'+ $(sort).data("name") + '"' + " : " + $(sort).data("value")	
-		}
+		sendData += ","+ '"'+ $(e.target).data("name") + '"' + " : " + '"'+ $(e.target).data("value") + '"'
 	}
 	sendData += "}";
 	console.log(sendData)
@@ -59,7 +55,14 @@ function searchAjax(e) {
 		data : sendData
 	}
 	$.ajax(options).done(data => {
+		console.log(data)
 		$("#list_view").html(makeAuctionlist(data))
+		console.log(data.pr)
+		let count = $(".countdown")
+		for(let i = 0 ; i < count.length ; i++) {
+			console.log($(count[i]),data.list[i].auctionLimitDate)
+			auctionCount($(count[i]),data.list[i].auctionLimitDate)
+		}
 	})
 	.fail(() => {
 		 alert("ajax 처리 에러발생");
@@ -67,7 +70,7 @@ function searchAjax(e) {
 }
 function makeAuctionlist(data) {
 	let $auctionField ="";
-	if(data.length == 0) {
+	if(data.list.length == 0) {
 		return $auctionField = `
 				<div class="card-body" >
 					<h5 class="card-title m-0" style="text-shadow: 0px 0px 1px black;">
@@ -75,11 +78,8 @@ function makeAuctionlist(data) {
 				</div>
 		`
 	}
-	$.each(data, (i, list) => {
-		let maxPrice = list.maxPrice;
-		if(list.maxPrice == null){
-			maxPrice == list.minprice
-		}
+	data.list.forEach((list,i) => {
+		let maxPrice = comma(uncomma(list.maxPrice));
 		$auctionField += `
 		<div class='col-md-4 p-2' >
 			<a class="auction_list" href="/doublecome/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}&pageNo=0>
@@ -89,7 +89,7 @@ function makeAuctionlist(data) {
 						style="height: 250px;"/>
 					<p class="mb-1 m-1">${list.auctionTitle}</p>
 					<p class="card-text m-1">${maxPrice}원</p>		
-					<div class="auction-condition">
+					<div class="auction_condition">
 						<span class="text-left">입찰 ${list.bidCnt}건</span>
 						<small class="countdown text-muted m-1"></small>
 					</div>
@@ -98,17 +98,19 @@ function makeAuctionlist(data) {
 		</div>
 		`
 	})
-	console.log($auctionField)
+	pg.print($("#content"),data.pr)
 	return $auctionField
 }
 $(document).on("click",".options", e => {
 	let cate = $(e.target).attr("class")
 	let arr = $(".cnkfilter");
 	if($(e.target).prop('tagName') == "SPAN"){
-		if($(e.target).parent().attr("class").cont("category ")){
-			return
-		}else if($(e.target).parent().attr("class").endsWith("category selected")){
-			return
+		if($(e.target).parent().attr("class").endsWith("category ")){
+			return false;
+		} else if($(e.target).parent().attr("class").endsWith("category selected")){
+			return false;
+		} else if($(e.target).parent().attr("class").endsWith("category")) {
+			return false;
 		}
 		$(e.target).parent().remove()
 		searchAjax(e);
@@ -118,12 +120,14 @@ $(document).on("click",".options", e => {
 			$(filter).prev().removeClass("selected")
 			}
 		}
-		return
+		return false;
 	}
 	if(cate.endsWith("category ")){
-		return
+		return false
 	} else if(cate.endsWith("category selected")){
-		return
+		return false
+	} else if(cate.endsWith("category")) {
+		return false;
 	}
 	$(e.target).remove()		
 	searchAjax(e);

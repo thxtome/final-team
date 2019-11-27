@@ -1,4 +1,4 @@
- let pg = {print: print,
+let pg = {print: print,
                           movePage: function($ele,func){
                             $ele.on("click",".page",(e)=>{
                                 func($(e.target).text());
@@ -56,7 +56,7 @@
             if(next == true) {
                 $pageContent.append($(`<div class="pageArrowNext" data-pageNo=${endPage+1}><i class="fas fa-chevron-right"></i></div>`));
             }
-            
+            console.log($pageContent)
             $ele.find(".pagination").html($pageContent)
         }
         
