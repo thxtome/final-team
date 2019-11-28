@@ -9,6 +9,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Album</title>
+  <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
 <!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" -->
 <!--     type="text/css"> -->
@@ -73,7 +75,7 @@
     </div>
     
     <div class="layout-right">
-      <div class="py-4 bg-light">
+      <div class="py-4 bg-light" id="content">
       	<div class="option_selectbar" id="selectbar">
       		<a id="resetfilter" href="" class="clear">
       			<span class="option-clean"></span>
@@ -90,7 +92,7 @@
 		      		<ul class="sort_list" id="sort_list">
 						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="min_price" title="낮은 가격순"><span></span>낮은 가격순</a></li>
 						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="max_price" title="높은 가격순"><span></span>높은 가격순</a></li>
-						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="auction_leg_date" title="등록일순"><span></span>등록일순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="auction_reg_date" title="등록일순"><span></span>등록일순</a></li>
 						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="bid_count" title="입찰 많은순"><span></span>입찰횟수순</a></li>
 					</ul>
 					<span class="view_count">
@@ -145,10 +147,10 @@
 				</c:choose>
 				</div>
             </div>
+			<c:import url="/WEB-INF/jsp/include/pagination.jsp" />
           </div>
         </div>
       </div>
-    </div>
  <c:import url="/WEB-INF/jsp/include/footer.jsp" />
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
  
@@ -179,7 +181,18 @@
 					}
 				}
 			}
+		 	
 		})
+  </script>
+  <script type="text/javascript">
+		  let limiteDate = [<c:forEach items="${auctionlist}" var="auctionlist">
+				<c:out value="${auctionlist.auctionLimitDate}" />,</c:forEach>];
+		  	let arr = limiteDate.split(",");
+			let countdown = $(".countdown");
+			for(let i = 0 ; i < countdown.length ; i++) {
+				console.log(limiteDate[0])
+				auctionCount($(countdown[i]),arr[i])
+			}
   </script>
   <script src="<c:url value="/resources/js/auction/accordion.js" />"></script>
 </body>
