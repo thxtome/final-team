@@ -1,5 +1,6 @@
 package kr.co.doublecome.user.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.InternalResourceView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.User;
@@ -86,23 +86,39 @@ public class UserController {
 	@RequestMapping("/userInfo.do")
 	public void userInfo() throws Exception{
 	}
+	//마이페이지 - 회원 정보 수정 
 	@RequestMapping("/userInfoUpdate.do")
 	public void userInfoUpdate(
-			@RequestParam(value="userEmail") String userEmail,
-			@RequestParam(value="userPass") String userPass,		
+			/* @RequestParam(value="userEmail") */ String userEmail,
+			/* @RequestParam(value="userPass") */ String userPass,		
 			Model model  ) throws Exception{
 		User user = new User();
 		user.setUserEmail(userEmail);
 		user.setUserPass(userPass);
 		model.addAttribute("user", service.selectUserInfo(user));
 	}
-	
+	//마이페이지 - 회원 정보 수정 버튼
 	@RequestMapping("/userUpdate.do")
-	public String updateUser(User user) throws Exception{
-		System.out.println("/updateUser.do");
+	public String updateUser(User user, Principal p, RedirectAttributes attr) throws Exception{
+		User u = service.selectUserInfoByName(p.getName());
+		System.out.println(u.getUserPass() + "u.getUserPass()");
+		System.out.println(user.getUserPass().length() + ": userPass.length()");
+		System.out.println(user.getUserPass() + ": userPass");
+		//비밀번호 수정
+		if(user.getUserPass().length() == 0)
+		user.setUserPass(u.getUserPass());
+		else 
 		user.setUserPass(encoder.encode(user.getUserPass()));
+		// 별명 수정
+		if(user.getUserNickname().length() == 0)
+		user.setUserPass(u.getUserNickname());
+		else 
+		user.setUserNickname(user.getUserNickname());
+		
 		service.updateUser(user);
-		return "redirect:/main.do?userEmail=" + user.getUserEmail();
+		System.out.println("/updateUser.do");
+		attr.addFlashAttribute("user", user);
+		return "redirect:/main.do";
 	}
 	
 	@RequestMapping("/bidList.do")

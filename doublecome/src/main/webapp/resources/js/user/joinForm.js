@@ -75,9 +75,9 @@ $('#userEmail').keyup( (e) => {
 
 
 $('#userNickname').keyup( (e) => {
-  let phnumRule = /^[a-zA-Z0-9]{3,21}|[A-Za-z가-힣0-9]{2,7}$/g;// 별명 입력 체크식
+  let nicknameRule = /^[a-zA-Z0-9]{3,21}|[A-Za-z가-힣0-9]{2,7}$/g;// 별명 입력 체크식
   
-  if(!phnumRule.test($("input[id='userNickname']").val()) ) {            
+  if(!nicknameRule.test($("input[id='userNickname']").val()) ) {            
   //경고
     $('#userNickname').next().text('사용 할 수 없는 별명입니다.');
     inAvtiveBtn();          
