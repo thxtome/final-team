@@ -201,7 +201,15 @@
 							<div class="scoreDiv">
 								<div class="scoreLibel">신뢰도</div>
 								<div class="scoreCon">
-									<input style="width: 500px; height: 30px" type="text" name="reviewScore" class="scoreBar" />
+									<c:forEach var="r" begin="1" end="10">
+									<span class="scoreSpan">
+										<input type="radio" id="reviewScore${r}" name="reviewScore" value="${r}">
+										<label class="scoreLabel" for="reviewScore${r}">
+										<i class='fas fa-star regitStar'></i>${r}
+										</label>
+									</span>
+									</c:forEach>
+<!-- 									<input style="width: 500px; height: 30px" type="text" name="reviewScore" class="scoreBar" /> -->
 								</div>
 							</div>
 							<div class="reviewTitleDiv">
@@ -231,6 +239,7 @@
 		</div>
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
+	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 	<script
 		src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>

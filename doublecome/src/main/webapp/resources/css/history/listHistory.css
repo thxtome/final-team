@@ -15,35 +15,38 @@
     height: 150px;
     margin: 50px auto;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 120px;
 	grid-template-areas:
 	"myDeal purchaseDeal salesDeal reviewDeal";
 }
 #myDeal{
 	grid-area: myDeal;
 	background-color: #DB1D3B;
-	color: white;
-	font-size: 40px;
+	color: #f3f3f3;
+	font-size: 30px;
 	text-align: center;
-	line-height: 150px;
-	border-right: 1px solid black;
+	line-height: 120px;
+	border-right: 1px solid white;
 }
 #purchaseDeal, #salesDeal, #reviewDeal{
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-	border-right: 1px solid black;
-	background-color: white;
+/* 	border-top: 1px solid black; */
+/* 	border-bottom: 1px solid black; */
+/* 	border-right: 1px solid black; */
+	background-color: #f3f3f3;
 	color: black;
 }
 #purchaseDeal > div, #salesDeal > div, #reviewDeal > div{
-	margin: 20px 70px;
+	margin: 20px 70px 0px;
 	font-size: 17px;
+	color: #838383;
 }
 #purchaseDeal :nth-child(2), #salesDeal :nth-child(2), #reviewDeal :nth-child(2){
 	display: inline-block;
 	margin-left: 70px;
 	margin-right: 10px;
-	font-size: 60px;
+	font-size: 50px;
 	font-weight: lighter;
+	color: #737373;
 }
 #purchaseDeal{
 	grid-area: purchaseDeal;
@@ -206,21 +209,42 @@
 }
 .scoreArea{
     /* border: 1px solid black; */
-    width: 200px;
+    width: 130px;
     height: 80px;
     text-align: center;
 }
 .scoreArea > div{
     float: left;
 }
+.score{
+    width: 40px;
+    height: 50px;
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 65px;
+    margin-left: 30px;
+}
+.scoreForm{
+    width: 40px;
+    height: 50px;
+    font-size: 17px;
+    line-height: 83px;
+    margin: 0;
+}
+.scoreStar{
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	line-height: 45px;
+}
 .contentArea{
     /* border: 1px solid black; */
     width: 400px;
     height: 80px;
-    font-size: 12px;
+    font-size: 14px;
     padding-left: 20px;
     line-height: 32px;
-    margin: 0;
+    margin-left: 30px;
 }
 .writerArea{
     width: 150px;
@@ -228,19 +252,6 @@
     text-align: center;
     line-height: 80px;
     font-size: 13px;
-}
-.score{
-    width:50px;
-    font-size: 45px;
-    font-weight: bold;
-    line-height: 85px;
-    margin-left: 30px;
-}
-.scoreForm{
-    width:50px;
-    font-size: 17px;
-    line-height: 100px;
-    margin: 0;
 }
 .auctionTitle, .reviewer, .auctionWriter{
     font-weight: bold;
@@ -418,7 +429,7 @@
 }
 .reviewContent{
 	margin-left: 50px;
-	font-size: 13px;
+	font-size: 14px;
 	display: grid;
 	width: 750px;
 /* 	height: 500px; */
@@ -612,7 +623,7 @@
     font-weight: bold;
 }
 .auctionTitleDiv > div:nth-child(2),
-.scoreDiv > div:nth-child(2), 
+/* .scoreDiv > div:nth-child(2),  */
 .reviewTitleDiv > div:nth-child(2), 
 .photoDiv > div:nth-child(2){
     text-align: center;
@@ -698,4 +709,37 @@
 }
 .wrapper{
 	margin-top: 100px;
+}
+
+/* 신뢰도  slider*/
+.scoreCon input{
+	display: inline-block;
+	display: none;
+}
+.scoreCon label{
+/* 	margin-right: 20px; */
+	text-align: center;
+	font-size: 17px;
+	line-height: 50px;
+	cursor: pointer;
+	width: 40px;
+}
+.scoreCon label:hover{
+	opacity: 0.7;
+}
+.fa-star{
+	color: yellow;
+	visibility: hidden;
+}
+.scoreChoice{
+	visibility: visible;
+}
+.auctionTitle{
+	font-size: 13px;
+}
+.fa-star-half-alt{
+	color: yellow;
+}
+.reviewStar{
+	visibility: visible;
 }

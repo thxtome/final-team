@@ -41,7 +41,8 @@ $navBar.find("a").click((e) => {
     		minus = 50; 
     		break;
     }
-    jQuery('html, body').animate( { scrollTop : $topTarget.offset().top - minus }, 400 );
+    
+    jQuery('html, body').animate( { scrollTop : $topTarget.offset().top - minus }, 0 );
 });
 
 // 네비게이션바 고정 & 색깔 변화
@@ -104,6 +105,8 @@ $(".reviewTabList").click((e) => {
 	pageNo = 1;
 	$("#reviewCon > ul").html("");
 	$(".reviewTabList").removeClass("tabChoice");
+	$(".sortTypeTab").removeClass("sortTypeChoice");
+	$(".sortType").find(".sortTypeTab:first").addClass("sortTypeChoice");
 	$(e.target).addClass("tabChoice");
 	reviewListAjax($(e.target), pageNo);
 });
@@ -118,10 +121,108 @@ $("body").on("click", ".sortTypeTab", (e) => {
 	reviewListAjax($eTarget, pageNo, sort);
 });
 
+// 신뢰도 별
+function makeStar(score){
+	let starHtml = ``;
+	switch (score){
+	case 1:
+		starHtml = `
+			<i class="fas fa-star-half-alt reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+		`;
+		break;
+	case 2:
+		starHtml = `
+			<i class="fas fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			`;
+		break;
+	case 3:
+		starHtml = `
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star-half-alt reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			`;
+		break;
+	case 4:
+		starHtml = `
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			`;
+		break;
+	case 5:
+		starHtml = `
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star-half-alt reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			`;
+		break;
+	case 6:
+		starHtml = `
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			`;
+		break;
+	case 7:
+		starHtml = `
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star-half-alt reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			`;
+		break;
+	case 8:
+		starHtml = `
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="far fa-star reviewStar"></i>
+			`;
+		break;
+	case 9:
+		starHtml = `
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star-half-alt reviewStar"></i>
+			`;
+		break;
+	case 10:
+		starHtml = `
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			<i class="fas fa-star reviewStar"></i>
+			`;
+		break;
+	}
+	return starHtml;
+}
+
 // 후기 목록 출력
 function makeReviewList(result, type, sort){
-	console.log(sort)
 	let html = ``;
+	let starHtml = ``;
 	if (type == "SendReview"){
 		if (result.length == 0){
 			$(".SendReview").html("");
@@ -134,11 +235,15 @@ function makeReviewList(result, type, sort){
 		} else {
 			$.each(result, (i, r) => {
 				reviewCnt = r.reviewCnt;
+				starHtml = makeStar(r.reviewScore);
 				html += `
 					<li class="preView">
 						<div class="scoreArea">
 							<div class="score">${r.reviewScore}</div>
 							<div class="scoreForm">점</div>
+							<span class="scoreStar">
+								${starHtml}
+							</span>
 						</div>
 						<div class="contentArea">
 							<div class="auctionTitle">${r.auctionTitle}</div>
@@ -189,13 +294,16 @@ function makeReviewList(result, type, sort){
 			$(".ReceiveReview").html(html);
 		} else {
 			$.each(result, (i, r) => {
-				console.log(result);
 				reviewCnt = r.reviewCnt;
+				starHtml = makeStar(r.reviewScore);
 				html += `
 					<li class="preView">
 					<div class="scoreArea">
 					<div class="score">${r.reviewScore}</div>
 					<div class="scoreForm">점</div>
+						<span class="scoreStar">
+							${starHtml}
+						</span>
 					</div>
 					<div class="contentArea">
 					<div class="auctionTitle">${r.auctionTitle}</div>
@@ -231,7 +339,6 @@ function makeReviewList(result, type, sort){
 			$("#reviewCon > ul").append(html);
 			pageNo += 1;
 		}
-		
 	}
 }
 $("body").on("click", ".moreSBtn", (e) => {
@@ -296,19 +403,19 @@ $("body").on("click", ".reviewBtn", (e) => {
 });
 
 //후기 수정
-//$("body").on("click", ".editBtn > button", (e) => {
-//	$.get({
-//		url: "editReview.do",
-//		data : {
-//			reviewNo: $(".regitbtn").data("no")
-//		},
-//		success: function() {
-//			console.log("성공");
-//			success("수정");
-//			setTimeout("location.reload()", 1500);
-//		}
-//	});
-//});
+$("body").on("click", ".editBtn > button", (e) => {
+	$.get({
+		url: "editReview.do",
+		data : {
+			reviewNo: $(".regitbtn").data("no")
+		},
+		success: function() {
+			console.log("성공");
+			success("수정");
+			setTimeout("location.reload()", 1500);
+		}
+	});
+});
 
 // 후기 수정 폼
 $("body").on("click", ".editreview", (e) => {
@@ -319,9 +426,9 @@ $("body").on("click", ".editreview", (e) => {
 		},
 		success: result => {
 			$("#reviewForm > form").attr("action","editReview.do");
-			console.log($("#reviewForm > form").attr("action"));
 			$("#auctionTitle").html(result.auctionTitle);
-			$(".scoreCon input").val(result.reviewScore);
+			$(`#reviewScore${result.reviewScore}`).next("label").find(".fa-star").addClass("scoreChoice");
+			$(`#reviewScore${result.reviewScore}`).prop("checked", true);
 			$(".reviewTitleDiv input").val(result.reviewTitle);
 			$('#summernote').summernote('code', result.reviewContent);
 			$("#reviewNo").val(result.reviewNo);
@@ -334,6 +441,9 @@ $("body").on("click", ".editreview", (e) => {
 
 $("body").on("click", ".reviewModalClose", (e) => {
 	$addReviewModal.css("display","none");
+	$("#rform")[0].reset();
+	$('#summernote').summernote('code','');
+	$(".fa-star").removeClass("scoreChoice");
 });
 
 window.onclick = function(event) {
@@ -342,10 +452,10 @@ window.onclick = function(event) {
  }
 }
 //후기등록 score바
-$(".scoreBar").find("span").click((e) => {
-	$(".scoreBar").find("span").removeClass("scorechoice");
-	$(e.target).addClass("scorechoice");
-});
+//$(".scoreBar").find("span").click((e) => {
+//	$(".scoreBar").find("span").removeClass("scorechoice");
+//	$(e.target).addClass("scorechoice");
+//});
 
 // 후기작성 서머노트
 $('#summernote').summernote(
@@ -398,6 +508,21 @@ $("body").on("click" ,".reviewTitle", (e) => {
 		$reDetail.css("display", "inline-block");
 	} else {
 		$reDetail.css("display", "none");
+	}
+});
+
+// 후기점수
+$("body").on("click", ".scoreLabel", (e) => {
+	let $star = $(e.target).closest(".scoreSpan").find(".fa-star");
+	let $cStar = $(".fa-star");
+	let $radio = $(e.target).closest(".scoreSpan").find("input:radio");
+	if ($star.css("visibility") == "hidden"){
+		$cStar.removeClass("scoreChoice");
+		$star.addClass("scoreChoice");
+		$radio.prop("checked", true);
+	} else if ($star.css("visibility") == "visible"){
+		$cStar.removeClass("scoreChoice");
+		$radio.prop("checked", false);
 	}
 });
 
