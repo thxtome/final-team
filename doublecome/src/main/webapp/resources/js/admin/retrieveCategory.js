@@ -1,19 +1,28 @@
-  $(".dataContent").on("click",(".editBtn"),(e)=>{
-      let $eles = $(e.target).closest("tr").find("td").slice(1,3);
-      let $modalEles = $(".adminMoadalBack input");
+//모달창 띄울시에 데이터 넣기  
+$(".dataContent").on("click",(".editBtn"),(e)=>{
+	  let $trEles = $(e.target).closest("tr").find("td")
+	  let $eles = $trEles.slice(1,3);
+	  let categoryCode = $trEles.find("input").val();
+
+	  $(".adminMoadalBack input[type=hidden]").val(categoryCode)
+
+	  let $modalEles = $(".adminMoadalBack input[type=text]");
+
       for(let i = 0; i < $eles.length; i++){
           $($modalEles[i]).val($($eles[i]).text());
-      } 
-      let radioVal = $(e.target).closest("tr").find("td:eq(3)").text() == "노출" ? 1 : 2;
+	  } 
+	  
+	  let radioVal = $(e.target).closest("tr").find("td:eq(3)").text() == "노출" ? 1 : 2;
+	  
       $(".adminMoadalBack input[type=radio]").each((index,ele)=>{
         if($(ele).val() == radioVal){
             $(ele).prop("checked",true);
         }
-      })
+	  })
+	  
       $(".adminModal").show();
       $("#eventBtn").text("수정")
       $("#eventBtn").attr("action","editCategory.do");
-      
   })
 
   //등록버튼시 모달 띄우기
@@ -70,16 +79,15 @@
 				let $tr = $("<tr></tr>")
 				$tr.append($(`<td><input type="checkbox" name="removeCategory" value="${cat.categoryCode}"></td>`));
 				$tr.append($(`<td>${cat.categoryName}</td>`));
-				$tr.append($(`<td>${cat.categoryCode}</td>`));
+				$tr.append($(`<td>${cat.categoryOrder}</td>`));
 				$tr.append($(`<td>${display}</td>`));
 				$tr.append($(`<td>${cat.categoryDealCnt}</td>`));
 				$tr.append($(`<td><button class="editBtn">관리</button></td>`));
 				$tbody.append($tr);
 			}
-				
+			
 			$(".dataContent tbody").html($tbody.html())		
 			pg.print($(".adminContent"),result.pr);
-		
   }
   
 //체크박스 선택 코드========================================================================
@@ -88,7 +96,7 @@
   	if($checks.filter(":eq(0)").prop("checked") == true){
   		$checks.prop("checked",true);
   	} else{
-  		$checks.prop("checked",false);	
+  		$checks.prop("checked",false);
   	}
   })
 

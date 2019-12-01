@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.doublecome.admin.service.AdminService;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Category;
+import kr.co.doublecome.repository.vo.ReportType;
 import kr.co.doublecome.repository.vo.Search;
 import kr.co.doublecome.repository.vo.SearchAuction;
+import kr.co.doublecome.repository.vo.SearchDeal;
 import kr.co.doublecome.repository.vo.SearchUser;
 
 @Controller
@@ -37,7 +39,8 @@ public class AdminController {
 	public void retrieveUserStatistics() {}
 	
 	@RequestMapping("/retrieveReportedAuction.do")
-	public void retrieveReportedAuction() {
+	public void retrieveReportedAuction(Model model) {		
+		model.addAttribute("categories", service.retrieveCategoryForAucion());		
 	}
 	
 	@RequestMapping("/retrieveAuctionStatistics.do")
@@ -65,17 +68,21 @@ public class AdminController {
 	
 	@RequestMapping("searchAuction.do")
 	@ResponseBody 
-	public AjaxPage searchUser(@RequestBody SearchAuction sa) {
+	public AjaxPage searchAuction(@RequestBody SearchAuction sa) {
 		return service.retrieveAuctionForAdmin(sa);
+	}
+	
+	@RequestMapping("searchDeal.do")
+	@ResponseBody 
+	public AjaxPage searchDeal(@RequestBody SearchDeal sd) {
+		return service.retrieveDealForAdmin(sd);
 	}
 	
 	@RequestMapping("/detailReport.do")
 	@ResponseBody 
-	public AjaxPage retrieveReport(String userEmail, SearchUser su) {
-		su.setListSize(5);
-		su.setKeyword(userEmail);
-		
-		return service.retrieveReport(su);
+	public AjaxPage retrieveReport(Search search) {
+		search.setListSize(5);
+		return service.retrieveReport(search);
 	}
 	
 	@RequestMapping("/removeUser.do")
@@ -84,16 +91,34 @@ public class AdminController {
 		service.removeUser(userEmails);
 	}
 	
+	@RequestMapping("/removeAuction.do")
+	@ResponseBody 
+	public void removeAuction(@RequestBody List<Integer> auctionNos) {
+		service.removeAuction(auctionNos);
+	}
+	
 	@RequestMapping("/removeCategories.do")
 	@ResponseBody 
 	public void removeCategories(@RequestBody List<String> categoryCodes) {
 		service.removeCategories(categoryCodes);
 	}
 	
+	@RequestMapping("/removeReportTypes.do")
+	@ResponseBody 
+	public void removeReportTypes(@RequestBody List<String> reportTypeCodes) {
+		service.removeReportTypes(reportTypeCodes);
+	}
+	
 	@RequestMapping("/retrieveCategories.do")
 	@ResponseBody 
 	public AjaxPage retrieveCategories(@RequestBody Search search) {
 		return service.retrieveCategories(search);
+	}
+	
+	@RequestMapping("/retrieveReportTypes.do")
+	@ResponseBody 
+	public AjaxPage retrieveReportTypes(@RequestBody Search search) {
+		return service.retrieveReportTypes(search);
 	}
 	
 	@RequestMapping("/editCategory.do")
@@ -106,6 +131,18 @@ public class AdminController {
 	@ResponseBody 
 	public void addCategories(@RequestBody Category cat) {
 		service.addCategory(cat);
+	}
+	
+	@RequestMapping("/editReportType.do")
+	@ResponseBody 
+	public void editReportType(@RequestBody ReportType reportType) {
+		service.editReportType(reportType);
+	}
+	
+	@RequestMapping("/addReportType.do")
+	@ResponseBody 
+	public void addReportType(@RequestBody ReportType reportType) {
+		service.addReportType(reportType);
 	}
 	
 }

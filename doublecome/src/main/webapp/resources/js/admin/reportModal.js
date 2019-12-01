@@ -1,13 +1,16 @@
 $(".dataContent").on("click"," tr > td:not(td:has(input))",(e)=>{
-	let userEmail = $(e.target).closest("tr").attr("email");
-	let pageNo = 1;
-	listReport(userEmail,pageNo);
+	let data = {};
+	data.pageNo = 1;
+	data.searchType = $(e.target).closest("tr").attr("searchType");
+	data.keyword = $(e.target).closest("tr").attr("keyword");
+	console.log(data.keyword)
+	listReport(data);
 	$(".reportModal").show();
 })
 
 $(document).click((e)=>{
 	if($(e.target).attr("class") == "reportModalBack"){
-		$(".reportModal").hide();
+		$(".reportModal").hide();	
 		resetReport();
 	}
 })

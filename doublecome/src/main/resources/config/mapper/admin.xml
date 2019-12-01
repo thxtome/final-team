@@ -121,15 +121,24 @@
 	</select>
 	
 <!-- 신고 조회 -->
-	<select id="selectReportByUserEmail" parameterType="SearchUser" resultType="Report">
+	<select id="selectReportForAdmin" parameterType="Search" resultType="Report">
 		select *, 
 		 	   count(*) over() as report_cnt,
          	   rt.report_type_name
 		  from report r
   		 inner join report_type rt
 	  	    on r.report_type_code = rt.report_type_code  
-		 where report_receiver = #{keyword}
-		 limit #{begin},#{listSize}
+		 <where>
+		 	<choose>
+		 		<when test="searchType == 'userEmail'">
+		 			report_receiver = #{keyword}
+		 		</when>
+		 		<when test="searchType == 'auctionNo'">
+		 			auction_no = #{keyword}
+		 		</when>
+		 	</choose>
+		 </where>
+		 limit #{begin},5
 	</select>
 	
 <!-- 유저 삭제 -->	
@@ -148,16 +157,43 @@
 		select a.*,
 	   		   count(*) over() as auction_cnt,
        	  	   ifnull(bid_price,0) as bid_price,
+       	  	   <if test="type != null">
+       	  	   		ifnull(auction_reported_cnt,0) as auction_reported_cnt,
+       	  	   </if>
        	  	   c.category_name
+       	  	   
+       	  	   
   	      from auction a
   		  left outer join (select distinct max(bid_price) over(partition by auction_no) as bid_price,
 						          auction_no 
 			   			     from bid ) d
     	    on a.auction_no = d.auction_no
     	 inner join category c
-            on a.category_code = c.category_code  
+            on a.category_code = c.category_code
+            
+      <if test="type != null">
+		  left outer join (select auction_no,             
+								 count(*) as auction_reported_cnt           
+                            from report
+                            group by auction_no) r      
+		    on a.auction_no= r.auction_no	
+	  </if>      
   		 
   		 <where>
+  		 	<if test="type != null">
+			 	and auction_reported_cnt > 0
+			 	<choose>
+					<when test="startReportedCnt!= null and endReportedCnt != null">
+						and auction_reported_cnt between #{startReportedCnt} and #{endReportedCnt}
+					</when>
+					<when test="startReportedCnt == null and endReportedCnt != null">
+						and auction_reported_cnt <![CDATA[<]]>= #{endReportedCnt}
+					</when>
+					<when test="startReportedCnt != null and endReportedCnt == null">
+						and auction_reported_cnt <![CDATA[>]]>= #{startReportedCnt} 
+					</when>
+				</choose>
+		 	</if>
   		 
   		 	<choose>
 				<when test="startPrice != null and endPrice != null">
@@ -182,7 +218,7 @@
 					and auction_limit_date <![CDATA[>]]>= #{startLimitDate} 
 				</when>
 			</choose>
-  		 	
+
   		  		and a.category_code in 
   		  		<foreach collection="categories" item="staff" open="(" close=")" separator=",">
 		 			#{staff}
@@ -198,7 +234,7 @@
 					<when test="searchType == 'userEmail'">
 						and	a.user_email like CONCAT('%',#{keyword},'%')
 					</when>						
-				</choose>
+			</choose>
   		 </where>
   		 
   		 <choose>
@@ -214,11 +250,15 @@
 			<when test='sort == "auctionLimitDate"'>
 				order by a.auction_limit_date		
 			</when>
+			<when test='sort == "auctionReportedCnt"'>
+				order by r.auction_reported_cnt desc		
+			</when>
 		</choose>
   		 
   		 limit #{begin},#{listSize}
 	</select>
 	
+	<!-- 카테고리 조회  -->
 	<select id="selectCategoriesForAdmin" parameterType="Search" resultType="Category">
 		select c.*, 
 			   ifnull(a.category_deal_cnt,0) as category_deal_cnt,
@@ -244,20 +284,71 @@
 		 limit #{begin},#{listSize}
 	</select>
 	
+		<!-- 신고항목 조회  -->
+	<select id="selectReportTypesForAdmin" parameterType="Search" resultType="ReportType">
+		select rt.*, 
+	   		   ifnull(r.report_type_report_cnt,0) as report_type_report_cnt,
+	   	       count(rt.report_type_code) over() as report_cnt,
+	   	       report_type_order
+  	      from report_type rt
+  		  left outer join (select count(*) as report_type_report_cnt,
+						  				 	  report_type_code
+					 	     from report
+                    		group by report_type_code) r
+    		on  r.report_type_code = rt.report_type_code   
+    
+        <choose>
+			<when test='sort == "reportTypeCode"'>
+				order by c.category_code		
+			</when>
+			<when test='sort == "reportTypeName"'>
+				order by c.category_name	
+			</when>
+			<when test='sort == "reportTypeReportCnt"'>
+				order by category_deal_cnt	desc
+			</when>
+		</choose>
+		 limit #{begin},#{listSize}
+	</select>
+	
 	<!-- 카테고리 수정-->	
 	<update id="updateCategory" parameterType="Category">
 		update category
 		   set category_name = #{categoryName},
-		       category_code = #{categoryCode},
+		       category_order= #{categoryOrder},
 		   	   category_display = #{categoryDisplay}
 		where category_code = #{categoryCode}   	   
 	</update>
 	
 	<!-- 카테고리 등록-->	
 	<insert id="insertCategory" parameterType="Category">
-		insert into category(category_name, category_code, category_display
-		) values (#{categoryName}, #{categoryCode}, #{categoryDisplay})
+		insert into category(category_name, category_order, category_display
+		) values (#{categoryName}, #{categoryOrder}, #{categoryDisplay})
 	</insert>
+	
+	<!-- 신고항목 수정-->	
+	<update id="updateReportType" parameterType="ReportType">
+		update report_type
+		   set report_type_name = #{reportTypeName},
+		       report_type_order = #{reportTypeOrder}
+		where report_type_code = #{reportTypeCode}   	   
+	</update>
+	
+	<!-- 신고항목 등록-->	
+	<insert id="insertReportType" parameterType="ReportType">
+		insert into report_type(report_type_name, report_type_order
+		) values (#{reportTypeName}, #{reportTypeOrder})
+	</insert>
+	
+	<!-- 신고항목 삭제 -->	
+	<delete id="deleteReportType" parameterType="java.util.List" >
+		delete
+		  from report_type
+		 where report_type_code in 
+		 <foreach collection="list" item="code" open="(" close=")" separator=",">
+		 	#{code}
+		 </foreach>  
+	</delete>
 	
 	<!-- 카테고리 삭제 -->	
 	<delete id="deleteCategory" parameterType="java.util.List" >
@@ -268,4 +359,124 @@
 		 	#{code}
 		 </foreach>  
 	</delete>
+	
+	<!-- 경매 삭제 -->
+	<delete id="deleteAuction" parameterType="java.util.List" >
+		delete
+		  from auction
+		 where auction_no in 
+		 <foreach collection="list" item="code" open="(" close=")" separator=",">
+		 	#{code}
+		 </foreach>  
+	</delete>	
+	
+	<!-- 경매조회  -->
+	<select id="selectDealForAdmin" parameterType="SearchDeal" resultType="Deal">
+		select d.*,
+       		   a.auction_title,
+       		   count(*) over() as deal_cnt
+  	      from deal d
+ 	  	 inner join auction a
+    		on d.auction_no = a.auction_no
+    		
+    		where d.deal_condition in 
+  		  		<foreach collection="categories" item="staff" open="(" close=")" separator=",">
+		 			#{staff}
+				 </foreach> 
+				 
+		     <choose>
+					<when test="searchType == 'auctionTitle'">
+						and	a.auction_title like CONCAT('%',#{keyword},'%')
+					</when>
+					<when test="searchType == 'userEmailBuyer'">
+						and	d.user_email_buyer like CONCAT('%',#{keyword},'%')
+					</when>						
+					<when test="searchType == 'userEmailSeller'">
+						and	d.user_email_Seller like CONCAT('%',#{keyword},'%')
+					</when>						
+			</choose>
+			
+			<choose>
+				<when test="startDealNo != null and endDealNo != null">
+					and d.deal_no between #{startDealNo} and #{endDealNo}
+				</when>
+				<when test="startDealNo == null and endDealNo != null">
+					and d.deal_no <![CDATA[<=]]>= #{endDealNo}
+				</when>
+				<when test="startDealNo != null and endDealNo == null">
+					and d.deal_no <![CDATA[>=]]> #{startDealNo} 
+				</when>
+			</choose>
+	</select>
+	
+	<!-- 유저 경매개수 통계 -->
+	<select id="selectUserStaticsByAuctionCnt">
+		select count(*) as full,
+		   	   count(if(ifnull(cnt,0) between 0 and 5,1,null)) as first,
+		       count(if(cnt between 6 and 10,1,null)) as second,
+		       count(if(cnt between 11 and 15,1,null)) as third,
+		       count(if(cnt > 15,1,null)) as fourth
+		  from user u
+    	  left outer join (select count(*) as cnt,
+					              user_email	
+				 	         from auction
+					        group by user_email) auc
+      	    on u.user_email = auc.user_email;
+	</select>
+	
+	<!-- 유저 신고개수 통계 -->
+	<select id="selectUserStaticsByReport">
+		select count(*) as full,
+			   count(if(ifnull(cnt,0) between 0 and 5,1,null)) as first,
+			   count(if(cnt between 6 and 10,1,null)) as second,
+		       count(if(cnt between 11 and 15,1,null)) as third,
+		       count(if(cnt > 15,1,null)) as fourth
+		  from user u
+    	  left outer join (select count(*) as cnt,
+					              report_receiver	
+				             from report
+							group by report_receiver) rep
+      		on u.user_email = rep.report_receiver; 
+	</select>
+	
+	<!-- 유저 거래개수 통계 -->
+	<select id="selectUserStaticsByDealCnt">
+	  select count(*) as full,
+			 count(if(ifnull(cnt,0) between 0 and 5,1,null)) as first,
+			 count(if(cnt between 6 and 10,1,null)) as second,
+		     count(if(cnt between 11 and 15,1,null)) as third,
+		     count(if(cnt > 15,1,null)) as fourth
+	    from (select distinct u.user_email,cnt1 + cnt2 as cnt
+			    from user u
+			    left outer join (select deal.user_email_buyer,
+									    count(*) over(partition by deal.user_email_buyer) as cnt1
+							       from deal) d1
+			      on u.user_email = d1.user_email_buyer
+				left outer join (select deal.user_email_seller,
+									    count(*) over(partition by deal.user_email_seller) as cnt2
+						           from deal) d2
+			      on u.user_email = d2.user_email_seller) innerq;
+	</select>
+	
+	<!-- 경매 카테고리별 통계 -->
+	<select id="selectAuctionStaticsByCategory">
+		select c.category_name,
+			   a.category_auction_cnt as category_auction_cnt
+		  from category c
+		  inner join (select count(*) over (partition by category_code) as category_auction_cnt,
+								  category_code
+						     from auction) a
+		    on  c.category_code = a.category_code
+         group by c.category_code  
+         having c.category_code > 0
+	</select>
+	
+	<!-- 경매 상태별 통계 -->
+	<select id="selectAuctionStaticsByCondition">
+		   select count(if(auction_condition = 1,1,null)) as going,
+          		  count(if(auction_condition = 2,1,null)) as finish
+     	     from auction;
+	</select>
+	
+	
 </mapper>

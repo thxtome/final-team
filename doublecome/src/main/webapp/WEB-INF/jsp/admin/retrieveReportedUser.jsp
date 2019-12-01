@@ -72,7 +72,7 @@
 			
 			
 			<div class="dataFilters">
-				<input type="button" class="removeUserBtn" value="탈퇴">
+				<input type="button" class="removeCheckBtn" value="탈퇴">
 				<div>
 					<ul>
 						<li data-sort="userEmail">&#149;아이디순</li>
@@ -114,6 +114,7 @@
 		</div>
 		<c:import url="/WEB-INF/jsp/admin/reportModal.jsp" />
 	</div>
+	<script src="<c:url value="/resources/js/common/timeFormat.js"/>"></script>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
 	<script src="<c:url value="/resources/js/admin/retrieveReportedUser.js"/>"></script>
 </body>

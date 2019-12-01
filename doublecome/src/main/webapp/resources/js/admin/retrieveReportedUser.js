@@ -36,7 +36,7 @@ function success(result){
 	}
 	result.list.forEach((user)=>{
 		$("#dataCount").text(user.userCnt)
-		let $tr = $("<tr></tr>").attr("email",user.userEmail)
+		let $tr = $("<tr></tr>").attr("searchType",'userEmail').attr("keyword",user.userEmail)
 		$tr.append($(`<td><input type="checkbox" name="removeUser" value="${user.userEmail}"></td>`));
 		$tr.append($(`<td>${user.userEmail}</td>`));
 		$tr.append($(`<td>${user.userNickname}</td>`));
@@ -54,12 +54,12 @@ function success(result){
 
 
 //신고목록 갱신==================================================================================================
-function listReport(userEmail,pageNo){
+function listReport(data){
 
 	$.ajax({
-		url:"detailReport.do",
-		type:"POST",
-		data:{userEmail:userEmail, pageNo:pageNo},
+		url: "detailReport.do",
+		type: "POST",
+		data: data,
 		success: (result)=>{
 			console.log(result);
 			let reportContent = $("<div></div>");
@@ -68,7 +68,7 @@ function listReport(userEmail,pageNo){
 				let report = ele;
 				let content = $("<div></div>"); 
 				content.append($(`<div><span>${report.reportSender}</span>
-											<span>${format(report.reportRegDate)}</span><div>`))
+							 		   <span>${format(report.reportRegDate,"ymd")}</span><div>`))
 								.append($(`<div><span>${report.reportTypeName}</span></div>`))	    
 								.append($(`<div><span>${report.reportContent}</span></div>`))
 				
@@ -76,7 +76,7 @@ function listReport(userEmail,pageNo){
 			})
 			reportContent.append($("<div></div>").addClass("pagination"))
 			
-			$(".reportContent").html(reportContent.html()).attr("userEmail",userEmail);
+			$(".reportContent").html(reportContent.html()).attr("keyword",data.keyword);
 			
 			pg.print($(".reportContent"),result.pr);	
 				    
@@ -86,20 +86,10 @@ function listReport(userEmail,pageNo){
 
 //신고목록 페이지 이동시============================================================================================
 pg.movePage($(".reportContent"),(pageNo)=>{
-	let userEmail = $(".reportContent").attr("userEmail")
-	listReport(userEmail,pageNo)
+	let keyword = $(".reportContent").attr("keyword")
+	let data = {keyword:keyword,pageNo:pageNo,searchType:"userEmail"}
+	listReport(data)
 })
-
-//날짜변환========================================================================================================
-function format(date){
-    var year = date.year;		//yyyy
-    var month = date.monthValue;		//MM
-    month = month >= 10 ? month : '0' + month;	//month 두자리로 저장
-    var day = date.dayOfMonth;			//dd
-    day = day >= 10 ? day : '0' + day;		//day 두자리로 저장
-    return  year + '-' + month + '-' + day;
-}
-
 
 //신고목록 리셋========================================================================================================
 function resetReport() {
@@ -107,7 +97,7 @@ function resetReport() {
 }
 
 //유저 삭제=============================================================================================================
-$(".removeUserBtn").click(()=>{
+$(".removeCheckBtn").click(()=>{
 	removeUser();
 })
 

@@ -29,7 +29,7 @@ public class Auction {
 	private String userNickname;			// 경매글쓴이 닉네임
 	private String reviewSender;			// 후기 작성자 이메일
 	private int auctionCnt;				    // 경매  개수
-	
+	private int auctionReportedCnt;			// 받은 신고글 갯수
 	private int inquiryNo;					// 문의글 번호
 	private String inquiryContent;			// 문의글 내용
 	private int inquiryParent;				// 답글 여부

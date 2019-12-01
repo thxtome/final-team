@@ -10,4 +10,5 @@ public class Category {
 	private int categoryDisplay;			// 카테고리 노출여부
 	private int categoryDealCnt;			// 카테고리 경매개수
 	private int categoryCnt;			// 카테고리 총개수
+	private int categoryOrder;			// 카테고리 순서
 }

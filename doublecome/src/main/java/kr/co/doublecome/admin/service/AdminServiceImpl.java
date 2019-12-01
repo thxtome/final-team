@@ -11,9 +11,12 @@ import kr.co.doublecome.repository.mapper.AuctionMapper;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Category;
+import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.Report;
+import kr.co.doublecome.repository.vo.ReportType;
 import kr.co.doublecome.repository.vo.Search;
 import kr.co.doublecome.repository.vo.SearchAuction;
+import kr.co.doublecome.repository.vo.SearchDeal;
 import kr.co.doublecome.repository.vo.SearchUser;
 import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.util.page.PageResult;
@@ -48,6 +51,11 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	
+	public void removeAuction(List<Integer> auctionNos) {
+		mapper.deleteAuction(auctionNos);
+	}
+
+
 	public void editCategory(Category cat) {
 		mapper.updateCategory(cat);
 	}
@@ -63,12 +71,12 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 
-	public AjaxPage retrieveReport(SearchUser su) {
+	public AjaxPage retrieveReport(Search search) {
 		
 		AjaxPage ap = new AjaxPage();
 		List<Object> list = new ArrayList<Object>();
-		System.out.println(su.getKeyword());
-		List<Report> rlist = mapper.selectReportByUserEmail(su);
+		
+		List<Report> rlist = mapper.selectReportForAdmin(search);
 		
 		for(Report report : rlist) {
 			list.add((Object)report);
@@ -81,11 +89,76 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		ap.setList(list);
-		ap.setPr(new PageResult(su.getPageNo(), count, 5, 5));
+		ap.setPr(new PageResult(search.getPageNo(), count, 5, 5));
 
 		return ap;
 	}
 	
+	@Override
+	public AjaxPage retrieveDealForAdmin(SearchDeal sd) {
+		AjaxPage ap = new AjaxPage();
+		List<Object> list = new ArrayList<Object>();
+		
+		List<Deal> dlist = mapper.selectDealForAdmin(sd);
+		
+		for(Deal deal : dlist) {
+			list.add((Object)deal);
+		}
+		
+		int count = 0;
+		
+		if(!dlist.isEmpty()) {
+			count = dlist.get(0).getDealCnt();
+		}
+		
+		ap.setList(list);
+		ap.setPr(new PageResult(sd.getPageNo(), count, sd.getListSize(), 10));
+
+		return ap;
+	}
+
+
+	public void editReportType(ReportType reportType) {
+		System.out.println(reportType.toString());
+		mapper.updateReportType(reportType);
+	}
+
+
+	@Override
+	public AjaxPage retrieveReportTypes(Search search) {
+		AjaxPage ap = new AjaxPage();
+		List<Object> list = new ArrayList<Object>();
+		List<ReportType> rtlist =  mapper.selectReportTypesForAdmin(search);
+		
+		
+		for(ReportType rt : rtlist) {
+			list.add((Object)rt);
+		}
+		
+		int count = 0;
+		
+		if(!rtlist.isEmpty()) {
+			count = rtlist.get(0).getReportTypeCnt();
+		}
+		
+		ap.setList(list);
+		ap.setPr(new PageResult(search.getPageNo(), count, search.getListSize(), 10));
+		
+		return ap;
+	}
+
+
+
+	public void removeReportTypes(List<String> reportTypeCodes) {
+		mapper.deleteReportType(reportTypeCodes);
+	}
+
+
+	public void addReportType(ReportType reportType) {
+		mapper.insertReportType(reportType);		
+	}
+
+
 	public void removeUser(List<String> userEmails) {
 		mapper.deleteUser(userEmails);
 	}

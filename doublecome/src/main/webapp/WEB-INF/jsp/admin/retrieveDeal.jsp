@@ -34,18 +34,18 @@
 
 			<div id="searchBar">
 				<form action="">
-					<table class="dataSearch">
+					<table class="dataSearch" id="searchForm" data-action="searchDeal.do">
 						<tr>
 							<td>검색항목</td>
-							<td><select>
-									<option value="userEmail">구매자</option>
-									<option value="userNickname">판매자</option>
+							<td><select name="searchType">
+									<option value="userEmailBuyer">구매자</option>
+									<option value="userEmailSeller">판매자</option>
 									<option value="userNickname">경매 제목</option>
-							</select> <input type="text" class="searchWord"></input></td>
+							</select> <input type="text" name="keyword" class="searchWord"></input></td>
 							<td>거래 번호</td>
 							<td>
-								<p class="labels">번</p> <input type="text"> <span>~</span>
-								<p class="labels">번</p> <input type="text">
+								<p class="labels">번</p> <input name="startDealNo" type="text"> <span>~</span>
+								<p class="labels">번</p> <input name="endDealNo" type="text">
 							</td>
 						</tr>
 
@@ -55,21 +55,25 @@
 								<div class="categoryBox">
 
 									<div>
-										<label for="conditionAll" id="conditionAllLabel">전체</label> <input
-											type="checkbox" id="conditionAll">
+									<label for="categoryAll" id="categoryAllLabel">전체</label> <input type="checkbox"
+											id="categoryAll" value="">
 									</div>
 									<div>
-										<label for="condition1" class="conditionLable">거래중</label> <input
-											type="checkbox" name="condition" value="" id="condition1">
-									</div>
+										<label for="category1">거래중</label> <input name="categories" type="checkbox"
+											id="category1" value="1">
+									</div>	
 									<div>
-										<label for="category2" class="conditionLable">거래완료</label> <input
-											type="checkbox" name="condition" id="category2">
-									</div>
+										<label for="category2">정상거래완료</label> <input name="categories" type="checkbox"
+											id="category2" value="2">
+									</div>	
 									<div>
-										<label for="category3" class="conditionLable">거래실패</label> <input
-											type="checkbox" name="condition" id="category3">
-									</div>
+										<label for="category3">거래취소</label> <input name="categories" type="checkbox"
+											id="category3" value="3">
+									</div>	
+									<div>
+										<label for="category4">신고거래</label> <input name="categories" type="checkbox"
+											id="category4" value="4">
+									</div>	
 								</div>
 							</td>
 						</tr>
@@ -77,7 +81,7 @@
 						<tfoot>
 							<tr>
 								<td colspan="4">
-									<button>검색</button>
+									<button id="searchBtn" type="button">검색</button>
 								</td>
 							</tr>
 						</tfoot>
@@ -87,7 +91,7 @@
 			<div class="dataFilters">
 				<div></div>
 				<div>
-					<select>
+					<select id="listSize">
 						<option value="10">10개씩 보기</option>
 						<option value="25">25개씩 보기</option>
 						<option value="50">50개씩 보기</option>
@@ -111,15 +115,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>아이폰 11 싸게 팝니다</td>
-						<td>p@p</td>
-						<td>c@c</td>
-						<td>완료</td>
-					</tr>
 				</tbody>
 			</table>
+			<c:import url="/WEB-INF/jsp/include/pagination.jsp" />
 		</div>
 	</div>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>

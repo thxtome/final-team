@@ -114,54 +114,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>아이폰 사세요 싸게 드립니다</td>
-						<td>park</td>
-						<td>180,000</td>
-						<td>전자기기</td>
-						<td>2019-11-15</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>아이폰 사세요 싸게 드립니다</td>
-						<td>park</td>
-						<td>180,000</td>
-						<td>전자기기</td>
-						<td>2019-11-15</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>아이폰 사세요 싸게 드립니다</td>
-						<td>park</td>
-						<td>180,000</td>
-						<td>전자기기</td>
-						<td>2019-11-15</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>아이폰 사세요 싸게 드립니다</td>
-						<td>park</td>
-						<td>180,000</td>
-						<td>전자기기</td>
-						<td>2019-11-15</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>아이폰 사세요 싸게 드립니다</td>
-						<td>park</td>
-						<td>180,000</td>
-						<td>전자기기</td>
-						<td>2019-11-15</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>아이폰 사세요 싸게 드립니다</td>
-						<td>park</td>
-						<td>180,000</td>
-						<td>전자기기</td>
-						<td>2019-11-15</td>
-					</tr>
 				</tbody>
 			</table>
 		<c:import url="/WEB-INF/jsp/include/pagination.jsp" />

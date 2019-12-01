@@ -1,6 +1,8 @@
 package kr.co.doublecome.repository.vo;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -14,6 +16,7 @@ public class Report {
 	private int reportTypeCode;
 	private int auctionNo;
 	private int reportCnt;
-	private LocalDateTime reportRegDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date reportRegDate;
 	private String reportTypeName;
 }

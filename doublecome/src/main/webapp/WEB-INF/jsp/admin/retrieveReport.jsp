@@ -31,58 +31,40 @@
 			<div>
 				<h2>신고 항목</h2>
 			</div>
-
+		
+			<div class="dataFilters">
+				<input type="button" class="removeReportTypesBtn" value="삭제 ">
+				<div>
+					<ul>
+						<li data-sort="categoryCode">&#149;순서순</li>
+						<li data-sort="categoryName">&#149;제목순</li>
+						<li data-sort="categoryDealCnt">&#149;높은 경매수순</li>
+					</ul>
+				</div>
+				<div>
+					<select id="listSize">
+						<option value="10">10개씩 보기</option>
+						<option value="25">25개씩 보기</option>
+						<option value="50">50개씩 보기</option>
+					</select> <span>총 개수 : </span> <span id="dataCount">10</span> <span>개</span>
+				</div>
+			</div>
 
 			<table class="dataContent">
 				<thead>
 					<tr>
-						<th>신고항목 순서</th>
+						<th><input type="checkbox"></th>
 						<th>신고항목 내용</th>
+						<th>신고항목 순서</th>
 						<th>신고 수</th>
-						<th>등록 날짜</th>
 						<th>비고</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>욕설/비방</td>
-						<td>13</td>
-						<td>2019-07-19</td>
-						<td>
-							<button class="editBtn">관리</button>
-						</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>사기</td>
-						<td>16</td>
-						<td>2019-08-11</td>
-						<td>
-							<button class="editBtn">관리</button>
-						</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>물품 상태</td>
-						<td>152</td>
-						<td>2019-01-14</td>
-						<td>
-							<button class="editBtn">관리</button>
-						</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>불친전</td>
-						<td>123</td>
-						<td>2019-02-13</td>
-						<td>
-							<button class="editBtn">관리</button>
-						</td>
-					</tr>
 				</tbody>
 			</table>
-
+			<data id="searchForm" data-action="retrieveReportTypes.do"> <c:import
+				url="/WEB-INF/jsp/include/pagination.jsp" />
 			<div class="addReportBtn">
 				<button>등록</button>
 			</div>
@@ -93,22 +75,25 @@
 		</div>
 
 		<div class="adminModal">
-			<div class="adminMoadalBack">
+			<div class="adminModalBack">
 				<div>
 					<h2>신고항목 관리</h2>
 					<hr style="width: 90%" />
-					<div>
-						<span>신고항목 순서</span> <input type="text">
-					</div>
+					<form>
+						<input type="hidden" name="reportTypeCode" value="">
+						<div>
+							<span>신고항목 제목</span> <input name="reportTypeName" type="text">
+						</div>
 
-					<div>
-						<span>신고항목 제목</span> <input type="text">
-					</div>
+						<div>
+							<span>신고항목 순서</span> <input name="reportTypeOrder" type="text">
+						</div>
 
-					<div>
-						<button id="eventBtn">수정</button>
-						<button id="cancelBtn">취소</button>
-					</div>
+						<div>
+							<button id="eventBtn" type="button">수정</button>
+							<button id="cancelBtn" type="button">취소</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

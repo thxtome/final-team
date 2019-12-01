@@ -31,9 +31,9 @@
 			<div>
 				<h2>카테고리 항목</h2>
 			</div>
-			
+
 			<div class="dataFilters">
-			<input type="button" class="removeCategoriesBtn" value="삭제 ">
+				<input type="button" class="removeCategoriesBtn" value="삭제 ">
 				<div>
 					<ul>
 						<li data-sort="categoryCode">&#149;순서순</li>
@@ -63,18 +63,16 @@
 				</thead>
 				<tbody>
 					<tr>
-						<tr><td style=text-align:center colspan='5'>검색결과가 없습니다.</td>
+					<tr>
+						<td style="text-align: center" colspan='5'>검색결과가 없습니다.</td>
 					</tr>
 				</tbody>
 			</table>
-			<data id="searchForm" data-action="retrieveCategories.do">
-			<c:import url="/WEB-INF/jsp/include/pagination.jsp" />
+			<data id="searchForm" data-action="retrieveCategories.do"> <c:import
+				url="/WEB-INF/jsp/include/pagination.jsp" />
 			<div class="addCategoryBtn">
 				<button>등록</button>
 			</div>
-
-
-
 		</div>
 
 		<div class="adminModal">
@@ -82,26 +80,28 @@
 				<div>
 					<h2>카테고리 관리</h2>
 					<hr style="width: 90%" />
-				<form>
-					<div>
-						<span>카테고리 제목</span> <input name="categoryName" type="text">
-					</div>
+					<form>
+						<input type="hidden" name="categoryCode" value="">
+						<div>
+							<span>카테고리 제목</span> <input name="categoryName" type="text">
+						</div>
 
-					<div>
-						<span>카테고리 순서</span> <input name="categoryCode" type="text">
-					</div>
-					
-					<div>
-						<span>노출 여부</span> 
-						<input type="radio" value="1" id="showTrue" name="categoryDisplay"> <label for="showTrue">노출</label>
-						<input type="radio" value="2" id="showFalse" name="categoryDisplay"> <label for="showFalse">비노출</label>
-					</div>
+						<div>
+							<span>카테고리 순서</span> <input name="categoryOrder" type="text">
+						</div>
 
-					<div>
-						<button id="eventBtn" type="button">수정</button>
-						<button id="cancelBtn" type="button">취소</button>
-					</div>
-				</form>
+						<div>
+							<span>노출 여부</span> <input type="radio" value="1" id="showTrue"
+								name="categoryDisplay"> <label for="showTrue">노출</label>
+							<input type="radio" value="2" id="showFalse"
+								name="categoryDisplay"> <label for="showFalse">비노출</label>
+						</div>
+
+						<div>
+							<button id="eventBtn" type="button">수정</button>
+							<button id="cancelBtn" type="button">취소</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
