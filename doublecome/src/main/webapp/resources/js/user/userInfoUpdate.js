@@ -129,7 +129,7 @@ function upload() {
   
   
 function avtiveBtn() {
-	  if($('input').val() !== "")
+	 /* if($('input').val() !== "")*/
   $('#updateFormBtn').attr( 'disabled', false )
 }
 

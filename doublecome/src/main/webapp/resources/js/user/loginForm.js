@@ -1,4 +1,4 @@
-($('.hideLogin').hide());
+/*($('.hideLogin').hide());
 ($('#background').hide());
 $('span > a').click( (e) => {
     let ele = e.target;
@@ -29,7 +29,7 @@ $('#findPass').click( (e) => {
                     'PassWord Find',
                     'width = 500, height = 300, location= no');
     })
-});
+});*/
 /*
 $('#findId').click( (e) => {
 	console.log($(e.target).attr("id"))
