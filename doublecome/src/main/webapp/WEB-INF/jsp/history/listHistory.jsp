@@ -49,15 +49,21 @@
 			<div>
 				<div id="purchaseHead">구매내역</div>
 				<ul class="tabHead">
-					<li><span class="purchaseTabList">입찰</span></li>
-					<li><span class="purchaseTabList tabChoice">거래 진행</span></li>
-					<li><span class="purchaseTabList">거래 완료</span></li>
+					<li><span data-name="dealBid" class="purchaseTabList tabChoice">입찰</span></li>
+					<li><span data-name="dealProgress" class="purchaseTabList">거래 진행</span></li>
+					<li><span data-name="dealComplete" class="purchaseTabList">거래 완료</span></li>
 				</ul>
 				<c:choose>
 					<c:when test="${empty buyHistory}">
 						<div class="emptyBox">구매한 내역이 없습니다.</div>
 					</c:when>
 					<c:otherwise>
+					<div class="yearSort">
+						<select name="sort">
+						<option>2019</option>
+						<option>2018</option>
+						</select>
+					</div>
 						<c:forEach var="b" items="${buyHistory}">
 							<div class="listCon">
 								<div class="listHead">
@@ -238,6 +244,7 @@
 			</div>
 		</div>
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+		<c:import url="/WEB-INF/jsp/admin/reportModal.jsp" />
 	</div>
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 	<script
@@ -246,7 +253,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	<script src="<c:url value="/resources/summernote/summernote.js" />"></script>
 	<script src="<c:url value="/resources/js/common/timeFormat.js"/>"></script>
-	<script src="<c:url value="/resources/js/history/listHistory.js"/>"></script>
-	<c:import url="/WEB-INF/jsp/admin/reportModal.jsp" />
+	<script src="<c:url value="/resources/js/history/reviewHistory.js"/>"></script>
+	<script src="<c:url value="/resources/js/history/sailesHistory.js"/>"></script>
 </body>
 </html>

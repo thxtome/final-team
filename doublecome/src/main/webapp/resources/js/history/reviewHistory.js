@@ -1,21 +1,3 @@
-/*
-	$.post({
-
-		url: "addReivew.do",
-		dataType: "json",
-		data: {
-			auctionNo: $(e.target).data("no"), 
-			reviewTitle:,
-			reviewContent:,
-			reviewScore:,
-			reviewReceiver:,
-			dealNo:
-			},
-		contentType: "application/x-www-form-urlencoded",
-		success: (result) => {makeCommentList(result)}
-	});
-	$("#writer", "#content").val("");
-*/
 let pageNo = 1;
 let reviewCnt = 0;
 let sort = "";
@@ -80,7 +62,6 @@ $(".salesTabList").click((e) => {
 	$(e.target).addClass("tabChoice");
 });
 function reviewListAjax(target, pageNo, sort){
-	console.log(target.data("name"));
 	let $dataName = target.data("name");
 		$.get({
 			url: `retrieve${$dataName}.do`,

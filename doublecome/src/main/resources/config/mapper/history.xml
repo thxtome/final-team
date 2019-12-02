@@ -131,9 +131,6 @@
 	
 	<!-- 후기등록 -->
 	<insert id="insertReview" parameterType="Review" >
-		<selectKey order="AFTER">
-			update user set user_review_cnt = user_review_cnt + 1;
-		</selectKey>
 		insert into review (
 		review_title, review_content, deal_no, review_sender, review_receiver, review_score
 		) values (
@@ -145,6 +142,14 @@
 			#{reviewScore}
 		)
 	</insert>
+	
+	<!-- 사용자 받은 후기점수 합계 -->
+	<select id="selectUserSumScore" parameterType="Review" resultType="int">
+		select sum(review_score)
+		  from review
+		 group by review_receiver
+		 where review_receiver = #{reviewReceiver}
+	</select>
 	
 	<!-- 후기 한개  -->
 	<select id="selectOneReview" parameterType="Review" resultType="Review">
