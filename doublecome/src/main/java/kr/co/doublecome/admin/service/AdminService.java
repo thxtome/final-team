@@ -1,6 +1,7 @@
 package kr.co.doublecome.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Category;
@@ -26,4 +27,7 @@ public interface AdminService {
 	public void addReportType(ReportType reportType);
 	public AjaxPage retrieveReportTypes(Search search);
 	public void removeReportTypes(List<String> reportTypeCodes);
+	public Map<String, String> retrieveUserStaticsAc();
+	public Map<String, String> retrieveUserStaticsRp();
+	public Map<String, String> retrieveUserStaticsDc();
 }

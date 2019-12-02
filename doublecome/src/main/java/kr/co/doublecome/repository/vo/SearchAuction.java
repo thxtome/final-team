@@ -31,6 +31,9 @@ public class SearchAuction extends Search{
 	private Integer startPrice;
 	private Integer endPrice;
 	private String sorts;
+	private Integer type;
+	private Integer startReportedCnt;
+	private Integer endReportedCnt;
 	
 	private Integer[] categories;
 	

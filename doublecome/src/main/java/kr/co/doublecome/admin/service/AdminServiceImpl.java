@@ -2,6 +2,7 @@ package kr.co.doublecome.admin.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,21 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	AuctionMapper auctionMapper;
 	
+	public Map<String, String> retrieveUserStaticsAc() {
+		return mapper.selectUserStaticsByAuctionCnt();
+	}
+
+
+	public Map<String, String> retrieveUserStaticsRp() {
+		return mapper.selectUserStaticsByReport();
+	}
+
+
+	public Map<String, String> retrieveUserStaticsDc() {
+		return mapper.selectUserStaticsByDealCnt();
+	}
+
+
 	public AjaxPage retrieveUserForAdmin(SearchUser su){
 		AjaxPage ap = new AjaxPage();
 		List<Object> list = new ArrayList<Object>();

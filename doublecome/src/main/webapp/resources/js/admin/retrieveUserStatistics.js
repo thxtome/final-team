@@ -11,6 +11,8 @@
             ['data2', 350, 220, 110, 240, 215, 125, 113, 364, 384, 232, 132]
         ]
 
+        
+
         printChart(data)
 
         $(".lineChartType > span").click((e) => {
@@ -41,69 +43,51 @@
         }
         // ==========================================================================================================
 
-        c3.generate({
-            bindto: "#pieChart1",
-            data: {
-                columns: [
-                    ['0 - 5', 30],
-                    ['6 - 10', 120],
-                    ['11 - 15', 120],
-                    ['16 - ', 150],
-                ],
-                type: 'donut',
-                onclick: function (d, i) { console.log("onclick", d, i); },
-                onmouseover: function (d, i) { console.log("onmouseover", d, i); },
-                onmouseout: function (d, i) { console.log("onmouseout", d, i); }
-            },
-            color: {
-                pattern: ['#1f77b4', '#aec7e8', '#ffbb78', '#2ca02c']
-            },
-            donut: {
-                title: "신고수별 유저 비율"
-            }
-        });
+        let pie1 = {url: "retrieveUserStaticsAc.do", 
+                    target: "#pieChart1",
+                    color: ['#1f77b4', '#aec7e8', '#ffbb78', '#2ca02c'],
+                    title: "신고수별 유저 비율"}
+        let pie2 = {url: "retrieveUserStaticsDc.do", 
+                    target: "#pieChart2",
+                    color: ['#d62728', '#ff9896', '#9467bd', '#c5b0d5'],
+                    title: "거래수별 유저 비율"}
+        let pie3 = {url: "retrieveUserStaticsRp.do", 
+                    target: "#pieChart3",
+                    color: ['#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d'],
+                    title: "경매수별 유저 비율"}
 
-        c3.generate({
-            bindto: "#pieChart2",
-            data: {
-                columns: [
-                    ['0 - 5', 90],
-                    ['6 - 10', 100],
-                    ['11 - 15', 90],
-                    ['16 - ', 150],
-                ],
-                type: 'donut',
-                onclick: function (d, i) { console.log("onclick", d, i); },
-                onmouseover: function (d, i) { console.log("onmouseover", d, i); },
-                onmouseout: function (d, i) { console.log("onmouseout", d, i); }
-            },
-            color: {
-                pattern: ['#d62728', '#ff9896', '#9467bd', '#c5b0d5']
-            },
-            donut: {
-                title: "거래수별 유저 비율"
-            }
-        });
+        printPie(pie1);
+        printPie(pie2);
+        printPie(pie3);
 
-        c3.generate({
-            bindto: "#pieChart3",
-            data: {
-                columns: [
-                    ['0 - 5', 90],
-                    ['6 - 10', 100],
-                    ['11 - 15', 90],
-                    ['16 - ', 150],
-                ],
-                type: 'donut',
-                onclick: function (d, i) { console.log("onclick", d, i); },
-                onmouseover: function (d, i) { console.log("onmouseover", d, i); },
-                onmouseout: function (d, i) { console.log("onmouseout", d, i); }
-            },
-            color: {
-                pattern: ['#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d']
-            },
-            donut: {
-                title: "경매수별 유저 비율"
-            }
-        });
 
+    function printPie(pie) {
+        $.ajax({
+            url: pie.url,
+            success: (result)=>{
+                let data = [];
+                Object.keys(result).map(function(key){
+                    let innerArr = [key,result[key]]
+                    data.push(innerArr);
+                });
+
+                c3.generate({
+                    bindto: pie.target,
+                    data: {
+                        columns: data,
+                        type: 'donut',
+                        onclick: function (d, i) { console.log("onclick", d, i); },
+                        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+                        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+                    },
+                    color: {
+                        pattern: pie.color
+                    },
+                    donut: {
+                        title: pie.title
+                    }
+                });
+            }
+        })
+   
+    }

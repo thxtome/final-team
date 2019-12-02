@@ -1,6 +1,7 @@
 package kr.co.doublecome.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -143,6 +144,24 @@ public class AdminController {
 	@ResponseBody 
 	public void addReportType(@RequestBody ReportType reportType) {
 		service.addReportType(reportType);
+	}
+	
+	@RequestMapping("/retrieveUserStaticsAc.do")
+	@ResponseBody 	
+	public Map<String,String> retrieveUserStaticsAc() {
+		return service.retrieveUserStaticsAc();
+	}
+	
+	@RequestMapping("/retrieveUserStaticsRp.do")
+	@ResponseBody 	
+	public Map<String,String> retrieveUserStaticsRp() {
+		return service.retrieveUserStaticsRp();
+	}
+	
+	@RequestMapping("/retrieveUserStaticsDc.do")
+	@ResponseBody 	
+	public Map<String,String> retrieveUserStaticsDc() {
+		return service.retrieveUserStaticsDc();
 	}
 	
 }

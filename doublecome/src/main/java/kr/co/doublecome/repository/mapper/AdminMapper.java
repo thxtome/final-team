@@ -1,6 +1,7 @@
 package kr.co.doublecome.repository.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Category;
@@ -14,6 +15,7 @@ import kr.co.doublecome.repository.vo.SearchUser;
 import kr.co.doublecome.repository.vo.User;
 
 public interface AdminMapper {
+	public Map<String, String> selectUserStaticsByAuctionCnt();	
 	public List<User> selectUserForAdmin(SearchUser su);
 	public List<Auction> selectAuctionForAdmin(SearchAuction sa);
 	public List<Report> selectReportForAdmin(Search search);
@@ -28,4 +30,6 @@ public interface AdminMapper {
 	public void insertReportType(ReportType reportType);
 	public List<ReportType> selectReportTypesForAdmin(Search search);
 	public void deleteReportType(List<String> reportTypeCodes);
+	public Map<String, String> selectUserStaticsByReport();
+	public Map<String, String> selectUserStaticsByDealCnt();
 }
