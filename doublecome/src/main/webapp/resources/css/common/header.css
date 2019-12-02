@@ -3,12 +3,8 @@
     height: 40px;
     background: rgb(230, 230, 230);
 }
-.topContent {
-	border-bottom : eee;
-}
 .topbar>div {
     width: 1000px;
-    margin: auto;
     height: 40px;
 }
 #bdhr {
@@ -26,7 +22,7 @@
     position: relative;
     width: 50px;
     height: 21px;
-    left: 84%;
+    left: 50%;
     top: 11px;
     color: rgb(0, 0, 0);
     font-weight: bold;
@@ -43,10 +39,9 @@
 .topContent {
     margin: auto;
     width: 1000px;
-    height: 200px;
+    height: 180px;
     display: grid;
     grid-template-columns: 4fr 7fr 4fr;
-    grid-template-rows: 140px 60px;
 }
 
 
@@ -149,15 +144,19 @@
 
 .topContent>div:nth-child(4)>div:first-child {
     width: 230px;
-    height: 100%;
+    height: 53px;
     display: flex;
     align-items: center;
     text-align: center;
-    background: rgb(230, 230, 230);
+    border-top : 1px solid #eee;
+    border-left : 1px solid #eee;
+    border-right : 1px solid #eee;
 }
 
 .topContent>div:nth-child(4)>div:first-child:hover {
-    background: rgb(199, 199, 199);
+    background:#FF3B58;
+    color : white;
+    font-weight: bold;
 }
 
 .topContent>div:nth-child(4)>div:first-child>span:hover {
@@ -212,14 +211,35 @@
 
 .categoryBar{
     position: absolute;
-    width: 230px;
+    width: 285px;
     height: max-content;
-    top: 240px;
+    top: 221px;
     background: #ffffff;
     display: none;
     z-index: 1;
+    font-weight:bold;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    
 }
+.categoryBar a {
+	color : #333;
+}
+.categoryBar ul li{
+	font-weight : bold;
+	display : grid;
+	grid-template-columns : 2fr 8fr
+}
+.all_category svg{
+	margin-right : 10px;
+}
+.categoryBar li {
+	list-style : none;
+	height: 30px;
+}
+.categoryBar ul:first-child {
+	margin-top : 20px;
+}
+
 .categoryBar > div{
     width: 100%;
     height: 50px;
@@ -234,4 +254,31 @@
 }
 #movetomain {
 	cursor: pointer;
+}
+.category_displayOn ul {
+	list-style: none;
+	margin : 0;
+	padding : 0;
+	padding-left : 20px;
+	line-height: 50px;
+}
+.category_displayOn ul li a {
+	color : #333;
+	text-decoration: none;
+}
+.category_displayOn ul li {
+	float:left;
+	margin-right: 30px;
+}
+.category_displayOn ul li:hover, .category_displayOn ul li a:hover {
+    font-weight: bold;
+    color : #FF3B58;
+    cursor: pointer;
+}
+.all_category {
+	padding-left : 20px
+}
+.all_category:hover{
+	backgroud : #FF3B58;
+	cursor: pointer
 }

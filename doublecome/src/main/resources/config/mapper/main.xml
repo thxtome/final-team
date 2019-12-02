@@ -22,5 +22,9 @@
 		  and auction_condition = 1
 		order by bid_cnt desc
 	</select>
+	<select id="categoryList" resultType="Category">
+		select *
+		  from category
+	</select>
 </mapper>
 <!--           and str_to_date(a.auction_limit_date, "%Y-%m-%d") > str_to_date(date_format(now(), "%Y-%m-%d"), "%Y-%m-%d") -->

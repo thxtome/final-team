@@ -6,10 +6,14 @@
    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/common/header.css" />">
-   
+   <link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet">
+   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <div class="topbar">
 	<sec:authorize access="isAnonymous()">
 		<div>
+			<span><a href="<c:url value="/user/userInfo.do" />">마이페이지</a></span>
+			<span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
+			<span><a href="<c:url value="/auction/insertAuction.do" />">글작성 페이지로 이동</a></span>
 			<span><a href="<c:url value="/user/loginForm.do" />">로그인</a></span>
 			<span><a href="<c:url value="/user/joinForm.do" />">회원가입</a></span>
 		</div>
@@ -19,8 +23,10 @@
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal.user" var="u" />
 			<div>
+				<span><a href="<c:url value="/user/userInfo.do" />">마이페이지</a></span>
+				<span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
+				<span><a href="<c:url value="/auction/insertAuction.do" />">글작성 페이지로 이동</a></span>
 				<span>${u.userEmail}</span>
-				<span>${u.userType}</span>
 				<span><a href="<c:url value="/user/logout.do" />">로그아웃</a></span>
 			</div>
 	</sec:authorize>
@@ -37,39 +43,42 @@
 				src="/images/Vector.svg" alt="">
 		</div>
 	</div>
+	<div></div>
 	<div>
-		
-		<div>
-			<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/user/userInfo.do" />">마이페이지</a></span>
-		</div>
-		<div>
-			<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
-		</div>
-		<div>
-			<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/auction/insertAuction.do" />">글작성 페이지로 이동</a></span>
-		</div>
-	</div>
-	<div>
-		<div>
-			<img src="/images/list.svg" alt=""> <span>전체 카테고리</span>
+		<div class="all_category" >
+			<i class="fas fa-bars category-filter"></i>
+			<a href="<c:url value="/auction/searchAuction.do?categoryCode=0&categoryName=전체" />"></a>
+			전체 카테고리	
 		</div>
 		<div class="categoryBar">
-			<div>카테고리1</div>
-			<div>카테고리2</div>
-			<div>카테고리3</div>
-			<div>카테고리4</div>
-			<div>카테고리5</div>
-			<div>카테고리6</div>
+			<ul>
+				<c:forEach var="category" items="${category}" >
+		          <li>
+		       		<i class="fas fa-${category.categoryIcon} category-filter"></i>
+		          	<a class="category cnkfilter" id="category${category.categoryCode}" 
+		     		href="<c:url value="/auction/searchAuction.do?categoryCode=${category.categoryCode}&categoryName=${category.categoryName}" />"
+		          	data-selected="" data-name="categoryCode" data-value="${category.categoryCode}" title="${category.categoryName}">
+						${category.categoryName}
+		          	</a>
+		          </li>	        
+	        	</c:forEach>
+			</ul>
 		</div>
-		<div>
-			<div>
-				<img src="/images/mypage.svg" alt=""><span><a href="<c:url value="/auction/searchAuction.do?categoryCode=0&categoryName=전체" />">경매찾기</a></span>
-			</div>
-			<div>카테고리2</div>
-			<div>카테고리3</div>
-			<div>카테고리4</div>
-			<div>카테고리5</div>
-			<div>카테고리6</div>
+		<div class="category_displayOn">
+			<ul>
+				<c:forEach var="category" items="${category}" >
+				  <c:if test="${category.categoryDisplay == 1}">
+			          <li>
+			       		<i class="fas fa-${category.categoryIcon} category-filter"></i>
+			          	<a class="category cnkfilter" id="category${category.categoryCode}" 
+			     		href="<c:url value="/auction/searchAuction.do?categoryCode=${category.categoryCode}&categoryName=${category.categoryName}" />"
+			          	data-selected="" data-name="categoryCode" data-value="${category.categoryCode}" title="${category.categoryName}">
+							${category.categoryName}
+			          	</a>
+			          </li>	        
+				  </c:if>
+	        	</c:forEach>
+			</ul>
 		</div>
 	</div>
 </div>

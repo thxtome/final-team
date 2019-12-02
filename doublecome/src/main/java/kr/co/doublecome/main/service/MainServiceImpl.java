@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.doublecome.repository.mapper.MainMapper;
 import kr.co.doublecome.repository.vo.Auction;
+import kr.co.doublecome.repository.vo.Category;
 
 @Service("kr.co.doublecome.main.service.MainService")
 public class MainServiceImpl implements MainService {
@@ -19,4 +20,5 @@ public class MainServiceImpl implements MainService {
 		return mapper.mainAuctionList();
 		
 	}
+	public List<Category> listCategory() { return mapper.categoryList();}
 }

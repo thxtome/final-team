@@ -14,6 +14,7 @@ public class MainController {
 	
 	@RequestMapping("/main.do")
 	public void main(Model model) {
+		model.addAttribute("category", service.listCategory());
 		model.addAttribute("auclist", service.mainList());
 	}
 }
