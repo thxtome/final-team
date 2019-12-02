@@ -162,5 +162,15 @@ pg.movePage($("#nav2"),(pageNo) =>{
 	location.href = `?no=${no}&userEmail=${email}&pageNo=${pageNo}`
 })
 
-
+$("body").on("click", ".moreBtn", (e) => {
+	console.log(pageNo);
+	$.get({
+		url: "retrieveReceiveReview.do",
+		data: {
+			pageNo
+		},
+		dataType: "json",
+		success: result => makeReviewList(result, $(e.target).data("name"), sort)
+	});
+});
 
