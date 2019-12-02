@@ -1,6 +1,7 @@
 $(document).ready(e => {
 	$("#price_filter li a, #price_choice, #bidcount li a, a.category, #date li a").unbind("click").click(e => {
 		if (selectCheck(e) == false) return;
+		$("#sort_list span").removeClass("on")
 		searchAjax(e);
 	})
 	$("#sort_list a").click(e => {
@@ -11,13 +12,18 @@ $(document).ready(e => {
 })
 //ajax 처리
 function searchAjax(e) {
-	e.preventDefault();
+	if(typeof(e) == 'string'){
+		console.log(e);
+	} else{		
+		e.preventDefault();
+	}
 	let sendData = "{";
 	let filter = $(".options")
 	let ele = e.target;
 	let flag = true;
 	let priceChoice = [];
 	let limits = [];
+	
 	for (let option of filter){
 		if (flag == true) {
 			sendData = sendData + '"'+ $(option).data("name") + '"' + " : " + $(option).data("value")
@@ -26,6 +32,8 @@ function searchAjax(e) {
 			let startPrice ="startPrice"
 			let endPrice = "endPrice"
 			priceChoice = $(option).data("value").split("-");
+			console.log(priceChoice[0])
+			console.log(priceChoice[1])
 			sendData += ","+ '"'+ startPrice + '"' + " : " + priceChoice[0]
 			+","+ '"'+ endPrice + '"' + " : " + priceChoice[1]				
 		} else if ($(option).data("name") == "limits") {
@@ -42,14 +50,20 @@ function searchAjax(e) {
 			sendData = sendData + "," + '"'+ $(option).data("name") + '"'+ " : " + $(option).data("value")				
 		}
 	}
-	console.log($(e.target).data("value"))
-	if ($(e.target).data("name") == "sorts" ){		
-		sendData += ","+ '"'+ $(e.target).data("name") + '"' + " : " + '"'+ $(e.target).data("value") + '"'
+	
+	if(typeof(e) == 'string'){
+		sendData += ","+ '"'+ 'pageNo' + '"' + " : " + '"'+ e + '"'
+	} else{		
+		e.preventDefault();		
+		console.log($(e.target).data("value"))
+		if ($(e.target).data("name") == "sorts" ){		
+			sendData += ","+ '"'+ $(e.target).data("name") + '"' + " : " + '"'+ $(e.target).data("value") + '"'
+		}
 	}
 	sendData += "}";
 	console.log(sendData)
 	let options = {
-		url : $(ele).attr("href"),
+		url : "searchActionList.do",
 		type : "POST",
 		contentType : "application/json",
 		data : sendData
@@ -81,7 +95,7 @@ function makeAuctionlist(data) {
 	data.list.forEach((list,i) => {
 		let maxPrice = comma(uncomma(list.maxPrice));
 		$auctionField += `
-		<div class='col-md-4 p-2' >
+		<div class='col-md-4 p-2 card'>
 			<a class="auction_list" href="/doublecome/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}&pageNo=0>
 				<div class="card box-shadow">
 					<img class="card-img-top w-100"
@@ -98,7 +112,9 @@ function makeAuctionlist(data) {
 		</div>
 		`
 	})
-	pg.print($("#content"),data.pr)
+	if(data.list != null) {
+		pg.print($("#content"),data.pr)	
+	}
 	return $auctionField
 }
 $(document).on("click",".options", e => {
@@ -222,3 +238,6 @@ function uncomma(str) {
     return str.replace(/[^\d]+/g, '');
 }
 
+pg.movePage($("#content"),(pageNo)=>{
+	searchAjax(pageNo)
+})
