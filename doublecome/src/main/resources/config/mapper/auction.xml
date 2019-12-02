@@ -19,7 +19,8 @@
 			a.file_group_code,
 			a.user_email,
             ifnull(b.bid_cnt,0)as bidCnt,
-            ifnull(b.max_price, a.auction_min_price) as maxPrice
+            ifnull(b.max_price, a.auction_min_price) as maxPrice,
+            count(*) over() as auctionCnt
 	 	 from auction a 
 	  	 left join(select auction_no,
 	  					  max(bid_price) over(partition by auction_no) as max_price,

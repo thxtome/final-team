@@ -29,7 +29,7 @@
 		    on u.user_email = r.review_sender
 		 where r.review_receiver = #{keyword}
 		 order by review_no
-		 limit #{begin}, 5
+		 limit #{begin}, #{listSize}
 	</select>
 	
 	<!-- 보낸 후기 개수 -->
