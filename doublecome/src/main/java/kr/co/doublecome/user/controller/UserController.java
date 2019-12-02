@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.User;
@@ -100,7 +102,16 @@ public class UserController {
 	        apiResult = naverLoginBO.getUserProfile(oauthToken);
 	        System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
 	        model.addAttribute("result", apiResult);
-	        System.out.println("result"+apiResult);
+	        System.out.println(apiResult);
+	        
+	        JsonParser jsonParser = new JsonParser();
+	        JsonElement jsonElement = jsonParser.parse(apiResult);
+
+	        JsonElement response = jsonElement.getAsJsonObject().get("response");
+	        System.out.println(response);
+	        String email = response.getAsJsonObject().get("email").getAsString();
+	        System.out.println(email);
+	        //String response = element.getAsJsonObject().get("response").getAsString();
 	        /* 네이버 로그인 성공 페이지 View 호출 */
 //	      JSONObject jsonobj = jsonparse.stringToJson(apiResult, "response");
 //	      String snsId = jsonparse.JsonToString(jsonobj, "id");
@@ -122,7 +133,7 @@ public class UserController {
 //	      session.setAttribute("login",vo);
 //	      return new ModelAndView("user/loginPost", "result", vo);
 	        
-	        return "users/naverSuccess";
+	        return "/main";
 	    }
 
 	
