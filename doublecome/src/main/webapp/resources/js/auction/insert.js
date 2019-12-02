@@ -27,22 +27,17 @@ $('#summernote').summernote(
 });
 
 let sysdate = new Date()
-let year = sysdate.getFullYear()
-let month = sysdate.getMonth() + 1
-let day = sysdate.getDate()
-let maxDay = sysdate.getDate() + 7
-let hour = sysdate.getHours()
-let minHour = sysdate.getHours() + 6
-let minute = sysdate.getMinutes()
-$now = year + "-" + month + "-" + day + " " + minHour + ":" + minute
+let maxdate = new Date()
 
-$max = year + "-" + month + "-" + maxDay + " " + hour + ":" + minute
+sysdate.setHours(sysdate.getHours() + 6)
+maxdate.setDate(maxdate.getDate() + 7)
+maxdate.setHours(maxdate.getHours() + 6)
 $(function () {
     $('#datetimepicker').datetimepicker({
     	format: 'YYYY-MM-DD HH:mm',
-    	minDate:$now,
-        maxDate:$max,
-        defaultDate:$now,
+    	minDate:sysdate,
+        maxDate:maxdate,
+        defaultDate:sysdate
     });
 });
 function addCommas(x) {

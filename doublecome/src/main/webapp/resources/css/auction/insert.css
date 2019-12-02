@@ -124,3 +124,15 @@ a:visited {
     top: -5px;
     left: 3px;
 }
+.img_wrap {
+	width: 600px;
+	margin-top: 50px;
+}
+.img_wrap img {
+	max-width: 150px;
+	max-height: 150px;
+}
+.selProductFile {
+	backfround: red;
+	
+}
