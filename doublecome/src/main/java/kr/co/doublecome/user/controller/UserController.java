@@ -1,12 +1,20 @@
 package kr.co.doublecome.user.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +67,7 @@ public class UserController {
         //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
         System.out.println("네이버:" + naverAuthUrl);
         
-        //네이버 
+        //네이버 로그인 창 URL 
         model.addAttribute("url", naverAuthUrl);
 		
 		if(result != null) {
@@ -93,7 +101,7 @@ public class UserController {
 	*/
 	    //네이버 로그인 성공시 callback호출 메소드
 	    @RequestMapping("/callback.do")
-	    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+	    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, HttpServletRequest req)
 	            throws Exception {
 	        System.out.println("여기는 callback");
 	        OAuth2AccessToken oauthToken;
@@ -110,7 +118,36 @@ public class UserController {
 	        JsonElement response = jsonElement.getAsJsonObject().get("response");
 	        System.out.println(response);
 	        String email = response.getAsJsonObject().get("email").getAsString();
+	        String nickname = response.getAsJsonObject().get("nickname").getAsString();
+	        String id = response.getAsJsonObject().get("id").getAsString();
 	        System.out.println(email);
+	        if(service.checkEmail(email) == 0) {
+	        	User u = new User();
+	        	u.setUserEmail(email);
+	        	u.setUserPass(id);
+	        	u.setUserNickname(nickname);
+	        	model.addAttribute("user", u);
+	        	return "user/joinForm2";
+	        }
+	        User u = new User();
+	        u.setUser(service.selectUserInfoByName(email));
+	        
+	        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+	        list.add(new SimpleGrantedAuthority("ROLE_U"));
+
+	        
+	        SecurityContext sc = SecurityContextHolder.getContext();
+	        //아이디, 패스워드, 권한을 설정합니다. 아이디는 Object단위로 넣어도 무방하며
+	        //패스워드는 null로 하여도 값이 생성됩니다.
+	        sc.setAuthentication(new UsernamePasswordAuthenticationToken(u, null, list));
+	        HttpSession APIsession = req.getSession(true);
+
+	        //위에서 설정한 값을 Spring security에서 사용할 수 있도록 세션에 설정해줍니다.
+	        APIsession.setAttribute(HttpSessionSecurityContextRepository.
+	                             SPRING_SECURITY_CONTEXT_KEY, sc);
+
+
+	        
 	        //String response = element.getAsJsonObject().get("response").getAsString();
 	        /* 네이버 로그인 성공 페이지 View 호출 */
 //	      JSONObject jsonobj = jsonparse.stringToJson(apiResult, "response");

@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data	
 public class User {
+	private User user;						// API 로그인을 위한 타입
 	private String userEmail;				// 사용자 이메일	
 	private String userPass;				// 사용자 비밀번호
 	private String userScore;				// 사용자 평점
