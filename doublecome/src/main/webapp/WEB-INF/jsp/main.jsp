@@ -67,7 +67,7 @@
 					<c:otherwise>
 						<c:forEach items="${auclist}" var="list">
 							<div class="col-md-4 p-2" >
-								<a class="auction_list" href="<c:url value="/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}&pageNo=0" />">
+								<a class="auction_list" href="<c:url value="/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}" />">
 									<div class="card box-shadow">
 										<img class="card-img-top w-100"
 											src="<c:url value="/resources/images/macbook.jpg"/>"
@@ -83,7 +83,7 @@
 										</c:choose>
 										<div class="auction-condition">
 											<span class="text-left">입찰 ${list.bidCnt}건</span>
-											<small class="countdown text-muted m-1"></small>
+											<small class="countdown text-muted m-1" onload="auctionCount(this,${list.auctionLimitDate})"></small>
 										</div>
 									</div>
 								</a>

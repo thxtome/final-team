@@ -26,7 +26,7 @@
 <c:import url="/WEB-INF/jsp/include/header.jsp" />
   <div id="wrapper">
     <div id="sidebar">
-      <div class="checklist categorylist box-line">
+      <div class="category checklist categorylist box-line">
         <h3>카데고리</h3>
         <ul>
         <c:forEach var="category" items="${category}" >
@@ -164,13 +164,12 @@
   <script>
 	  $(document).ready(e => {
 			$("#selectbar").append(
-				`<a href="#" data-name="categoryCode" data-value="${category.categoryCode}" class="options selected category ">
-				${selectCategery.categoryName}
+				`<a href="#" data-name="categoryCode" data-value="${selectCategory.categoryCode}" class="options selected category ">
+				${selectCategory.categoryName}
 					<span class="del"></span>
 				</a>
 				`
 			)
-			console.log("왔어")
 			let loadchk = $(".category");
 			let optiondata = $(".options");
 			for(let value of loadchk) {
@@ -178,7 +177,9 @@
 					if (value.dataset.value == optionval.dataset.value) {
 						$(value).addClass("selected")	
 						$(value).prev().addClass("selected")
-						return
+						if ($(value).attr("class").startsWith("options ")) {
+							$(value).prev().removeClass("selected")
+						}
 					}
 				}
 			}
@@ -186,13 +187,13 @@
 		})
   </script>
   <script type="text/javascript">
-		  let limiteDate = [`<c:forEach items="${auctionlist}" var="auctionlist">
-				<c:out value="${auctionlist.auctionLimitDate}" />,</c:forEach>`];
+		  let limiteDate = [<c:forEach items="${auctionlist}" var="auctionlist">
+				<c:out value="${auctionlist.auctionLimitDate}" />,</c:forEach>];
 		  	let arr = limiteDate.split(",");
 			let countdown = $(".countdown");
 			for(let i = 0 ; i < countdown.length ; i++) {
 				console.log(limiteDate[0])
-				auctionCount($(countdown[i]),arr[i])
+				auctionCount($(countdown[i]), arr[i])
 			}
   </script>
   <script src="<c:url value="/resources/js/auction/accordion.js" />"></script>

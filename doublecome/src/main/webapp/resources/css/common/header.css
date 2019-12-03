@@ -1,7 +1,7 @@
 .topbar {
     width: 100%;
     height: 40px;
-    background: rgb(230, 230, 230);
+    border : 1px solid #eee;
 }
 .topbar>div {
     width: 1000px;
@@ -22,13 +22,16 @@
     position: relative;
     width: 50px;
     height: 21px;
-    left: 50%;
+    left: 100%;
     top: 11px;
     color: rgb(0, 0, 0);
     font-weight: bold;
-    font-size: 15px;
+    font-size: 13px;
     line-height: 21px;
-    margin-right: 50px;
+    margin-right: 30px;
+}
+.topbar a {
+	color : #333;
 }
 .topbar span:hover{
     color: rgb(60, 106, 255);
@@ -41,7 +44,7 @@
     width: 1000px;
     height: 180px;
     display: grid;
-    grid-template-columns: 4fr 7fr 4fr;
+    grid-template-columns: 4fr 8fr 4fr;
 }
 
 
@@ -58,6 +61,7 @@
     text-align: center;
 }
 
+
 .topContent>div:first-child>div:nth-child(2) {
     position: relative;
     width: max-content;
@@ -70,7 +74,41 @@
     display: flex;
     color: #D92323;
 }
-
+.topContent>div:first-child>div:nth-child(2) svg:hover {
+	cursor : pointer;
+}
+input:focus {outline:none;}
+.user_mypage {
+	margin-left : 28px;
+}
+.user_mypage, .auction_write {
+	position: relative;
+    top: 48px;
+    left: 30px;
+    width: 185px;
+    cursor : pointer;
+  
+}
+.user_mypage a, .auction_write a{
+	color : #333;
+}
+.user_mypage a:hover, .auction_write a:hover{
+	color : #D92323;
+	text-decoration: none;
+	font-weight: bold;
+}
+.user_mypage svg, .auction_write svg {
+    font-size: 50px;	
+    margin-left : 6px;
+}
+.auction_write div {
+	margin-left : 7px;
+}
+.user_mypage div, .auction_write div {
+	margin-top : 5px;
+	font-size : 12px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
 .topContent>div:first-child>div:nth-child(3) {
     position: relative;
     width: max-content;
@@ -85,24 +123,32 @@
 
 .topContent>div:nth-child(2)>div {
     position: relative;
-    width: 467px;
-    height: 49px;
-    left: 0px;
-    top: 47px;
-    border: 2px solid #F20505;
+    width: 476px;
+    height: 40px;
+    left: 33px;
+    top: 63px;
+    border: 3px solid #F20505;
     box-sizing: border-box;
     display: flex;
     justify-content: flex-end;
 }
-
+.topContent>div:nth-child(2) svg {
+    height: 33px;
+    width: 19px;
+    right: 10px;
+    margin-right: 10px;
+}
+.topContent>div:nth-child(2) svg:hover {
+	cursor : pointer;
+}
 .topContent>div:nth-child(2)>div>img {
     margin-right: 3px;
 }
 
 .topContent>div:nth-child(2)>div>input {
     border: 0px;
-    width: 95%;
-    height: 95%;
+    width: 100%;
+    height: 100%;
     padding-left: 10px;
 }
 
@@ -260,7 +306,7 @@
 	margin : 0;
 	padding : 0;
 	padding-left : 20px;
-	line-height: 50px;
+	line-height: 55px;
 }
 .category_displayOn ul li a {
 	color : #333;
@@ -269,6 +315,8 @@
 .category_displayOn ul li {
 	float:left;
 	margin-right: 30px;
+	font-weight : bold;
+	font-size : 13px;
 }
 .category_displayOn ul li:hover, .category_displayOn ul li a:hover {
     font-weight: bold;
