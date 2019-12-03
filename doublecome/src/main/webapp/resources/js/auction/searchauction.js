@@ -26,7 +26,28 @@ function searchAjax(e) {
 	
 	for (let option of filter){
 		if (flag == true) {
-			sendData = sendData + '"'+ $(option).data("name") + '"' + " : " + $(option).data("value")
+			if ($(option).data("name") == "priceChoice") {
+				let startPrice ="startPrice"
+				let endPrice = "endPrice"
+				priceChoice = $(option).data("value").split("-");
+				console.log(priceChoice[0])
+				console.log(priceChoice[1])
+				sendData += '"'+ startPrice + '"' + " : " + priceChoice[0]
+				+","+ '"'+ endPrice + '"' + " : " + priceChoice[1]				
+			} else if ($(option).data("name") == "limits") {
+				let startLimit ="startLimit"
+				limit = $(option).data("value");
+				sendData += '"'+ startLimit+ '"' + " : " + limit
+			} else if ($(option).data("name") == "bidCount") {
+				let startBidCount ="startBidCount"
+				let endBidCount = "endBidCount"
+				bidCount = $(option).data("value").split("-");
+				sendData += '"'+ startBidCount+ '"' + " : " + bidCount[0]
+				+","+ '"'+ endBidCount + '"' + " : " + bidCount[1]				
+			}  else	{
+				sendData = sendData + '"'+ $(option).data("name") + '"' + " : " + $(option).data("value")				
+			}
+			
 			flag = false;
 		} else if ($(option).data("name") == "priceChoice") {
 			let startPrice ="startPrice"
@@ -95,23 +116,24 @@ function makeAuctionlist(data) {
 	data.list.forEach((list,i) => {
 		let maxPrice = comma(uncomma(list.maxPrice));
 		$auctionField += `
-		<div class='col-md-4 p-2 card'>
-			<a class="auction_list" href="/doublecome/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}&pageNo=0>
-				<div class="card box-shadow">
+		<div class='col-md-4 p-2'>
+			<div class="card box-shadow">
+				<a class="auction_list" href="/doublecome/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}&pageNo=0">
 					<img class="card-img-top w-100"
 						src="/doublecome/resources/images/macbook.jpg"
 						style="height: 250px;"/>
 					<p class="mb-1 m-1">${list.auctionTitle}</p>
 					<p class="card-text m-1">${maxPrice}원</p>		
-					<div class="auction_condition">
+					<div class="auction_condition loadtime">
 						<span class="text-left">입찰 ${list.bidCnt}건</span>
 						<small class="countdown text-muted m-1"></small>
 					</div>
-				</div>
-			</a>
+				</a>
+			</div>
 		</div>
 		`
 	})
+	console.log(data.list)
 	if(data.list != null) {
 		pg.print($("#content"),data.pr)	
 	}

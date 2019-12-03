@@ -282,3 +282,9 @@
 	backgroud : #FF3B58;
 	cursor: pointer
 }
+.loadtime{
+	display: grid;
+    padding: 0.1rem 0.25rem;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+}

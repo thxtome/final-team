@@ -164,12 +164,13 @@
   <script>
 	  $(document).ready(e => {
 			$("#selectbar").append(
-				`<a href="#" data-name="categoryCode" data-value="${selectCategery.categoryCode}" class="options selected category ">
+				`<a href="#" data-name="categoryCode" data-value="${category.categoryCode}" class="options selected category ">
 				${selectCategery.categoryName}
 					<span class="del"></span>
 				</a>
 				`
 			)
+			console.log("왔어")
 			let loadchk = $(".category");
 			let optiondata = $(".options");
 			for(let value of loadchk) {
@@ -185,8 +186,8 @@
 		})
   </script>
   <script type="text/javascript">
-		  let limiteDate = [<c:forEach items="${auctionlist}" var="auctionlist">
-				<c:out value="${auctionlist.auctionLimitDate}" />,</c:forEach>];
+		  let limiteDate = [`<c:forEach items="${auctionlist}" var="auctionlist">
+				<c:out value="${auctionlist.auctionLimitDate}" />,</c:forEach>`];
 		  	let arr = limiteDate.split(",");
 			let countdown = $(".countdown");
 			for(let i = 0 ; i < countdown.length ; i++) {
