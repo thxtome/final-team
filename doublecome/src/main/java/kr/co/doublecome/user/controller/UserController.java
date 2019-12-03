@@ -1,7 +1,6 @@
 package kr.co.doublecome.user.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,10 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
@@ -30,6 +28,7 @@ import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.user.BO.NaverLoginBO;
 import kr.co.doublecome.user.service.UserService;
+import kr.co.doublecome.util.security.MyBatisUserDetailsService;
 
 
 @Controller
@@ -42,6 +41,8 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder encoder;
 	
+	@Autowired
+	private MyBatisUserDetailsService userService;
 	
 	/* NaverLoginBO */
     private NaverLoginBO naverLoginBO;
@@ -101,7 +102,12 @@ public class UserController {
 	*/
 	    //네이버 로그인 성공시 callback호출 메소드
 	    @RequestMapping("/callback.do")
-	    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, HttpServletRequest req)
+	    public String callback(
+	    		Model model,
+	    		@RequestParam String code,
+	    		@RequestParam String state,
+	    		HttpSession session,
+	    		HttpServletRequest req)
 	            throws Exception {
 	        System.out.println("여기는 callback");
 	        OAuth2AccessToken oauthToken;
@@ -129,8 +135,26 @@ public class UserController {
 	        	model.addAttribute("user", u);
 	        	return "user/joinForm2";
 	        }
+
+		
+	        UserDetails u = userService.loadUserByUsername(email);
+	        SecurityContext sc = SecurityContextHolder.getContext();
+	        //아이디, 패스워드, 권한을 설정합니다. 아이디는 Object단위로 넣어도 무방하며
+	        //패스워드는 null로 하여도 값이 생성됩니다.
+	        sc.setAuthentication(new UsernamePasswordAuthenticationToken(u, null, u.getAuthorities()));
+	        HttpSession APIsession = req.getSession(true);
+
+	        //위에서 설정한 값을 Spring security에서 사용할 수 있도록 세션에 설정해줍니다.
+	        APIsession.setAttribute(HttpSessionSecurityContextRepository.
+	                             SPRING_SECURITY_CONTEXT_KEY, sc);
+	        /*
 	        User u = new User();
 	        u.setUser(service.selectUserInfoByName(email));
+	        System.out.println(u.getUser().getUserEmail() + "<< userEmail From VO" );
+	        u.setUserEmail(u.getUser().getUserEmail());
+	        u.setUserPass(u.getUser().getUserPass());
+	        u.setUserPhnum(u.getUser().getUserPhnum());
+	        u.setUserNickname(u.getUser().getUserNickname());
 	        
 	        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 	        list.add(new SimpleGrantedAuthority("ROLE_U"));
@@ -146,7 +170,7 @@ public class UserController {
 	        APIsession.setAttribute(HttpSessionSecurityContextRepository.
 	                             SPRING_SECURITY_CONTEXT_KEY, sc);
 
-
+*/
 	        
 	        //String response = element.getAsJsonObject().get("response").getAsString();
 	        /* 네이버 로그인 성공 페이지 View 호출 */

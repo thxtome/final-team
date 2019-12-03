@@ -24,6 +24,7 @@ public class MyBatisUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		System.out.println(userName + "<< userName ");
 		User vo = mapper.selectUserInfoByName(userName);
 
 		List<SimpleGrantedAuthority> list = new ArrayList<>();
