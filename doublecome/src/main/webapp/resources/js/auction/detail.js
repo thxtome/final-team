@@ -266,16 +266,23 @@ function makeReviewList (result) {
 
 $(".updateInquiryBtn").click((e) => {
 	let id = $(e.target).data("no")
-	$(`.inquiryContent${id} p`).remove();
+	let content = $(e.target).data("content")
+	$(`.inquiryContent${id} p`).hide();
 	
 	let html = 
-	`<textarea class="InquiryUpdateText"></textarea>
+	`
+	<div class="InquiryUpdateBox">
+	<textarea class="InquiryUpdateText">${content}</textarea>
 					<div class="InquiryUpdateBtn">
 						<button class="InquiryUpdateCancelBtn">취소</button>
 						<button type="button" class="InquiryUpdateCompleteBtn">수정</button>
 					</div>
-	
+	</div>
 	`;
 	$(`.inquiryContent${id}`).append(html);
 	
+	$(".InquiryUpdateCancelBtn").click(() => {
+		$(".InquiryUpdateBox").remove();
+		$(`.inquiryContent${id} p`).show();
+	})
 })
