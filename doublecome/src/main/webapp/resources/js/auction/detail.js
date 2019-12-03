@@ -1,3 +1,5 @@
+let rPageNo = 1;
+let reviewCnt = 0;
 function swal() {
     Swal.fire({
         title: '로그인이 필요한 페이지입니다',
@@ -119,20 +121,8 @@ $(window).scroll(function () {
       }
 })
 
-var acc = document.getElementsByClassName("accordion");
+let acc = document.getElementsByClassName("accordion");
 var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
-  });
-}
 
 $('.nav-item').click(function(e){
 	classes = $(e.target).data("nav");
@@ -160,17 +150,132 @@ pg.print($("#nav2"));
 pg.movePage($("#nav2"),(pageNo) =>{
 	let href = location.search.substr(1)
 	location.href = `?no=${no}&userEmail=${email}&pageNo=${pageNo}`
+//	let offset = $("#nav3").offset()
+//	$("html").animate({scrollTop : offset.top}, 400)
 })
 
-$("body").on("click", ".moreBtn", (e) => {
-	console.log(pageNo);
-	$.get({
+function scr() {
+	window.oriScroll = $(window).scrollTop();
+	return false;
+}
+function scro() {
+	$(window).scrollTop(window.oriScroll);
+	return false;
+}
+
+
+makeReviewListAjax()
+
+function makeReviewListAjax() {
+	$.getJSON({
 		url: "retrieveReceiveReview.do",
-		data: {
-			pageNo
-		},
-		dataType: "json",
-		success: result => makeReviewList(result, $(e.target).data("name"), sort)
+		data: {rPageNo, email},
+		success: result => {
+			makeReviewList(result);
+			for (i = 0; i < acc.length; i++) {
+				  acc[i].addEventListener("click", function() {
+				    this.classList.toggle("active");
+				    var panel = this.nextElementSibling;
+				    if (panel.style.maxHeight) {
+				      panel.style.maxHeight = null;
+				    } else {
+				      panel.style.maxHeight = panel.scrollHeight + "px";
+				    } 
+				 });
+			}
+		}
 	});
+}
+
+$(document).on("click", ".moreBtn", (e) => {
+	makeReviewListAjax()
 });
 
+function makeReviewList (result) {
+	let html = "";
+	if (result.length == 0) {
+		html = `
+			<div class="review_box">
+				<div class="empty_review">작성된 리뷰가 없습니다.</div>
+			</div>
+		`
+		$(".reviewListContent").html(html);
+	} else {
+		$.each(result, (i, review) => {
+			reviewCnt = review.reviewCnt;
+			html += `
+										<button class="accordion">
+								<div class="col-xs-12">
+									<div class="col-xs-2">
+										<p class="grade">
+											<span class="grade_point">${review.reviewScore}</span><span>점</span>
+										</p>
+									</div>
+									<div class="col-xs-8 text-center">
+										<p class="review_title review_pdct_title">${review.auctionTitle}</p>
+										<p class="review_title review_title">${review.reviewTitle}</p>
+										<p class="review_title review_regdate"><fmt:formatDate value="${review.reviewRegDate}" pattern="yyyy-MM-dd"/></p>
+									</div>
+									<div class="review_contents_writer col-xs-2">
+										<p class="review_writer">${review.senderNickname}</p>
+									</div>
+								</div>
+
+							</button>
+							<div class="accor">
+								<div class="accor_contents">
+									<div class="review_contents_top row">
+										<div class="review_top col-xs-10">
+											<div class="col-xs-3">
+												<img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+													class="review_img img-rounded img-fluid" />
+											</div>
+											<div class="col-xs-7 review_contents_title">
+												<p>
+													<span class="review_writer">${review.senderNickname}</span><span
+														class="review_contents_regdate"><fmt:formatDate value="${review.reviewRegDate}" pattern="yyyy-MM-dd"/></span>
+												</p>
+												<p>${review.reviewTitle}</p>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-10 review_contents_contents">
+										<div class="clearfix"></div>
+										<p>${review.reviewContent}</p>
+									</div>
+								</div>
+							</div>
+			`;
+		})
+			html += `
+					<button class="moreBtn">더 보기 <span class="glyphicon glyphicon-menu-down"></span></button>
+				`;
+		if (rPageNo*5 > reviewCnt) {
+			$(".moreBtn").remove();
+		}
+		
+		$(".reviewListContent").append(html);
+		
+		if (rPageNo*5 > reviewCnt) {
+			$(".moreBtn").remove();
+		}
+		rPageNo += 1;
+		
+	}
+}
+
+$(".updateInquiryBtn").click((e) => {
+	let id = $(e.target).data("no")
+	$(`.inquiryContent${id} p`).remove();
+	
+	let html = 
+	`<textarea class="InquiryUpdateText"></textarea>
+					<div class="InquiryUpdateBtn">
+						<button class="InquiryUpdateCancelBtn">취소</button>
+						<button type="button" class="InquiryUpdateCompleteBtn">수정</button>
+					</div>
+	
+	`;
+	$(`.inquiryContent${id}`).append(html);
+	
+})

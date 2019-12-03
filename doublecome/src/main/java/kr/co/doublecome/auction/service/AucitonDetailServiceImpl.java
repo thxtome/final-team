@@ -43,9 +43,9 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 		return hMapper.selectReceiveReview(search);
 	}
 	
-	public AjaxPage retrieveinquiry(int no, int pageNo) {
+	public AjaxPage retrieveinquiry(int no, Integer pageNo) {
 		AjaxPage ap = new AjaxPage();
-		if(pageNo == 0) {
+		if(pageNo == null) {
 			pageNo = 1;
 		}
 		Search search = new Search(pageNo);

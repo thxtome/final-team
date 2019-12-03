@@ -107,13 +107,20 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 									<c:choose>
 									<c:when test="${empty inq.inquiryParent}">
 									<div class="card-body">
-										<div class="row">
+										<div class="row${inq.inquiryNo}">
 											<div class="col-xs-12 pdct_inquiry_item">
 												<p class="inquiry_name col-xs-12">
 													<strong>${inq.userNickname}</strong> <span class="inquiry_minute"><fmt:formatDate value="${inq.inquiryRegDate}" pattern="yyyy-MM-dd HH:mm"/></span>
 												</p>
 												<div class="clearfix"></div>
-												<p>${inq.inquiryContent}</p>
+<%-- 												<p>${inq.inquiryContent}</p> --%>
+																<div class="inquiryContent${inq.inquiryNo}">
+																	<p class="col-xs-12">${inq.inquiryContent}
+																		<span class="myInquiryUpdate">
+																			<a href="#" class="updateInquiryBtn" data-no="${inq.inquiryNo}">수정</a> / <a href="#">삭제</a>
+																		</span>
+																	</p>
+																</div>
 												<sec:authorize access="isAuthenticated()">
 												<sec:authentication property="principal.user" var="log"/>
 												<c:if test="${log.userEmail eq auction.userEmail}">
@@ -132,13 +139,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 												<c:otherwise>
 													<div class="card-inner">
 														<div class="card-body">
-															<div class="row">
+															<div class="row${inq.inquiryNo}">
 																<div class="col-xs-12 pdct_inquiry_inner_item">
 																	<p class="inquiry_name col-xs-12">
 																		<i class="fab fa-replyd fa-lg"></i><strong> ${inq.userNickname}</strong> <span class="inquiry_minute"><fmt:formatDate value="${inq.inquiryRegDate}" pattern="yyyy-MM-dd HH:mm"/></span>
 																	</p>
 																	<div class="clearfix"></div>
-																	<p>${inq.inquiryContent}</p>
+																	<p class="col-xs-12">${inq.inquiryContent}
+																		<span class="myInquiryUpdate">
+																			<a href="#">수정</a> / <a href="#">삭제</a>
+																		</span>
+																	</p>
 																</div>
 															</div>
 														</div>
@@ -180,62 +191,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 									</tbody>
 								</table>
 							</div>
-							<c:choose>
-							<c:when test="${empty review}">
-								<div class="review_box">
-									<div class="empty_review">작성된 리뷰가 없습니다.</div>
-								</div>
-							</c:when>
-							</c:choose>
-							<c:forEach items="${review}" var="review">
-							<button class="accordion">
-								<div class="col-xs-12">
-									<div class="col-xs-2">
-										<p class="grade">
-											<span class="grade_point">${review.reviewScore}</span><span>점</span>
-										</p>
-									</div>
-									<div class="col-xs-8 text-center">
-										<p class="review_title review_pdct_title">${review.auctionTitle}</p>
-										<p class="review_title review_title">${review.reviewTitle}</p>
-										<p class="review_title review_regdate"><fmt:formatDate value="${review.reviewRegDate}" pattern="yyyy-MM-dd"/></p>
-									</div>
-									<div class="review_contents_writer col-xs-2">
-										<p class="review_writer">${review.senderNickname}</p>
-									</div>
-								</div>
-
-							</button>
-							<div class="accor">
-								<div class="accor_contents">
-									<div class="review_contents_top row">
-										<div class="review_top col-xs-10">
-											<div class="col-xs-3">
-												<img src="https://image.ibb.co/jw55Ex/def_face.jpg"
-													class="review_img img-rounded img-fluid" />
-											</div>
-											<div class="col-xs-7 review_contents_title">
-												<p>
-													<span class="review_writer">${review.senderNickname}</span><span
-														class="review_contents_regdate"><fmt:formatDate value="${review.reviewRegDate}" pattern="yyyy-MM-dd"/></span>
-												</p>
-												<p>${review.reviewTitle}</p>
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-10 review_contents_contents">
-										<div class="clearfix"></div>
-										<p>${review.reviewContent}</p>
-									</div>
-								</div>
-							</div>
-							</c:forEach>
-					<c:choose>
-					<c:when test="${not empty review}">
-					<button class="moreBtn" type="button">더 보기 <span class="glyphicon glyphicon-menu-down"></span></button>
-					</c:when>
-					</c:choose>
-				</div>
+							<div class="reviewListContent"></div>
+					</div>
 				</section>
 			</div>
 		</div>

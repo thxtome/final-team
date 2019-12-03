@@ -28,11 +28,11 @@ public class AuctionDetailController {
 	private AuctionDetailService service;
 	@Autowired
 	private FileService fileService;
-	@Autowired
-	private HistoryService hService;
+//	@Autowired
+//	private HistoryService hService;
 	
 	@RequestMapping("/detailAuction.do")
-	public void auctionDetail(int no, String userEmail, Model model, int pageNo, Search search ) {
+	public void auctionDetail(int no, String userEmail, Model model, Integer pageNo, Search search ) {
 		model.addAttribute("auction", service.auctiondetail(no));
 		model.addAttribute("user", service.userInfo(userEmail));
 		search.setKeyword("c@c");
@@ -47,11 +47,11 @@ public class AuctionDetailController {
 	
 	@RequestMapping("/retrieveReceiveReview.do")
 	@ResponseBody
-	public List<Review> retrieveReceiveReview(Search search, Principal p){
-		search.setKeyword("c@c");
-		search.setPageNo(1);
+	public List<Review> retrieveReceiveReview(Search search, int rPageNo, String email){
+		search.setKeyword(email);
 		search.setListSize(5);
-		return hService.receiveReviewList(search);
+		search.setPageNo(rPageNo);
+		return service.selectReceiveReview(search);
 	}
 	
 	

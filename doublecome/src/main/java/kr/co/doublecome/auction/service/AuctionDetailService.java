@@ -16,7 +16,7 @@ public interface AuctionDetailService {
 	Auction auctiondetail(int no);
 	History userInfo(String userEmail);
 	List<Review> selectReceiveReview(Search search);
-	AjaxPage retrieveinquiry(int no,int pageNo);
+	AjaxPage retrieveinquiry(int no, Integer pageNo);
 	void insertInquiry(Inquiry inquiry);
 	List<Category> categoryList();
 	void addFile(UtilFile file);

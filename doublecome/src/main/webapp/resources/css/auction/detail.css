@@ -134,7 +134,7 @@ footer {
     background: #FF3B58;
     color: white;
 }
-.writer_btn {
+.writer_btn, .InquiryUpdateCompleteBtn, .InquiryUpdateCancelBtn {
     float: right;
     background: #DB1D3B;
     border: none;
@@ -145,9 +145,16 @@ footer {
     text-shadow: 1px 1px 1px #9E3F3F;
     cursor: pointer;
 }
-.writer_btn:hover {
+.writer_btn:hover, .InquiryUpdateCompleteBtn:hover, .InquiryUpdateCancelBtn:hover {
     background: #FF3B58;
     color: white;
+}
+.InquiryUpdateCancelBtn {
+    margin-left: 11px;
+    margin-right: 25px;
+}
+.InquiryUpdateBtn {
+	margin-top: 10px;
 }
 .edit_btn {
     margin-right: 15px;
@@ -353,4 +360,11 @@ section {
 }
 .Seller__titleText {
 	margin: 0;
+}
+.myInquiryUpdate {
+	float: right;
+}
+.InquiryUpdateText {
+	width: 570px;
+    height: 85px;
 }
