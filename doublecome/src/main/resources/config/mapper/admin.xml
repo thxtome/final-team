@@ -411,10 +411,10 @@
 	
 	<!-- 유저 경매개수 통계 -->
 	<select id="selectUserStaticsByAuctionCnt" resultMap="pieFive">
-		select count(if(ifnull(cnt,0) between 0 and 5,1,null)) as '0-5',
-		       count(if(cnt between 6 and 10,1,null)) as '6-10',
-		       count(if(cnt between 11 and 15,1,null)) as '11-15',
-		       count(if(cnt > 15,1,null)) as '16-'
+		select count(if(ifnull(cnt,0) between 0 and 5,1,null)) as 'first',
+		       count(if(cnt between 6 and 10,1,null)) as 'second',
+		       count(if(cnt between 11 and 15,1,null)) as 'third',
+		       count(if(cnt > 15,1,null)) as 'fourth'
 		  from user u
     	  left outer join (select count(*) as cnt,
 					              user_email	
@@ -425,10 +425,10 @@
 	
 	<!-- 유저 신고개수 통계 -->
 	<select id="selectUserStaticsByReport" resultMap="pieFive">
-		select count(if(ifnull(cnt,0) between 0 and 5,1,null)) as '0 - 5',
-			   count(if(cnt between 6 and 10,1,null)) as '6 - 10',
-		       count(if(cnt between 11 and 15,1,null)) as '11 - 15',
-		       count(if(cnt > 15,1,null)) as '16 -'
+		select count(if(ifnull(cnt,0) between 0 and 5,1,null)) as 'first',
+			   count(if(cnt between 6 and 10,1,null)) as 'second',
+		       count(if(cnt between 11 and 15,1,null)) as 'third',
+		       count(if(cnt > 15,1,null)) as 'fourth'
 		  from user u
     	  left outer join (select count(*) as cnt,
 					              report_receiver	
@@ -439,10 +439,10 @@
 	
 	<!-- 유저 거래개수 통계 -->
 	<select id="selectUserStaticsByDealCnt" resultMap="pieFive">
-	  select count(if(ifnull(cnt,0) between 0 and 5,1,null)) as '0 - 5',
-			 count(if(cnt between 6 and 10,1,null)) as '6 - 10',
-		     count(if(cnt between 11 and 15,1,null)) as '11 - 15',
-		     count(if(cnt > 15,1,null)) as '16 -'
+	  select count(if(ifnull(cnt,0) between 0 and 5,1,null)) as 'first',
+			 count(if(cnt between 6 and 10,1,null)) as 'second',
+		     count(if(cnt between 11 and 15,1,null)) as 'third',
+		     count(if(cnt > 15,1,null)) as 'fourth'
 	    from (select distinct u.user_email,cnt1 + cnt2 as cnt
 			    from user u
 			    left outer join (select deal.user_email_buyer,
@@ -456,7 +456,7 @@
 	</select>
 	
 	<!-- 경매 카테고리별 통계 -->
-	<select id="selectAuctionStaticsByCategory" >
+	<select id="selectAuctionStaticsByCategory" resultType="Category">
 		select c.category_name,
 			   a.category_auction_cnt as category_auction_cnt
 		  from category c
@@ -469,18 +469,40 @@
 	</select>
 	
 	<!-- 경매 상태별 통계 -->
-	<select id="selectAuctionStaticsByCondition">
-		   select count(if(auction_condition = 1,1,null)) as going,
-          		  count(if(auction_condition = 2,1,null)) as finish
+	<select id="selectAuctionStaticsByCondition" resultMap="pieTwo">
+		   select count(if(auction_condition = 1,1,null)) as first,
+          		  count(if(auction_condition = 2,1,null)) as second
      	     from auction
 	</select>
 	
+	<select id="selectAuctionCntbyRegDate" resultMap="line" parameterType="map">
+		select count(*) as cnt, 
+			   date_format(auction_reg_date, '%Y-%m-%d') as date
+		  from auction
+		 where date_format(auction_reg_date, '%Y-%m-%d') between #{startDate} and #{endDate}
+		 group by date_format(auction_reg_date, '%Y-%m-%d')
+		 order by date_format(auction_reg_date, '%Y-%m-%d')
+	</select>
+	
+	
 	<resultMap id="pieFive" type="java.util.HashMap">
-		<result javaType="java.lang.String" column="0-5" property="0 - 5"/>
-		<result javaType="java.lang.String" column="6-10" property="6 - 10"/>
-		<result javaType="java.lang.String" column="11-15" property="11 - 15"/>
-		<result javaType="java.lang.String" column="16-" property="16 -"/>
+		<result javaType="java.lang.String" column="first" property="0 - 5"/>
+		<result javaType="java.lang.String" column="second" property="6 - 10"/>
+		<result javaType="java.lang.String" column="third" property="11 - 15"/>
+		<result javaType="java.lang.String" column="fourth" property="16 -"/>
 	</resultMap>
+	
+	<resultMap id="pieTwo" type="java.util.HashMap">
+		<result javaType="java.lang.String" column="first" property="진행중인 경매"/>
+		<result javaType="java.lang.String" column="second" property="완료된 경매"/>
+	</resultMap>
+	
+	<resultMap id="line" type="java.util.HashMap">
+		<result javaType="java.lang.String" column="date" property="date"/>
+		<result javaType="java.lang.String" column="cnt" property="cnt"/>
+	</resultMap>
+
+
 	
 	
 	

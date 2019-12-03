@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="currentTime" class="java.util.Date"/>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,8 +44,25 @@
 			</div>
 
 			<div class="lineChartType">
-				<span class="clickedType">&#149;일자별 경매 등록수</span> <span>&#149;일자별
-					총 경매 수</span>
+				<span class="clickedType">&#149;일자별 경매 등록수</span> 
+				<div>
+					<fmt:formatDate value="${currentTime}" pattern="yyyy" var="year"/>
+					
+					<select>
+						<c:forEach begin="0" var="i" end="${5}">
+							<c:set var="yearOption" value="${year-i}" />
+    						<option value="${yearOption}">${yearOption}</option>
+						</c:forEach>
+					</select>
+					
+					<select>
+						<option value="1">1분기</option>
+						<option value="2">2분기</option>
+						<option value="3">3분기</option>
+						<option value="4">4분기</option>
+					</select>
+					<button type="button">검색</button>
+				</div>
 			</div>
 
 			<div id="lineChart"></div>

@@ -30,4 +30,7 @@ public interface AdminService {
 	public Map<String, String> retrieveUserStaticsAc();
 	public Map<String, String> retrieveUserStaticsRp();
 	public Map<String, String> retrieveUserStaticsDc();
+	public Map<String, String> retrieveAuctionStaticsCon();
+	public List<Category> retrieveAuctionStaticsCat();
+	public List<Map<String, String>> retrieveAuctionStaticsRegDate(String startDate, String endDate);
 }

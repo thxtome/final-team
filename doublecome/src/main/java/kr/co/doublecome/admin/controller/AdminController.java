@@ -164,4 +164,24 @@ public class AdminController {
 		return service.retrieveUserStaticsDc();
 	}
 	
+	@RequestMapping("/retrieveAuctionStaticsCon.do")
+	@ResponseBody 	
+	public Map<String,String> retrieveAuctionStaticsCon() {
+		return service.retrieveAuctionStaticsCon();
+	}
+	
+	@RequestMapping("/retrieveAuctionStaticsCat.do")
+	@ResponseBody 	
+	public List<Category> retrieveAuctionStaticsCat() {
+		return service.retrieveAuctionStaticsCat();
+	}
+	
+	@RequestMapping("/retrieveAuctionStaticsRegDate.do")
+	@ResponseBody 	
+	public List<Map<String,String>> retrieveAuctionStaticsRegDate(String startDate, String endDate) {
+		System.out.println();
+		return service.retrieveAuctionStaticsRegDate(startDate, endDate);
+	}
+	
+	
 }

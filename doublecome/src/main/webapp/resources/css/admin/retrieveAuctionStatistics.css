@@ -5,11 +5,31 @@
 }
 
 .lineChartType span {
-	margin: 20px 10px 0px 30px;
+	margin: 0px 10px 0px 30px;
 	color: lightgray;
 	cursor: pointer;
+	float: left;
 }
 
+.lineChartType > div{
+	    float: left;
+    display: flex;
+    width: 200px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.lineChartType > div select{
+	height: 25px;
+}
+.lineChartType > div button{
+	border: none;
+	color: white;
+	background: rgb(252, 79, 79);
+	border-radius: 3px;
+	cursor: pointer;
+	height: 25px;
+}
 .clickedType {
 	color: black !important;
 	font-weight: bold;

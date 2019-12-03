@@ -11,38 +11,6 @@
             ['data2', 350, 220, 110, 240, 215, 125, 113, 364, 384, 232, 132]
         ]
 
-        
-
-        printChart(data)
-
-        $(".lineChartType > span").click((e) => {
-            $(".lineChartType > span").removeClass("clickedType")
-            $(e.target).addClass("clickedType");
-            printChart(data2);
-        })
-
-
-        function printChart(data) {
-            var chart = c3.generate({
-                bindto: "#lineChart",
-                data: {
-                    x: 'x',
-                    columns: data
-                },
-
-                axis: {
-                    x: {
-                        type: 'timeseries',
-                        tick: {
-                            count: 5,
-                            format: '%Y-%m-%d'
-                        }
-                    }
-                }
-            });
-        }
-        // ==========================================================================================================
-
         let pie1 = {url: "retrieveUserStaticsAc.do", 
                     target: "#pieChart1",
                     color: ['#1f77b4', '#aec7e8', '#ffbb78', '#2ca02c'],
@@ -55,13 +23,25 @@
                     target: "#pieChart3",
                     color: ['#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d'],
                     title: "경매수별 유저 비율"}
+        // ==========================================================================================================
+
+    
 
         printPie(pie1);
         printPie(pie2);
         printPie(pie3);
 
+        printChart(data)
+
+        $(".lineChartType > span").click((e) => {
+            $(".lineChartType > span").removeClass("clickedType")
+            $(e.target).addClass("clickedType");
+            printChart(data2);
+        })
+
 
     function printPie(pie) {
+
         $.ajax({
             url: pie.url,
             success: (result)=>{
@@ -90,4 +70,24 @@
             }
         })
    
+    }
+
+    function printChart(data) {
+        var chart = c3.generate({
+            bindto: "#lineChart",
+            data: {
+                x: 'x',
+                columns: data
+            },
+
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        count: 5,
+                        format: '%Y-%m-%d'
+                    }
+                }
+            }
+        });
     }

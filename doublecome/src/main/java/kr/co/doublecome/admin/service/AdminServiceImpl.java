@@ -1,6 +1,7 @@
 package kr.co.doublecome.admin.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,26 @@ public class AdminServiceImpl implements AdminService{
 
 	public Map<String, String> retrieveUserStaticsDc() {
 		return mapper.selectUserStaticsByDealCnt();
+	}
+
+	public Map<String, String> retrieveAuctionStaticsCon() {
+		return mapper.selectAuctionStaticsByCondition();
+	}
+
+	
+
+	public List<Category> retrieveAuctionStaticsCat() {
+		return mapper.selectAuctionStaticsByCategory();
+	}
+
+	
+
+	public List<Map<String, String>> retrieveAuctionStaticsRegDate(String startDate, String endDate) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		System.out.println(startDate + "  " + endDate);
+		return mapper.selectAuctionCntbyRegDate(map);
 	}
 
 
