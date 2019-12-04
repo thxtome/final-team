@@ -94,9 +94,13 @@ $(".reply").click((e) => {
 })
 
 
-$(".Button--bid, .Button--buynow").click(() => {
+$(".notLogin, .Button--buynow").click(() => {
 	swal()
 })
+//$(".loginAlready").click(() => {
+//	location.href="/bidModal.do"
+//})
+
 
 $(document).ready(function(){
     loopcounter('counter-class');
@@ -121,9 +125,6 @@ $(window).scroll(function () {
       }
 })
 
-let acc = document.getElementsByClassName("accordion");
-var i;
-
 $('.nav-item').click(function(e){
 	classes = $(e.target).data("nav");
 	let movepoint = '#' + classes;
@@ -140,6 +141,7 @@ function numberWithCommas(x) {
 
 $(".nowprice").html(numberWithCommas($(".nowprice").html()))
 $(".buyprice").html(numberWithCommas($(".buyprice").html()))
+$(".nowMax").html(numberWithCommas($(".nowMax").html()))
 
 $(".logout").click(() => {
 	swal();
@@ -165,6 +167,18 @@ function scro() {
 
 
 makeReviewListAjax()
+let acc = document.getElementsByClassName("accordion");
+
+function toggle() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+ }
+
 
 function makeReviewListAjax() {
 	$.getJSON({
@@ -173,15 +187,8 @@ function makeReviewListAjax() {
 		success: result => {
 			makeReviewList(result);
 			for (i = 0; i < acc.length; i++) {
-				  acc[i].addEventListener("click", function() {
-				    this.classList.toggle("active");
-				    var panel = this.nextElementSibling;
-				    if (panel.style.maxHeight) {
-				      panel.style.maxHeight = null;
-				    } else {
-				      panel.style.maxHeight = panel.scrollHeight + "px";
-				    } 
-				 });
+				acc[i].removeEventListener("click", toggle)
+				acc[i].addEventListener("click", toggle);
 			}
 		}
 	});
@@ -250,6 +257,7 @@ function makeReviewList (result) {
 			html += `
 					<button class="moreBtn">더 보기 <span class="glyphicon glyphicon-menu-down"></span></button>
 				`;
+		$(".moreBtn").remove();
 		if (rPageNo*5 > reviewCnt) {
 			$(".moreBtn").remove();
 		}
@@ -264,20 +272,31 @@ function makeReviewList (result) {
 	}
 }
 
+
+
+
 $(".updateInquiryBtn").click((e) => {
 	let id = $(e.target).data("no")
 	let content = $(e.target).data("content")
+	let prevContent = $(".InquiryUpdateText").parents("div").parents("div").attr("class")
+	if($('textarea').hasClass("InquiryUpdateText")) {
+		$(".InquiryUpdateBox").remove();
+		$(`.${prevContent} p`).show();
+	}
 	$(`.inquiryContent${id} p`).hide();
 	
 	let html = 
 	`
-	<div class="InquiryUpdateBox">
-	<textarea class="InquiryUpdateText">${content}</textarea>
+		<div class="InquiryUpdateBox">
+	<form id="upForm" method="post" action="editInquiry.do">
+	<textarea class="InquiryUpdateText" name="inquiryContent">${content}</textarea>
 					<div class="InquiryUpdateBtn">
 						<button class="InquiryUpdateCancelBtn">취소</button>
 						<button type="button" class="InquiryUpdateCompleteBtn">수정</button>
 					</div>
-	</div>
+		<input type="hidden" name="inquiryNo" value="${id}">	
+	</form>
+		</div>
 	`;
 	$(`.inquiryContent${id}`).append(html);
 	
@@ -285,4 +304,89 @@ $(".updateInquiryBtn").click((e) => {
 		$(".InquiryUpdateBox").remove();
 		$(`.inquiryContent${id} p`).show();
 	})
+	$(".InquiryUpdateCompleteBtn").click(() => {
+		Swal.fire({
+	        title: '등록한 문의사항을 수정하시겠습니까',
+	        type: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        confirmButtonText: '수정',
+	        cancelButtonText: '취소'
+	      }).then((result) => {
+	        if (result.value) {
+	        	$("#upForm").submit()
+	        } else if (result.dismiss === Swal.DismissReason.cancel) {
+	        }
+	      })
+	})
+	
+})
+
+$(".deleteInquiryBtn").click((e) => {
+	let id = $(e.target).data("no")
+	
+	    Swal.fire({
+        title: '등록한 문의사항을 삭제하시겠습니까',
+        text: "삭제시 등록된 답변도 같이 삭제됩니다",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '삭제',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.value) {
+        	location.href=`removeInquiry.do?inquiryNo=${id}`
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        }
+      })
+})
+
+
+function addCommas(x) {
+	 let val = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	 if(!val.endsWith("000")) {
+		 alert("입력은 천원단위 입니다.")
+		 return;
+	 }
+	 return val;
+}
+ 
+function removeCommas(x) {
+    if(!x || x.length == 0) return "";
+    else return x.split(",").join("");
+}
+
+$(".start, .buy").on("focus", function() {
+	    var x = $(this).val();
+	    x = removeCommas(x);
+	    $(this).val(x);
+	}).on("focusout", function() {
+	    var x = $(this).val();
+	    if(x && x.length > 0) {
+	        if(!$.isNumeric(x)) {
+	            x = x.replace(/[^0-9]/g,"");
+	        }
+	        x = addCommas(x);
+	        $(this).val(x);
+	    }
+	}).on("keyup", function() {
+	    $(this).val($(this).val().replace(/[^0-9]/g,""));
+	});
+
+$(".start").click((e) => {
+	   $($(e.target)).val("")
+})
+
+$(".bidModalBtn").click(() => {
+	$div = $(".nowMax").text().replace(/[^0-9]/g,"")
+	$div2 = $(".inputwon").val().replace(/[^0-9]/g,"")
+	if(parseInt($div)+10 < parseInt($div2)) {
+		$(".inputwon").val($(".inputwon").val().replace(/[^0-9]/g,""))
+		$("#bidForm").submit();
+		alert("입찰완료")
+	} else {
+		alert("현재가격보다 낮은가격으로는 입찰하실 수 없습니다.")
+	}
 })

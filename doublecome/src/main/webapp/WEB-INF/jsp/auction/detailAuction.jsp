@@ -118,7 +118,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 																		<span class="myInquiryUpdate">
 																			<c:if test="${log.userEmail eq inq.userEmail}">
 																			<a href="javascript:return false;" class="updateInquiryBtn" data-no="${inq.inquiryNo}" data-content="${inq.inquiryContent}">수정</a> / 
-																			<a href="#">삭제</a>
+																			<a href="javascript:return false;" class="deleteInquiryBtn" data-no="${inq.inquiryNo}">삭제</a>
 																			</c:if>
 																		</span>
 																	</p>
@@ -152,7 +152,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 																		<span class="myInquiryUpdate">
 																			<c:if test="${log.userEmail eq inq.userEmail}">
 																			<a href="javascript:return false;" class="updateInquiryBtn" data-no="${inq.inquiryNo}" data-content="${inq.inquiryContent}">수정</a> / 
-																			<a href="#">삭제</a>
+																			<a href="javascript:return false;">삭제</a>
 																			</c:if>
 																		</span>
 																	</p>

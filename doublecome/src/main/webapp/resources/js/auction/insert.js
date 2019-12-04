@@ -74,6 +74,7 @@ $(".start, .buy").on("focus", function() {
 $(".start, .buy").click((e) => {
 	   $($(e.target)).val("")
 })
+
 $(".fileUpIcon").hover(() => {
 	$(".hoverNotification").show();
 },() => {

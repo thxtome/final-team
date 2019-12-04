@@ -87,4 +87,21 @@ public class AuctionDetailController {
 		return "redirect:/main.do";
 	}
 	
+	@RequestMapping("/editInquiry.do")
+	public String updateInquiry(@RequestHeader(value="referer") String referer, Inquiry inquiry) {
+		service.updateInquiry(inquiry);
+		return "redirect:" + referer;
+	}
+	@RequestMapping("/removeInquiry.do")
+	public String deleteInquiry(@RequestHeader(value="referer") String referer, int inquiryNo) {
+		service.deleteInquiry(inquiryNo);
+		return "redirect:" + referer;
+	}
+	@RequestMapping("/addBid.do")
+	public String auctionBid(@RequestHeader(value="referer") String referer, Principal principal, Auction auction) {
+		auction.setUserEmail(principal.getName());
+		service.auctionBid(auction);
+		return "redirect:" + referer;
+	}
+	
 }
