@@ -26,7 +26,7 @@
 				
 <form id="infoBox" method="post" action="/doublecome/user/userUpdate.do" class="uploader" enctype="multipart/form-data">
 <div id="pfimgbox"> 
-			<!-- <input class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" /> -->
+			<input class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" />
 			
 			<label class="uploader__label" for="file-upload">
 				<span class="uploader__wrapper">
@@ -38,6 +38,8 @@
 				</span>
 			</label>
  </div>
+ </form>
+ <form method="post" action="/doublecome/user/userUpdate.do" >
         
 	<%-- <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.user" var="user" /> --%>
@@ -64,7 +66,7 @@
 	    		<td>
 	    		 <i class="fas fa-mobile-alt fa-1x" id="icon"></i>
 	    		<input id="userPhnum" name="userPhnum" type="text" class="registInput" value="${user.userPhnum}"
-	    				placeholder="${user.userPhnum}" readonly/>
+	    				placeholder="${user.userPhnum}" />
 						<div id="alert"></div>
 	    		</td>
 	    	</tr>

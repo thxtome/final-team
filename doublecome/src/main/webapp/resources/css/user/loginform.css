@@ -174,10 +174,8 @@ body {
 .form-module a {
   
   display: block;
-  
-  border: 1px solid #d9d9d9;
   margin: 10px 0 10px;
-  padding: 10px 15px;
+  padding: 10px;
   box-sizing: border-box;
   font-wieght: 400;
   transition: 0.3s ease;

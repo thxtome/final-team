@@ -1,16 +1,9 @@
 html, body {
-
-    margin: 0;
-
-    height: 100%;
-
-    overflow: hidden;
 }
 
 
 	#bg{
-		background: #F2F2F2;
-		height: 100%;
+
 	}
 
 	#pageBox{
@@ -19,9 +12,10 @@ html, body {
 		position: relative;
 		width: 1000px;
 		height: 350px;
-		top: 50px;
+		top: 25px;
 		background: white;
-		border: solid black 1px;
+		
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 	
 	#userInfoTitle{
@@ -48,6 +42,7 @@ html, body {
  #infoContainer{
  	position:relative;
  	left: 22%;
+ 	padding: 10px;
  }  
  
  table{
@@ -247,8 +242,8 @@ html {
 /*	left: 0.5em;
 	top: 0em; */
 	display: block;
-	width: 200px;
-	height: 200px;
+	width: 150px;
+	height: 150px;
 	border-radius: 3%;
 	z-index: 1;
 	opacity: 0;
