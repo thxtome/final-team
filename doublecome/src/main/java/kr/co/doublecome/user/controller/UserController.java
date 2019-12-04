@@ -136,7 +136,11 @@ public class UserController {
 	        	return "user/joinForm2";
 	        }
 
-		
+		/*
+		 * MyBatisUserDetailsService mds = new MyBatisUserDetailsService();
+		 * 
+		 * System.out.println(mds.loadUserByUsername(email) + "<< SecurityUser");
+		 */
 	        UserDetails u = userService.loadUserByUsername(email);
 	        SecurityContext sc = SecurityContextHolder.getContext();
 	        //아이디, 패스워드, 권한을 설정합니다. 아이디는 Object단위로 넣어도 무방하며
@@ -147,30 +151,7 @@ public class UserController {
 	        //위에서 설정한 값을 Spring security에서 사용할 수 있도록 세션에 설정해줍니다.
 	        APIsession.setAttribute(HttpSessionSecurityContextRepository.
 	                             SPRING_SECURITY_CONTEXT_KEY, sc);
-	        /*
-	        User u = new User();
-	        u.setUser(service.selectUserInfoByName(email));
-	        System.out.println(u.getUser().getUserEmail() + "<< userEmail From VO" );
-	        u.setUserEmail(u.getUser().getUserEmail());
-	        u.setUserPass(u.getUser().getUserPass());
-	        u.setUserPhnum(u.getUser().getUserPhnum());
-	        u.setUserNickname(u.getUser().getUserNickname());
-	        
-	        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-	        list.add(new SimpleGrantedAuthority("ROLE_U"));
-
-	        
-	        SecurityContext sc = SecurityContextHolder.getContext();
-	        //아이디, 패스워드, 권한을 설정합니다. 아이디는 Object단위로 넣어도 무방하며
-	        //패스워드는 null로 하여도 값이 생성됩니다.
-	        sc.setAuthentication(new UsernamePasswordAuthenticationToken(u, null, list));
-	        HttpSession APIsession = req.getSession(true);
-
-	        //위에서 설정한 값을 Spring security에서 사용할 수 있도록 세션에 설정해줍니다.
-	        APIsession.setAttribute(HttpSessionSecurityContextRepository.
-	                             SPRING_SECURITY_CONTEXT_KEY, sc);
-
-*/
+	       
 	        
 	        //String response = element.getAsJsonObject().get("response").getAsString();
 	        /* 네이버 로그인 성공 페이지 View 호출 */
@@ -208,14 +189,33 @@ public class UserController {
 	public void findPass(User user) throws Exception{}
 	
 	
-
-	//회원 가입
+	//회원 탈퇴
+	@RequestMapping("/deleteUser.do")
+	public String deleteUser(String userEmail) throws Exception{
+		System.out.println("회원 탈퇴 요청 >>" + userEmail );
+		service.deleteUser(userEmail);
+		System.out.println("회원 탈퇴 완료 >>" + userEmail );
+		return "redirect:/user/logout.do"; 
+	}
+	//회원 가입 - 화면
 	@RequestMapping("/joinForm.do")
 	public void joinForm(User user) throws Exception{}
+	
+	// 회원 가입 - 버튼
 	@RequestMapping("/insert.do")
-	public String insertUser(User user) throws Exception{
+	public String insertUser(User user, HttpServletRequest req) throws Exception{
 		user.setUserPass(encoder.encode(user.getUserPass()));	
 		service.insertUser(user);
+		
+		UserDetails u = userService.loadUserByUsername(user.getUserEmail());
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(new UsernamePasswordAuthenticationToken(u, null, u.getAuthorities()));
+        HttpSession APIsession = req.getSession(true);
+
+        APIsession.setAttribute(HttpSessionSecurityContextRepository.
+                             SPRING_SECURITY_CONTEXT_KEY, sc);
+
+		
 		return "redirect:" + "/main.do";
 	}
 	//회원 가입 - 이메일 중복 검사
@@ -258,26 +258,34 @@ public class UserController {
 	}
 	//마이페이지 - 회원 정보 수정 버튼
 	@RequestMapping("/userUpdate.do")
-	public String updateUser(User user, Principal p, RedirectAttributes attr) throws Exception{
+	public String updateUser(User user, Principal p, RedirectAttributes attr, HttpServletRequest req) throws Exception{
 		User u = service.selectUserInfoByName(p.getName());
-		System.out.println(u.getUserPass() + "u.getUserPass()");
-		System.out.println(user.getUserPass().length() + ": userPass.length()");
-		System.out.println(user.getUserPass() + ": userPass");
+		
 		//비밀번호 수정
 		if(user.getUserPass().length() == 0)
 		user.setUserPass(u.getUserPass());
-		else 
+		
 		user.setUserPass(encoder.encode(user.getUserPass()));
 		// 별명 수정
 		if(user.getUserNickname().length() == 0)
 		user.setUserPass(u.getUserNickname());
-		else 
-		user.setUserNickname(user.getUserNickname());
 		
+		//user.setUserNickname(user.getUserNickname());
+		System.out.println(user.getUserPhnum());
+		System.out.println("회원정보 수정 요청");
 		service.updateUser(user);
-		System.out.println("/updateUser.do");
-		attr.addFlashAttribute("user", user);
-		return "redirect:/main.do";
+		System.out.println("회원정보 수정 완료");
+		
+		System.out.println("수정된 회원정보 세션등록");
+		UserDetails uu = userService.loadUserByUsername(user.getUserEmail());
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(new UsernamePasswordAuthenticationToken(uu, null, uu.getAuthorities()));
+        HttpSession APIsession = req.getSession(true);
+
+        APIsession.setAttribute(HttpSessionSecurityContextRepository.
+                             SPRING_SECURITY_CONTEXT_KEY, sc);
+        System.out.println("수정된 회원정보 세션등록 완");
+        return "redirect:/main.do";
 	}
 	
 	@RequestMapping("/bidList.do")

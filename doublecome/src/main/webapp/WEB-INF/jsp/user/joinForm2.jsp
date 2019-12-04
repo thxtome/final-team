@@ -44,7 +44,7 @@
       <input type="hidden" placeholder="비밀 번호" name="userPass" id="userPass" value="${user.userPass}" />
       <input type="tell" placeholder="핸드폰 번호 (- 없이)" name="userPhnum" id="userPhnum"/>
       <div id="phnumCheck" class="alert"></div>
-      <input type="text" placeholder="별명" name="userNickname" id="userNickname" "/>
+      <input type="text" placeholder="별명" name="userNickname" id="userNickname" />
       <div id="idCheck" class="alert"></div>
       <button tpye="submit" id="joinBtn">가입</button>
     </form>

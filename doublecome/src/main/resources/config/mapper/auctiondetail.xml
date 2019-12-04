@@ -70,4 +70,21 @@
 		where auction_no = #{auctionNo}
 	</delete>
 	
+	<update id="updateInquiry" parameterType="Inquiry">
+		update inquiry
+		set inquiry_content = #{inquiryContent}
+		where inquiry_no = #{inquiryNo}
+	</update>
+	
+	<delete id="deleteInquiry" parameterType="int">
+		delete
+		from inquiry
+		where inquiry_no = #{inquiryNo}
+		or inquiry_parent = #{inquiryNo}
+	</delete>
+	<insert id="auctionBid" parameterType="Auction">
+		insert into bid(bid_price, user_email, auction_no)
+		values(#{bidPrice}, #{userEmail}, #{auctionNo})
+	</insert>
+	
 </mapper>

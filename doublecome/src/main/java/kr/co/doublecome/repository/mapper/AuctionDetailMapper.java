@@ -17,4 +17,7 @@ public interface AuctionDetailMapper {
 	void addAuction(Auction auction);
 	List<UtilFile> retrieveFile(int no);
 	void deleteAuction(int no);
+	void updateInquiry(Inquiry inquiry);
+	void deleteInquiry(int no);
+	void auctionBid(Auction auction);
 }

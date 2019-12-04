@@ -15,7 +15,12 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserMapper mapper;
-	
+	//회원 탈퇴
+	@Override
+	public void deleteUser(String email) {
+		mapper.deleteUser(email);
+		
+	}
 	//회원 가입
 	@Override
 	public void insertUser(User user) {
@@ -58,23 +63,25 @@ public class UserServiceImpl implements UserService{
 		return mapper.selectUserInfoByName(userName);
 	}
 
-
+	//유일성 검사 - 이메일
 	@Override
 	public int checkEmail(String userEmail) {
 		return mapper.checkEmail(userEmail);
 	}
 
-
+	//유일성 검사 - 번호
 	@Override
 	public int checkPhnum(String userPhnum) {
 		return mapper.checkPhnum(userPhnum);
 	}
 
-
+	//유일성 검사 - 별명
 	@Override
 	public int checkNickname(String userNickname) {
 		return mapper.checkNickname(userNickname);
 	}
+
+
 
 
 	

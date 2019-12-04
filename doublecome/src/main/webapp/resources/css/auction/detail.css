@@ -134,7 +134,7 @@ footer {
     background: #FF3B58;
     color: white;
 }
-.writer_btn, .InquiryUpdateCompleteBtn, .InquiryUpdateCancelBtn {
+.writer_btn, .InquiryUpdateCompleteBtn, .InquiryUpdateCancelBtn, .bidModalBtn {
     float: right;
     background: #DB1D3B;
     border: none;
@@ -145,7 +145,7 @@ footer {
     text-shadow: 1px 1px 1px #9E3F3F;
     cursor: pointer;
 }
-.writer_btn:hover, .InquiryUpdateCompleteBtn:hover, .InquiryUpdateCancelBtn:hover {
+.writer_btn:hover, .InquiryUpdateCompleteBtn:hover, .InquiryUpdateCancelBtn:hover, .bidModalBtn:hover {
     background: #FF3B58;
     color: white;
 }
@@ -367,4 +367,47 @@ section {
 .InquiryUpdateText {
 	width: 570px;
     height: 85px;
+}
+.modal-content {
+	margin-top: 200px;
+}
+.inputwon {
+	text-align: end;
+    box-sizing: border-box;
+    padding-right: 23px;
+    width: 150px;
+    position: relative;
+}
+.won {
+	display: inline;
+    position: absolute;
+    font-size: 13px;
+    color: gray;
+	left: 178px;
+    top: 0;
+    line-height: 23px;
+    z-index: 1;
+}
+.modal-body {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-bottom: 0 !important;
+}
+.modal-content {
+	width: 500px;
+    margin: 230px auto;
+}
+.nowMax {
+	color: #E30921;
+	font-size: 120%;
+}
+.bidModalBtn {
+    margin-right: 35px;
+    margin-left: 12px !important;
+}
+.modal-footer {
+	padding: 10px;
+}
+.modalBody {
+	margin-bottom: 10px;
 }

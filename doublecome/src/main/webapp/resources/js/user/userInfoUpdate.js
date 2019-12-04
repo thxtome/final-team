@@ -13,7 +13,7 @@ function upload() {
           fileDrag      = document.querySelector('.uploader__label'),
           fileSize      = null;
   
-      /*fileSelect.addEventListener('change', fileSelectHandler, false);*/
+      fileSelect.addEventListener('change', fileSelectHandler, false);
   
       // Is XHR2 available?
       var xhr = new XMLHttpRequest();
@@ -100,7 +100,7 @@ function upload() {
               // document.location.reload(true);
             }
           };
-  
+          
           // Start upload
           xhr.open('POST', document.querySelector('.uploader').action, true);
           xhr.setRequestHeader('X-File-Name', file.name);
@@ -108,7 +108,7 @@ function upload() {
           xhr.setRequestHeader('Content-Type', 'multipart/form-data');
           xhr.send(file);
         } else {
-          console.log('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
+          alert('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
         }
       }
     }
@@ -156,7 +156,19 @@ function uniqueCheck(url, val) {
   return r;
 };
 
+$('#userPhnum').keyup( (e) => {
+    let phnumRule = /^\d{3}\d{3,4}\d{4}$/;// 핸드폰 번호 정규식
+    
+    if(!phnumRule.test($("input[id='userPhnum']").val()) ) {            
+    //경고
+      $('#userPhnum').next().text('잘못된 번호 형식입니다.');
+      inAvtiveBtn();          
+    }else if(uniqueCheck("/doublecome/user/checkPhnum.do", $("input[id='userPhnum']").val()) == 1) {
+      $('#userPhnum').next().text('이미 등록된 번호입니다.');
+      inAvtiveBtn();
+    }else { $('#userPhnum').next().text(""); avtiveBtn(); }
 
+});
 
 $('#userNickname').keyup( (e) => {
   let nicknameRule = /^[a-zA-Z0-9]{3,21}|[A-Za-z가-힣0-9]{2,7}$/g;// 별명 입력 체크식

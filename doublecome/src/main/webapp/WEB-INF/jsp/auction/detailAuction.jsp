@@ -113,11 +113,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 													<strong>${inq.userNickname}</strong> <span class="inquiry_minute"><fmt:formatDate value="${inq.inquiryRegDate}" pattern="yyyy-MM-dd HH:mm"/></span>
 												</p>
 												<div class="clearfix"></div>
-<%-- 												<p>${inq.inquiryContent}</p> --%>
 																<div class="inquiryContent${inq.inquiryNo}">
 																	<p class="col-xs-12">${inq.inquiryContent}
 																		<span class="myInquiryUpdate">
-																			<a href="#" class="updateInquiryBtn" data-no="${inq.inquiryNo}">수정</a> / <a href="#">삭제</a>
+																			<c:if test="${log.userEmail eq inq.userEmail}">
+																			<a href="javascript:return false;" class="updateInquiryBtn" data-no="${inq.inquiryNo}" data-content="${inq.inquiryContent}">수정</a> / 
+																			<a href="javascript:return false;" class="deleteInquiryBtn" data-no="${inq.inquiryNo}">삭제</a>
+																			</c:if>
 																		</span>
 																	</p>
 																</div>
@@ -145,11 +147,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 																		<i class="fab fa-replyd fa-lg"></i><strong> ${inq.userNickname}</strong> <span class="inquiry_minute"><fmt:formatDate value="${inq.inquiryRegDate}" pattern="yyyy-MM-dd HH:mm"/></span>
 																	</p>
 																	<div class="clearfix"></div>
+																<div class="inquiryContent${inq.inquiryNo}">
 																	<p class="col-xs-12">${inq.inquiryContent}
 																		<span class="myInquiryUpdate">
-																			<a href="#">수정</a> / <a href="#">삭제</a>
+																			<c:if test="${log.userEmail eq inq.userEmail}">
+																			<a href="javascript:return false;" class="updateInquiryBtn" data-no="${inq.inquiryNo}" data-content="${inq.inquiryContent}">수정</a> / 
+																			<a href="javascript:return false;">삭제</a>
+																			</c:if>
 																		</span>
 																	</p>
+																</div>
 																</div>
 															</div>
 														</div>

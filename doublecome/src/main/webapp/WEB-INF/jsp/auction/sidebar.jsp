@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@
 						<div class="swiper-wrapper">
 						<c:forEach items="${file}" var="f">
 							<div class="swiper-slide"
-								style="background-image: url('<c:url value="/file/imgLoad.do?filePath=${f.filePath}&fileSystemName=${f.fileSystemName}" />')"></div>
+								style="background-image: url('<c:url value="/file/downLoadFile.do?fileNo=${f.fileNo}" />')"></div>
 						</c:forEach>
 						</div>
 						<div class="swiper-button-next swiper-button-white"
@@ -29,7 +30,8 @@
 							<div class="swiper-wrapper">
 							<c:forEach items="${file}" var="f">
 								<div class="swiper-slide"
-									style="background-image: url('<c:url value="/file/imgLoad.do?filePath=${f.filePath}&fileSystemName=${f.fileSystemName}" />')"></div>
+									style="background-image: url('<c:url value="/file/downLoadFile.do?fileNo=${f.fileNo}" />')">
+								</div>
 							</c:forEach>
 							</div>
 						</div>
@@ -94,12 +96,22 @@
 											<dt class="Price__title">현재 최고가</dt>
 											<dd class="Price__value"><span class="nowprice">${auction.maxPrice}</span><span>원</span></dd>
 										</dl>
+									<sec:authorize access="isAnonymous()">
 										<div class="Price__buttonArea">
 											<a href="#"
-												class="Button Button--bid js-modal-show rapidnofollow"
+												class="Button Button--bid js-modal-show rapidnofollow notLogin"
 												rel="nofollow" data-modal-name="error"
 												data-ylk="rsec:bds;pos:1" data-rapid_p="7">입 찰 하 기</a>
 										</div>
+									</sec:authorize>
+									<sec:authorize access="isAuthenticated()">
+										<div class="Price__buttonArea">
+											<a href="#normalModal"
+												class="Button Button--bid js-modal-show rapidnofollow loginAlready"
+												rel="nofollow" data-modal-name="error"
+												data-ylk="rsec:bds;pos:1" data-rapid_p="7" data-toggle="modal">입 찰 하 기</a>
+										</div>
+									</sec:authorize>
 									</div>
 									<div class="Price Price--buynow">
 										<div class="PriceUse is-hide"></div>
@@ -153,5 +165,47 @@
 					</div>
 				</div>
 			</div>
+			
+				<div id="normalModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">경매 입찰하기</h4>
+				</div>
+				<div class="modal-body">
+					<dl class="row modalBody">
+						<dd class="col-xs-6">
+						<p>현재 최고가</p>
+						</dd>
+						<dd class="col-xs-6">
+						<p class="nowMax">${auction.maxPrice}<span> 원</span></p>
+						</dd>
+						
+					</dl>
+					<form id="bidForm" method="POST" action="addBid.do">
+						<div>
+							<dl class="row modalBody">
+							<dd class="col-xs-6">
+								<p>입찰희망가 </p>
+							</dd>
+								<dd class="col-xs-6 line_clean">
+									<p class="won">원</p>
+									<input type="text" class="start inputwon" name="bidPrice" />
+									<input type="hidden" name="auctionNo" value="${auction.auctionNo}" >
+								</dd>
+							</dl>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn bidModalBtn">입찰하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		
 </body>
 </html>

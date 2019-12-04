@@ -36,6 +36,7 @@ public class FileController {
 //        res.setHeader("Content-Disposition", "inline;");
 //        Files.copy(file.toPath(), res.getOutputStream());
 //	}
+	
 	@RequestMapping("/uploadFile.do")
 	public UtilFile uploadFile(UtilFile uFile) {
 		return service.uploadFile(uFile);
@@ -49,7 +50,6 @@ public class FileController {
 	@PostMapping("/photoUpload.do")
 	@ResponseBody
 	public String AjaxFileUpload(@RequestParam("file") MultipartFile file, HttpServletResponse res) {
-		System.out.println(file);
 		UtilFile util = new UtilFile();
 		List<MultipartFile> attach = new ArrayList<>();
 		attach.add(file);

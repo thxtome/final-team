@@ -94,4 +94,14 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	public void deleteAuction(int no) {
 		mapper.deleteAuction(no);
 	}
+	public void updateInquiry(Inquiry inquiry) {
+		mapper.updateInquiry(inquiry);
+	}
+	public void deleteInquiry(int no) {
+		mapper.deleteInquiry(no);
+	}
+	public void auctionBid(Auction auction) {
+		mapper.auctionBid(auction);
+	}
+	
 }
