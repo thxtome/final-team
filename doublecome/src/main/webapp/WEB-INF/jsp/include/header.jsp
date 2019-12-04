@@ -12,6 +12,7 @@
 <div class="topbar">
 	<sec:authorize access="isAnonymous()">
 		<div>
+			<span><a href="javascript:popupOpen()">메세지</a></span>
 			<span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
 			<span><a href="<c:url value="/user/loginForm.do" />">로그인</a></span>
 			<span><a href="<c:url value="/user/joinForm.do" />">회원가입</a></span>
@@ -22,6 +23,7 @@
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal.user" var="u" />
 			<div>
+				<span><a href="<c:url value="/chatting/messenger.do"/>">메세지</a></span>
 				<span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
 				<span>${u.userEmail}</span>
 				<span><a href="<c:url value="/user/logout.do" />">로그아웃</a></span>
@@ -94,6 +96,11 @@
 <hr id="bdhr" />
 
 
-
+<script>
+	function popupOpen(){
+		let popOption = "width=820, height=620, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+		window.open("<c:url value="/chatting/messenger.do"/>","",popOption);
+	}
+</script>
 <script src="<c:url value="/resources/js/common/header.js" />"></script>
 
