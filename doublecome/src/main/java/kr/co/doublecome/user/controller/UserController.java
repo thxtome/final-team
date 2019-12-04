@@ -260,20 +260,18 @@ public class UserController {
 	@RequestMapping("/userUpdate.do")
 	public String updateUser(User user, Principal p, RedirectAttributes attr, HttpServletRequest req) throws Exception{
 		User u = service.selectUserInfoByName(p.getName());
-		System.out.println(u.getUserPass() + "u.getUserPass()");
-		System.out.println(user.getUserPass().length() + ": userPass.length()");
-		System.out.println(user.getUserPass() + ": userPass");
+		
 		//비밀번호 수정
 		if(user.getUserPass().length() == 0)
 		user.setUserPass(u.getUserPass());
-		else 
+		
 		user.setUserPass(encoder.encode(user.getUserPass()));
 		// 별명 수정
 		if(user.getUserNickname().length() == 0)
 		user.setUserPass(u.getUserNickname());
-		else 
-		user.setUserNickname(user.getUserNickname());
 		
+		//user.setUserNickname(user.getUserNickname());
+		System.out.println(user.getUserPhnum());
 		System.out.println("회원정보 수정 요청");
 		service.updateUser(user);
 		System.out.println("회원정보 수정 완료");

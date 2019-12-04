@@ -38,6 +38,8 @@
 				</span>
 			</label>
  </div>
+ </form>
+ <form method="post" action="/doublecome/user/userUpdate.do" >
         
 	<%-- <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.user" var="user" /> --%>
@@ -64,7 +66,7 @@
 	    		<td>
 	    		 <i class="fas fa-mobile-alt fa-1x" id="icon"></i>
 	    		<input id="userPhnum" name="userPhnum" type="text" class="registInput" value="${user.userPhnum}"
-	    				placeholder="${user.userPhnum}" readonly/>
+	    				placeholder="${user.userPhnum}" />
 						<div id="alert"></div>
 	    		</td>
 	    	</tr>

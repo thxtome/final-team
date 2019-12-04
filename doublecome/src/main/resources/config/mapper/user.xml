@@ -66,8 +66,9 @@
 	<update id="updateUser"  parameterType="User">
 		update user 
 		   set user_pass = #{userPass},
-		   	   user_nickname = #{userNickname}
-		 where user_phnum = #{userPhnum}
+		   	   user_nickname = #{userNickname},
+			   user_phnum = #{userPhnum}
+		 where user_email = #{userEmail}
 	</update>
 	
 	
