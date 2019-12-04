@@ -1,16 +1,3 @@
-
-        let data = [
-            ['x', '2019-01-10', '2019-01-11', '2019-01-12', '2019-01-13', '2019-01-14', '2019-01-15', '2019-01-16', '2019-01-17', '2019-01-18', '2019-01-19', '2019-01-20'],
-            ['data1', 30, 200, 100, 400, 150, 250, 123, 32, 42, 321, 62],
-            ['data2', 50, 20, 10, 40, 15, 25, 213, 64, 84, 132, 232]
-        ]
-
-        let data2 = [
-            ['x', '2019-01-10', '2019-01-11', '2019-01-12', '2019-01-13', '2019-01-14', '2019-01-15', '2019-01-16', '2019-01-17', '2019-01-18', '2019-01-19', '2019-01-20'],
-            ['data1', 300, 80, 90, 140, 215, 330, 123, 212, 321, 121, 262],
-            ['data2', 350, 220, 110, 240, 215, 125, 113, 364, 384, 232, 132]
-        ]
-
         let pie1 = {url: "retrieveUserStaticsAc.do", 
                     target: "#pieChart1",
                     color: ['#1f77b4', '#aec7e8', '#ffbb78', '#2ca02c'],
@@ -31,7 +18,7 @@
         printPie(pie2);
         printPie(pie3);
 
-        printChart(data)
+        printChart({})
 
         $(".lineChartType > span").click((e) => {
             $(".lineChartType > span").removeClass("clickedType")
@@ -69,11 +56,10 @@
                 });
             }
         })
-   
     }
 
     function printChart(data) {
-        var chart = c3.generate({
+        c3.generate({
             bindto: "#lineChart",
             data: {
                 x: 'x',
@@ -89,5 +75,45 @@
                     }
                 }
             }
+        }); 
+    }
+
+    $(".lineChartType button").click(()=>{
+        let data = makeDate()
+        console.dir(data)
+        
+        let date = ["x"];
+        let cnt = ["일자별 경매 등록수"]; 
+        $.ajax({
+            url:"retrieveUserStaticsRegDate.do",
+            type:"POST",
+            data: data,
+            success: (result)=>{
+                result.forEach((ele)=>{
+                    date.push(ele.date);
+                    cnt.push(ele.cnt);
+                })
+                let dataArr = [date,cnt];
+                console.dir(dataArr);
+                printChart(dataArr)
+            }
         });
+    })
+    
+    function makeDate(){
+        let $selectEle = $(".lineChartType select")
+        let startDate;
+        let endDate;
+        let year = $($selectEle[0]).val()
+        console.log($($selectEle[1]).val());
+        switch ($($selectEle[1]).val()) {
+        case '1': startDate = year + '-01-01'; endDate = year + '-03-31'; break;
+    
+        case '2': startDate = year + '-04-01'; endDate = year + '-06-30';  break;
+        
+        case '3': startDate = year + '-07-01'; endDate = year + '-09-30';  break;
+        
+        case '4': startDate = year + '-10-01'; endDate = year + '-12-31';  break;
+        }
+        return {'startDate':startDate,'endDate':endDate};
     }

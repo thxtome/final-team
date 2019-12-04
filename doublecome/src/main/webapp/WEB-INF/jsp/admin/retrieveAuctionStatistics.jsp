@@ -70,11 +70,9 @@
 		</div>
 	</div>
 	<script src="https://d3js.org/d3.v3.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 	<script src="<c:url value="/resources/js/admin/sideBar.js"/>"></script>
-	<script
-		src="<c:url value="/resources/js/admin/retrieveAuctionStatistics.js"/>"></script>
+	<script src="<c:url value="/resources/js/admin/retrieveAuctionStatistics.js"/>"></script>
 </body>
 
 </html>

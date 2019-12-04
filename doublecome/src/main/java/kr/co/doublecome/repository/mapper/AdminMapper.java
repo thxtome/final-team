@@ -37,5 +37,5 @@ public interface AdminMapper {
 	public Map<String, String> selectAuctionStaticsByCondition();
 	public List<Category> selectAuctionStaticsByCategory();
 	public List<Map<String, String>> selectAuctionCntbyRegDate(Map<String,String> map);
-	
+	public List<Map<String, String>> selectUserCntbyRegDate(Map<String, String> map);
 }

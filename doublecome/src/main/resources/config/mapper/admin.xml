@@ -261,15 +261,15 @@
 	<!-- 카테고리 조회  -->
 	<select id="selectCategoriesForAdmin" parameterType="Search" resultType="Category">
 		select c.*, 
-			   ifnull(a.category_deal_cnt,0) as category_deal_cnt,
+			   ifnull(a.category_Auction_cnt,0) as category_Auction_cnt,
 			   count(c.category_code) over() as category_cnt
 		  from category c
-		  left outer join (select count(*) over (partition by category_code) as category_deal_cnt,
+		  left outer join (select count(*) over (partition by category_code) as category_Auction_cnt,
 								  category_code
 						     from auction) a
 		    on  c.category_code = a.category_code
          group by c.category_code    
-         
+         having c.category_order > 0
          	 <choose>
 			<when test='sort == "categoryCode"'>
 				order by c.category_code		
@@ -277,8 +277,8 @@
 			<when test='sort == "categoryName"'>
 				order by c.category_name	
 			</when>
-			<when test='sort == "categoryDealCnt"'>
-				order by category_deal_cnt	desc
+			<when test='sort == "categoryAuctionCnt"'>
+				order by category_Auction_cnt	desc
 			</when>
 		</choose>
 		 limit #{begin},#{listSize}
@@ -475,6 +475,7 @@
      	     from auction
 	</select>
 	
+	<!-- 경매 일자별 통계 -->
 	<select id="selectAuctionCntbyRegDate" resultMap="line" parameterType="map">
 		select count(*) as cnt, 
 			   date_format(auction_reg_date, '%Y-%m-%d') as date
@@ -482,6 +483,16 @@
 		 where date_format(auction_reg_date, '%Y-%m-%d') between #{startDate} and #{endDate}
 		 group by date_format(auction_reg_date, '%Y-%m-%d')
 		 order by date_format(auction_reg_date, '%Y-%m-%d')
+	</select>
+	
+	<!-- 유저 일자별 통계 -->
+	<select id="selectUserCntbyRegDate" resultMap="line" parameterType="map">
+		select count(*) as cnt, 
+			   date_format(user_reg_date, '%Y-%m-%d') as date
+		  from user
+		 where date_format(user_reg_date, '%Y-%m-%d') between #{startDate} and #{endDate}
+		 group by date_format(user_reg_date, '%Y-%m-%d')
+		 order by date_format(user_reg_date, '%Y-%m-%d')
 	</select>
 	
 	
@@ -503,8 +514,4 @@
 	</resultMap>
 
 
-	
-	
-	
-	
 </mapper>

@@ -179,8 +179,13 @@ public class AdminController {
 	@RequestMapping("/retrieveAuctionStaticsRegDate.do")
 	@ResponseBody 	
 	public List<Map<String,String>> retrieveAuctionStaticsRegDate(String startDate, String endDate) {
-		System.out.println();
 		return service.retrieveAuctionStaticsRegDate(startDate, endDate);
+	}
+	
+	@RequestMapping("/retrieveUserStaticsRegDate.do")
+	@ResponseBody 	
+	public List<Map<String,String>> retrieveUserStaticsRegDate(String startDate, String endDate) {
+		return service.retrieveUserStaticsRegDate(startDate, endDate);
 	}
 	
 	

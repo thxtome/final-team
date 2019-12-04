@@ -104,7 +104,7 @@ $(".lineChartType button").click(()=>{
     console.dir(data)
     
     let date = ["x"];
-    let cnt = ["일자별 유저 가입수"]; 
+    let cnt = ["일자별 경매 등록수"]; 
     $.ajax({
 		url:"retrieveAuctionStaticsRegDate.do",
 		type:"POST",

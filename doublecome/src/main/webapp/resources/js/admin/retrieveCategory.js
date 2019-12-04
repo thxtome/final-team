@@ -71,7 +71,7 @@ $(".dataContent").on("click",(".editBtn"),(e)=>{
 				return;
 			}
 			
-			for(let i = 1; i < result.list.length; i++){				
+			for(let i = 0; i < result.list.length; i++){				
 				let cat = result.list[i]
 				let display = cat.categoryDisplay == 1 ? "노출" : "비노출";
 				$("#dataCount").text(cat.categoryCnt)
@@ -81,7 +81,7 @@ $(".dataContent").on("click",(".editBtn"),(e)=>{
 				$tr.append($(`<td>${cat.categoryName}</td>`));
 				$tr.append($(`<td>${cat.categoryOrder}</td>`));
 				$tr.append($(`<td>${display}</td>`));
-				$tr.append($(`<td>${cat.categoryDealCnt}</td>`));
+				$tr.append($(`<td>${cat.categoryAuctionCnt}</td>`));
 				$tr.append($(`<td><button class="editBtn">관리</button></td>`));
 				$tbody.append($tr);
 			}

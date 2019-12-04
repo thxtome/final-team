@@ -57,6 +57,16 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	
+	
+
+	public List<Map<String, String>> retrieveUserStaticsRegDate(String startDate, String endDate) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		System.out.println(startDate + "  " + endDate);
+		return mapper.selectUserCntbyRegDate(map);
+	}
+
 
 	public List<Map<String, String>> retrieveAuctionStaticsRegDate(String startDate, String endDate) {
 		Map<String,String> map = new HashMap<String,String>();
