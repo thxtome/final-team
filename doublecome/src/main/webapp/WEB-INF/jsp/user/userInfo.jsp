@@ -45,7 +45,7 @@
    <%--  <input type="hidden" value="${user.userEmail}" name="userEmail"/> --%>
     <button id="historyGoBtn">거래/후기 내역</button>
     </form>
-    <form method="post" action="<c:url value="/user/userDelete.do"/>">
+    <form method="post" action="<c:url value="/user/deleteUser.do"/>">
     <input type="hidden" value="${user.userEmail}" name="userEmail"/>
     <button id="deleteBtn">회원 탈퇴</button>
     </form>
@@ -119,6 +119,7 @@
 		
 		
 <div id="bidList">
+<h2>입찰 내역       이 없습니다.</h2>
 </div>
 </div> 
 </section>

@@ -9,6 +9,7 @@ public interface UserMapper {
 	public User selectUserInfo(User user);
 	public User selectUserInfoByName(String userName);
 	public void insertUser(User user);
+	public void deleteUser(String email);
 	public void updateUser(User user);
 	public User findEmail(User userPhnum);
 	public String findPass(String email);

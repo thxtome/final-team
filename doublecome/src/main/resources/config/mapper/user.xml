@@ -51,7 +51,11 @@
 		 where b.user_email = #{email}
 	</select>
 	
-	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteUser" parameterType="string">
+		delete from user
+		where user_email = #{email}
+	</delete>
 	
 	<!-- 회원 가입 -->
 	<insert id="insertUser" parameterType="User">
