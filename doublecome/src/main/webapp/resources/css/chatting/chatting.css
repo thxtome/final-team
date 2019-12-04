@@ -79,6 +79,21 @@
 	margin-right: 12px;
 	border-radius: 50%;
 }
+.left_people_field .person .count[data-count]:after{
+	position: absolute;
+    right: 1%;
+    top: 5%;
+    content: attr(data-count);
+    font-size: 30%;
+    padding: .6em;
+    border-radius: 50%;
+    line-height: .8em;
+    color: white;
+    background: rgba(255, 0, 0, 0.85);
+    text-align: center;
+    min-width: 1em;
+    font-weight: bold;
+}
 
 .left_people_field .people .person .name {
 	font-size: 14px;
@@ -90,11 +105,18 @@
 
 .left_people_field .people .person .time {
 	font-size: 14px;
-	top: 16px;
+	top: 10px;
 	right: 10%;
 	position: absolute;
 	padding: 0 0 5px 5px;
 	color: #999;
+}
+.right_message_field .chat.active-chat .bubble {
+    transition-timing-function: cubic-bezier(0.4, -0.04, 1, 1);
+}
+.left_people_field .people .person.active span, .left_people_field .people .person:hover span {
+    color: white;
+    background: transparent;
 }
 
 .left_people_field .people .person .preview {
@@ -161,10 +183,9 @@
 
 .right_message_field .chat {
 	position: relative;
-/* 	display: none; */
+	display: none;
 	overflow: hidden;
 	padding: 0 35px 92px;
-/* 	height: calc(100% - 48px); */
 	justify-content: flex-end;
 	flex-direction: column;
 }
@@ -185,14 +206,9 @@
 	color: #999;
 }
 
-.right_message_field .chat.active-chat .bubble:nth-of-type(2) {
+.right_message_field .chat.active-chat .bubble{
 	-webkit-animation-duration: 0.3s;
 	animation-duration: 0.3s;
-}
-
-.right_message_field .chat.active-chat .bubble:nth-of-type(3) {
-	-webkit-animation-duration: 0.45s;
-	animation-duration: 0.45s;
 }
 
 .right_message_field .chat.active-chat .bubble {
@@ -275,12 +291,12 @@
 }
 
 .main_container .write input {
-	font-size: 16px;
+	font-size: 14px;
 	float: left;
 	width: 347px;
 	height: 40px;
 	padding: 0 32px;
-	color: #1a1a1a;
+	color: #333;
 	border: 0;
 	outline: none;
 	background-color: #eceff1;
@@ -325,4 +341,45 @@ li {
 }
 html {
 	overflow:hidden;
+}
+
+@keyframes slideFromLeft {
+    0% {
+        margin-left: -200px;
+        opacity: 0;
+    }
+    100% {
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+@-webkit-keyframes slideFromLeft {
+    0% {
+        margin-left: -200px;
+        opacity: 0;
+    }
+    100% {
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+@keyframes slideFromRight {
+    0% {
+        margin-right: -200px;
+        opacity: 0;
+    }
+    100% {
+        margin-right: 0;
+        opacity: 1;
+    }
+}
+@-webkit-keyframes slideFromRight {
+    0% {
+        margin-right: -200px;
+        opacity: 0;
+    }
+    100% {
+        margin-right: 0;
+        opacity: 1;
+    }
 }

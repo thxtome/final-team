@@ -3,14 +3,14 @@ document.querySelector('.person[data-chat=person2]').classList.add('active')
 
 let friends = {
     list: document.querySelector('ul.people'),
-    all: document.querySelectorAll('.left .person'),
+    all: document.querySelectorAll('.left_people_field .person'),
     name: ''
   },
   chat = {
-    container: document.querySelector('.container .right'),
+    container: document.querySelector('.right_container'),
     current: null,
     person: null,
-    name: document.querySelector('.container .right .top .name')
+    name: document.querySelector('.right_top_field .name')
   }
 
 friends.all.forEach(f => {

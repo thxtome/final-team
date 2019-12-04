@@ -19,37 +19,49 @@
                 <div class="left_people_field">
                     <ul class="people">
                         <li class="person" data-chat="person1">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+                        	<span class="count" data-count="3">
+	                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+                        	</span>
                             <span class="name">Thomas Bangalter</span>
                             <span class="time">2:09 PM</span>
                             <span class="preview">I was wondering...</span>
                         </li>
                         <li class="person" data-chat="person2">
+                        	<span class="count" data-count="3">
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
+                            </span>
                             <span class="name">Dog Woofson</span>
                             <span class="time">1:44 PM</span>
                             <span class="preview">I've forgotten how it felt before</span>
                         </li>
                         <li class="person" data-chat="person3">
+                        	<span class="count" data-count="3">
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/louis-ck.jpeg" alt="" />
+                            </span>
                             <span class="name">Louis CK</span>
                             <span class="time">2:09 PM</span>
                             <span class="preview">But we’re probably gonna need a new carpet.</span>
                         </li>
                         <li class="person" data-chat="person4">
+                        	<span class="count" data-count="3">
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/bo-jackson.jpg" alt="" />
+                            </span>
                             <span class="name">Bo Jackson</span>
                             <span class="time">2:09 PM</span>
                             <span class="preview">It’s not that bad...</span>
                         </li>
                         <li class="person" data-chat="person5">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/michael-jordan.jpg" alt="" />
+                        	<span class="count" data-count="3">
+                            	<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/michael-jordan.jpg" alt="" />
+                            </span>
                             <span class="name">Michael Jordan</span>
                             <span class="time">2:09 PM</span>
                             <span class="preview">Wasup for the third time like is you blind bitch</span>
                         </li>
                         <li class="person" data-chat="person6">
+                        	<span class="count" data-count="3">
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/drake.jpg" alt="" />
+                            </span>
                             <span class="name">Drake</span>
                             <span class="time">2:09 PM</span>
                             <span class="preview">howdoyoudoaspace</span>
@@ -60,7 +72,7 @@
             <div class="right_container">
                 <div class="right_top_field"><span>To: <span class="name">Dog Woofson</span></span></div>
                 <div class="right_message_field">
-                    <div class="chat" data-chat="person2">
+                    <div class="chat" data-chat="person1">
                         <div class="conversation-start">
                             <span>Today, 6:48 AM</span>
                         </div>
