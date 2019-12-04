@@ -13,7 +13,7 @@ function upload() {
           fileDrag      = document.querySelector('.uploader__label'),
           fileSize      = null;
   
-      /*fileSelect.addEventListener('change', fileSelectHandler, false);*/
+      fileSelect.addEventListener('change', fileSelectHandler, false);
   
       // Is XHR2 available?
       var xhr = new XMLHttpRequest();
@@ -108,7 +108,7 @@ function upload() {
           xhr.setRequestHeader('Content-Type', 'multipart/form-data');
           xhr.send(file);
         } else {
-          console.log('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
+          alert('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
         }
       }
     }

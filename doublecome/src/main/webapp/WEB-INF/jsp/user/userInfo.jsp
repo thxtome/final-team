@@ -119,7 +119,6 @@
 		
 		
 <div id="bidList">
-<h2>입찰 내역       이 없습니다.</h2>
 </div>
 </div> 
 </section>

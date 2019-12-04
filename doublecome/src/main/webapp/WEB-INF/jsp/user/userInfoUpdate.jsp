@@ -26,7 +26,7 @@
 				
 <form id="infoBox" method="post" action="/doublecome/user/userUpdate.do" class="uploader" enctype="multipart/form-data">
 <div id="pfimgbox"> 
-			<!-- <input class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" /> -->
+			<input class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" />
 			
 			<label class="uploader__label" for="file-upload">
 				<span class="uploader__wrapper">
