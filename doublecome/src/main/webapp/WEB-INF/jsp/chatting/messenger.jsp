@@ -18,54 +18,61 @@
                 </div>
                 <div class="left_people_field">
                     <ul class="people">
-                        <li class="person" data-chat="person1">
-                        	<span class="count" data-count="3">
-	                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
-                        	</span>
-                            <span class="name">Thomas Bangalter</span>
-                            <span class="time">2:09 PM</span>
-                            <span class="preview">I was wondering...</span>
-                        </li>
-                        <li class="person" data-chat="person2">
-                        	<span class="count" data-count="3">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/dog.png" alt="" />
-                            </span>
-                            <span class="name">Dog Woofson</span>
-                            <span class="time">1:44 PM</span>
-                            <span class="preview">I've forgotten how it felt before</span>
-                        </li>
-                        <li class="person" data-chat="person3">
-                        	<span class="count" data-count="3">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/louis-ck.jpeg" alt="" />
-                            </span>
-                            <span class="name">Louis CK</span>
-                            <span class="time">2:09 PM</span>
-                            <span class="preview">But we’re probably gonna need a new carpet.</span>
-                        </li>
-                        <li class="person" data-chat="person4">
-                        	<span class="count" data-count="3">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/bo-jackson.jpg" alt="" />
-                            </span>
-                            <span class="name">Bo Jackson</span>
-                            <span class="time">2:09 PM</span>
-                            <span class="preview">It’s not that bad...</span>
-                        </li>
-                        <li class="person" data-chat="person5">
-                        	<span class="count" data-count="3">
-                            	<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/michael-jordan.jpg" alt="" />
-                            </span>
-                            <span class="name">Michael Jordan</span>
-                            <span class="time">2:09 PM</span>
-                            <span class="preview">Wasup for the third time like is you blind bitch</span>
-                        </li>
-                        <li class="person" data-chat="person6">
-                        	<span class="count" data-count="3">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/drake.jpg" alt="" />
-                            </span>
-                            <span class="name">Drake</span>
-                            <span class="time">2:09 PM</span>
-                            <span class="preview">howdoyoudoaspace</span>
-                        </li>
+                    	<c:forEach items="${chat}" var="chat" varStatus="loop">
+                    		<c:choose>
+	                    		<c:when test="${chat.userEmailSeller != email}">
+			                        <li class="person" data-chat="person${loop.count}">
+			                        	<c:choose>
+			                        		<c:when test="${chat.readsSeller == 0}">
+				                        	    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+			                        		</c:when>
+			                        		<c:otherwise>
+					                        	<span class="count" data-count="${chat.readsSeller}">
+						                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+					                        	</span>
+			                        		</c:otherwise>
+			                        	</c:choose>
+					                    <span class="name">${chat.buyerNickName}</span>
+			                            <c:choose>
+			                            	<c:when test="${chat.covstRegDate == null}">
+					                            <span class="name">${chat.buyerNickName}</span>
+					                            <span class="time">00:00</span>			                            				                            	
+					                            <span class="preview">대화를 시작하세요!</span>
+			                            	</c:when>
+			                            	<c:otherwise>
+					                            <span class="time">${chat.covstRegDate}</span>			                            	
+					                            <span class="preview">${chat.covstContent}</span>
+			                            	</c:otherwise>
+			                            </c:choose>
+	                       			 </li>                    		
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<li class="person" data-chat="person${loop.count}">
+			                        	<c:choose>
+			                        		<c:when test="${chat.readsBuyer == 0}">
+				                        	    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+			                        		</c:when>
+			                        		<c:otherwise>
+					                        	<span class="count" data-count="${chat.readsBuyer}">
+						                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+					                        	</span>
+			                        		</c:otherwise>
+			                        	</c:choose>
+			                            <span class="name">${chat.buyerNickName}</span>
+			                            <c:choose>
+			                            	<c:when test="${chat.covstRegDate == null}">
+					                            <span class="time">00:00</span>			                            				                            	
+					                            <span class="preview">대화를 시작하세요</span>
+			                            	</c:when>
+			                            	<c:otherwise>
+					                            <span class="time">${chat.covstRegDate}</span>			                            	
+					                            <span class="preview">${chat.covstContent}</span>
+			                            	</c:otherwise>
+			                            </c:choose>
+	                       			 </li>          
+	                    		</c:otherwise>                    		
+                    		</c:choose>
+                    	</c:forEach>
                     </ul>
                 </div>
             </div>
