@@ -12,6 +12,7 @@ import kr.co.doublecome.repository.mapper.HistoryMapper;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Category;
+import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.History;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.Review;
@@ -103,5 +104,7 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	public void auctionBid(Auction auction) {
 		mapper.auctionBid(auction);
 	}
-	
+	public void insertDeal(Deal deal) {
+		mapper.insertDeal(deal);
+	}
 }

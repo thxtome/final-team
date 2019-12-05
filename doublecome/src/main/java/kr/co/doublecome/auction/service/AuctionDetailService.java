@@ -5,6 +5,7 @@ import java.util.List;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Category;
+import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.History;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.Review;
@@ -27,4 +28,5 @@ public interface AuctionDetailService {
 	void updateInquiry(Inquiry inquiry);
 	void deleteInquiry(int no);
 	void auctionBid(Auction auction);
+	void insertDeal(Deal deal);
 }

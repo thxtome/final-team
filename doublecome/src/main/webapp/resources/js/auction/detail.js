@@ -94,7 +94,7 @@ $(".reply").click((e) => {
 })
 
 
-$(".notLogin, .Button--buynow").click(() => {
+$(".notLogin").click(() => {
 	swal()
 })
 //$(".loginAlready").click(() => {
@@ -382,11 +382,36 @@ $(".start").click((e) => {
 $(".bidModalBtn").click(() => {
 	$div = $(".nowMax").text().replace(/[^0-9]/g,"")
 	$div2 = $(".inputwon").val().replace(/[^0-9]/g,"")
-	if(parseInt($div)+10 < parseInt($div2)) {
+	$div3 = $(".auctionBuyNow").val()
+	if(parseInt($div)+10 < parseInt($div2) && parseInt($div2) < $div3) {
 		$(".inputwon").val($(".inputwon").val().replace(/[^0-9]/g,""))
 		$("#bidForm").submit();
 		alert("입찰완료")
-	} else {
+	} else if (parseInt($div2) > $div3) {
+		alert("즉시구매가격보다 높은 가격으로 입찰하실 수 없습니다.")
+	} 
+	else {
 		alert("현재가격보다 낮은가격으로는 입찰하실 수 없습니다.")
 	}
+})
+
+$(".loginAlreadyBuyNow").click(() => {
+    Swal.fire({
+        title: '즉시구매가격으로 구매하시겠습니까?',
+        text: "구매시 취소하실 수 없습니다",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '즉시구매',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.value) {
+        	$(".inputwon").val($(".auctionBuyNow").val())
+        	$("#bidForm").attr("action", "addDeal.do");
+        	$("#bidForm").submit();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        	
+        }
+      })
 })

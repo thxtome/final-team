@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.auction.service.AuctionDetailService;
 import kr.co.doublecome.common.service.FileService;
-import kr.co.doublecome.history.service.HistoryService;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
+import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
@@ -103,5 +103,14 @@ public class AuctionDetailController {
 		service.auctionBid(auction);
 		return "redirect:" + referer;
 	}
+	@RequestMapping("/addDeal.do")
+	public String insertDeal(Principal principal, Auction auction, Deal deal) {
+		deal.setUserEmailBuyer(principal.getName());
+		deal.setUserEmailSeller(auction.getUserEmail());
+		service.auctionBid(auction);
+		service.insertDeal(deal);
+		return "redirect:/main.do";
+	}
+	
 	
 }

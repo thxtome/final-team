@@ -119,14 +119,23 @@
 											<dt class="Price__title">즉시 구매가</dt>
 											<dd class="Price__value"><span class="buyprice">${auction.auctionBuyNow}</span><span>원</span></dd>
 										</dl>
+										<sec:authorize access="isAnonymous()">
 										<div class="Price__buttonArea">
-
 											<a href="#"
-												class="Button Button--buynow js-modal-show rapidnofollow"
+												class="Button Button--buynow js-modal-show rapidnofollow notLogin"
 												rel="nofollow" data-modal-name="error"
 												data-ylk="rsec:byitnw;pos:1" data-rapid_p="9">즉시 구매하기</a>
 
 										</div>
+										</sec:authorize>
+									<sec:authorize access="isAuthenticated()">
+										<div class="Price__buttonArea">
+											<a href="#"
+												class="Button Button--buynow js-modal-show rapidnofollow loginAlreadyBuyNow"
+												rel="nofollow" data-modal-name="error"
+												data-ylk="rsec:byitnw;pos:1" data-rapid_p="9">즉시 구매하기</a>
+										</div>
+									</sec:authorize>
 										<div id="auc_detail_ymobile_pc"></div>
 									</div>
 								</li>
@@ -194,6 +203,8 @@
 									<p class="won">원</p>
 									<input type="text" class="start inputwon" name="bidPrice" />
 									<input type="hidden" name="auctionNo" value="${auction.auctionNo}" >
+									<input type="hidden" name="userEmail" value="${auction.userEmail}" >
+									<input type="hidden" name="auctionBuyNow" class="auctionBuyNow" value="${auction.auctionBuyNow}" >
 								</dd>
 							</dl>
 						</div>
