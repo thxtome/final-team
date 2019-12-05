@@ -2,6 +2,7 @@ package kr.co.doublecome.chatting.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.doublecome.chatting.service.ChattingService;
@@ -13,5 +14,9 @@ public class ChattingController {
 	private ChattingService service;
 	
 	@RequestMapping("/messenger.do")
-	public void messenger() {System.out.println("왔어");}
+	public void messenger(Model model, String email) {
+		model.addAttribute("email",email);
+		model.addAttribute("chat", service.chatList(email));
+		System.out.println(service.chatList(email));
+	}
 }
