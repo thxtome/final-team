@@ -18,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -66,7 +68,6 @@ public class UserController {
         
         //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
         //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        System.out.println("네이버:" + naverAuthUrl);
         
         //네이버 로그인 창 URL 
         model.addAttribute("url", naverAuthUrl);
@@ -192,9 +193,7 @@ public class UserController {
 	//회원 탈퇴
 	@RequestMapping("/deleteUser.do")
 	public String deleteUser(String userEmail) throws Exception{
-		System.out.println("회원 탈퇴 요청 >>" + userEmail );
 		service.deleteUser(userEmail);
-		System.out.println("회원 탈퇴 완료 >>" + userEmail );
 		return "redirect:/user/logout.do"; 
 	}
 	//회원 가입 - 화면
@@ -243,8 +242,13 @@ public class UserController {
 	
 	//마이페이지 
 	@RequestMapping("/userInfo.do")
-	public void userInfo() throws Exception{
-	}
+	public void userInfo() throws Exception{}
+	
+	//마이페이지 - 파일 업로드
+	@RequestMapping("fileupload/.do")
+	@ResponseBody
+	public void fileupload(MultipartRequest fileData) throws Exception{}
+	
 	//마이페이지 - 회원 정보 수정 
 	@RequestMapping("/userInfoUpdate.do")
 	public void userInfoUpdate(
@@ -259,7 +263,7 @@ public class UserController {
 	//마이페이지 - 회원 정보 수정 버튼
 	@RequestMapping("/userUpdate.do")
 	public String updateUser(User user, Principal p, RedirectAttributes attr, HttpServletRequest req) throws Exception{
-		User u = service.selectUserInfoByName(p.getName());
+		User u = service.selectUserInfoByName(user.getUserEmail());
 		
 		//비밀번호 수정
 		if(user.getUserPass().length() == 0)
@@ -271,12 +275,8 @@ public class UserController {
 		user.setUserPass(u.getUserNickname());
 		
 		//user.setUserNickname(user.getUserNickname());
-		System.out.println(user.getUserPhnum());
-		System.out.println("회원정보 수정 요청");
 		service.updateUser(user);
-		System.out.println("회원정보 수정 완료");
 		
-		System.out.println("수정된 회원정보 세션등록");
 		UserDetails uu = userService.loadUserByUsername(user.getUserEmail());
         SecurityContext sc = SecurityContextHolder.getContext();
         sc.setAuthentication(new UsernamePasswordAuthenticationToken(uu, null, uu.getAuthorities()));
@@ -284,7 +284,6 @@ public class UserController {
 
         APIsession.setAttribute(HttpSessionSecurityContextRepository.
                              SPRING_SECURITY_CONTEXT_KEY, sc);
-        System.out.println("수정된 회원정보 세션등록 완");
         return "redirect:/main.do";
 	}
 	

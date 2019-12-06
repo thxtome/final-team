@@ -24,7 +24,7 @@ function upload() {
         fileDrag.addEventListener('drop', fileSelectHandler, false);
       }
     }
-  
+    //파일 호버시 등록창 색 변경
     function fileDragHover(e) {
       var fileDrag = document.querySelector('.uploader__label');
   
@@ -37,7 +37,7 @@ function upload() {
     function fileSelectHandler(e) {
   
       document.querySelector('.uploader').classList.add('uploading');
-  
+      console.log(e.target)
       // Fetch FileList object
       var files = e.target.files || e.dataTransfer.files;
   
@@ -50,7 +50,7 @@ function upload() {
         uploadFile(f);
       }
     }
-  
+    //파일 이미지 브라우저에 띄우기
     function parseFile(file) {
   
        console.log(file.name);
@@ -61,6 +61,7 @@ function upload() {
       if (isGood) {
         // Thumbnail Preview
         document.querySelector('.uploader__file').src = URL.createObjectURL(file);
+        console.log(URL.createObjectURL(file) ,"URL.createObjectURL(file)")
       }
       else {
         document.querySelector('.uploader').reset();
@@ -68,7 +69,7 @@ function upload() {
     }
   
     function updateFileProgress(e) {
-  
+    	console.log(e.loaded, "e.loaded")
       if (e.lengthComputable) {
         percentage = (e.loaded / fileSize) * 100;
         clippaper.style.strokeDashoffset = (-clippaperLength + (percentage  * clippaperLength) / 100);
@@ -87,6 +88,7 @@ function upload() {
         fileSizeLimit = 1024; // In MB
       if (xhr.upload) {
         // Check if file is less than x MB
+    	  console.log(file.size, "file.size")
         if (file.size <= fileSizeLimit * 1024 * 1024) {
           // Progress bar
           xhr.upload.addEventListener('progress', updateFileProgress, false);
@@ -94,7 +96,7 @@ function upload() {
           // File received / failed
           xhr.onreadystatechange = function(e) {
             if (xhr.readyState == 4) {
-              // Everything is good!
+              console.log("Everything is good!")
   
               // progress.className = (xhr.status == 200 ? "success" : "failure");
               // document.location.reload(true);
@@ -102,6 +104,7 @@ function upload() {
           };
           
           // Start upload
+          
           xhr.open('POST', document.querySelector('.uploader').action, true);
           xhr.setRequestHeader('X-File-Name', file.name);
           xhr.setRequestHeader('X-File-Size', file.size);

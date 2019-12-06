@@ -24,9 +24,9 @@
 					  
 		
 				
-<form id="infoBox" method="post" action="/doublecome/user/userUpdate.do" class="uploader" enctype="multipart/form-data">
+<form id="infoBox" method="post" action="/doublecome/user/fileupload.do" class="uploader" enctype="multipart/form-data" >
 <div id="pfimgbox"> 
-			<input class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" />
+			<input class="uploader__input" id="file-upload" type="file" name="file" accept="image/*" />
 			
 			<label class="uploader__label" for="file-upload">
 				<span class="uploader__wrapper">
@@ -89,35 +89,6 @@
 			</tr>
 	    	</tbody>
 	    	</table>
-	    	
-	    	<%-- 
-			<div id="registInputBox">
-				<div id="registInputBox1" class="registInputBox">
-						<i class="far fa-envelope fa-1x" id="icon"></i>
-						<span id="email"  class="registInput">${user.userEmail}</span>
-						<div id="alert"></div>
-				</div>
-				<div id="registInputBox2" class="registInputBox">
-						<i class="fas fa-unlock-alt fa-1x" id="icon"></i>
-						<div id="pass" style="display:none;">${user.userPass}</div>
-						<input id="registInput" class="registInput" name="userPass" type="password" placeholder="비밀번호">
-						
-						<div id="alert"></div>
-				</div>
-				
-				<div id="registInputBox3" class="registInputBox">
-						<i class="fas fa-mobile-alt fa-1x" id="icon"></i>
-						<span id="phnum" class="registInput">${user.userPhnum}</span>
-						
-						<div id="alert"></div>
-				</div>
-				<div id="registInputBox4" class="registInputBox">
-						<i class="fas fa-user fa-1x" id="icon"></i>
-						
-						<span id="nickname"  class="registInput">${user.userNickname}</span>
-						<div id="alert"></div>
-				</div>
-				 --%>
 			</div>
 			<%-- </sec:authorize> --%>
 </form>

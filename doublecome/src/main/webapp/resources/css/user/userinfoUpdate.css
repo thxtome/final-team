@@ -142,10 +142,15 @@ html, body {
 	}
 	.registInput{
 		
-		
+		width: 80%;
 		border: none;
 		font-size: 15px;
 		border-bottom: solid 1px rgb(211, 211, 211);
+		
+	}
+	#userPass, #userPassConfirm{
+		
+		width: 45%;
 		
 	}
 	input:focus {outline:none;}
