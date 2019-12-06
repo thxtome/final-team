@@ -29,4 +29,5 @@ public interface AuctionDetailService {
 	void deleteInquiry(int no);
 	void auctionBid(Auction auction);
 	void insertDeal(Deal deal);
+	void auctionCondition(int no);
 }

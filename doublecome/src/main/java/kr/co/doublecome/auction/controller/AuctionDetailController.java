@@ -103,12 +103,13 @@ public class AuctionDetailController {
 		service.auctionBid(auction);
 		return "redirect:" + referer;
 	}
-	@RequestMapping("/addDeal.do")
+	@RequestMapping("/buyNow.do")
 	public String insertDeal(Principal principal, Auction auction, Deal deal) {
 		deal.setUserEmailBuyer(principal.getName());
 		deal.setUserEmailSeller(auction.getUserEmail());
 		service.auctionBid(auction);
 		service.insertDeal(deal);
+		service.auctionCondition(auction.getAuctionNo());
 		return "redirect:/main.do";
 	}
 	

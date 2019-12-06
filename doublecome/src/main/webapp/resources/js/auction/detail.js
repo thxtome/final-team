@@ -408,7 +408,7 @@ $(".loginAlreadyBuyNow").click(() => {
       }).then((result) => {
         if (result.value) {
         	$(".inputwon").val($(".auctionBuyNow").val())
-        	$("#bidForm").attr("action", "addDeal.do");
+        	$("#bidForm").attr("action", "buyNow.do");
         	$("#bidForm").submit();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         	

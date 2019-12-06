@@ -107,4 +107,7 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	public void insertDeal(Deal deal) {
 		mapper.insertDeal(deal);
 	}
+	public void auctionCondition(int no) {
+		mapper.auctionCondition(no);
+	}
 }

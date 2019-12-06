@@ -93,23 +93,10 @@
 		values (#{auctionNo}, #{userEmailBuyer}, #{userEmailSeller});
 	</insert>
 	
-	<!-- 
-	insert into deal (auction_no, user_email_buyer, user_email_seller) 
-select a.auction_no,  b.user_email as user_email_buyer, a.user_email as user_email_seller   
-from bid b   
-join auction a     
-on a.auction_no = b.auction_no     
-where a.auction_limit_date = now()   
-group by b.auction_no;
-
-
-select a.auction_no,  b.user_email as user_email_buyer, a.user_email as user_email_seller, max(b.bid_price)
-from bid b   
-right join auction a     
-on a.auction_no = b.auction_no     
-where a.auction_limit_date = '2019-11-21 14:53:00'
-group by b.auction_no
-	 -->
-	
+	<update id="auctionCondition" parameterType="int">
+		update auction
+		set auction_condition = 2
+		where auction_no = #{auctionNo}
+	</update>
 	
 </mapper>

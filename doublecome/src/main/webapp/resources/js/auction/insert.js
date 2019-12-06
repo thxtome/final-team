@@ -29,7 +29,7 @@ $('#summernote').summernote(
 let sysdate = new Date()
 let maxdate = new Date()
 
-sysdate.setHours(sysdate.getHours() + 6)
+sysdate.setHours(sysdate.getHours())
 maxdate.setDate(maxdate.getDate() + 7)
 maxdate.setHours(maxdate.getHours() + 6)
 $(function () {
