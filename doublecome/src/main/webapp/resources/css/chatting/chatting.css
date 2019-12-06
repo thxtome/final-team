@@ -69,7 +69,8 @@
 	position: relative;
 	padding: 12px 10% 16px;
 	cursor: pointer;
-	background-color: #fff
+	background-color: #fff;
+	height : 44px;
 }
 
 .left_people_field .people .person img {
@@ -101,6 +102,7 @@
 	color: #1a1a1a;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 600;
+	padding-right:14px;
 }
 
 .left_people_field .people .person .time {

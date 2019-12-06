@@ -11,7 +11,7 @@
         
         
         <websocket:handlers>
-        	<websocket:mapping handler="" path=""/>
+        	<websocket:mapping handler="messenger" path="/messenger.do"/>
         	<websocket:handshake-interceptors>
         		<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
         	</websocket:handshake-interceptors>

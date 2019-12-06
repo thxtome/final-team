@@ -90,10 +90,10 @@
                 <h5 class="card-title m-0" style="	text-shadow: 0px 0px 1px black;">Best Auction</h5>
                	<div class="sort_area">
 		      		<ul class="sort_list" id="sort_list">
-						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="min_price" title="낮은 가격순"><span></span>낮은 가격순</a></li>
-						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="max_price" title="높은 가격순"><span></span>높은 가격순</a></li>
-						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="auction_reg_date" title="등록일순"><span></span>등록일순</a></li>
-						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="bid_count" title="입찰 많은순"><span></span>입찰횟수순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="maxPrice" title="낮은 가격순"><span></span>낮은 가격순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="maxPrice desc" title="높은 가격순"><span></span>높은 가격순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="auction_reg_date desc" title="등록일순"><span></span>등록일순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="bidCnt desc" title="입찰 많은순"><span></span>입찰횟수순</a></li>
 					</ul>
 					<span class="view_count">
 						<select id="view">
@@ -121,7 +121,7 @@
 					<c:otherwise>
 						<c:forEach items="${auctionlist}" var="list">
 							<div class="col-md-4 p-2" >
-								<a class="auction_list" href="<c:url value="/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}&pageNo=0" />">
+								<a class="auction_list" href="<c:url value="/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}" />">
 									<div class="card box-shadow">
 										<img class="card-img-top w-100"
 											src="<c:url value="/resources/images/macbook.jpg"/>"
@@ -164,7 +164,11 @@
   <script>
 	  $(document).ready(e => {
 			$("#selectbar").append(
-				`<a href="#" data-name="categoryCode" data-value="${selectCategory.categoryCode}" class="options selected category ">
+				`<a href="/doublecome/auction/searchActionList.do" 
+				data-name="categoryCode" 
+				data-value="${selectCategory.categoryCode}" 
+				class="options selected category "
+				data-selected="true">
 				${selectCategory.categoryName}
 					<span class="del"></span>
 				</a>

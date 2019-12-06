@@ -35,7 +35,6 @@
 					                    <span class="name">${chat.buyerNickName}</span>
 			                            <c:choose>
 			                            	<c:when test="${chat.covstRegDate == null}">
-					                            <span class="name">${chat.buyerNickName}</span>
 					                            <span class="time">00:00</span>			                            				                            	
 					                            <span class="preview">대화를 시작하세요!</span>
 			                            	</c:when>

@@ -41,11 +41,11 @@
 	  		and ifnull(b.bid_cnt,0) between #{startBidCount} and #{endBidCount}
 	  	</if>
 	  	<choose>
-		  	<when test="sorts != null">
-	  			order by #{sorts} desc
+		  	<when test="sorts == null">
+				order by a.auction_reg_date desc
 		  	</when> 
 			<otherwise>
-				order by a.auction_reg_date desc
+	  			order by #{sorts} 
 			</otherwise>	  			
 	  	</choose>
 	  	limit #{begin},#{listSize}

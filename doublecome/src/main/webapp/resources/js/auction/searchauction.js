@@ -1,6 +1,9 @@
 $(document).ready(e => {
 	$("#price_filter li a, #price_choice, #bidcount li a, a.category, #date li a").unbind("click").click(e => {
-		if (selectCheck(e) == false) return;
+		if (selectCheck(e) == false) {
+			console.log("실패")
+			return;
+		} 
 		$("#sort_list span").removeClass("on")
 		searchAjax(e);
 	})
@@ -118,7 +121,7 @@ function makeAuctionlist(data) {
 		$auctionField += `
 		<div class='col-md-4 p-2'>
 			<div class="card box-shadow">
-				<a class="auction_list" href="/doublecome/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}&pageNo=0">
+				<a class="auction_list" href="/doublecome/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}">
 					<img class="card-img-top w-100"
 						src="/doublecome/resources/images/macbook.jpg"
 						style="height: 250px;"/>
@@ -180,7 +183,11 @@ $(document).on("click",".options", e => {
 
 function selectCheck(e) {
 	let $event = $(e.target);
+	if ($event.attr("class").startsWith("category ") == false){
+		return;
+	}
 	let clz = $event.attr('class').replace(/cnkfilter/,"")
+	if (clz == "category  selected") return;
 	if ($event.data("selected") == true) {
 		$event.removeClass("selected")
 		$event.prev().removeClass("selected")
@@ -191,11 +198,9 @@ function selectCheck(e) {
 				$(filter).remove();
 			}
 		}
-		if ($event.attr("class").startsWith("category ") == false){			
-			return;
-		}
 	}
 	let chkArr = $("."+clz);
+	console.log(clz)
 	let arr = $(".options");
 	for (let filter of arr) {
 		for (let val of chkArr) {
@@ -211,7 +216,7 @@ function selectCheck(e) {
 	let auctionName = $event.data("name");
 	let datavalue = e.target.dataset.value;
 	let priceChoice = "";
-	if($event.data("value") == "priceChoice") {
+	if ($event.data("value") == "priceChoice") {
 		let num1 = parseInt($("#num1").val())
 		let num2 = parseInt($("#num2").val())
 		if (num1 >= num2 && num2 !== "") {
