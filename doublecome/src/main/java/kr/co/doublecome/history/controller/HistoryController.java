@@ -51,8 +51,8 @@ public class HistoryController {
 	@RequestMapping("/addReview.do")
 	public String addReview(Principal p, Review review) {
 		review.setReviewSender(p.getName());
+		System.out.println("컨트롤러도착 : "+ review);
 		service.insertReview(review);
-		
 		return "redirect:listHistory.do";
 	}
 	

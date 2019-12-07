@@ -235,8 +235,8 @@ function makeReviewList(result, type, sort){
 							<a class="reviewer">${r.senderNickname}</a>
 						</div>
 						<div class="editdel">
-							<a data-no="${r.reviewNo}" class="editreview">수정</a> / 
-							<a data-no="${r.reviewNo}" class="delreview">삭제</a>
+							<a data-no="${r.reviewNo}" data-receiver="${r.reviewReceiver}" class="editreview">수정</a> / 
+							<a data-no="${r.reviewNo}" data-receiver="${r.reviewReceiver}" class="delreview">삭제</a>
 						</div>
 					</li>
 					<li class="reviewDetail">
@@ -364,7 +364,8 @@ $("body").on("click", ".delreview", (e) => {
 	$.get({
 		url: "removeReview.do",
 		data : {
-			reviewNo: $(e.target).data("no")
+			reviewNo: $(e.target).data("no"),
+			reviewReceiver: $(e.target).data("receiver")
 		},
 		success: function() {
 			console.log("성공");
@@ -388,7 +389,8 @@ $("body").on("click", ".editBtn > button", (e) => {
 	$.get({
 		url: "editReview.do",
 		data : {
-			reviewNo: $(".regitbtn").data("no")
+			reviewNo: $(".regitbtn").data("no"),
+			reviewReceiver: $(".regitbtn").data("receiver")
 		},
 		success: function() {
 			console.log("성공");
@@ -413,6 +415,7 @@ $("body").on("click", ".editreview", (e) => {
 			$(".reviewTitleDiv input").val(result.reviewTitle);
 			$('#summernote').summernote('code', result.reviewContent);
 			$("#reviewNo").val(result.reviewNo);
+			$("#reviewReceiver").val(result.reviewReceiver);
 			$(".regitbtn > button").html("수정");
 			$addReviewModal.css("display","block");
 		}

@@ -83,6 +83,39 @@
 		 where user_email = #{userEmail}
 	</select>
 	
+	<!-- 받은리뷰 개수, 평점 -->
+	<update id="updateUserReviewInfo" parameterType="Review">
+		<selectKey resultType="int" keyProperty="reviewScore" order="BEFORE">
+			select distinct ifnull(sum(review_score), 0)
+			  from review
+			 where review_receiver = #{reviewReceiver}
+		</selectKey>
+		update user
+		   set
+		   <choose>
+		   	<when test='type == "insert"'>
+		   		user_review_cnt = user_review_cnt + 1,
+				user_score = #{reviewScore} / user_review_cnt
+		   where user_email = #{reviewReceiver}
+		   	</when>
+			<when test='type == "delete"'>
+				user_review_cnt = user_review_cnt - 1,
+				user_score =
+				case when #{reviewScore} = 0 then 0
+				     else #{reviewScore} / user_review_cnt
+				      end
+		   where user_email = #{reviewReceiver}
+			</when>
+			<when test='type == "update"'>
+				user_score =
+				case when #{reviewScore} = 0 then 0
+				     else #{reviewScore} / user_review_cnt
+				      end
+				where user_email = #{reviewReceiver}
+			</when>
+		   </choose>
+	</update>
+	
 	<!-- 판매내역 -->
 	<select id="saleHistory" resultType="Auction" parameterType="String">
 		select distinct a.*, 
@@ -126,7 +159,8 @@
 	<select id="dealInfo" parameterType="int" resultType="Deal">
 		select *
 		  from deal
-		 where auction_no = #{auctionNo} 
+		 where auction_no = #{auctionNo}
+		   and deal_condition = 2
 	</select>
 	
 	<!-- 후기등록 -->

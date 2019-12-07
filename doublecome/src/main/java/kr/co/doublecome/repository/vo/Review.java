@@ -23,4 +23,5 @@ public class Review {
 	private int reviewScore;					// 평가 점수
 	private int fileGroupCode;					// 저장된 파일 그룹코드
 	private int reviewCnt;						// 전체 리뷰 개수
+	private String type;						// 후기 등록/수정/삭제 타입
 }

@@ -23,4 +23,5 @@ public interface HistoryMapper {
 	public UtilFile selectOneFile(UtilFile uFile);					// 파일 정보
 	public Review selectOneReview(Review review);					// 후기 한개
 	public void updateReview(Review review);						// 후기 수정
+	public void updateUserReviewInfo(Review review);				// 후기 등록/수정/삭제시 평점,후기개수 수정
 }
