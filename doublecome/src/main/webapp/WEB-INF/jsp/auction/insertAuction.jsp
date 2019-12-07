@@ -29,7 +29,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 					<dl class="row">
 						<dt class="col-xs-3 menu">제목</dt>
 						<dd class="col-xs-9">
-							<input type="text" id="auctiontitle" name="auctionTitle" placeholder="글 제목을 입력해주세요" />
+							<input type="text" id="auctiontitle" name="auctionTitle" placeholder=" 글 제목을 입력해주세요" />
 						</dd>
 						<dt class="col-xs-3 menu">카테고리</dt>
 						<dd class="col-xs-9">
