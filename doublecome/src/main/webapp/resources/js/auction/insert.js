@@ -89,17 +89,20 @@ $(".button").click(() => {
 	$div = $(".start").val().replace(/[^0-9]/g,"")
 	$div2 = $(".buy").val().replace(/[^0-9]/g,"")
 	if ($(".start").val() == "") {
-		alert("경매 시작가를 입력해주세요.")
+		swalAlert("경매 시작가를 입력해주세요.")
 	} else if ($(".buy").val() == "") {
-		alert("즉시 구매가를 입력해주세요.")
+		swalAlert("즉시 구매가를 입력해주세요.")
 	} else if ($("#auctiontitle").val() == "") {
-		alert("제목을 입력해주세요.")
+		swalAlert("제목을 입력해주세요.")
 	} else if ($(".catg").val() == null || $(".catg").val() == 0) {
-		alert("카테고리를 선택해주세요.")
+		swalAlert("카테고리를 선택해주세요.")
 	} else if (parseInt($div) >= parseInt($div2)) {
-		alert("즉시 구매가는 경매 시작가보다 높아야 합니다.")
+		swalAlert("즉시 구매가는 경매 시작가보다 높아야 합니다.")
 	} else {
-		$("#insertForm").submit();
+		swalAlert("경매 등록이 완료되었습니다.")
+		$(".swal2-confirm").click(() => {
+			$("#insertForm").submit();
+		})
 	}
 })
 
