@@ -54,6 +54,16 @@ public class AuctionDetailController {
 		return service.selectReceiveReview(search);
 	}
 	
+	@RequestMapping("/checkBid.do")
+	@ResponseBody
+	public int checkBid(Auction auction){
+		int result = service.checkBid(auction);
+		if (result >= 1) {
+			return 1;
+		}
+		return 0;
+	}
+	
 	
 	@RequestMapping("/insertAuction.do")
 	public void auctionInsert(Model model) {

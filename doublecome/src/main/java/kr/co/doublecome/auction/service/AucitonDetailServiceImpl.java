@@ -110,4 +110,7 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	public void auctionCondition(int no) {
 		mapper.auctionCondition(no);
 	}
+	public int checkBid(Auction auction) {
+		return mapper.checkBid(auction);
+	}
 }

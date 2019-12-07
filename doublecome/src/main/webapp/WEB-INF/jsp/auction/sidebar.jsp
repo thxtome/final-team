@@ -94,7 +94,16 @@
 										</div>
 										<dl class="Price__body">
 											<dt class="Price__title">현재 최고가</dt>
-											<dd class="Price__value"><span class="nowprice">${auction.maxPrice}</span><span>원</span></dd>
+											<dd class="Price__value"><span class="nowprice">
+											<c:choose>
+											<c:when test="${auction.maxPrice eq 0}">
+											${auction.auctionMinPrice}
+											</c:when>
+											<c:otherwise>
+											${auction.maxPrice}
+											</c:otherwise>
+											</c:choose>
+											</span><span>원</span></dd>
 										</dl>
 									<sec:authorize access="isAnonymous()">
 										<div class="Price__buttonArea">
@@ -107,7 +116,7 @@
 									<sec:authorize access="isAuthenticated()">
 										<div class="Price__buttonArea">
 											<a href="#normalModal"
-												class="Button Button--bid js-modal-show rapidnofollow loginAlready"
+												class="Button Button--bid js-modal-show rapidnofollow loginAlready Mine"
 												rel="nofollow" data-modal-name="error"
 												data-ylk="rsec:bds;pos:1" data-rapid_p="7" data-toggle="modal">입 찰 하 기</a>
 										</div>
@@ -122,7 +131,7 @@
 										<sec:authorize access="isAnonymous()">
 										<div class="Price__buttonArea">
 											<a href="#"
-												class="Button Button--buynow js-modal-show rapidnofollow notLogin"
+												class="Button Button--buynow js-modal-show rapidnofollow notLogin Mine"
 												rel="nofollow" data-modal-name="error"
 												data-ylk="rsec:byitnw;pos:1" data-rapid_p="9">즉시 구매하기</a>
 
@@ -131,7 +140,7 @@
 									<sec:authorize access="isAuthenticated()">
 										<div class="Price__buttonArea">
 											<a href="#"
-												class="Button Button--buynow js-modal-show rapidnofollow loginAlreadyBuyNow"
+												class="Button Button--buynow js-modal-show rapidnofollow loginAlreadyBuyNow Mine"
 												rel="nofollow" data-modal-name="error"
 												data-ylk="rsec:byitnw;pos:1" data-rapid_p="9">즉시 구매하기</a>
 										</div>
@@ -189,7 +198,17 @@
 						<p>현재 최고가</p>
 						</dd>
 						<dd class="col-xs-6">
-						<p class="nowMax">${auction.maxPrice}<span> 원</span></p>
+						<p class="nowMax">
+						<c:choose>
+						<c:when test="${auction.maxPrice eq 0}">
+						${auction.auctionMinPrice}
+						</c:when>
+						<c:otherwise>
+						${auction.maxPrice}
+						</c:otherwise>
+						</c:choose>
+						<span> 원</span>
+						</p>
 						</dd>
 						
 					</dl>

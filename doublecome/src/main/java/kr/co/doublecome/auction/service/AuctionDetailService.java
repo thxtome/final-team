@@ -30,4 +30,5 @@ public interface AuctionDetailService {
 	void auctionBid(Auction auction);
 	void insertDeal(Deal deal);
 	void auctionCondition(int no);
+	int checkBid(Auction auction);
 }

@@ -1,5 +1,11 @@
 let rPageNo = 1;
 let reviewCnt = 0;
+
+
+function swalAlert(msg) {
+	Swal.fire(msg)
+}
+
 function swal() {
     Swal.fire({
         title: '로그인이 필요한 페이지입니다',
@@ -380,22 +386,53 @@ $(".start").click((e) => {
 })
 
 $(".bidModalBtn").click(() => {
+	if (email == id) {
+		swalAlert("자신의 제품에 입찰 혹은 구매하실 수 없습니다.")
+	} else {
 	$div = $(".nowMax").text().replace(/[^0-9]/g,"")
 	$div2 = $(".inputwon").val().replace(/[^0-9]/g,"")
 	$div3 = $(".auctionBuyNow").val()
 	if(parseInt($div)+10 < parseInt($div2) && parseInt($div2) < $div3) {
 		$(".inputwon").val($(".inputwon").val().replace(/[^0-9]/g,""))
-		$("#bidForm").submit();
-		alert("입찰완료")
+		$.ajax({
+			url : "checkBid.do",
+			type : "post",
+			data : {
+				bidPrice : parseInt($div2),
+				auctionNo : no
+			},
+			success: function(result) {
+				if (result == 1) {
+					swalAlert("최고 입찰가가 갱신되었습니다.")
+					$(".swal2-confirm").click(() => {
+						location.reload();
+					})
+					
+				} else {
+					swalAlert("입찰 되었습니다.")
+					$(".swal2-confirm").click(() => {
+						$("#bidForm").submit();						
+					})
+					
+				}
+			},
+		})
+		
 	} else if (parseInt($div2) > $div3) {
-		alert("즉시구매가격보다 높은 가격으로 입찰하실 수 없습니다.")
+		alert("즉시 구매가격보다 높은 가격으로 입찰하실 수 없습니다.")
 	} 
 	else {
-		alert("현재가격보다 낮은가격으로는 입찰하실 수 없습니다.")
+		alert("현재 가격보다 낮은 가격 또는 같은 가격으로 입찰하실 수 없습니다.")
+	}
 	}
 })
 
+
+
 $(".loginAlreadyBuyNow").click(() => {
+	if (email == id) {
+		swalAlert("자신의 제품에 입찰 혹은 구매하실 수 없습니다.")
+	} else {
     Swal.fire({
         title: '즉시구매가격으로 구매하시겠습니까?',
         text: "구매시 취소하실 수 없습니다",
@@ -414,4 +451,5 @@ $(".loginAlreadyBuyNow").click(() => {
         	
         }
       })
+	}
 })

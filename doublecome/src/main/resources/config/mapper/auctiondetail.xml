@@ -99,4 +99,12 @@
 		where auction_no = #{auctionNo}
 	</update>
 	
+	<select id="checkBid" parameterType="Auction" resultType="int">
+		select count(*)
+		from (select *
+				from bid
+				where auction_no = #{auctionNo}
+				and bid_price <![CDATA[>=]]> #{bidPrice}) as b;
+	</select>
+	
 </mapper>
