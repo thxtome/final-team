@@ -105,97 +105,28 @@ $("body").on("click", ".sortTypeTab", (e) => {
 // 신뢰도 별
 function makeStar(score){
 	let starHtml = ``;
-	switch (score){
-	case 1:
-		starHtml = `
+	let halfScore = Math.floor(score / 2); 
+	console.log(Math.floor(score));
+	console.log(halfScore);
+	console.log(score % 2);
+	for (let i = 1; i <= halfScore; i++){
+		starHtml += `
+			<i class="fas fa-star reviewStar"></i>
+		`;	
+	}
+	if (score % 2 === 1){
+		starHtml += `
 			<i class="fas fa-star-half-alt reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
+		`;	
+	}
+	for (let i = halfScore; i < 5; i++){
+		console.log(i);
+		if ((score % 2 == 1) && i == 4){
+			continue;
+		}
+		starHtml += `
+		<i class="far fa-star reviewStar"></i>
 		`;
-		break;
-	case 2:
-		starHtml = `
-			<i class="fas fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			`;
-		break;
-	case 3:
-		starHtml = `
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star-half-alt reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			`;
-		break;
-	case 4:
-		starHtml = `
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			`;
-		break;
-	case 5:
-		starHtml = `
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star-half-alt reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			`;
-		break;
-	case 6:
-		starHtml = `
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			`;
-		break;
-	case 7:
-		starHtml = `
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star-half-alt reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			`;
-		break;
-	case 8:
-		starHtml = `
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="far fa-star reviewStar"></i>
-			`;
-		break;
-	case 9:
-		starHtml = `
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star-half-alt reviewStar"></i>
-			`;
-		break;
-	case 10:
-		starHtml = `
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			<i class="fas fa-star reviewStar"></i>
-			`;
-		break;
 	}
 	return starHtml;
 }
@@ -435,11 +366,6 @@ window.onclick = function(event) {
  	$addReviewModal.css("display","none");
  }
 }
-//후기등록 score바
-//$(".scoreBar").find("span").click((e) => {
-//	$(".scoreBar").find("span").removeClass("scorechoice");
-//	$(e.target).addClass("scorechoice");
-//});
 
 // 후기작성 서머노트
 $('#summernote').summernote(

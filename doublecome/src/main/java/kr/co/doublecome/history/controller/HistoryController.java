@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.history.service.HistoryService;
+import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
 
@@ -27,13 +28,26 @@ public class HistoryController {
 		model.addAttribute("buyHistory", service.receiveBuyHistory(userEmail));
 	}
 	
+	// 구매내역 ajax
+	@RequestMapping("/receiveBuyHistory.do")
+	@ResponseBody
+	public List<Auction> receiveBuyHistory(Principal p){
+		return service.receiveBuyHistory(p.getName());
+	}
+	
+	// 판매내역 ajax
+	@RequestMapping("/receiveSaleHistory.do")
+	@ResponseBody
+	public List<Auction> receiveSaleHistory(Principal p){
+		return service.receiveBuyHistory(p.getName());
+	}
+	
 	// 받은 후기 ajax
 	@RequestMapping("/retrieveReceiveReview.do")
 	@ResponseBody
 	public List<Review> retrieveReceiveReview(Search search, Principal p){
 		search.setKeyword(p.getName());
 		search.setListSize(5);
-		System.out.println(search.getSort());
 		return service.receiveReviewList(search);
 	}
 	
@@ -43,7 +57,6 @@ public class HistoryController {
 	public List<Review> retrieveSendReview(Search search, Principal p){
 		search.setKeyword(p.getName());
 		search.setListSize(5);
-		System.out.println(search.getSort());
 		return service.sendReviewList(search);
 	}
 	
@@ -51,7 +64,6 @@ public class HistoryController {
 	@RequestMapping("/addReview.do")
 	public String addReview(Principal p, Review review) {
 		review.setReviewSender(p.getName());
-		System.out.println("컨트롤러도착 : "+ review);
 		service.insertReview(review);
 		return "redirect:listHistory.do";
 	}
@@ -60,7 +72,6 @@ public class HistoryController {
 	@RequestMapping("/editReviewForm.do")
 	@ResponseBody
 	public Review editReviewForm(Review review) {
-		System.out.println(service.selectOneReview(review));
 		return service.selectOneReview(review);
 	}
 	

@@ -24,7 +24,9 @@ public class HistoryServiceImpl implements HistoryService{
 		return mapper.selectSendReview(search);
 	}
 	public History receiveUserInfo(String userEmail) {
-		return mapper.userInfo(userEmail);
+		History h = mapper.salesInfo(userEmail);
+		h.setBuyCnt(mapper.purchaseInfo(userEmail));
+		return h;
 	}
 	public List<Auction> receiveSaleHistory(String userEmail) {
 		return mapper.saleHistory(userEmail);
@@ -33,19 +35,14 @@ public class HistoryServiceImpl implements HistoryService{
 		return mapper.buyHistory(userEmail);
 	}
 	public void insertReview(Review review) {
-		System.out.println("서비스도착1 : "+ review);
 		Deal deal = mapper.dealInfo(review.getAuctionNo());
-		System.out.println("1" + deal);
 		review.setDealNo(deal.getDealNo());
-		System.out.println("2" + review);
 		if (deal.getUserEmailBuyer().equals(review.getReviewSender())) {
 			review.setReviewReceiver(deal.getUserEmailSeller());
 		} else {
 			review.setReviewReceiver(deal.getUserEmailBuyer());
 		}
-		System.out.println("서비스도착2 : "+ review);
 		review.setType("insert");
-		System.out.println("등록시 리뷰정보 : " + review);
 		mapper.insertReview(review);
 		mapper.updateUserReviewInfo(review);
 	}
@@ -60,6 +57,7 @@ public class HistoryServiceImpl implements HistoryService{
 	public void updateReview(Review review) {
 		review.setType("update");
 		mapper.updateReview(review);
+		System.out.println(review);
 		mapper.updateUserReviewInfo(review);
 	}
 }

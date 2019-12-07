@@ -83,6 +83,25 @@
 		 where user_email = #{userEmail}
 	</select>
 	
+	<select id="salesInfo" resultType="History" parameterType="String">
+		select distinct u.*,
+			   count(d.user_email_seller) over(partition by d.user_email_seller) as sell_cnt
+		  from user u
+		  left join deal d
+		    on u.user_email = d.user_email_seller
+		   and d.deal_condition = 2
+		 where user_email = #{userEmail}
+	</select>
+	
+	<select id="purchaseInfo" resultType="int" parameterType="String">
+		select count(user_email_buyer) as buy_cnt
+		  from deal 
+		 where user_email_buyer = #{userEmail}
+		   and deal_condition = 2
+	</select>
+	
+	
+	
 	<!-- 받은리뷰 개수, 평점 -->
 	<update id="updateUserReviewInfo" parameterType="Review">
 		<selectKey resultType="int" keyProperty="reviewScore" order="BEFORE">
@@ -107,10 +126,7 @@
 		   where user_email = #{reviewReceiver}
 			</when>
 			<when test='type == "update"'>
-				user_score =
-				case when #{reviewScore} = 0 then 0
-				     else #{reviewScore} / user_review_cnt
-				      end
+				user_score = #{reviewScore} / user_review_cnt
 				where user_email = #{reviewReceiver}
 			</when>
 		   </choose>
@@ -119,6 +135,7 @@
 	<!-- 판매내역 -->
 	<select id="saleHistory" resultType="Auction" parameterType="String">
 		select distinct a.*, 
+			   d.deal_no,
 		       max(b.bid_price) over(partition by b.auction_no) as max_price,
 		       r.review_sender,
 		       u.user_nickname
@@ -139,6 +156,7 @@
 	<!-- 구매내역 -->
 	<select id="buyHistory" resultType="Auction" parameterType="String">
 		select distinct a.*, 
+			   d.deal_no,
 			   max(b.bid_price) over(partition by b.auction_no) as bid_price,
 			   u.user_nickname,
 			   r.review_sender
@@ -160,7 +178,6 @@
 		select *
 		  from deal
 		 where auction_no = #{auctionNo}
-		   and deal_condition = 2
 	</select>
 	
 	<!-- 후기등록 -->

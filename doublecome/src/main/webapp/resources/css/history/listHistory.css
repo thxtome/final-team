@@ -348,11 +348,14 @@
 .productInfo{
     width: 500px;
     height: 130px;
-    line-height: 60px;
+    line-height: 40px;
 }
 .listTitle, .listRegDate{
-/*     margin-top: 10px; */
-/*     margin-bottom: 10px; */
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	word-wrap:normal;
+	width:500px;
+	overflow:hidden;
     color: black;
 }
 .listTitle{

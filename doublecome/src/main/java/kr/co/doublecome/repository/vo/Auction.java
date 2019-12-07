@@ -34,6 +34,7 @@ public class Auction {
 	private String inquiryContent;			// 문의글 내용
 	private int inquiryParent;				// 답글 여부
 	private String inquiryRegDate;			// 문의글 게시일
+	private int dealNo;						// 거래번호
 	
 	private int fileNo;
 	private String fileOriginName;
