@@ -1,24 +1,24 @@
 $(function (){
-	$(".salesTabList").click((e) => {
-		$(".salesTabList").removeClass("tabChoice");
+	$(".purchaseTabList").click((e) => {
+		$(".purchaseTabList").removeClass("tabChoice");
 		$(e.target).addClass("tabChoice");
-		salesListAjax(target.data("name"));
+		purchaseListAjax(target.data("name"));
 		console.log(target.data("name"));
 	});
 	
-	function salesListAjax(searchType){
+	function purchaseListAjax(searchType){
+		console.log(1);
 		$.getJSON({
-			url: `receiveSaleHistory.do`,
+			url: `receivePurchaseHistory.do`,
 			data: {
 				searchType,
 			},
-			success: result => makeSalesHistory(result, searchType)
+			success: result => {console.log(2); makePurchaseHistory(result, searchType)}
 		});
-	}
+	};
 	
-	function makeSalesHistory(result, searchType){
-		console.log("판매내역함수도착");
-		console.log(result);
+	function makePurchaseHistory(result, searchType){
+		console.log(3);
 		let html = ``;
 		if(result.length == 0){
 			html = `
@@ -39,7 +39,7 @@ $(function (){
 					<div class="listCon">
 								<div class="listHead">
 									<span class="listDate"> <span class="dateTitle">마감
-											날짜 </span> <span class="dateContent">${format(r.auctionLimitDate, "ymd")}</span>
+											날짜 </span> <span class="dateContent">${r.auctionLimitDate}</span>
 									</span> <span class="detailCon"> <a>입찰금 <strong>${r.bidPrice}</strong>원
 									</a>
 									</span>
@@ -55,7 +55,7 @@ $(function (){
 										<li>
 											<div class="productInfo">
 												<a href="/doublecome/auction/detailAuction.do?no=${r.auctionNo}&userEmail=${r.userEmail}" class="listTitle">${r.auctionTitle}</a>
-												<div class="listRegDate">${format(r.auctionRegDate, "ymd")}</div>
+												<div class="listRegDate">${r.auctionRegDate}</div>
 											</div>
 										</li>
 										<li>
@@ -78,7 +78,7 @@ $(function (){
 						`;
 			});
 		}
-		$("#salesAjax").html(html);
+		$("#purchaseAjax").html(html);
 	};
-	salesListAjax("");
+	purchaseListAjax("");
 });

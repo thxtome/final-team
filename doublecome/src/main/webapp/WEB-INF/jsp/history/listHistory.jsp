@@ -53,116 +53,118 @@
 					<li><span data-name="dealProgress" class="purchaseTabList">거래 진행</span></li>
 					<li><span data-name="dealComplete" class="purchaseTabList">거래 종료</span></li>
 				</ul>
-				<c:choose>
-					<c:when test="${empty buyHistory}">
-						<div class="emptyBox">구매한 내역이 없습니다.</div>
-					</c:when>
-					<c:otherwise>
-					<div class="yearSort">
-						<select name="sort">
-						<option>전체</option>
-						<option>2019</option>
-						<option>2018</option>
-						</select>
-					</div>
-						<c:forEach var="b" items="${buyHistory}">
-							<div class="listCon">
-								<div class="listHead">
-									<span class="listDate"> <span class="dateTitle">마감
-											날짜 </span> <span class="dateContent">${b.auctionLimitDate}</span>
-									</span> <span class="detailCon"> <a>입찰금 <strong>${b.bidPrice}</strong>원
-									</a>
-									</span>
-								</div>
-								<div class="listBody">
-									<ul>
-										<li>
-											<div class="productImg">
-												<img class="imgCon"
-													src="<c:url value="/resources/images/profileImg.png"/>">
-											</div>
-										</li>
-										<li>
-											<div class="productInfo">
-												<a href="<c:url value="/auction/detailAuction.do?no=${b.auctionNo}&userEmail=${b.userEmail}" />" class="listTitle">${b.auctionTitle}</a>
-												<div class="listRegDate">${b.auctionRegDate}</div>
-											</div>
-										</li>
-										<li>
-											<div class="writerInfo">
-												<a class="auctionWriter">${b.userNickname}</a>
-												<div>${s.score}점</div>
-												<a class="reportBtn"><strong>신고</strong></a>
-												<c:if test="${b.dealNo != 0 and empty b.reviewSender}">
-													<a data-no="${b.auctionNo}" class="reviewBtn">후기등록</a>
-												</c:if>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+				<div id="purchaseAjax"></div>
+<%-- 				<c:choose> --%>
+<%-- 					<c:when test="${empty buyHistory}"> --%>
+<!-- 						<div class="emptyBox">구매한 내역이 없습니다.</div> -->
+<%-- 					</c:when> --%>
+<%-- 					<c:otherwise> --%>
+<!-- 					<div class="yearSort"> -->
+<!-- 						<select name="sort"> -->
+<!-- 						<option>전체</option> -->
+<!-- 						<option>2019</option> -->
+<!-- 						<option>2018</option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<%-- 						<c:forEach var="b" items="${buyHistory}"> --%>
+<!-- 							<div class="listCon"> -->
+<!-- 								<div class="listHead"> -->
+<!-- 									<span class="listDate"> <span class="dateTitle">마감 -->
+<%-- 											날짜 </span> <span class="dateContent">${b.auctionLimitDate}</span> --%>
+<%-- 									</span> <span class="detailCon"> <a>입찰금 <strong>${b.bidPrice}</strong>원 --%>
+<!-- 									</a> -->
+<!-- 									</span> -->
+<!-- 								</div> -->
+<!-- 								<div class="listBody"> -->
+<!-- 									<ul> -->
+<!-- 										<li> -->
+<!-- 											<div class="productImg"> -->
+<!-- 												<img class="imgCon" -->
+<%-- 													src="<c:url value="/resources/images/profileImg.png"/>"> --%>
+<!-- 											</div> -->
+<!-- 										</li> -->
+<!-- 										<li> -->
+<!-- 											<div class="productInfo"> -->
+<%-- 												<a href="<c:url value="/auction/detailAuction.do?no=${b.auctionNo}&userEmail=${b.userEmail}" />" class="listTitle">${b.auctionTitle}</a> --%>
+<%-- 												<div class="listRegDate">${b.auctionRegDate}</div> --%>
+<!-- 											</div> -->
+<!-- 										</li> -->
+<!-- 										<li> -->
+<!-- 											<div class="writerInfo"> -->
+<%-- 												<a class="auctionWriter">${b.userNickname}</a> --%>
+<%-- 												<div>${s.score}점</div> --%>
+<!-- 												<a class="reportBtn"><strong>신고</strong></a> -->
+<%-- 												<c:if test="${b.dealNo != 0 and empty b.reviewSender}"> --%>
+<%-- 													<a data-no="${b.auctionNo}" class="reviewBtn">후기등록</a> --%>
+<%-- 												</c:if> --%>
+<!-- 											</div> -->
+<!-- 										</li> -->
+<!-- 									</ul> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<%-- 						</c:forEach> --%>
+<%-- 					</c:otherwise> --%>
+<%-- 				</c:choose> --%>
 			</div>
 			<div>
 				<div id="salesHead">판매내역</div>
 				<ul class="tabHead">
-					<li><span class="salesTabList tabChoice">입찰 진행</span></li>
-					<li><span class="salesTabList">거래 진행</span></li>
-					<li><span class="salesTabList">거래 종료</span></li>
+					<li><span data-name="dealBid" class="salesTabList tabChoice">입찰 진행</span></li>
+					<li><span data-name="dealProgress" class="salesTabList">거래 진행</span></li>
+					<li><span data-name="dealComplete" class="salesTabList">거래 종료</span></li>
 				</ul>
-				<c:choose>
-					<c:when test="${empty saleHistory}">
-						<div class="emptyBox">판매한 내역이 없습니다.</div>
-					</c:when>
-					<c:otherwise>
-					<div class="yearSort">
-						<select name="sort">
-						<option>전체</option>
-						<option>2019</option>
-						<option>2018</option>
-						</select>
-					</div>
-						<c:forEach var="s" items="${saleHistory}">
-							<div class="listCon">
-								<div class="listHead">
-									<span class="listDate"> <span class="dateTitle">마감
-											날짜 </span> <span class="dateContent">${s.auctionLimitDate}</span>
-									</span> <span class="detailCon"> <a>입찰금 <strong>${s.maxPrice}</strong>원
-									</a>
-									</span>
-								</div>
-								<div class="listBody">
-									<ul>
-										<li>
-											<div class="productImg">
-												<img class="imgCon"
-													src="<c:url value="/resources/images/profileImg.png"/>">
-											</div>
-										</li>
-										<li>
-											<div class="productInfo">
-												<a href="<c:url value="/auction/detailAuction.do?no=${s.auctionNo}&userEmail=${s.userEmail}" />" class="listTitle">${s.auctionTitle}</a>
-												<div class="listRegDate">${s.auctionRegDate}</div>
-											</div>
-										</li>
-										<li>
-											<div class="writerInfo">
-												<a class="auctionWriter">${s.userNickname}</a>
-												<div>${s.score}점</div>
-												<a class="reportBtn"><strong>신고</strong></a>
-												<c:if test="${s.dealNo != 0 and empty s.reviewSender}">
-													<a data-no="${s.auctionNo}" class="reviewBtn">후기등록</a>
-												</c:if>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+				<div id="salesAjax"></div>
+<%-- 				<c:choose> --%>
+<%-- 					<c:when test="${empty saleHistory}"> --%>
+<!-- 						<div class="emptyBox">판매한 내역이 없습니다.</div> -->
+<%-- 					</c:when> --%>
+<%-- 					<c:otherwise> --%>
+<!-- 					<div class="yearSort"> -->
+<!-- 						<select name="sort"> -->
+<!-- 						<option>전체</option> -->
+<!-- 						<option>2019</option> -->
+<!-- 						<option>2018</option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<%-- 						<c:forEach var="s" items="${saleHistory}"> --%>
+<!-- 							<div class="listCon"> -->
+<!-- 								<div class="listHead"> -->
+<!-- 									<span class="listDate"> <span class="dateTitle">마감 -->
+<%-- 											날짜 </span> <span class="dateContent">${s.auctionLimitDate}</span> --%>
+<%-- 									</span> <span class="detailCon"> <a>입찰금 <strong>${s.maxPrice}</strong>원 --%>
+<!-- 									</a> -->
+<!-- 									</span> -->
+<!-- 								</div> -->
+<!-- 								<div class="listBody"> -->
+<!-- 									<ul> -->
+<!-- 										<li> -->
+<!-- 											<div class="productImg"> -->
+<!-- 												<img class="imgCon" -->
+<%-- 													src="<c:url value="/resources/images/profileImg.png"/>"> --%>
+<!-- 											</div> -->
+<!-- 										</li> -->
+<!-- 										<li> -->
+<!-- 											<div class="productInfo"> -->
+<%-- 												<a href="<c:url value="/auction/detailAuction.do?no=${s.auctionNo}&userEmail=${s.userEmail}" />" class="listTitle">${s.auctionTitle}</a> --%>
+<%-- 												<div class="listRegDate">${s.auctionRegDate}</div> --%>
+<!-- 											</div> -->
+<!-- 										</li> -->
+<!-- 										<li> -->
+<!-- 											<div class="writerInfo"> -->
+<%-- 												<a class="auctionWriter">${s.userNickname}</a> --%>
+<%-- 												<div>${s.score}점</div> --%>
+<!-- 												<a class="reportBtn"><strong>신고</strong></a> -->
+<%-- 												<c:if test="${s.dealNo != 0 and empty s.reviewSender}"> --%>
+<%-- 													<a data-no="${s.auctionNo}" class="reviewBtn">후기등록</a> --%>
+<%-- 												</c:if> --%>
+<!-- 											</div> -->
+<!-- 										</li> -->
+<!-- 									</ul> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<%-- 						</c:forEach> --%>
+<%-- 					</c:otherwise> --%>
+<%-- 				</c:choose> --%>
 			</div>
 			<div>
 				<div id="reviewHead">후기</div>
@@ -253,10 +255,9 @@
 		<c:import url="/WEB-INF/jsp/admin/reportModal.jsp" />
 	</div>
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-	<script
-		src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
+	<script src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	<script src="<c:url value="/resources/summernote/summernote.js" />"></script>
 	<script src="<c:url value="/resources/js/common/timeFormat.js"/>"></script>
 	<script src="<c:url value="/resources/js/history/reviewHistory.js"/>"></script>

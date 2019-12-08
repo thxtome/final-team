@@ -106,9 +106,6 @@ $("body").on("click", ".sortTypeTab", (e) => {
 function makeStar(score){
 	let starHtml = ``;
 	let halfScore = Math.floor(score / 2); 
-	console.log(Math.floor(score));
-	console.log(halfScore);
-	console.log(score % 2);
 	for (let i = 1; i <= halfScore; i++){
 		starHtml += `
 			<i class="fas fa-star reviewStar"></i>

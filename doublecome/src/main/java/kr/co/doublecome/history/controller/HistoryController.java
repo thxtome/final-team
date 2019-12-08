@@ -24,14 +24,16 @@ public class HistoryController {
 	public void listHistory(Principal p, Model model) {
 		String userEmail = p.getName();
 		model.addAttribute("userHistory", service.receiveUserInfo(userEmail));
-		model.addAttribute("saleHistory", service.receiveSaleHistory(userEmail));
-		model.addAttribute("buyHistory", service.receiveBuyHistory(userEmail));
+//		model.addAttribute("saleHistory", service.receiveSaleHistory(userEmail));
+//		model.addAttribute("buyHistory", service.receiveBuyHistory(userEmail));
 	}
 	
 	// 구매내역 ajax
-	@RequestMapping("/receiveBuyHistory.do")
+	@RequestMapping("/receivePurchaseHistory.do")
 	@ResponseBody
-	public List<Auction> receiveBuyHistory(Principal p){
+	public List<Auction> receivePurchaseHistory(Principal p){
+		System.out.println("구매도착");
+		System.out.println(service.receiveBuyHistory(p.getName()));
 		return service.receiveBuyHistory(p.getName());
 	}
 	
@@ -39,7 +41,9 @@ public class HistoryController {
 	@RequestMapping("/receiveSaleHistory.do")
 	@ResponseBody
 	public List<Auction> receiveSaleHistory(Principal p){
-		return service.receiveBuyHistory(p.getName());
+		System.out.println("판매도착");
+		System.out.println(service.receiveSaleHistory(p.getName()));
+		return service.receiveSaleHistory(p.getName());
 	}
 	
 	// 받은 후기 ajax
