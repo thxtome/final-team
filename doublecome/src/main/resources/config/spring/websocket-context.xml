@@ -11,7 +11,9 @@
         
         
         <websocket:handlers>
-        	<websocket:mapping handler="messenger" path="/messenger.do"/>
+<!--         	<websocket:mapping handler="messenger" path="/messenger.do"/> -->
+        	<websocket:mapping handler="LiveAuctionChatHandler" path="/chat.do"/>
+        	<websocket:mapping handler="LiveAuctionBidHandler" path="/bid.do"/>
         	<websocket:handshake-interceptors>
         		<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
         	</websocket:handshake-interceptors>
