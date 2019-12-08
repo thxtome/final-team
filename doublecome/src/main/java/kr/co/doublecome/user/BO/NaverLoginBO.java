@@ -22,16 +22,16 @@ import kr.co.doublecome.user.controller.NaverLoginApi;
 public class NaverLoginBO {
 	
 	/* 인증 요청문을 구성하는 파라미터 */
-    //client_id: 애플리케이션 등록 후 발급받은 클라이언트 아이디
+    //NCLIENT_ID: 애플리케이션 등록 후 발급받은 클라이언트 아이디
     //response_type: 인증 과정에 대한 구분값. code로 값이 고정돼 있습니다.
-    //redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩). 애플리케이션을 등록할 때 Callback URL에 설정한 정보입니다.
+    //NREDIRECT_URI: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩). 애플리케이션을 등록할 때 Callback URL에 설정한 정보입니다.
     //state: 애플리케이션이 생성한 상태 토큰
-    private final static String CLIENT_ID = "TOpvHOSeiE05F9UnTU0P";       //네이버API Client ID
-    private final static String CLIENT_SECRET = "sOEOX2mF55";                      
-    private final static String REDIRECT_URI = "http://localhost:8001/doublecome/user/callback.do";
-    private final static String SESSION_STATE = "oauth_state";
+    private final static String NCLIENT_ID = "TOpvHOSeiE05F9UnTU0P";       //네이버API Client ID
+    private final static String NCLIENT_SECRET = "sOEOX2mF55";                      
+    private final static String NREDIRECT_URI = "http://localhost:8001/doublecome/user/callback.do";
+    private final static String NSESSION_STATE = "oauth_state";
     /* 프로필 조회 API URL */
-    private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";/// Api 종류 기본 !!
+    private final static String NPROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";/// Api 종류 기본 !!
     
     /* 네이버 아이디로 인증  URL 생성  Method */
     public String getAuthorizationUrl(HttpSession session) {
@@ -43,9 +43,9 @@ public class NaverLoginBO {
 
         /* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */
         OAuth20Service oauthService = new ServiceBuilder()                                                   
-                .apiKey(CLIENT_ID)
-                .apiSecret(CLIENT_SECRET)
-                .callback(REDIRECT_URI)
+                .apiKey(NCLIENT_ID)
+                .apiSecret(NCLIENT_SECRET)
+                .callback(NREDIRECT_URI)
                 .state(state) //앞서 생성한 난수값을 인증 URL생성시 사용함
                 .build(NaverLoginApi.instance());
 
@@ -60,9 +60,9 @@ public class NaverLoginBO {
         if(StringUtils.pathEquals(sessionState, state)){
 
             OAuth20Service oauthService = new ServiceBuilder()
-                    .apiKey(CLIENT_ID)
-                    .apiSecret(CLIENT_SECRET)
-                    .callback(REDIRECT_URI)
+                    .apiKey(NCLIENT_ID)
+                    .apiSecret(NCLIENT_SECRET)
+                    .callback(NREDIRECT_URI)
                     .state(state)
                     .build(NaverLoginApi.instance());
 
@@ -80,22 +80,22 @@ public class NaverLoginBO {
 
     /* http session에 데이터 저장 */
     private void setSession(HttpSession session,String state){
-        session.setAttribute(SESSION_STATE, state);     
+        session.setAttribute(NSESSION_STATE, state);     
     }
 
     /* http session에서 데이터 가져오기 */ 
     private String getSession(HttpSession session){
-        return (String) session.getAttribute(SESSION_STATE);
+        return (String) session.getAttribute(NSESSION_STATE);
     }
     /* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */
     public String getUserProfile(OAuth2AccessToken oauthToken) throws IOException{
 
         OAuth20Service oauthService =new ServiceBuilder()
-                .apiKey(CLIENT_ID)
-                .apiSecret(CLIENT_SECRET)
-                .callback(REDIRECT_URI).build(NaverLoginApi.instance());
+                .apiKey(NCLIENT_ID)
+                .apiSecret(NCLIENT_SECRET)
+                .callback(NREDIRECT_URI).build(NaverLoginApi.instance());
 
-            OAuthRequest request = new OAuthRequest(Verb.GET, PROFILE_API_URL, oauthService);
+            OAuthRequest request = new OAuthRequest(Verb.GET, NPROFILE_API_URL, oauthService);
         oauthService.signRequest(oauthToken, request);
         Response response = request.send();
         return response.getBody();
