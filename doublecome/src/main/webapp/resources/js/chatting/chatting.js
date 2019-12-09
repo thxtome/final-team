@@ -1,6 +1,3 @@
-document.querySelector('.chat[data-chat=person2]').classList.add('active-chat')
-document.querySelector('.person[data-chat=person2]').classList.add('active')
-
 let friends = {
     list: document.querySelector('ul.people'),
     all: document.querySelectorAll('.left_people_field .person'),
@@ -10,7 +7,7 @@ let friends = {
     container: document.querySelector('.right_container'),
     current: null,
     person: null,
-    name: document.querySelector('.right_top_field .name')
+    name: document.querySelector('.right_top_field')
   }
 	
 friends.all.forEach(f => {
@@ -20,18 +17,31 @@ friends.all.forEach(f => {
 });
 
 function setAciveChat(f) {
-  friends.list.querySelector('.active').classList.remove('active')
+  if(friends.list.querySelector('.active') != null) {
+	  friends.list.querySelector('.active').classList.remove('active')	  
+  } 
   f.classList.add('active')
   chat.current = chat.container.querySelector('.active-chat')
   chat.person = f.getAttribute('data-chat')
-  chat.current.classList.remove('active-chat')
+  if(chat.current != null) {
+	  chat.current.classList.remove('active-chat');
+  }
   chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat')
   friends.name = f.querySelector('.name').innerText
-  chat.name.innerHTML = friends.name
+  chat.name.innerHTML = `<span>To: <span class="name">${friends.name}</span></span>`
+//  $(".right_message_field").append(`
+//	<div class="write">
+//        <input type="text" data-chatfield="chat"/>             
+//        <a href="javascript:;" class="write-link send"></a>
+//    </div>	  
+//  `)
 }
 
 let ws = null;
-
+let email = $(".wrapper").data("id");
+let chatNo = $("div[data-chat='person2']").data("no");
+let person = null;
+let peopleField = null;
 $(() => {
 	ws = new WebSocket("ws://localhost/doublecome/chatting.do");	
 	ws.onopen = () => {
@@ -52,10 +62,64 @@ $(() => {
 	};
 	
 });
-
-$(".write a").click(() => {
+function insertData () {
 	let $msg = $("input[data-chatfield='chat']");
-	ws.send($msg.val());
-	$("div[data-chat=person2]").append("<div class='bubble me'>" + $msg.val() + "</div>");
-	$msg.val("");
+	if($msg.val() != "") {		
+		let selectChat = $(".right_message_field .chat");
+		for(let selChat of selectChat) {
+			if($(selChat).hasClass('active-chat')) {
+				person = $(selChat);
+			}
+		}
+		let peopleArea = $(".people .person");
+		for (let people of peopleArea) {
+			if ($(people).hasClass('active')) {
+				peopleField = $(people);
+			}
+		}
+		let d = new Date();
+		let data = {email : $(".wrapper").data("id"), msg: $msg.val(), chatNo:person.data("no")}
+		ws.send(JSON.stringify(data));
+		person.append("<div class='bubble me'>"+ $msg.val() + "</div>");
+		console.log(peopleField.children(".preview"));
+		peopleField.children(".preview").text($msg.val());
+		let hours = d.getHours();
+		let minutes = d.getMinutes();
+		if (d.getHours() < 12) {
+			let hoursLength = hours + "";
+			let minutesLength = minutes + "";
+			if (hoursLength.length == 1) {
+				hours = "0" + hours
+			}
+			if (minutesLength == 1) {
+				minutes = "0" + minutes
+			}
+			peopleField.children(".time").text(hours + ":" + minutes + " AM");			
+		} else {
+			hours = hours - 12;
+			let hoursLength = hours + "";
+			let minutesLength = minutes + "";
+			if (hoursLength.length == 1) {
+				hours = "0" + hours
+			}
+			if (minutesLength == 1) {
+				minutes = "0" + minutes
+			}
+			peopleField.children(".time").text(hours + ":" + minutes + " PM");
+		}
+		$msg.val("");
+	}
+}
+$(document).ready(function(){
+	$(".write a").click(() => {
+		insertData();		
+	});
+    $("input[data-chatfield='chat']").keypress(function (e) {
+     if (e.keyCode  == 13){
+    	 insertData();
+     }
+    $(".person").click((e) => {
+    	$("input[data-chatfield='chat']").focus();
+    })
+ });
 });
