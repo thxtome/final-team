@@ -89,7 +89,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 											placeholder="문의내용을 작성해주세요" name="inquiryContent"></textarea>
 									</sec:authorize>
 									<input type="hidden" name="auctionNo" value="${auction.auctionNo}">
-									<button class="button">등록</button>
+									<button type="button" class="button InquiryBtn">등록</button>
 									</form>
 								</div>
 							</div>

@@ -453,3 +453,11 @@ $(".loginAlreadyBuyNow").click(() => {
       })
 	}
 })
+
+$(".InquiryBtn").click(() => {
+	if (email == id) {
+		swalAlert("자신의 글에 문의등록을 하실 수 없습니다.")
+	} else {
+		$("#productInquiry").submit();
+	}
+})
