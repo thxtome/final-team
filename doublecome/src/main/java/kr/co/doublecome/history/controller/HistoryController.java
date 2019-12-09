@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.history.service.HistoryService;
+import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
@@ -31,19 +33,23 @@ public class HistoryController {
 	// 구매내역 ajax
 	@RequestMapping("/receivePurchaseHistory.do")
 	@ResponseBody
-	public List<Auction> receivePurchaseHistory(Principal p){
-		System.out.println("구매도착");
-		System.out.println(service.receiveBuyHistory(p.getName()));
-		return service.receiveBuyHistory(p.getName());
+	public AjaxPage receivePurchaseHistory(Search search, Principal p){
+		search.setListSize(5);
+		search.setKeyword(p.getName());
+		System.out.println(search);
+		System.out.println(service.receiveBuyHistory(search));
+		return service.receiveBuyHistory(search);
 	}
 	
 	// 판매내역 ajax
 	@RequestMapping("/receiveSaleHistory.do")
 	@ResponseBody
-	public List<Auction> receiveSaleHistory(Principal p){
-		System.out.println("판매도착");
-		System.out.println(service.receiveSaleHistory(p.getName()));
-		return service.receiveSaleHistory(p.getName());
+	public AjaxPage receiveSaleHistory(Search search, Principal p){
+		search.setListSize(5);
+		search.setKeyword(p.getName());
+		System.out.println(search);
+		System.out.println(service.receiveSaleHistory(search));
+		return service.receiveSaleHistory(search);
 	}
 	
 	// 받은 후기 ajax

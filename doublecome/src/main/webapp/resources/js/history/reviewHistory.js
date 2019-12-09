@@ -117,7 +117,6 @@ function makeStar(score){
 		`;	
 	}
 	for (let i = halfScore; i < 5; i++){
-		console.log(i);
 		if ((score % 2 == 1) && i == 4){
 			continue;
 		}

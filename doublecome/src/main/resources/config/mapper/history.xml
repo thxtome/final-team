@@ -133,12 +133,14 @@
 	</update>
 	
 	<!-- 판매내역 -->
-	<select id="saleHistory" resultType="Auction" parameterType="String">
+	<select id="saleHistory" resultType="Auction" parameterType="Search">
 		select distinct a.*, 
 			   d.deal_no,
+			   d.deal_condition,
 		       max(b.bid_price) over(partition by b.auction_no) as max_price,
 		       r.review_sender,
-		       u.user_nickname
+		       u.user_nickname,
+		       count(*) over(partition by b.auction_no) as auction_cnt
 		  from auction a
 		 inner join user u
 		    on a.user_email = u.user_email
@@ -150,16 +152,30 @@
          left join review r
             on d.deal_no = r.deal_no
            and a.user_email = r.review_sender
-		where a.user_email = #{userEmail};
+		where a.user_email = #{keyword}
+		<choose>
+	   	 	<when test="searchType == 'dealProgress'">
+	   	 		and d.deal_condition = 1
+	   	 	</when>
+	   	 	<when test="searchType == 'dealBid' and searchType == ''">
+	   	 		and a.auction_condition = 1
+	   	 	</when>
+	   	 	<otherwise>
+	   	 		and d.deal_condition in (2, 3, 4)
+	   	 	</otherwise>
+	   	 </choose>
+		limit #{begin}, #{listSize}
 	</select>
 	
 	<!-- 구매내역 -->
-	<select id="buyHistory" resultType="Auction" parameterType="String">
+	<select id="buyHistory" resultType="Auction" parameterType="Search">
 		select distinct a.*, 
 			   d.deal_no,
+			   d.deal_condition,
 			   max(b.bid_price) over(partition by b.auction_no) as bid_price,
 			   u.user_nickname,
-			   r.review_sender
+			   r.review_sender,
+			   count(*) over(partition by b.auction_no) as auction_cnt
 		  from auction a
 		 inner join user u
 		    on a.user_email = u.user_email
@@ -170,7 +186,19 @@
           left join review r
             on d.deal_no = r.deal_no
            and d.user_email_buyer = r.review_sender
-	   	 where d.user_email_buyer = #{userEmail}
+	   	 where d.user_email_buyer = #{keyword}
+	   	 <choose>
+	   	 	<when test="searchType == 'dealProgress'" >
+	   	 		and d.deal_condition = 1
+	   	 	</when>
+	   	 	<when test="searchType == 'dealBid' and searchType == ''" >
+	   	 		and a.auction_condition = 1
+	   	 	</when>
+	   	 	<otherwise>
+	   	 		and d.deal_condition in (2, 3, 4)
+	   	 	</otherwise>
+	   	 </choose>
+	   	 limit #{begin}, #{listSize}
 	</select>
 	
 	<!-- 후기 등록시 거래정보  -->

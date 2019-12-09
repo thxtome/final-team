@@ -1,32 +1,37 @@
 $(function (){
+	let data = { pageNo: 1, searchType: ""};
 	$(".salesTabList").click((e) => {
 		$(".salesTabList").removeClass("tabChoice");
 		$(e.target).addClass("tabChoice");
-		salesListAjax(target.data("name"));
-		console.log(target.data("name"));
+		data.searchType = $(e.target).data("type");
+		$("#salesAjax").html("");
+		console.log(data.searchType);
+		salesListAjax(data);
 	});
+	console.log(data.searchType);
+	salesListAjax(data);
 	
-	function salesListAjax(searchType){
+	function salesListAjax(data){
 		$.getJSON({
 			url: `receiveSaleHistory.do`,
-			data: {
-				searchType,
-			},
-			success: result => makeSalesHistory(result, searchType)
+			contentType :'application/json',
+			data: data,
+			success: result => makeSalesHistory(result, data)
 		});
 	}
 	
-	function makeSalesHistory(result, searchType){
-		console.log("판매내역함수도착");
-		console.log(result);
+	function makeSalesHistory(result, data){
+		let salesContent = $("<div></div>");
+		let salesAjax = $("#salesAjax");
 		let html = ``;
-		if(result.length == 0){
+		if(result.list.length == 0){
 			html = `
 				<div class="emptyBox">구매한 내역이 없습니다.</div>
 			`;
+			salesContent.html(html);
 		} else {
 			html = `
-					<div class="yearSort">
+					<div id="salesSort" class="yearSort">
 						<select name="sort">
 						<option>전체</option>
 						<option>2019</option>
@@ -34,7 +39,7 @@ $(function (){
 						</select>
 					</div>
 			`;
-			$.each(result, (i, r) => {
+			$.each(result.list, (i, r) => {
 				html += `
 					<div class="listCon">
 								<div class="listHead">
@@ -78,7 +83,38 @@ $(function (){
 						`;
 			});
 		}
-		$("#salesAjax").html(html);
+		salesContent.html(html);
+		salesContent.append($("<div></div>").addClass("pagination"));
+		salesAjax.html(salesContent.html());
+		pg.print(salesAjax, result.pr);
 	};
-	salesListAjax("");
+	
+	pg.movePage($("#salesAjax"),(pageNo)=>{
+		let year = $("#sales option:selected").html();
+		let data = { 
+				pageNo: pageNo,
+				searchType: $("#sales option:selected").html()
+		};
+		console.log(pageNo);
+		salesListAjax(data);
+	});
+	
+    pg.movePrevTab($("#salesAjax"),(pageNo)=>{
+		let year = $("#sales option:selected").html();
+		let data = { 
+				pageNo: pageNo,
+				searchType: $("#sales option:selected").html()
+		};
+		salesListAjax(data);
+	});
+
+    pg.moveNextTab($("#salesAjax"),(pageNo)=>{
+		let year = $("#sales option:selected").html();
+		let data = { 
+				pageNo: pageNo,
+				searchType: $("#sales option:selected").html()
+		};
+		salesListAjax(data);
+	});
+	
 });

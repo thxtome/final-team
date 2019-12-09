@@ -1,16 +1,19 @@
 package kr.co.doublecome.history.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.doublecome.repository.mapper.HistoryMapper;
+import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.History;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
+import kr.co.doublecome.util.page.PageResult;
 
 @Service("kr.co.doublecome.history.service.HistoryServiceImpl")
 public class HistoryServiceImpl implements HistoryService{
@@ -28,11 +31,48 @@ public class HistoryServiceImpl implements HistoryService{
 		h.setBuyCnt(mapper.purchaseInfo(userEmail));
 		return h;
 	}
-	public List<Auction> receiveSaleHistory(String userEmail) {
-		return mapper.saleHistory(userEmail);
+	public AjaxPage receiveSaleHistory(Search search) {
+		AjaxPage ap = new AjaxPage();
+		List<Object> list = new ArrayList<Object>();
+		
+		List<Auction> aList = mapper.saleHistory(search);
+		
+		for(Auction auction : aList) {
+			list.add((Object)auction);
+		}
+		
+		int count = 0;
+		
+		if(!aList.isEmpty()) {
+			count = aList.get(0).getAuctionCnt();
+		}
+		
+		ap.setList(list);
+		ap.setPr(new PageResult(search.getPageNo(), count, 5, 5));
+
+		return ap;
 	}
-	public List<Auction> receiveBuyHistory(String userEmail){
-		return mapper.buyHistory(userEmail);
+	
+	public AjaxPage receiveBuyHistory(Search search){
+		AjaxPage ap = new AjaxPage();
+		List<Object> list = new ArrayList<Object>();
+		
+		List<Auction> aList = mapper.buyHistory(search);
+		
+		for(Auction auction : aList) {
+			list.add((Object)auction);
+		}
+		
+		int count = 0;
+		
+		if(!aList.isEmpty()) {
+			count = aList.get(0).getAuctionCnt();
+		}
+		
+		ap.setList(list);
+		ap.setPr(new PageResult(search.getPageNo(), count, 5, 5));
+
+		return ap;
 	}
 	public void insertReview(Review review) {
 		Deal deal = mapper.dealInfo(review.getAuctionNo());
