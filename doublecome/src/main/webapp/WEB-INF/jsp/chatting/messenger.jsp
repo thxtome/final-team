@@ -6,10 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/chatting/chatting.css" />">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-	 <div class="wrapper">
+	 <div class="wrapper" data-id="${email}">
         <div class="main_container">
             <div class="left_container">
                 <div class="left_top_field">
@@ -200,7 +202,7 @@
                         </div>
                     </div>
                     <div class="write">
-                        <input type="text" />             
+                        <input type="text" data-chatfield="chat"/>             
                         <a href="javascript:;" class="write-link send"></a>
                     </div>
                 </div>

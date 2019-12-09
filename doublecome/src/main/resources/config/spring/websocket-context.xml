@@ -11,7 +11,7 @@
         
         
         <websocket:handlers>
-<!--         	<websocket:mapping handler="messenger" path="/messenger.do"/> -->
+        	<websocket:mapping handler="messenger" path="/chatting.do"/>
         	<websocket:mapping handler="LiveAuctionChatHandler" path="/chat.do"/>
         	<websocket:mapping handler="LiveAuctionBidHandler" path="/bid.do"/>
         	<websocket:handshake-interceptors>

@@ -14,9 +14,8 @@ public class ChattingController {
 	private ChattingService service;
 	
 	@RequestMapping("/messenger.do")
-	public void messenger(Model model, String email) {
-		model.addAttribute("email",email);
+	public void messenger(Model model,	 String email) {
+		model.addAttribute("email", email);
 		model.addAttribute("chat", service.chatList(email));
-		System.out.println(service.chatList(email));
 	}
 }

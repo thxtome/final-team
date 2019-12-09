@@ -6,22 +6,28 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.google.gson.Gson;
+
+import jdk.nashorn.api.scripting.JSObject;
+
 @Component("messenger")
 public class ChattingHandler extends TextWebSocketHandler {
+	
+	private String userEmail;
 	public ChattingHandler() { 
 		System.out.println("채팅 핸들러 생성 완료");
 	}
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println(session.getId() + " 연결되었음..");
-	
+		userEmail = session.getId();
+		System.out.println(userEmail);
 	}
 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("보낸 아이디 : " + session.getId());
-		System.out.println("보낸 데이터 : " + message.getPayload());
-		session.sendMessage(new TextMessage("에코 메세지 : " + message.getPayload()));
+		if (userEmail.equals(session.getId())) session.sendMessage(new TextMessage(message.getPayload()));
+		
 	}
 
 	@Override
