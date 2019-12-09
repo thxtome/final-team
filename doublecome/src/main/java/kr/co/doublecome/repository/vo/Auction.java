@@ -35,6 +35,9 @@ public class Auction {
 	private int inquiryParent;				// 답글 여부
 	private String inquiryRegDate;			// 문의글 게시일
 	private int dealNo;						// 거래번호
+	private String userEmailBuyer;			// 구매자 이메일
+	private String userEmailSeller;			// 판매자 이메일
+	
 	
 	private int fileNo;
 	private String fileOriginName;

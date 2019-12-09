@@ -107,10 +107,16 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	public void insertDeal(Deal deal) {
 		mapper.insertDeal(deal);
 	}
-	public void auctionCondition(int no) {
-		mapper.auctionCondition(no);
-	}
 	public int checkBid(Auction auction) {
 		return mapper.checkBid(auction);
+	}
+	public void callSPAddDeal(Auction auction) {
+		mapper.callSPAddDeal(auction);
+	}
+	public List<Auction> bidList(int no) {
+		return mapper.bidList(no);
+	}
+	public String selectPhNum(int no) {
+		return mapper.selectPhNum(no);
 	}
 }

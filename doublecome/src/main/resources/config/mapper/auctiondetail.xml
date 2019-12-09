@@ -93,12 +93,6 @@
 		values (#{auctionNo}, #{userEmailBuyer}, #{userEmailSeller});
 	</insert>
 	
-	<update id="auctionCondition" parameterType="int">
-		update auction
-		set auction_condition = 2
-		where auction_no = #{auctionNo}
-	</update>
-	
 	<select id="checkBid" parameterType="Auction" resultType="int">
 		select count(*)
 		from (select *
@@ -107,4 +101,27 @@
 				and bid_price <![CDATA[>=]]> #{bidPrice}) as b;
 	</select>
 	
+	<select id="callSPAddDeal" parameterType="Auction" statementType="CALLABLE">
+		call addDeal(#{bidPrice}, #{userEmail}, #{auctionNo}, #{userEmailBuyer})
+	</select>
+	
+	<select id="bidList" parameterType="int" resultType="Auction">
+		select u.user_nickname, b.bid_price
+		from bid b
+		join user u
+        on b.user_email = u.user_email
+        where auction_no = #{auctionNo}
+		order by bid_price desc
+		limit 5
+	</select>
+	
+	<select id="selectPhNum" parameterType="int" resultType="String">
+		select u.user_phnum
+		from bid b
+		join user u
+		on b.user_email = u.user_email
+		where b.auction_no = #{AuctionNo}
+		order by bid_price desc
+		limit 1
+	</select>
 </mapper>
