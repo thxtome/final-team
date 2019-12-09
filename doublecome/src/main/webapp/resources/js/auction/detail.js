@@ -466,3 +466,7 @@ $(".InquiryBtn").click(() => {
 		$("#productInquiry").submit();
 	}
 })
+
+$(".swiper-slide").on("click", () => {
+	alert("a")
+})

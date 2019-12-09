@@ -106,3 +106,54 @@ $(".button").click(() => {
 	}
 })
 
+let up_files = [];
+
+$(document).ready(() => {
+	$("#upload").on("change", handleImgsFilesSelect)
+})
+
+function deleteImageAction(index) {
+	alert("a")
+	up_files.splice(index, 1)
+	
+	let img_id = "#img_id_"+index;
+	$(img_id).remove();
+}
+
+
+
+function handleImgsFilesSelect(e) {
+	
+	up_files = [];
+	$(".img_wrap").empty();
+	
+	let files = e.target.files
+	let filesArr = Array.prototype.slice.call(files)
+	
+	let index = 0;
+	
+	filesArr.forEach((f) => {
+		if(!f.type.match("image.*")) {
+			alert("이미지 타입만 가능합니다.")
+			return;
+		}
+		up_files.push(f)
+		
+		let reader = new FileReader()
+		reader.onload = function(e) {
+			let html = 
+			"<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\">" 
+			+ "<img src=\""+e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'>"
+			+ "</a>";
+			$(".img_wrap").append(html);
+			index++
+		}
+		reader.readAsDataURL(f);
+	})
+}
+
+
+$(".upload_btn").click(() => {
+	window.open("uploadPhoto.do", "사진 첨부", "width=1000, height=800, location=no, left=400")
+})
+		

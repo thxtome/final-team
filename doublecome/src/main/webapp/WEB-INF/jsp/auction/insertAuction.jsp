@@ -66,7 +66,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 						</dd>
 						<dt class="col-xs-3 menu fileUp">파일첨부<i class="fas fa-question-circle fa-sm fileUpIcon"></i></dt>
 						<dd class="col-xs-9 attach">
-						<input style="display: none;" type="file" id="upload" name="attach" multiple/>
+<!-- 						<input style="display: none;" type="file" id="upload" name="attach" multiple/> -->
   						<label for="upload" class="upload_btn"><span class="glyphicon glyphicon-picture"></span> 사진
 						</label>
 						</dd>
@@ -102,6 +102,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 		<div class="hoverNotification">
 		<div>메인에 등록할 사진을 업로드 해주세요</div>
 	</div>
+	
+	
 	<script src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/js/datetimepicker/moment.js" />"></script>
@@ -112,58 +114,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 	<script src="<c:url value="/resources/summernote/summernote.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/insert.js" />"></script>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
-	
-	<script>
-		let up_files = [];
-		
-		$(document).ready(() => {
-			$("#upload").on("change", handleImgsFilesSelect)
-		})
-		
-		function fileUploadAction() {
-			$("#upload").trigger("click")
-		}
-		
-		function deleteImageAction(index) {
-			alert("a")
-			up_files.splice(index, 1)
-			
-			let img_id = "#img_id_"+index;
-			$(img_id).remove();
-		}
-		
-		
-		
-		function handleImgsFilesSelect(e) {
-			
-			up_files = [];
-			$(".img_wrap").empty();
-			
-			let files = e.target.files
-			let filesArr = Array.prototype.slice.call(files)
-			
-			let index = 0;
-			
-			filesArr.forEach((f) => {
-				if(!f.type.match("image.*")) {
-					alert("이미지 타입만 가능합니다.")
-					return;
-				}
-				up_files.push(f)
-				
-				let reader = new FileReader()
-				reader.onload = function(e) {
-					let html = 
-					"<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\">" 
-					+ "<img src=\""+e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'>"
-					+ "</a>";
-					$(".img_wrap").append(html);
-					index++
-				}
-				reader.readAsDataURL(f);
-			})
-		}
-		
-	</script>
+
 </body>
 </html>

@@ -123,5 +123,10 @@ public class AuctionDetailController {
 		service.callSPAddDeal(auction);
 		return "redirect:/main.do";
 	}
+	@RequestMapping("/uploadPhoto.do")
+	public void upload() {
+	}
+	
+	
 	
 }

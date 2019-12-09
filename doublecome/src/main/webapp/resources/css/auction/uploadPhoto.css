@@ -1,0 +1,48 @@
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+/*     margin-top: 20px; */
+}
+.contents {
+	padding: 0px 40px;
+    margin-left: 55px;
+}
+.topContent {
+	height: 70px;
+	border-bottom: 1px solid #e6e6e6;
+}
+.button {
+    background: #E27575;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    box-shadow: 1px 1px 5px #B6B6B6;
+    border-radius: 3px;
+    text-shadow: 1px 1px 1px #9E3F3F;
+    cursor: pointer;
+    float: right;
+    position: relative;
+	top: 18px;
+    right: 97px;
+}
+
+.button:hover {
+    background: #CF7A7A;
+}
+.basic {
+	height: 120px;
+	background: #f1f1f1;
+	margin: 7px;
+}
+.upload_btn {
+	font-weight: normal;
+	cursor: pointer;
+	position: relative;
+	top: 25px;
+    left: 90px;
+    float: left;
+}
+li {
+	list-style: none;
+}
