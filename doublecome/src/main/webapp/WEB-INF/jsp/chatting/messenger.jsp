@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	 <div class="wrapper" data-id="${email}">
+	 <div class="wrapper" data-id="${email}" >
         <div class="main_container">
             <div class="left_container">
                 <div class="left_top_field">
@@ -23,14 +23,14 @@
                     	<c:forEach items="${chat}" var="chat" varStatus="loop">
                     		<c:choose>
 	                    		<c:when test="${chat.userEmailSeller != email}">
-			                        <li class="person" data-chat="person${loop.count}">
+			                        <li class="person" data-chat="person${chat.chatNo}">
 			                        	<c:choose>
 			                        		<c:when test="${chat.readsSeller == 0}">
-				                        	    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+				                        	    <img src="<c:url value="/resources/images/macbook.jpg"/>" >
 			                        		</c:when>
 			                        		<c:otherwise>
 					                        	<span class="count" data-count="${chat.readsSeller}">
-						                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+						                            <img src="<c:url value="/resources/images/macbook.jpg"/>" >
 					                        	</span>
 			                        		</c:otherwise>
 			                        	</c:choose>
@@ -48,14 +48,14 @@
 	                       			 </li>                    		
 	                    		</c:when>
 	                    		<c:otherwise>
-	                    			<li class="person" data-chat="person${loop.count}">
+	                    			<li class="person" data-chat="person${chat.chatNo}">
 			                        	<c:choose>
 			                        		<c:when test="${chat.readsBuyer == 0}">
-				                        	    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+				                        	    <img src="<c:url value="/resources/images/macbook.jpg"/>" >
 			                        		</c:when>
 			                        		<c:otherwise>
 					                        	<span class="count" data-count="${chat.readsBuyer}">
-						                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg" alt="" />
+						                            <img src="<c:url value="/resources/images/macbook.jpg"/>" >
 					                        	</span>
 			                        		</c:otherwise>
 			                        	</c:choose>
@@ -74,133 +74,23 @@
 	                    		</c:otherwise>                    		
                     		</c:choose>
                     	</c:forEach>
+                    	<c:if test="${empty chat}">
+                    		<div>거래중인 경매가 존재하지 않습니다</div>
+                    		<div>경매에 참여해보세요!</div>
+                    	</c:if>
                     </ul>
                 </div>
             </div>
             <div class="right_container">
-                <div class="right_top_field"><span>To: <span class="name">Dog Woofson</span></span></div>
+                <div class="right_top_field" style="height:13px; line-height:13px"></div>
                 <div class="right_message_field">
-                    <div class="chat" data-chat="person1">
+               	<c:forEach var="chat" items="${chat}">
+                    <div class="chat" data-chat="person${chat.chatNo}" data-no="${chat.chatNo}">
                         <div class="conversation-start">
                             <span>Today, 6:48 AM</span>
                         </div>
-                        <div class="bubble you">
-                            Hello,
-                        </div>
-                        <div class="bubble you">
-                            it's me.
-                        </div>
-                        <div class="bubble you">
-                            I was wondering...
-                        </div>
                     </div>
-                    <div class="chat" data-chat="person2">
-                        <div class="conversation-start">
-                            <span>Today, 5:38 PM</span>
-                        </div>
-                        <div class="bubble you">
-                            Hello, can you hear me?
-                        </div>
-                        <div class="bubble you">
-                            I'm in California dreaming
-                        </div>
-                        <div class="bubble me">
-                            ... about who we used to be.
-                        </div>
-                        <div class="bubble me">
-                            Are you serious?
-                        </div>
-                        <div class="bubble you">
-                            When we were younger and free...
-                        </div>
-                        <div class="bubble you">
-                            I've forgotten how it felt before
-                        </div>
-                    </div>
-                    <div class="chat" data-chat="person3">
-                        <div class="conversation-start">
-                            <span>Today, 3:38 AM</span>
-                        </div>
-                        <div class="bubble you">
-                            Hey human!
-                        </div>
-                        <div class="bubble you">
-                            Umm... Someone took a shit in the hallway.
-                        </div>
-                        <div class="bubble me">
-                            ... what.
-                        </div>
-                        <div class="bubble me">
-                            Are you serious?
-                        </div>
-                        <div class="bubble you">
-                            I mean...
-                        </div>
-                        <div class="bubble you">
-                            It’s not that bad...
-                        </div>
-                        <div class="bubble you">
-                            But we’re probably gonna need a new carpet.
-                        </div>
-                    </div>
-                    <div class="chat" data-chat="person4">
-                        <div class="conversation-start">
-                            <span>Yesterday, 4:20 PM</span>
-                        </div>
-                        <div class="bubble me">
-                            Hey human!
-                        </div>
-                        <div class="bubble me">
-                            Umm... Someone took a shit in the hallway.
-                        </div>
-                        <div class="bubble you">
-                            ... what.
-                        </div>
-                        <div class="bubble you">
-                            Are you serious?
-                        </div>
-                        <div class="bubble me">
-                            I mean...
-                        </div>
-                        <div class="bubble me">
-                            It’s not that bad...
-                        </div>
-                    </div>
-                    <div class="chat" data-chat="person5">
-                        <div class="conversation-start">
-                            <span>Today, 6:28 AM</span>
-                        </div>
-                        <div class="bubble you">
-                            Wasup
-                        </div>
-                        <div class="bubble you">
-                            Wasup
-                        </div>
-                        <div class="bubble you">
-                            Wasup for the third time like is <br />you blind bitch
-                        </div>
-        
-                    </div>
-                    <div class="chat" data-chat="person6">
-                        <div class="conversation-start">
-                            <span>Monday, 1:27 PM</span>
-                        </div>
-                        <div class="bubble you">
-                            So, how's your new phone?
-                        </div>
-                        <div class="bubble you">
-                            You finally have a smartphone :D
-                        </div>
-                        <div class="bubble me">
-                            Drake?
-                        </div>
-                        <div class="bubble me">
-                            Why aren't you answering?
-                        </div>
-                        <div class="bubble you">
-                            howdoyoudoaspace
-                        </div>
-                    </div>
+               	</c:forEach>
                     <div class="write">
                         <input type="text" data-chatfield="chat"/>             
                         <a href="javascript:;" class="write-link send"></a>

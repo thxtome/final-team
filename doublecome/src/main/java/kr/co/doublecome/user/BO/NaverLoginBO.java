@@ -1,7 +1,6 @@
 package kr.co.doublecome.user.BO;
 
 
-import java.io.IOException;                                       
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -35,6 +34,8 @@ public class NaverLoginBO {
     
     /* 네이버 아이디로 인증  URL 생성  Method */
     public String getAuthorizationUrl(HttpSession session) {
+    	
+    	OAuth20Service oauthService;  
 
         /* 세션 유효성 검증을 위하여 난수를 생성 */
         String state = generateRandomString();
@@ -42,7 +43,7 @@ public class NaverLoginBO {
         setSession(session,state);        
 
         /* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */
-        OAuth20Service oauthService = new ServiceBuilder()                                                   
+         oauthService = new ServiceBuilder(NCLIENT_ID)                                                   
                 .apiKey(NCLIENT_ID)
                 .apiSecret(NCLIENT_SECRET)
                 .callback(NREDIRECT_URI)
@@ -53,13 +54,13 @@ public class NaverLoginBO {
     }
 
     /* 네이버아이디로 Callback 처리 및  AccessToken 획득 Method */
-    public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException{
+    public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws Exception{
 
         /* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
         String sessionState = getSession(session);
         if(StringUtils.pathEquals(sessionState, state)){
 
-            OAuth20Service oauthService = new ServiceBuilder()
+            OAuth20Service oauthService = new ServiceBuilder(NCLIENT_ID)
                     .apiKey(NCLIENT_ID)
                     .apiSecret(NCLIENT_SECRET)
                     .callback(NREDIRECT_URI)
@@ -88,16 +89,16 @@ public class NaverLoginBO {
         return (String) session.getAttribute(NSESSION_STATE);
     }
     /* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */
-    public String getUserProfile(OAuth2AccessToken oauthToken) throws IOException{
+    public String getUserProfile(OAuth2AccessToken oauthToken) throws Exception{
 
-        OAuth20Service oauthService =new ServiceBuilder()
+        OAuth20Service oauthService =new ServiceBuilder(NCLIENT_ID)
                 .apiKey(NCLIENT_ID)
                 .apiSecret(NCLIENT_SECRET)
                 .callback(NREDIRECT_URI).build(NaverLoginApi.instance());
 
-            OAuthRequest request = new OAuthRequest(Verb.GET, NPROFILE_API_URL, oauthService);
+            OAuthRequest request = new OAuthRequest(Verb.GET, NPROFILE_API_URL);
         oauthService.signRequest(oauthToken, request);
-        Response response = request.send();
+        Response response = oauthService.execute(request);
         return response.getBody();
     }
 

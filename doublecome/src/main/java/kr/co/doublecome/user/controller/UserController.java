@@ -28,7 +28,6 @@ import com.google.gson.JsonParser;
 
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.User;
-import kr.co.doublecome.user.BO.KakaoLoginBO;
 import kr.co.doublecome.user.BO.NaverLoginBO;
 import kr.co.doublecome.user.service.UserService;
 import kr.co.doublecome.util.security.MyBatisUserDetailsService;
@@ -49,21 +48,19 @@ public class UserController {
 	
 	/* NaverLoginBO */
     private NaverLoginBO naverLoginBO;
-    private KakaoLoginBO kakaoLoginBO;
+  //  private KakaoLoginBO kakaoLoginBO;
     private String apiResult = null;
     
     @Autowired
     private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
         this.naverLoginBO = naverLoginBO;
     }
-    @Autowired
-    private void setKakaoLoginBO(KakaoLoginBO kakaoLoginBO) {
-    	this.kakaoLoginBO = kakaoLoginBO;
-    }
-
-    //TOpvHOSeiE05F9UnTU0P
-    //sOEOX2mF55
-    //http://localhost:8001/doublecome/main.do
+	
+	/*
+	 * @Autowired private void setKakaoLoginBO(KakaoLoginBO kakaoLoginBO) {
+	 * this.kakaoLoginBO = kakaoLoginBO; }
+	 */
+    
 	
 	//로그인
 	@RequestMapping("/loginForm.do")
@@ -71,30 +68,48 @@ public class UserController {
 		
 		 /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-        String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
+      //  String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
         
         //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
         //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
         
         //네이버 로그인 창 URL 
         model.addAttribute("url", naverAuthUrl);
-        model.addAttribute("kakao_url", kakaoAuthUrl);
+    //    model.addAttribute("kakao_url", kakaoAuthUrl);
 		
-		if(result != null) {
-			model.addAttribute("result", "false");
-		}
+		/*
+		 * if(result != null) { model.addAttribute("result", "false"); }
+		 */
 	}
 	
 
 	 @RequestMapping("/kakaoCallback.do")
 	    public String kakaoCallback(
 	    		Model model,
-	    		@RequestParam String code,
-	    		@RequestParam String state,
 	    		HttpSession session,
-	    		HttpServletRequest req)
+	    		HttpServletRequest req,
+	    		String email,
+	    		String id
+	    		)
 	            throws Exception {
 		 
+			 if(service.checkEmail(email) == 0) {
+		        	User u = new User();
+		        	u.setUserEmail(email);
+		        	u.setUserPass(id);
+		        	model.addAttribute("user", u);
+		        	return "user/joinForm2";
+		        }
+			UserDetails u = userService.loadUserByUsername(email);
+	        SecurityContext sc = SecurityContextHolder.getContext();
+	        //아이디, 패스워드, 권한을 설정합니다. 아이디는 Object단위로 넣어도 무방하며
+	        //패스워드는 null로 하여도 값이 생성됩니다.
+	        sc.setAuthentication(new UsernamePasswordAuthenticationToken(u, null, u.getAuthorities()));
+	        HttpSession APIsession = req.getSession(true);
+
+	        //위에서 설정한 값을 Spring security에서 사용할 수 있도록 세션에 설정해줍니다.
+	        APIsession.setAttribute(HttpSessionSecurityContextRepository.
+	                             SPRING_SECURITY_CONTEXT_KEY, sc);
 		 
 		 return "/main";
 		}
@@ -110,7 +125,11 @@ public class UserController {
 	    		HttpSession session,
 	    		HttpServletRequest req)
 	            throws Exception {
+	    	System.out.println(code + "<<code");
+	    	System.out.println(state + "<<state");	
+	    	System.out.println(session+ "<<session");
 	        System.out.println("여기는 callback");
+	        
 	        OAuth2AccessToken oauthToken;
 	        oauthToken = naverLoginBO.getAccessToken(session, code, state);
 	        //로그인 사용자 정보를 읽어온다.
@@ -265,15 +284,22 @@ public class UserController {
 	public String updateUser(User user, Principal p, RedirectAttributes attr, HttpServletRequest req) throws Exception{
 		User u = service.selectUserInfoByName(user.getUserEmail());
 		
+		System.out.println(u.getUserPass() + "<<u");
+		System.out.println(user.getUserPass().length() + "<< user >>" + user.getUserPass());
 		//비밀번호 수정
 		if(user.getUserPass().length() == 0)
 		user.setUserPass(u.getUserPass());
+		else { 
+			user.setUserPass(encoder.encode(user.getUserPass()));
+		}
 		
-		user.setUserPass(encoder.encode(user.getUserPass()));
 		// 별명 수정
 		if(user.getUserNickname().length() == 0)
 		user.setUserPass(u.getUserNickname());
+		else user.setUserNickname(user.getUserNickname());
 		
+		System.out.println(u.getUserPass() + "<<u");
+		System.out.println(user.getUserPass().length() + "<< user >>" + user.getUserPass());
 		//user.setUserNickname(user.getUserNickname());
 		service.updateUser(user);
 		

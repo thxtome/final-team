@@ -15,7 +15,7 @@
         	<websocket:mapping handler="LiveAuctionChatHandler" path="/chat.do"/>
         	<websocket:mapping handler="LiveAuctionBidHandler" path="/bid.do"/>
         	<websocket:handshake-interceptors>
-        		<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+        		<bean class="kr.co.doublecome.util.interceptor.HandShakeInterceptor"/>
         	</websocket:handshake-interceptors>
         </websocket:handlers>
         

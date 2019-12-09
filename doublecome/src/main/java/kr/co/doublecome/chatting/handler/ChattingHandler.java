@@ -8,7 +8,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
 
-import jdk.nashorn.api.scripting.JSObject;
+import kr.co.doublecome.repository.vo.DealChat;
+
 
 @Component("messenger")
 public class ChattingHandler extends TextWebSocketHandler {
@@ -26,7 +27,13 @@ public class ChattingHandler extends TextWebSocketHandler {
 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		if (userEmail.equals(session.getId())) session.sendMessage(new TextMessage(message.getPayload()));
+		String msg = message.getPayload();
+		System.out.println(msg);
+		DealChat dc = new Gson().fromJson(message.getPayload(), DealChat.class);
+		System.out.println(dc.getEmail());
+		System.out.println(dc.getMsg());
+		System.out.println(dc.getChatNo());
+		if (!userEmail.equals(session.getId())) session.sendMessage(new TextMessage(dc.getMsg()));
 		
 	}
 
