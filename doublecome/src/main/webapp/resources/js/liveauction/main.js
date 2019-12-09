@@ -2,17 +2,18 @@ let ws = null;
 		
 		$(()=>{
 			//접속할 주소를 설정 : 웹소켓 핸들러 구현 클래스와 연결된 URL
-			ws = new WebSocket("ws://localhost/doublecome/chat.do");
+			ws = new WebSocket("wss://192.168.0.12:8443/doublecome/chat.do");
 			ws.onopen = () => {
 				console.log("연결성공")
 			};
 			
 			ws.onmessage = (evt) => {
-				$(".chatSpace").append($(
+				$chatSpace = $(".chatSpace")
+				$chatSpace.append($(
 					`<div class="chat">
 						${evt.data}			
-					<span></span></div>`))
-				console.log("메세지 : " + evt.data)
+					<span></span></div>`));
+				$chatSpace.scrollTop($chatSpace[0].scrollHeight);
 			}
 			
 			ws.onerror= (evt) => {
