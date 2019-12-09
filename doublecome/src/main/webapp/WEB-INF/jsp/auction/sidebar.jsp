@@ -192,6 +192,24 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title">경매 입찰하기</h4>
 				</div>
+				<table>
+				  <thead>
+				    <tr>
+				      <th scope="col">순위</th>
+				      <th scope="col">닉네임</th>
+				      <th scope="col">입찰가</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  <c:forEach items="${bid}" var="b" varStatus="i">
+				    <tr class="bidListRank">
+				      <td>${i.count}</td>
+				      <td>${b.userNickname}</td>
+				      <td class="bidPriceRank">${b.bidPrice}</td>
+				    </tr>
+				  </c:forEach>
+				  </tbody>
+				</table>
 				<div class="modal-body">
 					<dl class="row modalBody">
 						<dd class="col-xs-6">

@@ -22,6 +22,8 @@ public interface AuctionDetailMapper {
 	void deleteInquiry(int no);
 	void auctionBid(Auction auction);
 	void insertDeal(Deal deal);
-	void auctionCondition(int no);
 	int checkBid(Auction auction);
+	void callSPAddDeal(Auction auction);
+	List<Auction> bidList(int no);
+	String selectPhNum(int no);
 }

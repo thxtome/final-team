@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.auction.service.AuctionDetailService;
 import kr.co.doublecome.common.service.FileService;
+import kr.co.doublecome.common.service.SmsService;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
-import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
@@ -30,6 +30,8 @@ public class AuctionDetailController {
 	private FileService fileService;
 //	@Autowired
 //	private HistoryService hService;
+	@Autowired
+	private SmsService smsService;
 	
 	@RequestMapping("/detailAuction.do")
 	public void auctionDetail(int no, String userEmail, Model model, Integer pageNo, Search search ) {
@@ -43,6 +45,7 @@ public class AuctionDetailController {
 		model.addAttribute("inquiry", ap.getList());
 		model.addAttribute("pr", ap.getPr());
 		model.addAttribute("file", service.retrieveFile(no));
+		model.addAttribute("bid", service.bidList(no));
 	}
 	
 	@RequestMapping("/retrieveReceiveReview.do")
@@ -110,18 +113,15 @@ public class AuctionDetailController {
 	@RequestMapping("/addBid.do")
 	public String auctionBid(@RequestHeader(value="referer") String referer, Principal principal, Auction auction) {
 		auction.setUserEmail(principal.getName());
+		smsService.sendSMS("최고입찰가가 갱신되었습니다.", service.selectPhNum(auction.getAuctionNo()));
 		service.auctionBid(auction);
 		return "redirect:" + referer;
 	}
 	@RequestMapping("/buyNow.do")
-	public String insertDeal(Principal principal, Auction auction, Deal deal) {
-		deal.setUserEmailBuyer(principal.getName());
-		deal.setUserEmailSeller(auction.getUserEmail());
-		service.auctionBid(auction);
-		service.insertDeal(deal);
-		service.auctionCondition(auction.getAuctionNo());
+	public String insertDeal(Principal principal, Auction auction) {
+		auction.setUserEmailBuyer(principal.getName());
+		service.callSPAddDeal(auction);
 		return "redirect:/main.do";
 	}
-	
 	
 }

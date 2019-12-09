@@ -15,6 +15,8 @@ public interface HistoryMapper {
 	public List<Review> selectReceiveReview(Search search);			// 받은 후기 목록
 	public List<Review> selectSendReview(Search search);			// 보낸 후기 목록
 	public History userInfo(String userEmail);						// 구매/판매 횟수, 후기갯수
+	public int purchaseInfo(String userEmail);						// 구매횟수
+	public History salesInfo(String userEmail);						// 유저정보, 판매횟수
 	public List<Auction> saleHistory(String userEmail);				// 판매 내역 목록
 	public List<Auction> buyHistory(String userEmail);				// 구매 내역 목록
 	public Deal dealInfo(int auctionNo);							// 후기등록시 거래정보

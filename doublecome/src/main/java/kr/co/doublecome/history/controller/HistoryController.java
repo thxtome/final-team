@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.history.service.HistoryService;
+import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
 
@@ -23,8 +24,26 @@ public class HistoryController {
 	public void listHistory(Principal p, Model model) {
 		String userEmail = p.getName();
 		model.addAttribute("userHistory", service.receiveUserInfo(userEmail));
-		model.addAttribute("saleHistory", service.receiveSaleHistory(userEmail));
-		model.addAttribute("buyHistory", service.receiveBuyHistory(userEmail));
+//		model.addAttribute("saleHistory", service.receiveSaleHistory(userEmail));
+//		model.addAttribute("buyHistory", service.receiveBuyHistory(userEmail));
+	}
+	
+	// 구매내역 ajax
+	@RequestMapping("/receivePurchaseHistory.do")
+	@ResponseBody
+	public List<Auction> receivePurchaseHistory(Principal p){
+		System.out.println("구매도착");
+		System.out.println(service.receiveBuyHistory(p.getName()));
+		return service.receiveBuyHistory(p.getName());
+	}
+	
+	// 판매내역 ajax
+	@RequestMapping("/receiveSaleHistory.do")
+	@ResponseBody
+	public List<Auction> receiveSaleHistory(Principal p){
+		System.out.println("판매도착");
+		System.out.println(service.receiveSaleHistory(p.getName()));
+		return service.receiveSaleHistory(p.getName());
 	}
 	
 	// 받은 후기 ajax
@@ -33,7 +52,6 @@ public class HistoryController {
 	public List<Review> retrieveReceiveReview(Search search, Principal p){
 		search.setKeyword(p.getName());
 		search.setListSize(5);
-		System.out.println(search.getSort());
 		return service.receiveReviewList(search);
 	}
 	
@@ -43,7 +61,6 @@ public class HistoryController {
 	public List<Review> retrieveSendReview(Search search, Principal p){
 		search.setKeyword(p.getName());
 		search.setListSize(5);
-		System.out.println(search.getSort());
 		return service.sendReviewList(search);
 	}
 	
@@ -51,7 +68,6 @@ public class HistoryController {
 	@RequestMapping("/addReview.do")
 	public String addReview(Principal p, Review review) {
 		review.setReviewSender(p.getName());
-		System.out.println("컨트롤러도착 : "+ review);
 		service.insertReview(review);
 		return "redirect:listHistory.do";
 	}
@@ -60,7 +76,6 @@ public class HistoryController {
 	@RequestMapping("/editReviewForm.do")
 	@ResponseBody
 	public Review editReviewForm(Review review) {
-		System.out.println(service.selectOneReview(review));
 		return service.selectOneReview(review);
 	}
 	

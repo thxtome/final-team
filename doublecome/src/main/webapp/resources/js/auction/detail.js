@@ -149,6 +149,11 @@ $(".nowprice").html(numberWithCommas($(".nowprice").html()))
 $(".buyprice").html(numberWithCommas($(".buyprice").html()))
 $(".nowMax").html(numberWithCommas($(".nowMax").html()))
 
+$(".bidPriceRank").each((index, item) => {
+	$(item).html(numberWithCommas($(item).html()))
+	
+})
+
 $(".logout").click(() => {
 	swal();
 })

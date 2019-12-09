@@ -212,17 +212,18 @@ inAvtiveBtn();
 }else if(num < 0 || eng < 0 || spe < 0  ){
 $('#userPassConfirm').next().text("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
 inAvtiveBtn();
-}else{ $('#userPassConfirm').next().text("");
-   avtiveBtn();}
+}else{ 
+	$('#userPassConfirm').next().text("");
+	$('#userPassConfirm').keyup( (e) => {
+		if($('#userPass').val() !== $('#userPassConfirm').val() ) {      
+		$('#userPassConfirm').next().text("비밀 번호가 다릅니다");
+		inAvtiveBtn();
+		}else { $('#userPassConfirm').next().text(""); avtiveBtn(); }
+		});}
 });
 
 
 
-$('#userPassConfirm').keyup( (e) => {
-if($('#userPass').val() !== $('#userPassConfirm').val() ) {      
-$('#userPassConfirm').next().text("비밀 번호가 다릅니다");
-inAvtiveBtn();
-}else { $('#userPassConfirm').next().text(""); avtiveBtn(); }
-});
+
  
   

@@ -1,21 +1,18 @@
 jQuery(document).ready(function($){
 	window.loopcounter = function( idWarp ) {
 		if(typeof idWarp!= 'undefined'){
-			var date = $('.'+idWarp).data('date');
+			date = $('.'+idWarp).data('date');
 
-			
-			
-			var start = new Date( date ),
-			    end   = new Date(),
-			    diff  = new Date( start - end ),
-			    time  = diff/1000/60/60/24;
-
-				var day = parseInt(time);
-				var hour = parseInt( 24 - (diff/1000/60/60)%24 );
-				var min = parseInt( 60 - (diff/1000/60)%60 );
-				var sec = parseInt( 60 - (diff/1000)%60 );
+			let start = new Date( date );
+			let end   = new Date();
+			let diff  = new Date( start - end );
+			let time  = diff/1000/60/60/24;
+			let day = parseInt(time);
+			let hour = parseInt((diff/1000/60/60)%24 );
+			let min = parseInt((diff/1000/60)%60 );
+			let sec = parseInt((diff/1000)%60 );
 				
-				counterDate(idWarp,day,hour,min,sec);
+			counterDate(idWarp,day,hour,min,sec);
 
 				var interval = setInterval(function () {
 					if( sec==0 && min!=0 ){
@@ -56,5 +53,4 @@ jQuery(document).ready(function($){
 			}
 		}
     }
-	//loopcounter( 'counter-id' );
 });
