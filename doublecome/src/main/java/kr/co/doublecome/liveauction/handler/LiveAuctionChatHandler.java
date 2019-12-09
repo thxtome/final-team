@@ -31,6 +31,7 @@ public class LiveAuctionChatHandler extends TextWebSocketHandler{
 		String id = (String)map.get("userId");
 		System.out.println(id + "연결되었음");
 		map.put("msg",id + " 님이 입장하셨습니다.");
+		
 		Map<String, WebSocketSession> innerMap = new HashMap<>();
 		innerMap.put(id, session);
 		
@@ -44,10 +45,8 @@ public class LiveAuctionChatHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		Map<String, Object> map = session.getAttributes();
 		String id = (String)map.get("userId");
-		map
 		System.out.println("보낸 아이디 : " + session.getId());
 		System.out.println("보낸 데이터 : " + message.getPayload());
-		broadcast(id + " : " + message.getPayload());
 	}
 
 	@Override
