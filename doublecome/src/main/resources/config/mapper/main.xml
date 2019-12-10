@@ -26,5 +26,13 @@
 		select *
 		  from category
 	</select>
+	
+	<select id="selectOnAirAuction" resultType="Auction">
+		select * 
+  		  from auction
+ 		 <!-- where auction_broadcast = 2
+   		   and auction_condition = 1 -->
+	</select>
+	
 </mapper>
 <!--           and str_to_date(a.auction_limit_date, "%Y-%m-%d") > str_to_date(date_format(now(), "%Y-%m-%d"), "%Y-%m-%d") -->

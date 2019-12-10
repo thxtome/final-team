@@ -9,4 +9,5 @@ public interface MainMapper {
 	
 	List<Auction> mainAuctionList();
 	List<Category> categoryList();
+	List<Auction> selectOnAirAuction();
 }

@@ -1,37 +1,60 @@
 package kr.co.doublecome.util.interceptor;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
-	int count = 1;
+	Map<Integer,Integer> countMap = new HashMap<>();
 	
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) throws Exception {
 		 System.out.println("Before Handshake");
+		 ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
+	     HttpServletRequest req =  ssreq.getServletRequest();
+
+		 int auctionNo = (int)req.getSession().getAttribute("auctionNo");
+		 
 		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 
+		 Integer count = countMap.get(auctionNo);
+		 
+		 if(count == null) {
+			 count = 1;
+		 } else {
+			 count++;
+		 }
+		 
+		 //아이디 입력
 		 if(principal != "anonymousUser") {
 			 UserDetails userDetails = (UserDetails) principal;
 			 attributes.put("userId", userDetails.getUsername());
 		 } else {
-			 attributes.put("userId","익명 " + count++);
+			 attributes.put("userId","익명 " + count);
 		 }
 		 
+		 countMap.put(auctionNo,count);
+		 
+		 //색상 랜덤 선택
 		 Random r = new Random();
 		 String color = "#";
 		 for(int i = 0; i < 3; i++) {
-			 color += r.nextInt(12) + 5 + "";
+			 int num = r.nextInt(130) + 124;
+			 color += String.format("%02X", num) + "";
 		 }
 		 attributes.put("color",color);
-		 
+		 attributes.put("auctionNo",auctionNo);
 		return super.beforeHandshake(request, response, wsHandler, attributes);
 	}
 

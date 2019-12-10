@@ -11,4 +11,6 @@ public interface MainService {
 	List<Auction> mainList();
 
 	List<Category> listCategory();
+	
+	List<Auction> retrieveOnAirList();
 }

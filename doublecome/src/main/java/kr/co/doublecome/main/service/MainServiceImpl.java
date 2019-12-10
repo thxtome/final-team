@@ -12,13 +12,18 @@ import kr.co.doublecome.repository.vo.Category;
 
 @Service("kr.co.doublecome.main.service.MainService")
 public class MainServiceImpl implements MainService {
+	
 	@Autowired
 	private MainMapper mapper;
 	
-	@RequestMapping("/main.do")
+	
 	public List<Auction> mainList() {
 		return mapper.mainAuctionList();
-		
 	}
+	
 	public List<Category> listCategory() { return mapper.categoryList();}
+	
+	public List<Auction> retrieveOnAirList(){
+		return mapper.selectOnAirAuction();
+	}
 }

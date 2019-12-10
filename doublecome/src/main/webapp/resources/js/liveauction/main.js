@@ -8,11 +8,14 @@ let ws = null;
 			};
 			
 			ws.onmessage = (evt) => {
+				let dataObj = JSON.parse(evt.data);
+				console.dir(dataObj)
 				$chatSpace = $(".chatSpace")
 				$chatSpace.append($(
-					`<div class="chat">
-						${evt.data}			
-					<span></span></div>`));
+					`<div class="chat">			
+					<span style="color: ${dataObj.color}; font-weight: bold">${dataObj.userId}</span>
+					<span>${dataObj.msg}</span>
+					</div>`));
 				$chatSpace.scrollTop($chatSpace[0].scrollHeight);
 			}
 			
@@ -27,7 +30,23 @@ let ws = null;
 		
 		$("#sendBtn").click(()=>{
 			//웹소켓을 이용해서 서버에 데이터 전송
-			let $msg = $(".chatInput textarea");
-			ws.send($msg.val());
-			$msg.val("");
+			send();
 		});
+
+		$(".chatInput textarea").keydown((e)=>{
+			if(e.keyCode == 13){
+				if (!event.shiftKey){
+	                event.preventDefault();
+	                send();
+	            }
+			}
+		})
+
+		function send() {
+			let $msg = $(".chatInput textarea")
+			let value = $msg.val();
+			if(value.trim() != ""){
+				ws.send(value);				
+				$msg.val("");
+			}
+		}	
