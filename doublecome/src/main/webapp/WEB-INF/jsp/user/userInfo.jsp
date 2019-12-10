@@ -75,6 +75,7 @@
 	    		<span id="nickname"  >${user.userNickname}</span>
 	    		</td>
 	    	</tr>
+	    	<c:if test="${user.userEmail.length() < 30} ">
 			<tr>
 	    		<th>비밀번호</th>
 	    		<td>
@@ -82,37 +83,11 @@
 	    		<input id="registInput" class="registInput" name="userPass" type="password" placeholder="비밀번호">
 	    		</td>
 			</tr>
+			</c:if>
 	    	</tbody>
 	    	</table>
 	    	
-	    	<%-- 
-			<div id="registInputBox">
-				<div id="registInputBox1" class="registInputBox">
-						<i class="far fa-envelope fa-1x" id="icon"></i>
-						<span id="email"  class="registInput">${user.userEmail}</span>
-						<div id="alert"></div>
-				</div>
-				<div id="registInputBox2" class="registInputBox">
-						<i class="fas fa-unlock-alt fa-1x" id="icon"></i>
-						<div id="pass" style="display:none;">${user.userPass}</div>
-						<input id="registInput" class="registInput" name="userPass" type="password" placeholder="비밀번호">
-						
-						<div id="alert"></div>
-				</div>
-				
-				<div id="registInputBox3" class="registInputBox">
-						<i class="fas fa-mobile-alt fa-1x" id="icon"></i>
-						<span id="phnum" class="registInput">${user.userPhnum}</span>
-						
-						<div id="alert"></div>
-				</div>
-				<div id="registInputBox4" class="registInputBox">
-						<i class="fas fa-user fa-1x" id="icon"></i>
-						
-						<span id="nickname"  class="registInput">${user.userNickname}</span>
-						<div id="alert"></div>
-				</div>
-				 --%>
+	    	
 			</div>
 			</sec:authorize>
 </div>

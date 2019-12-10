@@ -30,7 +30,7 @@
 	</div>
 	<!-- Form Module-->
 	<div class="module form-module">
-	  <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+	  <div class="toggle"><i class="far fa-envelope fa-1x"></i>
 	    <div class="tooltip">Click me</div>
 	  </div>
 	  <div class="form">
