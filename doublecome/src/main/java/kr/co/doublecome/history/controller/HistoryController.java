@@ -6,13 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.history.service.HistoryService;
 import kr.co.doublecome.repository.vo.AjaxPage;
-import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
 
@@ -26,8 +24,6 @@ public class HistoryController {
 	public void listHistory(Principal p, Model model) {
 		String userEmail = p.getName();
 		model.addAttribute("userHistory", service.receiveUserInfo(userEmail));
-//		model.addAttribute("saleHistory", service.receiveSaleHistory(userEmail));
-//		model.addAttribute("buyHistory", service.receiveBuyHistory(userEmail));
 	}
 	
 	// 구매내역 ajax
@@ -38,6 +34,7 @@ public class HistoryController {
 		search.setKeyword(p.getName());
 		System.out.println(search);
 		System.out.println(service.receiveBuyHistory(search));
+		
 		return service.receiveBuyHistory(search);
 	}
 	

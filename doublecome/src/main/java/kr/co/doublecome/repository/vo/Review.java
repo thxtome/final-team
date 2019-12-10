@@ -11,6 +11,7 @@ public class Review {
 	
 	private int auctionNo;						// 해당 경매글 번호
 	private String auctionTitle;				// 해당 경매글 제목
+	private String userEmail;					// 경매글쓴이
 	private int reviewNo;						// 후기글 번호
 	private String reviewTitle;					// 후기글 제목
 	private String reviewContent;				// 후기글 내용

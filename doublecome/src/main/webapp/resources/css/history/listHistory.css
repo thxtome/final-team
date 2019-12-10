@@ -265,6 +265,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	cursor: pointer;
 }
 .reviewTitle:hover{
 	text-decoration: underline;
@@ -738,6 +739,12 @@
 	visibility: visible;
 }
 .auctionTitle{
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	word-wrap:normal;
+	width:500px;
+	overflow:hidden;
+    color: black;
 	font-size: 13px;
 }
 .fa-star-half-alt{
@@ -758,4 +765,25 @@ select{
 	margin-top: 10px;
 	margin-bottom: 0px;
 	height: 44px;
+}
+.dealCondition{
+	display: inline-block;
+	height: 16px;
+	width: 50px;
+	font-size: 12px;
+	border-radius: 5px;
+	line-height: 17px;
+}
+
+.colorPink{
+	background-color: pink;
+}
+.colorBlue{
+	background-color: blue;
+}
+.colorRed{
+	background-color: red;
+}
+.colorYellow{
+	background-color: yellow;
 }

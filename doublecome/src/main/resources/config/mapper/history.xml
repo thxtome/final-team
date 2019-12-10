@@ -17,7 +17,9 @@
 	<!-- 받은 후기 목록 -->
 	<select id="selectReceiveReview" resultType="Review" parameterType="Search">
 		select r.*, 
-			   a.auction_title, 
+			   a.auction_title,
+			   a.auction_no,
+			   a.user_email, 
 			   u.user_nickname as sender_nickname,
 			   count(*) over() as reviewCnt
 		  from review r
@@ -43,7 +45,8 @@
 	<select id="selectSendReview" resultType="Review" parameterType="Search">
 		select r.*, 
 			   a.auction_no, 
-			   a.auction_title, 
+			   a.auction_title,
+			   a.user_email, 
 			   u.user_nickname as sender_nickname,
 			   count(*) over() as reviewCnt
 		  from review r
@@ -137,10 +140,11 @@
 		select distinct a.*, 
 			   d.deal_no,
 			   d.deal_condition,
-		       max(b.bid_price) over(partition by b.auction_no) as max_price,
+		       max(b.bid_price) over (partition by b.auction_no) as max_price,
 		       r.review_sender,
 		       u.user_nickname,
-		       count(*) over(partition by b.auction_no) as auction_cnt
+		       count(*) over(partition by b.auction_no) as auction_cnt,
+		       max(f.file_no) over (partition by f.file_group_code) as file_no
 		  from auction a
 		 inner join user u
 		    on a.user_email = u.user_email
@@ -152,16 +156,19 @@
          left join review r
             on d.deal_no = r.deal_no
            and a.user_email = r.review_sender
+         inner join file f
+            on f.file_group_code = a.file_group_code
 		where a.user_email = #{keyword}
 		<choose>
 	   	 	<when test="searchType == 'dealProgress'">
 	   	 		and d.deal_condition = 1
 	   	 	</when>
-	   	 	<when test="searchType == 'dealBid' and searchType == ''">
+	   	 	<when test="searchType == 'dealBid' or searchType == ''">
 	   	 		and a.auction_condition = 1
 	   	 	</when>
 	   	 	<otherwise>
-	   	 		and d.deal_condition in (2, 3, 4)
+	   	 	    and (a.auction_condition = 3
+	   	 		or d.deal_condition in (2, 3, 4))
 	   	 	</otherwise>
 	   	 </choose>
 		limit #{begin}, #{listSize}
@@ -175,7 +182,8 @@
 			   max(b.bid_price) over(partition by b.auction_no) as bid_price,
 			   u.user_nickname,
 			   r.review_sender,
-			   count(*) over(partition by b.auction_no) as auction_cnt
+			   count(*) over(partition by b.auction_no) as auction_cnt,
+			   max(f.file_no) over (partition by f.file_group_code) as file_no
 		  from auction a
 		 inner join user u
 		    on a.user_email = u.user_email
@@ -186,12 +194,14 @@
           left join review r
             on d.deal_no = r.deal_no
            and d.user_email_buyer = r.review_sender
+         inner join file f
+            on f.file_group_code = a.file_group_code
 	   	 where d.user_email_buyer = #{keyword}
 	   	 <choose>
 	   	 	<when test="searchType == 'dealProgress'" >
 	   	 		and d.deal_condition = 1
 	   	 	</when>
-	   	 	<when test="searchType == 'dealBid' and searchType == ''" >
+	   	 	<when test="searchType == 'dealBid' or searchType == ''" >
 	   	 		and a.auction_condition = 1
 	   	 	</when>
 	   	 	<otherwise>

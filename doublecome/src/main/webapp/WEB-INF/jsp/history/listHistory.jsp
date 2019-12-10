@@ -151,7 +151,7 @@
 			</div>
 		</div>
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
-		<c:import url="/WEB-INF/jsp/admin/reportModal.jsp" />
+		<c:import url="/WEB-INF/jsp/include/addReportModal.jsp" />
 	</div>
 	<script src="<c:url value="/resources/js/common/pagination.js"/>"></script>
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>

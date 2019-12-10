@@ -1,17 +1,16 @@
 $(function (){
-	let data = { pageNo: 1, searchType: ""};
+	let data = { pageNo: 1, searchType: "", sort: $("#sales option:selected").html() };
 	$(".salesTabList").click((e) => {
 		$(".salesTabList").removeClass("tabChoice");
 		$(e.target).addClass("tabChoice");
 		data.searchType = $(e.target).data("type");
 		$("#salesAjax").html("");
-		console.log(data.searchType);
 		salesListAjax(data);
 	});
-	console.log(data.searchType);
 	salesListAjax(data);
 	
 	function salesListAjax(data){
+		console.log($("#sales option:selected").html());
 		$.getJSON({
 			url: `receiveSaleHistory.do`,
 			contentType :'application/json',
@@ -19,7 +18,7 @@ $(function (){
 			success: result => makeSalesHistory(result, data)
 		});
 	}
-	
+	let contextPath = window.location.pathname.substr(0,window.location.pathname.indexOf("/",2));
 	function makeSalesHistory(result, data){
 		let salesContent = $("<div></div>");
 		let salesAjax = $("#salesAjax");
@@ -43,31 +42,52 @@ $(function (){
 				html += `
 					<div class="listCon">
 								<div class="listHead">
-									<span class="listDate"> <span class="dateTitle">마감
-											날짜 </span> <span class="dateContent">${format(r.auctionLimitDate, "ymd")}</span>
-									</span> <span class="detailCon"> <a>입찰금 <strong>${r.bidPrice}</strong>원
-									</a>
-									</span>
-								</div>
-								<div class="listBody">
-									<ul>
-										<li>
-											<div class="productImg">
-												<img class="imgCon"
-													src="/doublecome/resources/images/profileImg.png"/>
-											</div>
-										</li>
-										<li>
-											<div class="productInfo">
-												<a href="/doublecome/auction/detailAuction.do?no=${r.auctionNo}&userEmail=${r.userEmail}" class="listTitle">${r.auctionTitle}</a>
-												<div class="listRegDate">${format(r.auctionRegDate, "ymd")}</div>
-											</div>
-										</li>
-										<li>
-											<div class="writerInfo">
-												<a class="auctionWriter">${r.userNickname}</a>
-												<div>${r.score}점</div>
-												<a class="reportBtn"><strong>신고</strong></a>
+									<span class="listDate"> 
+										<span class="dateTitle">마감 날짜 </span> 
+										<span class="dateContent">${format(r.auctionLimitDate, "ymd")}</span>
+				`;
+				if (r.dealCondition == '2'){
+					html += `
+						<span class="dealCondition colorBlue">정상거래</span>
+					`;
+				} else if (r.dealCondition == '3'){
+					html += `
+						<span class="dealCondition colorPink">취소거래</span>
+					`;
+				} else if (r.dealCondition == '4'){
+					html += `
+						<span class="dealCondition colorRed">신고거래</span>
+					`;
+				} else if (r.auctionCondition == '3'){
+					html += `
+						<span class="dealCondition colorYellow">유찰거래</span>
+					`;
+				}
+				html += `
+					</span> 
+					<span class="detailCon"> 
+						<a>입찰금 <strong>${r.bidPrice}</strong>원</a>
+					</span>
+				</div>
+				<div class="listBody">
+					<ul>
+						<li>
+							<div class="productImg">
+								<img class="imgCon"
+									src="${contextPath}/file/downLoadFile.do?fileNo=${r.fileNo}"/>
+							</div>
+						</li>
+						<li>
+							<div class="productInfo">
+								<a href="${contextPath}/auction/detailAuction.do?no=${r.auctionNo}&userEmail=${r.userEmail}" class="listTitle">${r.auctionTitle}</a>
+								<div class="listRegDate">${format(r.auctionRegDate, "ymd")}</div>
+							</div>
+						</li>
+						<li>
+							<div class="writerInfo">
+								<a class="auctionWriter">${r.userNickname}</a>
+								<div>${r.score}점</div>
+								<a class="reportBtn"><strong>신고</strong></a>
 					`;
 					if (r.dealNo!= 0 && r.reviewSender == null){
 						html += `
@@ -95,7 +115,6 @@ $(function (){
 				pageNo: pageNo,
 				searchType: $("#sales option:selected").html()
 		};
-		console.log(pageNo);
 		salesListAjax(data);
 	});
 	

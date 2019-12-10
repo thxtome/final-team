@@ -22,4 +22,13 @@
 		insert into file (file_group_code, file_origin_name, file_system_name, file_path)
 		values (#{fileGroupCode}, #{fileOriginName}, #{fileSystemName}, #{filePath})
 	</insert>
+	
+	<!-- 해당경매글 파일 가져오기 -->
+	<select id="selectFile" parameterType="int" resultType="UtilFile">
+		select max(file_no ) over (partition by f.file_group_code) as file_no, 
+		  from file f
+		 inner join auction a
+		    on f.file_group_code = a.file_group_code
+		 where a.auction_no = #{auctionNo}
+	</select>
 </mapper>

@@ -1,6 +1,7 @@
 let pageNo = 1;
 let reviewCnt = 0;
 let sort = "";
+let contextPath = window.location.pathname.substr(0,window.location.pathname.indexOf("/",2));
 $(function (){
 // 네비게이션바 클릭시 이동
 let $navBar = $("#navBar");
@@ -154,7 +155,7 @@ function makeReviewList(result, type, sort){
 							</span>
 						</div>
 						<div class="contentArea">
-							<div class="auctionTitle">${r.auctionTitle}</div>
+							<a href="${contextPath}/auction/detailAuction.do?no=${r.auctionNo}&userEmail=${r.userEmail}" class="auctionTitle">${r.auctionTitle}</a>
 							<div class="reviewTitle">${r.reviewTitle}</div>
 							<div class="reviewDate">${format(r.reviewRegDate,"ymd")}</div>
 						</div>
@@ -214,7 +215,7 @@ function makeReviewList(result, type, sort){
 						</span>
 					</div>
 					<div class="contentArea">
-					<div class="auctionTitle">${r.auctionTitle}</div>
+					<a href="${contextPath}/auction/detailAuction.do?no=${r.auctionNo}&userEmail=${r.userEmail}" class="auctionTitle">${r.auctionTitle}</a>
 					<div class="reviewTitle">${r.reviewTitle}</div>
 					<div class="reviewDate">${format(r.reviewRegDate,"ymd")}</div>
 					</div>
@@ -262,7 +263,6 @@ $("body").on("click", ".moreSBtn", (e) => {
 });
 
 $("body").on("click", ".moreRBtn", (e) => {
-	console.log(pageNo);
 	$.get({
 		url: "retrieveReceiveReview.do",
 		data: {
@@ -275,7 +275,6 @@ $("body").on("click", ".moreRBtn", (e) => {
 });
 
 function success(msg){
-	console.log("도착");
 	Swal.fire({
 		title: `후기글 ${msg}`,
 		text: `${msg}되었습니다.`,
@@ -295,7 +294,6 @@ $("body").on("click", ".delreview", (e) => {
 			reviewReceiver: $(e.target).data("receiver")
 		},
 		success: function() {
-			console.log("성공");
 			success("삭제");
 			setTimeout("location.reload()", 1500);
 		}
@@ -320,7 +318,6 @@ $("body").on("click", ".editBtn > button", (e) => {
 			reviewReceiver: $(".regitbtn").data("receiver")
 		},
 		success: function() {
-			console.log("성공");
 			success("수정");
 			setTimeout("location.reload()", 1500);
 		}
@@ -375,7 +372,6 @@ $('#summernote').summernote(
 		    focus: true,
 		    callbacks: {
 		    	onImageUpload: function (files, editor, welEditable) {
-		    		console.log(editor)
 		        for (var i = files.length - 1; i >= 0; i--) {
 		        	sendFile(files[i], this);
 		          }
@@ -383,10 +379,8 @@ $('#summernote').summernote(
 		      }
 
 });
-let contextPath = window.location.pathname.substr(0,window.location.pathname.indexOf("/",2));
-console.log(contextPath);
+
 function sendFile(file, editor) {
-	console.log(editor)
     // 파일 전송을 위한 폼생성
 		var data = new FormData();
 	    data.append("file", file);
@@ -400,7 +394,6 @@ function sendFile(file, editor) {
 	        processData : false,
 	        success : function(url) { // 처리가 성공할 경우
             // 에디터에 이미지 출력
-	        	console.log(url);
 	        	$(editor).summernote('editor.insertImage', url);
 	        }
 	    });
@@ -409,7 +402,6 @@ function sendFile(file, editor) {
 // 후기제목 클릭시 후기상세글 노출
 $("body").on("click" ,".reviewTitle", (e) => {
 	$reDetail = $(e.target).closest(".preView").next();
-//	$reDetail = $(e.target).closest("li").next();
 	if ($reDetail.css("display") == "none"){
 		$reDetail.css("display", "inline-block");
 	} else {
@@ -431,6 +423,11 @@ $("body").on("click", ".scoreLabel", (e) => {
 		$radio.prop("checked", false);
 	}
 });
+
+$("body").on("click", ".reportBtn", (e) => {
+	 $(".addReportModal").show();
+});
+
 
 // 페이지 상단으로 이동
 $("#toTheTop").click((e) => {

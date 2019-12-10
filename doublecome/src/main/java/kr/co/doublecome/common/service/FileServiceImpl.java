@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.doublecome.repository.mapper.AuctionDetailMapper;
 import kr.co.doublecome.repository.mapper.FileMapper;
 import kr.co.doublecome.repository.vo.UtilFile;
 
@@ -26,7 +25,6 @@ public class FileServiceImpl implements FileService{
 	private FileMapper mapper;
 	
 	public UtilFile uploadFile(UtilFile uFile) {
-		UtilFile utilFile = new UtilFile();
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
 		String filePath = "/auction" + sdf.format(new Date());
 		int groupCode = mapper.maxFileGroupCode() + 1;
@@ -53,7 +51,9 @@ public class FileServiceImpl implements FileService{
 	
 	public void downLoadFile(int fileNo, HttpServletResponse res) {
 		try {
+			System.out.println(fileNo);
 			UtilFile uFile = mapper.selectOneFile(fileNo);
+			System.out.println(uFile);
 			File f = new File(uFile.getFilePath(), uFile.getFileSystemName());
 			String orgName = uFile.getFileOriginName();
 			if (orgName == null) {
