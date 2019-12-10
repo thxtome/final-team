@@ -19,8 +19,8 @@
 	
 	
 	<!-- 이메일 찾기 -->	
-	<select id="findEmail" parameterType="User" resultType="User">
-		select *
+	<select id="findEmail" parameterType="string" resultType="string">
+		select user_email
 		from user
 		where user_phnum = #{userPhnum}
 	</select>

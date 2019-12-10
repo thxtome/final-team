@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService{
 	
 	//이메일 찾기
 	@Override
-	public User findEmail(User user) {
+	public String findEmail(String user) {
 		return mapper.findEmail(user);
 	}
 	//비밀번호 찾기

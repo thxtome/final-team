@@ -10,7 +10,7 @@ public interface UserService {
 	public void deleteUser(String email);
 	public void updateUser(User user);
 	public User selectUserInfo(User user);
-	public User findEmail(User user);
+	public String findEmail(String userPhnum);
 	public String findPass(String email);
 	public User selectUserInfoByName(String userName);
 	//public List<Auction> mybidAuction(User user);

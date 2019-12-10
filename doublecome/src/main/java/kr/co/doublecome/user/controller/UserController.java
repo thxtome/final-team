@@ -84,7 +84,8 @@ public class UserController {
 	
 
 	 @RequestMapping("/kakaoCallback.do")
-	    public String kakaoCallback(
+	 @ResponseBody
+	    public int kakaoCallback(
 	    		Model model,
 	    		HttpSession session,
 	    		HttpServletRequest req,
@@ -92,26 +93,23 @@ public class UserController {
 	    		String id
 	    		)
 	            throws Exception {
-		 
+		 	System.out.println("kakao >>" + email );
+		 	System.out.println(service.checkEmail(email) + " <<service.checkEmail(email)");
 			 if(service.checkEmail(email) == 0) {
-		        	User u = new User();
-		        	u.setUserEmail(email);
-		        	u.setUserPass(id);
-		        	model.addAttribute("user", u);
-		        	return "user/joinForm2";
-		        }
+			/*
+			 * User u = new User(); u.setUserEmail(email); u.setUserPass(id);
+			 * model.addAttribute("user", u);
+			 */
+		        return 0;
+		      }
+			  
 			UserDetails u = userService.loadUserByUsername(email);
 	        SecurityContext sc = SecurityContextHolder.getContext();
-	        //아이디, 패스워드, 권한을 설정합니다. 아이디는 Object단위로 넣어도 무방하며
-	        //패스워드는 null로 하여도 값이 생성됩니다.
 	        sc.setAuthentication(new UsernamePasswordAuthenticationToken(u, null, u.getAuthorities()));
 	        HttpSession APIsession = req.getSession(true);
-
-	        //위에서 설정한 값을 Spring security에서 사용할 수 있도록 세션에 설정해줍니다.
 	        APIsession.setAttribute(HttpSessionSecurityContextRepository.
 	                             SPRING_SECURITY_CONTEXT_KEY, sc);
-		 
-		 return "/main";
+		 return 1;
 		}
 	
 	
@@ -200,16 +198,23 @@ public class UserController {
 
 	
 	//이메일 찾기 페이지, 이메일 찾기
-	@RequestMapping("/findEmailForm.do")
-	public void findEmailForm(User user,  Model model) throws Exception{
-		model.addAttribute("user", service.findEmail(user));
+	@RequestMapping("/findEmailPassForm.do")
+	public String findEmailForm(String userPhnum ,  Model model) throws Exception{
+			
+		if(service.findEmail(userPhnum) == null) {
+			model.addAttribute("email", "가입된 메일이 없습니다" );
+			return "user/findForm";
+		}
+			String r =service.findEmail(userPhnum);
+			model.addAttribute("email", r );
+			return "user/findForm";
 	}
 	//비밀번호 찾기 페이지
-	@RequestMapping("/findPassForm.do")
+	@RequestMapping("/findForm.do")
 	public void findPass(User user) throws Exception{}
 	
 	
-	//회원 탈퇴
+	//회원 탈퇴	
 	@RequestMapping("/deleteUser.do")
 	public String deleteUser(String userEmail) throws Exception{
 		service.deleteUser(userEmail);
@@ -218,6 +223,14 @@ public class UserController {
 	//회원 가입 - 화면
 	@RequestMapping("/joinForm.do")
 	public void joinForm(User user) throws Exception{}
+	//회원가입 - api 화면
+	@RequestMapping("/joinForm2.do")
+	public void joinForm2(Model model, User user, String email, String id) throws Exception{
+		User u = new User();
+    	u.setUserEmail(email);
+    	u.setUserPass(id);
+    	model.addAttribute("user", u);
+	}	
 	
 	// 회원 가입 - 버튼
 	@RequestMapping("/insert.do")

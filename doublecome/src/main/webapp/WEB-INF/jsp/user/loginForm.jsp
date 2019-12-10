@@ -52,7 +52,7 @@
     </form>
   </div>
   
-  <div class="cta"><a href="<c:url value="/user/findEmailForm.do" />">아이디/비밀번호 찾기</a></div>
+  <div class="cta"><a href="<c:url value="/user/findForm.do" />">아이디/비밀번호 찾기</a></div>
 </div>
         
 </body>
@@ -70,16 +70,28 @@
             success: function(res) {
               console.log(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
               console.log(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
-              console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다.
-              console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
-              console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
+              console.log(res.id, "아이디");//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다.
+              console.log(res.kaccount_email ,"이메일");//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
+              console.log(res.properties['nickname'], "닉네임");//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
               // res.properties.nickname으로도 접근 가능 )
               console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력
               $.ajax({
                 url: "/doublecome/user/kakaoCallback.do",
                 data: {email: res.kaccount_email},
+                type: "POST",
                 success: (result) => {
-                  location.href='/doublecome/main.do';
+	                console.log(result)
+	                if(res.kaccount_email == null){
+	                console.log("res.kaccount_email")
+	                alert("사용자 정보를 이용할 수 없어 일반 가입 과정을 진행 합니다")
+					location.href='/doublecome/user/joinForm.do';		                	
+	                }else{	
+		                if(result === 0)
+		                location.href='/doublecome/user/joinForm2.do?email='+res.kaccount_email+"&id="+res.id;
+		                else if(result === 1)
+		                location.href='/doublecome/main.do';
+	                }
+                	
                 }
                 
               })
