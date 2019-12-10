@@ -137,38 +137,38 @@
 	
 	<!-- 판매내역 -->
 	<select id="saleHistory" resultType="Auction" parameterType="Search">
-		select distinct a.*, 
-			   d.deal_no,
-			   d.deal_condition,
-		       max(b.bid_price) over (partition by b.auction_no) as max_price,
-		       r.review_sender,
-		       u.user_nickname,
-		       count(*) over(partition by b.auction_no) as auction_cnt,
-		       max(f.file_no) over (partition by f.file_group_code) as file_no
-		  from auction a
-		 inner join user u
-		    on a.user_email = u.user_email
-		  left join deal d
-		    on a.user_email = d.user_email_seller
-		   and a.auction_no = d.auction_no
-	     left join bid b
-            on a.auction_no = b.auction_no
-         left join review r
-            on d.deal_no = r.deal_no
-           and a.user_email = r.review_sender
-         inner join file f
-            on f.file_group_code = a.file_group_code
-		where a.user_email = #{keyword}
+	select z.*, count(*) over () as auction_cnt
+	  from (select distinct a.*, 
+			   	   d.deal_no,
+			   	   d.deal_condition,
+		           max(b.bid_price) over (partition by b.auction_no) as max_price,
+		           r.review_sender,
+		           u.user_nickname,
+			       max(f.file_no) over (partition by f.file_group_code) as file_no
+			  from auction a
+			 inner join user u
+			    on a.user_email = u.user_email
+			  left join deal d
+			    on a.user_email = d.user_email_seller
+			   and a.auction_no = d.auction_no
+		      left join bid b
+		           on a.auction_no = b.auction_no
+		      left join review r
+		        on d.deal_no = r.deal_no
+		       and a.user_email = r.review_sender
+		     inner join file f
+		        on f.file_group_code = a.file_group_code
+			 where a.user_email = #{keyword}
 		<choose>
-	   	 	<when test="searchType == 'dealProgress'">
-	   	 		and d.deal_condition = 1
-	   	 	</when>
 	   	 	<when test="searchType == 'dealBid' or searchType == ''">
-	   	 		and a.auction_condition = 1
+	   	 		and a.auction_condition = 1) as z
+	   	 	</when>
+	   	 	<when test="searchType == 'dealProgress'">
+	   	 		and d.deal_condition = 1) as z
 	   	 	</when>
 	   	 	<otherwise>
 	   	 	    and (a.auction_condition = 3
-	   	 		or d.deal_condition in (2, 3, 4))
+	   	 		or d.deal_condition in (2, 3, 4))) as z
 	   	 	</otherwise>
 	   	 </choose>
 		limit #{begin}, #{listSize}
@@ -176,36 +176,39 @@
 	
 	<!-- 구매내역 -->
 	<select id="buyHistory" resultType="Auction" parameterType="Search">
-		select distinct a.*, 
-			   d.deal_no,
-			   d.deal_condition,
-			   max(b.bid_price) over(partition by b.auction_no) as bid_price,
-			   u.user_nickname,
-			   r.review_sender,
-			   count(*) over(partition by b.auction_no) as auction_cnt,
-			   max(f.file_no) over (partition by f.file_group_code) as file_no
-		  from auction a
-		 inner join user u
-		    on a.user_email = u.user_email
-		  left join deal d
-		    on a.auction_no = d.auction_no
-	      left join bid b
-            on a.auction_no = b.auction_no
-          left join review r
-            on d.deal_no = r.deal_no
-           and d.user_email_buyer = r.review_sender
-         inner join file f
-            on f.file_group_code = a.file_group_code
-	   	 where d.user_email_buyer = #{keyword}
+		select z.*, count(*) over () as auction_cnt
+		  from (select distinct a.*, 
+					   d.deal_no,
+					   d.deal_condition,
+					   max(b.bid_price) over(partition by b.auction_no) as bid_price,
+					   u.user_nickname,
+					   r.review_sender,
+					   max(f.file_no) over (partition by f.file_group_code) as file_no
+				  from auction a
+				 inner join user u
+				    on a.user_email = u.user_email
+				  left join deal d
+				    on a.auction_no = d.auction_no
+			      left join bid b
+		            on a.auction_no = b.auction_no
+		          left join review r
+		            on d.deal_no = r.deal_no
+		           and d.user_email_buyer = r.review_sender
+		          left join file f
+		            on f.file_group_code = a.file_group_code
+			   	 where 
 	   	 <choose>
-	   	 	<when test="searchType == 'dealProgress'" >
-	   	 		and d.deal_condition = 1
-	   	 	</when>
 	   	 	<when test="searchType == 'dealBid' or searchType == ''" >
-	   	 		and a.auction_condition = 1
+			   	b.user_email = #{keyword}
+	   	 		and a.auction_condition = 1) as z
+	   	 	</when>
+	   	 	<when test="searchType == 'dealProgress'" >
+	   	 		d.user_email_buyer = #{keyword}
+	   	 		and d.deal_condition = 1) as z
 	   	 	</when>
 	   	 	<otherwise>
-	   	 		and d.deal_condition in (2, 3, 4)
+	   	 		d.user_email_buyer = #{keyword}
+	   	 		and d.deal_condition in (2, 3, 4)) as z
 	   	 	</otherwise>
 	   	 </choose>
 	   	 limit #{begin}, #{listSize}

@@ -66,7 +66,7 @@ $(function (){
 				html += `
 					</span> 
 					<span class="detailCon"> 
-						<a>입찰금 <strong>${r.bidPrice}</strong>원</a>
+						<a>입찰금 <strong>${r.maxPrice}</strong>원</a>
 					</span>
 				</div>
 				<div class="listBody">
