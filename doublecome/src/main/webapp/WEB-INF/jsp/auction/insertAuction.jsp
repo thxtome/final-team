@@ -83,21 +83,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 				<input type="hidden" class="catg" name="categoryCode" value="" />
 			</form>
 		</div>
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
 	
-	<div>
-		<div style="position: relative; float:left; margin: 0 30px; width: 150px; height: 150px;">
-			<div style="position: absolute; top: 0; left: 0;">
-			<img src="<c:url value="/resources/images/macbook.jpg"/>" />
-			</div>
-			<div style="position: absolute; top: 0; left: 0;">
-			<button type="button" class="npu_btn npu_btn_image_del">
-				<i class="glyphicon glyphicon-remove npu_icon_del"></i>
-			</button>
-			</div>
-		</div>
-	</div>
-	
+	<div class="movePage">이동하기</div>
 	</div>
 		<div class="hoverNotification">
 		<div>메인에 등록할 사진을 업로드 해주세요</div>

@@ -1,6 +1,6 @@
 
 .wrapper {
-    width: 100%;
+    width: 900px;
     margin: 0 auto;
 /*     margin-top: 20px; */
 }
@@ -110,4 +110,21 @@ li {
     right: 5px;
     bottom: 0;
     left: 5px;
+}
+.npu_image_list .npu_btn_image_del {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 18px;
+    height: 18px;
+    background: rgba(0,0,0,0.0);
+    border: 0;
+    outline: 0;
+}
+.glyphicon-remove {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 13px;
+    height: 13px;
 }

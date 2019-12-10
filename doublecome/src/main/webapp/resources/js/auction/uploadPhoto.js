@@ -4,6 +4,7 @@ function swalAlert(msg) {
 
 let filesLength = 1;
 let fileCheck = 0;
+let key = 0;
 $(function() {
     let imagesPreview = function(input, preview) {
     	
@@ -18,12 +19,15 @@ $(function() {
             for (i = 0; i < input.files.length; i++) {
                 let reader = new FileReader();
                 reader.onload = function(event) {
-                	console.log(preview +" li:nth-child("+filesLength+")")
-                	$(preview +" li:nth-child("+filesLength+")").html(`							
+                	$(preview + " li:nth-child("+filesLength+")").attr("data-key", key++)
+                	$(preview +" li:nth-child("+filesLength+") div").html(`							
                 			<div class="img_thumb_wrap">
 								<div class="img_thumb">
 									<div class="img_thumb_img">
 									</div>
+									<button type="button" class="npu_btn npu_btn_image_del">
+                						<i class="glyphicon glyphicon-remove"></i>
+                					</button>
 								</div>
 							</div>`)
 					$(preview +" li:nth-child("+filesLength+") .img_thumb_img").css("background-image", "url(" + event.target.result + ")")
@@ -38,4 +42,10 @@ $(function() {
     $('#upload').on('change', function() {
         imagesPreview(this, '.j-selectable');
     });
+})
+
+$(document).on("click", ".glyphicon-remove", function() {
+	$(this).parents(".img_thumb_wrap").remove()
+	fileCheck--
+	filesLength--
 })
