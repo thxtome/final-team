@@ -34,7 +34,7 @@
 					                        	</span>
 			                        		</c:otherwise>
 			                        	</c:choose>
-					                    <span class="name">${chat.buyerNickName}</span>
+					                    <span class="name">${chat.auctionTitle}</span>
 			                            <c:choose>
 			                            	<c:when test="${chat.covstRegDate == null}">
 					                            <span class="time">00:00</span>			                            				                            	
@@ -59,7 +59,7 @@
 					                        	</span>
 			                        		</c:otherwise>
 			                        	</c:choose>
-			                            <span class="name">${chat.buyerNickName}</span>
+			                            <span class="name">${chat.auctionTitle}</span>
 			                            <c:choose>
 			                            	<c:when test="${chat.covstRegDate == null}">
 					                            <span class="time">00:00</span>			                            				                            	
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                	</c:forEach>
-                    <div class="write">
+                    <div class="write" style="display:none;">
                         <input type="text" data-chatfield="chat"/>             
                         <a href="javascript:;" class="write-link send"></a>
                     </div>

@@ -3,8 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.doublecome.repository.mapper.ChattingMapper">
 	<select id="listChat" parameterType="String" resultType="Chat">
-		select 
-			c.chat_no,
+		select 		c.chat_no,
 		    c.deal_no,
 		    c.user_email_seller,
 		    c.user_email_buyer,
@@ -12,6 +11,7 @@
 		    c.reads_buyer,
 		    b.covst_content,
 		    b.covst_reg_date,
+            d.auction_title,
 		    (select file_group_Code
 			   from user
 			  where user_email = c.user_email_seller
@@ -34,6 +34,11 @@
 					  order by covst_no desc
 		              limit 1) as b
 		    on c.chat_no = b.chat_no
+		  inner join (select deal_no, del.auction_no, auction_title
+						from deal del
+					   inner join auction auc
+						on del.auction_no = auc.auction_no) as d
+				on d.deal_no = c.deal_no
 		  where  user_email_seller like #{email}
 		     or user_email_buyer like #{email}
 	</select>
