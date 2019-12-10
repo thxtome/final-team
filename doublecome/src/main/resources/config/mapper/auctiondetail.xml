@@ -124,4 +124,14 @@
 		order by bid_price desc
 		limit 1
 	</select>
+	
+	<select id="selectAuctionForLive" parameterType="int" resultType="Auction">
+		select distinct a.*,
+				        count(b.auction_no) over(partition by b.auction_no) as bid_cnt,
+			            ifnull(max(b.bid_price) over(partition by b.auction_no), a.auction_min_price) as max_price
+		  from auction a
+		  left join bid b
+		    on a.auction_no = b.auction_no
+		 where a.auction_no = #{auctionNo}
+	</select>
 </mapper>

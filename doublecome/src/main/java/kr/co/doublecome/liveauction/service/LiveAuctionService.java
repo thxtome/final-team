@@ -1,7 +1,7 @@
 package kr.co.doublecome.liveauction.service;
 
-import org.springframework.stereotype.Service;
+import kr.co.doublecome.repository.vo.Auction;
 
 public interface LiveAuctionService {
-
+	Auction retrieveAuction(int auctionNo);
 }

@@ -1,6 +1,5 @@
 package kr.co.doublecome.util.interceptor;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -15,7 +14,6 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
-	Map<Integer,Integer> countMap = new HashMap<>();
 	
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
@@ -28,23 +26,13 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
 		 
 		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
-		 Integer count = countMap.get(auctionNo);
-		 
-		 if(count == null) {
-			 count = 1;
-		 } else {
-			 count++;
-		 }
-		 
 		 //아이디 입력
 		 if(principal != "anonymousUser") {
 			 UserDetails userDetails = (UserDetails) principal;
 			 attributes.put("userId", userDetails.getUsername());
 		 } else {
-			 attributes.put("userId","익명 " + count);
+			 attributes.put("userId","비회원");
 		 }
-		 
-		 countMap.put(auctionNo,count);
 		 
 		 //색상 랜덤 선택
 		 Random r = new Random();

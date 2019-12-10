@@ -240,6 +240,10 @@ html, body, .content {
 	cursor: pointer;
 }
 
+.timer-font{
+	display:inline-block !important;
+}
+
 ::-webkit-scrollbar {
   width: 7px;  /* 세로축 스크롤바 길이 */
 }
@@ -258,3 +262,4 @@ html, body, .content {
   width: 0px;
   height: 0px;
 }
+
