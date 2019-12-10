@@ -17,6 +17,7 @@ friends.all.forEach(f => {
 });
 
 function setAciveChat(f) {
+  $(".write").css("display", "block")
   if(friends.list.querySelector('.active') != null) {
 	  friends.list.querySelector('.active').classList.remove('active')	  
   } 
@@ -42,26 +43,8 @@ let email = $(".wrapper").data("id");
 let chatNo = $("div[data-chat='person2']").data("no");
 let person = null;
 let peopleField = null;
-$(() => {
-	ws = new WebSocket("ws://localhost/doublecome/chatting.do");	
-	ws.onopen = () => {
-		$("#result").append("<div>웹소켓 핸들러 연결 성공</div>");
-	};
-	ws.onmessage = (evt) => {
-		if (evt.data != null) {
-						
-		} else {
-			$("div[data-chat=person2]").append("<div class='bubble you'>" + evt.data + "</div>");
-		}
-	};
-	ws.onerror = (evt) => {
-		$("#result").append("<div>웹소켓 에러 발생 : " + evt.data + "</div>");
-	};
-	ws.onclose = () => {
-		$("#result").append("<div>웹소켓 연결 종료</div>");
-	};
-	
-});
+$(document).scrollTop($(document).height());
+
 function insertData () {
 	let $msg = $("input[data-chatfield='chat']");
 	if($msg.val() != "") {		
@@ -110,6 +93,25 @@ function insertData () {
 		$msg.val("");
 	}
 }
+
+$(() => {
+	ws = new WebSocket("ws://192.168.0.7/doublecome/chatting.do");	
+	ws.onopen = () => {
+		console.log("왔어")
+	};
+	ws.onmessage = (evt) => {
+		console.log(evt)
+		person.append("<div class='bubble you'>" + evt.data + "</div>");
+	};
+	ws.onerror = (evt) => {
+		$("#result").append("<div>웹소켓 에러 발생 : " + evt.data + "</div>");
+	};
+	ws.onclose = () => {
+		$("#result").append("<div>웹소켓 연결 종료</div>");
+	};
+	
+});
+
 $(document).ready(function(){
 	$(".write a").click(() => {
 		insertData();		

@@ -153,7 +153,7 @@ function handleImgsFilesSelect(e) {
 }
 
 
-$(".upload_btn").click(() => {
-	window.open("uploadPhoto.do", "사진 첨부", "width=1000, height=800, location=no, left=400")
-})
+//$(".upload_btn").click(() => {
+//	window.open("uploadPhoto.do", "사진 첨부", "width=1000, height=800, location=no, left=400")
+//})
 		

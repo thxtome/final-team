@@ -66,7 +66,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 						</dd>
 						<dt class="col-xs-3 menu fileUp">파일첨부<i class="fas fa-question-circle fa-sm fileUpIcon"></i></dt>
 						<dd class="col-xs-9 attach">
-<!-- 						<input style="display: none;" type="file" id="upload" name="attach" multiple/> -->
+						<input style="display: none;" type="file" id="upload" name="attach" multiple/>
   						<label for="upload" class="upload_btn"><span class="glyphicon glyphicon-picture"></span> 사진
 						</label>
 						</dd>

@@ -11,6 +11,7 @@ import kr.co.doublecome.repository.vo.UtilFile;
 public interface AuctionDetailMapper {
 	
 	Auction auctiondetail(int no);
+	Auction selectAuctionForLive(int no);	
 	List<Inquiry> retrieveinquiry(Search search);
 	void insertInquiry(Inquiry inquiry);
 	int addFile(UtilFile file);
