@@ -8,12 +8,11 @@
 		for(i = 0; i < result.length; i++){
 			$('#bidList').append(
 				`<div class="card_container">
-				<a id="aution" href="#">
-					<img src="/doublecome/src/main/resources/css/user/defaultpfimg.jpeg" alt="사진" class="card_imag">
-					<div class="vertical-line" style="height: 120px;"></div>
-					<p><span class="card_autionTitle">${result[i].auctionTitle}</span></p>
-					<p class="card_title">즉시 구매 가 <span class="card_content">${result[i].auctionBuyNow}</span></p>
-					<p class="card_title">경매 마감 일<span class="card_content">${result[i].auctionLimitDate}</span></p>
+				<a id="aution" href="">
+					<img src="/doublecome/resources/css/user/defaultpfimg.jpeg" alt="" class="card_image" >
+					<div class="aution_title"><span class="card_autionTitle">${result[i].auctionTitle}</span></div>
+					<div class="card_sub_now">즉시 구매 가:<span class="card_content">${result[i].auctionBuyNow}</span></div>
+					<div class="card_sub_date">경매 마감 일:<span class="card_content">${result[i].auctionLimitDate}</span></div>
 				</a>				
 				</div>`
 			);
