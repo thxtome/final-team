@@ -2,6 +2,13 @@ function swalAlert(msg) {
 	Swal.fire(msg)
 }
 
+let li = `
+					<li class="npu_image_item _npu_image_item_blank">
+						<div class="npu_image_list_thumb_wrap">
+						</div>
+					</li>
+`
+
 let filesLength = 1;
 let fileCheck = 0;
 let key = 0;
@@ -31,12 +38,16 @@ $(function() {
 								</div>
 							</div>`)
 					$(preview +" li:nth-child("+filesLength+") .img_thumb_img").css("background-image", "url(" + event.target.result + ")")
+					$.ajax({
+						url: "tempFile.do",
+						type: "post",
+						data: {fileUrl : event.target.result},
+					})
 					filesLength++
                 }
                 reader.readAsDataURL(input.files[i]);
             }
         }
-
     };
 
     $('#upload').on('change', function() {
@@ -44,8 +55,31 @@ $(function() {
     });
 })
 
+$(document).on("click", ".img_thumb_img", function(event) {
+	if ($(this).parents("li").hasClass("tagChoice")) {
+		
+		let a = Math.round(event.offsetX / $(this).width() * 100)
+		let b = Math.round(event.offsetY / $(this).height() * 100)
+		
+		$(this).append(`
+		<div class="addTag" style="top : ${b}%; left : ${a}%">태그를 입력해주세요</div>
+		`)
+	} else {
+		
+		let a = Math.round(event.offsetX / $(this).width() * 100)
+		let b = Math.round(event.offsetY / $(this).height() * 100)
+		
+		$(this).parents("li").addClass("tagChoice")
+	}
+})
+
+$(".tagCancel").click(() => {
+	$("li").removeClass("tagChoice")
+})
+
 $(document).on("click", ".glyphicon-remove", function() {
-	$(this).parents(".img_thumb_wrap").remove()
+	$(this).parents("li").remove()
 	fileCheck--
 	filesLength--
+	$("ul").append(li)
 })

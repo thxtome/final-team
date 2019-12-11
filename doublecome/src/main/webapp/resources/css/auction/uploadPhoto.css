@@ -3,10 +3,9 @@
     width: 900px;
     margin: 0 auto;
 /*     margin-top: 20px; */
+    width: 950px;
 }
 .contents {
-	padding-left: 40px;
-    padding-right: 80px;
 }
 .topContent {
 	height: 70px;
@@ -24,7 +23,7 @@
     float: right;
     position: relative;
 	top: 18px;
-    right: 97px;
+	right: 155px;
 }
 
 .button:hover {
@@ -40,7 +39,7 @@
 	cursor: pointer;
 	position: relative;
 	top: 25px;
-    left: 90px;
+    left: 50px;
     float: left;
 }
 .img_thumb_img {
@@ -60,13 +59,15 @@
     position: absolute;
     background: #f1f1f1;
     top: 0;
-    right: 5px;
+    right: 0;
     bottom: 0;
-    left: 5px;
+    left: 0;
 }
 
 .npu_image_list {
+    float: left;
     margin-top: 30px;
+    width: 800px;
 }
 ul {
     display: block;
@@ -127,4 +128,21 @@ li {
     left: 1px;
     width: 13px;
     height: 13px;
+}
+
+.tagChoice {
+    position: absolute !important;
+    z-index: 2 !important;
+    width: 762px !important;
+    height: 600px !important;
+}
+
+.tagCancel {
+	float: right;
+}
+.sidebar {
+	padding-right: 40px;
+}
+.addTag {
+	position: absolute;
 }

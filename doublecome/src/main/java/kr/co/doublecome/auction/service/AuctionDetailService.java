@@ -33,4 +33,5 @@ public interface AuctionDetailService {
 	void callSPAddDeal(Auction auction);
 	List<Auction> bidList(int no);
 	String selectPhNum(int no);
+	void tempFile(String string);
 }

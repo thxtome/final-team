@@ -32,7 +32,6 @@
 
 				<ul class="npu_image_list _list _list-list npu_cols_6 j-selectable">
 
-
 					<li class="npu_image_item _npu_image_item_blank">
 						<div class="npu_image_list_thumb_wrap">
 						</div>
@@ -115,7 +114,9 @@
 					</li>
 
 				</ul>
-
+				<div class="sidebar">
+					<button class="tagCancel" type="button" >취소</button>
+				</div>
 			</div>
 		</div>
 	</form>

@@ -1,8 +1,12 @@
 package kr.co.doublecome.auction.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.commons.net.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -127,6 +131,22 @@ public class AuctionDetailController {
 	public void upload() {
 	}
 	
+	@RequestMapping("/tempFile.do")
+	@ResponseBody
+	public void tempFile(String fileUrl, String filename) {
+		String fileUrl2 = fileUrl.split(",")[1];
+		byte[] binary = Base64.decodeBase64(fileUrl2);
+		FileOutputStream fos = null;
+		try {
+			String sysName = UUID.randomUUID().toString();
+			fos = new FileOutputStream("c:/java/upload/"+sysName+".jpg");
+			fos.write (binary);
+			fos.flush();
+			fos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 }

@@ -119,4 +119,7 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	public String selectPhNum(int no) {
 		return mapper.selectPhNum(no);
 	}
+	public void tempFile(String string) {
+		
+	}
 }
