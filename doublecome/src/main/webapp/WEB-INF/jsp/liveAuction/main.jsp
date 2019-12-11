@@ -44,14 +44,14 @@
                         <span>즉시구매가</span>
                         <span>${auction.auctionBuyNow}</span>
                     </div>
-                    <button>구매하기</button>
+                    <button id="sendPurchaseBtn">구매하기</button>
                 </div>
             </div>
             <div class="chatSpace">
             </div>
             <div class="chatInput">
                     <textarea name="" id="" cols="30" rows="10"></textarea>
-                    <button id="sendBtn">채팅</button>
+                    <button id="sendChatBtn">채팅</button>
             </div>
         </div>
         <div class="bidSpace">
@@ -76,7 +76,7 @@
                 </div>
                 <hr>
                 <div class="mBtns">
-                    <button class="sendBidBtn">입찰</button>
+                    <button id="sendBidBtn">입찰</button>
                     <button class="closeModalBtn">취소</button>
                 </div>
             </div>

@@ -102,6 +102,7 @@ html, body, .content {
 	height: max-content;
 	width: 95%;
 	font-size: 18px;
+	word-break: break-all;
 }
 
 .auctionInfo {

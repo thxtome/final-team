@@ -102,7 +102,7 @@
 	</select>
 	
 	<select id="callSPAddDeal" parameterType="Auction" statementType="CALLABLE">
-		call addDeal(#{bidPrice}, #{userEmail}, #{auctionNo}, #{userEmailBuyer})
+		call addDeal(#{bidPrice}, #{auctionNo}, #{userEmailBuyer})
 	</select>
 	
 	<select id="bidList" parameterType="int" resultType="Auction">

@@ -22,7 +22,6 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
 		 ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
 	     HttpServletRequest req =  ssreq.getServletRequest();
 
-		 int auctionNo = (int)req.getSession().getAttribute("auctionNo");
 		 
 		 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 
@@ -42,7 +41,12 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
 			 color += String.format("%02X", num) + "";
 		 }
 		 attributes.put("color",color);
-		 attributes.put("auctionNo",auctionNo);
+		 
+		 Integer auctionNo = (Integer)req.getSession().getAttribute("auctionNo");
+		 if(auctionNo != null) {
+			 attributes.put("auctionNo",auctionNo);			 
+		 }
+		 
 		return super.beforeHandshake(request, response, wsHandler, attributes);
 	}
 
