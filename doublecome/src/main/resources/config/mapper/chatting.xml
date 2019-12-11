@@ -42,4 +42,31 @@
 		  where  user_email_seller like #{email}
 		     or user_email_buyer like #{email}
 	</select>
+	<select id="oneChat" parameterType="int" resultType="ConverSation">
+		select 
+			covst_no,
+			covst_content,
+			user_email,
+			chat_no,
+			covst_reg_date
+		  from conversation
+		 where chat_no = #{chatNo}
+		 order by covst_no
+	</select>
+	<update id="updateChat" parameterType="ConverSation" >
+		update chat
+		   <choose>
+		   <when test="userType == 1">
+		   		set reads_seller = 0
+		   </when>
+		   <otherwise>
+		   		set reads_buyer = 0
+		   </otherwise>
+		   </choose>
+		 where chat_no = #{chatNo}
+	</update>
+	<insert id="addCovstData" parameterType="ConverSation">
+		insert into conversation(covst_content, user_Email, chat_No)
+		 values(#{covstContent},#{userEmail},#{chatNo})
+	</insert>
 </mapper>

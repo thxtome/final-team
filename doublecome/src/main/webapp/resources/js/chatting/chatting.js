@@ -28,16 +28,33 @@ function setAciveChat(f) {
 	  chat.current.classList.remove('active-chat');
   }
   chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat')
+  console.log(chat.current)
   friends.name = f.querySelector('.name').innerText
-  chat.name.innerHTML = `<span>To: <span class="name">${friends.name}</span></span>`
-//  $(".right_message_field").append(`
-//	<div class="write">
-//        <input type="text" data-chatfield="chat"/>             
-//        <a href="javascript:;" class="write-link send"></a>
-//    </div>	  
-//  `)
+  chat.name.innerHTML = `<span><span class="name">${friends.name}</span></span>`
+  let countTag = $(`li[data-chat="person${chat.person}"] .count`);
+  console.log(countTag)
+  countTag.addClass("hideCount");
+  countTag.attr("count", 0);
+  let sendData =  {chatNo:$(`div[data-chat="person${chat.person}]`).data("no"), userType:$(f).data("type")}
+  let options = {
+		url : "chatList.do",
+		type : "POST",
+		contentType : "application/json",
+		data : JSON.stringify(sendData)
+  }
+  $.ajax(options).done(data => {
+		console.log(data)
+		
+  }).fail(() => {
+		 alert("ajax 처리 에러발생");
+  });
+  $(`div[data-chat="person${chat.person}]`).append();
 }
-
+function makeAjaxChatList(data) {
+	data.each((value, index) => {
+		
+	})
+}
 let ws = null;
 let email = $(".wrapper").data("id");
 let chatNo = $("div[data-chat='person2']").data("no");
@@ -47,7 +64,8 @@ $(document).scrollTop($(document).height());
 
 function insertData () {
 	let $msg = $("input[data-chatfield='chat']");
-	if($msg.val() != "") {		
+	if($msg.val() != "") {
+		 
 		let selectChat = $(".right_message_field .chat");
 		for(let selChat of selectChat) {
 			if($(selChat).hasClass('active-chat')) {
@@ -60,48 +78,65 @@ function insertData () {
 				peopleField = $(people);
 			}
 		}
-		let d = new Date();
-		let data = {email : $(".wrapper").data("id"), msg: $msg.val(), chatNo:person.data("no")}
-		ws.send(JSON.stringify(data));
+		let sendData = {userEmail : $(".wrapper").data("id"), covstContent: $msg.val(), chatNo:person.data("no")}
+		ws.send(JSON.stringify(sendData));
+		let options = {
+			url : "insertChat.do",
+			type : "POST",
+			contentType : "application/json",
+			data : JSON.stringify(sendData)
+   	    }
+	    $.ajax(options).done(data => {
+				
+		}).fail(() => {
+		    alert("ajax 처리 에러발생");
+		});
 		person.append("<div class='bubble me'>"+ $msg.val() + "</div>");
-		console.log(peopleField.children(".preview"));
 		peopleField.children(".preview").text($msg.val());
-		let hours = d.getHours();
-		let minutes = d.getMinutes();
-		if (d.getHours() < 12) {
-			let hoursLength = hours + "";
-			let minutesLength = minutes + "";
-			if (hoursLength.length == 1) {
-				hours = "0" + hours
-			}
-			if (minutesLength == 1) {
-				minutes = "0" + minutes
-			}
-			peopleField.children(".time").text(hours + ":" + minutes + " AM");			
-		} else {
-			hours = hours - 12;
-			let hoursLength = hours + "";
-			let minutesLength = minutes + "";
-			if (hoursLength.length == 1) {
-				hours = "0" + hours
-			}
-			if (minutesLength == 1) {
-				minutes = "0" + minutes
-			}
-			peopleField.children(".time").text(hours + ":" + minutes + " PM");
-		}
+		peopleField.children(".time").text(nowDate());
 		$msg.val("");
 	}
 }
-
 $(() => {
-	ws = new WebSocket("ws://192.168.0.7/doublecome/chatting.do");	
+	ws = new WebSocket("ws://192.168.0.15/doublecome/chatting.do");	
 	ws.onopen = () => {
-		console.log("왔어")
+		console.log("채팅 접속")
 	};
+	
+	
 	ws.onmessage = (evt) => {
+		let count = 1;
 		console.log(evt)
-		person.append("<div class='bubble you'>" + evt.data + "</div>");
+		let data = JSON.parse(evt.data);
+		let chatArea = $(`div[data-no=${data.chatNo}]`);
+		console.log("chatArea" + chatArea)
+		if(chatArea.hasClass("active-chat")){			
+			console.log("데이터들어옴1")
+			$(`li[data-chat="person${data.chatNo}"] .time`).text(nowDate())
+			$(`li[data-chat="person${data.chatNo}"] .preview`).text(data.covstContent)
+			chatArea.append(
+				`
+				<div class='bubble you'>${data.msg}</div>
+				`
+			)
+		} else {
+			console.log("데이터들어옴2")
+			let countTag = $(`li[data-chat="person${data.chatNo}"] .count`);
+			let originCount = countTag.attr("count");
+			
+			console.log("원래 카운트")
+			console.log(originCount);
+			console.log("넣을 곳")
+			console.log(countTag);
+			
+			countTag.attr("count",count);
+			countTag.removeClass("hideCount");
+			console.log("넣고 난 후" + countTag);
+			$(`li[data-chat="person${data.chatNo}"] .time`).text(nowDate())
+			$(`li[data-chat="person${data.chatNo}"] .preview`).text(data.covstContent)
+		}
+		
+		
 	};
 	ws.onerror = (evt) => {
 		$("#result").append("<div>웹소켓 에러 발생 : " + evt.data + "</div>");
@@ -111,7 +146,36 @@ $(() => {
 	};
 	
 });
-
+function nowDate() {
+	let d = new Date();
+	let hours = d.getHours();
+	let minutes = d.getMinutes();
+	let time ="";
+	if (d.getHours() < 12) {
+		let hoursLength = hours + "";
+		let minutesLength = minutes + "";
+		if (hoursLength.length == 1) {
+			hours = "0" + hours
+		}
+		if (minutesLength == 1) {
+			minutes = "0" + minutes
+		}		
+		time = hours+":"+minutes+" AM";
+		
+	} else {
+		hours = hours - 12;
+		let hoursLength = hours + "";
+		let minutesLength = minutes + "";
+		if (hoursLength.length == 1) {
+			hours = "0" + hours
+		}
+		if (minutesLength == 1) {
+			minutes = "0" + minutes
+		}
+		time = hours+":"+minutes+" PM";
+	}
+	return time;
+}
 $(document).ready(function(){
 	$(".write a").click(() => {
 		insertData();		
