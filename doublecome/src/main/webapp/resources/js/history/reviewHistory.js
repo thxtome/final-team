@@ -3,7 +3,34 @@ let reviewCnt = 0;
 let sort = "";
 let contextPath = window.location.pathname.substr(0,window.location.pathname.indexOf("/",2));
 $(function (){
-// 네비게이션바 클릭시 이동
+// info 박스 클릭시 이동
+let $myInfo = $("#myInfo");
+$myInfo.find("div").click((e) => {
+	let topTarget = '';
+	let minus = 100;
+	$location = $(e.target).data("location");
+	switch ($location){
+	case "purchaseHead": 
+		$topTarget = $("#"+$location); 
+		break;
+	case "salesHead": 
+		$topTarget = $("#"+$location); 
+		minus = 120;
+		break;
+	case "reviewHead": 
+		$topTarget = $("#"+$location); 
+		minus = 50; 
+		break;
+	}
+	
+	jQuery('html, body').animate( { scrollTop : $topTarget.offset().top - minus }, 0 );
+});
+// 파일첨부 
+$("body").on("click", ".note-my-files",() => {
+	$(`.note-group-select-from-files input[type="file"]`).trigger("click");
+});
+
+/**
 let $navBar = $("#navBar");
 let $left = $(".purchaseTabList").offset().left;
 let navTop = $navBar.offset().top;
@@ -11,23 +38,24 @@ $navBar.find("a").click((e) => {
 	let topTarget = '';
 	let minus = 100;
 	$location = $(e.target).data("location");
-    switch ($location){
-    	case "purchaseHead": 
-    		$topTarget = $("#"+$location); 
-    		break;
-    	case "salesHead": 
-    		$topTarget = $("#"+$location); 
-    		minus = 120;
-    		break;
-    	case "reviewHead": 
-    		$topTarget = $("#"+$location); 
-    		minus = 50; 
-    		break;
-    }
-    
-    jQuery('html, body').animate( { scrollTop : $topTarget.offset().top - minus }, 0 );
+	switch ($location){
+	case "purchaseHead": 
+		$topTarget = $("#"+$location); 
+		break;
+	case "salesHead": 
+		$topTarget = $("#"+$location); 
+		minus = 120;
+		break;
+	case "reviewHead": 
+		$topTarget = $("#"+$location); 
+		minus = 50; 
+		break;
+	}
+	
+	jQuery('html, body').animate( { scrollTop : $topTarget.offset().top - minus }, 0 );
 });
-
+*/
+/**
 // 네비게이션바 고정 & 색깔 변화
 let navFun = function(navigation) {
 	$navBar.find("a").removeClass("navChoice");
@@ -52,7 +80,7 @@ $(window).scroll(function () {
         navFun("a:eq(0)");
     };
 });
-
+*/
 //  각 구매내역, 판매내역, 후기 탭 클릭시 색상변화 모듈화하기
 $(".purchaseTabList").click((e) => {
 	$(".purchaseTabList").removeClass("tabChoice");
@@ -160,7 +188,7 @@ function makeReviewList(result, type, sort){
 							<div class="reviewDate">${format(r.reviewRegDate,"ymd")}</div>
 						</div>
 						<div class="writerArea">
-							<a class="reviewer">${r.senderNickname}</a>
+							<span class="reviewer">${r.senderNickname}</span>
 						</div>
 						<div class="editdel">
 							<a data-no="${r.reviewNo}" data-receiver="${r.reviewReceiver}" class="editreview">수정</a> / 
@@ -220,7 +248,7 @@ function makeReviewList(result, type, sort){
 					<div class="reviewDate">${format(r.reviewRegDate,"ymd")}</div>
 					</div>
 					<div class="writerArea noBtn">
-					<a class="reviewer">${r.senderNickname}</a>
+					<span class="reviewer">${r.senderNickname}</span>
 					</div>
 					</li>
 					<li class="reviewDetail">
@@ -363,7 +391,7 @@ window.onclick = function(event) {
 // 후기작성 서머노트
 $('#summernote').summernote(
 		{
-			height : 250,
+			height : 350,
 			width : 500,
 		    disableResize: true,
 		    disableResizeEditor: true,

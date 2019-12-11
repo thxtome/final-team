@@ -30,7 +30,20 @@
 		 inner join user u 
 		    on u.user_email = r.review_sender
 		 where r.review_receiver = #{keyword}
-		 order by review_no
+ 		<choose>
+ 			<when test='sort == "highGrade"'>
+				 order by r.review_score desc, r.review_reg_date desc
+ 			</when>
+ 			<when test='sort == "lowGrade"'>
+				 order by r.review_score asc, r.review_reg_date desc
+ 			</when>
+ 			<when test='sort == "recency"'>
+			 	 order by r.review_reg_date desc
+ 			</when>
+ 			<otherwise>
+			 	 order by r.review_reg_date desc
+ 			</otherwise>
+ 		</choose>
 		 limit #{begin}, 5
 	</select>
 	
@@ -58,8 +71,11 @@
 		    on u.user_email = r.review_sender
 		 where r.review_sender = #{keyword}
 	 		<choose>
-	 			<when test='sort == "grade"'>
+	 			<when test='sort == "highGrade"'>
 					 order by r.review_score desc, r.review_reg_date desc
+	 			</when>
+	 			<when test='sort == "lowGrade"'>
+					 order by r.review_score asc, r.review_reg_date desc
 	 			</when>
 	 			<when test='sort == "recency"'>
 				 	 order by r.review_reg_date desc
@@ -139,7 +155,6 @@
 	<select id="saleHistory" resultType="Auction" parameterType="Search">
 	select z.*, count(*) over () as auction_cnt
 	  from (select distinct a.*, 
-			   	   d.deal_no,
 			   	   d.deal_condition,
 		           max(b.bid_price) over (partition by b.auction_no) as max_price,
 		           r.review_sender,
