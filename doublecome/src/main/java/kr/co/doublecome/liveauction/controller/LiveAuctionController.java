@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.doublecome.liveauction.service.LiveAuctionService;
+import kr.co.doublecome.repository.vo.Auction;
 
 @Controller
 @RequestMapping("/liveAuction")
@@ -18,9 +19,14 @@ public class LiveAuctionController {
 	
 
 	@RequestMapping("/main.do")
-	public void main(int auctionNo, HttpSession session, Model model) {
+	public String main(int auctionNo, HttpSession session, Model model) {
+		Auction auction = service.retrieveAuction(auctionNo);
+		if(auction.getAuctionBroadcast() == 1) {
+			return "liveAuction/notExist";
+		}
 		session.setAttribute("auctionNo", auctionNo);
 		model.addAttribute("auction",service.retrieveAuction(auctionNo));
+		return "liveAuction/main";
 	}
 
 	
