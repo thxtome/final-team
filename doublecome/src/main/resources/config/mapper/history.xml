@@ -156,8 +156,10 @@
 	select z.*, count(*) over () as auction_cnt
 	  from (select distinct a.*, 
 			   	   d.deal_condition,
+			   	   d.deal_no,
 		           max(b.bid_price) over (partition by b.auction_no) as max_price,
 		           r.review_sender,
+		           u.user_score,
 		           u.user_nickname,
 			       max(f.file_no) over (partition by f.file_group_code) as file_no
 			  from auction a
@@ -171,19 +173,21 @@
 		      left join review r
 		        on d.deal_no = r.deal_no
 		       and a.user_email = r.review_sender
-		     inner join file f
+		      left join file f
 		        on f.file_group_code = a.file_group_code
 			 where a.user_email = #{keyword}
 		<choose>
-	   	 	<when test="searchType == 'dealBid' or searchType == ''">
+	   	 	<when test="searchType == 'auctionBid' or searchType == ''">
 	   	 		and a.auction_condition = 1) as z
+	   	 	</when>
+	   	 	<when test="searchType == 'auctionComplete'">
+	   	 		and a.auction_condition in (2, 3)) as z
 	   	 	</when>
 	   	 	<when test="searchType == 'dealProgress'">
 	   	 		and d.deal_condition = 1) as z
 	   	 	</when>
 	   	 	<otherwise>
-	   	 	    and (a.auction_condition = 3
-	   	 		or d.deal_condition in (2, 3, 4))) as z
+	   	 	    and d.deal_condition in (2, 3, 4)) as z
 	   	 	</otherwise>
 	   	 </choose>
 		limit #{begin}, #{listSize}
@@ -196,6 +200,7 @@
 					   d.deal_no,
 					   d.deal_condition,
 					   max(b.bid_price) over(partition by b.auction_no) as bid_price,
+					   u.user_score,
 					   u.user_nickname,
 					   r.review_sender,
 					   max(f.file_no) over (partition by f.file_group_code) as file_no
@@ -213,9 +218,13 @@
 		            on f.file_group_code = a.file_group_code
 			   	 where 
 	   	 <choose>
-	   	 	<when test="searchType == 'dealBid' or searchType == ''" >
+	   	 	<when test="searchType == 'auctionBid' or searchType == ''" >
 			   	b.user_email = #{keyword}
 	   	 		and a.auction_condition = 1) as z
+	   	 	</when>
+	   	 	<when test="searchType == 'auctionComplete'" >
+			   	b.user_email = #{keyword}
+	   	 		and a.auction_condition in (2, 3)) as z
 	   	 	</when>
 	   	 	<when test="searchType == 'dealProgress'" >
 	   	 		d.user_email_buyer = #{keyword}

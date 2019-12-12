@@ -15,7 +15,7 @@
 	display: grid;
 	width: 900px;
 	height: 150px;
-	margin: 50px auto;
+	margin: 20px auto;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-template-rows: 120px;
 	grid-template-areas: "myDeal purchaseDeal salesDeal reviewDeal";
@@ -72,7 +72,7 @@
 	grid-area: reviewDeal;
 }
 
-#reviewHead, #purchaseHead, #salesHead {
+#reviewHead, #salesHead {
 	position: relative;
 	width: 900px;
 	height: 50px;
@@ -83,7 +83,19 @@
 	line-height: 35px;
 	display: flex;
 	align-items: center;
-	/*     border-top: 3px solid #555; */
+	color: #000000;
+}
+#purchaseHead{
+	position: relative;
+	width: 900px;
+	height: 50px;
+	margin-top: 0px;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 23px;
+	line-height: 35px;
+	display: flex;
+	align-items: center;
 	color: #000000;
 }
 
@@ -286,12 +298,21 @@
 	margin-left: 30px;
 }
 
-.writerArea {
+.rWriterArea {
 	width: 150px;
 	height: 80px;
 	text-align: center;
 	line-height: 80px;
 	font-size: 13px;
+	margin-left: 50px;
+}
+.sWriterArea {
+	width: 150px;
+	height: 80px;
+	text-align: center;
+	line-height: 80px;
+	font-size: 13px;
+	margin-left: 60px;
 }
 
 .auctionTitle, .reviewer, .auctionWriter {
@@ -437,8 +458,9 @@
 	width: 200px;
 	height: 130px;
 	text-align: center;
-	line-height: 35px;
+	line-height: 33px;
 	font-size: 15px;
+	margin-top: 12px;
 }
 
 .reportBtn {
@@ -492,6 +514,7 @@
 .editdel {
 	width: 90px;
 	line-height: 80px;
+	margin-left: 10px;
 }
 
 .editdel a {
@@ -540,6 +563,7 @@
 
 .onelineDiv {
 	grid-area: onelineDiv;
+	line-height: 20px;
 }
 
 .reviewDiv {
@@ -895,39 +919,42 @@ select {
 	line-height: 17px;
 }
 
-.colorPink {
-	background-color: pink;
+.colorOrange{
+	background-color: Orange;
+	color: white;
 }
 
 .colorBlue {
 	background-color: blue;
+	color: white;
 }
 
 .colorRed {
 	background-color: red;
+	color: white;
 }
 
-.colorYellow {
-	background-color: yellow;
+.colorGreen {
+	background-color: Green;
+	color: white;
 }
 
 .note-editable>p img {
-	width: 350px !important;
 	margin-bottom: 5px !important;
 }
 .note-group-select-from-files{
 	height: 50px;
-	text-align: center;
+	text-align: left;
 }
 
 .note-group-select-from-files input[type="file"]{
-	width: 1px;
-	height: 1px;
+	width: 0px;
+	height: 0px;
 	padding: 0;
 	margin: -1px;
 	overflow: hidden;
 	clip: rect(0, 0, 0, 0);
-	border: 0
+	border: 0;
 }
 .note-my-files:hover{
 	cursor: pointer;
@@ -935,16 +962,14 @@ select {
 .note-my-files {
 	position: absolute;
 	display: block;
-	border: none;
-	width: 80px;
-	height: 27px;
-	background-color: #337ab7;
-	color: white;
-	border-radius: 10px;
-	line-height: 25px;
-	margin-left: 245px;
+	margin-left: 0;
 	margin-bottom: 20px;
+	padding-left: 10px;
 }
 .note-group-image-url{
-	margin-top: 20px;
+	margin-top: 40px;
+}
+.modal-dialog .modal-content .modal-body .note-group-image-url label.note-form-label{
+	display: inline-block;
+    float: left;
 }

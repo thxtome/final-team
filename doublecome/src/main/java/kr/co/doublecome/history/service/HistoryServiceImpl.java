@@ -38,6 +38,7 @@ public class HistoryServiceImpl implements HistoryService{
 		List<Auction> aList = mapper.saleHistory(search);
 		
 		for(Auction auction : aList) {
+			System.out.println("경매글:" + auction);
 			list.add((Object)auction);
 		}
 		

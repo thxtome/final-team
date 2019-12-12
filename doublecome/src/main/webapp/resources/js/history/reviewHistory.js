@@ -6,8 +6,8 @@ $(function (){
 // info 박스 클릭시 이동
 let $myInfo = $("#myInfo");
 $myInfo.find("div").click((e) => {
-	let topTarget = '';
-	let minus = 100;
+	let $topTarget = '';
+	let minus = 20;
 	$location = $(e.target).data("location");
 	switch ($location){
 	case "purchaseHead": 
@@ -15,20 +15,25 @@ $myInfo.find("div").click((e) => {
 		break;
 	case "salesHead": 
 		$topTarget = $("#"+$location); 
-		minus = 120;
+//		minus = 70;
 		break;
 	case "reviewHead": 
 		$topTarget = $("#"+$location); 
-		minus = 50; 
+//		minus = 50; 
 		break;
 	}
 	
-	jQuery('html, body').animate( { scrollTop : $topTarget.offset().top - minus }, 0 );
+	$('html').animate( { scrollTop : $topTarget.offset().top - minus }, 400 );
 });
 // 파일첨부 
 $("body").on("click", ".note-my-files",() => {
 	$(`.note-group-select-from-files input[type="file"]`).trigger("click");
 });
+console.log($(".note-my-files"));
+$(".note-my-files").css("color", "blue");
+$(".note-my-files").html(`<span class="glyphicon glyphicon-picture"></span> 사진`);
+
+
 
 /**
 let $navBar = $("#navBar");
@@ -187,7 +192,7 @@ function makeReviewList(result, type, sort){
 							<div class="reviewTitle">${r.reviewTitle}</div>
 							<div class="reviewDate">${format(r.reviewRegDate,"ymd")}</div>
 						</div>
-						<div class="writerArea">
+						<div class="sWriterArea">
 							<span class="reviewer">${r.senderNickname}</span>
 						</div>
 						<div class="editdel">
@@ -247,7 +252,7 @@ function makeReviewList(result, type, sort){
 					<div class="reviewTitle">${r.reviewTitle}</div>
 					<div class="reviewDate">${format(r.reviewRegDate,"ymd")}</div>
 					</div>
-					<div class="writerArea noBtn">
+					<div class="rWriterArea noBtn">
 					<span class="reviewer">${r.senderNickname}</span>
 					</div>
 					</li>

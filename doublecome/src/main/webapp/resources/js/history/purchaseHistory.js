@@ -11,6 +11,7 @@ $(function (){
 	purchaseListAjax(data);
 	
 	function purchaseListAjax(data){
+		data.searchType = $("#purchaseHead").siblings(".tabHead").find("span.tabChoice").data("type");
 		$.getJSON({
 			url: `receivePurchaseHistory.do`,
 			contentType :'application/json',
@@ -18,11 +19,38 @@ $(function (){
 			success: result => makePurchaseHistory(result, data) 
 		});
 	};
+	
+	// 신뢰도 별
+	function makeStar(score){
+		let starHtml = ``;
+		let halfScore = Math.floor(score / 2); 
+		for (let i = 1; i <= halfScore; i++){
+			starHtml += `
+				<i class="fas fa-star reviewStar"></i>
+			`;	
+		}
+		if (score % 2 === 1){
+			starHtml += `
+				<i class="fas fa-star-half-alt reviewStar"></i>
+			`;	
+		}
+		for (let i = halfScore; i < 5; i++){
+			if ((score % 2 == 1) && i == 4){
+				continue;
+			}
+			starHtml += `
+			<i class="far fa-star reviewStar"></i>
+			`;
+		}
+		return starHtml;
+	}
+	
 	let contextPath = window.location.pathname.substr(0,window.location.pathname.indexOf("/",2));
 	function makePurchaseHistory(result, data){
 		let purchaseContent = $("<div></div>");
 		let purchaseAjax = $("#purchaseAjax");
 		let html = ``;
+		let starHtml = ``;
 		if(result.list.length == 0){
 			html = `
 				<div class="emptyBox">구매한 내역이 없습니다.</div>
@@ -39,7 +67,7 @@ $(function (){
 					</div>
 			`;
 			$.each(result.list, (i, r) => {
-				console.log(r.dealCondition);
+				starHtml = makeStar(Math.round(r.userScore));
 				html += `
 					<div class="listCon">
 						<div class="listHead">
@@ -87,21 +115,22 @@ $(function (){
 							<li>
 							<div class="writerInfo">
 								<a class="auctionWriter">${r.userNickname}</a>
-								<div>${r.score}점</div>
-								<a class="reportBtn"><strong>신고</strong></a>
-				`;
-					if (r.dealNo!= 0 && r.reviewSender == null){
-						html += `
-							<a data-no="${r.auctionNo}" class="reviewBtn">후기등록</a>
-						`;
-					}
-					html += `
-											</div>
-										</li>
-									</ul>
+								<div>${r.userScore}점</div>
+								<div class="starDiv">
+									${starHtml}
 								</div>
-							</div>
-						`;
+								</div>											</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				`;
+//				<a class="reportBtn"><strong>신고</strong></a>
+//					if (r.dealNo!= 0 && r.reviewSender == null){
+//						html += `
+//							<a data-no="${r.auctionNo}" class="reviewBtn">후기등록</a>
+//						`;
+//					}
 			});
 		}
 		purchaseContent.html(html);

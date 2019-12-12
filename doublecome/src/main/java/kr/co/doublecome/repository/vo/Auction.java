@@ -25,7 +25,7 @@ public class Auction {
 	private int bidCnt;						// 입찰 횟수
 	private int bidPrice;					// 입찰가
 	private String userEmail;				// 경매글쓴이
-	private double score;					// 경매글쓴이 평점
+	private double userScore;				// 경매글쓴이 평점
 	private String userNickname;			// 경매글쓴이 닉네임
 	private String reviewSender;			// 후기 작성자 이메일
 	private int auctionCnt;				    // 경매  개수

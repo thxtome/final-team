@@ -32,7 +32,6 @@ public class HistoryController {
 	public AjaxPage receivePurchaseHistory(Search search, Principal p){
 		search.setListSize(5);
 		search.setKeyword(p.getName());
-		
 		return service.receiveBuyHistory(search);
 	}
 	
@@ -42,6 +41,10 @@ public class HistoryController {
 	public AjaxPage receiveSaleHistory(Search search, Principal p){
 		search.setListSize(5);
 		search.setKeyword(p.getName());
+		System.out.println(search);
+		System.out.println(search.getBegin());
+		System.out.println(search.getListSize());
+		System.out.println(service.receiveSaleHistory(search));
 		return service.receiveSaleHistory(search);
 	}
 	

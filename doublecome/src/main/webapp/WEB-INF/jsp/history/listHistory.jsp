@@ -53,18 +53,20 @@
 			<div>
 				<div id="purchaseHead">구매내역</div>
 				<ul class="tabHead">
-					<li><span data-type="dealBid" class="purchaseTabList tabChoice">입찰 진행</span></li>
-					<li><span data-type="dealProgress" class="purchaseTabList">거래 진행</span></li>
-					<li><span data-type="dealComplete" class="purchaseTabList">거래 종료</span></li>
+					<li><span data-type="auctionBid" class="purchaseTabList tabChoice">입찰 중 경매</span></li>
+					<li><span data-type="auctionComplete" class="purchaseTabList">입찰 종료 경매</span></li>
+					<li><span data-type="dealProgress" class="purchaseTabList">진행 중 거래</span></li>
+					<li><span data-type="dealComplete" class="purchaseTabList">종료 거래</span></li>
 				</ul>
 				<div id="purchaseAjax"></div>
 			</div>
 			<div>
 				<div id="salesHead">판매내역</div>
 				<ul class="tabHead">
-					<li><span data-type="dealBid" class="salesTabList tabChoice">입찰 진행</span></li>
-					<li><span data-type="dealProgress" class="salesTabList">거래 진행</span></li>
-					<li><span data-type="dealComplete" class="salesTabList">거래 종료</span></li>
+					<li><span data-type="auctionBid" class="salesTabList tabChoice">입찰 중 경매</span></li>
+					<li><span data-type="auctionComplete" class="salesTabList">입찰 종료 경매</span></li>
+					<li><span data-type="dealProgress" class="salesTabList">진행 중 거래</span></li>
+					<li><span data-type="dealComplete" class="salesTabList">종료 거래</span></li>
 				</ul>
 				<div id="salesAjax"></div>
 			</div>

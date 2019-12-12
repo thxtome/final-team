@@ -310,7 +310,8 @@
               shapeNone: 'Shape: None',
               dragImageHere: 'Drag image or text here',
               dropImage: 'Drop image or Text',
-              selectFromFiles: '파일 선택',
+              selectFromFiles: '사진 선택',
+              attachPhoto: '사진',
               maximumFileSize: 'Maximum file size',
               maximumFileSizeError: 'Maximum file size exceeded.',
               url: 'URL 추가',
@@ -6728,7 +6729,7 @@
           var body = [
               '<div class="form-group note-form-group note-group-select-from-files">',
               '<label class="note-form-label">' + this.lang.image.selectFromFiles + '</label>',
-              '<label class="note-my-files">' + this.lang.image.selectFromFiles + '</label>',
+              '<label class="note-my-files"><span class="glyphicon glyphicon-picture fa-3x"></span></label>',
               '<input class="note-image-input form-control-file note-form-control note-input" ',
               ' type="file" name="files" accept="image/*" multiple="multiple" />',
               imageLimitation,
