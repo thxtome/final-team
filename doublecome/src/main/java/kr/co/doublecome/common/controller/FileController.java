@@ -50,13 +50,11 @@ public class FileController {
 	@PostMapping("/photoUpload.do")
 	@ResponseBody
 	public String AjaxFileUpload(@RequestParam("file") MultipartFile file, HttpServletResponse res) {
-		System.out.println("1");
 		UtilFile util = new UtilFile();
 		List<MultipartFile> attach = new ArrayList<>();
 		attach.add(file);
 		util.setAttach(attach);
 		util = service.uploadFile(util);
-		System.out.println("2");
 
 		return "/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo();
 	}

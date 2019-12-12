@@ -296,7 +296,7 @@
           },
           image: {
               image: 'Picture',
-              insert: 'Insert Image',
+              insert: '사진 첨부',
               resizeFull: 'Resize full',
               resizeHalf: 'Resize half',
               resizeQuarter: 'Resize quarter',
@@ -310,10 +310,10 @@
               shapeNone: 'Shape: None',
               dragImageHere: 'Drag image or text here',
               dropImage: 'Drop image or Text',
-              selectFromFiles: 'Select from files',
+              selectFromFiles: '파일 선택',
               maximumFileSize: 'Maximum file size',
               maximumFileSizeError: 'Maximum file size exceeded.',
-              url: 'Image URL',
+              url: 'URL 추가',
               remove: 'Remove Image',
               original: 'Original'
           },
@@ -6728,6 +6728,7 @@
           var body = [
               '<div class="form-group note-form-group note-group-select-from-files">',
               '<label class="note-form-label">' + this.lang.image.selectFromFiles + '</label>',
+              '<label class="note-my-files">' + this.lang.image.selectFromFiles + '</label>',
               '<input class="note-image-input form-control-file note-form-control note-input" ',
               ' type="file" name="files" accept="image/*" multiple="multiple" />',
               imageLimitation,

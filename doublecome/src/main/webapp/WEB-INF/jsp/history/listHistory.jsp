@@ -26,19 +26,20 @@
 	<div id="historyContent">
 		<div id="myInfo">
 			<div id="myDeal">MY거래</div>
-			<div id="purchaseDeal">
+			<div data-location="purchaseHead" id="purchaseDeal">
 				<div>구매내역</div>
 				<span>${userHistory.buyCnt}</span> <span>회</span>
 			</div>
-			<div id="salesDeal">
+			<div data-location="salesHead" id="salesDeal">
 				<div>판매내역</div>
 				<span>${userHistory.sellCnt}</span> <span>회</span>
 			</div>
-			<div id="reviewDeal">
+			<div data-location="reviewHead" id="reviewDeal">
 				<div>후기</div>
 				<span>${userHistory.userCnt}</span> <span>개</span>
 			</div>
 		</div>
+		<!-- 
 		<div>
 			<ul id="navBar">
 				<li><a data-location="purchaseHead" class="navList navChoice">구매내역</a></li>
@@ -46,6 +47,7 @@
 				<li><a data-location="reviewHead" class="navList">후기</a></li>
 			</ul>
 		</div>
+		 -->
 		<span id="toTheTop">top</span>
 		<div id="innerContent">
 			<div>
@@ -79,7 +81,8 @@
 						<div>
 							<ul>
 								<li class="sortTypeTab sortTypeChoice" data-sort="recency">•최신순</li>
-								<li class="sortTypeTab" data-sort="grade">•평점순</li>
+								<li class="sortTypeTab" data-sort="highGrade">•높은평점순</li>
+								<li class="sortTypeTab" data-sort="lowGrade">•낮은평점순</li>
 							</ul>
 						</div>
 					</div>
@@ -93,7 +96,8 @@
 						<div>
 							<ul>
 								<li class="sortTypeTab sortTypeChoice" data-sort="recency">•최신순</li>
-								<li class="sortTypeTab" data-sort="grade">•평점순</li>
+								<li class="sortTypeTab" data-sort="highGrade">•높은평점순</li>
+								<li class="sortTypeTab" data-sort="lowGrade">•낮은평점순</li>
 							</ul>
 						</div>
 					</div>

@@ -318,6 +318,9 @@ html {
   
   .card_container {
   position: relative;
+  min-height: 150px;
+  position: relative;
+  left: 10px;
   
  /*  border: 3px sold #DB1D3B;  */
   
@@ -337,33 +340,61 @@ html {
   display: table;
 }
 
-.card_container img {
-  float: left;
-  margin-right: 20px;
+.card_image{
+ 	height: 130px;
+    width: 130px;
+    position: absolute;
+    right: 0px;
+    margin: 10px;
+}
+.vertical-line{ /* Use only border style */
+
+/* 
+   heigth: 150px;
+   float: left; 
+   border: 1px inset #DB1D3B; 
+   margin: 0px 10px 0px -10px;
+ */
+ }
+#aution .aution_title {
+	width: 500px;
+	padding: 10px 0px 0px 10px;
+	text-align: center;
 }
 
-.card_container span {
+.card_container .card_autionTitle {
+	font-size: 20px;
+    color: black;
+     text-overflow:ellipsis; 
+     overflow:hidden
+
  
 }
 
 
 
-   .vertical-line{ /* Use only border style */
-      heigth: 100%;
-      float: left; 
-      border: 1px inset #DB1D3B; 
-      margin: 0px 10px 0px -10px;
-    }
 
-.card_imag{
-  margin: 15px 0px 0px 15px;
-  width:90px;
+
+.card_sub_now, .card_sub_date{
+	width: 500px;
+	padding: 5px 5px 5px 50px;
+	font-size: 12px;
 }
-
-.card_title{
+.card_sub_now{
+	bottom: 10px;
+    position: absolute;
 	
 }
+.card_sub_date{
+	bottom: 40px;
+    position: absolute;
+	
+}
+
+
 .card_content{
-	
+	font-size: 20px;
+    color: black;
+    margin: 10px;
 }
 
