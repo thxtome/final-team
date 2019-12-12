@@ -25,7 +25,7 @@
                     		<c:choose>
 	                    		<c:when test="${chat.userEmailSeller != email}">
 			                        <li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
-			                        	<span class="count" count="${chat.readsBuyer}">
+			                        	<span class="count" count="${chat.readsSeller}">
 				                            <img src="<c:url value="/resources/images/macbook.jpg"/>" >
 			                        	</span>
 					                    <span class="name">${chat.auctionTitle}</span>

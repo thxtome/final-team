@@ -223,7 +223,7 @@
 	position: relative;
 	display: none;
 	overflow: hidden;
-	padding: 0 35px 92px;
+	padding: 0 35px 0;
 	justify-content: flex-end;
 	flex-direction: column;
 }
@@ -263,7 +263,7 @@
 }
 
 .right_message_field .bubble {
-	font-size: 16px;
+	font-size: 14px;
 	position: relative;
 	display: inline-block;
 	clear: both;

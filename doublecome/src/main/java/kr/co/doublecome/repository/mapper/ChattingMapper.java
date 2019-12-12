@@ -10,4 +10,6 @@ public interface ChattingMapper {
 	List<ConverSation> oneChat(ConverSation covst);
 	void updateChat(ConverSation covst);
 	void addCovstData(ConverSation covst);
+	int readsCnt(Chat chat);
+	void updateReads(Chat chat);
 }

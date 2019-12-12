@@ -29,12 +29,9 @@ function setAciveChat(f) {
 	  chat.current.classList.remove('active-chat');
   }
   chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat')
-  console.log(chat.current)
   friends.name = f.querySelector('.name').innerText
   chat.name.innerHTML = `<span><span class="name">${friends.name}</span></span>`
-  console.log("채팅방번호", chat.person);
   let countTag = $(`li[data-chat=${chat.person}] .count`);
-  console.log(countTag)
   countTag.addClass("hideCount");
   countTag.attr("count", 0);
   let sendData =  {chatNo:$(`div[data-chat=${chat.person}]`).data("no"), userType:$(f).data("type")}
@@ -45,7 +42,6 @@ function setAciveChat(f) {
 		data : JSON.stringify(sendData)
   }
   $.ajax(options).done(data => {
-		console.log("콘텐츠 : "+ data[0])
 		makeAjaxChatList(data, email);
 		
   }).fail(() => {
@@ -70,12 +66,10 @@ function makeAjaxChatList(data, email) {
 			)
 		}
 	})
-	console.log(chatArea[0].scrollHeight);
-	chatArea.scrollTop(chatArea[0].scrollHeight);
+	chatArea.parent().scrollTop(chatArea.parent()[0].scrollHeight);
 }
 let ws = null;
 let email = $(".wrapper").data("id");
-let chatNo = $("div[data-chat='person2']").data("no");
 let person = null;
 let peopleField = null;
 $(document).scrollTop($(document).height());
@@ -96,7 +90,7 @@ function insertData () {
 				peopleField = $(people);
 			}
 		}
-		let sendData = {userEmail : $(".wrapper").data("id"), covstContent: $msg.val(), chatNo:person.data("no")}
+		let sendData = {userEmail : $(".wrapper").data("id"), covstContent: $msg.val(), chatNo:person.data("no"), userType:peopleField.data("type")}
 		ws.send(JSON.stringify(sendData));
 		let options = {
 			url : "insertChat.do",
@@ -110,6 +104,7 @@ function insertData () {
 		    alert("ajax 처리 에러발생");
 		});
 		person.append("<div class='bubble me'>"+ $msg.val() + "</div>");
+		person.parent().scrollTop(person.parent()[0].scrollHeight);
 		peopleField.children(".preview").text($msg.val());
 		peopleField.children(".time").text(nowDate());
 		$msg.val("");
@@ -123,7 +118,7 @@ $(() => {
 	
 	
 	ws.onmessage = (evt) => {
-		let count = 1;
+		
 		console.log(evt)
 		let data = JSON.parse(evt.data);
 		let chatArea = $(`div[data-no=${data.chatNo}]`);
@@ -134,28 +129,32 @@ $(() => {
 			$(`li[data-chat="person${data.chatNo}"] .preview`).text(data.covstContent)
 			chatArea.append(
 				`
-				<div class='bubble you'>${data.msg}</div>
+				<div class='bubble you'>${data.covstContent}</div>
 				`
 			)
+			chatArea.parent().scrollTop(chatArea.parent()[0].scrollHeight);
 		} else {
-			person.append("<div class='bubble me'>"+ $msg.val() + "</div>");
-			peopleField.children(".preview").text($msg.val());
-			peopleField.children(".time").text(nowDate());
-			$msg.val("");
-			console.log("데이터들어옴2")
-			let countTag = $(`li[data-chat="person${data.chatNo}"] .count`);
-			let originCount = countTag.attr("count");
-			
-			console.log("원래 카운트")
-			console.log(originCount);
-			console.log("넣을 곳")
-			console.log(countTag);
-			
-			countTag.attr("count",count);
-			countTag.removeClass("hideCount");
-			console.log("넣고 난 후" + countTag);
-			$(`li[data-chat="person${data.chatNo}"] .time`).text(nowDate())
-			$(`li[data-chat="person${data.chatNo}"] .preview`).text(data.covstContent)
+			let sendData = {
+				chatNo : data.chatNo,
+				userType : data.userType
+			}
+			let options = {
+					url : "updateReads.do",
+					type : "POST",
+					contentType : "application/json",
+					data : JSON.stringify(sendData)
+	   	    }
+		    $.ajax(options).done(countdata => {
+		    	console.log("데이터들어옴2")
+		    	let countTag = $(`li[data-chat="person${data.chatNo}"] .count`);
+		    	console.log("카운터 탭"+ countTag)
+		    	$(countTag).attr("count",countdata);
+		    	countTag.removeClass("hideCount");
+		    	$(`li[data-chat="person${data.chatNo}"] .time`).text(nowDate())
+		    	$(`li[data-chat="person${data.chatNo}"] .preview`).text(data.covstContent)
+			}).fail(() => {
+			    alert("ajax 처리 에러발생");
+			});
 		}
 		
 		
@@ -201,6 +200,7 @@ function nowDate() {
 $(document).ready(function(){
 	$(".write a").click(() => {
 		insertData();		
+		$("input[data-chatfield='chat']").focus();
 	});
     $("input[data-chatfield='chat']").keypress(function (e) {
      if (e.keyCode  == 13){

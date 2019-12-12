@@ -69,4 +69,29 @@
 		insert into conversation(covst_content, user_Email, chat_No)
 		 values(#{covstContent},#{userEmail},#{chatNo})
 	</insert>
+	<update id="updateReads" parameterType="Chat">
+		update chat
+		   <choose>
+		   <when test="userType == 1">
+		   		set reads_seller = reads_seller + 1
+		   </when>
+		   <otherwise>
+		   		set reads_buyer = reads_buyer + 1
+		   </otherwise>
+		   </choose>
+		 where chat_no = #{chatNo}
+	</update>
+	<select id="readsCnt" parameterType="Chat" resultType="int">
+		select 
+		<choose>
+			<when test="userType == 1">
+				reads_seller
+			</when>
+			<otherwise>
+				reads_buyer
+			</otherwise>
+		</choose> 
+			from chat
+		   where chat_no = #{chatNo}
+	</select>
 </mapper>

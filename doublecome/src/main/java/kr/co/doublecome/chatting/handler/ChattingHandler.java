@@ -37,10 +37,14 @@ public class ChattingHandler extends TextWebSocketHandler {
 		String email = (String) userData.get("userId");
 		System.out.println(email);
 		List<Chat> chatList = service.chatList(email);
-		Map<String, WebSocketSession> userSession = new HashMap<>();
 		for(Chat chat : chatList) {
 			System.out.println("채팅방번호" +chat.getChatNo());
-			userSession.put(session.getId(), session);
+			Map<String, WebSocketSession> userSession = chatMap.get(chat.getChatNo());
+			if(userSession == null) {
+				userSession = new HashMap<String, WebSocketSession>(); 
+				chatMap.put(chat.getChatNo(), userSession);
+			}
+			userSession.put(session.getId(), session);				
 			chatMap.put(chat.getChatNo(), userSession);
 		}
 	}
@@ -51,10 +55,8 @@ public class ChattingHandler extends TextWebSocketHandler {
 		String msg = message.getPayload();
 		System.out.println(msg);
 		ConverSation covst = gson.fromJson(message.getPayload(), ConverSation.class);
-		System.out.println(covst.getUserEmail());
-		System.out.println(covst.getCovstContent());
-		System.out.println(covst.getChatNo());
-		System.out.println(session.getId());
+		System.out.println("유저 아이디"+covst.getUserEmail());
+		System.out.println("유저타입"+covst.getUserType());
 		String data = gson.toJson(covst);
 		System.out.println("보낼데이터 : " +  data);
 		Map<String, WebSocketSession> userSession = chatMap.get(covst.getChatNo());

@@ -10,4 +10,6 @@ public interface ChattingService  {
 	List<ConverSation> selectOneChat(ConverSation covst);
 	void chatUpdate(ConverSation covst);
 	void chatInsert(ConverSation covst);
+	void readsUpdate(Chat chat);
+	int readsCount(Chat chat);
 }

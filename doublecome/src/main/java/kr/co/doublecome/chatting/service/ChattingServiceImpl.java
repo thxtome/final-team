@@ -27,5 +27,11 @@ public class ChattingServiceImpl implements ChattingService	{
 	public void chatInsert(ConverSation covst) {
 		mapper.addCovstData(covst);
 	}
+	public int readsCount(Chat chat) {
+		return mapper.readsCnt(chat);
+	}
+	public void readsUpdate(Chat chat) {
+		mapper.updateReads(chat);
+	}
 	
 }
