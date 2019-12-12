@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService{
 	public void updateUser(User user) {
 		mapper.updateUser(user);
 	}
+
 	//마이페이지 - 입찰 리스트
-	
 	@Override
 	public List<Auction> bidList(String email) {	
 		return mapper.bidList(email);

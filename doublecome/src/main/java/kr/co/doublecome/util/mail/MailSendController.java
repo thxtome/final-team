@@ -16,7 +16,6 @@ import kr.co.doublecome.user.service.UserService;
 public class MailSendController {
 	
 	public MailSendController() {
-		System.out.println("mailSend");
 	}
 	
 	@Autowired 
@@ -39,7 +38,7 @@ public class MailSendController {
 				helper.setText(
 						"아래 링크로 이동해 비밀번호를 다시 설정 하세요<br>" +
 						"<br>" +
-						"<a href=http://localhost:8001/doublecome/user/userInfoUpdate.do"+
+						"<a href=http://localhost:80/doublecome/user/findPassForm.do"+
 								"?userEmail=" + email +
 								"&userPass=" + service.findPass(email) + "> 비밀번호 재설정 하러 가기 <a>"  , true);	 			// 메일 내용
 			} 

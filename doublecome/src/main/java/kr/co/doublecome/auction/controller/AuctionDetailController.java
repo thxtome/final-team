@@ -133,19 +133,22 @@ public class AuctionDetailController {
 	
 	@RequestMapping("/tempFile.do")
 	@ResponseBody
-	public void tempFile(String fileUrl, String filename) {
+	public String tempFile(String fileUrl, String filename) {
 		String fileUrl2 = fileUrl.split(",")[1];
 		byte[] binary = Base64.decodeBase64(fileUrl2);
 		FileOutputStream fos = null;
+		String root = null;
 		try {
 			String sysName = UUID.randomUUID().toString();
-			fos = new FileOutputStream("c:/java/upload/"+sysName+".jpg");
+			root = "c:/java/upload/"+sysName+".jpg";
+			fos = new FileOutputStream(root);
 			fos.write (binary);
 			fos.flush();
 			fos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return root;
 	}
 	
 	

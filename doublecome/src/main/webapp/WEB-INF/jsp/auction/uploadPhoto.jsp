@@ -16,6 +16,15 @@
 
 <body>
 	<form id="PhotoForm">
+	<div class="modal">
+		<div class="sidebar">
+			<div class="sidebarContent">
+				<textarea class="tagText" placeholder="태그안에 들어갈 내용을 입력해주세요" onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
+				<button class="tagCancel" type="button" >취소</button>
+				<button class="tagComplete" type="button" >완료</button>
+			</div>
+		</div>
+	</div>
 		<div class="wrapper">
 			<header>
 				<div class="topContent">
@@ -24,7 +33,7 @@
 						class="glyphicon glyphicon-picture"></span> 사진</label>
 
 					<div class="submit">
-						<button type="button" class="button">첨부하기</button>
+						<button type="button" id="attachBtn" class="button">첨부하기</button>
 					</div>
 				</div>
 			</header>
@@ -114,9 +123,7 @@
 					</li>
 
 				</ul>
-				<div class="sidebar">
-					<button class="tagCancel" type="button" >취소</button>
-				</div>
+
 			</div>
 		</div>
 	</form>
