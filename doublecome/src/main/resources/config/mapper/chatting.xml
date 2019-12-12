@@ -42,7 +42,7 @@
 		  where  user_email_seller like #{email}
 		     or user_email_buyer like #{email}
 	</select>
-	<select id="oneChat" parameterType="int" resultType="ConverSation">
+	<select id="oneChat" parameterType="ConverSation" resultType="ConverSation">
 		select 
 			covst_no,
 			covst_content,

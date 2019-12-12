@@ -17,6 +17,7 @@ friends.all.forEach(f => {
 });
 
 function setAciveChat(f) {
+  let email = $(".wrapper").data("id");
   $(".write").css("display", "block")
   if(friends.list.querySelector('.active') != null) {
 	  friends.list.querySelector('.active').classList.remove('active')	  
@@ -31,11 +32,12 @@ function setAciveChat(f) {
   console.log(chat.current)
   friends.name = f.querySelector('.name').innerText
   chat.name.innerHTML = `<span><span class="name">${friends.name}</span></span>`
-  let countTag = $(`li[data-chat="person${chat.person}"] .count`);
+  console.log("채팅방번호", chat.person);
+  let countTag = $(`li[data-chat=${chat.person}] .count`);
   console.log(countTag)
   countTag.addClass("hideCount");
   countTag.attr("count", 0);
-  let sendData =  {chatNo:$(`div[data-chat="person${chat.person}]`).data("no"), userType:$(f).data("type")}
+  let sendData =  {chatNo:$(`div[data-chat=${chat.person}]`).data("no"), userType:$(f).data("type")}
   let options = {
 		url : "chatList.do",
 		type : "POST",
@@ -43,17 +45,33 @@ function setAciveChat(f) {
 		data : JSON.stringify(sendData)
   }
   $.ajax(options).done(data => {
-		console.log(data)
+		console.log("콘텐츠 : "+ data[0])
+		makeAjaxChatList(data, email);
 		
   }).fail(() => {
 		 alert("ajax 처리 에러발생");
   });
-  $(`div[data-chat="person${chat.person}]`).append();
 }
-function makeAjaxChatList(data) {
-	data.each((value, index) => {
-		
+function makeAjaxChatList(data, email) {
+	let chatArea ="";
+	data.forEach((ele,i)=> {
+		chatArea = $(`div[data-chat="person${ele.chatNo}"`);
+		if (email == ele.userEmail) {
+			chatArea.append(
+			`
+				<div class='bubble me'>${ele.covstContent}</div>
+			`		
+			)
+		} else {
+			chatArea.append(
+			`
+				<div class='bubble you'>${ele.covstContent}</div>
+			`		
+			)
+		}
 	})
+	console.log(chatArea[0].scrollHeight);
+	chatArea.scrollTop(chatArea[0].scrollHeight);
 }
 let ws = null;
 let email = $(".wrapper").data("id");
@@ -120,6 +138,10 @@ $(() => {
 				`
 			)
 		} else {
+			person.append("<div class='bubble me'>"+ $msg.val() + "</div>");
+			peopleField.children(".preview").text($msg.val());
+			peopleField.children(".time").text(nowDate());
+			$msg.val("");
 			console.log("데이터들어옴2")
 			let countTag = $(`li[data-chat="person${data.chatNo}"] .count`);
 			let originCount = countTag.attr("count");
