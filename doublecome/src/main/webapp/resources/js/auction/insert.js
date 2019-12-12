@@ -154,6 +154,7 @@ function handleImgsFilesSelect(e) {
 
 
 $(".movePage").click(() => {
+	console.dir(JSON.parse(localStorage.getItem("allImages")));
 	window.open("uploadPhoto.do", "사진 첨부", "width=1000, height=800, location=no, left=400")
 })
 		
