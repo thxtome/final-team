@@ -241,7 +241,7 @@ public class UserController {
                              SPRING_SECURITY_CONTEXT_KEY, sc);
 
 		
-		return "redirect:" + "/main.do";
+		return "redirect:/main.do";
 	}
 	//회원 가입 - 이메일 중복 검사
 	@RequestMapping("/checkEmail.do")
@@ -286,6 +286,30 @@ public class UserController {
 		user.setUserPass(userPass);
 		model.addAttribute("user", service.selectUserInfo(user));
 	}
+	//마이페이지 - 비밀번호 수정
+	@RequestMapping("/findPassForm.do")
+	public void findPassForm(
+			@RequestParam(value="userEmail") String userEmail,
+			@RequestParam(value="userPass")  String userPass,		
+			Model model  ) throws Exception{
+		User user = new User();
+		user.setUserEmail(userEmail);
+		user.setUserPass(userPass);
+		model.addAttribute("user", service.selectUserInfo(user));
+	}
+	
+	  @RequestMapping("/passUpdate.do")
+	  public String paddUpdate (User u) {
+		  	System.out.println("passUpdate.do");
+		  	System.out.println(u.getUserPass());
+		  	
+		  	User user = service.selectUserInfoByName(u.getUserEmail());
+		  	user.setUserPass(encoder.encode(u.getUserPass()));
+	 		service.updateUser(user); 
+	 		return "redirect:/main.do";
+	  }
+	 
+	
 	//마이페이지 - 회원 정보 수정 버튼
 	@RequestMapping("/userUpdate.do")
 	public String updateUser(User user, Principal p, RedirectAttributes attr, HttpServletRequest req) throws Exception{

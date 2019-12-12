@@ -27,7 +27,7 @@ public class NaverLoginBO {
     //state: 애플리케이션이 생성한 상태 토큰
     private final static String NCLIENT_ID = "TOpvHOSeiE05F9UnTU0P";       //네이버API Client ID
     private final static String NCLIENT_SECRET = "sOEOX2mF55";                      
-    private final static String NREDIRECT_URI = "http://localhost:8001/doublecome/user/callback.do";
+    private final static String NREDIRECT_URI = "http://localhost:80/doublecome/user/callback.do";
     private final static String NSESSION_STATE = "oauth_state";
     /* 프로필 조회 API URL */
     private final static String NPROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";/// Api 종류 기본 !!

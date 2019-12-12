@@ -71,6 +71,12 @@ html, body {
 	padding: 14px 30px;
     border-bottom: 1px solid #F2F2F2;
  }
+ th{
+ width: 150px;
+ }
+ td{
+ width: 400px;
+ }
 
 #deleteBtn{
 	z-index: 100;

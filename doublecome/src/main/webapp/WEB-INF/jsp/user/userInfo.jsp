@@ -75,7 +75,7 @@
 	    		<span id="nickname"  >${user.userNickname}</span>
 	    		</td>
 	    	</tr>
-	    	<%-- <c:if test="${user.userEmail.length() < 30} "> --%>
+	    	<%-- <c:if test="${user.userEmail.length() < 30} "> 
 			<tr>
 	    		<th>비밀번호</th>
 	    		<td>
@@ -83,7 +83,7 @@
 	    		<input id="registInput" class="registInput" name="userPass" type="password" placeholder="비밀번호">
 	    		</td>
 			</tr>
-		<%-- 	</c:if> --%>
+			</c:if> --%>
 	    	</tbody>
 	    	</table>
 	    	
