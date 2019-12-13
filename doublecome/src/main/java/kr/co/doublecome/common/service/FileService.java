@@ -8,4 +8,5 @@ public interface FileService {
 
 	public UtilFile uploadFile(UtilFile uFile);
 	public void downLoadFile(int fileNo, HttpServletResponse res);
+	public void tempFile(String root, HttpServletResponse res);
 }

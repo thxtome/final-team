@@ -61,7 +61,7 @@ public class FileServiceImpl implements FileService{
 			} else {
 				res.setHeader("Content-type", "application/octet-stream");
 				orgName = new String(orgName.getBytes("utf-8"), "8859_1");
-				res.setHeader("Content-Disposition", "attchment;filename=" + orgName);
+				res.setHeader("Content-Disposition", "attachment;filename=" + orgName);
 			}
 
 		FileInputStream fis = new FileInputStream(f);
@@ -78,6 +78,29 @@ public class FileServiceImpl implements FileService{
 		fis.close();
 		bos.close();
 		out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void tempFile(String root, HttpServletResponse res) {
+		try {
+			File f = new File(root);
+			res.setHeader("Content-type", "image/jpg");
+			FileInputStream fis = new FileInputStream(f);
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			OutputStream out = res.getOutputStream();
+			BufferedOutputStream bos = new BufferedOutputStream(out);
+			while (true) {
+				int ch = bis.read();
+				if (ch == -1)
+					break;
+				bos.write(ch);
+			}
+			bis.close();
+			fis.close();
+			bos.close();
+			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

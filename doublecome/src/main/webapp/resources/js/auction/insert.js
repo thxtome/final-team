@@ -152,9 +152,17 @@ function handleImgsFilesSelect(e) {
 	})
 }
 
-
 $(".movePage").click(() => {
-	console.dir(JSON.parse(localStorage.getItem("allImages")));
-	window.open("uploadPhoto.do", "사진 첨부", "width=1000, height=800, location=no, left=400")
+	let d = JSON.parse(localStorage.getItem("allImages"))
+	for (i = 0; i < Object.keys(d).length; i++) {
+		console.log(Object.keys(d)[i])
+		for (k = 0; k < d[Object.keys(d)[i]].length; k++) {
+			console.log(d[Object.keys(d)[i]][k])
+		}
+	}
+	window.open("uploadPhoto.do", "uploadPhoto", "width=1000, height=800, location=no, left=400")
 })
 		
+$(".tagTextBox").hover(() => {
+	$(this).css("display", "block")
+})

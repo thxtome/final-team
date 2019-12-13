@@ -4,6 +4,23 @@ function swalAlert(msg) {
 	Swal.fire(msg)
 }
 
+function swalAlertAccept(msg) {
+	Swal.fire({
+        title: msg,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '확인',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.value) {
+        	
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        }
+      })
+}
+
 let li = `
 					<li class="npu_image_item _npu_image_item_blank">
 						<div class="npu_image_list_thumb_wrap">
@@ -45,6 +62,7 @@ $(function() {
 							</div>`)
 							$(preview +" li:nth-child("+filesLength+") .img_thumb_img").css("background-image", "url(" + event.target.result + ")")
 							$("#pic" + key++).attr("data-fileName", UUID)
+							allImages[UUID] = {};
 							filesLength++
 						}
 					})
@@ -73,7 +91,7 @@ $(document).on("click", ".img_thumb_img", function(event) {
 		
 		$(this).parent().append(`
 		<div class="tagTextBox" style="top : ${y}%; left : ${x}%">
-		<textarea class="addTag" data-x=${x} data-y=${y} onkeydown="resize(this)" onkeyup="resize(this)">태그를 입력해주세요</textarea>
+		<textarea class="addTag" data-x=${x} data-y=${y} onkeydown="resize(this)" onkeyup="resize(this)" placeholder="태그를 입력해주세요"></textarea>
 		<button type="button" class="textDelI">
 				<i class="glyphicon glyphicon-remove" style="font-size: 10px;"></i>
         </button>
@@ -87,13 +105,32 @@ $(document).on("click", ".img_thumb_img", function(event) {
 		let b = Math.round(event.offsetY / $(this).height() * 100)
 		
 		$(this).parents("li").addClass("tagChoice")
+		$(".tagChoice .tagTextBox").show();
 		$(".modal").show();
 	}
 })
-
-
 $(".tagCancel").click(() => {
+	Swal.fire({
+        title: "등록한 태그를 전부 삭제하시겠습니까",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '확인',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.value) {
+        	$(".modal").hide();
+        	$(".tagChoice .tagTextBox").remove();
+        	$("li").removeClass("tagChoice");		
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        }
+      })
+})
+
+$(".tagComplete").click(() => {
 	$(".modal").hide();
+	$(".tagChoice .tagTextBox").hide();
 	
 	let tags = new Array;
 	
@@ -105,9 +142,6 @@ $(".tagCancel").click(() => {
 		}
 		tags.push(data);
 	})
-	console.dir(tags);
-	
-	
 	
 	let fileName = $(".tagChoice").attr("data-fileName");
 	allImages[fileName] = tags;
@@ -117,10 +151,20 @@ $(".tagCancel").click(() => {
 })
 
 $(document).on("click", ".textDelI", function() {
-	let det = JSON.parse(sessionStorage.getItem("detail"))
-	console.dir(det)
-	alert(det.pic3[0].name)
-	$(this).parent().remove()
+	Swal.fire({
+        title: "태그를 삭제하시겠습니까",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '확인',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.value) {
+        	$(this).parent().remove()
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        }
+      })
 })
 
 $(document).on("click", ".npu_btn_image_del", function() {
@@ -136,8 +180,33 @@ function resize(obj) {
   obj.style.height = "1px";
   obj.style.height = (12+obj.scrollHeight)+"px";
 }
-
+function getContextPath() {
+	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+}
 $("#attachBtn").click(()=>{
+	let path = getContextPath()
 	localStorage.setItem("allImages", JSON.stringify(allImages));
+	let d = JSON.parse(localStorage.getItem("allImages"))
+	for (i = 0; i < Object.keys(d).length; i++) {
+		html = `
+			<div class="imgtempWrapper${i}">
+			<div class="imgWrapper">
+				<img src="${path}/file/fileRoot.do?root=${Object.keys(d)[i]}">
+			</div>
+			</div>
+		`
+			$(".note-editable", opener.document).append(html);
+	for (k = 0; k < d[Object.keys(d)[i]].length; k++) {
+		html = `
+		<div class="tagTextBox" style="top : ${d[Object.keys(d)[i]][k].y}%; left : ${d[Object.keys(d)[i]][k].x}%;">
+		<textarea readonly class="addTag">${d[Object.keys(d)[i]][k].content}</textarea>
+		<div>
+		`
+		console.log(d[Object.keys(d)[i]][k])
+		$(`.imgtempWrapper${i} .imgWrapper`, opener.document).append(html);
+		}
+	}
+	self.close();
 })
 
