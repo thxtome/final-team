@@ -347,8 +347,9 @@ public class UserController {
 	@RequestMapping("/bidList.do")
 	@ResponseBody
 	public List<Auction> bidList( String email) throws Exception{
-		return service.bidList(email);	
-		
+		List<Auction> auction = service.bidList(email);
+		System.out.println(auction);
+		return service.bidList(email);
 	}
 
 
