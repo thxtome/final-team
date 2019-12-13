@@ -21,7 +21,8 @@ public class ChattingController {
 	
 	@RequestMapping("/messenger.do")
 	public void messenger(Model model,	 String email) {
-			
+		System.out.println("main에서부른 : "+ email);
+		System.out.println("채팅 리스트" + service.chatList(email));
 		model.addAttribute("email", email);
 		model.addAttribute("chat", service.chatList(email));
 	}
@@ -41,11 +42,10 @@ public class ChattingController {
 	@RequestMapping("/updateReads.do")
 	@ResponseBody
 	public int updateReads(@RequestBody Chat chat) {
-		System.out.println("왔어");
 		System.out.println("유저타입" + chat.getUserType());
 		System.out.println("채팅방번호" + chat.getChatNo());
-		service.readsUpdate(chat);
 		System.out.println("count값" + service.readsCount(chat));
+		service.readsUpdate(chat);
 		return service.readsCount(chat);
 	}
 	

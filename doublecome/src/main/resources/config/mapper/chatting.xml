@@ -73,10 +73,10 @@
 		update chat
 		   <choose>
 		   <when test="userType == 1">
-		   		set reads_seller = reads_seller + 1
+		   		set reads_buyer = reads_buyer + 1
 		   </when>
 		   <otherwise>
-		   		set reads_buyer = reads_buyer + 1
+		   		set reads_seller = reads_seller + 1
 		   </otherwise>
 		   </choose>
 		 where chat_no = #{chatNo}
@@ -85,10 +85,10 @@
 		select 
 		<choose>
 			<when test="userType == 1">
-				reads_seller
+				reads_buyer
 			</when>
 			<otherwise>
-				reads_buyer
+				reads_seller
 			</otherwise>
 		</choose> 
 			from chat
