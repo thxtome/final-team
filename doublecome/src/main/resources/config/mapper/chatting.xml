@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.doublecome.repository.mapper.ChattingMapper">
-	<select id="listChat" parameterType="String" resultType="Chat">
+	<select id="listChat" parameterType="ChatSearch" resultType="Chat">
 		select 		c.chat_no,
 		    c.deal_no,
 		    c.user_email_seller,
@@ -41,6 +41,9 @@
 				on d.deal_no = c.deal_no
 		  where  user_email_seller like #{email}
 		     or user_email_buyer like #{email}
+		  <if test="searchValue != null">
+		  	 and d.auction_title like ''#{searchValue}%''
+		  </if>
 	</select>
 	<select id="oneChat" parameterType="ConverSation" resultType="ConverSation">
 		select 
@@ -79,6 +82,11 @@
 		   		set reads_seller = reads_seller + 1
 		   </otherwise>
 		   </choose>
+		 where chat_no = #{chatNo}
+	</update>
+	<update id="deleteReads" parameterType="ConverSation">
+		update chat
+	   		set reads_buyer = 0, reads_seller = 0
 		 where chat_no = #{chatNo}
 	</update>
 	<select id="readsCnt" parameterType="Chat" resultType="int">

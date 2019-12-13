@@ -17,7 +17,7 @@
             <div class="left_container">
                 <div class="left_top_field">
                     <input type="text" placeholder="Search" />
-                    <a href="javascript:;" class="search"></a>
+                    <a href="javascript:;" class="search" ></a>
                 </div>
                 <div class="left_people_field">
                     <ul class="people">
@@ -34,7 +34,7 @@
 				                        	<span class="count" count="${chat.readsSeller}">
 					                            <img src="<c:url value="/resources/images/macbook.jpg"/>" >
 				                        	</span>
-						                    <span class="name">${chat.auctionTitle}</span>
+						                    <span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
 				                            <c:choose>
 				                            	<c:when test="${empty chat.covstRegDate}">
 						                            <span class="time">00:00</span>			                            				                            	
@@ -52,7 +52,7 @@
 				                        	<span class="count" count="${chat.readsBuyer}">
 					                            <img src="<c:url value="/resources/images/macbook.jpg"/>" >
 				                        	</span>
-				                            <span class="name">${chat.auctionTitle}</span>
+				                            <span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
 				                            <c:choose>
 				                            	<c:when test="${empty chat.covstRegDate}">
 						                            <span class="time">00:00</span>			                            				                            	
@@ -96,6 +96,7 @@
     			$(value).addClass("hideCount");	
     		}    		
     	})
+    	 
     </script>
     <script src="<c:url value="/resources/js/chatting/chatting.js" />"></script>
 </body>

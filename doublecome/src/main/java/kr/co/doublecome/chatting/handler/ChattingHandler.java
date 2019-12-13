@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import kr.co.doublecome.chatting.service.ChattingService;
 import kr.co.doublecome.repository.vo.Chat;
+import kr.co.doublecome.repository.vo.ChatSearch;
 import kr.co.doublecome.repository.vo.ConverSation;
 
 
@@ -35,8 +36,9 @@ public class ChattingHandler extends TextWebSocketHandler {
 		System.out.println("채팅 접속");
 		Map<String, Object> userData = session.getAttributes();
 		String email = (String) userData.get("userId");
-		System.out.println(email);
-		List<Chat> chatList = service.chatList(email);
+		ChatSearch ctList = new ChatSearch();
+		ctList.setEmail(email);
+		List<Chat> chatList = service.chatList(ctList);
 		for(Chat chat : chatList) {
 			System.out.println("채팅방번호" +chat.getChatNo());
 			Map<String, WebSocketSession> userSession = chatMap.get(chat.getChatNo());
@@ -75,7 +77,9 @@ public class ChattingHandler extends TextWebSocketHandler {
 		System.out.println(session.getId() + " 연결 종료되었음..");
 		Map<String, Object> userData = session.getAttributes();
 		String email = (String) userData.get("userId");
-		List<Chat> chatList = service.chatList(email);
+		ChatSearch ctList = new ChatSearch();
+		ctList.setEmail(email);
+		List<Chat> chatList = service.chatList(ctList);
 		for(Chat chat : chatList) {
 			chatMap.get(chat.getChatNo()).remove(session.getId());
 		}

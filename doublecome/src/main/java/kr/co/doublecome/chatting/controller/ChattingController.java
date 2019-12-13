@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.chatting.service.ChattingService;
 import kr.co.doublecome.repository.vo.Chat;
+import kr.co.doublecome.repository.vo.ChatSearch;
 import kr.co.doublecome.repository.vo.ConverSation;
 
 @Controller("kr.co.doublecome.chatting.controller.ChattingController")
@@ -21,10 +22,10 @@ public class ChattingController {
 	
 	@RequestMapping("/messenger.do")
 	public void messenger(Model model,	 String email) {
-		System.out.println("main에서부른 : "+ email);
-		System.out.println("채팅 리스트" + service.chatList(email));
 		model.addAttribute("email", email);
-		model.addAttribute("chat", service.chatList(email));
+		ChatSearch ctList = new ChatSearch();
+		ctList.setEmail(email);
+		model.addAttribute("chat", service.chatList(ctList));
 	}
 	@RequestMapping("/chatList.do")
 	@ResponseBody
@@ -37,16 +38,26 @@ public class ChattingController {
 	@RequestMapping("/insertChat.do")
 	@ResponseBody
 	public void insertChat(@RequestBody ConverSation covst) {
+		Chat chat = new Chat();
+		chat.setChatNo(covst.getChatNo());
+		chat.setUserType(covst.getUserType());
+		service.readsUpdate(chat);
 		service.chatInsert(covst);
 	}
 	@RequestMapping("/updateReads.do")
 	@ResponseBody
-	public int updateReads(@RequestBody Chat chat) {
-		System.out.println("유저타입" + chat.getUserType());
-		System.out.println("채팅방번호" + chat.getChatNo());
-		System.out.println("count값" + service.readsCount(chat));
-		service.readsUpdate(chat);
+	public int getCount(@RequestBody Chat chat) {
 		return service.readsCount(chat);
 	}
+	@RequestMapping("/deleteReads.do")
+	@ResponseBody
+	public void deleteReads(@RequestBody ConverSation covst) {
+		service.readsDelete(covst);
+	}
 	
+	@RequestMapping("/searchChat.do")
+	@ResponseBody
+	public List<Chat> searchChat(@RequestBody ChatSearch ctList) {
+		return service.chatList(ctList);
+	}
 }

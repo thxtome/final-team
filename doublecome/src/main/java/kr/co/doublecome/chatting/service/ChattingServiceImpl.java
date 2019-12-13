@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.doublecome.repository.mapper.ChattingMapper;
 import kr.co.doublecome.repository.vo.Chat;
+import kr.co.doublecome.repository.vo.ChatSearch;
 import kr.co.doublecome.repository.vo.ConverSation;
 
 @Service("kr.co.doublecome.chatting.service.ChattingServiceImpl")
@@ -15,8 +16,8 @@ public class ChattingServiceImpl implements ChattingService	{
 	@Autowired
 	private ChattingMapper mapper;
 	
-	public List<Chat> chatList(String email) {
-		return mapper.listChat(email);
+	public List<Chat> chatList(ChatSearch cList) {
+		return mapper.listChat(cList);
 	}
 	public List<ConverSation> selectOneChat(ConverSation covst) {
 		return mapper.oneChat(covst);
@@ -32,6 +33,9 @@ public class ChattingServiceImpl implements ChattingService	{
 	}
 	public void readsUpdate(Chat chat) {
 		mapper.updateReads(chat);
+	}
+	public void readsDelete(ConverSation covst) {
+		mapper.deleteReads(covst);
 	}
 	
 }

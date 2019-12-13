@@ -1,3 +1,85 @@
+$(".left_top_field a").click(() => {
+	let searchKeyWord = $(".left_top_field input").val();
+	let sendData = {email : $(".wrapper").data("id"), searchValue : searchKeyWord }
+	let options = {
+			url : "searchChat.do",
+			type : "POST",
+			contentType : "application/json",
+			data : JSON.stringify(sendData)
+	  }
+	  $.ajax(options).done(data => {
+			makeAjaxChatList(data);
+	  }).fail(() => {
+			 alert("ajax 처리 에러발생");
+	  });
+	
+})	
+function makeAjaxChatList(data) {
+	$peopleArea = $("<ul></ul>")
+	if (data === undefind){
+		return $peopleArea.html(`
+			<div>거래중인 경매가 존재하지 않습니다</div>
+			<div>경매에 참여해보세요!</div> 
+		
+		`)  
+	} 
+	data.forEach((chat, i) => {
+		if (chat.userEmailSeller == $("wrapper").data("id")) {
+			if (chat.covstRegDate === undefind) {
+				$peopleArea.append(`
+					 <li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
+	                	<span class="count" count="${chat.readsSeller}">
+	                        <img src="<c:url value="/resources/images/macbook.jpg"/>" >
+	                	</span>
+	                    <span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
+	                    <span class="time">00:00</span>			                            				                            	
+	                    <span class="preview">대화를 시작하세요!</span>
+	       			 </li>                    			
+				`)
+			} else {
+				let date = new Date(chat.covstRegDate);
+				chat.covstRegDate = date.format("hh:mm");
+				$peopleArea.append(`
+					 <li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
+		            	<span class="count" count="${chat.readsSeller}">
+		                    <img src="<c:url value="/resources/images/macbook.jpg"/>" >
+		            	</span>
+		                <span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
+		                <span class="time">${chat.covstRegDate}</span>		                            	
+						<span class="preview">${chat.covstContent}</span>
+		   			 </li>             
+				`)
+			}
+		} else {
+			if (chat.covstRegDate === undefind) {
+				$peopleArea.append(`
+					 <li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
+	                	<span class="count" count="${chat.readsBuyer}">
+	                        <img src="<c:url value="/resources/images/macbook.jpg"/>" >
+	                	</span>
+	                    <span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
+	                    <span class="time">00:00</span>			                            				                            	
+	                    <span class="preview">대화를 시작하세요!</span>
+	       			 </li>                    			
+				`)
+			} else {	
+				let date = new Date(chat.covstRegDate);
+				chat.covstRegDate = date.format("hh:mm");
+				$peopleArea.append(`
+					 <li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
+		            	<span class="count" count="${chat.readsBuyer}">
+		                    <img src="<c:url value="/resources/images/macbook.jpg"/>" >
+		            	</span>
+		                <span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
+		                <span class="time">${chat.covstRegDate}</span>		                            	
+						<span class="preview">${chat.covstContent}</span>
+		   			 </li>             
+				`)
+			}
+		}
+	})
+	return $peopleArea;
+}
 let friends = {
     list: document.querySelector('ul.people'),
     all: document.querySelectorAll('.left_people_field .person'),
@@ -90,24 +172,24 @@ function insertData () {
 				peopleField = $(people);
 			}
 		}
-		let sendData = {userEmail : $(".wrapper").data("id"), covstContent: $msg.val(), chatNo:person.data("no"), userType:peopleField.data("type")}
-		ws.send(JSON.stringify(sendData));
+		let sendData = {userEmail : $(".wrapper").data("id"), covstContent: $msg.val(), chatNo:person.data("no"), userType:peopleField.data("type")}	
 		let options = {
-			url : "insertChat.do",
-			type : "POST",
-			contentType : "application/json",
-			data : JSON.stringify(sendData)
-   	    }
-	    $.ajax(options).done(data => {
-				
+				url : "insertChat.do",
+				type : "POST",
+				contentType : "application/json",
+				data : JSON.stringify(sendData)
+		}
+		$.ajax(options).done(data => {
+			
 		}).fail(() => {
-		    alert("ajax 처리 에러발생");
+			alert("ajax 처리 에러발생");
 		});
 		person.append("<div class='bubble me'>"+ $msg.val() + "</div>");
 		person.parent().scrollTop(person.parent()[0].scrollHeight);
 		peopleField.children(".preview").text($msg.val());
 		peopleField.children(".time").text(nowDate());
 		$msg.val("");
+		ws.send(JSON.stringify(sendData));
 	}
 }
 $(() => {
@@ -122,9 +204,18 @@ $(() => {
 		console.log(evt)
 		let data = JSON.parse(evt.data);
 		let chatArea = $(`div[data-no=${data.chatNo}]`);
-		console.log("chatArea" + chatArea)
 		if(chatArea.hasClass("active-chat")){			
-			console.log("데이터들어옴1")
+			let options = {
+					url : "deleteReads.do",
+					type : "POST",
+					contentType : "application/json",
+					data : JSON.stringify(data)
+			}
+			$.ajax(options).done(data => {
+				
+			}).fail(() => {
+				alert("reads업데이트 처리 에러발생");
+			});
 			$(`li[data-chat="person${data.chatNo}"] .time`).text(nowDate())
 			$(`li[data-chat="person${data.chatNo}"] .preview`).text(data.covstContent)
 			chatArea.append(
@@ -197,6 +288,7 @@ function nowDate() {
 	}
 	return time;
 }
+
 $(document).ready(function(){
 	$(".write a").click(() => {
 		insertData();		
@@ -209,5 +301,6 @@ $(document).ready(function(){
     $(".person").click((e) => {
     	$("input[data-chatfield='chat']").focus();
     })
+   
  });
 });
