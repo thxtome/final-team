@@ -136,3 +136,32 @@ a:visited {
 	backfround: red;
 	
 }
+.imgtempWrapper {
+	float: left;
+}
+.imgWrapper {
+	position: relative;
+	width: 500px;
+	height: 400px;
+}
+.tagTextBox {
+	height: max-content;
+	position: absolute;
+    z-index: 50;
+    width: 170px;
+}
+.addTag {
+	position: relative;
+    resize: none;
+    min-height: 50px;
+    z-index: 5;
+    margin: 0 auto;
+    left: 3px;
+	top: 3px;
+	border: none;
+    border-radius: 5px;
+}	
+img {
+	width: 500px;
+	height: 400px;	
+}

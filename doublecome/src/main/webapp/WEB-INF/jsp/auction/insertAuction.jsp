@@ -88,8 +88,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 	</div>
 		<div class="hoverNotification">
 		<div>메인에 등록할 사진을 업로드 해주세요</div>
-	</div>
-	
+	</div>	
 	
 	<script src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
@@ -97,9 +96,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 	<script src="<c:url value="/resources/js/datetimepicker/momentlocales.js" />"></script>
 	<script src="<c:url value="/resources/js/datetimepicker/localeko.js" />"></script>
 	<script src="<c:url value="/resources/js/datetimepicker/datetimepicker.js" />"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	<script src="<c:url value="/resources/summernote/summernote.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/insert.js" />"></script>
+	<script src="<c:url value="/resources/js/auction/uploadPhoto.js" />"></script>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 
 </body>

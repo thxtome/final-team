@@ -47,6 +47,12 @@ public class FileController {
 		service.downLoadFile(fileNo, res);
 	}
 	
+	@RequestMapping("/fileRoot.do")
+	public void tempFile(String root, HttpServletResponse res) {
+		service.tempFile(root, res);
+	}
+	
+	
 	@PostMapping("/photoUpload.do")
 	@ResponseBody
 	public String AjaxFileUpload(@RequestParam("file") MultipartFile file, HttpServletResponse res) {
