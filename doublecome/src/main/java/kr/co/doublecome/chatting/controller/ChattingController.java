@@ -58,6 +58,11 @@ public class ChattingController {
 	@RequestMapping("/searchChat.do")
 	@ResponseBody
 	public List<Chat> searchChat(@RequestBody ChatSearch ctList) {
+		System.out.println("채팅 검색창 왔음");
+		System.out.println("검색대상" + ctList.getEmail());
+		System.out.println("감섹키워드" + ctList.getSearchValue());
+		List<Chat> chat = service.chatList(ctList);
+		System.out.println(chat);
 		return service.chatList(ctList);
 	}
 }

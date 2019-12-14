@@ -39,10 +39,10 @@
 					   inner join auction auc
 						on del.auction_no = auc.auction_no) as d
 				on d.deal_no = c.deal_no
-		  where  user_email_seller like #{email}
-		     or user_email_buyer like #{email}
+		  where  (user_email_seller like #{email}
+		     or user_email_buyer like #{email})
 		  <if test="searchValue != null">
-		  	 and d.auction_title like ''#{searchValue}%''
+		  	 and d.auction_title like CONCAT('%',#{searchValue},'%')
 		  </if>
 	</select>
 	<select id="oneChat" parameterType="ConverSation" resultType="ConverSation">

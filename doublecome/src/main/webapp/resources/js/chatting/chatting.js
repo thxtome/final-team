@@ -8,18 +8,19 @@ $(".left_top_field a").click(() => {
 			data : JSON.stringify(sendData)
 	  }
 	  $.ajax(options).done(data => {
-			makeAjaxChatList(data);
+		  	console.log(makeAjaxChatList(data))
+//			$("left_people_field").html(makeAjaxChatList(data));
 	  }).fail(() => {
 			 alert("ajax 처리 에러발생");
 	  });
 	
 })	
 function makeAjaxChatList(data) {
+	console.log("데이터 값" + data)
 	$peopleArea = $("<ul></ul>")
-	if (data === undefind){
+	if (data.length === 0){
 		return $peopleArea.html(`
-			<div>거래중인 경매가 존재하지 않습니다</div>
-			<div>경매에 참여해보세요!</div> 
+			<div>검색결과 경매가 존재하지 않습니다</div>
 		
 		`)  
 	} 
