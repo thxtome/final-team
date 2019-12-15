@@ -332,6 +332,10 @@
 	overflow: hidden;
 	cursor: pointer;
 	text-overflow: ellipsis;
+	text-align: left;
+}
+.reviewDate{
+	text-align: left;
 }
 
 .reviewTitle:hover {
@@ -439,6 +443,7 @@
 	width: 500px;
 	overflow: hidden;
 	color: black;
+	text-align: left;
 }
 
 .listTitle {
@@ -464,9 +469,9 @@
 }
 
 .reportBtn {
-	display: block;
-	width: 80px;
-	height: 27px;
+	display: inline-block;
+	width: 50px;
+	height: 20px;
 	background-color: #DB1D3B;
 	border-bottom: 2px solid rgb(170, 26, 15);
 	color: #fff;
@@ -476,20 +481,6 @@
 	line-height: 30px;
 }
 
-.reviewBtn {
-	display: block;
-	width: 80px;
-	height: 27px;
-	margin: auto;
-	border: 1px solid #DB1D3B;
-	color: #DB1D3B;
-	border-radius: 3px;
-	box-shadow: inset 0 -2px #e6e6e6;
-	cursor: pointer;
-	font-size: 13px;
-	line-height: 27px;
-	font-weight: bold;
-}
 /* The Modal (background) */
 .modal {
 	display: none; /* Hidden by default */
@@ -885,6 +876,7 @@
 	overflow: hidden;
 	color: black;
 	font-size: 13px;
+	text-align: left;
 }
 
 .fa-star-half-alt {

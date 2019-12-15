@@ -20,6 +20,8 @@
 	href="<c:url value="/resources/css/common/pagination.css"/>">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/history/buttonList.css"/>">
 </head>
 <body>
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
@@ -51,22 +53,25 @@
 		<span id="toTheTop">top</span>
 		<div id="innerContent">
 			<div>
+			</div>
+			<div>
 				<div id="purchaseHead">구매내역</div>
 				<ul class="tabHead">
-					<li><span data-type="auctionBid" class="purchaseTabList tabChoice">입찰 중 경매</span></li>
-					<li><span data-type="auctionComplete" class="purchaseTabList">입찰 종료 경매</span></li>
-					<li><span data-type="dealProgress" class="purchaseTabList">진행 중 거래</span></li>
-					<li><span data-type="dealComplete" class="purchaseTabList">종료 거래</span></li>
+					<li><span data-type="auctionBid" class="purchaseTabList tabChoice">입찰</span></li>
+					<li><span data-type="dealProgress" class="purchaseTabList">낙찰(거래 중)</span></li>
+					<li><span data-type="dealComplete" class="purchaseTabList">낙찰(거래 완료)</span></li>
+					<li><span data-type="dealCancle" class="purchaseTabList">신고/취소 거래</span></li>
 				</ul>
 				<div id="purchaseAjax"></div>
 			</div>
 			<div>
 				<div id="salesHead">판매내역</div>
 				<ul class="tabHead">
-					<li><span data-type="auctionBid" class="salesTabList tabChoice">입찰 중 경매</span></li>
-					<li><span data-type="auctionComplete" class="salesTabList">입찰 종료 경매</span></li>
-					<li><span data-type="dealProgress" class="salesTabList">진행 중 거래</span></li>
-					<li><span data-type="dealComplete" class="salesTabList">종료 거래</span></li>
+					<li><span data-type="auctionBid" class="salesTabList tabChoice">등록상품(판매 중)</span></li>
+					<li><span data-type="dealProgress" class="salesTabList">등록상품(거래 중)</span></li>
+					<li><span data-type="dealComplete" class="salesTabList">판매 완료</span></li>
+					<li><span data-type="auctionFail" class="salesTabList">유찰</span></li>
+					<li><span data-type="dealCancle" class="salesTabList">신고/취소 거래</span></li>
 				</ul>
 				<div id="salesAjax"></div>
 			</div>

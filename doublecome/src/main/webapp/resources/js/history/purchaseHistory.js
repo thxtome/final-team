@@ -93,14 +93,101 @@ $(function (){
 					`;
 				}
 				html += `
-						</span> 
+						</span>
 						<span class="detailCon"> 
 							<a>입찰금 <strong>${r.bidPrice}</strong>원</a>
 						</span>
 					</div>
+				`;
+				if (r.dealCondition == 1 || r.dealCondition == 2
+						&& (r.dealNo!= 0 && r.reviewSender == null)){
+					html += `					
+					<div class="listBody marginRemove">
+						<ul>
+							<li>
+						<div class="btnGroup"> 
+						   <div class="more">
+				        <button class="more-btn">
+				            <span class="more-dot"></span>
+				            <span class="more-dot"></span>
+				            <span class="more-dot"></span>
+				        </button>
+				        <div class="more-menu">
+				            <div class="more-menu-caret">
+				                <div class="more-menu-caret-outer"></div>
+				                <div class="more-menu-caret-inner"></div>
+				            </div>
+				            <ul class="more-menu-items" tabindex="-1" role="menu" aria-labelledby="more-btn" aria-hidden="true">
+						`;
+					if (r.dealNo!= 0 && r.reviewSender == null){
+						html += `
+							<li class="more-menu-item" role="presentation">
+			                    <button type="button" class="more-menu-btn reviewBtn" role="menuitem">
+			                    <a data-no="${r.auctionNo}">후기등록</a>
+			                    </button>
+			                </li>
+						`;
+					}
+					if (r.dealCondition == 1){
+						html +=`
+							<li class="more-menu-item" role="presentation">
+			                    <button type="button" class="more-menu-btn" role="menuitem">거래완료</button>
+			                </li>
+			                <li class="more-menu-item" role="presentation">
+			                    <button type="button" class="more-menu-btn" role="menuitem">신고</button>
+			                </li>
+			                <li class="more-menu-item" role="presentation">
+			                    <button type="button" class="more-menu-btn" role="menuitem">거래취소</button>
+			                </li>
+						`;
+					}
+					html += `
+						 </ul>
+				        </div>
+				    </div>
+				    </div>
+					`;
+				} else{
+					html += `
 					<div class="listBody">
 						<ul>
 							<li>
+					`;
+				}
+				/*
+				html += `
+					 <div class="container"> 
+						   <div class="more">
+				        <button id="more-btn" class="more-btn">
+				            <span class="more-dot"></span>
+				            <span class="more-dot"></span>
+				            <span class="more-dot"></span>
+				        </button>
+				        <div class="more-menu">
+				            <div class="more-menu-caret">
+				                <div class="more-menu-caret-outer"></div>
+				                <div class="more-menu-caret-inner"></div>
+				            </div>
+				            <ul class="more-menu-items" tabindex="-1" role="menu" aria-labelledby="more-btn" aria-hidden="true">
+				                <li class="more-menu-item" role="presentation">
+				                    <button type="button" class="more-menu-btn" role="menuitem">후기등록</button>
+				                </li>
+				                <li class="more-menu-item" role="presentation">
+				                    <button type="button" class="more-menu-btn" role="menuitem">거래완료</button>
+				                </li>
+				                <li class="more-menu-item" role="presentation">
+				                    <button type="button" class="more-menu-btn" role="menuitem">신고</button>
+				                </li>
+				                <li class="more-menu-item" role="presentation">
+				                    <button type="button" class="more-menu-btn" role="menuitem">거래취소</button>
+				                </li>
+				            </ul>
+				        </div>
+				    </div>
+				    </div>
+				   `;
+				   */
+				html +=`
 								<div class="productImg">
 									<img class="imgCon"
 										src="${contextPath}/file/downLoadFile.do?fileNo=${r.fileNo}"/>
@@ -119,7 +206,8 @@ $(function (){
 								<div class="starDiv">
 									${starHtml}
 								</div>
-								</div>											</div>
+								</div>											
+						</div>
 							</li>
 						</ul>
 					</div>
@@ -138,8 +226,45 @@ $(function (){
 		purchaseAjax.html(purchaseContent.html());
 		pg.print(purchaseAjax, result.pr);
 		
+		let el = document.querySelector('.more');
+		console.log("여기도착");
+		console.log(el);
+		let btn = el.querySelector('.more-btn');
+		let menu = el.querySelector('.more-menu');
+		let visible = false;
+		function showMenu(e) {
+			e.preventDefault();
+			if (!visible) {
+				visible = true;
+				el.classList.add('show-more-menu');
+				menu.setAttribute('aria-hidden', false);
+				document.addEventListener('mousedown', hideMenu, false);
+			}
+		}
+
+		function hideMenu(e) {
+			if (btn.contains(e.target)) {
+				return;
+			}
+			if (visible) {
+				visible = false;
+				el.classList.remove('show-more-menu');
+				menu.setAttribute('aria-hidden', true);
+				document.removeEventListener('mousedown', hideMenu);
+			}
+		}
+
+		btn.addEventListener('click', showMenu, false);
+		
 	};
-	
+    $("body").on("click", ".reviewBtn", (e) => {
+    	console.log("후기등록 클릭");
+    	$("#reviewForm > form").attr("action","addReview.do");
+    	$("#auctionTitle").html($(e.target).closest("ul").find(".listTitle").html());
+    	$("#auctionNo").val($(e.target).data("no"));
+    	$(".regitbtn > button").html("등록");
+    	$("#addReviewModal").css("display","block");
+    });
 	pg.movePage($("#purchaseAjax"),(pageNo)=>{
 		let year = $("#purchase option:selected").html();
 		let data = { 

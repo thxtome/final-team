@@ -180,14 +180,17 @@
 	   	 	<when test="searchType == 'auctionBid' or searchType == ''">
 	   	 		and a.auction_condition = 1) as z
 	   	 	</when>
-	   	 	<when test="searchType == 'auctionComplete'">
-	   	 		and a.auction_condition in (2, 3)) as z
-	   	 	</when>
 	   	 	<when test="searchType == 'dealProgress'">
 	   	 		and d.deal_condition = 1) as z
 	   	 	</when>
+	   	 	<when test="searchType == 'dealComplete'">
+	   	 		and d.deal_condition = 2) as z
+	   	 	</when>
+	   	 	<when test="searchType == 'auctionFail'">
+	   	 		and a.auction_condition = 3) as z
+	   	 	</when>
 	   	 	<otherwise>
-	   	 	    and d.deal_condition in (2, 3, 4)) as z
+	   	 	    and d.deal_condition in (3, 4)) as z
 	   	 	</otherwise>
 	   	 </choose>
 		limit #{begin}, #{listSize}
@@ -222,17 +225,17 @@
 			   	b.user_email = #{keyword}
 	   	 		and a.auction_condition = 1) as z
 	   	 	</when>
-	   	 	<when test="searchType == 'auctionComplete'" >
-			   	b.user_email = #{keyword}
-	   	 		and a.auction_condition in (2, 3)) as z
-	   	 	</when>
 	   	 	<when test="searchType == 'dealProgress'" >
 	   	 		d.user_email_buyer = #{keyword}
 	   	 		and d.deal_condition = 1) as z
 	   	 	</when>
+	   	 	<when test="searchType == 'dealComplete'" >
+			   	b.user_email = #{keyword}
+	   	 		and d.deal_condition = 2) as z
+	   	 	</when>
 	   	 	<otherwise>
 	   	 		d.user_email_buyer = #{keyword}
-	   	 		and d.deal_condition in (2, 3, 4)) as z
+	   	 		and d.deal_condition in (3, 4)) as z
 	   	 	</otherwise>
 	   	 </choose>
 	   	 limit #{begin}, #{listSize}
