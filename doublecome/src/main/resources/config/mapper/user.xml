@@ -42,7 +42,7 @@
 	<!-- 마이페이지 입찰 리스트 -->
 	<select id="bidList" parameterType="string" resultType="Auction">
 	select 
-	   b.auction_no,
+	distinct   b.auction_no,
 	   a.auction_title,
 	   a.auction_buy_now,
        a.auction_limit_date,
@@ -52,7 +52,9 @@
        f.*,
        RANK() OVER (ORDER BY a.auction_no ) as auction_cnt
   from auction a
- inner join bid b
+ inner join (select distinct max(bid_price) over(partition by auction_no) as bid_price, auction_no, user_email
+			    from bid
+			  where user_email = #{email}) b
     on a.auction_no = b.auction_no
  inner join(select f.*
 			 from file f
@@ -65,7 +67,7 @@
 						   where b.user_email = #{email}) c
 							  on f.file_no = c.file_no ) f
 					on a.file_group_code = f.file_group_code
- where b.user_email = #{email};
+ where b.user_email =#{email};
 
 
 	<!-- 

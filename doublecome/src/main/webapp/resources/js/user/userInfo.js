@@ -12,7 +12,6 @@
 				<a id="aution" href="">
 					<img src="doublecome/file/downLoadFile.do?fileNo=${result[i].fileNo}" alt="" class="card_image" >
 					<div class="aution_title"><div class="card_autionTitle">${result[i].auctionTitle}</div></div>
-					${result[i].auctionCnt % 2}
 					<div class="card_sub_now">즉시 구매 가:<span class="card_content">${result[i].auctionBuyNow}</span></div>
 					<div class="card_sub_date">경매 마감 일:<span class="card_content">${result[i].auctionLimitDate}</span></div>
 				</a>				
