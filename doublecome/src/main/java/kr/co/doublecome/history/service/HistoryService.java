@@ -3,6 +3,7 @@ package kr.co.doublecome.history.service;
 import java.util.List;
 
 import kr.co.doublecome.repository.vo.AjaxPage;
+import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.History;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
@@ -17,4 +18,6 @@ public interface HistoryService {
 	public void deleteReview(Review review);
 	public Review selectOneReview(Review review);
 	public void updateReview(Review reivew);
+	public void dealComplete(Deal deal);
+	public void dealCancel(Deal deal);
 }

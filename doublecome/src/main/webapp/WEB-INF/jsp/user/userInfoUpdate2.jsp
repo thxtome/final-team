@@ -24,36 +24,25 @@
 					  
 		
 				
-<!-- <form id="infoBox" method="post" action="/doublecome/file/photoUpload.do" class="uploader" enctype="multipart/form-data" >
+<form id="infoBox" method="post" action="<c:url value="/user/userPhotoUpload.do"/>" class="uploader" enctype="multipart/form-data" >
+<div id="pfimgbox"> 
+			<input class="uploader__input" id="file-upload" type="file" name="file" accept="image/*" />
+			
+			<label class="uploader__label" for="file-upload">
+				<span class="uploader__wrapper">
+					<img class="uploader__file hidden" src="#" alt="">
+					<svg class="uploader__svg" xmlns="http://www.w3.org/2000/svg" width="98px" height="90px" viewBox="0 0 98 90">
+						<path class="uploader__clipalt" d="M47.559,12.453L9.966,50.05 c0,0-16.188,15.611-0.892,30.908c15.297,15.301,30.995-0.804,30.995-0.804l50.666-50.669c0,0,10.814-10.891-0.268-21.981 c-11.087-11.088-21.97-0.288-21.97-0.288L24.221,51.486c0,0-10.736,8.541-2.432,16.921c8.307,8.384,16.832-2.521,16.832-2.521 l32.535-32.531"/>
+					  <path class="uploader__clip" d="M47.559,12.453L9.966,50.05 c0,0-16.188,15.611-0.892,30.908c15.297,15.301,30.995-0.804,30.995-0.804l50.666-50.669c0,0,10.814-10.891-0.268-21.981 c-11.087-11.088-21.97-0.288-21.97-0.288L24.221,51.486c0,0-10.736,8.541-2.432,16.921c8.307,8.384,16.832-2.521,16.832-2.521 l32.535-32.531"/>
+					</svg>
+				</span>
+			</label>
+ </div>
  </form>
- --> <form method="post" action="<c:url value="/user/userUpdate.do"/>" enctype="multipart/form-data" >
-
-<div class="l-constrained">
-<!--   <div class="m-box"> -->
-      <div class="m-upload js-fileupload">
-        <div class="m-upload__preview jst-preview">
-          <div>
-            <i class="mdi mdi-cloud-upload"></i>
-          </div>
-        </div>
+ <form method="post" action="/doublecome/user/userUpdate.do" >
         
-        <div class="m-upload__inputs">
-          <div class="m-upload__file">
-            <input type="file" accept="image/*" name="file" id="ul-button-1">
-            
-            <label for="ul-button-1">
-              <i class="mdi mdi-image"></i>
-              <span>사진 등록</span>
-            </label>
-          </div>
-          </div>
-        </div>
-      <!-- </div> -->
-   </div>   
-         
-        
-	<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.user" var="user" />
+	<%-- <sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.user" var="user" /> --%>
 			
 	<!-- 버튼 -->
 	<button id="updateFormBtn" >수정</button>
@@ -101,7 +90,7 @@
 	    	</tbody>
 	    	</table>
 			</div>
-			</sec:authorize>
+			<%-- </sec:authorize> --%>
 </form>
 		
 		

@@ -19,4 +19,11 @@ public class User {
 	private int fileGroupCode;				// 프로필 사진 파일 그룹 코드
 	private Date userRegDate;      			// 등록 날짜	
 	private int userCnt;                    // 유저수
+	
+	
+	private int fileNo;
+	private String fileOriginName;
+	private String fileSystemName;
+	private String filePath;
+	private String fileThumb;
 }

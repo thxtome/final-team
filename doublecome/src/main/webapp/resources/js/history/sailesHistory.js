@@ -11,9 +11,6 @@ $(function (){
 	
 	function salesListAjax(data){
 		data.searchType = $("#salesHead").siblings(".tabHead").find("span.tabChoice").data("type");
-		console.log("타입:", data.searchType);
-		console.log($("#sales option:selected").html());
-		
 		$.getJSON({
 			url: `receiveSaleHistory.do`,
 			contentType :'application/json',
@@ -69,7 +66,6 @@ $(function (){
 					</div>
 			`;
 			$.each(result.list, (i, r) => {
-				console.log(Math.round(7.3));
 				starHtml = makeStar(Math.round(r.userScore));
 				html += `
 					<div class="listCon">
@@ -77,33 +73,69 @@ $(function (){
 									<span class="listDate"> 
 										<span class="dateTitle">마감 날짜 </span> 
 										<span class="dateContent">${format(r.auctionLimitDate, "ymd")}</span>
-				`;
-				if (r.dealCondition == '2'){
-					html += `
-						<span class="dealCondition colorBlue">정상거래</span>
-					`;
-				} else if (r.dealCondition == '3'){
-					html += `
-						<span class="dealCondition colorOrange">취소거래</span>
-					`;
-				} else if (r.dealCondition == '4'){
-					html += `
-						<span class="dealCondition colorRed">신고거래</span>
-					`;
-				} else if (r.auctionCondition == '3'){
-					html += `
-						<span class="dealCondition colorGreen">유찰경매</span>
-					`;
-				}
-				html += `
 					</span> 
 					<span class="detailCon"> 
 						<a>입찰금 <strong>${r.maxPrice}</strong>원</a>
 					</span>
 				</div>
-				<div class="listBody">
+				`;
+				if ((r.dealCondition == 1 && ((r.dealNo!= 0 && r.reviewSender == null) || r.dealSellerCondition == 1))
+				|| (r.dealCondition == 2 && (r.dealNo!= 0 && r.reviewSender == null))
+				|| (r.dealCondition == 3 && (r.dealNo!= 0 && r.reviewSender == null))){
+				
+				html += `
+				<div class="listBody marginRemove">
 					<ul>
 						<li>
+						<div class="btnGroup"> 
+						   <div class="more">
+				        <button class="more-btn">
+				            <span class="more-dot"></span>
+				            <span class="more-dot"></span>
+				            <span class="more-dot"></span>
+				        </button>
+				        <div class="more-menu">
+				            <div class="more-menu-caret">
+				                <div class="more-menu-caret-outer"></div>
+				                <div class="more-menu-caret-inner"></div>
+				            </div>
+				            <ul class="more-menu-items" >
+						`;
+				if (r.dealNo!= 0 && r.reviewSender == null){
+					html += `
+						<li class="more-menu-item reviewBtn" data-no="${r.auctionNo}">
+		                    <button type="button" data-no="${r.auctionNo}" class="more-menu-btn" role="menuitem">후기등록</button>
+		                </li>
+					`;
+				}
+				
+				if (r.dealSellerCondition == 1){
+					html +=`
+						<li class="more-menu-item dealSellerComplete" data-no="${r.auctionNo}">
+		                    <button type="button" class="more-menu-btn" data-no="${r.auctionNo}">거래완료</button>
+		                </li>
+		                <li class="more-menu-item reportBtn" data-no="${r.auctionNo}">
+		                    <button type="button" data-no="${r.auctionNo}" class="more-menu-btn ">신고</button>
+		                </li>
+		                <li class="more-menu-item dealSellerCancel" data-no="${r.auctionNo}">
+		                    <button type="button" data-no="${r.auctionNo}" class="more-menu-btn">거래취소</button>
+		                </li>
+					`;
+				}
+				html += `
+					 </ul>
+			        </div>
+			    </div>
+			    </div>
+				`;
+				} else {
+					html += `
+						<div class="listBody">
+							<ul>
+								<li>
+						`;
+				}
+				html += `
 							<div class="productImg">
 								<img class="imgCon"
 									src="${contextPath}/file/downLoadFile.do?fileNo=${r.fileNo}"/>
@@ -128,15 +160,6 @@ $(function (){
 					</div>
 				</div>
 					`;
-//							<div class="buttonDiv">
-//								<a class="reportBtn"><strong>신고</strong></a>
-//					<a class="reportBtn"><strong>신고</strong></a>
-//					<a class="reportBtn"><strong>신고</strong></a>
-//					if (r.dealNo!= 0 && r.reviewSender == null){
-//						html += `
-//							<a data-no="${r.auctionNo}" class="reviewBtn">후기등록</a>
-//						`;
-//					}
 			});
 		}
 		salesContent.html(html);
@@ -171,5 +194,28 @@ $(function (){
 		};
 		salesListAjax(data);
 	});
-	
+    $("body").on("click", ".dealSellerComplete", (e) => {
+    	confirm('거래완료', 'Complete', $(e.target).data("no"), 'dealSellerCondition=2');
+    });
+
+    $("body").on("click", ".dealSellerCancel", (e) => {
+    	confirm('거래취소', 'Cancel', $(e.target).data("no"), 'dealSellerCondition=3');
+    });
+    function confirm(msg, type, auctionNo, userCondition){
+    	Swal.fire({
+    		  title: `${msg} 하시겠습니까?`,
+    		  text: `${msg} 후에는 거래상태 변경이 불가능합니다.`,
+    		  icon: 'warning',
+    		  showCancelButton: true,
+    		  confirmButtonColor: '#3085d6',
+    		  cancelButtonColor: '#d33',
+    		  confirmButtonText: '확인',
+    		  cancelButtonText: '취소'
+    			  
+    		}).then((result) => {
+    	        if (result.value) {
+    	            location.href=`deal${type}.do?auctionNo=${auctionNo}&${userCondition}`;
+    	        }
+    		})
+    };	
 });

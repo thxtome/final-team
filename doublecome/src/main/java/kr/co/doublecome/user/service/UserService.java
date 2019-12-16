@@ -2,8 +2,11 @@ package kr.co.doublecome.user.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.User;
+import kr.co.doublecome.repository.vo.UtilFile;
 
 public interface UserService {
 	public void insertUser(User user);
@@ -19,4 +22,5 @@ public interface UserService {
 	public int checkEmail(String userEmail);
 	public int checkPhnum(String userPhnum);
 	public int checkNickname(String userNickname);
+	
 }

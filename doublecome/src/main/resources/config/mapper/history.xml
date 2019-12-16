@@ -156,6 +156,8 @@
 	select z.*, count(*) over () as auction_cnt
 	  from (select distinct a.*, 
 			   	   d.deal_condition,
+				   d.deal_buyer_condition,
+				   d.deal_seller_condition,
 			   	   d.deal_no,
 		           max(b.bid_price) over (partition by b.auction_no) as max_price,
 		           r.review_sender,
@@ -202,6 +204,8 @@
 		  from (select distinct a.*, 
 					   d.deal_no,
 					   d.deal_condition,
+					   d.deal_buyer_condition,
+					   d.deal_seller_condition,
 					   max(b.bid_price) over(partition by b.auction_no) as bid_price,
 					   u.user_score,
 					   u.user_nickname,
@@ -305,4 +309,33 @@
 		  from file
 		 where file_no = #{fileNo}
 	</select>
+	
+	<!-- 거래완료 처리 -->
+	<update id="dealComplete" parameterType="Deal">
+		update deal set 
+		<choose>
+			<when test="dealBuyerCondition == 2">
+				deal_buyer_condition = #{dealBuyerCondition}
+			</when>
+			<otherwise>
+				deal_seller_condition = #{dealSellerCondition}
+			</otherwise>
+		</choose>
+		where auction_no = #{auctionNo}
+	</update>
+	
+	<!-- 거래 취소 처리 -->
+	<update id="dealCancel" parameterType="Deal">
+		update deal set
+		<choose>
+			<when test="dealBuyerCondition == 3">
+				deal_buyer_condition = #{dealBuyerCondition},
+			</when>
+			<otherwise>
+				deal_seller_condition = #{dealSellerCondition},
+			</otherwise>
+		</choose>
+			deal_condition = 3
+			where auction_no = #{auctionNo}
+	</update>
 </mapper>

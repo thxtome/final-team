@@ -26,4 +26,6 @@ public interface HistoryMapper {
 	public Review selectOneReview(Review review);					// 후기 한개
 	public void updateReview(Review review);						// 후기 수정
 	public void updateUserReviewInfo(Review review);				// 후기 등록/수정/삭제시 평점,후기개수 수정
+	public void dealComplete(Deal deal);							// 거래 완료 처리
+	public void dealCancel(Deal deal);								// 거래 취소 처리
 }

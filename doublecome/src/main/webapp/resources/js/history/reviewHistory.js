@@ -8,7 +8,7 @@ let $myInfo = $("#myInfo");
 $myInfo.find("div").click((e) => {
 	let $topTarget = '';
 	let minus = 20;
-	$location = $(e.target).data("location");
+	$location = $(e.target).closest("div").data("location");
 	switch ($location){
 	case "purchaseHead": 
 		$topTarget = $("#"+$location); 
@@ -410,7 +410,6 @@ $('#summernote').summernote(
 		          }
 		        }
 		      }
-
 });
 
 function sendFile(file, editor) {
@@ -455,10 +454,6 @@ $("body").on("click", ".scoreLabel", (e) => {
 		$cStar.removeClass("scoreChoice");
 		$radio.prop("checked", false);
 	}
-});
-
-$("body").on("click", ".reportBtn", (e) => {
-	 $(".addReportModal").show();
 });
 
 

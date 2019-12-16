@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.history.service.HistoryService;
 import kr.co.doublecome.repository.vo.AjaxPage;
+import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
 
@@ -32,6 +33,7 @@ public class HistoryController {
 	public AjaxPage receivePurchaseHistory(Search search, Principal p){
 		search.setListSize(5);
 		search.setKeyword(p.getName());
+		System.out.println("구매내역" + service.receiveBuyHistory(search));
 		return service.receiveBuyHistory(search);
 	}
 	
@@ -41,10 +43,6 @@ public class HistoryController {
 	public AjaxPage receiveSaleHistory(Search search, Principal p){
 		search.setListSize(5);
 		search.setKeyword(p.getName());
-		System.out.println(search);
-		System.out.println(search.getBegin());
-		System.out.println(search.getListSize());
-		System.out.println(service.receiveSaleHistory(search));
 		return service.receiveSaleHistory(search);
 	}
 	
@@ -97,4 +95,18 @@ public class HistoryController {
 		service.deleteReview(review);
 	}
 	
+	// 거래완료
+	@RequestMapping("/dealComplete.do")
+	public String dealComplete(Deal deal, Principal p) {
+		service.dealComplete(deal);
+		
+		return "redirect:listHistory.do";
+	}
+	
+	@RequestMapping("/dealCancel.do")
+	public String dealCancel(Deal deal, Principal p) {
+		service.dealCancel(deal);
+		
+		return "redirect:listHistory.do";
+	}
 }
