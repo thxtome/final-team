@@ -1,9 +1,11 @@
 package kr.co.doublecome.user.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +22,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import kr.co.doublecome.common.service.FileService;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.User;
+import kr.co.doublecome.repository.vo.UtilFile;
 import kr.co.doublecome.user.BO.NaverLoginBO;
 import kr.co.doublecome.user.service.UserService;
 import kr.co.doublecome.util.security.MyBatisUserDetailsService;
@@ -39,6 +42,9 @@ public class UserController {
 	
 	@Autowired
 	UserService service;
+	
+	@Autowired
+	FileService fileService;
 	
 	@Autowired
 	private PasswordEncoder encoder;
@@ -286,7 +292,7 @@ public class UserController {
 		user.setUserPass(userPass);
 		model.addAttribute("user", service.selectUserInfo(user));
 	}
-	//마이페이지 - 비밀번호 수정
+	//비밀번호 수정 패이지
 	@RequestMapping("/findPassForm.do")
 	public void findPassForm(
 			@RequestParam(value="userEmail") String userEmail,
@@ -297,7 +303,7 @@ public class UserController {
 		user.setUserPass(userPass);
 		model.addAttribute("user", service.selectUserInfo(user));
 	}
-	
+	//비밀번호 찾기 - 버튼
 	  @RequestMapping("/passUpdate.do")
 	  public String paddUpdate (User u) {
 		  	System.out.println("passUpdate.do");
@@ -312,11 +318,15 @@ public class UserController {
 	
 	//마이페이지 - 회원 정보 수정 버튼
 	@RequestMapping("/userUpdate.do")
-	public String updateUser(User user, Principal p, RedirectAttributes attr, HttpServletRequest req) throws Exception{
+	public String updateUser(
+			User user,
+			Principal p,
+			HttpServletRequest req,
+			HttpServletResponse res,
+			@RequestParam("file") MultipartFile file
+			) throws Exception{
 		User u = service.selectUserInfoByName(user.getUserEmail());
 		
-		System.out.println(u.getUserPass() + "<<u");
-		System.out.println(user.getUserPass().length() + "<< user >>" + user.getUserPass());
 		//비밀번호 수정
 		if(user.getUserPass().length() == 0)
 		user.setUserPass(u.getUserPass());
@@ -329,9 +339,13 @@ public class UserController {
 		user.setUserPass(u.getUserNickname());
 		else user.setUserNickname(user.getUserNickname());
 		
-		System.out.println(u.getUserPass() + "<<u");
-		System.out.println(user.getUserPass().length() + "<< user >>" + user.getUserPass());
-		//user.setUserNickname(user.getUserNickname());
+		//파일 수정
+		UtilFile util = new UtilFile();
+		List<MultipartFile> attach = new ArrayList<>();
+		attach.add(file);
+		util.setAttach(attach);
+		util = fileService.uploadProfile(util, p.getName());
+		fileService.downLoadFile(util.getFileNo(), res);
 		service.updateUser(user);
 		
 		UserDetails uu = userService.loadUserByUsername(user.getUserEmail());
@@ -347,8 +361,6 @@ public class UserController {
 	@RequestMapping("/bidList.do")
 	@ResponseBody
 	public List<Auction> bidList( String email) throws Exception{
-		List<Auction> auction = service.bidList(email);
-		System.out.println(auction);
 		return service.bidList(email);
 	}
 

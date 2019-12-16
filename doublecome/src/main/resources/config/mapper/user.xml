@@ -12,9 +12,17 @@
 	</select>
 	<!-- 이메일로 회원 조회  -->
 	<select id="selectUserInfoByName" parameterType="string" resultType="User">
+		<!-- 
 		select * 
 		  from user
 		 where user_email = #{userEmail}
+		 -->		 
+		  select * 
+		   from user u
+		   inner join file f
+		     on u.file_group_code = f.file_group_code
+		   where user_email = #{userEmail}
+		     ;
 	</select>
 	
 	
@@ -32,13 +40,6 @@
 		where user_email = #{email}
 	</select>
 	
-	<!-- <select id="mybidAuction" parameterType="User" resultType="Auction">
-		select a.*, RANK() OVER (ORDER BY a.auction_limit_date ) as rk
-		  from auction a
-		 inner join bid b
-		    on a.auction_no = b.auction_no
-		 where b.user_email = #{userEmail}
-	</select> -->
 	<!-- 마이페이지 입찰 리스트 -->
 	<select id="bidList" parameterType="string" resultType="Auction">
 	select 
@@ -68,19 +69,6 @@
 							  on f.file_no = c.file_no ) f
 					on a.file_group_code = f.file_group_code
  where b.user_email =#{email};
-
-
-	<!-- 
-		select a.*,
-		(select count(auction_no)
-		 from bid
-		where user_email = #{email}) as bid_cnt,
-		 RANK() OVER (ORDER BY a.auction_limit_date ) as rk
-		  from auction a
-		 inner join bid b
-		    on a.auction_no = b.auction_no
-		 where b.user_email = #{email}
-	 -->
 	</select>
 	
 	<!-- 회원 탈퇴 -->
@@ -94,12 +82,20 @@
 	  insert into user(user_email, user_pass, user_phnum, user_nickname
  	  ) values (#{userEmail}, #{userPass},#{userPhnum},#{userNickname});
 	</insert>
+	
+	
 	<!-- 회원 정보 수정 -->
 	<update id="updateUser"  parameterType="User">
 		update user 
 		   set user_pass = #{userPass},
 		   	   user_nickname = #{userNickname},
 			   user_phnum = #{userPhnum}
+		<if test="fileNo == 106">
+			   ,file_groub_code = 0
+		</if>
+		<if test="fileNo != null">
+			   ,file_groub_code = 1
+		</if>
 		 where user_email = #{userEmail}
 	</update>
 	

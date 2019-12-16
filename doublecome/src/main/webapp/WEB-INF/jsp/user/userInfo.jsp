@@ -23,17 +23,16 @@
 		
 					  
 		
-				
+	<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.user" var="user" />
 <div id="infoBox" method="post" action="/doublecome/user/userInfoUpdate.do" class="uploader" enctype="multipart/form-data">
 	<div id="pfimgbox"> 
 		<span class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" ></span>
 			<div class="uploader__label" for="file-upload">
-			<img  src="<c:url value="/resources/css/user/defaultpfimg.jpeg" />" alt="">
+					<img  src="/doublecome/file/downLoadFile.do?fileNo=${user.fileNo}" alt="">
 		</div> 
 	</div>
         
-	<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.user" var="user" />
 			
 	<!-- 버튼 -->
 	<form method="post" action="<c:url value="/user/userInfoUpdate.do"/>">
@@ -89,12 +88,12 @@
 	    	
 	    	
 			</div>
-			</sec:authorize>
 </div>
 		
 		
 <div id="bidList">
 </div>
+			</sec:authorize>
 </div> 
 </section>
 	<script src="<c:url value="/resources/js/user/userInfo.js" />" ></script>
