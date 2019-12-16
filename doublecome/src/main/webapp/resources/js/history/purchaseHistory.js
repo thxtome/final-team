@@ -67,6 +67,25 @@ $(function (){
 					</div>
 			`;
 			$.each(result.list, (i, r) => {
+				/*
+					if (r.dealCondition == '2'){
+					html += `
+					<span class="dealCondition colorBlue">정상거래</span>
+					`;
+					} else if (r.dealCondition == '3'){
+					html += `
+					<span class="dealCondition colorPink">취소거래</span>
+					`;
+					} else if (r.dealCondition == '4'){
+					html += `
+					<span class="dealCondition colorRed">신고거래</span>
+					`;
+					} else if (r.auctionCondition == '3'){
+					html += `
+					<span class="dealCondition colorYellow">유찰거래</span>
+					`;
+					}
+				 */
 				starHtml = makeStar(Math.round(r.userScore));
 				html += `
 					<div class="listCon">
@@ -74,33 +93,15 @@ $(function (){
 							<span class="listDate"> 
 								<span class="dateTitle">마감 날짜 </span> 
 								<span class="dateContent">${format(r.auctionLimitDate, "ymd")}</span>
-					`;
-				if (r.dealCondition == '2'){
-					html += `
-						<span class="dealCondition colorBlue">정상거래</span>
-					`;
-				} else if (r.dealCondition == '3'){
-					html += `
-						<span class="dealCondition colorPink">취소거래</span>
-					`;
-				} else if (r.dealCondition == '4'){
-					html += `
-						<span class="dealCondition colorRed">신고거래</span>
-					`;
-				} else if (r.auctionCondition == '3'){
-					html += `
-						<span class="dealCondition colorYellow">유찰거래</span>
-					`;
-				}
-				html += `
 						</span>
 						<span class="detailCon"> 
 							<a>입찰금 <strong>${r.bidPrice}</strong>원</a>
 						</span>
 					</div>
 				`;
-				if (r.dealCondition == 1 || r.dealCondition == 2
-						&& (r.dealNo!= 0 && r.reviewSender == null)){
+				if ((r.dealCondition == 1 && ((r.dealNo!= 0 && r.reviewSender == null) || r.dealBuyerCondition == 1))
+				|| (r.dealCondition == 2 && (r.dealNo!= 0 && r.reviewSender == null))
+				|| (r.dealCondition == 3 && (r.dealNo!= 0 && r.reviewSender == null))){
 					html += `					
 					<div class="listBody marginRemove">
 						<ul>
@@ -117,27 +118,25 @@ $(function (){
 				                <div class="more-menu-caret-outer"></div>
 				                <div class="more-menu-caret-inner"></div>
 				            </div>
-				            <ul class="more-menu-items" tabindex="-1" role="menu" aria-labelledby="more-btn" aria-hidden="true">
+				            <ul class="more-menu-items" >
 						`;
 					if (r.dealNo!= 0 && r.reviewSender == null){
 						html += `
-							<li class="more-menu-item" role="presentation">
-			                    <button type="button" class="more-menu-btn reviewBtn" role="menuitem">
-			                    <a data-no="${r.auctionNo}">후기등록</a>
-			                    </button>
+							<li class="more-menu-item reviewBtn" data-no="${r.auctionNo}">
+			                    <button type="button" data-no="${r.auctionNo}" class="more-menu-btn" role="menuitem">후기등록</button>
 			                </li>
 						`;
 					}
-					if (r.dealCondition == 1){
+					if (r.dealBuyerCondition == 1){
 						html +=`
-							<li class="more-menu-item" role="presentation">
-			                    <button type="button" class="more-menu-btn" role="menuitem">거래완료</button>
+							<li class="more-menu-item dealBuyerComplete" data-no="${r.auctionNo}">
+			                    <button type="button" class="more-menu-btn" data-no="${r.auctionNo}">거래완료</button>
 			                </li>
-			                <li class="more-menu-item" role="presentation">
-			                    <button type="button" class="more-menu-btn" role="menuitem">신고</button>
+			                <li class="more-menu-item reportBtn" data-no="${r.auctionNo}">
+			                    <button type="button" data-no="${r.auctionNo}" class="more-menu-btn ">신고</button>
 			                </li>
-			                <li class="more-menu-item" role="presentation">
-			                    <button type="button" class="more-menu-btn" role="menuitem">거래취소</button>
+			                <li class="more-menu-item dealBuyerCancel" data-no="${r.auctionNo}">
+			                    <button type="button" data-no="${r.auctionNo}" class="more-menu-btn">거래취소</button>
 			                </li>
 						`;
 					}
@@ -154,39 +153,6 @@ $(function (){
 							<li>
 					`;
 				}
-				/*
-				html += `
-					 <div class="container"> 
-						   <div class="more">
-				        <button id="more-btn" class="more-btn">
-				            <span class="more-dot"></span>
-				            <span class="more-dot"></span>
-				            <span class="more-dot"></span>
-				        </button>
-				        <div class="more-menu">
-				            <div class="more-menu-caret">
-				                <div class="more-menu-caret-outer"></div>
-				                <div class="more-menu-caret-inner"></div>
-				            </div>
-				            <ul class="more-menu-items" tabindex="-1" role="menu" aria-labelledby="more-btn" aria-hidden="true">
-				                <li class="more-menu-item" role="presentation">
-				                    <button type="button" class="more-menu-btn" role="menuitem">후기등록</button>
-				                </li>
-				                <li class="more-menu-item" role="presentation">
-				                    <button type="button" class="more-menu-btn" role="menuitem">거래완료</button>
-				                </li>
-				                <li class="more-menu-item" role="presentation">
-				                    <button type="button" class="more-menu-btn" role="menuitem">신고</button>
-				                </li>
-				                <li class="more-menu-item" role="presentation">
-				                    <button type="button" class="more-menu-btn" role="menuitem">거래취소</button>
-				                </li>
-				            </ul>
-				        </div>
-				    </div>
-				    </div>
-				   `;
-				   */
 				html +=`
 								<div class="productImg">
 									<img class="imgCon"
@@ -213,58 +179,15 @@ $(function (){
 					</div>
 				</div>
 				`;
-//				<a class="reportBtn"><strong>신고</strong></a>
-//					if (r.dealNo!= 0 && r.reviewSender == null){
-//						html += `
-//							<a data-no="${r.auctionNo}" class="reviewBtn">후기등록</a>
-//						`;
-//					}
 			});
 		}
 		purchaseContent.html(html);
 		purchaseContent.append($("<div></div>").addClass("pagination"));
 		purchaseAjax.html(purchaseContent.html());
 		pg.print(purchaseAjax, result.pr);
-		
-		let el = document.querySelector('.more');
-		console.log("여기도착");
-		console.log(el);
-		let btn = el.querySelector('.more-btn');
-		let menu = el.querySelector('.more-menu');
-		let visible = false;
-		function showMenu(e) {
-			e.preventDefault();
-			if (!visible) {
-				visible = true;
-				el.classList.add('show-more-menu');
-				menu.setAttribute('aria-hidden', false);
-				document.addEventListener('mousedown', hideMenu, false);
-			}
-		}
-
-		function hideMenu(e) {
-			if (btn.contains(e.target)) {
-				return;
-			}
-			if (visible) {
-				visible = false;
-				el.classList.remove('show-more-menu');
-				menu.setAttribute('aria-hidden', true);
-				document.removeEventListener('mousedown', hideMenu);
-			}
-		}
-
-		btn.addEventListener('click', showMenu, false);
-		
 	};
-    $("body").on("click", ".reviewBtn", (e) => {
-    	console.log("후기등록 클릭");
-    	$("#reviewForm > form").attr("action","addReview.do");
-    	$("#auctionTitle").html($(e.target).closest("ul").find(".listTitle").html());
-    	$("#auctionNo").val($(e.target).data("no"));
-    	$(".regitbtn > button").html("등록");
-    	$("#addReviewModal").css("display","block");
-    });
+
+
 	pg.movePage($("#purchaseAjax"),(pageNo)=>{
 		let year = $("#purchase option:selected").html();
 		let data = { 
@@ -292,4 +215,49 @@ $(function (){
 		purchaseListAjax(data);
 	});
 
+});
+
+$("body").on("click", ".reportBtn", (e) => {
+	console.log($(e.target).data("no"));
+	 $(".addReportModal").show();
+	 $('input[name=auctionNo]').val($(e.target).data("no"));
+});
+
+$("body").on("click", ".reviewBtn", (e) => {
+	$("#reviewForm > form").attr("action","addReview.do");
+	$("#auctionTitle").html($(e.target).closest(".listBody").find(".listTitle").html());
+	$("#auctionNo").val($(e.target).data("no"));
+	$(".regitbtn > button").html("등록");
+	$("#addReviewModal").css("display","block");
+})
+$("body").on("click", ".more", (e) => {
+	$(e.target).closest(".more").toggleClass("show-more-menu");
+
+$("body").on("click", ".dealBuyerComplete", (e) => {
+	confirm('거래완료', 'Complete', $(e.target).data("no"), 'dealBuyerCondition=2');
+});
+
+$("body").on("click", ".dealBuyerCancel", (e) => {
+	confirm('거래취소', 'Cancel', $(e.target).data("no"), 'dealBuyerCondition=3');
+});
+	
+
+function confirm(msg, type, auctionNo, userCondition){
+	Swal.fire({
+		  title: `${msg} 하시겠습니까?`,
+		  text: `${msg} 후에는 거래상태 변경이 불가능합니다.`,
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '확인',
+		  cancelButtonText: '취소'
+			  
+		}).then((result) => {
+	        if (result.value) {
+	            location.href=`deal${type}.do?auctionNo=${auctionNo}&${userCondition}`;
+	        }
+		})
+};
+	
 });

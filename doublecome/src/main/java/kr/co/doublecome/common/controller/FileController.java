@@ -22,21 +22,6 @@ public class FileController {
 	@Autowired
 	private FileService service;
 	
-//	@Autowired
-//	private AucitonDetailServiceImpl service;
-//	
-//	@RequestMapping("/imgLoad.do")
-//	public void imgLoad(UtilFile f, HttpServletResponse res) throws Exception {
-//		
-//		String fileDir = f.getFilePath();
-//		String fileName = f.getFileSystemName();
-//		File file = new File(fileDir, fileName);
-//		
-//        res.setHeader("Content-Length", String.valueOf(file.length()));
-//        res.setHeader("Content-Disposition", "inline;");
-//        Files.copy(file.toPath(), res.getOutputStream());
-//	}
-	
 	@RequestMapping("/uploadFile.do")
 	public UtilFile uploadFile(UtilFile uFile) {
 		return service.uploadFile(uFile);
@@ -51,7 +36,6 @@ public class FileController {
 	public void tempFile(String root, HttpServletResponse res) {
 		service.tempFile(root, res);
 	}
-	
 	
 	@PostMapping("/photoUpload.do")
 	@ResponseBody

@@ -29,15 +29,15 @@
 		<div id="myInfo">
 			<div id="myDeal">MY거래</div>
 			<div data-location="purchaseHead" id="purchaseDeal">
-				<div>구매내역</div>
+				<span>구매내역</span>
 				<span>${userHistory.buyCnt}</span> <span>회</span>
 			</div>
 			<div data-location="salesHead" id="salesDeal">
-				<div>판매내역</div>
+				<span>판매내역</span>
 				<span>${userHistory.sellCnt}</span> <span>회</span>
 			</div>
 			<div data-location="reviewHead" id="reviewDeal">
-				<div>후기</div>
+				<span>후기</span>
 				<span>${userHistory.userCnt}</span> <span>개</span>
 			</div>
 		</div>

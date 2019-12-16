@@ -101,4 +101,10 @@ public class HistoryServiceImpl implements HistoryService{
 		System.out.println(review);
 		mapper.updateUserReviewInfo(review);
 	}
+	public void dealComplete(Deal deal) {
+		mapper.dealComplete(deal);
+	}
+	public void dealCancel(Deal deal) {
+		mapper.dealCancel(deal);
+	}
 }
