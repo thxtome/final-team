@@ -74,6 +74,37 @@
     display: flex;
     color: #D92323;
 }
+.topbar .readsCount[readsCount]:after{
+	position: absolute;
+    right: -38%;
+    top: -58%;
+    content: attr(readsCount);
+    font-size: 30%;
+    padding: .6em;
+    border-radius: 50%;
+    line-height: .8em;
+    color: white;
+    background: rgba(255, 0, 0, 0.85);
+    text-align: center;
+    min-width: 1em;
+    font-weight: bold;
+}
+.topbar .hideCount.readsCount[readsCount]:after{
+	position: absolute;
+    right: -38%;
+    top: -58%;
+    content: attr(readsCount);
+    font-size: 30%;
+    padding: .6em;
+    border-radius: 50%;
+    line-height: .8em;
+    color: white;
+    background: rgba(255, 0, 0, 0.85);
+    text-align: center;
+    min-width: 1em;
+    font-weight: bold;
+    display:none;
+}
 .topContent>div:first-child>div:nth-child(2) svg:hover {
 	cursor : pointer;
 }

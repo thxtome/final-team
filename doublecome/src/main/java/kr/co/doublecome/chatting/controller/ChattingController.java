@@ -13,6 +13,7 @@ import kr.co.doublecome.chatting.service.ChattingService;
 import kr.co.doublecome.repository.vo.Chat;
 import kr.co.doublecome.repository.vo.ChatSearch;
 import kr.co.doublecome.repository.vo.ConverSation;
+import kr.co.doublecome.repository.vo.GetCount;
 
 @Controller("kr.co.doublecome.chatting.controller.ChattingController")
 @RequestMapping("/chatting")
@@ -25,6 +26,10 @@ public class ChattingController {
 		model.addAttribute("email", email);
 		ChatSearch ctList = new ChatSearch();
 		ctList.setEmail(email);
+		List<Chat> c = service.chatList(ctList);
+		for(Chat ct : c) {
+			System.out.println("채팅내용"+ct.getCovstContent());
+		}
 		model.addAttribute("chat", service.chatList(ctList));
 	}
 	@RequestMapping("/chatList.do")
@@ -64,5 +69,14 @@ public class ChattingController {
 		List<Chat> chat = service.chatList(ctList);
 		System.out.println(chat);
 		return service.chatList(ctList);
+	}
+	@RequestMapping("/readsCount.do")
+	@ResponseBody
+	public GetCount readsCount(@RequestBody String email) {
+		System.out.println("헤더 유저이메일" + email);
+		GetCount ct = service.getMsg(email);
+		System.out.println(ct.getReadsBuyer());
+		System.out.println(ct.getReadsSeller());
+		return service.getMsg(email);
 	}
 }

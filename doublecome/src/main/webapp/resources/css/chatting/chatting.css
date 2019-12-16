@@ -8,7 +8,10 @@
 	-wrapper: 1000px; -
 	-blue: #00b0ff;
 }
-
+.failure {
+	margin: 200px 0;
+    text-align: center;
+}
 .main_container {
 	position: relative;
 	display: grid;
@@ -136,6 +139,8 @@
 }
 .right_message_field .chat.active-chat .bubble {
     transition-timing-function: cubic-bezier(0.4, -0.04, 1, 1);
+    max-width: 200px;
+    word-break: break-word;
 }
 .left_people_field .people .person.active span, .left_people_field .people .person:hover span {
     color: white;

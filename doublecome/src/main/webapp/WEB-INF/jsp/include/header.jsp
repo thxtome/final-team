@@ -11,7 +11,7 @@
    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <div class="topbar">
 	<sec:authorize access="isAnonymous()">
-		<div>
+		<div style="width:1083px">
 			<span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
 			<span><a href="<c:url value="/user/loginForm.do" />">로그인</a></span>
 			<span><a href="<c:url value="/user/joinForm.do" />">회원가입</a></span>
@@ -21,8 +21,10 @@
 		<!--인증이 됐을 때  -->
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal.user" var="u" />
-			<div>
-				<span><a href="javascript:popupOpen('<c:url value="/chatting/messenger.do?email=${u.userEmail}"/>')">메세지</a></span>
+			<div style="width : 1023px">
+				<span class="readsCount" readsCount=10 data-id="${u.userEmail}">
+					<a href="javascript:popupOpen('<c:url value="/chatting/messenger.do?email=${u.userEmail}"/>')">메세지</a>
+				</span>
 				<span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
 				<span>${u.userEmail}</span>
 				<span><a href="<c:url value="/user/logout.do" />">로그아웃</a></span>

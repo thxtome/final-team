@@ -15,4 +15,5 @@ public class ConverSation {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date covstRegDate;
 	private int userType;
+	private int covstReads;
 }

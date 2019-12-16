@@ -9,6 +9,7 @@ import kr.co.doublecome.repository.mapper.ChattingMapper;
 import kr.co.doublecome.repository.vo.Chat;
 import kr.co.doublecome.repository.vo.ChatSearch;
 import kr.co.doublecome.repository.vo.ConverSation;
+import kr.co.doublecome.repository.vo.GetCount;
 
 @Service("kr.co.doublecome.chatting.service.ChattingServiceImpl")
 public class ChattingServiceImpl implements ChattingService	{
@@ -37,5 +38,7 @@ public class ChattingServiceImpl implements ChattingService	{
 	public void readsDelete(ConverSation covst) {
 		mapper.deleteReads(covst);
 	}
-	
+	public GetCount getMsg(String email) {
+		return mapper.getMessage(email);
+	}
 }

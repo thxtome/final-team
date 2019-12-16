@@ -5,6 +5,7 @@ import java.util.List;
 import kr.co.doublecome.repository.vo.Chat;
 import kr.co.doublecome.repository.vo.ChatSearch;
 import kr.co.doublecome.repository.vo.ConverSation;
+import kr.co.doublecome.repository.vo.GetCount;
 
 public interface ChattingService  {
 	List<Chat> chatList(ChatSearch cList);
@@ -14,4 +15,5 @@ public interface ChattingService  {
 	void readsUpdate(Chat chat);
 	int readsCount(Chat chat);
 	void readsDelete(ConverSation covst);
+	GetCount getMsg(String email);
 }

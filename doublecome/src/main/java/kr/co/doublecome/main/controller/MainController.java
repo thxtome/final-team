@@ -17,6 +17,7 @@ public class MainController {
 	@RequestMapping("/main.do")
 	public void main(Model model, HttpSession session) {
 		session.setAttribute("category", service.listCategory());
+		
 		model.addAttribute("auclist", service.mainList());
 		model.addAttribute("onAirlist", service.retrieveOnAirList());
 	}

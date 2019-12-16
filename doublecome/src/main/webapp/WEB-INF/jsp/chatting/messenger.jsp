@@ -37,7 +37,7 @@
 						                    <span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
 				                            <c:choose>
 				                            	<c:when test="${empty chat.covstRegDate}">
-						                            <span class="time">00:00</span>			                            				                            	
+						                            <span class="time"></span>			                            				                            	
 						                            <span class="preview">대화를 시작하세요!</span>
 				                            	</c:when>
 				                            	<c:otherwise>
@@ -55,7 +55,7 @@
 				                            <span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
 				                            <c:choose>
 				                            	<c:when test="${empty chat.covstRegDate}">
-						                            <span class="time">00:00</span>			                            				                            	
+						                            <span class="time"></span>			                            				                            	
 						                            <span class="preview">대화를 시작하세요</span>
 				                            	</c:when>
 				                            	<c:otherwise>
@@ -91,11 +91,14 @@
         </div>
     </div>
     <script>
-    	$(".person .count").each((index, value) => {
-    		if ($(value).attr("count") == 0) {
-    			$(value).addClass("hideCount");	
-    		}    		
-    	})
+    	function checkCount() {
+	    	$(".person .count").each((index, value) => {
+	    		if ($(value).attr("count") == 0) {
+	    			$(value).addClass("hideCount");	
+	    		}    		
+	    	})    		
+    	}
+    	checkCount();
     	 
     </script>
     <script src="<c:url value="/resources/js/chatting/chatting.js" />"></script>
