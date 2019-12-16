@@ -1,3 +1,5 @@
+//localStorage.clear();
+
 function swalAlert(msg) {
 	Swal.fire(msg)
 }
@@ -13,21 +15,6 @@ $('#summernote').summernote(
 	    disableResize: true,
 	    disableResizeEditor: true,
 	    resize: false,
-		toolbar : 
-			[
-				[
-						'style',
-						[ 'bold', 'italic', 'underline',
-								'clear' ] ],
-				[
-						'font',
-						[ 'strikethrough', 'superscript',
-								'subscript' ] ],
-				[ 'fontsize', [ 'fontsize' ] ],
-				[ 'color', [ 'color' ] ],
-				[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-				[ 'height', [ 'height' ] ] 
-			]
 });
 
 let sysdate = new Date()
@@ -86,6 +73,15 @@ $(".fileUpIcon").hover(() => {
 })
 
 $(".button").click(() => {
+	console.log(localStorage.getItem("allImages"))
+	console.log(JSON.parse(localStorage.getItem("allImages")))
+	$.ajax({
+		  type: "POST",
+		  url: "fileTag.do",
+		  data: {
+			  data : localStorage.getItem("allImages"),
+		  }
+		});
 	$div = $(".start").val().replace(/[^0-9]/g,"")
 	$div2 = $(".buy").val().replace(/[^0-9]/g,"")
 	if ($(".start").val() == "") {
@@ -154,15 +150,12 @@ function handleImgsFilesSelect(e) {
 
 $(".movePage").click(() => {
 	let d = JSON.parse(localStorage.getItem("allImages"))
-	for (i = 0; i < Object.keys(d).length; i++) {
-		console.log(Object.keys(d)[i])
-		for (k = 0; k < d[Object.keys(d)[i]].length; k++) {
-			console.log(d[Object.keys(d)[i]][k])
+		for (i = 0; i < Object.keys(d).length; i++) {
+			console.log(Object.keys(d)[i])
+			for (k = 0; k < d[Object.keys(d)[i]].length; k++) {
+				console.log(d[Object.keys(d)[i]][k])
+			}
 		}
-	}
 	window.open("uploadPhoto.do", "uploadPhoto", "width=1000, height=800, location=no, left=400")
 })
 		
-$(".tagTextBox").hover(() => {
-	$(this).css("display", "block")
-})

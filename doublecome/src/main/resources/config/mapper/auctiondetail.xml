@@ -56,6 +56,11 @@
 		values (#{fileGroupCode}, #{fileOriginName}, #{fileSystemName}, #{filePath})
 	</insert>
 	
+	<insert id="addTag" parameterType="UtilFile">
+		insert into file_tag (file_no, tag_x_cor, tag_y_cor, tag_content)
+		values (#{fileNo}, #{tagXCor}, #{tagYCor}, #{tagContent})
+	</insert>
+	
 	<select id="retrieveFile" parameterType="int" resultType="UtilFile">
 		select *
 		from file f
@@ -63,6 +68,17 @@
 		on f.file_group_code = a.file_group_code
 		where a.auction_no = #{auctionNo}
 	</select>
+	
+	<select id="retrieveFileTag" parameterType="int" resultType="UtilFile">
+		select t.*, f.*
+		from file_tag t
+		join file f
+		on t.file_no = f.file_no
+		join auction a
+		on a.file_group_code = f.file_group_code
+		where a.auction_no = #{auctionNo}
+	</select>
+	
 	
 	<delete id="deleteAuction" parameterType="int">
 		delete

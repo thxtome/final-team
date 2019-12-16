@@ -51,9 +51,7 @@ public class FileServiceImpl implements FileService{
 	
 	public void downLoadFile(int fileNo, HttpServletResponse res) {
 		try {
-			System.out.println(fileNo);
 			UtilFile uFile = mapper.selectOneFile(fileNo);
-			System.out.println(uFile);
 			File f = new File(uFile.getFilePath(), uFile.getFileSystemName());
 			String orgName = uFile.getFileOriginName();
 			if (orgName == null) {

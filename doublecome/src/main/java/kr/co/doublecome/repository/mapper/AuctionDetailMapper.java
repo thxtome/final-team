@@ -18,6 +18,7 @@ public interface AuctionDetailMapper {
 	int maxFileGroupCode();
 	void addAuction(Auction auction);
 	List<UtilFile> retrieveFile(int no);
+	List<UtilFile> retrieveFileTag(int no);
 	void deleteAuction(int no);
 	void updateInquiry(Inquiry inquiry);
 	void deleteInquiry(int no);
@@ -27,4 +28,6 @@ public interface AuctionDetailMapper {
 	void callSPAddDeal(Auction auction);
 	List<Auction> bidList(int no);
 	String selectPhNum(int no);
+	void addTag(UtilFile file);
+	
 }

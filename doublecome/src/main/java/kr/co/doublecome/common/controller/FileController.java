@@ -44,6 +44,7 @@ public class FileController {
 	
 	@RequestMapping("/downLoadFile.do")
 	public void downLoadFile(int fileNo, HttpServletResponse res) {
+		System.out.println(fileNo);
 		service.downLoadFile(fileNo, res);
 	}
 	

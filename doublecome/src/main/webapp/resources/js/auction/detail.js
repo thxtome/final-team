@@ -468,5 +468,10 @@ $(".InquiryBtn").click(() => {
 })
 
 $(".swiper-slide").on("click", () => {
-	alert("a")
+	$(".carousel-inner .item:nth-child(1)").addClass("active");
+	$(".modal").show();
+})
+$(".tagCancel").click(() => {
+	$(".carousel-inner .item").removeClass("active");
+	$(".modal").hide();
 })

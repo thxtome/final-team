@@ -91,6 +91,9 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	public List<UtilFile> retrieveFile(int no) {
 		return mapper.retrieveFile(no);
 	}
+	public List<UtilFile> retrieveFileTag(int no) {
+		return mapper.retrieveFileTag(no);
+	}
 	
 	public void deleteAuction(int no) {
 		mapper.deleteAuction(no);
@@ -121,5 +124,8 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	}
 	public void tempFile(String string) {
 		
+	}
+	public void addTag(UtilFile file) {
+		mapper.addTag(file);
 	}
 }

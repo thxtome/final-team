@@ -16,4 +16,9 @@ public class UtilFile {
 	private String filePath;
 	private String fileThumb;
 	private List<MultipartFile> attach;
+	
+	private int tagNo;
+	private int tagXCor;
+	private int tagYCor;
+	private String tagContent;
 }

@@ -14,13 +14,42 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/auction/insert.css"/>">
 <link rel="stylesheet"
+	href="<c:url value="/resources/css/auction/swiper.min.css"/>">
+<link rel="stylesheet"
 	href="<c:url value="/resources/summernote/summernote.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/datetimepicker/datetimepicker.css"/>">
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://kit.fontawesome.com/71437d7c9e.js" crossorigin="anonymous"></script>
+  <style>
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+  </style>
 <body>
+
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	<div id="wrapper">
 		<div class="contents">
@@ -89,7 +118,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 		<div class="hoverNotification">
 		<div>메인에 등록할 사진을 업로드 해주세요</div>
 	</div>	
-	
+
 	<script src="<c:url value="/resources/js/common/jquery-3.4.1.min.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/js/datetimepicker/moment.js" />"></script>
@@ -100,6 +129,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 	<script src="<c:url value="/resources/summernote/summernote.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/insert.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/uploadPhoto.js" />"></script>
+	<script src="<c:url value="/resources/js/auction/swiper.min.js" />"></script>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 
 </body>

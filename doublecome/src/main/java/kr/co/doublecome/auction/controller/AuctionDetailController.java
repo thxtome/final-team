@@ -1,21 +1,31 @@
 package kr.co.doublecome.auction.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.apache.commons.net.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import kr.co.doublecome.auction.service.AuctionDetailService;
-import kr.co.doublecome.common.service.FileService;
 import kr.co.doublecome.common.service.SmsService;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
@@ -30,8 +40,6 @@ public class AuctionDetailController {
 
 	@Autowired
 	private AuctionDetailService service;
-	@Autowired
-	private FileService fileService;
 //	@Autowired
 //	private HistoryService hService;
 	@Autowired
@@ -50,6 +58,7 @@ public class AuctionDetailController {
 		model.addAttribute("pr", ap.getPr());
 		model.addAttribute("file", service.retrieveFile(no));
 		model.addAttribute("bid", service.bidList(no));
+		model.addAttribute("tag", service.retrieveFileTag(no));
 	}
 	
 	@RequestMapping("/retrieveReceiveReview.do")
@@ -87,8 +96,7 @@ public class AuctionDetailController {
 	@RequestMapping("/addAuction.do")
 	public String addAuction(@RequestHeader(value = "referer") String referer, Principal principal, Auction auction, UtilFile uFile) throws Exception {
 		
-		int groupCode = fileService.uploadFile(uFile).getFileGroupCode();
-		
+		int groupCode = service.maxFileGroupCode() + 1;
 		auction.setUserEmail(principal.getName());
 		auction.setAuctionBuyNow(auction.getAuctionBuyNow().replaceAll(",", ""));
 		auction.setAuctionMinPrice(auction.getAuctionMinPrice().replaceAll(",", ""));
@@ -150,6 +158,55 @@ public class AuctionDetailController {
 		}
 		return root;
 	}
+	 
+	
+	
+	
+	@RequestMapping("/fileTag.do")
+	@ResponseBody
+	public void fileTag(String data, UtilFile file) throws Exception {
+		int fileGroupCode = service.maxFileGroupCode() + 1;
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(data);
+		JsonObject obj = element.getAsJsonObject(); 
+		Set<Map.Entry<String, JsonElement>> entries = obj.entrySet();
+		
+		for (Map.Entry<String, JsonElement> entry: entries) {
+			
+			
+			String sysName = entry.getKey().split("c:/java/upload/")[1];
+			String path = "c:/java/upload/temp/";
+			
+			File delFile = new File(entry.getKey());
+			File copyFile = new File(path + sysName);
+			FileInputStream fis = new FileInputStream(delFile);
+			FileOutputStream fos = new FileOutputStream(copyFile);
+			int input = 0; 
+			byte[] data2 = new byte[1024];			  
+			while((input = fis.read(data2)) != -1) {
+			  fos.write(data2, 0, input);
+			}
+			delFile.delete();
+			file.setFileGroupCode(fileGroupCode);
+			file.setFilePath(path);
+			file.setFileSystemName(sysName);
+			service.addFile(file);
+			
+			if (element.getAsJsonObject().get(entry.getKey()).isJsonArray()) {
+				JsonArray jsonArray = obj.getAsJsonArray(entry.getKey());
+				for (int i = 0; i < jsonArray.size(); i++) {
+					file.setFileNo(file.getFileNo());
+					file.setTagXCor(jsonArray.get(i).getAsJsonObject().get("x").getAsInt());
+					file.setTagYCor(jsonArray.get(i).getAsJsonObject().get("y").getAsInt());
+					file.setTagContent(jsonArray.get(i).getAsJsonObject().get("content").getAsString());
+					service.addTag(file);
+				}
+			} 
+			fis.close();
+			fos.close();
+		}
+	}
+	
 	
 	
 }
