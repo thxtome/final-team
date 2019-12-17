@@ -23,6 +23,24 @@
 		values (#{fileGroupCode}, #{fileOriginName}, #{fileSystemName}, #{filePath})
 	</insert>
 	
+	<!-- 유저 프로필 사진 -->
+	<insert id="addProfile" parameterType="UtilFile" >
+		<choose>
+			<when test="fileNo == 106">		
+		insert into file (file_group_code,  file_origin_name,  file_system_name, file_path)
+ 		VALUES ( #{fileGroupCode}, #{fileOriginName}, #{fileSystemName}, #{filePath}) ;
+			</when>
+			<otherwise>
+		replace into file (file_no, file_group_code,  file_origin_name,  file_system_name, file_path)
+ 		VALUES (#{fileNo}, #{fileGroupCode}, #{fileOriginName}, #{fileSystemName}, #{filePath}) ;
+			</otherwise>
+		</choose>
+	</insert>
+	<delete id="deleteProfile" parameterType="User">
+		delete from file
+		where file_path like '%#{user_email}/'	
+	</delete>
+	
 	<!-- 해당경매글 파일 가져오기 -->
 	<select id="selectFile" parameterType="int" resultType="UtilFile">
 		select max(file_no ) over (partition by f.file_group_code) as file_no, 

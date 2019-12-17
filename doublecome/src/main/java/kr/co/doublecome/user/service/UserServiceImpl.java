@@ -80,6 +80,17 @@ public class UserServiceImpl implements UserService{
 	public int checkNickname(String userNickname) {
 		return mapper.checkNickname(userNickname);
 	}
+	
+	//프로필 이미지
+	@Override
+	public void updateUserDefaultProfile(String email) {
+		mapper.updateUserDefaultProfile(email);
+	}
+	//프로필 이미지
+	@Override
+	public void updateUserCustomProfile(String email) {
+		mapper.updateUserCustomProfile(email);
+	}
 
 
 

@@ -1,6 +1,9 @@
 html, body {
 }
 
+td svg, span svg{
+	color :#969696;
+}
 
 	#bg{
 
@@ -11,7 +14,7 @@ html, body {
 		margin: auto;
 		position: relative;
 		width: 1000px;
-		height: 300px;
+		height: 320px;
 		top: 25px;
 		background: white;
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -230,6 +233,7 @@ html, body {
   float: left;
   border: 1px solid #90A4AE;
   text-align: center;
+  border-radius: 7px;
   width: 200px;
   height: 200px;
   margin: 70px 16px 16px 16px;
@@ -237,7 +241,7 @@ html, body {
 
 .m-upload__preview {
   position: relative;
-  padding-top: 160px;
+  padding-top: 200px;
   background-color: #B0BEC5;
   background-image: url(/doublecome/file/downLoadFile.do?fileNo=106);
   background-repeat: no-repeat;

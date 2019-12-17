@@ -57,6 +57,8 @@ public class FileController {
 	public String AjaxUserFileUpload(Principal p, @RequestParam("file") MultipartFile file, HttpServletResponse res) {
 		UtilFile util = new UtilFile();
 		List<MultipartFile> attach = new ArrayList<>();
+		
+		System.out.println(file.getOriginalFilename());
 		attach.add(file);
 		util.setAttach(attach);
 		util = service.uploadProfile(util, p.getName());
