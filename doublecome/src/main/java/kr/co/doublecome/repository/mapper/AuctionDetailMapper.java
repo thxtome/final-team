@@ -6,6 +6,7 @@ import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.Search;
+import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.repository.vo.UtilFile;
 
 public interface AuctionDetailMapper {
@@ -29,5 +30,6 @@ public interface AuctionDetailMapper {
 	List<Auction> bidList(int no);
 	String selectPhNum(int no);
 	void addTag(UtilFile file);
-	
+	List<Auction> smsList();
+	void smsUpdate();
 }

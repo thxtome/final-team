@@ -41,6 +41,8 @@ public class Auction {
 	private String userEmailBuyer;			// 구매자 이메일
 	private String userEmailSeller;			// 판매자 이메일
 	private int auctionBroadcast;			// 방송여부
+	private String userPhnum;				// 유저폰번호
+	
 	
 	private int fileNo;
 	private String fileOriginName;

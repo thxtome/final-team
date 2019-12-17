@@ -1,5 +1,14 @@
 let rPageNo = 1;
 let reviewCnt = 0;
+let limit = new Date(limitTime)
+let now = new Date()
+
+$(document).ready(() => {
+	if(limit.getTime() < now.getTime()) {
+		$(".afterModal").css("display", "block");
+		$(document).off();
+	} 
+})
 
 function swalAlert(msg) {
 	Swal.fire(msg)
@@ -44,22 +53,21 @@ $(window).scroll(function () {
 	  
 	})
 
-
-$(".remove_btn").click(() => {
-    Swal.fire({
-        title: '게시글을 삭제하시겠습니까',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '확인',
-        cancelButtonText: '취소'
-      }).then((result) => {
-        if (result.value) {
-            location.href="/doublecome/auction/deleteAuction.do?no=" + no
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-        }
-      })
+$(document).on("click", ".remove_btn", () => {
+	Swal.fire({
+		title: '게시글을 삭제하시겠습니까',
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '확인',
+		cancelButtonText: '취소'
+	}).then((result) => {
+		if (result.value) {
+			location.href="/doublecome/auction/deleteAuction.do?no=" + no
+		} else if (result.dismiss === Swal.DismissReason.cancel) {
+		}
+	})
 })
 
 $('.sidebar, .nav').stick_in_parent("#wrapper");
@@ -96,8 +104,7 @@ $("#btn2").click(() => {
   $("#insertbox2").html($("#inquiry_box"))
 })
 
-
-$(".reply").click((e) => {
+$(document).on("click", ".reply", () => {
 	$div = $(e.target).attr("id")
 	$("#inquiry_box").css('display', 'block')
 	$("." + $div).append($("#inquiry_box"))
@@ -105,8 +112,7 @@ $(".reply").click((e) => {
 	$(".inquiryParent").val($parent)
 })
 
-
-$(".notLogin").click(() => {
+$(document).on("click", ".notLogin", () => {
 	swal()
 })
 //$(".loginAlready").click(() => {
@@ -160,7 +166,7 @@ $(".bidPriceRank").each((index, item) => {
 	
 })
 
-$(".logout").click(() => {
+$(document).on("click", ".logout", () => {
 	swal();
 })
 
@@ -172,15 +178,6 @@ pg.movePage($("#nav2"),(pageNo) =>{
 //	let offset = $("#nav3").offset()
 //	$("html").animate({scrollTop : offset.top}, 400)
 })
-
-function scr() {
-	window.oriScroll = $(window).scrollTop();
-	return false;
-}
-function scro() {
-	$(window).scrollTop(window.oriScroll);
-	return false;
-}
 
 
 makeReviewListAjax()
@@ -291,8 +288,7 @@ function makeReviewList (result) {
 
 
 
-
-$(".updateInquiryBtn").click((e) => {
+$(document).on("click", ".updateInquiryBtn", (e) => {
 	let id = $(e.target).data("no")
 	let content = $(e.target).data("content")
 	let prevContent = $(".InquiryUpdateText").parents("div").parents("div").attr("class")
@@ -339,8 +335,7 @@ $(".updateInquiryBtn").click((e) => {
 	})
 	
 })
-
-$(".deleteInquiryBtn").click((e) => {
+$(document).on("click", ".deleteInquiryBtn", (e) => {
 	let id = $(e.target).data("no")
 	
 	    Swal.fire({
@@ -395,8 +390,7 @@ $(".start, .buy").on("focus", function() {
 $(".start").click((e) => {
 	   $($(e.target)).val("")
 })
-
-$(".bidModalBtn").click(() => {
+$(document).on("click", ".bidModalBtn", () => {
 	if (email == id) {
 		swalAlert("자신의 제품에 입찰 혹은 구매하실 수 없습니다.")
 	} else {
@@ -439,8 +433,7 @@ $(".bidModalBtn").click(() => {
 })
 
 
-
-$(".loginAlreadyBuyNow").click(() => {
+$(document).on("click", ".loginAlreadyBuyNow", () => {
 	if (email == id) {
 		swalAlert("자신의 제품에 입찰 혹은 구매하실 수 없습니다.")
 	} else {
@@ -464,8 +457,7 @@ $(".loginAlreadyBuyNow").click(() => {
       })
 	}
 })
-
-$(".InquiryBtn").click(() => {
+$(document).on("click", ".InquiryBtn", () => {
 	if (email == id) {
 		swalAlert("자신의 글에 문의등록을 하실 수 없습니다.")
 	} else {

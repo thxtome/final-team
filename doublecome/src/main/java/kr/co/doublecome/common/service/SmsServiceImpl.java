@@ -12,17 +12,16 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 public class SmsServiceImpl implements SmsService{
 	
 	  public void sendSMS(String msg, String phNo) {
+		  System.out.println(msg);
 		    String api_key = "";
 		    String api_secret = "";
 		    Message coolsms = new Message(api_key, api_secret);
-
 		    HashMap<String, String> params = new HashMap<String, String>();
 		    params.put("to", phNo);
 		    params.put("from", "");
 		    params.put("type", "SMS");
 		    params.put("text", msg);
 		    params.put("app_version", "JAVA SDK v1.2");
-		    System.out.println(msg + phNo);
 		    try {
 		      JSONObject obj = (JSONObject) coolsms.send(params);
 		      System.out.println(obj.toString());

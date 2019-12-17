@@ -19,7 +19,6 @@
 		<div class="modal">
 			<div class="sidebar">
 				<div class="sidebarContent">
-					<textarea class="tagText" placeholder="태그안에 들어갈 내용을 입력해주세요" onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
 					<button class="tagCancel" type="button" >취소</button>
 					<button class="tagComplete" type="button" >완료</button>
 				</div>
@@ -38,7 +37,6 @@
 				</div>
 			</header>
 			<div class="contents">
-
 				<ul class="npu_image_list _list _list-list npu_cols_6 j-selectable">
 
 					<li class="npu_image_item _npu_image_item_blank">

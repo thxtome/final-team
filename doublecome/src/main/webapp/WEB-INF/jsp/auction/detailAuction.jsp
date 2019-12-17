@@ -29,12 +29,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
     <body>
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	<div id="wrapper">
-		<c:set var="now" value="<%=new java.util.Date()%>" />
-		<fmt:formatDate value="${now}" pattern="yyyyMMddhhmm" var="nowDate" />
-		<fmt:formatDate value="${auction.auctionLimitDate}" pattern="yyyyMMddhhmm" var="limitDate" />
-		<c:if test="${nowDate >= limitDate}">
+		<fmt:formatDate value="${auction.auctionLimitDate}" pattern="yyyy-MM-dd hh:mm:ss" var="limitDate" />
 		<div class="afterModal"></div>
-		</c:if>
 		<div id="contents">
 			<div>
 			<sec:authorize access="isAuthenticated()">

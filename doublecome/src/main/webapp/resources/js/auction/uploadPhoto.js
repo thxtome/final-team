@@ -190,29 +190,19 @@ $("#attachBtn").click(()=>{
 	let d = JSON.parse(localStorage.getItem("allImages"))
 	for (i = 0; i < Object.keys(d).length; i++) {
 		html = `
-			<img src="${path}/file/fileRoot.do?root=${Object.keys(d)[i]}" data-filename="${Object.keys(d)[i]}"">
+			<img class="imgContent" src="${path}/file/fileRoot.do?root=${Object.keys(d)[i]}" data-filename="${Object.keys(d)[i]}"">
 		`
-//			html = `
-//
-//				<div class="imgtempWrapper${i}">
-//				<div class="imgWrapper">
-//				<img src="${path}/file/fileRoot.do?root=${Object.keys(d)[i]}" data-filename="${Object.keys(d)[i]}"">
-//				</div>
-//				</div>
-//
-//			`
+
 			$(".img_wrap", opener.document).append(html);
-//	for (k = 0; k < d[Object.keys(d)[i]].length; k++) {
-//		html = `
-//		<div class="tagTextBox" style="top : ${d[Object.keys(d)[i]][k].y}%; left : ${d[Object.keys(d)[i]][k].x}%;">
-//		<textarea readonly class="addTag">${d[Object.keys(d)[i]][k].content}</textarea>
-//		<i class="glyphicon glyphicon-menu-right hoverBtn" />
-//		</div>
-//		`
-//		console.log(d[Object.keys(d)[i]][k])
-//		$(`.imgtempWrapper${i} .imgWrapper`, opener.document).append(html);
-//		}
+
 	}
 	self.close();
+})
+
+
+
+$(document).on("keyup", ".addTag", function () {
+	$(".tag").text($(this).val())
+	console.log($(this).val())
 })
 
