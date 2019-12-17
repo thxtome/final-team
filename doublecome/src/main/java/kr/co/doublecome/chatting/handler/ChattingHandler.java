@@ -33,14 +33,12 @@ public class ChattingHandler extends TextWebSocketHandler {
 	@SuppressWarnings("null")
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("채팅 접속");
 		Map<String, Object> userData = session.getAttributes();
 		String email = (String) userData.get("userId");
 		ChatSearch ctList = new ChatSearch();
 		ctList.setEmail(email);
 		List<Chat> chatList = service.chatList(ctList);
 		for(Chat chat : chatList) {
-			System.out.println("채팅방번호" +chat.getChatNo());
 			Map<String, WebSocketSession> userSession = chatMap.get(chat.getChatNo());
 			if(userSession == null) {
 				userSession = new HashMap<String, WebSocketSession>(); 
@@ -50,25 +48,31 @@ public class ChattingHandler extends TextWebSocketHandler {
 			chatMap.put(chat.getChatNo(), userSession);
 		}
 	}
-	
-	@SuppressWarnings("unlikely-arg-type")
-	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		String msg = message.getPayload();
-		System.out.println(msg);
-		ConverSation covst = gson.fromJson(message.getPayload(), ConverSation.class);
-		System.out.println("유저 아이디"+covst.getUserEmail());
-		System.out.println("유저타입"+covst.getUserType());
+	public void webSend(ConverSation covst, WebSocketSession session) {
 		String data = gson.toJson(covst);
-		System.out.println("보낼데이터 : " +  data);
 		Map<String, WebSocketSession> userSession = chatMap.get(covst.getChatNo());
 		for(String key : userSession.keySet()) {
 			WebSocketSession user = userSession.get(key);
-			System.out.println("session : " + user.getId());
 			if(!user.getId().equals(session.getId())) {
-				System.out.println("같지않다");
-				user.sendMessage(new TextMessage(data));				
+				try {
+					user.sendMessage(new TextMessage(data));				
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
+		}
+	}
+	@SuppressWarnings("unlikely-arg-type")
+	@Override
+	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		ConverSation covst = gson.fromJson(message.getPayload(), ConverSation.class);
+		System.out.println("데이터 타입" + covst.getDataType());
+		if(covst.getDataType() == 1) {
+			webSend(covst, session);
+		} else if(covst.getDataType() == 2){
+			webSend(covst, session);
+		} else if(covst.getDataType() == 3){
+			webSend(covst, session);
 		}
 	}
 

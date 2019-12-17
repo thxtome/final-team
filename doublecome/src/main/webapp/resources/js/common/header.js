@@ -18,11 +18,13 @@ $(() => {
 	
 	ws.onmessage = (evt) => {
 	  let email = $(".topbar .readsCount").data("id");
+	  let sendData = {'email':email}
+	  console.log(sendData)
 	  let options = {
 			url : "/doublecome/chatting/readsCount.do",
 			type : "POST",
 			contentType : "application/json",
-			data : {email : $(".topbar .readsCount").data("id")}
+			data : email
 	  }
 	  $.ajax(options).done(data => {
 		  console.log(data)
@@ -53,14 +55,14 @@ $(() => {
 	
 });
 $(document).ready(() => {
-	let email = $(".topbar .readsCount").data("id");
-	if (email != null) {
+	let userEmail = $(".topbar .readsCount").data("id");
+	if (userEmail != null) {
 		
 	  let options = {
 			url : "/doublecome/chatting/readsCount.do",
 			type : "POST",
 			contentType : "application/json",
-			data : {email : $(".topbar .readsCount").data("id")}
+			data : userEmail
 	  }
 	  $.ajax(options).done(data => {
 		  console.log(data)

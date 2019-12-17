@@ -22,8 +22,8 @@
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal.user" var="u" />
 			<div style="width : 1023px">
-				<span class="readsCount" readsCount=10 data-id="${u.userEmail}">
-					<a href="javascript:popupOpen('<c:url value="/chatting/messenger.do?email=${u.userEmail}"/>')">메세지</a>
+				<span class="readsCount" readsCount data-id="${u.userEmail}">
+					<a href="javascript:popupOpen('<c:url value="/chatting/messenger.do?email=${u.userEmail}"/>')"><i class="far fa-comment-dots"></i>메세지</a>
 				</span>
 				<span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
 				<span>${u.userEmail}</span>

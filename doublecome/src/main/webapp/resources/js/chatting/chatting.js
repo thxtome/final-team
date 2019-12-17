@@ -15,9 +15,8 @@ let friends = {
 	    f.classList.contains('active') || setAciveChat(f)
 	  })
 });
-
+let ws = null;
 function setAciveChat(f) {
-  console.log(f)
   let email = $(".wrapper").data("id");
   $(".write").css("display", "block")
   if(friends.list.querySelector('.active') != null) {
@@ -31,11 +30,11 @@ function setAciveChat(f) {
   }
   chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat')
   friends.name = f.querySelector('.name').innerText
-  chat.name.innerHTML = `<span><span class="name">${friends.name}</span></span>`
+  chat.name.innerHTML = `<img src="/doublecome/resources/images/macbook.jpg"><span><span class="name">${friends.name}</span></span>`
   let countTag = $(`li[data-chat=${chat.person}] .count`);
   countTag.addClass("hideCount");
   countTag.attr("count", 0);
-  let sendData =  {chatNo:$(`div[data-chat=${chat.person}]`).data("no"), userType:$(f).data("type")}
+  let sendData =  {chatNo:$(`div[data-chat=${chat.person}]`).data("no"), userType:$(f).data("type"), userEmail:$(".wrapper").data("id"),dataType:2 }
   let options = {
 		url : "chatList.do",
 		type : "POST",
@@ -44,26 +43,30 @@ function setAciveChat(f) {
   }
   $.ajax(options).done(data => {
 		makeAjaxChatList(data, email);
-		
+		ws.send(JSON.stringify(sendData));
   }).fail(() => {
 		 alert("ajax 처리 에러발생");
   });
 }
 function makeAjaxChatList(data, email) {
-	let chatArea ="";
+	let chatNo = data[0].chatNo;
+	let chatArea = $(`div[data-chat="person${chatNo}"`).html("")
 	data.forEach((ele,i)=> {
-		chatArea = $(`div[data-chat="person${ele.chatNo}"`);
 		if (email == ele.userEmail) {
 			if (ele.covstReads == 1){
 				chatArea.append(
 					`
-						<div class='bubble me'>${ele.covstContent}</div>
+					<div class='right_field'>						
+						<div class='bubble me'><span>1</span>${ele.covstContent}</div>
+					</div>
 					`		
 				)
 			} else {
 				chatArea.append(
 					`
-						<div class='bubble me'>${ele.covstContent}</div>
+					<div class='right_field'>						
+						<div class='bubble me'><span></span>${ele.covstContent}</div>
+					</div>	
 					`		
 				)
 			}
@@ -71,26 +74,35 @@ function makeAjaxChatList(data, email) {
 			if (ele.covstReads == 1){
 				chatArea.append(
 					`
-						<div class='bubble you'>${ele.covstContent}</div>
+					<div class='left_field'>
+						<div class='bubble you'>${ele.covstContent}<span>1</span></div>
+					</div>
 					`		
 				)
 			} else {
 				chatArea.append(
 					`
-						<div class='bubble you'>${ele.covstContent}</div>
+					<div class='left_field'>
+						<div class='bubble you'>${ele.covstContent}<span>0</span></div>
+					</div>
 					`		
-				)
+				)				
 			}
 		}
 	})
+	
+	let checkReads = $(".left_field .bubble.you span")
+		$.each(checkReads, (index, ele) => {
+			$(ele).text("");
+	})
 	$(".right_message_field").scrollTop($(".right_message_field")[0].scrollHeight)
 }
-let ws = null;
+
 let email = $(".wrapper").data("id");
 let person = null;
 let peopleField = null;
 $(document).scrollTop($(document).height());
-
+let myMessage = null;
 function insertData () {
 	let $msg = $("input[data-chatfield='chat']");
 	if($msg.val() != "") {
@@ -107,7 +119,7 @@ function insertData () {
 				peopleField = $(people);
 			}
 		}
-		let sendData = {userEmail : $(".wrapper").data("id"), covstContent: $msg.val(), chatNo:person.data("no"), userType:peopleField.data("type")}	
+		let sendData = {userEmail : $(".wrapper").data("id"), covstContent: $msg.val(), chatNo:person.data("no"), userType:peopleField.data("type"), dataType : 1}	
 		let options = {
 				url : "insertChat.do",
 				type : "POST",
@@ -119,13 +131,22 @@ function insertData () {
 		}).fail(() => {
 			alert("ajax 처리 에러발생");
 		});
-		person.append("<div class='bubble me'>"+ $msg.val() + "</div></span>");
+		person.append("<div class='right_field'><div class='bubble me'><span>1</span>"+ $msg.val() + "</div></div>");
 		person.parent().scrollTop(person.parent()[0].scrollHeight);
 		peopleField.children(".preview").text($msg.val());
 		peopleField.children(".time").text(nowDate());
 		$msg.val("");
+		myMessage = $(".bubble.me span");
 		ws.send(JSON.stringify(sendData));
 	}
+}
+
+function withchat(message) {
+	console.log("widthchat : " + message)
+	$.each(message, (index, ele) => {
+		console.log(ele)
+		$(ele).text("");
+	})
 }
 $(() => {
 	ws = new WebSocket("ws://192.168.0.11/doublecome/chatting.do");	
@@ -136,52 +157,74 @@ $(() => {
 	
 	ws.onmessage = (evt) => {
 		let data = JSON.parse(evt.data);
+		let returnSend = "";
 		let chatArea = $(`div[data-no=${data.chatNo}]`);
-		if(chatArea.hasClass("active-chat")){			
-			let options = {
-					url : "deleteReads.do",
-					type : "POST",
-					contentType : "application/json",
-					data : JSON.stringify(data)
+		if (data.dataType == 1) {
+			if(chatArea.hasClass("active-chat")){			
+				let options = {
+						url : "deleteReads.do",
+						type : "POST",
+						contentType : "application/json",
+						data : JSON.stringify(data)
+				}
+				$.ajax(options).done(data => {
+				}).fail(() => {
+					alert("reads업데이트 처리 에러발생");
+				});
+				$(`li[data-chat="person${data.chatNo}"] .time`).text(nowDate())
+				$(`li[data-chat="person${data.chatNo}"] .preview`).text(data.covstContent)
+				chatArea.append(
+						`
+						<div class='left_field'>
+						<div class='bubble you'>${data.covstContent}<span></span></div>
+						</div>
+						
+						`
+				)
+				$(".right_message_field").scrollTop($(".right_message_field")[0].scrollHeight)
+				returnSend = {userEmail:data.userEmail, dataType:3, chatNo: data.chatNo}
+				ws.send(JSON.stringify(returnSend))
+			} else {
+				let sendData = {
+						chatNo : data.chatNo,
+						userType : data.userType
+				}
+				let options = {
+						url : "updateReads.do",
+						type : "POST",
+						contentType : "application/json",
+						data : JSON.stringify(sendData)
+				}
+				$.ajax(options).done(countdata => {
+					let countTag = $(`li[data-chat="person${data.chatNo}"] .count`);
+					$(countTag).attr("count",countdata);
+					countTag.removeClass("hideCount");
+					$(`li[data-chat="person${data.chatNo}"] .time`).text(nowDate())
+					$(`li[data-chat="person${data.chatNo}"] .preview`).text(data.covstContent)
+				}).fail(() => {
+					alert("ajax 처리 에러발생");
+				});
 			}
-			$.ajax(options).done(data => {
-				
-			}).fail(() => {
-				alert("reads업데이트 처리 에러발생");
-			});
-			$(`li[data-chat="person${data.chatNo}"] .time`).text(nowDate())
-			$(`li[data-chat="person${data.chatNo}"] .preview`).text(data.covstContent)
-			chatArea.append(
-				`
-				<div class='bubble you'>${data.covstContent}</div>
-				`
-			)
-			$(".right_message_field").scrollTop($(".right_message_field")[0].scrollHeight)
-		} else {
-			let sendData = {
-				chatNo : data.chatNo,
-				userType : data.userType
-			}
-			let options = {
-					url : "updateReads.do",
-					type : "POST",
-					contentType : "application/json",
-					data : JSON.stringify(sendData)
-	   	    }
-		    $.ajax(options).done(countdata => {
-		    	console.log("데이터들어옴2")
-		    	let countTag = $(`li[data-chat="person${data.chatNo}"] .count`);
-		    	console.log("카운터 탭"+ countTag)
-		    	$(countTag).attr("count",countdata);
-		    	countTag.removeClass("hideCount");
-		    	$(`li[data-chat="person${data.chatNo}"] .time`).text(nowDate())
-		    	$(`li[data-chat="person${data.chatNo}"] .preview`).text(data.covstContent)
-			}).fail(() => {
-			    alert("ajax 처리 에러발생");
-			});
+		} else if(data.dataType == 2){
+		  let email = $(".wrapper").data("id")
+		  let options = {
+				url : "chatList.do",
+				type : "POST",
+				contentType : "application/json",
+				data : JSON.stringify(data)
+		  }
+		  $.ajax(options).done(data => {
+				makeAjaxChatList(data, email);
+		  }).fail(() => {
+				 alert("ajax 처리 에러발생");
+		  });
+		} else if(data.dataType == 3) {
+			let checkCnt = $(".right_field .bubble.me span");
+			console.log(checkCnt)
+			$.each(checkCnt, (index, ele) => {
+				$(ele).text("");
+			})
 		}
-		
-		
 	};
 	ws.onerror = (evt) => {
 		$("#result").append("<div>웹소켓 에러 발생 : " + evt.data + "</div>");
@@ -236,9 +279,6 @@ function makeSearchList(data) {
 	data.forEach((chat, i) => {
 		if (chat.userEmailSeller == $("wrapper").data("id")) {
 			let showCount = "count";
-			if (chat.readsSeller === 0) {
-				showCount = " hideCount"
-			}
 			if (chat.covstRegDate === undefined) {
 				$peopleArea.append(`
 						<li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
@@ -265,9 +305,6 @@ function makeSearchList(data) {
 			}
 		} else {
 			let showCount = "count";
-			if (chat.readsSeller === 0) {
-				showCount = " hideCount"
-			}
 			if (chat.covstRegDate == null) {
 				$peopleArea.append(`
 						<li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>

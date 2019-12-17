@@ -16,4 +16,5 @@ public interface ChattingService  {
 	int readsCount(Chat chat);
 	void readsDelete(ConverSation covst);
 	GetCount getMsg(String email);
+	void messageReadsUpdate(ConverSation covst);
 }

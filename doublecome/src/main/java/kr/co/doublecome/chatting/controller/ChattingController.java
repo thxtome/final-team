@@ -20,23 +20,17 @@ import kr.co.doublecome.repository.vo.GetCount;
 public class ChattingController {
 	@Autowired
 	private ChattingService service;
-	
 	@RequestMapping("/messenger.do")
 	public void messenger(Model model,	 String email) {
 		model.addAttribute("email", email);
 		ChatSearch ctList = new ChatSearch();
 		ctList.setEmail(email);
-		List<Chat> c = service.chatList(ctList);
-		for(Chat ct : c) {
-			System.out.println("채팅내용"+ct.getCovstContent());
-		}
 		model.addAttribute("chat", service.chatList(ctList));
 	}
 	@RequestMapping("/chatList.do")
 	@ResponseBody
 	public List<ConverSation> chatList(@RequestBody ConverSation covst) {
-		System.out.println(covst.getUserType());
-		System.out.println(covst.getChatNo());
+		service.messageReadsUpdate(covst);
 		service.chatUpdate(covst);
 		return service.selectOneChat(covst);
 	}
@@ -57,26 +51,18 @@ public class ChattingController {
 	@RequestMapping("/deleteReads.do")
 	@ResponseBody
 	public void deleteReads(@RequestBody ConverSation covst) {
+		service.messageReadsUpdate(covst);
 		service.readsDelete(covst);
 	}
 	
 	@RequestMapping("/searchChat.do")
 	@ResponseBody
 	public List<Chat> searchChat(@RequestBody ChatSearch ctList) {
-		System.out.println("채팅 검색창 왔음");
-		System.out.println("검색대상" + ctList.getEmail());
-		System.out.println("감섹키워드" + ctList.getSearchValue());
-		List<Chat> chat = service.chatList(ctList);
-		System.out.println(chat);
 		return service.chatList(ctList);
 	}
 	@RequestMapping("/readsCount.do")
 	@ResponseBody
 	public GetCount readsCount(@RequestBody String email) {
-		System.out.println("헤더 유저이메일" + email);
-		GetCount ct = service.getMsg(email);
-		System.out.println(ct.getReadsBuyer());
-		System.out.println(ct.getReadsSeller());
 		return service.getMsg(email);
 	}
 }

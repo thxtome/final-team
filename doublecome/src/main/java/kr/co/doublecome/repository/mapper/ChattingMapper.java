@@ -16,4 +16,5 @@ public interface ChattingMapper {
 	void updateReads(Chat chat);
 	void deleteReads(ConverSation covst);
 	GetCount getMessage(String email);
+	void messageReads(ConverSation covst);
 }
