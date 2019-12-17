@@ -108,9 +108,20 @@
 		   where chat_no = #{chatNo}
 	</select>
 	<select id="getMessage" parameterType="String" resultType="GetCount">
-		select count(reads_Seller) as readsSeller, count(reads_buyer) as readsBuyer
+		select (select sum(reads_seller)
 		  from chat
 		 where user_email_seller = #{email}
-		    or user_email_buyer = #{email}
+		) as readsSeller,
+        (select sum(reads_buyer)
+		   from chat
+		  where user_email_buyer = #{email}
+		) as readsBuyer
+		  from chat limit 1
 	</select>
+	<update id="messageReads" parameterType="Conversation">
+		update conversation
+		   set covst_reads = 0
+		 where chat_no = #{chatNo}
+		   and user_Email != #{userEmail}
+	</update>
 </mapper>

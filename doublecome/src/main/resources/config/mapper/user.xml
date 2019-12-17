@@ -90,12 +90,24 @@
 		   set user_pass = #{userPass},
 		   	   user_nickname = #{userNickname},
 			   user_phnum = #{userPhnum}
-		<if test="fileNo == 106">
-			   ,file_groub_code = 0
-		</if>
-		<if test="fileNo != null">
-			   ,file_groub_code = 1
-		</if>
+		<choose>
+			<when test="fileOriginName.length() == 0">
+				,file_group_code = 0
+			</when>
+			<otherwise>
+				,file_group_code = 1
+			</otherwise>
+		</choose>
+		 where user_email = #{userEmail}
+	</update>
+	<update id="updateUserDefaultProfile" parameterType="string" >
+		update user
+		   set file_group_code = 0
+		 where user_email = #{userEmail}
+	</update>
+	<update id="updateUserCustomProfile" parameterType="string" >
+		update user
+		   set file_group_code = 1
 		 where user_email = #{userEmail}
 	</update>
 	

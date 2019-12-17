@@ -76,7 +76,7 @@
 }
 .topbar .readsCount[readsCount]:after{
 	position: absolute;
-    right: -38%;
+    right: -25%;
     top: -58%;
     content: attr(readsCount);
     font-size: 30%;
@@ -91,7 +91,7 @@
 }
 .topbar .hideCount.readsCount[readsCount]:after{
 	position: absolute;
-    right: -38%;
+    right: -25%;
     top: -58%;
     content: attr(readsCount);
     font-size: 30%;

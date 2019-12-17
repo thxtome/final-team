@@ -16,4 +16,5 @@ public class ConverSation {
 	private Date covstRegDate;
 	private int userType;
 	private int covstReads;
+	private int dataType;
 }

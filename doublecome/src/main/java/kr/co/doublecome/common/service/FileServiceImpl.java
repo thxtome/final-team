@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.doublecome.repository.mapper.FileMapper;
+import kr.co.doublecome.repository.mapper.UserMapper;
 import kr.co.doublecome.repository.vo.UtilFile;
 
 @Service("kr.co.doublecome.common.service.FileServiceImpl")
@@ -24,6 +25,11 @@ public class FileServiceImpl implements FileService{
 
 	@Autowired
 	private FileMapper mapper;
+	
+	@Autowired
+	private UserMapper userMapper;
+	
+	
 	
 	public UtilFile uploadFile(UtilFile uFile) {
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
@@ -66,11 +72,12 @@ public class FileServiceImpl implements FileService{
 				mFile.transferTo(file);
 			} catch (Exception e) {
 			}
+			uFile.setFileNo(userMapper.selectUserInfoByName(email).getFileNo());
 			uFile.setFileGroupCode(groupCode);
 			uFile.setFileOriginName(orgName);
 			uFile.setFileSystemName(sysName);
 			uFile.setFilePath("c:/java/upload" + filePath);
-			mapper.addFile(uFile);
+			mapper.addProfile(uFile);
 		}
 		return uFile;
 	}

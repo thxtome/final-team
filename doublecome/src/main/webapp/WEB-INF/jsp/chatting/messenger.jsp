@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="right_container">
-                <div class="right_top_field" style="height:13px; line-height:13px"></div>
+                <div class="right_top_field" ></div>
                 <div class="right_message_field">
                	<c:forEach var="chat" items="${chat}">
                     <div class="chat" data-chat="person${chat.chatNo}" data-no="${chat.chatNo}" >
@@ -96,6 +96,7 @@
 	    		if ($(value).attr("count") == 0) {
 	    			$(value).addClass("hideCount");	
 	    		}    		
+	    	console.log("함수왔음")
 	    	})    		
     	}
     	checkCount();

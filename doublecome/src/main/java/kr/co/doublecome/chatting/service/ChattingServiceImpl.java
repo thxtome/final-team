@@ -41,4 +41,7 @@ public class ChattingServiceImpl implements ChattingService	{
 	public GetCount getMsg(String email) {
 		return mapper.getMessage(email);
 	}
+	public void messageReadsUpdate(ConverSation covst) {
+		mapper.messageReads(covst);
+	}
 }

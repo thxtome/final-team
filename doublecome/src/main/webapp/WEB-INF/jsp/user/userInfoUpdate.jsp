@@ -27,7 +27,7 @@
 <!-- <form id="infoBox" method="post" action="/doublecome/file/photoUpload.do" class="uploader" enctype="multipart/form-data" >
  </form>
  --> <form method="post" action="<c:url value="/user/userUpdate.do"/>" enctype="multipart/form-data" >
-
+												  	
 <div class="l-constrained">
 <!--   <div class="m-box"> -->
       <div class="m-upload js-fileupload">
@@ -42,8 +42,8 @@
             <input type="file" accept="image/*" name="file" id="ul-button-1">
             
             <label for="ul-button-1">
-              <i class="mdi mdi-image"></i>
-              <span>사진 등록</span>
+             
+              <span> <i class="far fa-image fa-1x"></i>사진 등록</span>
             </label>
           </div>
           </div>
@@ -93,7 +93,7 @@
 	    		<th>비밀번호</th>
 	    		<td>
 	    		<i class="fas fa-unlock-alt fa-1x" id="icon"></i>
-	    		<input id="userPass" name="userPass" type="password" value="" placeholder="비밀번호 확인"  class="registInput">
+	    		<input id="userPass" name="userPass" type="password" value="" placeholder="비밀번호"  class="registInput">
 	    		<input id="userPassConfirm" name="userPassConfirm" type="password" placeholder="비밀번호 확인" class="registInput">
 				<div id="alert"></div>
 	    		</td>
