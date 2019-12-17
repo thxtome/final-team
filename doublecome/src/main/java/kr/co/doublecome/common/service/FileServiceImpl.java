@@ -1,16 +1,20 @@
 package kr.co.doublecome.common.service;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -135,5 +139,48 @@ public class FileServiceImpl implements FileService{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void saveBase64File(String content) {
+		UtilFile util = new UtilFile();
+		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
+		String filePath = "/history" + sdf.format(new Date());
+		int groupCode = mapper.maxFileGroupCode() + 1;
+		String orgImg = content;
+		String img = content;
+//		while(true) {
+			int extTempStart = img.indexOf("image/");
+			if (extTempStart == -1) return;
+			String extTemp = img.substring(extTempStart + 6);
+			String ext = extTemp.substring(0, extTemp.indexOf(";"));
+			int start = img.indexOf("base64,");
+			String temp = img.substring(start + 7);
+			String nameStart = temp.substring(temp.indexOf("data-filename=\"") + 15);
+			String orgName = nameStart.substring(0, nameStart.indexOf("\""));
+			System.out.println(orgName);
+			int end = temp.indexOf("\"");
+			img = img.substring(end);
+			String baseImg = temp.substring(0, end);
+			byte[] imageBytes = DatatypeConverter.parseBase64Binary(baseImg);
+			
+			String sysName = UUID.randomUUID().toString() + "." + ext;
+			try {
+				File file = new File("c:/java/upload" + filePath + sysName);
+				if(file.exists() == false) file.mkdirs();
+				System.out.println(imageBytes);
+				BufferedImage bufImg = ImageIO.read(new ByteArrayInputStream(imageBytes));
+				System.out.println(bufImg);
+				ImageIO.write(bufImg, ext, file);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			util.setFileGroupCode(groupCode);
+			util.setFileOriginName(orgName);
+			util.setFileSystemName(sysName);
+			util.setFilePath("c:/java/upload" + filePath);
+			mapper.addFile(util);
+//		}
 	}
 }

@@ -402,34 +402,43 @@ $('#summernote').summernote(
 		    disableResizeEditor: true,
 		    resize: false,
 		    toolbar : ['insert', ['picture']],
-		    focus: true,
-		    callbacks: {
-		    	onImageUpload: function (files, editor, welEditable) {
-		        for (var i = files.length - 1; i >= 0; i--) {
-		        	sendFile(files[i], this);
-		          }
-		        }
-		      }
+		    focus: true
+//		    callbacks: {
+//		    	
+//		    	onImageUpload: function (files, editor, welEditable) {
+//		        for (var i = files.length - 1; i >= 0; i--) {
+//		        	console.log(files[i]);
+//		        	console.log(btoa(files[i]));
+//		        	localStorage.setItem("i", files[i]);
+//		        	sendFile(btoa(files[i]));
+//		        	sendFile(files[i], this);
+//		        	console.log("localStorage:",localStorage.getItem("i"))
+//		          }
+//		        }
+//		      }
 });
 
-function sendFile(file, editor) {
-    // 파일 전송을 위한 폼생성
-		var data = new FormData();
-	    data.append("file", file);
-	    $.ajax({ // ajax를 통해 파일 업로드 처리
-	        data : data,
-	        type : "POST",
-	        url : contextPath + "/file/photoUpload.do",
-	        cache : false,
-	        contentType : false,
-	        enctype: "multipart/form-data",
-	        processData : false,
-	        success : function(url) { // 처리가 성공할 경우
-            // 에디터에 이미지 출력
-	        	$(editor).summernote('editor.insertImage', url);
-	        }
-	    });
+function sendFile(img, editor) {
+	$(editor).summernote('editor.insertImage', img);
 	}
+//function sendFile(file, editor) {
+//	// 파일 전송을 위한 폼생성
+//	var data = new FormData();
+//	data.append("file", file);
+//	$.ajax({ // ajax를 통해 파일 업로드 처리
+//		data : data,
+//		type : "POST",
+//		url : contextPath + "/file/photoUpload.do",
+//		cache : false,
+//		contentType : false,
+//		enctype: "multipart/form-data",
+//		processData : false,
+//		success : function(url) { // 처리가 성공할 경우
+//			// 에디터에 이미지 출력
+//			$(editor).summernote('editor.insertImage', url);
+//		}
+//	});
+//}
 
 // 후기제목 클릭시 후기상세글 노출
 $("body").on("click" ,".reviewTitle", (e) => {
