@@ -1,7 +1,6 @@
 let rPageNo = 1;
 let reviewCnt = 0;
 
-
 function swalAlert(msg) {
 	Swal.fire(msg)
 }
@@ -25,6 +24,27 @@ function swal() {
       })
 }
 
+$(window).scroll(function () {
+	  height = $(document).scrollTop();
+	  margin = parseInt($(".afterModal").css("margin-top"))
+	  marginTop = margin - height
+	  top1 = $(".topbar").css("height")
+	  top2 = $(".topContent").css("height")
+	  // 헤더의 길이
+	  if (marginTop <= 0 && height >= (parseInt(top1) + parseInt(top2))) {
+		  $(".afterModal").css("margin-top", 0)
+		  //만약 scrollTop이 헤더의 길이보다 커지면 마진을 0 으로
+	  } else if(height <= 220) {
+		  $(".afterModal").css("margin-top", (parseInt(top1) + parseInt(top2))-height+"px")
+		  //스크롤을 다시 올리면 원래의 마진 복구
+	  } else {
+		  $(".afterModal").css("margin-top", (parseInt(top1) + parseInt(top2))-height+"px")
+		  //스크롤을 내리면 마진탑을 내림
+	  }
+	  
+	})
+
+
 $(".remove_btn").click(() => {
     Swal.fire({
         title: '게시글을 삭제하시겠습니까',
@@ -44,20 +64,10 @@ $(".remove_btn").click(() => {
 
 $('.sidebar, .nav').stick_in_parent("#wrapper");
 
-let galleryThumbs = new Swiper('.gallery-thumbs', {
-    spaceBetween: 10,
-    slidesPerView: 4,
-    loop: true,
-    freeMode: true,
-    loopedSlides: 5, //looped slides should be the same
-    watchSlidesVisibility: true,
-    watchSlidesProgress: true,
-  });
   let galleryTop = new Swiper('.gallery-top', {
     effect: 'cube',
     grabCursor: true,
     loop: true,
-    loopedSlides: 4, //looped slides should be the same
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -68,10 +78,6 @@ let galleryThumbs = new Swiper('.gallery-thumbs', {
         shadowOffset: 20,
         shadowScale: 0.94,
     },
-    thumbs: {
-        swiper: galleryThumbs,
-    },
-  
   });
 $("#btn1").click(() => {
 	$("#inquiry_box").css('display', 'block')
@@ -475,3 +481,4 @@ $(".tagCancel").click(() => {
 	$(".carousel-inner .item").removeClass("active");
 	$(".modal").hide();
 })
+

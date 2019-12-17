@@ -11,59 +11,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
-<style>
-#slider {
-  position: relative;
-  overflow: hidden;
-  margin: 20px auto 0 auto;
-  border-radius: 4px;
-}
-
-#slider ul {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  height: 200px;
-  list-style: none;
-}
-
-#slider ul li {
-  position: relative;
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 0;
-  width: 500px;
-  height: 300px;
-  background: #ccc;
-  text-align: center;
-  line-height: 300px;
-}
-
-a.control_prev, a.control_next {
-  position: absolute;
-  top: 40%;
-  z-index: 999;
-  display: block;
-  padding: 4% 3%;
-  width: auto;
-  height: auto;
-  background: #2a2a2a;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 18px;
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-a.control_next {
-  right: 0;
-  border-radius: 2px 0 0 2px;
-}
-
-
-</style>
 </head>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/common/normalize.css"/>">
@@ -82,7 +29,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
     <body>
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	<div id="wrapper">
-			
+		<c:set var="now" value="<%=new java.util.Date()%>" />
+		<fmt:formatDate value="${now}" pattern="yyyyMMddhhmm" var="nowDate" />
+		<fmt:formatDate value="${auction.auctionLimitDate}" pattern="yyyyMMddhhmm" var="limitDate" />
+		<c:if test="${nowDate >= limitDate}">
+		<div class="afterModal"></div>
+		</c:if>
 		<div id="contents">
 			<div>
 			<sec:authorize access="isAuthenticated()">
@@ -108,15 +60,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 							class="nav-link js-scroll-trigger" data-nav="nav3">판매자 후기</a></li>
 					</ul>
 
-
-
 					<section id="nav1">
 						<div id="tab-1">
 							<div id="auction-board">${auction.auctionContent}</div>
 						</div>
 					</section>
-
-
 
 					<section id="nav2" class="bg-light">
 
@@ -274,6 +222,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 		let no = ${auction.auctionNo};
 		let email = '${auction.userEmail}';
 		let id = '${log.userEmail}';
+		let limitTime = "${limitDate}";
 	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

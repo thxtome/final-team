@@ -16,6 +16,7 @@
 
 	<div id="top">
 		<div id="slide">
+
 			<div class="swiper-container gallery-top">
 				<div class="swiper-wrapper">
 					<c:forEach items="${file}" var="f">
@@ -37,6 +38,7 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 		<div class="l-sub" id="l-sub">
 			<div class="sidebar" id="sidebar">
@@ -265,12 +267,6 @@
 	<div class="modal">
 
 		<div id="carousel-example" class="carousel slide">
-			<ol class="carousel-indicators">
-				<li data-target="#carousel-example" data-slide-to="0" class="active"></li>
-				<li data-target="#carousel-example" data-slide-to="1"></li>
-				<li data-target="#carousel-example" data-slide-to="2"></li>
-			</ol>
-
 			<div class="carousel-inner">
 				<c:forEach items="${file}" var="f">
 					<div class="item">
@@ -282,8 +278,7 @@
 								<c:forEach items="${tag}" var="t">
 								<c:if test="${f.fileNo eq t.fileNo}">
 								<div class="tagTextBox" style="top: ${t.tagXCor}%; left: ${t.tagYCor}%;">
-									<textarea readonly class="addTag">${t.tagContent}</textarea>
-									<i class="glyphicon glyphicon-menu-right hoverBtn"></i>
+									${t.tagContent}
 								</div>
 								</c:if>
 								</c:forEach>
@@ -301,6 +296,7 @@
 			</a>
 		</div>
 	</div>
+
 
 </body>
 </html>

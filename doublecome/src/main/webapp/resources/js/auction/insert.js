@@ -1,4 +1,4 @@
-//localStorage.clear();
+localStorage.clear();
 
 function swalAlert(msg) {
 	Swal.fire(msg)
@@ -73,15 +73,6 @@ $(".fileUpIcon").hover(() => {
 })
 
 $(".button").click(() => {
-	console.log(localStorage.getItem("allImages"))
-	console.log(JSON.parse(localStorage.getItem("allImages")))
-	$.ajax({
-		  type: "POST",
-		  url: "fileTag.do",
-		  data: {
-			  data : localStorage.getItem("allImages"),
-		  }
-		});
 	$div = $(".start").val().replace(/[^0-9]/g,"")
 	$div2 = $(".buy").val().replace(/[^0-9]/g,"")
 	if ($(".start").val() == "") {
@@ -94,68 +85,30 @@ $(".button").click(() => {
 		swalAlert("카테고리를 선택해주세요.")
 	} else if (parseInt($div) >= parseInt($div2)) {
 		swalAlert("즉시 구매가는 경매 시작가보다 높아야 합니다.")
+	} else if (localStorage.length == 0) {
+		swalAlert("최소한 한장의 사진이 첨부되어야 합니다.")
 	} else {
 		swalAlert("경매 등록이 완료되었습니다.")
 		$(".swal2-confirm").click(() => {
-			$("#insertForm").submit();
+			$.ajax({
+				  type: "POST",
+				  url: "fileTag.do",
+				  data: {
+					  data : localStorage.getItem("allImages"),
+				  },
+				  success: $("#insertForm").submit(),					  
+				});
 		})
 	}
 })
 
-let up_files = [];
 
-$(document).ready(() => {
-	$("#upload").on("change", handleImgsFilesSelect)
-})
-
-function deleteImageAction(index) {
-	alert("a")
-	up_files.splice(index, 1)
-	
-	let img_id = "#img_id_"+index;
-	$(img_id).remove();
-}
-
-
-
-function handleImgsFilesSelect(e) {
-	
-	up_files = [];
-	$(".img_wrap").empty();
-	
-	let files = e.target.files
-	let filesArr = Array.prototype.slice.call(files)
-	
-	let index = 0;
-	
-	filesArr.forEach((f) => {
-		if(!f.type.match("image.*")) {
-			alert("이미지 타입만 가능합니다.")
-			return;
-		}
-		up_files.push(f)
-		
-		let reader = new FileReader()
-		reader.onload = function(e) {
-			let html = 
-			"<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\">" 
-			+ "<img src=\""+e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'>"
-			+ "</a>";
-			$(".img_wrap").append(html);
-			index++
-		}
-		reader.readAsDataURL(f);
-	})
-}
-
-$(".movePage").click(() => {
-	let d = JSON.parse(localStorage.getItem("allImages"))
-		for (i = 0; i < Object.keys(d).length; i++) {
-			console.log(Object.keys(d)[i])
-			for (k = 0; k < d[Object.keys(d)[i]].length; k++) {
-				console.log(d[Object.keys(d)[i]][k])
-			}
-		}
-	window.open("uploadPhoto.do", "uploadPhoto", "width=1000, height=800, location=no, left=400")
+$(".upload_btn").click(() => {
+	if (localStorage.length) {
+		localStorage.clear();
+		window.open("uploadPhoto.do", "uploadPhoto", "width=1000, height=800, location=no, left=400")
+	} else {
+		window.open("uploadPhoto.do", "uploadPhoto", "width=1000, height=800, location=no, left=400")
+	}
 })
 		
