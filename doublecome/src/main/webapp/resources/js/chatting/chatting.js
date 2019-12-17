@@ -149,7 +149,7 @@ function withchat(message) {
 	})
 }
 $(() => {
-	ws = new WebSocket("ws://192.168.0.11/doublecome/chatting.do");	
+	ws = new WebSocket("ws://192.168.0.23/doublecome/chatting.do");	
 	ws.onopen = () => {
 		console.log("채팅 접속")
 	};
@@ -182,7 +182,7 @@ $(() => {
 						`
 				)
 				$(".right_message_field").scrollTop($(".right_message_field")[0].scrollHeight)
-				returnSend = {userEmail:data.userEmail, dataType:3, chatNo: data.chatNo}
+				returnSend = {userEmail:data.userEmail, dataType:2, chatNo: data.chatNo}
 				ws.send(JSON.stringify(returnSend))
 			} else {
 				let sendData = {
@@ -205,20 +205,7 @@ $(() => {
 					alert("ajax 처리 에러발생");
 				});
 			}
-		} else if(data.dataType == 2){
-		  let email = $(".wrapper").data("id")
-		  let options = {
-				url : "chatList.do",
-				type : "POST",
-				contentType : "application/json",
-				data : JSON.stringify(data)
-		  }
-		  $.ajax(options).done(data => {
-				makeAjaxChatList(data, email);
-		  }).fail(() => {
-				 alert("ajax 처리 에러발생");
-		  });
-		} else if(data.dataType == 3) {
+		} else if(data.dataType == 2) {
 			let checkCnt = $(".right_field .bubble.me span");
 			console.log(checkCnt)
 			$.each(checkCnt, (index, ele) => {
