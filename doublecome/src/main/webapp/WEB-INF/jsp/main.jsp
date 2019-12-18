@@ -28,8 +28,8 @@
 	href="<c:url value="/resources/css/main/main.css" />">
 </head>
 <body>
-		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-	
+	<c:import url="/WEB-INF/jsp/include/header.jsp" />
+
 	<div class="py-5">
 		<div class="container">
 			<div class="row">
@@ -46,9 +46,9 @@
 		<div class="container w-75">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="card-body" >
+					<div class="card-body">
 						<h5 class="card-title m-0" style="text-shadow: 0px 0px 1px black;">
-						onAir Auction</h5>
+							onAir Auction</h5>
 					</div>
 				</div>
 			</div>
@@ -58,16 +58,18 @@
 				<c:choose>
 					<c:when test="${empty onAirlist}">
 						<div class="col-md-12">
-							<div class="card-body" >
-								<h5 class="card-title m-0" style="text-shadow: 0px 0px 1px black;">
-								방송중인 경매가 존재하지 않습니다.</h5>
+							<div class="card-body">
+								<h5 class="card-title m-0"
+									style="text-shadow: 0px 0px 1px black;">방송중인 경매가 존재하지
+									않습니다.</h5>
 							</div>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${onAirlist}" var="list">
-							<div class="col-md-4 p-2" >
-								<a class="auction_list" href="<c:url value="/liveAuction/main.do?auctionNo=${list.auctionNo}" />">
+							<div class="col-md-4 p-2">
+								<a class="auction_list"
+									href="<c:url value="/liveAuction/main.do?auctionNo=${list.auctionNo}" />">
 									<div class="card box-shadow">
 										<img class="card-img-top w-100"
 											src="<c:url value="/resources/images/macbook.jpg"/>"
@@ -75,15 +77,23 @@
 										<p class="mb-1 m-1">${list.auctionTitle}</p>
 										<c:choose>
 											<c:when test="${empty list.maxPrice}">
-												<p class="card-text m-1"><fmt:formatNumber value="${list.auctionMinPrice}" pattern="#,###"/>원</p>											
+												<p class="card-text m-1">
+													<fmt:formatNumber value="${list.auctionMinPrice}"
+														pattern="#,###" />
+													원
+												</p>
 											</c:when>
 											<c:otherwise>
-												<p class="card-text m-1"><fmt:formatNumber value="${list.maxPrice}" pattern="#,###"/>원</p>		
+												<p class="card-text m-1">
+													<fmt:formatNumber value="${list.maxPrice}" pattern="#,###" />
+													원
+												</p>
 											</c:otherwise>
 										</c:choose>
 										<div class="auction-condition">
-											<span class="text-left">입찰 ${list.bidCnt}건</span>
-											<small class="countdown text-muted m-1" onload="auctionCount(this,${list.auctionLimitDate})"></small>
+											<span class="text-left">입찰 ${list.bidCnt}건</span> <small
+												class="countdown text-muted m-1"
+												onload="auctionCount(this,${list.auctionLimitDate})"></small>
 										</div>
 									</div>
 								</a>
@@ -93,68 +103,79 @@
 				</c:choose>
 			</div>
 		</div>
-		
+
 		<div class="py-4 bg-light">
-		<div class="container w-75">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card-body" >
-						<h5 class="card-title m-0" style="text-shadow: 0px 0px 1px black;">
-						Best Auction</h5>
+			<div class="container w-75">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card-body">
+							<h5 class="card-title m-0"
+								style="text-shadow: 0px 0px 1px black;">Best Auction</h5>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="container w-75" id="container">
-			<div class="row">
-				<c:choose>
-					<c:when test="${empty auclist}">
-						<div class="col-md-12">
-							<div class="card-body" >
-								<h5 class="card-title m-0" style="text-shadow: 0px 0px 1px black;">
-								등록되어있는 경매가 존재하지 않습니다.</h5>
+			<div class="container w-75" id="container">
+				<div class="row">
+					<c:choose>
+						<c:when test="${empty auclist}">
+							<div class="col-md-12">
+								<div class="card-body">
+									<h5 class="card-title m-0"
+										style="text-shadow: 0px 0px 1px black;">등록되어있는 경매가 존재하지
+										않습니다.</h5>
+								</div>
 							</div>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${auclist}" var="list">
-							<div class="col-md-4 p-2" >
-								<a class="auction_list" href="<c:url value="/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}" />">
-									<div class="card box-shadow">
-										<img class="card-img-top w-100"
-											src="<c:url value="/resources/images/macbook.jpg"/>"
-											style="height: 250px;">
-										<p class="mb-1 m-1">${list.auctionTitle}</p>
-										<c:choose>
-											<c:when test="${empty list.maxPrice}">
-												<p class="card-text m-1"><fmt:formatNumber value="${list.auctionMinPrice}" pattern="#,###"/>원</p>											
-											</c:when>
-											<c:otherwise>
-												<p class="card-text m-1"><fmt:formatNumber value="${list.maxPrice}" pattern="#,###"/>원</p>		
-											</c:otherwise>
-										</c:choose>
-										<div class="auction-condition">
-											<span class="text-left">입찰 ${list.bidCnt}건</span>
-											<small class="countdown text-muted m-1" onload="auctionCount(this,${list.auctionLimitDate})"></small>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${auclist}" var="list">
+								<div class="col-md-4 p-2">
+									<a class="auction_list"
+										href="<c:url value="/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}" />">
+										<div class="card box-shadow">
+											<img class="card-img-top w-100"
+												src="<c:url value="/resources/images/macbook.jpg"/>"
+												style="height: 250px;">
+											<p class="mb-1 m-1">${list.auctionTitle}</p>
+											<c:choose>
+												<c:when test="${empty list.maxPrice}">
+													<p class="card-text m-1">
+														<fmt:formatNumber value="${list.auctionMinPrice}"
+															pattern="#,###" />
+														원
+													</p>
+												</c:when>
+												<c:otherwise>
+													<p class="card-text m-1">
+														<fmt:formatNumber value="${list.maxPrice}" pattern="#,###" />
+														원
+													</p>
+												</c:otherwise>
+											</c:choose>
+											<div class="auction-condition">
+												<span class="text-left">입찰 ${list.bidCnt}건</span> <small
+													class="countdown text-muted m-1"
+													onload="auctionCount(this,${list.auctionLimitDate})"></small>
+											</div>
 										</div>
-									</div>
-								</a>
-							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+									</a>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
-		</div>
-		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+			<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-			integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-			crossorigin="anonymous"></script>
+			crossorigin="anonymous">
+			</script>
+			<script
+				src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+				integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+				crossorigin="anonymous"></script>
 
-		<script src="<c:url value="/resources/js/common/countdown.js" />"></script>
-		<!-- <script type="text/javascript">
+			<script src="<c:url value="/resources/js/common/countdown.js" />"></script>
+			<!-- <script type="text/javascript">
 		  var naver_id_login = new naver_id_login("TOpvHOSeiE05F9UnTU0P", "http://localhost:8001/doublecome/main.do");
 		  // 접근 토큰 값 출력
 		  console.log(naver_id_login.oauthParams.access_token);
@@ -167,6 +188,5 @@
 		    console.log(naver_id_login.getProfileData('profile'));
 		  }
 		</script> -->
-		
 </body>
 </html>

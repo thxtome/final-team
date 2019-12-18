@@ -28,6 +28,9 @@ public class LiveAuctionController {
 		model.addAttribute("auction",service.retrieveAuction(auctionNo));
 		return "liveAuction/main";
 	}
+	
+	@RequestMapping("/test.do")
+	public void test() {}
 
 	
 }

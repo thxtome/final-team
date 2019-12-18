@@ -2,7 +2,7 @@ let chatWs = null;
 
 $(() => {
   // 접속할 주소를 설정 : 웹소켓 핸들러 구현 클래스와 연결된 URL
-  chatWs = new WebSocket("wss://192.168.0.12:8443/doublecome/chat.do");
+  chatWs = new WebSocket("wss://192.168.0.21:8443/doublecome/chat.do");
   chatWs.onopen = () => {
     console.log("연결성공");
   };

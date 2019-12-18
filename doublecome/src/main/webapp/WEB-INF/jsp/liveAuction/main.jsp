@@ -10,12 +10,26 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/common/normalize.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/liveauction/bootstrap.min.css"/>" />
+<link rel="stylesheet" href="<c:url value="/resources/css/liveauction/ekko-lightbox.min.css" />" />
+<link rel="stylesheet" href="<c:url value="/resources/css/liveauction/kurento.css" /> " />
 <link rel="stylesheet" href="<c:url value="/resources/css/liveauction/main.css"/>">
+<script src="https://cdn.temasys.io/adapterjs/0.15.x/adapter.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="<c:url value="/resources/js/liveauction/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/resources/js/liveauction/ekko-lightbox.min.js"/>"></script>
+<script src="<c:url value="/resources/js/liveauction/kurento-utils.min.js"/>"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="<c:url value="/resources/js/liveauction/broadcast.js"/>"></script>
 </head>
 <body>
     <div class="content">
-        <div class="video"></div>
+    	<div class="btns">
+    		<a id="call" href="#"> <span></span> Presenter</a> 
+    		<a id="viewer" href="#"> <span></span> Viewer</a> 
+    		<a id="terminate" href="#"><span></span>Stop</a>
+    	</div>
+        <video class="video" id="video" autoplay></video>
         <div class="innerLive">
             <div class="auctionInfo">
                 <div class="counter-class" data-date="<fmt:formatDate value="${auction.auctionLimitDate}" pattern="yyyy-MM-dd HH:mm:ss"/>">

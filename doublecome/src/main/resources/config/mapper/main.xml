@@ -30,8 +30,8 @@
 	<select id="selectOnAirAuction" resultType="Auction">
 		select * 
   		  from auction
- 		 <!-- where auction_broadcast = 2
-   		   and auction_condition = 1 -->
+ 		 where auction_broadcast = 2
+   		   and auction_condition = 1 
 	</select>
 	
 </mapper>
