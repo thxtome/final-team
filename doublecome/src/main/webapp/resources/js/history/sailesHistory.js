@@ -56,6 +56,7 @@ $(function (){
 			`;
 			salesContent.html(html);
 		} else {
+			/*
 			html = `
 					<div id="salesSort" class="yearSort">
 						<select name="sort">
@@ -65,8 +66,10 @@ $(function (){
 						</select>
 					</div>
 			`;
+			*/
 			$.each(result.list, (i, r) => {
 				starHtml = makeStar(Math.round(r.userScore));
+				let maxPrice = (r.maxPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				html += `
 					<div class="listCon">
 								<div class="listHead">
@@ -75,7 +78,7 @@ $(function (){
 										<span class="dateContent">${format(r.auctionLimitDate, "ymd")}</span>
 					</span> 
 					<span class="detailCon"> 
-						<a>입찰금 <strong>${r.maxPrice}</strong>원</a>
+						<a>최고 입찰금 <strong>${maxPrice}</strong>원</a>
 					</span>
 				</div>
 				`;
