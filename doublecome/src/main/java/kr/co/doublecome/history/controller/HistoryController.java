@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.doublecome.common.service.FileService;
 import kr.co.doublecome.history.service.HistoryService;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Deal;
@@ -20,6 +21,10 @@ import kr.co.doublecome.repository.vo.Search;
 public class HistoryController {
 	@Autowired
 	private HistoryService service;
+	@Autowired
+	private FileService fService;
+	
+	
 	// history 처음 로딩시 구매/판매 내역, 후기 목록
 	@RequestMapping("/listHistory.do")
 	public void listHistory(Principal p, Model model) {
@@ -69,9 +74,10 @@ public class HistoryController {
 	@RequestMapping("/addReview.do")
 	public String addReview(Principal p, Review review) {
 		review.setReviewSender(p.getName());
-//		service.insertReview(review);
 		System.out.println("-----------------------------------------");
 		System.out.println(review.getReviewContent());
+		review.setReviewContent(fService.saveBase64File(review.getReviewContent()));
+		service.insertReview(review);
 		return "redirect:listHistory.do";
 	}
 	
@@ -85,6 +91,7 @@ public class HistoryController {
 	// 후기 수정
 	@RequestMapping("/editReview.do")
 	public String editReview(Review review) {
+		review.setReviewContent(fService.saveBase64File(review.getReviewContent()));
 		service.updateReview(review);
 		
 		return "redirect:listHistory.do";
