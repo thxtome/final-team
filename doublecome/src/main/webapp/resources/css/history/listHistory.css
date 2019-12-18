@@ -333,13 +333,9 @@
 }
 
 .reviewTitle, .auctionTitle {
-	display: inline-block; text-overflow : ellipsis;
-	white-space: nowrap;
-	word-wrap: normal;
+	display: inline-block; 
 	width: 450px;
-	overflow: hidden;
 	cursor: pointer;
-	text-overflow: ellipsis;
 	text-align: left;
 }
 .reviewDate{
@@ -732,6 +728,11 @@
 
 .auctionTitleDiv>div:nth-child(2), /* .scoreDiv > div:nth-child(2),  */
 	.reviewTitleDiv>div:nth-child(2), .photoDiv>div:nth-child(2) {
+		text-overflow : ellipsis;
+	white-space: nowrap;
+	word-wrap: normal;
+	text-overflow: ellipsis;
+	overflow: hidden;
 	text-align: center;
 	line-height: 50px;
 	font-size: 13px;

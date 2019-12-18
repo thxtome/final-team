@@ -1,5 +1,6 @@
 package kr.co.doublecome.admin.service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -258,5 +259,21 @@ public class AdminServiceImpl implements AdminService{
 		ap.setPr(new PageResult(sa.getPageNo(), count, sa.getListSize(), 10));
 		
 		return ap;
+	}
+
+
+	public void addReport(Principal p, Report report) {
+		System.out.println("report" + report);
+		Deal deal = mapper.dealInfo(report.getAuctionNo());
+		System.out.println("deal" + deal);
+		if (p.getName() == deal.getUserEmailBuyer()) {
+			report.setReportSender(deal.getUserEmailBuyer());
+			report.setReportReceiver(deal.getUserEmailSeller());
+		} else {
+			report.setReportSender(deal.getUserEmailSeller());
+			report.setReportReceiver(deal.getUserEmailBuyer());
+		}
+		report.setDealNo(deal.getDealNo());
+		mapper.insertReport(report);
 	}
 }

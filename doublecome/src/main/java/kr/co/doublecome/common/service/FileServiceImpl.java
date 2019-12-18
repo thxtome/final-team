@@ -170,7 +170,8 @@ public class FileServiceImpl implements FileService{
 		String filePath = "/history" + sdf.format(new Date());
 		int groupCode = mapper.maxFileGroupCode() + 1;
 		String orgContent = content;
-		String img = orgContent;
+		System.out.println(content);
+		String img = content;
 		while(true) {
 			int extTempStart = img.indexOf("image/");
 			if (extTempStart == -1) return orgContent;
@@ -208,7 +209,7 @@ public class FileServiceImpl implements FileService{
 			if (tagStart == -1) tagStart = orgContent.indexOf("<img style"); 
 			System.out.println(tagStart);
 			System.out.println(orgContent);
-			orgContent = orgContent.replace(orgContent.substring(tagStart, orgContent.indexOf(">", tagStart) + 1), "<img src=\"/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo() + "\">");
+			orgContent = orgContent.replace(orgContent.substring(tagStart, orgContent.indexOf(">", tagStart) + 1), "<img style=\"width: 350px\" src=\"/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo() + "\">");
 			System.out.println("orgContent : " + orgContent);
 		}
 	}

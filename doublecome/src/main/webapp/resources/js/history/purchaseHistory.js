@@ -221,9 +221,13 @@ $(function (){
 });
 
 $("body").on("click", ".reportBtn", (e) => {
-	console.log($(e.target).data("no"));
 	 $(".addReportModal").show();
 	 $('input[name=auctionNo]').val($(e.target).data("no"));
+});
+
+$(".addReportBtn").click((e) => {
+	console.log("클릭됨");
+	$("#reportForm")[0].submit();
 });
 
 $("body").on("click", ".reviewBtn", (e) => {

@@ -38,4 +38,7 @@ public interface AdminMapper {
 	public List<Category> selectAuctionStaticsByCategory();
 	public List<Map<String, String>> selectAuctionCntbyRegDate(Map<String,String> map);
 	public List<Map<String, String>> selectUserCntbyRegDate(Map<String, String> map);
+	
+	public Deal dealInfo(int auctionNo);
+	public void insertReport(Report report);
 }

@@ -512,6 +512,20 @@
 		<result javaType="java.lang.String" column="date" property="date"/>
 		<result javaType="java.lang.String" column="cnt" property="cnt"/>
 	</resultMap>
-
-
+	
+	<!-- 신고 등록시 거래정보  -->
+	<select id="dealInfo" parameterType="int" resultType="Deal">
+		select *
+		  from deal
+		 where auction_no = #{auctionNo}
+	</select>
+	
+	<!-- 신고 등록 -->
+	<insert id="insertReport" parameterType="Report">
+		insert into report (
+			report_content, report_sender, report_receiver, deal_no, report_type_code, auction_no
+		) values (
+			#{reportContent}, #{reportSender}, #{reportReceiver}, #{dealNo}, #{reportTypeCode}, #{auctionNo}
+		)
+	</insert>
 </mapper>

@@ -76,6 +76,7 @@ public class HistoryController {
 	public String addReview(Principal p, Review review) {
 		review.setReviewSender(p.getName());
 		System.out.println("-----------------------------------------");
+		System.out.println(review);
 		System.out.println(review.getReviewContent());
 		review.setReviewContent(fService.saveBase64File(review.getReviewContent()));
 		service.insertReview(review);

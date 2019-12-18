@@ -4640,7 +4640,7 @@
                   if (typeof param === 'string') {
                       $image.attr('data-filename', param);
                   }
-                  $image.css('width', Math.min(_this.$editable.width(), $image.width()));
+                  $image.css('width', '350px');
               }
               $image.show();
               range.create(_this.editable).insertNode($image[0]);
