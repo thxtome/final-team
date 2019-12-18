@@ -147,14 +147,13 @@ public class FileServiceImpl implements FileService{
 		String filePath = "/history" + sdf.format(new Date());
 		int groupCode = mapper.maxFileGroupCode() + 1;
 		String orgImg = content;
-		String img = content;
+		String img = orgImg;
 //		while(true) {
 			int extTempStart = img.indexOf("image/");
 			if (extTempStart == -1) return;
 			String extTemp = img.substring(extTempStart + 6);
 			String ext = extTemp.substring(0, extTemp.indexOf(";"));
-			int start = img.indexOf("base64,");
-			String temp = img.substring(start + 7);
+			String temp = img.substring(img.indexOf("base64,") + 7);
 			String nameStart = temp.substring(temp.indexOf("data-filename=\"") + 15);
 			String orgName = nameStart.substring(0, nameStart.indexOf("\""));
 			System.out.println(orgName);
@@ -181,6 +180,8 @@ public class FileServiceImpl implements FileService{
 			util.setFileSystemName(sysName);
 			util.setFilePath("c:/java/upload" + filePath);
 			mapper.addFile(util);
+			int tagStart = orgImg.indexOf("<img src=\"data:");
+			orgImg.replace(orgImg.substring(tagStart, orgImg.indexOf(">", tagStart) + 1), "/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo());
 //		}
 	}
 }

@@ -70,6 +70,7 @@ public class HistoryController {
 	public String addReview(Principal p, Review review) {
 		review.setReviewSender(p.getName());
 //		service.insertReview(review);
+		System.out.println("-----------------------------------------");
 		System.out.println(review.getReviewContent());
 		return "redirect:listHistory.do";
 	}
