@@ -38,7 +38,7 @@
 			</div>
 			<div data-location="reviewHead" id="reviewDeal">
 				<span>후기</span>
-				<span>${userHistory.userCnt}</span> <span>개</span>
+				<span>${userHistory.userReviewCnt}</span> <span>개</span>
 			</div>
 		</div>
 		<!-- 

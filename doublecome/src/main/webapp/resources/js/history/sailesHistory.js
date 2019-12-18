@@ -56,6 +56,7 @@ $(function (){
 			`;
 			salesContent.html(html);
 		} else {
+			/*
 			html = `
 					<div id="salesSort" class="yearSort">
 						<select name="sort">
@@ -65,6 +66,7 @@ $(function (){
 						</select>
 					</div>
 			`;
+			*/
 			$.each(result.list, (i, r) => {
 				starHtml = makeStar(Math.round(r.userScore));
 				html += `
