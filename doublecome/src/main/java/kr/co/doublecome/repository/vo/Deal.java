@@ -12,6 +12,7 @@ public class Deal {
 	private int dealCondition;				// 거래 상태
 	private int dealSellerCondition;    	// 판매자 거래 상태
 	private int dealBuyerCondition;    		// 구매자 거래 상태
+	private int dealUserCondition;
 	private int dealCnt;			// 거래 개수
 	private String auctionTitle;
 }

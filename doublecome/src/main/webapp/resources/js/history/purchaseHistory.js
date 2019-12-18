@@ -57,6 +57,7 @@ $(function (){
 			`;
 			purchaseContent.html(html);
 		} else {
+			/*
 			html += `
 					<div id="purchaseSort" class="yearSort">
 						<select name="sort">
@@ -66,6 +67,7 @@ $(function (){
 						</select>
 					</div>
 			`;
+			 */
 			$.each(result.list, (i, r) => {
 				/*
 					if (r.dealCondition == '2'){
@@ -87,6 +89,7 @@ $(function (){
 					}
 				 */
 				starHtml = makeStar(Math.round(r.userScore));
+				let bidPrice = r.bidPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				html += `
 					<div class="listCon">
 						<div class="listHead">
@@ -95,7 +98,7 @@ $(function (){
 								<span class="dateContent">${format(r.auctionLimitDate, "ymd")}</span>
 						</span>
 						<span class="detailCon"> 
-							<a>입찰금 <strong>${r.bidPrice}</strong>원</a>
+							<a>입찰금 <strong>${bidPrice}</strong>원</a>
 						</span>
 					</div>
 				`;

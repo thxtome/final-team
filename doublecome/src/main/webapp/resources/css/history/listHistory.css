@@ -21,6 +21,13 @@
 	grid-template-areas: "myDeal purchaseDeal salesDeal reviewDeal";
 }
 
+#salesAjax, #purchaseAjax{
+	margin-top: 50px;
+}
+
+.detailCon a{
+	text-decoration: none;
+}
 #myDeal {
 	grid-area: myDeal;
 	background-color: #DB1D3B;
@@ -952,4 +959,9 @@ select {
 .modal-dialog .modal-content .modal-body .note-group-image-url label.note-form-label{
 	display: inline-block;
     float: left;
+}
+
+.detailCon a:hover{
+	text-decoration: none;
+	color:#000;
 }

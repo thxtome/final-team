@@ -30,6 +30,7 @@ public class HistoryController {
 	public void listHistory(Principal p, Model model) {
 		String userEmail = p.getName();
 		model.addAttribute("userHistory", service.receiveUserInfo(userEmail));
+		System.out.println("userinfo : " + service.receiveUserInfo(userEmail));
 	}
 	
 	// 구매내역 ajax
