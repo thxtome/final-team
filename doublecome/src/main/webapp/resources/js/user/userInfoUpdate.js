@@ -128,12 +128,17 @@ inAvtiveBtn();
 });
 
 //ㅅ
-console.log($('#userEmail').val())
-
-($.ajax({
-	url:"/doublecome/user/bidList.do",
-	data:{ email :$('#userEmail').val()}
-}));
+$('.m-upload__preview jst-preview > div').click(() => {	
+	$.ajax({
+		url:"/doublecome/user/deleteProfile.do",
+		data:{ email :$('#userEmail').val()},
+		success:(result)=> {
+			console.log(result ,"result");
+			console.log($('#userEmail').val(), "$('#userEmail').val()" )
+			$('.m-upload__preview jst-preview').attr('style', "background-image:url(/doublecome/file/downLoadFile.do?fileNo=${user.fileNo});" )
+		}
+	});
+} )
 
  
   

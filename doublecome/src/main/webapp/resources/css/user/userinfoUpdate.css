@@ -1,6 +1,10 @@
 html, body {
 }
-
+ html *,
+  html *::before,
+  html *::after {
+	box-sizing: inherit;
+  }
 td svg, span svg{
 	color :#969696;
 }
@@ -66,8 +70,8 @@ td svg, span svg{
 		z-index: 100;
 		
 		position: absolute;
-		width: 120px;
-		height: 40px;
+		width: 108px;
+		height: 38px;
 		left: 850px;
 		top: 150px;
 		line-height: 40px;
