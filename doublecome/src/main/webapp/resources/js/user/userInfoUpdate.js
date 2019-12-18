@@ -1,3 +1,4 @@
+//파일 업로드
 (function(){
   let setEventListeners = function(uploadBox) {
     let previewContainer = uploadBox.querySelectorAll('.jst-preview')[0];
@@ -126,8 +127,10 @@ inAvtiveBtn();
 		});}
 });
 
-
-
+//ㅅ
+($.ajax({
+	
+}));
 
  
   

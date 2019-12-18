@@ -63,7 +63,7 @@ public class FileServiceImpl implements FileService{
 	//유저 프로필 이미지
 	public UtilFile uploadProfile(UtilFile uFile, String email ) {
 		String filePath = "/user" + "/" + email + "/";
-		int groupCode = 1;
+		int groupCode = 0;
 		for (MultipartFile mFile : uFile.getAttach()) {
 			if (mFile.isEmpty()) continue;
 			

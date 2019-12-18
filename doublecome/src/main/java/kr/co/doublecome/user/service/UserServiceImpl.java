@@ -27,6 +27,11 @@ public class UserServiceImpl implements UserService{
 	mapper.insertUser(user);	
 	}
 
+	//鍮꾨�踰덊샇 李얘린 - 媛쒖씤�젙蹂� �닔�젙�럹�씠吏�
+	@Override
+	public User selectUserInfoByName(String userName) {
+		return mapper.selectUserInfoByName(userName);
+	}
 	
 	//마이페이지
 	@Override
@@ -55,12 +60,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public String findPass(String email) {
 		return mapper.findPass(email);
-	}
-	//鍮꾨�踰덊샇 李얘린 - 媛쒖씤�젙蹂� �닔�젙�럹�씠吏�
-	@Override
-	public User selectUserInfoByName(String userName) {
-		
-		return mapper.selectUserInfoByName(userName);
 	}
 
 	//유일성 검사 - 이메일

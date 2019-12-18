@@ -92,22 +92,22 @@
 			   user_phnum = #{userPhnum}
 		<choose>
 			<when test="fileOriginName.length() == 0">
-				,file_group_code = 0
+				,file_group_code = 1
 			</when>
 			<otherwise>
-				,file_group_code = 1
+				,file_group_code = 0
 			</otherwise>
 		</choose>
 		 where user_email = #{userEmail}
 	</update>
 	<update id="updateUserDefaultProfile" parameterType="string" >
 		update user
-		   set file_group_code = 0
+		   set file_group_code = 1
 		 where user_email = #{userEmail}
 	</update>
 	<update id="updateUserCustomProfile" parameterType="string" >
 		update user
-		   set file_group_code = 1
+		   set file_group_code = 0
 		 where user_email = #{userEmail}
 	</update>
 	
