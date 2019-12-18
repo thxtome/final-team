@@ -142,25 +142,25 @@ public class FileServiceImpl implements FileService{
 		}
 	}
 	
-	public void saveBase64File(String content) {
+	public String saveBase64File(String content) {
 		UtilFile util = new UtilFile();
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
 		String filePath = "/history" + sdf.format(new Date());
 		int groupCode = mapper.maxFileGroupCode() + 1;
-		String orgImg = content;
-		String img = content;
-//		while(true) {
+		String orgContent = content;
+		String img = orgContent;
+		while(true) {
 			int extTempStart = img.indexOf("image/");
-			if (extTempStart == -1) return;
+			if (extTempStart == -1) return orgContent;
 			String extTemp = img.substring(extTempStart + 6);
 			String ext = extTemp.substring(0, extTemp.indexOf(";"));
-			int start = img.indexOf("base64,");
-			String temp = img.substring(start + 7);
+			String temp = img.substring(img.indexOf("base64,") + 7);
 			String nameStart = temp.substring(temp.indexOf("data-filename=\"") + 15);
 			String orgName = nameStart.substring(0, nameStart.indexOf("\""));
 			System.out.println(orgName);
 			int end = temp.indexOf("\"");
-			img = img.substring(end);
+			System.out.println("img" + img);
+			img = temp.substring(end);
 			String baseImg = temp.substring(0, end);
 			byte[] imageBytes = DatatypeConverter.parseBase64Binary(baseImg);
 			
@@ -182,6 +182,12 @@ public class FileServiceImpl implements FileService{
 			util.setFileSystemName(sysName);
 			util.setFilePath("c:/java/upload" + filePath);
 			mapper.addFile(util);
-//		}
+			int tagStart = orgContent.indexOf("<img src=\"data:");
+			if (tagStart == -1) tagStart = orgContent.indexOf("<img style"); 
+			System.out.println(tagStart);
+			System.out.println(orgContent);
+			orgContent = orgContent.replace(orgContent.substring(tagStart, orgContent.indexOf(">", tagStart) + 1), "<img src=\"/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo() + "\">");
+			System.out.println("orgContent : " + orgContent);
+		}
 	}
 }
