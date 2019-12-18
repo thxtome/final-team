@@ -230,9 +230,12 @@ public class UserController {
 	@RequestMapping("/userInfo.do")
 	public void userInfo() throws Exception{}
 	
+	
+	//마이페이지 -프로필 이미지 삭제
 	@RequestMapping("/deleteProfile.do")
 	public void deleteProfile(String email) throws Exception{
 		service.updateUserDefaultProfile(email);
+		fileService.deleteProfile(email);
 	}
 	
 	//마이페이지 - 회원 정보 수정 

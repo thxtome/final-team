@@ -128,8 +128,11 @@ inAvtiveBtn();
 });
 
 //ㅅ
+console.log($('#userEmail').val())
+
 ($.ajax({
-	
+	url:"/doublecome/user/bidList.do",
+	data:{ email :$('#userEmail').val()}
 }));
 
  
