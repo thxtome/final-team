@@ -92,9 +92,16 @@
 										</c:choose>
 										<div class="auction-condition">
 											<span class="text-left">입찰 ${list.bidCnt}건</span> <small
-												class="countdown text-muted m-1"
-												onload="auctionCount(this,${list.auctionLimitDate})"></small>
+												id="auction${list.auctionNo}"
+												class="countdown text-muted m-1"></small>
+											<script>
+											$(() => {
+												console.log($("#auction${list.auctionNo}"))
+												auctionCount($("#auction${list.auctionNo}"), new Date(${list.auctionLimitDate.time}))
+											})	
+											</script>
 										</div>
+
 									</div>
 								</a>
 							</div>
@@ -154,8 +161,15 @@
 											</c:choose>
 											<div class="auction-condition">
 												<span class="text-left">입찰 ${list.bidCnt}건</span> <small
-													class="countdown text-muted m-1"
-													onload="auctionCount(this,${list.auctionLimitDate})"></small>
+
+													id="liveAuction${list.auctionNo}"
+													class="countdown text-muted m-1"></small>
+												<script>
+												$(() => {
+													auctionCount($("#liveAuction${list.auctionNo}"), new Date(${list.auctionLimitDate.time}))
+												})	
+											</script>
+
 											</div>
 										</div>
 									</a>
