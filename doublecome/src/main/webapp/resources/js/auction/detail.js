@@ -438,17 +438,12 @@ $(document).on("click", ".bidModalBtn", () => {
 		})
 		
 	} else if (parseInt($div2) > $div3) {
-		alert("즉시 구매가격보다 높은 가격으로 입찰하실 수 없습니다.")
+		swalAlert("즉시 구매가격보다 높은 가격으로 입찰하실 수 없습니다.")
 	} 
 	else {
-		alert("현재 가격보다 낮은 가격 또는 같은 가격으로 입찰하실 수 없습니다.")
+		swalAlert("현재 가격보다 낮은 가격 또는 같은 가격으로 입찰하실 수 없습니다.")
 	}
 	}
-})
-
-$(document).on("click", ".loginAlready", function(event) {
-	alert("a");
-	return false
 })
 
 $(document).on("click", ".loginAlreadyBuyNow", () => {

@@ -98,9 +98,7 @@ public class AuctionDetailController {
 	@RequestMapping("/addAuction.do")
 	public String addAuction(@RequestHeader(value = "referer") String referer, Principal principal, Auction auction, UtilFile uFile) throws Exception {
 		
-		System.out.println("글등록할 시" + service.maxFileGroupCode());
 		int groupCode = service.maxFileGroupCode() + 1;
-		System.out.println("옥션에 그룹코드 적용하기 전 : " + groupCode);
 		auction.setUserEmail(principal.getName());
 		auction.setAuctionBuyNow(auction.getAuctionBuyNow().replaceAll(",", ""));
 		auction.setAuctionMinPrice(auction.getAuctionMinPrice().replaceAll(",", ""));
@@ -172,9 +170,7 @@ public class AuctionDetailController {
 	@RequestMapping("/fileTag.do")
 	@ResponseBody
 	public void fileTag(String data, UtilFile file) throws Exception {
-		System.out.println("파일저장할때 디비에서 뽑아낸 그룹코드 : " + service.maxFileGroupCode());
 		int fileGroupCode = service.maxFileGroupCode() + 1;
-		System.out.println("파일 실제저장할 값 : " + fileGroupCode);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(data);
 		JsonObject obj = element.getAsJsonObject(); 
@@ -206,10 +202,12 @@ public class AuctionDetailController {
 			if (element.getAsJsonObject().get(entry.getKey()).isJsonArray()) {
 				JsonArray jsonArray = obj.getAsJsonArray(entry.getKey());
 				for (int i = 0; i < jsonArray.size(); i++) {
+					String content = jsonArray.get(i).getAsJsonObject().get("content").getAsString();
+					if (content.equals("")) continue;
 					file.setFileNo(file.getFileNo());
 					file.setTagXCor(jsonArray.get(i).getAsJsonObject().get("x").getAsInt());
 					file.setTagYCor(jsonArray.get(i).getAsJsonObject().get("y").getAsInt());
-					file.setTagContent(jsonArray.get(i).getAsJsonObject().get("content").getAsString());
+					file.setTagContent(content);
 					service.addTag(file);
 				}
 			} 
