@@ -61,7 +61,7 @@ public class FileController {
 		System.out.println(file.getOriginalFilename());
 		attach.add(file);
 		util.setAttach(attach);
-		util = service.uploadProfile(util, p.getName());
+		/* util = service.uploadProfile(util, p.getName()); */
 
 		return "/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo();
 	}
