@@ -90,14 +90,14 @@
 		   set user_pass = #{userPass},
 		   	   user_nickname = #{userNickname},
 			   user_phnum = #{userPhnum}
-		<choose>
+		<!-- <choose>
 			<when test="fileOriginName.length() == 0">
 				,file_group_code = 1
 			</when>
 			<otherwise>
 				,file_group_code = 0
 			</otherwise>
-		</choose>
+		</choose> -->
 		 where user_email = #{userEmail}
 	</update>
 	<update id="updateUserDefaultProfile" parameterType="string" >

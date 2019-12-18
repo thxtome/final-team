@@ -59,7 +59,29 @@ public class FileServiceImpl implements FileService{
 		}
 		return uFile;
 	}
-	
+	//유저 프로필 사진 삭제 
+		public void deleteProfile(String email) {
+			mapper.deleteProfile(email);
+			String path = "c:/java/upload/user" + "/" + email + "/";
+			File folder = new File(path);
+			try {
+			    while(folder.exists()) {
+				File[] folder_list = folder.listFiles(); //파일리스트 얻어오기
+						
+				for (int j = 0; j < folder_list.length; j++) {
+					folder_list[j].delete(); //파일 삭제 
+					System.out.println("파일이 삭제되었습니다.");
+				}
+						
+				if(folder_list.length == 0 && folder.isDirectory()){ 
+					folder.delete(); //대상폴더 삭제
+					System.out.println("폴더가 삭제되었습니다.");
+				}
+		            }
+			 } catch (Exception e) {
+				e.getStackTrace();
+			}
+		}
 	//유저 프로필 이미지
 	public UtilFile uploadProfile(UtilFile uFile, String email ) {
 		String filePath = "/user" + "/" + email + "/";

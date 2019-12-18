@@ -13,4 +13,5 @@ public interface FileService {
 	public void downLoadFile(int fileNo, HttpServletResponse res);
 	public void tempFile(String root, HttpServletResponse res);
 	public String saveBase64File(String content);
+	public void deleteProfile(String email);
 }

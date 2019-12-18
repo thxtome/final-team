@@ -36,7 +36,7 @@
 			</otherwise>
 		</choose>
 	</insert>
-	<delete id="deleteProfile" parameterType="User">
+	<delete id="deleteProfile" parameterType="string">
 		delete from file
 		where file_path like '%#{user_email}/'	
 	</delete>
