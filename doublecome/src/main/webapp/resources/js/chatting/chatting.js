@@ -149,7 +149,7 @@ function withchat(message) {
 	})
 }
 $(() => {
-	ws = new WebSocket("ws://192.168.0.23/doublecome/chatting.do");	
+	ws = new WebSocket("ws://192.168.0.9/doublecome/chatting.do");	
 	ws.onopen = () => {
 		console.log("채팅 접속")
 	};
@@ -264,9 +264,9 @@ function makeSearchList(data) {
 		`)  
 	} 
 	data.forEach((chat, i) => {
-		if (chat.userEmailSeller == $("wrapper").data("id")) {
+		if (chat.userEmailSeller == $(".wrapper").data("id")) {
 			let showCount = "count";
-			if (chat.covstRegDate === undefined) {
+			if (chat.covstRegDate == null) {
 				$peopleArea.append(`
 						<li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
 						<span class="${showCount}" count="${chat.readsSeller}">
@@ -291,6 +291,7 @@ function makeSearchList(data) {
 				`)
 			}
 		} else {
+			console.log(chat.readsBuyer)
 			let showCount = "count";
 			if (chat.covstRegDate == null) {
 				$peopleArea.append(`
@@ -322,35 +323,17 @@ function makeSearchList(data) {
 	return $peopleArea;
 }
 function dateformat(date) {
-	let target_time = date / 1000;
-	target_time = target_time % 86400;
-	let hours = parseInt(target_time / 3600) + "";
-	target_time = target_time % 3600;
-	let minutes = parseInt(target_time / 60) + "";
-	if (hours < 12) {
-		let hoursLength = hours + "";
-		let minutesLength = minutes + "";
-		if (hoursLength.length == 1) {
-			hours = "0" + hours
-		}
-		if (minutesLength.length == 1) {
-			minutes = "0" + minutes
-		}		
-		time = hours+":"+minutes;
-		
-	} else {
-		hours = hours - 12;
-		let hoursLength = hours + "";
-		let minutesLength = minutes + "";
-		if (hoursLength.length == 1) {
-			hours = "0" + hours
-		}
-		if (minutesLength.length == 1) {
-			minutes = "0" + minutes
-		}
-		time = hours+":"+minutes;
-	}
-	return time;
+	 let milliseconds = parseInt((date%1000)/100)
+     , minutes = parseInt((date/(1000*60))%60) 
+     , hours = parseInt((date/(1000*60*60))%24) - 3;
+	 let day = Math.floor(date / (1000 * 60 * 60 * 24))
+	 let d = new Date();
+	 console.log(d.getDate())
+	 console.log(day)
+	 hours = (hours < 10) ? "0" + hours : hours;
+	 minutes = (minutes < 10) ? "0" + minutes : minutes;
+	 let time = hours+":"+minutes
+     return time;
 }
 
 $(document).ready(function(){

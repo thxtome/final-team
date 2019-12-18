@@ -11,7 +11,7 @@ $("#movetomain").click(() => {
 })
 
 $(() => {
-	ws = new WebSocket("ws://192.168.0.11/doublecome/chatting.do");	
+	ws = new WebSocket("ws://192.168.0.9/doublecome/chatting.do");	
 	ws.onopen = () => {
 		console.log("채팅 접속")
 	};
