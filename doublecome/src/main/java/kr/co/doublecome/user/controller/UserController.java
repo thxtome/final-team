@@ -28,6 +28,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import kr.co.doublecome.common.service.FileService;
+import kr.co.doublecome.common.service.FileServiceImpl;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.repository.vo.UtilFile;
@@ -235,7 +236,7 @@ public class UserController {
 	@RequestMapping("/deleteProfile.do")
 	public void deleteProfile(String email) throws Exception{
 		service.updateUserDefaultProfile(email);
-		fileService.deleteProfile(email);
+		/* fileService.deleteProfile(email); */
 	}
 	
 	//마이페이지 - 회원 정보 수정 
@@ -275,18 +276,28 @@ public class UserController {
 		user.setUserPass(u.getUserNickname());
 		else user.setUserNickname(user.getUserNickname());
 		
-		System.out.println(file.getOriginalFilename() + "<< file.getOriginalFilename");
+		
 		user.setFileOriginName(file.getOriginalFilename());
-		service.updateUser(user);
 		
 		//파일 수정
-		UtilFile util = new UtilFile();
-		List<MultipartFile> attach = new ArrayList<>();
-		attach.add(file);
-		util.setAttach(attach);
-		util = fileService.uploadProfile(util, p.getName());
-		/* fileService.downLoadFile(util.getFileNo(), res); */
+		if(file.getOriginalFilename().length() != 0 ) {
+			UtilFile util = new UtilFile();
+			List<MultipartFile> attach = new ArrayList<>();
+			attach.add(file);
+			util.setAttach(attach);
+			if(user.getFileGroupCode() != 0) {
+				user.setFileGroupCode(fileService.maxFileGroupCode());
+				fileService.uploadProfile(util, user);
+				fileService.deleteProfile(fileService.maxFileGroupCode() -1 );				
+			}else {
+				user.setFileGroupCode(fileService.maxFileGroupCode() + 1);
+				
+			}
+			/* fileService.downLoadFile(util.getFileNo(), res); */
+		}
 		
+		service.updateUser(user);
+		//세션 등록
 		UserDetails uu = userService.loadUserByUsername(user.getUserEmail());
         SecurityContext sc = SecurityContextHolder.getContext();
         sc.setAuthentication(new UsernamePasswordAuthenticationToken(uu, null, uu.getAuthorities()));
