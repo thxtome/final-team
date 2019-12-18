@@ -189,6 +189,7 @@ img {
 }
 section {
     width: 666px;
+    margin-bottom: 100px;
 }
 .sidebar {
     margin-left: 30px;

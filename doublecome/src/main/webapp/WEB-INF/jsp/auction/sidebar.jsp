@@ -177,7 +177,7 @@
 											<span class="Seller__ratingGood">평가점수 : <span>${user.userScore}</span>점
 											</span>
 											<div>
-												(<span>${user.userCnt}</span>회)
+												(<span>${user.userReviewCnt}</span>회)
 											</div>
 										</dd>
 									</dl>

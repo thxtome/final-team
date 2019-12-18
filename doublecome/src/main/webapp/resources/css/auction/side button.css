@@ -22,9 +22,6 @@ version 1.0.55
 body a {
     text-decoration: none;
 }
-body a:link {
-    color: #2a7bb4;
-}
 body a:hover {
     color: #d7a50d;
 }
@@ -248,8 +245,8 @@ body a:hover {
 }
 .Count__count {
     float: left;
-    margin: 6px 0 4px 0;
-    padding: 8px 10px;
+    margin: 0 0 4px 0;
+    padding: 0 10px;
 }
 .Count__count--sideLine {
     border-left: 1px dotted #ccc;
@@ -346,9 +343,7 @@ body a:hover {
   }
 
   .side_seller_info {
-      padding: 15px;
-/*       padding-bottom: 24px; */
-/*       padding-top: 24px; */
+      padding: 10px;
   }
   blockquote, dd, div, dl, dt, fieldset, form, input, li, ol, p, pre, ul {
     margin: 0;

@@ -15,6 +15,16 @@ $('#summernote').summernote(
 	    disableResize: true,
 	    disableResizeEditor: true,
 	    resize: false,
+        toolbar: [
+            ['Font Style', ['fontname']],
+            ['style', ['bold', 'italic', 'underline']],
+            ['font', ['strikethrough']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['paragraph']],
+            ['height', ['height']],
+            ['Misc', ['fullscreen']]
+         ]
 });
 
 let sysdate = new Date()
@@ -119,3 +129,6 @@ $(document).on("click", ".imgContent", (e) => {
 	console.log(localStorage.getItem())
 //	localStorage.removeItem($(e.target).data("filename"))
 })
+
+
+$(".note-dropzone").remove();

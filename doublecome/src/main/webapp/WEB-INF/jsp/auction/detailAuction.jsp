@@ -187,7 +187,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 										<tr>
 											<td>평점</td>
 											<td><span id="grade_point">${user.userScore}</span> (<span
-												id="grade_count">${user.userCnt}</span>)</td>
+												id="grade_count">${user.userReviewCnt}</span>)</td>
 										</tr>
 										<tr>
 											<td>판매 횟수</td>

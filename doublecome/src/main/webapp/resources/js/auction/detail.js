@@ -154,8 +154,14 @@ $(window).scroll(function () {
       ) {
         $(".nav").children().removeClass("movenav")
         $(".nav3").addClass("movenav")
-      }
+      } 
+  //제일 하단까지 내려왔을 경우
+  if ($(document).height() - $(window).height() <= height + 20) {
+    	  $(".nav").children().removeClass("movenav")
+    	  $(".nav3").addClass("movenav")
+  }
 })
+
 
 $('.nav-item').click(function(e){
 	classes = $(e.target).data("nav");

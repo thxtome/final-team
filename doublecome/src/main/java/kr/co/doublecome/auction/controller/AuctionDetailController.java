@@ -61,6 +61,7 @@ public class AuctionDetailController {
 		model.addAttribute("file", service.retrieveFile(no));
 		model.addAttribute("bid", service.bidList(no));
 		model.addAttribute("tag", service.retrieveFileTag(no));
+		System.out.println(service.userInfo(userEmail));
 	}
 	
 	@RequestMapping("/retrieveReceiveReview.do")
