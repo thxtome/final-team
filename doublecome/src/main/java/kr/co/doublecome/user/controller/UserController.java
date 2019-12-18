@@ -54,7 +54,6 @@ public class UserController {
 	
 	/* NaverLoginBO */
     private NaverLoginBO naverLoginBO;
-  //  private KakaoLoginBO kakaoLoginBO;
     private String apiResult = null;
     
     @Autowired
@@ -62,11 +61,6 @@ public class UserController {
         this.naverLoginBO = naverLoginBO;
     }
 	
-	/*
-	 * @Autowired private void setKakaoLoginBO(KakaoLoginBO kakaoLoginBO) {
-	 * this.kakaoLoginBO = kakaoLoginBO; }
-	 */
-    
 	
 	//로그인
 	@RequestMapping("/loginForm.do")
@@ -96,10 +90,6 @@ public class UserController {
 		 	System.out.println("kakao >>" + email );
 		 	System.out.println(service.checkEmail(email) + " <<service.checkEmail(email)");
 			 if(service.checkEmail(email) == 0) {
-			/*
-			 * User u = new User(); u.setUserEmail(email); u.setUserPass(id);
-			 * model.addAttribute("user", u);
-			 */
 		        return 0;
 		      }
 			  
@@ -240,14 +230,11 @@ public class UserController {
 	@RequestMapping("/userInfo.do")
 	public void userInfo() throws Exception{}
 	
-	/*
-	 * //마이페이지 - 파일 업로드
-	 * 
-	 * @RequestMapping("fileupload/.do")
-	 * 
-	 * @ResponseBody public void fileupload(MultipartRequest fileData) throws
-	 * Exception{}
-	 */
+	@RequestMapping("/deleteProfile.do")
+	public void deleteProfile(String email) throws Exception{
+		service.updateUserDefaultProfile(email);
+	}
+	
 	//마이페이지 - 회원 정보 수정 
 	@RequestMapping("/userInfoUpdate.do")
 	public void userInfoUpdate(
@@ -288,6 +275,7 @@ public class UserController {
 		System.out.println(file.getOriginalFilename() + "<< file.getOriginalFilename");
 		user.setFileOriginName(file.getOriginalFilename());
 		service.updateUser(user);
+		
 		//파일 수정
 		UtilFile util = new UtilFile();
 		List<MultipartFile> attach = new ArrayList<>();
@@ -306,12 +294,13 @@ public class UserController {
         return "redirect:/main.do";
 	}
 	
+	//입찰 리스트
 	@RequestMapping("/bidList.do")
 	@ResponseBody
 	public List<Auction> bidList( String email) throws Exception{
 		return service.bidList(email);
 	}
-
+	
 
 	//비밀번호 수정 패이지
 	@RequestMapping("/findPassForm.do")

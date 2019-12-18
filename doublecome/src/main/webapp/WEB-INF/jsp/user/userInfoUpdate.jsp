@@ -27,11 +27,13 @@
 <!-- <form id="infoBox" method="post" action="/doublecome/file/photoUpload.do" class="uploader" enctype="multipart/form-data" >
  </form>
  --> <form method="post" action="<c:url value="/user/userUpdate.do"/>" enctype="multipart/form-data" >
+	<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.user" var="user" />
 												  	
 <div class="l-constrained">
 <!--   <div class="m-box"> -->
       <div class="m-upload js-fileupload">
-        <div class="m-upload__preview jst-preview">
+        <div class="m-upload__preview jst-preview" >
           <div>
             <i class="mdi mdi-cloud-upload"></i>
           </div>
@@ -52,8 +54,6 @@
    </div>   
          
         
-	<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.user" var="user" />
 			
 	<!-- 버튼 -->
 	<button id="updateFormBtn" >수정</button>

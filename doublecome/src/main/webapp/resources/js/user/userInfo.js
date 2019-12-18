@@ -9,7 +9,7 @@
 			console.log(result[i]);
 			$('#bidList').append(
 				`<div class="card_container${result[i].auctionCnt % 2}">
-				<a id="aution" href="">
+				<a id="aution" href="/doublecome/auction/detailAuction.do?no=${result[i].auctionNo}&userEmail=${result[i].userEmail}">
 					<img src="/doublecome/file/downLoadFile.do?fileNo=${result[i].fileNo}" alt="" class="card_image" >
 					<div class="aution_title"><div class="card_autionTitle">${result[i].auctionTitle}</div></div>
 					<div class="card_sub_now">즉시 구매 가:<span class="card_content">${result[i].auctionBuyNow}</span></div>
