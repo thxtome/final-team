@@ -157,9 +157,7 @@ public class FileServiceImpl implements FileService{
 			String temp = img.substring(img.indexOf("base64,") + 7);
 			String nameStart = temp.substring(temp.indexOf("data-filename=\"") + 15);
 			String orgName = nameStart.substring(0, nameStart.indexOf("\""));
-			System.out.println(orgName);
 			int end = temp.indexOf("\"");
-			System.out.println("img" + img);
 			img = temp.substring(end);
 			String baseImg = temp.substring(0, end);
 			byte[] imageBytes = DatatypeConverter.parseBase64Binary(baseImg);
@@ -168,9 +166,7 @@ public class FileServiceImpl implements FileService{
 			try {
 				File file = new File("c:/java/upload" + filePath + sysName);
 				if(file.exists() == false) file.mkdirs();
-				System.out.println(imageBytes);
 				BufferedImage bufImg = ImageIO.read(new ByteArrayInputStream(imageBytes));
-				System.out.println(bufImg);
 				ImageIO.write(bufImg, ext, file);
 				
 			} catch (IOException e) {
@@ -184,10 +180,7 @@ public class FileServiceImpl implements FileService{
 			mapper.addFile(util);
 			int tagStart = orgContent.indexOf("<img src=\"data:");
 			if (tagStart == -1) tagStart = orgContent.indexOf("<img style"); 
-			System.out.println(tagStart);
-			System.out.println(orgContent);
 			orgContent = orgContent.replace(orgContent.substring(tagStart, orgContent.indexOf(">", tagStart) + 1), "<img src=\"/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo() + "\">");
-			System.out.println("orgContent : " + orgContent);
 		}
 	}
 }

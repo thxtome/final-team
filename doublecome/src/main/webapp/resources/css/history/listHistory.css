@@ -20,6 +20,9 @@
 	grid-template-rows: 120px;
 	grid-template-areas: "myDeal purchaseDeal salesDeal reviewDeal";
 }
+#salesAjax, #purchaseAjax{
+	margin-top: 30px;
+}
 
 #myDeal {
 	grid-area: myDeal;
