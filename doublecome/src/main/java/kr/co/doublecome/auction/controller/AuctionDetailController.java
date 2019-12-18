@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -96,7 +98,9 @@ public class AuctionDetailController {
 	@RequestMapping("/addAuction.do")
 	public String addAuction(@RequestHeader(value = "referer") String referer, Principal principal, Auction auction, UtilFile uFile) throws Exception {
 		
-		int groupCode = service.maxFileGroupCode();
+		System.out.println("글등록할 시" + service.maxFileGroupCode());
+		int groupCode = service.maxFileGroupCode() + 1;
+		System.out.println("옥션에 그룹코드 적용하기 전 : " + groupCode);
 		auction.setUserEmail(principal.getName());
 		auction.setAuctionBuyNow(auction.getAuctionBuyNow().replaceAll(",", ""));
 		auction.setAuctionMinPrice(auction.getAuctionMinPrice().replaceAll(",", ""));
@@ -148,7 +152,10 @@ public class AuctionDetailController {
 		String root = null;
 		try {
 			String sysName = UUID.randomUUID().toString();
-			root = "c:/java/upload/"+sysName+".jpg";
+			String fileName = sysName+".jpg";
+			root = "c:/java/upload/temp/" + fileName;
+			File file = new File("c:/java/upload/temp/");
+			if(file.exists() == false) file.mkdirs();
 			fos = new FileOutputStream(root);
 			fos.write (binary);
 			fos.flush();
@@ -165,7 +172,9 @@ public class AuctionDetailController {
 	@RequestMapping("/fileTag.do")
 	@ResponseBody
 	public void fileTag(String data, UtilFile file) throws Exception {
+		System.out.println("파일저장할때 디비에서 뽑아낸 그룹코드 : " + service.maxFileGroupCode());
 		int fileGroupCode = service.maxFileGroupCode() + 1;
+		System.out.println("파일 실제저장할 값 : " + fileGroupCode);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(data);
 		JsonObject obj = element.getAsJsonObject(); 
@@ -174,9 +183,12 @@ public class AuctionDetailController {
 		for (Map.Entry<String, JsonElement> entry: entries) {
 			
 			
-			String sysName = entry.getKey().split("c:/java/upload/")[1];
-			String path = "c:/java/upload/temp/";
-			
+			String sysName = entry.getKey().split("c:/java/upload/temp/")[1];
+			SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
+			String filePath = "auction" + sdf.format(new Date());
+			String path = "c:/java/upload/" + filePath;
+			File realPath = new File(path);
+			if(realPath.exists() == false) realPath.mkdirs();
 			File delFile = new File(entry.getKey());
 			File copyFile = new File(path + sysName);
 			FileInputStream fis = new FileInputStream(delFile);
@@ -186,7 +198,6 @@ public class AuctionDetailController {
 			while((input = fis.read(data2)) != -1) {
 			  fos.write(data2, 0, input);
 			}
-			delFile.delete();
 			file.setFileGroupCode(fileGroupCode);
 			file.setFilePath(path);
 			file.setFileSystemName(sysName);
@@ -204,6 +215,7 @@ public class AuctionDetailController {
 			} 
 			fis.close();
 			fos.close();
+			delFile.delete();
 		}
 	}
 	

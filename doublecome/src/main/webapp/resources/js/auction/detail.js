@@ -1,19 +1,28 @@
-let rPageNo = 1;
+let rPageNo = 1; //판매자 후기
 let reviewCnt = 0;
-let limit = new Date(limitTime)
-let now = new Date()
+let limit = new Date(limitTime) //해당글 리밋시간체크
+let now = new Date() 
 
+//해당글 리밋시간 지날시 모든이벤트 off
 $(document).ready(() => {
 	if(limit.getTime() < now.getTime()) {
 		$(".afterModal").css("display", "block");
 		$(document).off();
-	} 
+	}
 })
+let timer = limit.getTime() - now.getTime()
+if (timer > 0) {
+	setTimeout(() => {
+		location.reload();
+	}, timer)
+}	
 
+//alert 라이브러리
 function swalAlert(msg) {
 	Swal.fire(msg)
 }
 
+//alert 라이브러리
 function swal() {
     Swal.fire({
         title: '로그인이 필요한 페이지입니다',
@@ -33,6 +42,7 @@ function swal() {
       })
 }
 
+//경매종료 페이지 스크롤 내릴때 모달조절
 $(window).scroll(function () {
 	  height = $(document).scrollTop();
 	  margin = parseInt($(".afterModal").css("margin-top"))
@@ -69,24 +79,27 @@ $(document).on("click", ".remove_btn", () => {
 		}
 	})
 })
-
+//스틱 라이브러리
 $('.sidebar, .nav').stick_in_parent("#wrapper");
 
-  let galleryTop = new Swiper('.gallery-top', {
-    effect: 'cube',
-    grabCursor: true,
-    loop: true,
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    cubeEffect: {
-        shadow: true,
-        slideShadows: true,
-        shadowOffset: 20,
-        shadowScale: 0.94,
-    },
-  });
+//스와이퍼 라이브러리
+let galleryTop = new Swiper('.gallery-top', {
+  effect: 'cube',
+  grabCursor: true,
+  loop: true,
+  navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+  },
+  cubeEffect: {
+      shadow: true,
+      slideShadows: true,
+      shadowOffset: 20,
+      shadowScale: 0.94,
+  },
+});
+
+//페이지 클릭부분 호출
 $("#btn1").click(() => {
 	$("#inquiry_box").css('display', 'block')
   $("#insertbox1").html($("#inquiry_box"))
@@ -104,6 +117,7 @@ $("#btn2").click(() => {
   $("#insertbox2").html($("#inquiry_box"))
 })
 
+//문의 답장버튼 클릭시 html호출해서 해당 부분 하단에 붙여넣기
 $(document).on("click", ".reply", () => {
 	$div = $(e.target).attr("id")
 	$("#inquiry_box").css('display', 'block')
@@ -124,7 +138,7 @@ $(document).ready(function(){
     loopcounter('counter-class');
   });
 
-
+//스크롤 내릴시 상단 탭 부분 변경
 $(window).scroll(function () {
   height = $(document).scrollTop();
   if ($("#nav1").offset().top-80 < height && 
@@ -432,6 +446,10 @@ $(document).on("click", ".bidModalBtn", () => {
 	}
 })
 
+$(document).on("click", ".loginAlready", function(event) {
+	alert("a");
+	return false
+})
 
 $(document).on("click", ".loginAlreadyBuyNow", () => {
 	if (email == id) {
