@@ -122,6 +122,7 @@ public class FileServiceImpl implements FileService{
 		try {
 			File f = new File(root);
 			res.setHeader("Content-type", "image/jpg");
+			if(f.exists() == false) f.mkdirs();
 			FileInputStream fis = new FileInputStream(f);
 			BufferedInputStream bis = new BufferedInputStream(fis);
 			OutputStream out = res.getOutputStream();

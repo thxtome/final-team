@@ -12,7 +12,6 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 public class SmsServiceImpl implements SmsService{
 	
 	  public void sendSMS(String msg, String phNo) {
-		  System.out.println(msg);
 		    String api_key = "";
 		    String api_secret = "";
 		    Message coolsms = new Message(api_key, api_secret);

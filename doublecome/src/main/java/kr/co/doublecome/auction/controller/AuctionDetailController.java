@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -96,7 +98,7 @@ public class AuctionDetailController {
 	@RequestMapping("/addAuction.do")
 	public String addAuction(@RequestHeader(value = "referer") String referer, Principal principal, Auction auction, UtilFile uFile) throws Exception {
 		
-		int groupCode = service.maxFileGroupCode();
+		int groupCode = service.maxFileGroupCode() + 1;
 		auction.setUserEmail(principal.getName());
 		auction.setAuctionBuyNow(auction.getAuctionBuyNow().replaceAll(",", ""));
 		auction.setAuctionMinPrice(auction.getAuctionMinPrice().replaceAll(",", ""));
@@ -148,7 +150,10 @@ public class AuctionDetailController {
 		String root = null;
 		try {
 			String sysName = UUID.randomUUID().toString();
-			root = "c:/java/upload/"+sysName+".jpg";
+			String fileName = sysName+".jpg";
+			root = "c:/java/upload/temp/" + fileName;
+			File file = new File("c:/java/upload/temp/");
+			if(file.exists() == false) file.mkdirs();
 			fos = new FileOutputStream(root);
 			fos.write (binary);
 			fos.flush();
@@ -174,9 +179,12 @@ public class AuctionDetailController {
 		for (Map.Entry<String, JsonElement> entry: entries) {
 			
 			
-			String sysName = entry.getKey().split("c:/java/upload/")[1];
-			String path = "c:/java/upload/temp/";
-			
+			String sysName = entry.getKey().split("c:/java/upload/temp/")[1];
+			SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
+			String filePath = "auction" + sdf.format(new Date());
+			String path = "c:/java/upload/" + filePath;
+			File realPath = new File(path);
+			if(realPath.exists() == false) realPath.mkdirs();
 			File delFile = new File(entry.getKey());
 			File copyFile = new File(path + sysName);
 			FileInputStream fis = new FileInputStream(delFile);
@@ -186,7 +194,6 @@ public class AuctionDetailController {
 			while((input = fis.read(data2)) != -1) {
 			  fos.write(data2, 0, input);
 			}
-			delFile.delete();
 			file.setFileGroupCode(fileGroupCode);
 			file.setFilePath(path);
 			file.setFileSystemName(sysName);
@@ -195,15 +202,18 @@ public class AuctionDetailController {
 			if (element.getAsJsonObject().get(entry.getKey()).isJsonArray()) {
 				JsonArray jsonArray = obj.getAsJsonArray(entry.getKey());
 				for (int i = 0; i < jsonArray.size(); i++) {
+					String content = jsonArray.get(i).getAsJsonObject().get("content").getAsString();
+					if (content.equals("")) continue;
 					file.setFileNo(file.getFileNo());
 					file.setTagXCor(jsonArray.get(i).getAsJsonObject().get("x").getAsInt());
 					file.setTagYCor(jsonArray.get(i).getAsJsonObject().get("y").getAsInt());
-					file.setTagContent(jsonArray.get(i).getAsJsonObject().get("content").getAsString());
+					file.setTagContent(content);
 					service.addTag(file);
 				}
 			} 
 			fis.close();
 			fos.close();
+			delFile.delete();
 		}
 	}
 	
