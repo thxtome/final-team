@@ -85,11 +85,6 @@ public class UserServiceImpl implements UserService{
 	public void updateUserDefaultProfile(String email) {
 		mapper.updateUserDefaultProfile(email);
 	}
-	//프로필 이미지
-	@Override
-	public void updateUserCustomProfile(String email) {
-		mapper.updateUserCustomProfile(email);
-	}
 
 
 

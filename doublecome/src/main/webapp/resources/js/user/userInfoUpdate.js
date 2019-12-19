@@ -128,18 +128,47 @@ inAvtiveBtn();
 });
 
 //사진 지우기
-$('.m-upload__preview jst-preview').click(() => {	
-	console.log("클릭")
-	$.ajax({
-		url:"/doublecome/user/deleteProfile.do",
-		data:{ email :$('#userEmail').val()},
-		success:(result)=> {
-			console.log(result ,"result");
-			console.log($('#userEmail').val(), "$('#userEmail').val()" )
-			$('.m-upload__preview jst-preview').attr('style', "background-image:url(/doublecome/file/downLoadFile.do?fileNo=${user.fileNo});" )
-		}
-	});
-} )
+/*$('.m-upload__preview').click( () => {	
+	let result = confirm("등록한 사진을 지웁니다");
+	if(result ){		
+		$.ajax({
+			url:"/doublecome/user/deleteProfile.do",
+			data:{ email :$('#userEmail').val()},
+			success:(result)=> {
+				console.log(result ,"result");
+				console.log($('#userEmail').val(), "$('#userEmail').val()" )
+				alert("사진을 지우셨습니다")
+				$('.m-upload__preview jst-preview').attr('style', "background-image:url(/doublecome/file/downLoadFile.do?fileNo=1);" )
+			}
+		});
+	}
+} )*/
+$('.m-upload__preview').click( () => {	
+	Swal.fire({
+        title: '사진을 지우시겠습니까',
+        /*text: "회원가입 혹은 로그인후 진행해주세요",*/
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '확인',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.value) {
+        	$.ajax({
+    			url:"/doublecome/user/deleteProfile.do",
+    			data:{ email :$('#userEmail').val()},
+    			success:(result)=> {
+    				console.log(result ,"result");
+    				console.log($('#userEmail').val(), "$('#userEmail').val()" )
+    				Swal.fire("사진을 지우셨습니다")
+    				$('.m-upload__preview jst-preview').attr('style', "background-image:url(/doublecome/file/downLoadFile.do?fileNo=1);" )
+    			}
+    		});
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        	return false;
+        }
+      })
+})
 
- 
   

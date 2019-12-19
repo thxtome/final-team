@@ -231,9 +231,11 @@ public class UserController {
 	
 	// 마이페이지 -프로필 이미지 삭제
 	@RequestMapping("/deleteProfile.do")
+	@ResponseBody
 	public void deleteProfile(String email) throws Exception {
+		User user = service.selectUserInfoByName(email);
+		fileService.deleteProfile(user); 
 		service.updateUserDefaultProfile(email);
-		/* fileService.deleteProfile(email); */
 	}
 
 	// 마이페이지 - 회원 정보 수정 버튼
