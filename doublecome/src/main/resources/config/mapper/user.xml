@@ -86,20 +86,26 @@
 	
 	<!-- 회원 정보 수정 -->
 	<update id="updateUser"  parameterType="User">
+		<!-- 
 		update user 
 		   set user_pass = #{userPass},
 		   	   user_nickname = #{userNickname},
 			   user_phnum = #{userPhnum},
 			   file_group_code = #{fileGroupCode}
-		<!-- <choose>
-			<when test="fileOriginName.length() == 0">
-				,file_group_code = 0
-			</when>
-			<otherwise>
-				,file_group_code = 1
-			</otherwise>
-		</choose> -->
 		 where user_email = #{userEmail}
+		-->
+		update user 
+		   set file_group_code = #{fileGroupCode}
+			<if test="userNickname.length() != 0">
+				,user_nickname = #{userNickname}
+			</if>
+			<if test="userPhnum.length() != 0">
+				,user_phnum = #{userPhnum}
+			</if>
+			<if test="userPass.length() != 0">
+				,user_pass = #{userPass}
+			</if>
+	 	where user_email = #{userEmail}
 	</update>
 	<update id="updateUserDefaultProfile" parameterType="string" >
 		update user
