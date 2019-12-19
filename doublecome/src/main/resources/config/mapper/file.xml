@@ -38,7 +38,7 @@
 	</insert>
 	<delete id="deleteProfile" parameterType="int">
 		delete from file
-		where file_group_code = #{fileGroupCode}	
+		where file_no = #{fileNo}	
 	</delete>
 	
 	<!-- 해당경매글 파일 가져오기 -->

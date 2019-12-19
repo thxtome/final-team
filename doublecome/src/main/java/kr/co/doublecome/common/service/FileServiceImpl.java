@@ -86,7 +86,7 @@ public class FileServiceImpl implements FileService{
 	public UtilFile uploadProfile(UtilFile uFile, User user ) {
 		String filePath = "/user" + "/" + user.getUserEmail() + "/";
 		
-		int groupCode = mapper.maxFileGroupCode() + 1;
+		int groupCode = user.getFileGroupCode();
 		for (MultipartFile mFile : uFile.getAttach()) {
 			if (mFile.isEmpty()) continue;
 			
