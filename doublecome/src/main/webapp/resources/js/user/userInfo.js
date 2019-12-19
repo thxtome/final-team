@@ -23,15 +23,42 @@
 
 	}
 }));
-/*
-$('#updateFormBtn').click( ()=> {
-	alert($('#email').html());
-	$.ajax({
-		url: "/doublecome/user/userInfoUpdate.do",
-		data: {userEmail: $('#email').html(),
-				userPass: $('#pass').html(),
-				userPhnum: $('#phnum').html,
-				userNickname: $('#nickname').html}
+
+$(document).on("click", ".asd", () => {
+	Swal.fire({
+		title: '탈퇴 하시겠습니까',
+		/*text: "회원가입 혹은 로그인후 진행해주세요",*/
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '확인',
+		cancelButtonText: '취소'
+	}).then((result) => {
+		if (result.value) {
+			return true;
+		} else if (result.dismiss === Swal.DismissReason.cancel) {
+			return false;
+		}
 	})
-});
-*/
+	
+})
+
+$(document).on("click", "#deleteBtn", () => {
+	Swal.fire({
+        title: '탈퇴 하시겠습니까',
+        /*text: "회원가입 혹은 로그인후 진행해주세요",*/
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '확인',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.value) {
+        	   $("#pa").submit()
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        	return false;
+        }
+      })
+})

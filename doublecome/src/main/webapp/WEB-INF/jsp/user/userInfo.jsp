@@ -44,9 +44,9 @@
    <%--  <input type="hidden" value="${user.userEmail}" name="userEmail"/> --%>
     <button id="historyGoBtn">거래/후기 내역</button>
     </form>
-    <form method="post" action="<c:url value="/user/deleteUser.do"/>">
+    <form id="pa" method="post" action="deleteUser.do">
     <input type="hidden" value="${user.userEmail}" name="userEmail"/>
-    <button id="deleteBtn">회원 탈퇴</button>
+    <button type="button" id="deleteBtn">회원 탈퇴</button>
     </form>
 			
 			<div id="infoContainer">
@@ -96,6 +96,7 @@
 			</sec:authorize>
 </div> 
 </section>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	<script src="<c:url value="/resources/js/user/userInfo.js" />" ></script>
 </body>
 </html>

@@ -107,6 +107,7 @@
 </div>
 </div> 
 </section>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	<script src="<c:url value="/resources/js/user/userInfoUpdate.js" />" ></script>
 </body>
 </html>
