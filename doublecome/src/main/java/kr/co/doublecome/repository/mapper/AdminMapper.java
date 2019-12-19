@@ -41,4 +41,5 @@ public interface AdminMapper {
 	
 	public Deal dealInfo(int auctionNo);
 	public void insertReport(Report report);
+	public void updateDealCondition(Deal deal);
 }

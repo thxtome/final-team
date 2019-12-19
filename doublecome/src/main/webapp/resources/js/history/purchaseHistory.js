@@ -103,8 +103,7 @@ $(function (){
 					</div>
 				`;
 				if ((r.dealCondition == 1 && ((r.dealNo!= 0 && r.reviewSender == null) || r.dealBuyerCondition == 1))
-				|| (r.dealCondition == 2 && (r.dealNo!= 0 && r.reviewSender == null))
-				|| (r.dealCondition == 3 && (r.dealNo!= 0 && r.reviewSender == null))){
+				|| (r.dealCondition == 2 || r.dealCondition == 3 || r.dealCondition == 4 && (r.dealNo!= 0 && r.reviewSender == null))){
 					html += `					
 					<div class="listBody marginRemove">
 						<ul>
@@ -220,15 +219,7 @@ $(function (){
 
 });
 
-$("body").on("click", ".reportBtn", (e) => {
-	 $(".addReportModal").show();
-	 $('input[name=auctionNo]').val($(e.target).data("no"));
-});
 
-$(".addReportBtn").click((e) => {
-	console.log("클릭됨");
-	$("#reportForm")[0].submit();
-});
 
 $("body").on("click", ".reviewBtn", (e) => {
 	$("#reviewForm > form").attr("action","addReview.do");

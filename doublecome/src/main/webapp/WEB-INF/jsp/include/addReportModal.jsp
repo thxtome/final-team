@@ -10,7 +10,7 @@
         <div class="addReportModalBack">
             <div>
                 <div class="reportReason">
-                    <form method="post" action="#" id="reportForm">
+                    <form method="post" id="reportForm">
                     <!-- 유저 신고는 1번 경매신고는 2번-->
                     <input type="hidden" value='' name="reportReceiver">
                     <input type="hidden" value='' name="reportSender">

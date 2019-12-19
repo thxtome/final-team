@@ -82,9 +82,8 @@ $(function (){
 					</span>
 				</div>
 				`;
-				if ((r.dealCondition == 1 && ((r.dealNo!= 0 && r.reviewSender == null) || r.dealSellerCondition == 1))
-				|| (r.dealCondition == 2 && (r.dealNo!= 0 && r.reviewSender == null))
-				|| (r.dealCondition == 3 && (r.dealNo!= 0 && r.reviewSender == null))){
+				if ((r.dealCondition == 1 && ((r.dealNo!= 0 && r.reviewSender == null) || r.dealBuyerCondition == 1))
+						|| (r.dealCondition == 2 || r.dealCondition == 3 || r.dealCondition == 4 && (r.dealNo!= 0 && r.reviewSender == null))){
 				
 				html += `
 				<div class="listBody marginRemove">

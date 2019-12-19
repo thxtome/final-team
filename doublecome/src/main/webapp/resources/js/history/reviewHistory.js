@@ -385,14 +385,14 @@ function swalAlert(msg){
 }
 
 // 후기 등록 내용 확인
-/*
 $(".regitbtn").click((e) => {
 	let flag = false;
 	let radio = $('input:radio[name="reviewScore"]');
 	console.log($('input:text[name="reviewTitle"]').val());
 	for (let i = 0; i < 10; i++){
-		console.log($(radio[i]).prop("checked"));
-		if($(radio[i]).prop("checked")){
+		console.log($(radio[i]).is(':checked'));
+		if($(radio[i]).is(':checked')){
+			console.log("a");
 			flag = true;
 			return;
 		}
@@ -406,10 +406,9 @@ $(".regitbtn").click((e) => {
 		swalAlert("후기를 입력해주세요.");
 	} else {
 		swalAlert("후기가 등록되었습니다.");
-		$("#rform").submit();
+//		$("#rform").submit();
 	}
 });
-*/
 $("body").on("click", ".reviewModalClose", (e) => {
 	$addReviewModal.css("display","none");
 	$("#rform")[0].reset();
@@ -421,6 +420,7 @@ window.onclick = function(event) {
  if (event.target == $addReviewModal) {
  	$addReviewModal.css("display","none");
  }
+ 
 }
 
 // 후기작성 서머노트
@@ -486,15 +486,15 @@ $("body").on("click", ".scoreLabel", (e) => {
 	let $star = $(e.target).closest(".scoreSpan").find(".fa-star");
 	let $cStar = $(".fa-star");
 	let $radio = $(e.target).closest(".scoreSpan").find("input:radio");
+//	let $radio = $(e.target).siblings("input:radio");
 	if ($star.css("visibility") == "hidden"){
 		$cStar.removeClass("scoreChoice");
 		$star.addClass("scoreChoice");
 		$radio.prop("checked", true);
 	} else if ($star.css("visibility") == "visible"){
-		$cStar.removeClass("scoreChoice");
 		$radio.prop("checked", false);
+		$cStar.removeClass("scoreChoice");
 	}
-	console.log($radio.prop("checked"));
 });
 
 

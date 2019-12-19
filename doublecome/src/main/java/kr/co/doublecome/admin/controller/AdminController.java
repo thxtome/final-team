@@ -191,8 +191,9 @@ public class AdminController {
 	}
 	
 	// 신고등록
-	@RequestMapping("addReport.do")
-	public void addReport(Principal p, Report report) {
-		service.addReport(p, report);
+	@RequestMapping("/addReport.do")
+	public String addReport(Principal p, Report report) {
+		service.addReport(p.getName(), report);
+		return "redirect:/history/listHistory.do";
 	}
 }

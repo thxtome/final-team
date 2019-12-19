@@ -154,7 +154,7 @@
 							<input id="auctionNo" type="hidden" name="auctionNo" value="0"/>
 							<input id="reviewNo" type="hidden" name="reviewNo" value="0"/>
 							<div class="regitbtn">
-								<button type="submit"></button>
+								<button type="button"></button>
 							</div>
 						</form>
 					</div>

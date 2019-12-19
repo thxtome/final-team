@@ -262,11 +262,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 
-	public void addReport(Principal p, Report report) {
-		System.out.println("report" + report);
+	public void addReport(String userEmail, Report report) {
 		Deal deal = mapper.dealInfo(report.getAuctionNo());
-		System.out.println("deal" + deal);
-		if (p.getName() == deal.getUserEmailBuyer()) {
+		if (userEmail == deal.getUserEmailBuyer()) {
 			report.setReportSender(deal.getUserEmailBuyer());
 			report.setReportReceiver(deal.getUserEmailSeller());
 		} else {
@@ -274,6 +272,9 @@ public class AdminServiceImpl implements AdminService{
 			report.setReportReceiver(deal.getUserEmailBuyer());
 		}
 		report.setDealNo(deal.getDealNo());
+		deal.setUserEmail(userEmail);
 		mapper.insertReport(report);
+		mapper.updateDealCondition(deal);
+		
 	}
 }

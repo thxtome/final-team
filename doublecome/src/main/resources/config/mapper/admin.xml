@@ -528,4 +528,19 @@
 			#{reportContent}, #{reportSender}, #{reportReceiver}, #{dealNo}, #{reportTypeCode}, #{auctionNo}
 		)
 	</insert>
+	
+	<!-- 신고시 dealCondition 변경 -->
+	<update id="updateDealCondition" parameterType="Deal" >
+		update deal
+		   set deal_condition = 4,
+		<choose>
+			<when test='userEmailBuyer == userEmail'>
+				deal_buyer_condition = 4
+			</when>
+			<otherwise>
+				deal_seller_condition = 4
+			</otherwise>
+		</choose>		
+		where deal_no = #{dealNo}
+	</update>
 </mapper>
