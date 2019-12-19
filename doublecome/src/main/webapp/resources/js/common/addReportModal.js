@@ -13,9 +13,15 @@ $(".addReportModalBack").click((e)=>{
 })
 
 function closeReportModal() {
+	for (let i = 1; i <= $('input[name="reportTypeCode"]').length; i++){
+		if ($(`#report${i}`).prop("checked")){
+			$(`#report${i}`).prop("checked", false);
+		}
+	}
     let $modal = $(".addReportModal")
     $modal.hide();
     $modal.find("textarea").val("");
+    
 }
 
 $("body").on("click", ".reportBtn", (e) => {
@@ -25,6 +31,15 @@ $("body").on("click", ".reportBtn", (e) => {
 });
 
 $(".addReportBtn").click((e) => {
-	console.log("클릭됨");
+	let flag = false;
+	for (let i = 1; i <= $('input[name="reportTypeCode"]').length; i++){
+		if ($(`#report${i}`).prop("checked")){
+			flag = true;
+		}
+	}
+	if (!flag){
+		Swal.fire("신고 타입을 선택해주세요.");
+	}
 	$("#reportForm")[0].submit();
 });
+

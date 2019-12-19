@@ -128,10 +128,10 @@
 							<div class="scoreDiv">
 								<div class="scoreLibel">신뢰도</div>
 								<div class="scoreCon">
+									<input type="hidden" name = "reviewScore" value="" />
 									<c:forEach var="r" begin="1" end="10">
 									<span class="scoreSpan">
-										<input type="radio" id="reviewScore${r}" name="reviewScore" value="${r}">
-										<label class="scoreLabel" for="reviewScore${r}">
+										<label class="scoreLabel" for="reviewScore${r}" data-no="${r}" >
 										<i class='fas fa-star regitStar'></i>${r}
 										</label>
 									</span>

@@ -74,16 +74,37 @@ $(function (){
 					<div class="listCon">
 								<div class="listHead">
 									<span class="listDate"> 
-										<span class="dateTitle">마감 날짜 </span> 
-										<span class="dateContent">${format(r.auctionLimitDate, "ymd")}</span>
+				`;
+				if (r.auctionCondition == 1 || r.auctionCondition == 3){
+					html += `
+						<span class="dateTitle">입찰 마감일 </span> 
+						<span class="dateContent">${format(r.auctionLimitDate, "ymd")}</span>
+					`;
+				} else {
+					html += `
+						<span class="dateTitle">거래시작일</span> 
+						<span class="dateContent">${format(r.dealRegDate, "ymd")}</span>
+					`;
+					if (r.dealCondition == '3'){
+						html += `
+						<span class="dealCondition colorGreen">취소거래</span>
+						`;
+						} else if (r.dealCondition == '4'){
+						html += `
+						<span class="dealCondition colorRed">신고거래</span>
+						`;
+						}
+				}
+				html += `
 					</span> 
 					<span class="detailCon"> 
-						<a>입찰금 <strong>${maxPrice}</strong>원</a>
+					<a>입찰금 <strong>${maxPrice}</strong>원</a>
 					</span>
-				</div>
+					</div>
 				`;
-				if ((r.dealCondition == 1 && ((r.dealNo!= 0 && r.reviewSender == null) || r.dealBuyerCondition == 1))
-						|| (r.dealCondition == 2 || r.dealCondition == 3 || r.dealCondition == 4 && (r.dealNo!= 0 && r.reviewSender == null))){
+				if ((r.dealCondition == 1 && ((r.dealNo!= 0 && r.reviewSender == null) || r.dealSellerCondition == 1))
+						|| (r.dealCondition == 2 && (r.dealNo!= 0 && r.reviewSender == null))
+						|| (r.dealCondition == 3 && (r.dealNo!= 0 && r.reviewSender == null))){
 				
 				html += `
 				<div class="listBody marginRemove">
@@ -152,7 +173,7 @@ $(function (){
 						<li>
 							<div class="writerInfo">
 								<a class="auctionWriter">${r.userNickname}</a>
-								<div>${r.userScore}점</div>
+								<div>(평점 : ${r.userScore}점)</div>
 								<div class="starDiv">
 									${starHtml}
 								</div>

@@ -38,6 +38,7 @@ public class Auction {
 	private int dealCondition;				// 거래상태
 	private int dealBuyerCondition;			// 구매자거래상태
 	private int dealSellerCondition;		// 판매자거래상태
+	private Date dealRegDate;				// 거래시작일
 	private String userEmailBuyer;			// 구매자 이메일
 	private String userEmailSeller;			// 판매자 이메일
 	private int auctionBroadcast;			// 방송여부

@@ -294,6 +294,7 @@
 	width: 100px;
 	height: 30px;
 	line-height: 45px;
+	margin-right: 1px;
 }
 
 .contentArea {
@@ -839,7 +840,7 @@
 /* 신뢰도  slider*/
 .scoreCon input {
 	display: inline-block;
-	display: none;
+/* 	display: none; */
 }
 
 .scoreCon label {
@@ -965,4 +966,10 @@ select {
 .detailCon a:hover{
 	text-decoration: none;
 	color:#000;
+}
+.colorRed{
+	background-color: red;
+}
+.colorGreen{
+	background-color: green;
 }
