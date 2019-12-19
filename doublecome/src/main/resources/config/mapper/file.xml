@@ -26,7 +26,7 @@
 	<!-- 유저 프로필 사진 -->
 	<insert id="addProfile" parameterType="UtilFile" >
 		<choose>
-			<when test="fileNo == 106">		
+			<when test="fileNo == 1">		
 		insert into file (file_group_code,  file_origin_name,  file_system_name, file_path)
  		VALUES ( #{fileGroupCode}, #{fileOriginName}, #{fileSystemName}, #{filePath}) ;
 			</when>

@@ -34,9 +34,7 @@
 <!--   <div class="m-box"> -->
       <div class="m-upload js-fileupload">
         <div class="m-upload__preview jst-preview" style="background-image:url(/doublecome/file/downLoadFile.do?fileNo=${user.fileNo});">
-          <div>
-            <i class="mdi mdi-cloud-upload"></i>
-          </div>
+          
         </div>
         
         <div class="m-upload__inputs">
