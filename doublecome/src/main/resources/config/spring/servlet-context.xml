@@ -14,6 +14,18 @@
             			  http://www.springframework.org/schema/task
 						  http://www.springframework.org/schema/task/spring-task.xsd">
 
+		<bean id="interceptorLogin" class="kr.co.doublecome.common.controller.Interceptor"></bean>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/auction/insertAuction.do"/>
+			<mvc:mapping path="/user/userInfo.do"/>
+			<mvc:mapping path="/admin/**"/>
+			<ref bean="interceptorLogin"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	
 	<!-- 컨테이너에 객체를 어노테이션으로 자동 등록 -->
 	<context:component-scan base-package="kr.co.doublecome" />
 	

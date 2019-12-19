@@ -73,7 +73,7 @@
 	
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteUser" parameterType="string">
-	    CASCADE	delete from user
+	   	delete from user
 		where user_email = #{email}
 	</delete>
 	
@@ -110,11 +110,6 @@
 	<update id="updateUserDefaultProfile" parameterType="string" >
 		update user
 		   set file_group_code = 0
-		 where user_email = #{userEmail}
-	</update>
-	<update id="updateUserCustomProfile" parameterType="string" >
-		update user
-		   set file_group_code = 1
 		 where user_email = #{userEmail}
 	</update>
 	

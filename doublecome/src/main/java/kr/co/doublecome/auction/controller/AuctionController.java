@@ -1,5 +1,7 @@
 package kr.co.doublecome.auction.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.doublecome.auction.service.AuctionServiceImpl;
 import kr.co.doublecome.repository.vo.AjaxPage;
+import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Category;
 import kr.co.doublecome.repository.vo.SearchAuction;
 
@@ -25,6 +28,7 @@ public class AuctionController {
 		category.setCategoryCode(search.getCategoryCode());
 		category.setCategoryName(search.getCategoryName());
 		AjaxPage ap = service.auctionList(search);
+		List<Object> list = ap.getList();
 		model.addAttribute("pr", ap.getPr());
 		model.addAttribute("selectCategory",category);
 		model.addAttribute("category",service.listCategory());

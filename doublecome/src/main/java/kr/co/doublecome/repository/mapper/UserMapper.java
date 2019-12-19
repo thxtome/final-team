@@ -14,7 +14,6 @@ public interface UserMapper {
 	
 	public void updateUser(User user);
 	public void updateUserDefaultProfile(String email);
-	public void updateUserCustomProfile(String email);
 	
 	
 	public String findEmail(String user);
