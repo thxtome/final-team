@@ -484,7 +484,7 @@ $(document).on("click", ".InquiryBtn", () => {
 	}
 })
 
-$(".swiper-slide").on("click", () => {
+$(".swiper-wrapper").on("click", () => {
 	$(".carousel-inner .item:nth-child(1)").addClass("active");
 	$(".modal").show();
 })
