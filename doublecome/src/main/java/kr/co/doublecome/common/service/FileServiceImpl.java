@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.doublecome.repository.mapper.FileMapper;
 import kr.co.doublecome.repository.mapper.UserMapper;
+import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.repository.vo.UtilFile;
 
 @Service("kr.co.doublecome.common.service.FileServiceImpl")
@@ -61,7 +62,6 @@ public class FileServiceImpl implements FileService{
 	}
 	//유저 프로필 사진 삭제 
 		public void deleteProfile(String email) {
-			mapper.deleteProfile(email);
 			String path = "c:/java/upload/user" + "/" + email + "/";
 			File folder = new File(path);
 			try {
@@ -83,9 +83,10 @@ public class FileServiceImpl implements FileService{
 			}
 		}
 	//유저 프로필 이미지
-	public UtilFile uploadProfile(UtilFile uFile, String email ) {
-		String filePath = "/user" + "/" + email + "/";
-		int groupCode = 0;
+	public UtilFile uploadProfile(UtilFile uFile, User user ) {
+		String filePath = "/user" + "/" + user.getUserEmail() + "/";
+		
+		int groupCode = user.getFileGroupCode();
 		for (MultipartFile mFile : uFile.getAttach()) {
 			if (mFile.isEmpty()) continue;
 			
@@ -98,7 +99,7 @@ public class FileServiceImpl implements FileService{
 				mFile.transferTo(file);
 			} catch (Exception e) {
 			}
-			uFile.setFileNo(userMapper.selectUserInfoByName(email).getFileNo());
+			uFile.setFileNo(user.getFileNo());
 			uFile.setFileGroupCode(groupCode);
 			uFile.setFileOriginName(orgName);
 			uFile.setFileSystemName(sysName);
@@ -107,6 +108,13 @@ public class FileServiceImpl implements FileService{
 		}
 		return uFile;
 	}
+	
+	public int maxFileGroupCode() {
+		return mapper.maxFileGroupCode();
+	}
+	public void deleteProfile(int i) {
+		mapper.deleteProfile(i);
+	};
 	
 	public void downLoadFile(int fileNo, HttpServletResponse res) {
 		try {
@@ -170,7 +178,8 @@ public class FileServiceImpl implements FileService{
 		String filePath = "/history" + sdf.format(new Date());
 		int groupCode = mapper.maxFileGroupCode() + 1;
 		String orgContent = content;
-		String img = orgContent;
+		System.out.println(content);
+		String img = content;
 		while(true) {
 			int extTempStart = img.indexOf("image/");
 			if (extTempStart == -1) return orgContent;
@@ -208,7 +217,7 @@ public class FileServiceImpl implements FileService{
 			if (tagStart == -1) tagStart = orgContent.indexOf("<img style"); 
 			System.out.println(tagStart);
 			System.out.println(orgContent);
-			orgContent = orgContent.replace(orgContent.substring(tagStart, orgContent.indexOf(">", tagStart) + 1), "<img src=\"/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo() + "\">");
+			orgContent = orgContent.replace(orgContent.substring(tagStart, orgContent.indexOf(">", tagStart) + 1), "<img style=\"width: 350px\" src=\"/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo() + "\">");
 			System.out.println("orgContent : " + orgContent);
 		}
 	}

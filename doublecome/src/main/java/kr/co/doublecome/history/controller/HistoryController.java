@@ -30,6 +30,7 @@ public class HistoryController {
 	public void listHistory(Principal p, Model model) {
 		String userEmail = p.getName();
 		model.addAttribute("userHistory", service.receiveUserInfo(userEmail));
+		System.out.println("userinfo : " + service.receiveUserInfo(userEmail));
 	}
 	
 	// 구매내역 ajax
@@ -75,6 +76,7 @@ public class HistoryController {
 	public String addReview(Principal p, Review review) {
 		review.setReviewSender(p.getName());
 		System.out.println("-----------------------------------------");
+		System.out.println(review);
 		System.out.println(review.getReviewContent());
 		review.setReviewContent(fService.saveBase64File(review.getReviewContent()));
 		service.insertReview(review);

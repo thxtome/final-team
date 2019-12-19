@@ -10,38 +10,37 @@
         <div class="addReportModalBack">
             <div>
                 <div class="reportReason">
-                    <form action="#"></form>
+                    <form method="post" action="#" id="reportForm">
                     <!-- 유저 신고는 1번 경매신고는 2번-->
-                    <input type="hidden" value='' name="reportTypeCode">
                     <input type="hidden" value='' name="reportReceiver">
                     <input type="hidden" value='' name="reportSender">
                     <input type="hidden" value='' name="auctionNo">
                     <span>신고사유</span>
                     <div>
-                        <input type="radio" name="report" id="report1"  />
+                        <input type="radio" name="reportTypeCode" id="report1"  value="1"/>
                         <label for="report1">욕설 및 비방</label>
                     </div>
                     <div>
-                        <input type="radio" name="report" id="report2" />
+                        <input type="radio" name="reportTypeCode" id="report2" value="2"/>
                         <label for="report2">물품 미발송</label>
                     </div>
                     <div>
-                        <input type="radio" name="report" id="report3" />
+                        <input type="radio" name="reportTypeCode" id="report3" value="3"/>
                         <label for="report3">광고성 게시물</label>
                     </div>
                     <div>
-                        <input type="radio" name="report" id="report4" />
+                        <input type="radio" name="reportTypeCode" id="report4" value="4"/>
                         <label for="report4">불친절</label>
                     </div>
                     <div>
-                        <input type="radio" name="report" id="report5" />
+                        <input type="radio" name="reportTypeCode" id="report5" value="5"/>
                         <label for="report5">기타</label>
                     </div>
-                </div>
-
                 <div>
                     <span>신고 내용</span>
-                    <textarea placeholder="내용을 입력해주세요.(선택)"></textarea>
+                    <textarea name="reportContent" placeholder="내용을 입력해주세요.(선택)"></textarea>
+                </div>
+				</form>
                 </div>
                 <div><button class="addReportBtn">신고</button><button class="cancleReportBtn">취소</button></div>
             </div>

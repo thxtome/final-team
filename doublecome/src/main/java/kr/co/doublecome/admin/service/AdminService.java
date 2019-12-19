@@ -1,10 +1,12 @@
 package kr.co.doublecome.admin.service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Category;
+import kr.co.doublecome.repository.vo.Report;
 import kr.co.doublecome.repository.vo.ReportType;
 import kr.co.doublecome.repository.vo.Search;
 import kr.co.doublecome.repository.vo.SearchAuction;
@@ -34,4 +36,5 @@ public interface AdminService {
 	public List<Category> retrieveAuctionStaticsCat();
 	public List<Map<String, String>> retrieveAuctionStaticsRegDate(String startDate, String endDate);
 	public List<Map<String, String>> retrieveUserStaticsRegDate(String startDate, String endDate);
+	public void addReport(Principal p, Report report);
 }

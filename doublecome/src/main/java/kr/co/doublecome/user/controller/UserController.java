@@ -28,6 +28,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import kr.co.doublecome.common.service.FileService;
+import kr.co.doublecome.common.service.FileServiceImpl;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.repository.vo.UtilFile;
@@ -235,7 +236,7 @@ public class UserController {
 	@RequestMapping("/deleteProfile.do")
 	public void deleteProfile(String email) throws Exception{
 		service.updateUserDefaultProfile(email);
-		fileService.deleteProfile(email);
+		/* fileService.deleteProfile(email); */
 	}
 	
 	//마이페이지 - 회원 정보 수정 
@@ -260,7 +261,6 @@ public class UserController {
 			HttpServletResponse res,
 			@RequestParam("file") MultipartFile file
 			) throws Exception{
-		System.out.println("/userUpdate.do");
 		User u = service.selectUserInfoByName(user.getUserEmail());
 		
 		//비밀번호 수정
@@ -275,19 +275,42 @@ public class UserController {
 		user.setUserPass(u.getUserNickname());
 		else user.setUserNickname(user.getUserNickname());
 		
-		System.out.println(file.getOriginalFilename() + "<< file.getOriginalFilename");
-		user.setFileOriginName(file.getOriginalFilename());
-		service.updateUser(user);
+		
 		
 		//파일 수정
-		UtilFile util = new UtilFile();
-		List<MultipartFile> attach = new ArrayList<>();
-		attach.add(file);
-		util.setAttach(attach);
-		util = fileService.uploadProfile(util, p.getName());
-		/* fileService.downLoadFile(util.getFileNo(), res); */
+		System.out.println("user>>" + user);
+		System.out.println("u>>" + u);
+		user.setFileOriginName(file.getOriginalFilename());
+		System.out.println("file.getOriginalFilename().length()>>" + file.getOriginalFilename().length() );
 		
+		if(file.getOriginalFilename().length() == 0) {
+			user.setFileGroupCode(u.getFileGroupCode());
+		}
+		
+		
+		
+		
+		if(file.getOriginalFilename().length() != 0 ) {
+			UtilFile util = new UtilFile();
+			List<MultipartFile> attach = new ArrayList<>();
+			attach.add(file);
+			util.setAttach(attach);
+			user.setFileNo(u.getFileNo());
+			user.setFileGroupCode(u.getFileGroupCode());
+			if(u.getFileGroupCode() != 0) {
+				fileService.deleteProfile(u.getFileNo());				
+				/* user.setFileGroupCode(fileService.maxFileGroupCode() + 1); */
+				fileService.uploadProfile(util, user);
+			}else {
+				user.setFileGroupCode(fileService.maxFileGroupCode() + 1);
+				fileService.uploadProfile(util, user);
+				
+			}
+		}
+		service.updateUser(user);
+		//세션 등록
 		UserDetails uu = userService.loadUserByUsername(user.getUserEmail());
+		
         SecurityContext sc = SecurityContextHolder.getContext();
         sc.setAuthentication(new UsernamePasswordAuthenticationToken(uu, null, uu.getAuthorities()));
         HttpSession APIsession = req.getSession(true);

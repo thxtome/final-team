@@ -27,9 +27,7 @@ public class HistoryServiceImpl implements HistoryService{
 		return mapper.selectSendReview(search);
 	}
 	public History receiveUserInfo(String userEmail) {
-		History h = mapper.salesInfo(userEmail);
-		h.setBuyCnt(mapper.purchaseInfo(userEmail));
-		return h;
+		return mapper.userInfo(userEmail);
 	}
 	public AjaxPage receiveSaleHistory(Search search) {
 		AjaxPage ap = new AjaxPage();

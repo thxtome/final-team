@@ -69,6 +69,7 @@ $(function (){
 			*/
 			$.each(result.list, (i, r) => {
 				starHtml = makeStar(Math.round(r.userScore));
+				let maxPrice = r.maxPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				html += `
 					<div class="listCon">
 								<div class="listHead">
@@ -77,7 +78,7 @@ $(function (){
 										<span class="dateContent">${format(r.auctionLimitDate, "ymd")}</span>
 					</span> 
 					<span class="detailCon"> 
-						<a>입찰금 <strong>${r.maxPrice}</strong>원</a>
+						<a>입찰금 <strong>${maxPrice}</strong>원</a>
 					</span>
 				</div>
 				`;

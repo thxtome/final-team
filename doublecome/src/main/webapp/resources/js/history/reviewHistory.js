@@ -380,6 +380,36 @@ $("body").on("click", ".editreview", (e) => {
 	
 });
 
+function swalAlert(msg){
+	Swal.fire(msg);
+}
+
+// 후기 등록 내용 확인
+/*
+$(".regitbtn").click((e) => {
+	let flag = false;
+	let radio = $('input:radio[name="reviewScore"]');
+	console.log($('input:text[name="reviewTitle"]').val());
+	for (let i = 0; i < 10; i++){
+		console.log($(radio[i]).prop("checked"));
+		if($(radio[i]).prop("checked")){
+			flag = true;
+			return;
+		}
+	}
+	console.log(flag);
+	if (!flag) {
+		swalAlert("신뢰도를 선택해주세요.");
+	} else if ($('input:text[name="reviewTitle"]').val() == ""){
+		swalAlert("한줄 요약을 입력해주세요.");
+	} else if($(".note-editable p").val() == ""){
+		swalAlert("후기를 입력해주세요.");
+	} else {
+		swalAlert("후기가 등록되었습니다.");
+		$("#rform").submit();
+	}
+});
+*/
 $("body").on("click", ".reviewModalClose", (e) => {
 	$addReviewModal.css("display","none");
 	$("#rform")[0].reset();
@@ -402,6 +432,7 @@ $('#summernote').summernote(
 		    disableResizeEditor: true,
 		    resize: false,
 		    toolbar : ['insert', ['picture']],
+		    popover: {},
 		    focus: true
 //		    callbacks: {
 //		    	
@@ -463,6 +494,7 @@ $("body").on("click", ".scoreLabel", (e) => {
 		$cStar.removeClass("scoreChoice");
 		$radio.prop("checked", false);
 	}
+	console.log($radio.prop("checked"));
 });
 
 

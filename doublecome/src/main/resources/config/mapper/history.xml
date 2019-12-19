@@ -90,16 +90,20 @@
 	<!-- 구매횟수, 판매횟수, 후기갯수 -->
 	<select id="userInfo" resultType="History" parameterType="String">
 		select distinct u.*,
-			   count(ds.user_email_seller) over(partition by ds.user_email_seller) as sell_cnt,
-			   count(db.user_email_buyer) over(partition by db.user_email_buyer) as buy_cnt
+			   a.sell_cnt,
+			   b.buy_cnt
 		  from user u
-		  left join deal ds
-		    on u.user_email = ds.user_email_seller
-		   and ds.deal_condition = 2
-		  left join deal db
-		    on u.user_email = db.user_email_buyer
-		   and db.deal_condition = 2
-		 where user_email = #{userEmail}
+		  join (select count(*) as sell_cnt, user_email
+				  from auction
+                 where user_email = #{userEmail}) a
+		    on u.user_email = a.user_email
+		  join (select count(*) as buy_cnt, c.user_email as user_email
+         		  from (select count(*), user_email
+           			      from bid
+                         where user_email = #{userEmail}
+          	 			 group by auction_no) c) b
+		    on u.user_email = b.user_email
+		 where u.user_email = #{userEmail};
 	</select>
 	
 	<select id="salesInfo" resultType="History" parameterType="String">
@@ -312,6 +316,19 @@
 	
 	<!-- 거래완료 처리 -->
 	<update id="dealComplete" parameterType="Deal">
+		<selectKey keyProperty="dealUserCondition" resultType="int" order="BEFORE">
+			select  
+			<choose>
+				<when test="dealBuyerCondition == 2">
+					deal_seller_condition
+				</when>
+				<otherwise>
+					deal_buyer_condition
+				</otherwise>
+			</choose>
+			from deal
+		   where auction_no = #{auctionNo}
+		</selectKey>
 		update deal set 
 		<choose>
 			<when test="dealBuyerCondition == 2">
@@ -321,6 +338,9 @@
 				deal_seller_condition = #{dealSellerCondition}
 			</otherwise>
 		</choose>
+		<if test="dealUserCondition == 2">
+			, deal_condition = #{dealUserCondition}
+		</if>
 		where auction_no = #{auctionNo}
 	</update>
 	
