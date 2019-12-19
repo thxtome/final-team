@@ -12,9 +12,9 @@
                 <div class="reportReason">
                     <form method="post" id="reportForm">
                     <!-- 유저 신고는 1번 경매신고는 2번-->
-                    <input type="hidden" value='' name="reportReceiver">
-                    <input type="hidden" value='' name="reportSender">
-                    <input type="hidden" value='' name="auctionNo">
+                    <input type="hidden" value='' name="reportReceiver" class="reportReceiver">
+                    <input type="hidden" value='' name="reportSender" class="reportSender">
+                    <input type="hidden" value='' name="auctionNo" class="auctionNo">
                     <span>신고사유</span>
                     <div>
                         <input type="radio" name="reportTypeCode" id="report1"  value="1"/>

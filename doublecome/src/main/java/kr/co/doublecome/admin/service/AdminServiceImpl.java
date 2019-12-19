@@ -277,4 +277,11 @@ public class AdminServiceImpl implements AdminService{
 		mapper.updateDealCondition(deal);
 		
 	}
+	
+	public void addAuctionReport(String userEmail, Report report) {
+		report.setReportSender(userEmail);
+		mapper.insertReport(report);
+		
+	}
+	
 }

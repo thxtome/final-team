@@ -196,4 +196,14 @@ public class AdminController {
 		service.addReport(p.getName(), report);
 		return "redirect:/history/listHistory.do";
 	}
+	
+	@RequestMapping("/addAuctionReport.do")
+	public String addAuctionReport(Principal p, Report report) {
+		service.addAuctionReport(p.getName(), report);
+		return "redirect:/main.do";
+	}
+	
+	
+	
+	
 }

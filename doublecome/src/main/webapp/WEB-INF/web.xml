@@ -55,6 +55,17 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>	
 	
+	
+<!-- 에러페이지 처리 -->	
+	<error-page>
+	 <exception-type>java.lang.Exception</exception-type>
+	 <location>/WEB-INF/jsp/include/error.jsp</location>
+	</error-page>
+	<error-page>
+	 <error-code>404</error-code>
+	 <location>/WEB-INF/jsp/include/error.jsp</location>
+	</error-page>
+	
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>*.do</url-pattern>
@@ -64,6 +75,7 @@
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+
 </web-app>
 
 

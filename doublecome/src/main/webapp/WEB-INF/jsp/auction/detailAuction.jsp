@@ -35,12 +35,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 			<div>
 			<sec:authorize access="isAuthenticated()">
 			<sec:authentication property="principal.user" var="log"/>
-			<c:if test="${log.userEmail eq auction.userEmail}">
+			<c:choose>
+			<c:when test="${log.userEmail eq auction.userEmail}">
 				<div class="writer_btns">
 						<button type="button" class="remove_btn writer_btn">삭제</button>
 <%-- 					<a href="updateAuction.do?no=${auction.auctionNo}"><button class="edit_btn writer_btn">수정</button></a> --%>
 				</div>
-			</c:if>
+			</c:when>
+			<c:otherwise>
+				<div class="writer_btns">
+						<button id="openReportModal" type="button" class="writer_btn reportBtn">신고하기</button>
+				</div>
+			</c:otherwise>
+			</c:choose>
 			</sec:authorize>
 				<h2 id="auction-title">${auction.auctionTitle}</h2>
 			</div>
@@ -211,6 +218,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 		</form>
 	</div>
 	</div>
+	<c:import url="/WEB-INF/jsp/include/addReportModal.jsp" />
 	<footer>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</footer>

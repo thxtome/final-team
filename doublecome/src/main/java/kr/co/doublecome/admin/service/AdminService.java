@@ -37,4 +37,5 @@ public interface AdminService {
 	public List<Map<String, String>> retrieveAuctionStaticsRegDate(String startDate, String endDate);
 	public List<Map<String, String>> retrieveUserStaticsRegDate(String startDate, String endDate);
 	public void addReport(String userEmail, Report report);
+	public void addAuctionReport(String userEmail, Report report);
 }
