@@ -51,6 +51,7 @@ footer {
     border-bottom: 2px solid black;
     padding-bottom: 20px;
     text-align: left;
+    margin-left: 25px;
 }
 .nav-item {
     border-left: 1px solid #F2F2F2;

@@ -217,12 +217,7 @@ public class UserController {
 	public void userInfo() throws Exception {
 	}
 
-	// 마이페이지 -프로필 이미지 삭제
-	@RequestMapping("/deleteProfile.do")
-	public void deleteProfile(String email) throws Exception {
-		service.updateUserDefaultProfile(email);
-		/* fileService.deleteProfile(email); */
-	}
+
 
 	// 마이페이지 - 회원 정보 수정
 	@RequestMapping("/userInfoUpdate.do")
@@ -232,6 +227,13 @@ public class UserController {
 		user.setUserEmail(userEmail);
 		user.setUserPass(userPass);
 		model.addAttribute("user", service.selectUserInfo(user));
+	}
+	
+	// 마이페이지 -프로필 이미지 삭제
+	@RequestMapping("/deleteProfile.do")
+	public void deleteProfile(String email) throws Exception {
+		service.updateUserDefaultProfile(email);
+		/* fileService.deleteProfile(email); */
 	}
 
 	// 마이페이지 - 회원 정보 수정 버튼
@@ -252,7 +254,7 @@ public class UserController {
 			util.setAttach(attach); 
 			
 			if(u.getFileGroupCode() != 0) {
-				fileService.deleteProfile(u.getFileNo());
+				fileService.deleteProfile(u);
 				user.setFileGroupCode(u.getFileGroupCode());
 			}else {
 				user.setFileGroupCode(fileService.maxFileGroupCode() + 1);

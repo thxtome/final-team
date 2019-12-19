@@ -24,10 +24,18 @@ function closeReportModal() {
     
 }
 
-$("body").on("click", ".reportBtn", (e) => {
+let contextPath = window.location.pathname.substr(0,window.location.pathname.indexOf("/",2));
+
+$(document).on("click", ".reportBtn", () => { 
+	$(".auctionNo").val(no); 
+	$(".reportReceiver").val(email); 
+	$('#reportForm').attr("action", `${contextPath}/admin/addAuctionReport.do`); 
+});
+
+$("body").on("click", ".reportButton", (e) => {
 	 $(".addReportModal").show();
 	 $('input[name=auctionNo]').val($(e.target).data("no"));
-	 $('#reportForm').attr("action", "/doublecome/admin/addReport.do");
+	 $('#reportForm').attr("action", `${contextPath}/admin/addReport.do`);
 });
 
 $(".addReportBtn").click((e) => {

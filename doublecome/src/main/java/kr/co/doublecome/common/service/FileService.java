@@ -13,6 +13,6 @@ public interface FileService {
 	public void tempFile(String root, HttpServletResponse res);
 	public String saveBase64File(String content);
 	public UtilFile uploadProfile(UtilFile util, User user);
-	public void deleteProfile(int i);
+	public void deleteProfile(User user);
 	public int maxFileGroupCode();
 }

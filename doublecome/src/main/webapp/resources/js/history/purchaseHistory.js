@@ -155,7 +155,7 @@ $(function (){
 							<li class="more-menu-item dealBuyerComplete" data-no="${r.auctionNo}">
 			                    <button type="button" class="more-menu-btn" data-no="${r.auctionNo}">거래완료</button>
 			                </li>
-			                <li class="more-menu-item reportBtn" data-no="${r.auctionNo}">
+			                <li class="more-menu-item reportButton" data-no="${r.auctionNo}">
 			                    <button type="button" data-no="${r.auctionNo}" class="more-menu-btn ">신고</button>
 			                </li>
 			                <li class="more-menu-item dealBuyerCancel" data-no="${r.auctionNo}">

@@ -82,7 +82,6 @@ public class AuctionDetailController {
 		return 0;
 	}
 	
-	
 	@RequestMapping("/insertAuction.do")
 	public void auctionInsert(Model model) {
 		model.addAttribute("category", service.categoryList());

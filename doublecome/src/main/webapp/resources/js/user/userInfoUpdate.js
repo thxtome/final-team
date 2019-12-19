@@ -127,8 +127,9 @@ inAvtiveBtn();
 		});}
 });
 
-//ㅅ
-$('.m-upload__preview jst-preview > div').click(() => {	
+//사진 지우기
+$('.m-upload__preview jst-preview').click(() => {	
+	console.log("클릭")
 	$.ajax({
 		url:"/doublecome/user/deleteProfile.do",
 		data:{ email :$('#userEmail').val()},

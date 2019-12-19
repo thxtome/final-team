@@ -7,7 +7,6 @@ import lombok.Data;
 @Data	
 public class User {
 	private Boolean isSNS;					// API 로그인 여부
-	private User user;						// 자기 자신 geter seter
 	private String userEmail;				// 사용자 이메일	
 	private String userPass;				// 사용자 비밀번호
 	private String userScore;				// 사용자 평점
