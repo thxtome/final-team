@@ -1,6 +1,5 @@
 package kr.co.doublecome.common.controller;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,20 +48,4 @@ public class FileController {
 
 		return "/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo();
 	}
-	
-	//유저 프로필 이미지
-	@PostMapping("/userPhotoUpload.do")
-	@ResponseBody
-	public String AjaxUserFileUpload(Principal p, @RequestParam("file") MultipartFile file, HttpServletResponse res) {
-		UtilFile util = new UtilFile();
-		List<MultipartFile> attach = new ArrayList<>();
-		
-		System.out.println(file.getOriginalFilename());
-		attach.add(file);
-		util.setAttach(attach);
-		/* util = service.uploadProfile(util, p.getName()); */
-
-		return "/doublecome/file/downLoadFile.do" + "?fileNo=" + util.getFileNo();
-	}
-	
 }

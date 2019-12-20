@@ -209,8 +209,7 @@ public class FileServiceImpl implements FileService{
 				System.out.println(bufImg);
 				ImageIO.write(bufImg, ext, file);
 				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			util.setFileGroupCode(groupCode);

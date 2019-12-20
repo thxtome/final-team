@@ -30,7 +30,6 @@ public class HistoryController {
 	public void listHistory(Principal p, Model model) {
 		String userEmail = p.getName();
 		model.addAttribute("userHistory", service.receiveUserInfo(userEmail));
-		System.out.println("userinfo : " + service.receiveUserInfo(userEmail));
 	}
 	
 	// 구매내역 ajax
@@ -39,7 +38,6 @@ public class HistoryController {
 	public AjaxPage receivePurchaseHistory(Search search, Principal p){
 		search.setListSize(5);
 		search.setKeyword(p.getName());
-		System.out.println("구매내역" + service.receiveBuyHistory(search));
 		return service.receiveBuyHistory(search);
 	}
 	
@@ -58,7 +56,6 @@ public class HistoryController {
 	public List<Review> retrieveReceiveReview(Search search, Principal p){
 		search.setKeyword(p.getName());
 		search.setListSize(5);
-		System.out.println(search);
 		return service.receiveReviewList(search);
 	}
 	
@@ -75,9 +72,6 @@ public class HistoryController {
 	@RequestMapping("/addReview.do")
 	public String addReview(Principal p, Review review) {
 		review.setReviewSender(p.getName());
-		System.out.println("-----------------------------------------");
-		System.out.println(review);
-		System.out.println(review.getReviewContent());
 		review.setReviewContent(fService.saveBase64File(review.getReviewContent()));
 		service.insertReview(review);
 		return "redirect:listHistory.do";
