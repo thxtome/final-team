@@ -28,8 +28,8 @@
 <div id="infoBox" method="post" action="/doublecome/user/userInfoUpdate.do" class="uploader" enctype="multipart/form-data">
 	<div id="pfimgbox"> 
 		<span class="uploader__input" id="file-upload" type="file" name="fileGroupCode" accept="image/*" ></span>
-			<div class="uploader__label" for="file-upload">
-					<img  src="/doublecome/file/downLoadFile.do?fileNo=${user.fileNo}" alt="">
+		<div class="uploader__label" for="file-upload">
+			<img  src="/doublecome/file/downLoadFile.do?fileNo=${user.fileNo}" alt="">
 		</div> 
 	</div>
         
@@ -44,7 +44,7 @@
    <%--  <input type="hidden" value="${user.userEmail}" name="userEmail"/> --%>
     <button id="historyGoBtn">거래/후기 내역</button>
     </form>
-    <form id="pa" method="post" action="deleteUser.do">
+    <form id="d" method="post" action="deleteUser.do">
     <input type="hidden" value="${user.userEmail}" name="userEmail"/>
     <button type="button" id="deleteBtn">회원 탈퇴</button>
     </form>
@@ -92,10 +92,12 @@
 		
 		
 <div id="bidList">
+	
 </div>
 			</sec:authorize>
 </div> 
 </section>
+	<script src="<c:url value="/resources/js/common/timeFormat.js"/>"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	<script src="<c:url value="/resources/js/user/userInfo.js" />" ></script>
 </body>
