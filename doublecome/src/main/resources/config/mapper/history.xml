@@ -21,6 +21,7 @@
 			   a.auction_no,
 			   a.user_email, 
 			   u.user_nickname as sender_nickname,
+			   max(f.file_no) over () as file_group_code,
 			   count(*) over() as reviewCnt
 		  from review r
 		 inner join deal d
@@ -29,6 +30,8 @@
 		    on d.auction_no = a.auction_no
 		 inner join user u 
 		    on u.user_email = r.review_sender
+		  join file f
+		    on u.file_group_code = f.file_group_code
 		 where r.review_receiver = #{keyword}
  		<choose>
  			<when test='sort == "highGrade"'>
@@ -61,6 +64,7 @@
 			   a.auction_title,
 			   a.user_email, 
 			   u.user_nickname as sender_nickname,
+			   max(f.file_no) over () as file_group_code,
 			   count(*) over() as reviewCnt
 		  from review r
 		 inner join deal d
@@ -69,6 +73,8 @@
 		    on d.auction_no = a.auction_no
 		 inner join user u 
 		    on u.user_email = r.review_sender
+		  join file f
+		    on u.file_group_code = f.file_group_code
 		 where r.review_sender = #{keyword}
 	 		<choose>
 	 			<when test='sort == "highGrade"'>

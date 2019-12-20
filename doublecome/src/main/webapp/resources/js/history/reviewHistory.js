@@ -29,7 +29,6 @@ $myInfo.find("div").click((e) => {
 $("body").on("click", ".note-my-files",() => {
 	$(`.note-group-select-from-files input[type="file"]`).trigger("click");
 });
-console.log($(".note-my-files"));
 $(".note-my-files").css("color", "blue");
 $(".note-my-files").html(`<span class="glyphicon glyphicon-picture"></span> 사진`);
 
@@ -203,7 +202,7 @@ function makeReviewList(result, type, sort){
 					<li class="reviewDetail">
 						<div class="reviewContent">
 							<div class="profileDiv">
-								<img class="profileImg" src="/doublecome/resources/images/profileImg.png" />
+								<img class="profileImg" src="${contextPath}/file/downLoadFile.do?fileNo=${r.fileGroupCode}" />
 							</div>
 							<div class="nicknameDiv">${r.senderNickname}</div>
 							<div class="regdateDiv">${format(r.reviewRegDate,"ymd")}</div>
@@ -259,7 +258,7 @@ function makeReviewList(result, type, sort){
 					<li class="reviewDetail">
 					<div class="reviewContent">
 					<div class="profileDiv">
-					<img class="profileImg" src="/doublecome/resources/images/profileImg.png" />
+					<img class="profileImg" src="${contextPath}/file/downLoadFile.do?fileNo=${r.fileGroupCode}" />
 					</div>
 					<div class="nicknameDiv">${r.senderNickname}</div>
 					<div class="regdateDiv">${format(r.reviewRegDate,"ymd")}</div>
@@ -473,14 +472,12 @@ $("body").on("click", ".scoreLabel", (e) => {
 	let score = $('input:hidden[name="reviewScore"]');
 	if ($star.css("visibility") == "hidden"){
 		$cStar.removeClass("scoreChoice");
-		console.log($(e.target).data("no"))
 		$star.addClass("scoreChoice");
 		score.val($(e.target).data("no"));
 	} else if ($star.css("visibility") == "visible"){
 		$cStar.removeClass("scoreChoice");
 		score.val("");
 	}
-	console.log(score.val());
 });
 
 

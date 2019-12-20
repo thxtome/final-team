@@ -24,7 +24,6 @@ function closeReportModal() {
     
 }
 
-let contextPath = window.location.pathname.substr(0,window.location.pathname.indexOf("/",2));
 
 $(document).on("click", ".reportBtn", () => { 
 	$(".auctionNo").val(no); 
