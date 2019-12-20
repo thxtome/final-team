@@ -12,6 +12,9 @@ $(document).ready(e => {
 		$(e.target).find("span").addClass("on");
 		searchAjax(e);
 	})
+	$("#view").change(e => {
+		searchAjax(e);		
+	})
 })
 //ajax 처리
 function searchAjax(e) {
@@ -82,6 +85,8 @@ function searchAjax(e) {
 		console.log($(e.target).data("value"))
 		if ($(e.target).data("name") == "sorts" ){		
 			sendData += ","+ '"'+ $(e.target).data("name") + '"' + " : " + '"'+ $(e.target).data("value") + '"'
+		} else if ($(e.target)[0].name == "listSize") {
+			sendData += ","+ '"'+ $(e.target)[0].name + '"' + " : " + '"'+ $(e.target).val() + '"'
 		}
 	}
 	sendData += "}";
@@ -93,12 +98,9 @@ function searchAjax(e) {
 		data : sendData
 	}
 	$.ajax(options).done(data => {
-		console.log(data)
 		$("#list_view").html(makeAuctionlist(data))
-		console.log(data.pr)
 		let count = $(".countdown")
 		for(let i = 0 ; i < count.length ; i++) {
-			console.log($(count[i]),data.list[i].auctionLimitDate)
 			auctionCount($(count[i]),data.list[i].auctionLimitDate)
 		}
 	})
@@ -109,6 +111,7 @@ function searchAjax(e) {
 function makeAuctionlist(data) {
 	let $auctionField ="";
 	if(data.list.length == 0) {
+		$(".pagination").html("");
 		return $auctionField = `
 				<div class="card-body" >
 					<h5 class="card-title m-0" style="text-shadow: 0px 0px 1px black;">
@@ -136,10 +139,7 @@ function makeAuctionlist(data) {
 		</div>
 		`
 	})
-	console.log(data.list)
-	if(data.list != null) {
-		pg.print($("#content"),data.pr)	
-	}
+	pg.print($("#content"),data.pr)	
 	return $auctionField
 }
 $(document).on("click",".options", e => {
@@ -183,9 +183,9 @@ $(document).on("click",".options", e => {
 
 function selectCheck(e) {
 	let $event = $(e.target);
-	if ($event.attr("class").startsWith("category ") == false){
-		return;
-	}
+//	if ($event.attr("class").startsWith("category ") == false){
+//		return;
+//	}
 	let clz = $event.attr('class').replace(/cnkfilter/,"")
 	if (clz == "category  selected") return;
 	if ($event.data("selected") == true) {

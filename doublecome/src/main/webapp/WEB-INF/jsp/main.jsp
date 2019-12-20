@@ -35,8 +35,7 @@
 			<div class="row">
 				<div class="col-md-12 w-75">
 					<div class="embed-responsive embed-responsive-16by9">
-						<iframe src="https://www.youtube.com/embed/ctvlUvN6wSE?controls=0"
-							allowfullscreen="" class="embed-responsive-item"></iframe>
+						<iframe width="956" height="538" src="https://www.youtube.com/embed/rY8nHb3TUDA?version=3&loop=1&autoplay=1&playlist=7UIZnWHUjXQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>					
 					</div>
 				</div>
 			</div>
@@ -96,7 +95,6 @@
 												class="countdown text-muted m-1"></small>
 											<script>
 											$(() => {
-												console.log($("#auction${list.auctionNo}"))
 												auctionCount($("#auction${list.auctionNo}"), new Date(${list.auctionLimitDate.time}))
 											})	
 											</script>

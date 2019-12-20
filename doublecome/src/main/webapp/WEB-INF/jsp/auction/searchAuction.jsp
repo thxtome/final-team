@@ -90,16 +90,16 @@
                 <h5 class="card-title m-0" style="	text-shadow: 0px 0px 1px black;">Best Auction</h5>
                	<div class="sort_area">
 		      		<ul class="sort_list" id="sort_list">
-						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="maxPrice" title="낮은 가격순"><span></span>낮은 가격순</a></li>
-						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="maxPrice desc" title="높은 가격순"><span></span>높은 가격순</a></li>
-						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="auction_reg_date desc" title="등록일순"><span></span>등록일순</a></li>
-						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="bidCnt desc" title="입찰 많은순"><span></span>입찰횟수순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="minPrice" title="낮은 가격순"><span></span>낮은 가격순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="maxPrice" title="높은 가격순"><span></span>높은 가격순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="regDate" title="등록일순"><span></span>등록일순</a></li>
+						<li><a class="order" href="<c:url value="/auction/searchActionList.do" />" data-selected="" data-name="sorts" data-value="bidCnt" title="입찰 많은순"><span></span>입찰횟수순</a></li>
 					</ul>
 					<span class="view_count">
-						<select id="view">
-							<option selected="selected" value="1">10개씩 보기</option>
-							<option value="2">20개씩 보기</option>
-							<option value="3">40개씩 보기</option>
+						<select id="view" name="listSize">
+							<option selected="selected" value="12">12개씩 보기</option>
+							<option value="24">24개씩 보기</option>
+							<option value="48">48개씩 보기</option>
 						</select>
 					</span>
 		      	</div>
@@ -137,7 +137,12 @@
 										</c:choose>
 										<div class="auction-condition">
 											<span class="text-left">입찰 ${list.bidCnt}건</span>
-											<small class="countdown text-muted m-1"></small>
+											<small id="auction${list.auctionNo}" class="countdown text-muted m-1"></small>
+											<script>
+											$(() => {
+												auctionCount($("#auction${list.auctionNo}"), new Date(${list.auctionLimitDate.time}))
+											})	
+											</script>
 										</div>
 									</div>
 								</a>
@@ -153,7 +158,6 @@
       </div>
  <c:import url="/WEB-INF/jsp/include/footer.jsp" />
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
- 
   <script src="<c:url value="/resources/js/common/countdown.js" />"></script>
   <script>
     $("input:text[numberOnly]").on("keyup", function() {
@@ -189,16 +193,6 @@
 			}
 		 	
 		})
-  </script>
-  <script type="text/javascript">
-		  let limiteDate = [<c:forEach items="${auctionlist}" var="auctionlist">
-				<c:out value="${auctionlist.auctionLimitDate}" />,</c:forEach>];
-		  	let arr = limiteDate.split(",");
-			let countdown = $(".countdown");
-			for(let i = 0 ; i < countdown.length ; i++) {
-				console.log(limiteDate[0])
-				auctionCount($(countdown[i]), arr[i])
-			}
   </script>
   <script src="<c:url value="/resources/js/auction/accordion.js" />"></script>
 </body>

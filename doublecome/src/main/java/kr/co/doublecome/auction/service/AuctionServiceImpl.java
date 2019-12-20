@@ -24,6 +24,7 @@ public class AuctionServiceImpl implements AuctionService {
 	public AjaxPage auctionList(SearchAuction search) {
 		AjaxPage ap = new AjaxPage();
 		List<Object> list = new ArrayList<>();
+		if (search.getListSize() < 13) search.setListSize(12); 
 		List<Auction> alist = mapper.listAuction(search);
 		for(Auction auction : alist) {
 			list.add((Object)auction);

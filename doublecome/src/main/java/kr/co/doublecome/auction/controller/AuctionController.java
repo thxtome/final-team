@@ -28,7 +28,6 @@ public class AuctionController {
 		category.setCategoryCode(search.getCategoryCode());
 		category.setCategoryName(search.getCategoryName());
 		AjaxPage ap = service.auctionList(search);
-		List<Object> list = ap.getList();
 		model.addAttribute("pr", ap.getPr());
 		model.addAttribute("selectCategory",category);
 		model.addAttribute("category",service.listCategory());

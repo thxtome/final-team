@@ -45,7 +45,18 @@
 				order by a.auction_reg_date desc
 		  	</when> 
 			<otherwise>
-	  			order by #{sorts} 
+		  		<if test='sorts.equals("minPrice")'>
+		  			order by maxPrice 
+		  		</if>
+		  		<if test='sorts.equals("maxPrice")'>
+		  			order by maxPrice desc
+		  		</if>
+		  		<if test='sorts.equals("regDate")'>
+		  			order by a.auction_reg_date
+		  		</if>
+		  		<if test='sorts.equals("binCnt")'>
+		  			order by bidCnt desc
+		  		</if>
 			</otherwise>	  			
 	  	</choose>
 	  	limit #{begin},#{listSize}
