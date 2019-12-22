@@ -392,6 +392,11 @@ html {
 	
 }
 
+#aution{
+	height: 150px;
+    width: 490px;
+}
+
 .card_container0 .card_autionTitle,
 .card_container1 .card_autionTitle {
 	font-size: 20px;
@@ -420,7 +425,7 @@ html {
 	
 }
 .card_sub_date{
-	width: 300px;
+	width: 350px;
 	bottom: 40px;
     position: absolute;
 	
