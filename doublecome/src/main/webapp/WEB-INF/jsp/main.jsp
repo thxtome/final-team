@@ -67,8 +67,7 @@
 					<c:otherwise>
 						<c:forEach items="${onAirlist}" var="list">
 							<div class="col-md-4 p-2">
-								<a class="auction_list"
-									href="<c:url value="/liveAuction/main.do?auctionNo=${list.auctionNo}" />">
+								<a class="auction_list onAir" data-auctionNo="${list.auctionNo}" href="<c:url value="/liveAuction/broadcast.do"/>">
 									<div class="card box-shadow">
 										<img class="card-img-top w-100"
 											src="<c:url value="/resources/images/macbook.jpg"/>"
@@ -187,6 +186,7 @@
 				crossorigin="anonymous"></script>
 
 			<script src="<c:url value="/resources/js/common/countdown.js" />"></script>
+			<script src="<c:url value="/resources/js/main.js" />"></script>
 			<!-- <script type="text/javascript">
 		  var naver_id_login = new naver_id_login("TOpvHOSeiE05F9UnTU0P", "http://localhost:8001/doublecome/main.do");
 		  // 접근 토큰 값 출력

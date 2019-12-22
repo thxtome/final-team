@@ -37,8 +37,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 			<sec:authentication property="principal.user" var="log"/>
 			<c:choose>
 			<c:when test="${log.userEmail eq auction.userEmail}">
+			
 				<div class="writer_btns">
+				
 						<button type="button" class="remove_btn writer_btn">삭제</button>
+						<button type="button" class="onAir_btn writer_btn">방송</button>
 <%-- 					<a href="updateAuction.do?no=${auction.auctionNo}"><button class="edit_btn writer_btn">수정</button></a> --%>
 				</div>
 			</c:when>

@@ -537,3 +537,7 @@ table th {
 .left {
 	left: -100px !important;
 }
+
+.onAir_btn{
+	margin-right: 10px;
+}

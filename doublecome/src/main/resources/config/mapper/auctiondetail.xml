@@ -170,6 +170,12 @@
 		 where a.auction_no = #{auctionNo}
 	</select>
 	
+	<update id="updateOnAir" parameterType="map">
+		update auction
+		   set auction_broadcast = #{onAir}
+		 where auction_no = #{auctionNo}
+	</update>
+	
 	
 	
 </mapper>

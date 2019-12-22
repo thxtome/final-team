@@ -11,14 +11,13 @@ html, body, .content {
 
 .video {
 	position: absolute;
-	height: 80%;
-	width: 80%;
-	background-image: url("../../images/aa.jpg");
-	background-repeat: no-repeat;
+	height: 100%;
+    width: 80%;
 	background-size: 100% 100%;
 	left: 0%;
-	top:10%;
+	top:0%;
 	border:none;
+	background: #000;
 }
 
 .innerLive {
@@ -270,8 +269,24 @@ html, body, .content {
 }
 
 .btns{
+	display:none;
 	position: absolute;
 	width: 80%;
-	height: 10%;
+	height: 7%;
+	top:93%;
+	background: rgb(0,0,0,0.7);
+	left:0%;
+}
+.btns > div {
+	padding-left: 10px;
+	width: 30%;
+	height: 100%;
+	display:flex;
+	align-items: center;
+	font-size:30px;
 }
 
+.btns a {
+	color: white;
+	margin-left: 20px;
+}

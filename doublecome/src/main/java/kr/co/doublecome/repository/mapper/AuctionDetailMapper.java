@@ -1,12 +1,12 @@
 package kr.co.doublecome.repository.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.Inquiry;
 import kr.co.doublecome.repository.vo.Search;
-import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.repository.vo.UtilFile;
 
 public interface AuctionDetailMapper {
@@ -32,4 +32,5 @@ public interface AuctionDetailMapper {
 	void addTag(UtilFile file);
 	List<Auction> smsList();
 	void smsUpdate();
+	void updateOnAir(Map<String,Integer> liveAuctionMap);
 }

@@ -493,3 +493,65 @@ $(".tagCancel").click(() => {
 	$(".modal").hide();
 })
 
+//방송 시작 버튼 클릭시 이벤트
+$(".onAir_btn").click(()=>{
+	let hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	let path = location.href.substring( 0, location.href.indexOf('/', hostIndex + 1));
+
+	$.ajax({
+		url : path + '/liveAuction/start.do',
+		type : "post",
+		data : {
+			auctionNo : no
+		},
+		success: (result) => {
+			if (result == 'false') {
+				swalAlert("이미 방송이 진행중입니다.")
+			    return;
+			}
+			submit(path + '/liveAuction/broadcast.do',no)
+		},
+	})
+})
+
+
+//폼객체 만들어서 전송하는 함수
+function submit(url,auctionNo) {
+
+        var form = document.createElement("form");
+
+        form.setAttribute("charset", "UTF-8");
+
+        form.setAttribute("method", "Post");  //Post 방식
+
+        form.setAttribute("action", url); //요청 보낼 주소
+
+
+
+        var hiddenField = document.createElement("input");
+
+        hiddenField.setAttribute("type", "hidden");
+
+        hiddenField.setAttribute("name", "auctionNo");
+
+        hiddenField.setAttribute("value", auctionNo);
+
+        form.appendChild(hiddenField);
+
+
+
+        hiddenField = document.createElement("input");
+
+        hiddenField.setAttribute("type", "hidden");
+
+        hiddenField.setAttribute("name", "type");
+
+        hiddenField.setAttribute("value", "presenter");
+
+        form.appendChild(hiddenField);
+
+        document.body.appendChild(form);
+
+        form.submit();
+
+}
