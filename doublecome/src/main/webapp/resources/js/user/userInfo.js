@@ -42,9 +42,8 @@
 		let hours = Math.floor((distance % _day) / _hour);
 		let minutes = Math.floor((distance % _hour) / _minute);
 		let seconds = Math.floor((distance % _minute) / _second);
-		
-		if(days != 0 && hours != 0){
-			
+
+		if(days != 0){
 			document.getElementById(id).innerHTML = days + '일 ';
 			document.getElementById(id).innerHTML += hours + '시간 ';
 			document.getElementById(id).innerHTML += minutes + '분 ';
@@ -56,8 +55,6 @@
 		}else if(days == 0 && hours == 0)
 			document.getElementById(id).innerHTML = minutes + '분 ';
 			/*document.getElementById(id).innerHTML += seconds + '초';*/
-		
-		
 		}
 
 		timer = setInterval(showRemaining, 1000);
@@ -73,7 +70,7 @@
 					<img src="/doublecome/file/downLoadFile.do?fileNo=${result[i].fileNo}" alt="" class="card_image" >
 					<div class="aution_title"><div class="card_autionTitle">${result[i].auctionTitle}</div></div>
 					<div class="card_sub_now">즉시 구매 가:<span class="card_content">${result[i].auctionBuyNow}</span></div>
-					<div class="card_sub_date">남은 시간:<span id="remainTime${result[i].auctionCnt}" class="card_content">${format(result[i].auctionLimitDate, "Mdhms")}</span></div>
+					<div class="card_sub_date">경매 마감 일:<span id="remainTime${result[i].auctionCnt}" class="card_content">${format(result[i].auctionLimitDate, "Mdhms")}</span></div>
 				</a>				
 				</div>`
 			);
