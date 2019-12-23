@@ -32,12 +32,14 @@
 		select user_email
 		from user
 		where user_phnum = #{userPhnum}
+		and user_type = '1'
 	</select>
 	<!-- 비밀번호 찾기 -->
 	<select id="findPass" parameterType="string" resultType="string">
 		select user_pass
 		from user
 		where user_email = #{email}
+		and user_type = '1'
 	</select>
 	
 	<!-- 마이페이지 입찰 리스트 -->

@@ -88,7 +88,8 @@
 	    		</td>
 	    	</tr>
 	    	<c:choose>
-	    	<c:when test="${user.userType == 0}">
+	    	<c:when test="${user.userType == 3}">
+	    		<input id="userPass" name="userPass" type="hidden" value="" placeholder="비밀번호"  class="registInput">
 	    	</c:when>
 	    	<c:otherwise>
 			<tr>

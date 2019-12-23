@@ -72,9 +72,7 @@ public class UserController {
 		// 네이버 로그인 창 URL
 		model.addAttribute("url", naverAuthUrl);
 
-		/*
-		 * if(result != null) { model.addAttribute("result", "false"); }
-		 */
+		
 	}
 
 	@RequestMapping("/kakaoCallback.do")
@@ -178,7 +176,7 @@ public class UserController {
 		User u = new User();
 		u.setUserEmail(email);
 		u.setUserPass(id);
-		u.setUserType(0);
+		u.setUserType(3);
 		model.addAttribute("user", u);
 	}
 
@@ -350,12 +348,14 @@ public class UserController {
 		model.addAttribute("user", service.selectUserInfo(user));
 	}
 
-	// 비밀번호 찾기 - 버튼
+	// 비밀번호 수정 - 버튼
 	@RequestMapping("/passUpdate.do")
 	public String paddUpdate(User u) {
 		System.out.println("passUpdate.do");
-
 		User user = service.selectUserInfoByName(u.getUserEmail());
+		if(u.getUserType() == 0) {
+			return "redirect:/main.do";
+		}
 		System.out.println(u.getUserPass());
 		user.setUserPass(encoder.encode(u.getUserPass()));
 		service.updateUser(user);
