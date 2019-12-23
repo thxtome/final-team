@@ -141,8 +141,8 @@ where b.user_email = 'doublegoo@naver.com'
 		select * ,
 		(select count(*) over() as auctionCnt
 	    from deal 
-	    where user_email_seller = #{userEmail} and deal_seller_condition = '2'  
-           or user_email_seller = #{userEmail} and deal_buyer_condition = '2') as auctionCnt
+	    where user_email_seller = #{userEmail} and deal_seller_condition = '1'  
+           or user_email_seller = #{userEmail} and deal_buyer_condition = '1') as auctionCnt
 		from auction a
         where user_email = #{userEmail} and auction_condition = '1' ;
 		
