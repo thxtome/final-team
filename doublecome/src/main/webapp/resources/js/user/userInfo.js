@@ -6,18 +6,7 @@
 		if(result.length !== 0)
 		$('#bidList').append(`<h2 id="bidTitle">입찰 내역</h2>`)
 		
-		console.log(`${format(result[0].auctionLimitDate, "Mdhms")}`)
-		
-		
-		
 		let Dday = new Date(`${format(result[0].auctionLimitDate, "hms")}`);
-
-		
-		console.log(`${format(result[0].auctionLimitDate, "hms")}` ,'time');
-		console.log(Dday ,'Dday');
-		
-		
-		
 
 		function CountDownTimer(dt, id){
 		let end = new Date(dt);
@@ -62,8 +51,7 @@
 		
 		
 		for(i = 0; i < result.length; i++){
-			console.log(result[i]);
-			console.log(Dday, `${result[i].auctionCnt}`);
+			
 			$('#bidList').append(
 				`<div class="card_container${result[i].auctionCnt % 2}">
 				<a id="aution" href="/doublecome/auction/detailAuction.do?no=${result[i].auctionNo}&userEmail=${result[i].userEmail}">
@@ -77,9 +65,6 @@
 
 			CountDownTimer(`${format(result[i].auctionLimitDate, "hms")}`, `remainTime${result[i].auctionCnt}`); 
 		}	
-		
-		
-		
 		
 	}
 }));
@@ -96,16 +81,28 @@
 $(document).on("click", "#deleteBtn", () => {
 	Swal.fire({
         title: '탈퇴 하시겠습니까',
-        /*text: "회원가입 혹은 로그인후 진행해주세요",*/
+        text: "진행중인 판매 경매가 존재 할 경우 탈퇴 하실 수 없습니다.",
         type: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#3085d6',   
         cancelButtonColor: '#d33',
         confirmButtonText: '확인',
         cancelButtonText: '취소'
       }).then((result) => {
         if (result.value) {
-        	   $("#d").submit()
+        	$.ajax({
+        		url:"/doublecome/user/checkAuction.do",
+        		data: {email: $("#email").html()},
+        		success: (r) => {
+        			if(r.length == 0){        				
+        				$("#d").submit()
+        			}else{
+        				Swal.fire({
+        					title: "진행중인 판매 경매가 존재 합니다.",
+        				})
+        			}
+        		}
+        	})
         } else if (result.dismiss === Swal.DismissReason.cancel) {
         	return false;
         }

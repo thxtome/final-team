@@ -159,6 +159,13 @@ public class UserController {
 		service.deleteUser(userEmail);
 		return "redirect:/user/logout.do";
 	}
+	
+	//회원 탈퇴  - 진행중 경매 유무 확인
+	@RequestMapping("/checkAuction.do")
+	@ResponseBody
+	public List<Auction> checkAuction (String email) throws Exception {
+		return service.checkAuction(email);
+	}
 
 	// 회원 가입 - 화면
 	@RequestMapping("/joinForm.do")
@@ -171,6 +178,7 @@ public class UserController {
 		User u = new User();
 		u.setUserEmail(email);
 		u.setUserPass(id);
+		u.setUserType(0);
 		model.addAttribute("user", u);
 	}
 
@@ -244,6 +252,7 @@ public class UserController {
 	@RequestMapping("/userUpdate.do")
 	public String updateUser(User user, Principal p, HttpServletRequest req, HttpServletResponse res,
 			@RequestParam("file") MultipartFile file) throws Exception {
+		System.out.println(p.getClass() + " << Class");
 		User u = service.selectUserInfoByName(user.getUserEmail());
 		
 		//비밀번호 수정 

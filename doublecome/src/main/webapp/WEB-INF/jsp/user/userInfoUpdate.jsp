@@ -87,6 +87,10 @@
 						<div id="alert"></div>
 	    		</td>
 	    	</tr>
+	    	<c:choose>
+	    	<c:when test="${user.userType == 0}">
+	    	</c:when>
+	    	<c:otherwise>
 			<tr>
 	    		<th>비밀번호</th>
 	    		<td>
@@ -96,6 +100,9 @@
 				<div id="alert"></div>
 	    		</td>
 			</tr>
+	    	</c:otherwise>
+	    	</c:choose>
+			
 	    	</tbody>
 	    	</table>
 			</div>

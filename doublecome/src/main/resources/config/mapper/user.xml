@@ -131,13 +131,21 @@ where b.user_email = 'doublegoo@naver.com'
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteUser" parameterType="string">
 	   	delete from user
-		where user_email = #{email}
+		where user_email = #{userEmail}
 	</delete>
+	<!-- 회원 탈퇴 - 진행중인 판매 경매 체크 -->
+	<select id="checkAuction" parameterType="string"  resultType="Auction">
+		select *, count(*) over() as auctionCnt
+		from auction
+		where user_email = #{userEmail};
+	</select>
+	
+	
 	
 	<!-- 회원 가입 -->
 	<insert id="insertUser" parameterType="User">
-	  insert into user(user_email, user_pass, user_phnum, user_nickname
- 	  ) values (#{userEmail}, #{userPass},#{userPhnum},#{userNickname});
+	  insert into user(user_email, user_pass, user_phnum, user_nickname, user_type
+ 	  ) values (#{userEmail}, #{userPass},#{userPhnum},#{userNickname}, #{userType});
 	</insert>
 	
 	

@@ -21,6 +21,11 @@ public class UserServiceImpl implements UserService{
 		mapper.deleteUser(email);
 		
 	}
+	// 회원탈퇴 - 진행중 경매 유무 확인
+	@Override
+	public List<Auction> checkAuction(String email) {
+		return mapper.checkAuction(email);
+	}
 	//회원 가입
 	@Override
 	public void insertUser(User user) {

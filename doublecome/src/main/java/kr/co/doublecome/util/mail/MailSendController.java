@@ -35,7 +35,17 @@ public class MailSendController {
 				helper.setFrom("doublecome4@gmail.com");  					// 보내는사람 생략하면 정상작동을 안함 xml과 다르면 전송 안됨
 				helper.setTo("doublegoo@naver.com"/*email*/); 						// 받는사람 이메일
 				helper.setSubject("누구나 쉬운 경매! 더불로와 - 비밀번호 찾기"); 			// 메일제목은 생략이 가능하다
+				String text = "<div class=\"topContent\">\r\n" + 
+						"<div class=\"pen-title\">\r\n" + 
+						"  <div><a href=\"<c:url value=\"/main.do\" />\">누구나 쉬운 경매!</a></div>\r\n" + 
+						"		<div><a class=\"titleToMain\" href=\"<c:url value=\"/main.do\" />\">더블</a></div>\r\n" + 
+						"		<div><a class=\"titleToMain\" href=\"<c:url value=\"/main.do\" />\">로와</a></div>\r\n" + 
+						"</div>\r\n" + 
+						"</div>";
+				
+				
 				helper.setText(
+						text +
 						"아래 링크로 이동해 비밀번호를 다시 설정 하세요<br>" +
 						"<br>" +
 						"<a href=http://localhost:80/doublecome/user/findPassForm.do"+
