@@ -98,7 +98,7 @@
     top: 9%;
     content: attr(count);
     font-size: 30%;
-    padding: .6em;
+    padding: 1.6em;
     border-radius: 50%;
     line-height: .8em;
     color: white;
@@ -113,7 +113,7 @@
     top: 9%;
     content: attr(count);
     font-size: 30%;
-    padding: .6em;
+    padding: 1.6em;
     border-radius: 50%;
     line-height: .8em;
     color: white;

@@ -139,6 +139,7 @@ function makeAuctionlist(data) {
 		</div>
 		`
 	})
+	console.log("pr객체"+data.pr)
 	pg.print($("#content"),data.pr)	
 	return $auctionField
 }
@@ -268,3 +269,5 @@ function uncomma(str) {
 pg.movePage($("#content"),(pageNo)=>{
 	searchAjax(pageNo)
 })
+
+//pg.print($("#content"))
