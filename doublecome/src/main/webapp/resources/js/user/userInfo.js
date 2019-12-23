@@ -99,7 +99,7 @@ $(document).on("click", "#deleteBtn", () => {
         		success: (r) => {
         			console.log(r.length , 'r.length')
         			console.log(r.auctionCount , 'r.auctionCount')
-        			if(r.length == 0 && r.auctionCount == 1){        				
+        			if(r.length == 1 && r.auctionCount == 1){        				
         				$("#d").submit()
         			}else{
         				Swal.fire({
