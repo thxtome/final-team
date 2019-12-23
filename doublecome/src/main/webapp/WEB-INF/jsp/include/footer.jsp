@@ -37,7 +37,7 @@
 					<div class="footer_menu">
 						<div class="col-xs-4 text-xs-left">
 							<h2 class="xs-3">
-								<i class="fa fa-diamond"></i> (주)DoubleCome
+								<i class="fas-diamond"></i> (주)DoubleCome
 							</h2>
 							<div class="col_menu">
 								<p class="xs-1">

@@ -12,7 +12,6 @@
 <div class="topbar">
 	<sec:authorize access="isAnonymous()">
 		<div style="width:1083px">
-			<span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
 			<span><a href="<c:url value="/user/loginForm.do" />">로그인</a></span>
 			<span><a href="<c:url value="/user/joinForm.do" />">회원가입</a></span>
 		</div>
@@ -25,7 +24,6 @@
 				<span class="readsCount" readsCount data-id="${u.userEmail}">
 					<a href="javascript:popupOpen('<c:url value="/chatting/messenger.do?email=${u.userEmail}"/>')"><i class="far fa-comment-dots"></i>메세지</a>
 				</span>
-				<span><a href="<c:url value="/history/listHistory.do" />">History</a></span>
 				<span>${u.userEmail}</span>
 				<span><a href="<c:url value="/user/logout.do" />">로그아웃</a></span>
 			</div>

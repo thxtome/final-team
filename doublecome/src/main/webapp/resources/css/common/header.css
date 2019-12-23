@@ -33,11 +33,11 @@
 .topbar a {
 	color : #333;
 }
-.topbar span:hover{
-    color: rgb(60, 106, 255);
-    cursor: pointer;
-    text-decoration: underline;
-}
+/* .topbar span:hover{ */
+/*     color: rgb(60, 106, 255); */
+/*     cursor: pointer; */
+/*     text-decoration: underline; */
+/* } */
 
 .topContent {
     margin: auto;
