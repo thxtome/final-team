@@ -50,7 +50,10 @@
 			</ul>
 		</div>
 		 -->
-		<span id="toTheTop">top</span>
+		 <div id = moveButton>
+		<div id="toTheTop"><i class="fas fa-sort-up fa-3x"></i></div>
+		<div id="toTheBottom"><i class="fas fa-sort-down fa-3x"></i></div>
+		 </div>
 		<div id="innerContent">
 			<div>
 			</div>

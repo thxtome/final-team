@@ -480,10 +480,18 @@ $("body").on("click", ".scoreLabel", (e) => {
 	}
 });
 
-
+let myInfo = $("#myInfo");
+console.log(myInfo.offset().left + 930);
+$("#moveButton").css("left", myInfo.offset().left + 930);
+console.log($("#moveButton").css("left"));
 // 페이지 상단으로 이동
 $("#toTheTop").click((e) => {
 	let htmlOffset = jQuery( 'html' ).offset();
-    jQuery( 'html, body' ).animate( { scrollTop : htmlOffset.top }, 400 );
+    $( 'html, body' ).animate( { scrollTop : htmlOffset.top }, 400 );
+});
+
+$("#toTheBottom").click((e) => {
+	let htmlOffset = jQuery( 'html' ).offset();
+	$('html, body').animate( { scrollTop : $(document).height() } );
 });
 });

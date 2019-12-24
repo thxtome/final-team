@@ -206,6 +206,7 @@
 	   	 	    and d.deal_condition in (3, 4)) as z
 	   	 	</otherwise>
 	   	 </choose>
+	   	 	order by z.auction_no desc
 		limit #{begin}, #{listSize}
 	</select>
 	
@@ -254,6 +255,7 @@
 	   	 		and d.deal_condition in (3, 4)) as z
 	   	 	</otherwise>
 	   	 </choose>
+	   	 order by z.auction_no desc
 	   	 limit #{begin}, #{listSize}
 	</select>
 	

@@ -248,8 +248,15 @@
 	border-bottom: 1px solid #737373;
 }
 
-#reviewCon ul:nth-child(10) {
+#reviewCon  ul li:nth-child(10n + 9) {
 	border-bottom: 1px solid #737373;
+}
+#reviewCon  ul li:nth-child(10n + 1) {
+	border-top: none;
+}
+
+#reviewCon  ul li:first-child{
+	border-top: 1px solid #737373;
 }
 
 .preView {
@@ -613,13 +620,6 @@
 	background-color: #f2f2f2;
 }
 
-#toTheTop {
-	position: fixed;
-	bottom: 50px;
-	right: 50px;
-	cursor: pointer;
-}
-
 .reviewModal {
 	display: none;
 	position: fixed;
@@ -978,3 +978,27 @@ select {
 .colorGreen{
 	background-color: green;
 }
+#moveButton{
+	width: 50px;
+	height: 80px;
+/* 	border: 1px solid black; */
+	position: fixed;
+/* 	bottom: 50px; */
+/* 	right: 50px; */
+	cursor: pointer;
+	text-align: center;
+	line-height: 40px;
+}
+#toTheTop {
+	height: 40px;
+}
+#toTheBottom{
+	height: 40px;
+}
+.fa-sort-up, .fa-sort-down{
+	color: #C3C3C3;
+}
+#toTheTop:hover, #toTheBottom:hover{
+	color: #ddd;
+}
+
