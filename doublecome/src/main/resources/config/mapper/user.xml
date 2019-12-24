@@ -137,32 +137,28 @@ where b.user_email = 'doublegoo@naver.com'
 	</delete>
 	<!-- 회원 탈퇴 - 진행중인 판매 경매 체크 -->
 	<select id="checkAuction" parameterType="string"  resultType="Auction">
+		<!-- 
 		 select *, count(*) over()
         from auction a
 	   inner join deal d
 		 on a.user_email = d.user_email_seller
 	 where a.user_email = #{userEmail}
        and d.deal_condition = '1';
-		
-		<!-- 
-		 select * ,
-		(select count(*) over() as auctionCnt
-	    from deal 
-	    where user_email_seller = #{userEmail} and deal_condition = '1'  ) as auctionCnt
-		from auction a
-        where user_email = #{userEmail} and auction_condition = '1'
-           or user_email = #{userEmail} and auction_condition = '2'
 		 -->
-		<!-- 
-		select a.*, count(*) over() as auctionCnt
-		from auction a
-        inner join deal d
-        on a.auction_no = d.auction_no
-        where a.user_email = #{userEmail} and a.auction_condition = '1' 
-           or a.user_email = #{userEmail} and a.auction_condition = '2' 
-           or d.user_email_seller = #{userEmail} and d.deal_seller_condition = '1'  
-           or d.user_email_seller = #{userEmail} and d.deal_buyer_condition = '1';
-         -->
+		 
+		    select *
+       from auction a
+       where user_email = #{userEmail}
+         and auction_condition = 1;
+		
+	</select>
+	<!-- 회원 탈퇴 - 진행중인 판매/구매 거래 체크 -->
+	<select id="checkDeal" parameterType="string"  resultType="Auction">
+		
+		 select *, count(*) over()
+         from deal
+         where user_email_seller = #{userEmail} or user_email_buyer = #{userEmail}
+         and deal_condition = 1;
 	</select>
 	
 	

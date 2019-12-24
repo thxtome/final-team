@@ -37,8 +37,9 @@
   <div class="form">
     <h2>로그인</h2>
     <form action="<c:url value="/user/login.do"/>" method="post">
-      <input type="text" placeholder="이메일" name="userEmail"/>
-      <input type="password" placeholder="비밀번호" name="userPass"/>
+      <input type="text" placeholder="이메일" name="userEmail" id='userEmail'/>
+      <input type="password" placeholder="비밀번호" name="userPass" id='userPass'/>
+       <div id="loginCheck" class="alert">${param.failureMSG}</div>
       <button id="loginBtn">로그인</button>
       <a class="rg" href="/doublecome/user/joinForm.do">회원 가입</a>
       <div id="naver_id_login"><a href="${url}">

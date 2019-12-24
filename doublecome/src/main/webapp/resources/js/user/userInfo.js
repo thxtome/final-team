@@ -97,10 +97,12 @@ $(document).on("click", "#deleteBtn", () => {
         		url:"/doublecome/user/checkAuction.do",
         		data: {email: $("#email").html()},
         		success: (r) => {
-        			console.log(r.length , 'r.length')
-        			console.log(r.auctionCount , 'r.auctionCount')
-        			if(r.length == 0 && r.auctionCount == null ){        				
+        			
+        			if(r[0].auctionNo == undefined && r[0].dealNo == undefined){        				
         				$("#d").submit()
+        				console.log(r, 'r')
+            			console.log(r[0].auctionNo , 'r.auctionNo')
+            			console.log(r[0].dealNo , 'r.dealNo')
         			}else{
         				Swal.fire({
         					title: "등록중인 (판매/거래) 경매가 존재 합니다.",

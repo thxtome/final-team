@@ -12,6 +12,7 @@ public interface UserMapper {
 	public void insertUser(User user);
 	public void deleteUser(String email);
 	public List<Auction> checkAuction(String email);
+	public List<Auction> checkDeal(String email);
 	
 	public void updateUser(User user);
 	public void updateUserDefaultProfile(String email);

@@ -74,7 +74,16 @@ public class UserController {
 
 		
 	}
-
+	
+	//로그인 실패
+	/*
+	 * @RequestMapping("/loginfail.do") public String loginfail (HttpServletRequest
+	 * request, HttpServletResponse response) throws Exception{
+	 * response.getContentType(); System.out.println(response.getContentType());
+	 * return "user/loginForm.do"; }
+	 */
+	
+	
 	@RequestMapping("/kakaoCallback.do")
 	@ResponseBody
 	public int kakaoCallback(Model model, HttpSession session, HttpServletRequest req, String email, String id)
@@ -162,7 +171,10 @@ public class UserController {
 	@RequestMapping("/checkAuction.do")
 	@ResponseBody
 	public List<Auction> checkAuction (String email) throws Exception {
-		return service.checkAuction(email);
+		
+		List<Auction> a = service.checkAuction(email); 
+		a = service.checkDeal(email);
+		return a;
 	}
 
 	// 회원 가입 - 화면

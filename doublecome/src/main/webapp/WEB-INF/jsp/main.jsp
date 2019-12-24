@@ -184,18 +184,6 @@
 
 			<script src="<c:url value="/resources/js/common/countdown.js" />"></script>
 			<script src="<c:url value="/resources/js/main.js" />"></script>
-			<!-- <script type="text/javascript">
-		  var naver_id_login = new naver_id_login("TOpvHOSeiE05F9UnTU0P", "http://localhost:8001/doublecome/main.do");
-		  // 접근 토큰 값 출력
-		  console.log(naver_id_login.oauthParams.access_token);
-		  // 네이버 사용자 프로필 조회
-		  naver_id_login.get_naver_userprofile("naverSignInCallback()");
-		  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-		  function naverSignInCallback() {
-		    console.log(naver_id_login.getProfileData('email'));
-		    console.log(naver_id_login.getProfileData('nickname'));
-		    console.log(naver_id_login.getProfileData('profile'));
-		  }
-		</script> -->
+			
 </body>
 </html>
