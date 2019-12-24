@@ -98,7 +98,7 @@ public class FileServiceImpl implements FileService{
 			String orgName = mFile.getOriginalFilename();
 			String ext = orgName.substring(orgName.lastIndexOf("."));
 			String sysName = UUID.randomUUID().toString() + ext;
-			File file = new File("c:/java/upload" + filePath + sysName);
+			File file = new File("/java/upload" + filePath + sysName);
 			if(file.exists() == false) file.mkdirs();
 			try {
 				mFile.transferTo(file);
@@ -108,7 +108,7 @@ public class FileServiceImpl implements FileService{
 			uFile.setFileGroupCode(groupCode);
 			uFile.setFileOriginName(orgName);
 			uFile.setFileSystemName(sysName);
-			uFile.setFilePath("c:/java/upload" + filePath);
+			uFile.setFilePath("/java/upload" + filePath);
 			mapper.addProfile(uFile);
 		}
 		return uFile;
