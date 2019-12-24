@@ -14,12 +14,16 @@
 			a.auction_min_price,
 			a.file_group_code,
 			a.user_email,
-			max(b.bid_price) over(partition by  a.auction_no) as max_price,
-			count(b.bid_no) over(partition by  a.auction_no) as bid_cnt
+            ifnull(b.bid_cnt,0)as bidCnt,
+            ifnull(b.max_price, a.auction_min_price) as maxPrice,
+            count(*) over() as auctionCnt
 	 	 from auction a 
-	  	inner join bid b
+	  	 left join(select auction_no,
+	  					  max(bid_price) over(partition by auction_no) as max_price,
+					  	  count(bid_no) over(partition by auction_no) as bid_cnt
+					 from bid) b
 		   on a.auction_no = b.auction_no
-		  and auction_condition = 1
+		where auction_condition = 1
 		order by bid_cnt desc
 	</select>
 	<select id="categoryList" resultType="Category">
