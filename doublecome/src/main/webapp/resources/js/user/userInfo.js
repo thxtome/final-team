@@ -84,7 +84,7 @@
 $(document).on("click", "#deleteBtn", () => {
 	Swal.fire({
         title: '탈퇴 하시겠습니까',
-        text: "진행중인 판매 경매가 존재 할 경우 탈퇴 하실 수 없습니다.",
+        text: "등록중인 (판매/거래) 경매가 존재 할 경우 탈퇴 하실 수 없습니다.",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',   
@@ -99,11 +99,11 @@ $(document).on("click", "#deleteBtn", () => {
         		success: (r) => {
         			console.log(r.length , 'r.length')
         			console.log(r.auctionCount , 'r.auctionCount')
-        			if(r.length == 0 && r.auctionCount == null){        				
+        			if(r.length == 0 && r.auctionCount == null ){        				
         				$("#d").submit()
         			}else{
         				Swal.fire({
-        					title: "진행중인 판매 경매가 존재 합니다.",
+        					title: "등록중인 (판매/거래) 경매가 존재 합니다.",
         				})
         			}
         		}
