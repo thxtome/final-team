@@ -57,37 +57,19 @@ $(function (){
 			`;
 			purchaseContent.html(html);
 		} else {
-			/*
-			html += `
-					<div id="purchaseSort" class="yearSort">
-						<select name="sort">
-						<option>전체</option>
-						<option>2019</option>
-						<option>2018</option>
-						</select>
-					</div>
-			`;
-			 */
+//			html += `
+//			<div class="purchaseSort">
+//			<div>
+//				<ul>
+//					<li class="sortTypeTab sortTypeChoice" data-sort="recency">•최신순</li>
+//					<li class="sortTypeTab" data-sort="highGrade">•높은평점순</li>
+//					<li class="sortTypeTab" data-sort="lowGrade">•낮은평점순</li>
+//				</ul>
+//				</div>
+//			</div>
+//			`;
 			$.each(result.list, (i, r) => {
-				/*
-					if (r.dealCondition == '2'){
-					html += `
-					<span class="dealCondition colorBlue">정상거래</span>
-					`;
-					} else if (r.dealCondition == '3'){
-					html += `
-					<span class="dealCondition colorGreen">취소거래</span>
-					`;
-					} else if (r.dealCondition == '4'){
-					html += `
-					<span class="dealCondition colorRed">신고거래</span>
-					`;
-					} else if (r.auctionCondition == '3'){
-					html += `
-					<span class="dealCondition colorYellow">유찰거래</span>
-					`;
-					}
-				 */
+
 				starHtml = makeStar(Math.round(r.userScore));
 				let bidPrice = r.bidPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 				html += `

@@ -213,7 +213,7 @@
 	
 }
 
-.sortType {
+.sortType, .purchaseSort {
 	display: inline-block;
 	width: 900px;
 	margin-bottom: 20px;

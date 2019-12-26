@@ -169,7 +169,7 @@ function makeReviewList(result, type, sort){
 			$(".SendReview").html("");
 			html = `
 				<div class="SendReview">
-					<div class="emptyBox">보낸 후기가 없습니다.</div>
+					<div class="emptyBox">작성한 후기가 없습니다.</div>
 				</div>
 			`;
 			$(".SendReview").html(html);
