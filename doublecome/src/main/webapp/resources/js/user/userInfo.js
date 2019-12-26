@@ -54,7 +54,7 @@
 		
 		
 		for(i = 0; i < result.length; i++){
-			
+			console.log(result[i]);
 			$('#bidList').append(
 				`<div class="card_container${result[i].auctionCnt % 2}">
 				<a id="aution" href="/doublecome/auction/detailAuction.do?no=${result[i].auctionNo}&userEmail=${result[i].userEmail}">
@@ -101,7 +101,8 @@ $(document).on("click", "#deleteBtn", () => {
         		url:"/doublecome/user/checkAuction.do",
         		data: {email: $("#email").html()},
         		success: (r) => {
-        			if(r[0].auctionNo == undefined && r[0].dealNo == undefined){        				
+        			console.log()
+        			if(r.length < 1){        				
         				$("#d").submit()
         			}else{
         				Swal.fire({
