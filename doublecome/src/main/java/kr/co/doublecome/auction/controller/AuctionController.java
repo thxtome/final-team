@@ -26,16 +26,22 @@ public class AuctionController {
 	
 	@RequestMapping("/searchAuction.do")
 	public void auctionList(Model model, SearchAuction search) {
-		Category category= new Category();
-		category.setCategoryCode(search.getCategoryCode());
-		category.setCategoryName(search.getCategoryName());
-		AjaxPage ap = service.auctionList(search);
-		PageResult pr = ap.getPr();
-		System.out.println("끝나는페이지" + pr.getEndPage());;
-		model.addAttribute("pr", ap.getPr());
-		model.addAttribute("selectCategory",category);
-		model.addAttribute("category",service.listCategory());
-		model.addAttribute("auctionlist", ap.getList());		
+		if (search.getCategoryCode() != null) {
+			Category category= new Category();
+			category.setCategoryCode(search.getCategoryCode());
+			category.setCategoryName(search.getCategoryName());
+			AjaxPage ap = service.auctionList(search);
+			model.addAttribute("pr", ap.getPr());
+			model.addAttribute("selectCategory",category);
+			model.addAttribute("category",service.listCategory());
+			model.addAttribute("auctionlist", ap.getList());
+		} else {
+			AjaxPage ap = service.auctionList(search);
+			model.addAttribute("pr", ap.getPr());
+			model.addAttribute("auctionlist", ap.getList());
+			model.addAttribute("searchKeyWord", search.getSearchKeyWord());
+			model.addAttribute("category",service.listCategory());
+		}
 	}
 	@RequestMapping("/searchActionList.do")
 	@ResponseBody

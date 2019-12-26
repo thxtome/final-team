@@ -20,15 +20,18 @@
 			a.user_email,
             ifnull(b.bid_cnt,0)as bidCnt,
             ifnull(b.max_price, a.auction_min_price) as maxPrice,
-            count(*) over() as auctionCnt
+            count(*) over() as auctionCnt,
+            max(f.file_no) over (partition by f.file_group_code) as file_no
 	 	 from auction a 
 	  	 left join(select auction_no,
 	  					  max(bid_price) over(partition by auction_no) as max_price,
 					  	  count(bid_no) over(partition by auction_no) as bid_cnt
 					 from bid) b
 		   on a.auction_no = b.auction_no
+		inner join file f
+		   on a.file_group_code = f.file_group_code
 		where auction_condition = 1
-	  	<if test="categoryCode != null">
+	  	<if test="categoryCode != null and categoryCode != 0">
 	  		and category_code = #{categoryCode}
 	  	</if>
 	  	<if test="startPrice != null">
@@ -39,6 +42,9 @@
 	  	</if>
 	  	<if test="startBidCount != null">
 	  		and ifnull(b.bid_cnt,0) between #{startBidCount} and #{endBidCount}
+	  	</if>
+	  	<if test="searchKeyWord != null">
+	  		and a.auction_title Like CONCAT('%',#{searchKeyWord},'%')
 	  	</if>
 	  	<choose>
 		  	<when test="sorts == null">

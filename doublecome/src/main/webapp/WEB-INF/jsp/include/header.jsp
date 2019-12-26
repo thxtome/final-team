@@ -37,7 +37,7 @@
 	</div>
 	<div>
 		<div>
-			<input type="text" placeholder="경매를 검색하세요."> 
+			<input class="searchField" type="text" placeholder="경매를 검색하세요."> 
 			<i id="search_btn" class="fas fa-search"></i>
 		</div>
 	</div>
