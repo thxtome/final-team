@@ -193,6 +193,7 @@ function getContextPath() {
 }
 //첨부 버튼 클릭
 $("#attachBtn").click(()=>{
+	$(".img_wrap", opener.document).html("");
 	let path = getContextPath()
 	localStorage.setItem("allImages", JSON.stringify(allImages));
 	let d = JSON.parse(localStorage.getItem("allImages"))
@@ -201,7 +202,6 @@ $("#attachBtn").click(()=>{
 			<img class="imgContent" src="${path}/file/fileRoot.do?root=${Object.keys(d)[i]}" data-filename="${Object.keys(d)[i]}"">
 		`
 			$(".img_wrap", opener.document).append(html);
-
 	}
 	self.close();
 })
