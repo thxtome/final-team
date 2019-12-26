@@ -76,17 +76,24 @@ public class UserController {
 	}
 	
 	//로그인 실패
-	/*
-	 * @RequestMapping("/loginfail.do") public String loginfail (HttpServletRequest
-	 * request, HttpServletResponse response) throws Exception{
-	 * response.getContentType(); System.out.println(response.getContentType());
-	 * return "user/loginForm.do"; }
-	 */
+	 @RequestMapping("/loginfail.do")
+	 public String loginfail ( HttpServletRequest request, HttpServletResponse response
+			 ) throws Exception{
+		 response.getContentType();
+		 System.out.println(request.getAttributeNames() + "<<getAttributeNames");
+		 System.out.println(response.getContentType() + "<< getContentType");
+	 return "user/loginForm.do"; 
+	 }
+	 
 	
 	
 	@RequestMapping("/kakaoCallback.do")
 	@ResponseBody
-	public int kakaoCallback(Model model, HttpSession session, HttpServletRequest req, String email, String id)
+	public int kakaoCallback(
+			Model model, HttpSession session,
+			HttpServletRequest req,
+			String email,
+			String id)
 			throws Exception {
 		System.out.println("kakao >>" + email);
 		System.out.println(service.checkEmail(email) + " <<service.checkEmail(email)");
@@ -104,7 +111,11 @@ public class UserController {
 
 	// 네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping("/callback.do")
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,
+	public String callback(
+			Model model, 
+			@RequestParam String code, 
+			@RequestParam String state, 
+			HttpSession session,
 			HttpServletRequest req) throws Exception {
 
 		OAuth2AccessToken oauthToken;

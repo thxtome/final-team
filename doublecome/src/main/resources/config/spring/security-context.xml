@@ -12,6 +12,7 @@
 						http://www.springframework.org/schema/beans/spring-beans.xsd">
 <!-- 필요한 빈객체 먼저 등록 -->						
 	<bean id="loginSuccessHandler" class="kr.co.doublecome.util.security.LoginSuccessHandler" />
+	<!-- <bean id="loginFailureHandler" class="kr.co.doublecome.util.security.LoginFailureHandler" /> -->
 	<bean id="myBatisUserDetailsService" class="kr.co.doublecome.util.security.MyBatisUserDetailsService" />
 			
 <!-- 인코더방식 설정  -->
@@ -33,12 +34,25 @@
 <!-- 		<security:intercept-url pattern="/resources/**" access="permitAll" /> -->
 <!--  		<security:intercept-url pattern="/**" access="hasRole('ROLE_U')" /> -->
 		<!-- <security:intercept-url pattern="admin.do" access="hasRole('ROLE_A')" /> -->
-		<security:form-login login-page="/user/loginForm.do" username-parameter="userEmail" password-parameter="userPass" 
-		                     authentication-success-handler-ref="loginSuccessHandler" login-processing-url="/user/login.do" />
+		<security:form-login login-page="/user/loginForm.do" 
+							 username-parameter="userEmail" 
+							 password-parameter="userPass" 
+		                     authentication-success-handler-ref="loginSuccessHandler" 
+		                     login-processing-url="/user/login.do" />
 		<security:logout logout-url="/user/logout.do" 
 						 logout-success-url="/main.do"
 		                 invalidate-session="true" 
-		                 delete-cookies="JSESSIONID" />                 
+		                 delete-cookies="JSESSIONID" />     
+		                    <!--  authentication-failure-handler-ref="loginFailureHandler" --> 
+		                 
+		                 
+	<!-- <security:session-management invalid-session-url="/main.do">
+        <security:concurrency-control max-sessions="1" expired-url="/main.do" error-if-maximum-exceeded="true"/>
+    </security:session-management> -->
+
+
+
+		                             
 	</security:http>	
 					
 	<security:authentication-manager>

@@ -60,8 +60,8 @@
 				<a id="aution" href="/doublecome/auction/detailAuction.do?no=${result[i].auctionNo}&userEmail=${result[i].userEmail}">
 					<img src="/doublecome/file/downLoadFile.do?fileNo=${result[i].fileNo}" alt="" class="card_image" >
 					<div class="aution_title"><div class="card_autionTitle">${result[i].auctionTitle}</div></div>
-					<div class="card_sub_now">즉시 구매 가:<span class="card_content">${result[i].auctionBuyNow}</span></div>
-					<div class="card_sub_date">경매 마감 일:<span id="remainTime${result[i].auctionCnt}" class="card_content">${format(result[i].auctionLimitDate, "Mdhms")}</span></div>
+					<div class="card_sub_now">즉시 구매 가:<span class="card_content">${numberWithCommas(result[i].auctionBuyNow)}</span>원</div>
+					<div class="card_sub_date">남은 시간:<span id="remainTime${result[i].auctionCnt}" class="card_content">${format(result[i].auctionLimitDate, "Mdhms")}</span></div>
 				</a>				
 				</div>`
 			);
@@ -73,6 +73,10 @@
 }));
 
 
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 
@@ -97,12 +101,8 @@ $(document).on("click", "#deleteBtn", () => {
         		url:"/doublecome/user/checkAuction.do",
         		data: {email: $("#email").html()},
         		success: (r) => {
-        			
         			if(r[0].auctionNo == undefined && r[0].dealNo == undefined){        				
         				$("#d").submit()
-        				console.log(r, 'r')
-            			console.log(r[0].auctionNo , 'r.auctionNo')
-            			console.log(r[0].dealNo , 'r.dealNo')
         			}else{
         				Swal.fire({
         					title: "등록중인 (판매/거래) 경매가 존재 합니다.",

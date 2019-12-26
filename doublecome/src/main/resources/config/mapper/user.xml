@@ -154,7 +154,6 @@ where b.user_email = 'doublegoo@naver.com'
 	</select>
 	<!-- 회원 탈퇴 - 진행중인 판매/구매 거래 체크 -->
 	<select id="checkDeal" parameterType="string"  resultType="Auction">
-		
 		 select *, count(*) over()
          from deal
          where user_email_seller = #{userEmail} or user_email_buyer = #{userEmail}
