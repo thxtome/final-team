@@ -96,20 +96,22 @@
 	<!-- 구매횟수, 판매횟수, 후기갯수 -->
 	<select id="userInfo" resultType="History" parameterType="String">
 		select distinct u.*,
-			   a.sell_cnt,
+			   ifnull(a.sell_cnt, 0) as sell_cnt,
 			   b.buy_cnt
 		  from user u
 		  join (select count(*) as sell_cnt, user_email
 				  from auction
-                 where user_email = #{userEmail}) a
+                 where user_email = #{user_email}) a
 		    on u.user_email = a.user_email
-		  join (select count(*) as buy_cnt, c.user_email as user_email
+		  join (select count(*) - 1 as buy_cnt, c.user_email as user_email
          		  from (select count(*), user_email
            			      from bid
-                         where user_email = #{userEmail}
-          	 			 group by auction_no) c) b
+                         where user_email = #{user_email}
+                         group by auction_no
+				union
+                select 0 as cnt, #{user_email}) c) b
 		    on u.user_email = b.user_email
-		 where u.user_email = #{userEmail};
+		 where u.user_email = #{user_email};
 	</select>
 	
 	<select id="salesInfo" resultType="History" parameterType="String">

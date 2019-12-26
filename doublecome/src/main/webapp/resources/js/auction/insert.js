@@ -108,7 +108,7 @@ $(".button").click(() => {
 					  data : localStorage.getItem("allImages")
 				  },
 				  success: () => {
-					  $("#insertForm").submit();					  
+					  $("#insertForm").submit()				  
 				  }
 				});
 		})
@@ -118,7 +118,7 @@ $(".button").click(() => {
 
 $(".upload_btn").click(() => {
 	if (localStorage.length) {
-//		localStorage.clear();
+		localStorage.clear();
 		window.open("uploadPhoto.do", "uploadPhoto", "width=1000, height=800, location=no, left=400")
 	} else {
 		window.open("uploadPhoto.do", "uploadPhoto", "width=1000, height=800, location=no, left=400")
@@ -132,6 +132,5 @@ $(document).on("click", ".imgContent", (e) => {
 	console.log(localStorage.getItem())
 //	localStorage.removeItem($(e.target).data("filename"))
 })
-
 
 $(".note-dropzone").remove();
