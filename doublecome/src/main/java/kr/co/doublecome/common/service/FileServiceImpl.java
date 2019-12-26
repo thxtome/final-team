@@ -46,7 +46,7 @@ public class FileServiceImpl implements FileService{
 			String orgName = mFile.getOriginalFilename();
 			String ext = orgName.substring(orgName.lastIndexOf("."));
 			String sysName = UUID.randomUUID().toString() + ext;
-			File file = new File("c:/java/upload" + filePath + sysName);
+			File file = new File("/var/photo/upload" + filePath + sysName);
 			if(file.exists() == false) file.mkdirs();
 			try {
 				mFile.transferTo(file);
@@ -55,7 +55,7 @@ public class FileServiceImpl implements FileService{
 			uFile.setFileGroupCode(groupCode);
 			uFile.setFileOriginName(orgName);
 			uFile.setFileSystemName(sysName);
-			uFile.setFilePath("c:/java/upload" + filePath);
+			uFile.setFilePath("/var/photo/upload" + filePath);
 			mapper.addFile(uFile);
 		}
 		return uFile;
@@ -66,7 +66,7 @@ public class FileServiceImpl implements FileService{
 			mapper.deleteProfile(user.getFileNo());
 			if(user.getFileGroupCode() != 0) {
 					
-				String path = "c:/java/upload/user" + "/" + user.getUserEmail() + "/";
+				String path = "/var/photo/upload/user" + "/" + user.getUserEmail() + "/";
 				File folder = new File(path);
 				try {
 				    while(folder.exists()) {
@@ -98,17 +98,18 @@ public class FileServiceImpl implements FileService{
 			String orgName = mFile.getOriginalFilename();
 			String ext = orgName.substring(orgName.lastIndexOf("."));
 			String sysName = UUID.randomUUID().toString() + ext;
-			File file = new File("/java/upload" + filePath + sysName);
+			File file = new File("/var/photo/upload" + filePath + sysName);
 			if(file.exists() == false) file.mkdirs();
 			try {
 				mFile.transferTo(file);
 			} catch (Exception e) {
+				
 			}
 			uFile.setFileNo(user.getFileNo());
 			uFile.setFileGroupCode(groupCode);
 			uFile.setFileOriginName(orgName);
 			uFile.setFileSystemName(sysName);
-			uFile.setFilePath("/java/upload" + filePath);
+			uFile.setFilePath("/var/photo/upload" + filePath);
 			mapper.addProfile(uFile);
 		}
 		return uFile;
@@ -202,7 +203,7 @@ public class FileServiceImpl implements FileService{
 			
 			String sysName = UUID.randomUUID().toString() + "." + ext;
 			try {
-				File file = new File("c:/java/upload" + filePath + sysName);
+				File file = new File("/var/photo/upload" + filePath + sysName);
 				if(file.exists() == false) file.mkdirs();
 				System.out.println(imageBytes);
 				BufferedImage bufImg = ImageIO.read(new ByteArrayInputStream(imageBytes));
@@ -215,7 +216,7 @@ public class FileServiceImpl implements FileService{
 			util.setFileGroupCode(groupCode);
 			util.setFileOriginName(orgName);
 			util.setFileSystemName(sysName);
-			util.setFilePath("c:/java/upload" + filePath);
+			util.setFilePath("/var/photo/upload" + filePath);
 			mapper.addFile(util);
 			int tagStart = orgContent.indexOf("<img src=\"data:");
 			if (tagStart == -1) tagStart = orgContent.indexOf("<img style"); 
