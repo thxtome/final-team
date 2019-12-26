@@ -104,7 +104,7 @@ $(".button").click(() => {
 				  type: "POST",
 				  url: "fileTag.do",
 				  data: {
-					  data : localStorage.getItem("allImages"),
+					  data : localStorage.getItem("allImages")
 				  },
 				  success: $("#insertForm").submit(),					  
 				});
