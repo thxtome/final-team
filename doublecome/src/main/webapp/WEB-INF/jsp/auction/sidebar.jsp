@@ -273,7 +273,7 @@
 					<button type="button" class="tagCancel">닫기</button>
 						<div class="imgtempWrapper">
 							<div class="imgWrapper">
-								<a href="#"><img class="tagImg"
+								<a href="#" class="imgTag"><img class="tagImg"
 									src="<c:url value="/file/downLoadFile.do?fileNo=${f.fileNo}" />"></a>
 								<c:forEach items="${tag}" var="t">
 								<c:if test="${f.fileNo eq t.fileNo}">
