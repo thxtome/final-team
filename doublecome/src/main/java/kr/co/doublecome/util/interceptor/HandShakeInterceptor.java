@@ -18,7 +18,6 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) throws Exception {
-		 System.out.println("Before Handshake");
 		 ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
 	     HttpServletRequest req =  ssreq.getServletRequest();
 
@@ -53,7 +52,6 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
 	@Override
 	public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Exception ex) {
-		System.out.println("에프터핸쉐");
 		super.afterHandshake(request, response, wsHandler, ex);
 	}
 }

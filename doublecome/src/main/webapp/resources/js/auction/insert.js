@@ -83,6 +83,7 @@ $(".fileUpIcon").hover(() => {
 })
 
 $(".button").click(() => {
+	console.log($(".img_wrap").html())
 	$div = $(".start").val().replace(/[^0-9]/g,"")
 	$div2 = $(".buy").val().replace(/[^0-9]/g,"")
 	if ($(".start").val() == "") {
@@ -106,7 +107,9 @@ $(".button").click(() => {
 				  data: {
 					  data : localStorage.getItem("allImages")
 				  },
-				  success: $("#insertForm").submit(),					  
+				  success: () => {
+					  $("#insertForm").submit();					  
+				  }
 				});
 		})
 	}

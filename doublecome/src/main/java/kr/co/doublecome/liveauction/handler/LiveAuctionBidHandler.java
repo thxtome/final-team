@@ -30,10 +30,6 @@ public class LiveAuctionBidHandler extends TextWebSocketHandler{
 	private Map<Integer, Map<String, WebSocketSession>> channels = new HashMap<>();
 	private Type type = new TypeToken<Map<String, String>>(){}.getType();
 	
-	public LiveAuctionBidHandler() {
-		System.out.println("LiveAuctionBid 생성");
-	}
-	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Map<String, Object> userData = session.getAttributes();
