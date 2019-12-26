@@ -99,7 +99,7 @@
 			   ifnull(a.sell_cnt, 0) as sell_cnt,
 			   b.buy_cnt
 		  from user u
-		  join (select count(*) as sell_cnt, user_email
+		  join (select count(*) as sell_cnt, #{user_email} as user_email
 				  from auction
                  where user_email = #{user_email}) a
 		    on u.user_email = a.user_email
