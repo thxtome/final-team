@@ -151,8 +151,8 @@ public class AuctionDetailController {
 		try {
 			String sysName = UUID.randomUUID().toString();
 			String fileName = sysName+".jpg";
-			root = "c:/java/upload/temp/" + fileName;
-			File file = new File("c:/java/upload/temp/");
+			root = "/var/photo/upload/temp/" + fileName;
+			File file = new File("/var/photo/upload/temp/");
 			if(file.exists() == false) file.mkdirs();
 			fos = new FileOutputStream(root);
 			fos.write (binary);
@@ -179,10 +179,10 @@ public class AuctionDetailController {
 		for (Map.Entry<String, JsonElement> entry: entries) {
 			
 			
-			String sysName = entry.getKey().split("c:/java/upload/temp/")[1];
+			String sysName = entry.getKey().split("/var/photo/upload/temp/")[1];
 			SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
 			String filePath = "auction" + sdf.format(new Date());
-			String path = "c:/java/upload/" + filePath;
+			String path = "/var/photo/upload" + filePath;
 			File realPath = new File(path);
 			if(realPath.exists() == false) realPath.mkdirs();
 			File delFile = new File(entry.getKey());
