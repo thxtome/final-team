@@ -22,6 +22,7 @@ public class Auction {
 	private int categoryCode;				// 카테고리
 	private String categoryName;			// 카테고리
 	private int maxPrice;					// 현재 최고 입찰가
+	private String maxPriceId;              // 최고 입찰자
 	private int bidCnt;						// 입찰 횟수
 	private int bidPrice;					// 입찰가
 	private String userEmail;				// 경매글쓴이

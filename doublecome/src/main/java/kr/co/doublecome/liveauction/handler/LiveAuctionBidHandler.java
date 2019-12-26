@@ -59,9 +59,9 @@ public class LiveAuctionBidHandler extends TextWebSocketHandler{
 		
 		//비회원일 경우 거절
 		if(userId == "비회원") {
-			
 			Map<String,Object> soloData = new HashMap<String, Object>();
 			soloData.put("access","denied");
+			soloData.put("code","1");
 			sendDataSolo(soloData,session);
 			return;
 		}
@@ -78,32 +78,46 @@ public class LiveAuctionBidHandler extends TextWebSocketHandler{
 		
 		//입찰일 경우 처리
 		if(bidData.get("bidType").equals("bidding")) {
-			auction.setUserEmail(userId);
-			mapper.auctionBid(auction);
-			userData.put("maxPrice", price);
-			userData.put("bidType","bidding");
+			int maxPrice = mapper.selectMaxBid(auctionNo);
+			//개인 데이터맵
 			Map<String,Object> soloData = new HashMap<String, Object>();
-			soloData.put("access","admited");
-			soloData.put("bidType","bidding");
-			sendDataSolo(soloData,session);
+			if(price > maxPrice) {				
+				auction.setUserEmail(userId);
+				mapper.auctionBid(auction);
+				userData.put("maxPrice", price);
+				userData.put("bidType","bidding");
+				soloData.put("access","admited");
+				soloData.put("bidType","bidding");
+				sendDataSolo(soloData,session);
+				sendData(userData,users);
+			} else {
+				userData.put("maxPrice", price);
+				soloData.put("access","denied");
+				soloData.put("code","2");
+				sendDataSolo(soloData,session);
+			}
 			
-			sendData(userData,users);
 		} 
 		//즉시구매일 경우 처리
-		else {
-			auction.setUserEmailBuyer(userId);
-			mapper.callSPAddDeal(auction);
-			userData.put("maxPrice", price);
-			userData.put("bidType","purchase");
+		else if (bidData.get("bidType").equals("purchase")){
 			Map<String,Object> soloData = new HashMap<String, Object>();
-			soloData.put("access","admited");
-			soloData.put("bidType","purchase");
-			sendDataSolo(soloData,session);
-			
-			sendData(userData,users);
+			System.out.println(price);
+			System.out.println();
+			if(price == Integer.parseInt(mapper.selectAuctionForLive(auctionNo).getAuctionBuyNow())) {				
+				auction.setUserEmailBuyer(userId);
+				mapper.callSPAddDeal(auction);
+				userData.put("maxPrice", price);
+				userData.put("bidType","purchase");
+				soloData.put("access","admited");
+				soloData.put("bidType","purchase");
+				sendDataSolo(soloData,session);
+				sendData(userData,users);
+			} else {
+				soloData.put("access","denied");
+				soloData.put("code","3");
+				sendDataSolo(soloData,session);
+			}	
 		}
-		
-		
 		
 	}
 

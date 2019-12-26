@@ -61,8 +61,10 @@
 											<dd class="Count__number">
 												<div class="middle">
 													<div class="inner">
+													<c:set var="now" value="<%=new java.util.Date()%>" />
 														<div class="counter-class"
-															data-date="<fmt:formatDate value="${auction.auctionLimitDate}" pattern="yyyy-MM-dd HH:mm:ss"/>">
+															data-date="<fmt:formatDate value="${auction.auctionLimitDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+															data-endDate="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>">
 															<div class="timer-font">
 																<span class="counter-days"></span> 일
 															</div>

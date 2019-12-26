@@ -190,7 +190,7 @@ public class UserController {
 
 	// 회원 가입 - 화면
 	@RequestMapping("/joinForm.do")
-	public void joinForm(User user) throws Exception {
+	public void joinForm(User user, Model model) throws Exception {
 	}
 
 	// 회원가입 - api 화면
@@ -199,7 +199,6 @@ public class UserController {
 		User u = new User();
 		u.setUserEmail(email);
 		u.setUserPass(id);
-		u.setUserType(3);
 		model.addAttribute("user", u);
 	}
 

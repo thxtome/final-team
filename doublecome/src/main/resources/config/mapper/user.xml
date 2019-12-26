@@ -42,6 +42,16 @@
 		and user_type = '1'
 	</select>
 	
+	
+	<!-- 마이페이지 입찰 리스트 -입찰 가격 빅-->
+		<select id="isYours" parameterType="Auction" resultType="Auction">
+			select distinct max(bid_price) over() as bid_price, (select distinct max(bid_price) over() as maxPrice
+			from bid b
+			where auction_no = #{auctionNo}) as maxPrice
+			from bid b
+			where auction_no = #{auctionNo}
+			and user_email = #{userEmail}
+		</select>
 	<!-- 마이페이지 입찰 리스트 -->
 	<select id="bidList" parameterType="string" resultType="Auction">
 	select *
@@ -52,7 +62,6 @@
 	       a.auction_limit_date,
 	       a.auction_condition,
 	       b.user_email,
-		   b.bid_price,
 	       count(b.auction_no) over() as bitCnt,
 	       RANK() OVER (ORDER BY a.auction_no ) as auction_cnt
 	  from auction a

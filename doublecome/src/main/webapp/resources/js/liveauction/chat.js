@@ -2,24 +2,28 @@ let chatWs = null;
 
 $(() => {
   // 접속할 주소를 설정 : 웹소켓 핸들러 구현 클래스와 연결된 URL
-  chatWs = new WebSocket("wss://192.168.219.189:8443/doublecome/chat.do");
+  chatWs = new WebSocket("wss://192.168.0.36:8443/doublecome/chat.do");
   chatWs.onopen = () => {
     console.log("연결성공");
   };
 
   chatWs.onmessage = evt => {
     let dataObj = JSON.parse(evt.data);
-    console.dir(dataObj);
-    $chatSpace = $(".chatSpace");
-    $chatSpace.append(
-      $(
-        `<div class="chat">			
-					<span style="color: ${dataObj.color}; font-weight: bold">${dataObj.userId}</span>
-					<span>${dataObj.msg}</span>
-					</div>`
-      )
-    );
-    $chatSpace.scrollTop($chatSpace[0].scrollHeight);
+    
+    switch (dataObj.type) {
+	case 'message':		
+		message(dataObj);
+		break;
+		
+	case 'entrance':
+		console.log(dataObj.count + "명")
+		$(".btns > div > span").text(dataObj.count)
+		break;
+
+	default:
+		break;
+	}
+    
   };
 
   chatWs.onerror = evt => {
@@ -52,4 +56,18 @@ function send() {
     chatWs.send(value);
     $msg.val("");
   }
+}
+
+function message(dataObj){
+	$chatSpace = $(".chatSpace");
+    $chatSpace.append(
+      $(
+        `<div class="chat">			
+					<span style="color: ${dataObj.color}; font-weight: bold">${dataObj.userId}</span>
+					<span>${dataObj.msg}</span>
+					</div>`
+      )
+    );
+    //스크롤다운
+    $chatSpace.scrollTop($chatSpace[0].scrollHeight);
 }

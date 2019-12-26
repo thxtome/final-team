@@ -46,6 +46,7 @@
       <div id="phnumCheck" class="alert"></div>
       <input type="text" placeholder="별명" name="userNickname" id="userNickname" />
       <div id="idCheck" class="alert"></div>
+      <input type="hidden" name="userType" value="3" />
       <button tpye="submit" id="joinBtn">가입</button>
     </form>
   </div>

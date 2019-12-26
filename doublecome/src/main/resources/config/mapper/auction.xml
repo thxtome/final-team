@@ -28,7 +28,7 @@
 					 from bid) b
 		   on a.auction_no = b.auction_no
 		where auction_condition = 1
-	  	<if test="categoryCode != 0">
+	  	<if test="categoryCode != null">
 	  		and category_code = #{categoryCode}
 	  	</if>
 	  	<if test="startPrice != null">

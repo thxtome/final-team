@@ -31,6 +31,7 @@ public class LiveAuctionController {
 		session.setAttribute("auctionNo", auctionNo);
 		model.addAttribute("auction",service.retrieveAuction(auctionNo));
 		model.addAttribute("type",type);
+		System.out.println(type);
 		return "liveAuction/broadcast";
 	}
 	
