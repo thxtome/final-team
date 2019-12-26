@@ -20,10 +20,6 @@ public class LiveAuctionChatHandler extends TextWebSocketHandler{
 	//전체 사용자 정보 관리하기
 	private Map<Integer, Map<String, WebSocketSession>> channels = new HashMap<>();
 	
-	public LiveAuctionChatHandler() {
-		System.out.println("LiveAuctionchat 생성");
-	}
-	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Map<String, Object> userData = session.getAttributes();
@@ -36,7 +32,8 @@ public class LiveAuctionChatHandler extends TextWebSocketHandler{
 		}
 		
 		users.put(session.getId(), session);
-		userData.put("msg", " 님이 입장하셨습니다.");
+		userData.put("type","entrance");
+		userData.put("count", users.size());
 		broadcast(userData,users);
 	}
 
@@ -46,6 +43,7 @@ public class LiveAuctionChatHandler extends TextWebSocketHandler{
 		int auctionNo = (int)userData.get("auctionNo");
 		
 		Map<String, WebSocketSession> users = channels.get(auctionNo);
+		userData.put("type","message");
 		userData.put("msg"," : " +  message.getPayload());
 		broadcast(userData,users);
 	}
@@ -64,7 +62,8 @@ public class LiveAuctionChatHandler extends TextWebSocketHandler{
 			return;
 		}
 		
-		userData.put("msg"," 님이 퇴장하셨습니다.");
+		userData.put("type","entrance");
+		userData.put("count",users.size());
 		broadcast(userData,users);
 	}
 	
