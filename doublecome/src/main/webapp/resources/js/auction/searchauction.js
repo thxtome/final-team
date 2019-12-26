@@ -125,9 +125,8 @@ function makeAuctionlist(data) {
 		<div class='col-md-4 p-2'>
 			<div class="card box-shadow">
 				<a class="auction_list" href="/doublecome/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}">
-					<img class="card-img-top w-100"
-						src="/doublecome/resources/images/macbook.jpg"
-						style="height: 250px;"/>
+					<img class="card-img-top w-100" style="height: 250px;"
+						src="/doublecome/file/downLoadFile.do?fileNo=${list.fileNo}" />">
 					<p class="mb-1 m-1">${list.auctionTitle}</p>
 					<p class="card-text m-1">${maxPrice}원</p>		
 					<div class="auction_condition loadtime">
