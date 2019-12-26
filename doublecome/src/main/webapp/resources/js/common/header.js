@@ -85,3 +85,9 @@ $(document).ready(() => {
 	  });
 	}
 })
+$(".topContent:nth-child(2) input").keypress((e) =>{
+	if(e.keyCode == 13) {
+		local.href = "/doublecome/"
+	}
+})
+$(".topContent:nth-child(2)")
