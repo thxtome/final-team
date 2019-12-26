@@ -123,9 +123,8 @@
 							<div class="col-md-4 p-2" >
 								<a class="auction_list" href="<c:url value="/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}" />">
 									<div class="card box-shadow">
-										<img class="card-img-top w-100"
-											src="<c:url value="/resources/images/macbook.jpg"/>"
-											style="height: 250px;">
+										<img class="card-img-top w-100" style="height: 250px;"
+										src="<c:url value="/file/downLoadFile.do?fileNo=${f.fileNo}" />">
 										<p class="mb-1 m-1">${list.auctionTitle}</p>
 										<c:choose>
 											<c:when test="${empty list.maxPrice}">
@@ -167,32 +166,48 @@
   <script src="<c:url value="/resources/js/auction/searchauction.js" />"></script>
   <script>
 	  $(document).ready(e => {
-			$("#selectbar").append(
-				`<a href="/doublecome/auction/searchActionList.do" 
-				data-name="categoryCode" 
-				data-value="${selectCategory.categoryCode}" 
-				class="options selected category "
-				data-selected="true">
-				${selectCategory.categoryName}
-					<span class="del"></span>
-				</a>
-				`
-			)
-			let loadchk = $(".category");
-			let optiondata = $(".options");
-			for(let value of loadchk) {
-				for (let optionval of optiondata) {
-					if (value.dataset.value == optionval.dataset.value) {
-						$(value).addClass("selected")	
-						$(value).prev().addClass("selected")
-						if ($(value).attr("class").startsWith("options ")) {
-							$(value).prev().removeClass("selected")
-						}
+	  let cateCode = `${selectCategory}`
+	  if (cateCode != null) {
+		$("#selectbar").append(
+			`<a href="/doublecome/auction/searchActionList.do" 
+			data-name="categoryCode" 
+			data-value="${selectCategory.categoryCode}" 
+			class="options selected category "
+			data-selected="true">
+			${selectCategory.categoryName}
+				<span class="del"></span>
+			</a>
+			`
+		)
+		let loadchk = $(".category");
+		let optiondata = $(".options");
+		for(let value of loadchk) {
+			for (let optionval of optiondata) {
+				if (value.dataset.value == optionval.dataset.value) {
+					$(value).addClass("selected")	
+					$(value).prev().addClass("selected")
+					if ($(value).attr("class").startsWith("options ")) {
+						$(value).prev().removeClass("selected")
 					}
 				}
 			}
-		 	
-		})
+		}
+	  } else {
+		  keyWordMk(${searchKeyWord})
+	  }
+	})
+	function keyWordMk(keyWord) {
+		alert(keyWord)
+  		$("#selectbar").append(
+ 			  `<a href="/doublecome/auction/searchActionList.do" 
+ 				data-name="searchKeyWord" 
+ 				data-value=
+ 				class="options selected category "
+ 				data-selected="true">
+ 					<span class="del"></span>
+ 				</a>
+				`)
+	}
   </script>
   <script src="<c:url value="/resources/js/auction/accordion.js" />"></script>
 </body>

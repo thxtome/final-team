@@ -2,7 +2,7 @@ jQuery(document).ready(function($){
 	window.loopcounter = function( idWarp ) {
 		if(typeof idWarp!= 'undefined'){
 			date = $('.'+idWarp).data('date');
-
+			let endDate = $('.'+idWarp).data('endDate')
 			let start = new Date( date );
 			let end   = new Date();
 			let diff  = new Date( start - end );

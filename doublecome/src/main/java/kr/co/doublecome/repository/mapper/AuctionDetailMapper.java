@@ -33,4 +33,5 @@ public interface AuctionDetailMapper {
 	List<Auction> smsList();
 	void smsUpdate();
 	void updateOnAir(Map<String,Integer> liveAuctionMap);
+	int selectMaxBid(int auctionNo);
 }

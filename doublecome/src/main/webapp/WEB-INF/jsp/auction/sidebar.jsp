@@ -61,8 +61,10 @@
 											<dd class="Count__number">
 												<div class="middle">
 													<div class="inner">
+													<c:set var="now" value="<%=new java.util.Date()%>" />
 														<div class="counter-class"
-															data-date="<fmt:formatDate value="${auction.auctionLimitDate}" pattern="yyyy-MM-dd HH:mm:ss"/>">
+															data-date="<fmt:formatDate value="${auction.auctionLimitDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+															data-endDate="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss"/>">
 															<div class="timer-font">
 																<span class="counter-days"></span> 일
 															</div>
@@ -273,7 +275,7 @@
 					<button type="button" class="tagCancel">닫기</button>
 						<div class="imgtempWrapper">
 							<div class="imgWrapper">
-								<a href="#"><img class="tagImg"
+								<a href="#" class="imgTag"><img class="tagImg"
 									src="<c:url value="/file/downLoadFile.do?fileNo=${f.fileNo}" />"></a>
 								<c:forEach items="${tag}" var="t">
 								<c:if test="${f.fileNo eq t.fileNo}">

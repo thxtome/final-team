@@ -85,3 +85,17 @@ $(document).ready(() => {
 	  });
 	}
 })
+$(".topContent .searchField").keypress((e) =>{
+	if ($(e.target).val() != null){
+		if(e.keyCode == 13) {
+			let value = $(e.target).val();
+			console.log(value)
+			location.href = `/doublecome/auction/searchAuction.do?searchKeyWord=${value}`
+		}
+	}
+})
+$(".topContent .searchField").next().click(e => {
+	if ($(e.target).prev().val() != null) {		
+		local.href="/doublecome/auction/searchAuction.do?searchKeyWord=${value}"
+	}
+})
