@@ -26,9 +26,6 @@ public class ChattingHandler extends TextWebSocketHandler {
 	@Autowired
 	Gson gson;
 	private Map<Integer, Map<String, WebSocketSession>> chatMap = new HashMap<>();
-	public ChattingHandler() { 
-		System.out.println("채팅 핸들러 생성 완료"); 
-	}
 	
 	@SuppressWarnings("null")
 	@Override

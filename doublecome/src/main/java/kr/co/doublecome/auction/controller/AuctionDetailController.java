@@ -99,6 +99,7 @@ public class AuctionDetailController {
 	public String addAuction(@RequestHeader(value = "referer") String referer, Principal principal, Auction auction, UtilFile uFile) throws Exception {
 		
 		int groupCode = service.maxFileGroupCode();
+		System.out.println("경매 넣기" + groupCode);
 		auction.setUserEmail(principal.getName());
 		auction.setAuctionBuyNow(auction.getAuctionBuyNow().replaceAll(",", ""));
 		auction.setAuctionMinPrice(auction.getAuctionMinPrice().replaceAll(",", ""));
@@ -171,6 +172,7 @@ public class AuctionDetailController {
 	@ResponseBody
 	public void fileTag(String data, UtilFile file) throws Exception {
 		int fileGroupCode = service.maxFileGroupCode() + 1;
+		System.out.println("경매 넣기" + fileGroupCode);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(data);
 		JsonObject obj = element.getAsJsonObject(); 

@@ -124,7 +124,7 @@
 								<a class="auction_list" href="<c:url value="/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}" />">
 									<div class="card box-shadow">
 										<img class="card-img-top w-100" style="height: 250px;"
-										src="<c:url value="/file/downLoadFile.do?fileNo=${f.fileNo}" />">
+										src="<c:url value="/file/downLoadFile.do?fileNo=${list.fileNo}" />">
 										<p class="mb-1 m-1">${list.auctionTitle}</p>
 										<c:choose>
 											<c:when test="${empty list.maxPrice}">

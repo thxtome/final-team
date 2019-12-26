@@ -149,7 +149,7 @@ function withchat(message) {
 	})
 }
 $(() => {
-	ws = new WebSocket("ws://localhost/doublecome/chatting.do");	
+	ws = new WebSocket("wss://192.168.0.36/doublecome/chatting.do");	
 	ws.onopen = () => {
 		console.log("채팅 접속")
 	};
