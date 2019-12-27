@@ -30,7 +30,8 @@ function setAciveChat(f) {
   }
   chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat')
   friends.name = f.querySelector('.name').innerText
-  chat.name.innerHTML = `<img src="/doublecome/resources/images/macbook.jpg"><span><span class="name">${friends.name}</span></span>`
+  let fileCode = $(f).attr("data-fileNo");
+  chat.name.innerHTML = `<img src="/doublecome/file/downLoadFile.do?fileNo=${fileCode}"><span><span class="name">${friends.name}</span></span>`
   let countTag = $(`li[data-chat=${chat.person}] .count`);
   countTag.addClass("hideCount");
   countTag.attr("count", 0);

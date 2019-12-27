@@ -11,7 +11,7 @@
    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <div class="topbar">
 	<sec:authorize access="isAnonymous()">
-		<div style="width:1083px">
+		<div>
 			<span><a href="<c:url value="/user/loginForm.do" />">로그인</a></span>
 			<span><a href="<c:url value="/user/joinForm.do" />">회원가입</a></span>
 		</div>
@@ -21,7 +21,7 @@
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal.user" var="u" />
 			<div style="width : 1023px">
-				<span class="readsCount" readsCount data-id="${u.userEmail}">
+				<span class="readsCount" readsCount=0 data-id="${u.userEmail}">
 					<a href="javascript:popupOpen('<c:url value="/chatting/messenger.do?email=${u.userEmail}"/>')"><i class="far fa-comment-dots"></i>메세지</a>
 				</span>
 				<span>${u.userEmail}</span>
@@ -101,5 +101,6 @@
 		window.open(url,"",popOption);
 	}
 </script>
+
 <script src="<c:url value="/resources/js/common/header.js" />"></script>
 

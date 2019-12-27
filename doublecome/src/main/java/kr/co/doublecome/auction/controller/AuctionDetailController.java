@@ -184,7 +184,7 @@ public class AuctionDetailController {
 			String sysName = entry.getKey().split("/var/photo/upload/temp/")[1];
 			SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
 			String filePath = "auction" + sdf.format(new Date());
-			String path = "/var/photo/upload" + filePath;
+			String path = "/var/photo/upload/" + filePath;
 			File realPath = new File(path);
 			if(realPath.exists() == false) realPath.mkdirs();
 			File delFile = new File(entry.getKey());

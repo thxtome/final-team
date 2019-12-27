@@ -36,8 +36,6 @@ function searchAjax(e) {
 				let startPrice ="startPrice"
 				let endPrice = "endPrice"
 				priceChoice = $(option).data("value").split("-");
-				console.log(priceChoice[0])
-				console.log(priceChoice[1])
 				sendData += '"'+ startPrice + '"' + " : " + priceChoice[0]
 				+","+ '"'+ endPrice + '"' + " : " + priceChoice[1]				
 			} else if ($(option).data("name") == "limits") {
@@ -50,7 +48,10 @@ function searchAjax(e) {
 				bidCount = $(option).data("value").split("-");
 				sendData += '"'+ startBidCount+ '"' + " : " + bidCount[0]
 				+","+ '"'+ endBidCount + '"' + " : " + bidCount[1]				
-			}  else	{
+			} else if ($(option).data("name") == "searchKeyWord") {
+				let searchKeyWord = $(option).data("name") 
+				sendData += '"'+ searchKeyWord+ '"' + " : " + '"'+ $(option).data("value") + '"'
+			} else {
 				sendData = sendData + '"'+ $(option).data("name") + '"' + " : " + $(option).data("value")				
 			}
 			
@@ -59,8 +60,6 @@ function searchAjax(e) {
 			let startPrice ="startPrice"
 			let endPrice = "endPrice"
 			priceChoice = $(option).data("value").split("-");
-			console.log(priceChoice[0])
-			console.log(priceChoice[1])
 			sendData += ","+ '"'+ startPrice + '"' + " : " + priceChoice[0]
 			+","+ '"'+ endPrice + '"' + " : " + priceChoice[1]				
 		} else if ($(option).data("name") == "limits") {
@@ -73,7 +72,10 @@ function searchAjax(e) {
 			bidCount = $(option).data("value").split("-");
 			sendData += ","+ '"'+ startBidCount+ '"' + " : " + bidCount[0]
 			+","+ '"'+ endBidCount + '"' + " : " + bidCount[1]				
-		}  else	{
+		} else if ($(option).data("name") == "searchKeyWord") {
+			let searchKeyWord = $(option).data("name") 
+			sendData += "," + '"'+ searchKeyWord + '"'+ " : " + '"'+ $(option).data("value") + '"'
+		} else	{
 			sendData = sendData + "," + '"'+ $(option).data("name") + '"'+ " : " + $(option).data("value")				
 		}
 	}
@@ -82,7 +84,6 @@ function searchAjax(e) {
 		sendData += ","+ '"'+ 'pageNo' + '"' + " : " + '"'+ e + '"'
 	} else{		
 		e.preventDefault();		
-		console.log($(e.target).data("value"))
 		if ($(e.target).data("name") == "sorts" ){		
 			sendData += ","+ '"'+ $(e.target).data("name") + '"' + " : " + '"'+ $(e.target).data("value") + '"'
 		} else if ($(e.target)[0].name == "listSize") {
@@ -126,8 +127,8 @@ function makeAuctionlist(data) {
 			<div class="card box-shadow">
 				<a class="auction_list" href="/doublecome/auction/detailAuction.do?no=${list.auctionNo}&userEmail=${list.userEmail}">
 					<img class="card-img-top w-100" style="height: 250px;"
-						src="/doublecome/file/downLoadFile.do?fileNo=${list.fileNo}" />">
-					<p class="mb-1 m-1">${list.auctionTitle}</p>
+						src="/doublecome/file/downLoadFile.do?fileNo=${list.fileNo}" />
+					<p class="mb-1 m-1">${list.auctionTitle}</p>	
 					<p class="card-text m-1">${maxPrice}원</p>		
 					<div class="auction_condition loadtime">
 						<span class="text-left">입찰 ${list.bidCnt}건</span>
@@ -138,7 +139,6 @@ function makeAuctionlist(data) {
 		</div>
 		`
 	})
-	console.log("pr객체"+data.pr)
 	pg.print($("#content"),data.pr)	
 	return $auctionField
 }
@@ -157,8 +157,8 @@ $(document).on("click",".options", e => {
 		searchAjax(e);
 		for (let filter of arr) {
 		if ($(e.target).parent().data("value") == filter.dataset.value) {
-			$(filter).removeClass("selected");
-			$(filter).prev().removeClass("selected")
+				$(filter).removeClass("selected");
+				$(filter).prev().removeClass("selected")
 			}
 		}
 		return false;
@@ -183,9 +183,6 @@ $(document).on("click",".options", e => {
 
 function selectCheck(e) {
 	let $event = $(e.target);
-//	if ($event.attr("class").startsWith("category ") == false){
-//		return;
-//	}
 	let clz = $event.attr('class').replace(/cnkfilter/,"")
 	if (clz == "category  selected") return;
 	if ($event.data("selected") == true) {
@@ -200,7 +197,6 @@ function selectCheck(e) {
 		}
 	}
 	let chkArr = $("."+clz);
-	console.log(clz)
 	let arr = $(".options");
 	for (let filter of arr) {
 		for (let val of chkArr) {
@@ -269,4 +265,4 @@ pg.movePage($("#content"),(pageNo)=>{
 	searchAjax(pageNo)
 })
 
-//pg.print($("#content"))
+pg.print($("#content"))

@@ -29,7 +29,6 @@ public class AuctionServiceImpl implements AuctionService {
 		for(Auction auction : alist) {
 			list.add((Object)auction);
 		}
-		
 		int count = 0;
 		
 		if(!alist.isEmpty()) {
@@ -37,7 +36,6 @@ public class AuctionServiceImpl implements AuctionService {
 		}
 		ap.setList(list);
 		ap.setPr(new PageResult(search.getPageNo(), count, search.getListSize(), 10));
-		System.out.println("끝나는 페이지"+ap.getPr().getEndPage());;
 		return ap;
 	}
 }

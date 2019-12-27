@@ -30,9 +30,9 @@
                 				<c:forEach items="${chat}" var="chat" varStatus="loop">
 	                    		<c:choose>
 		                    		<c:when test="${chat.userEmailSeller eq email}">
-				                        <li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
+				                        <li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1 data-fileNo="${chat.fileNo}">
 				                        	<span class="count" count="${chat.readsSeller}">
-					                            <img src="<c:url value="/resources/images/macbook.jpg"/>" >
+					                            <img src="<c:url value="/file/downLoadFile.do?fileNo=${chat.fileNo}" />" >
 				                        	</span>
 						                    <span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
 				                            <c:choose>
@@ -48,9 +48,9 @@
 		                       			 </li>                    		
 		                    		</c:when>
 		                    		<c:otherwise>
-		                    			<li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=2>
+		                    			<li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=2 data-fileNo="${chat.fileNo }">
 				                        	<span class="count" count="${chat.readsBuyer}">
-					                            <img src="<c:url value="/resources/images/macbook.jpg"/>" >
+					                           <img src="<c:url value="/file/downLoadFile.do?fileNo=${chat.fileNo}" />" >
 				                        	</span>
 				                            <span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
 				                            <c:choose>
