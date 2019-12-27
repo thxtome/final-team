@@ -15,7 +15,7 @@
  *
  */
 
-var ws = new WebSocket("wss://" + "192.168.0.36:20443" + "/one2many");
+var ws = new WebSocket("wss://" + "doublecome.shop:20443" + "/one2many");
 
 var video;
 var webRtcPeer;
