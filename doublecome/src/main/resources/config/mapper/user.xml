@@ -43,8 +43,8 @@
 	</select>
 	
 	
-	<!-- 마이페이지 입찰 리스트 -입찰 가격 빅-->
-		<select id="isYours" parameterType="Auction" resultType="Auction">
+	<!-- 마이페이지 입찰 리스트 -입찰 가격 비교-->
+		<select id="isYours" parameterType="IsYours" resultType="IsYours">
 			select distinct max(bid_price) over() as bid_price, (select distinct max(bid_price) over() as maxPrice
 			from bid b
 			where auction_no = #{auctionNo}) as maxPrice
@@ -146,15 +146,6 @@ where b.user_email = 'doublegoo@naver.com'
 	</delete>
 	<!-- 회원 탈퇴 - 진행중인 판매 경매 체크 -->
 	<select id="checkAuction" parameterType="string"  resultType="Auction">
-		<!-- 
-		 select *, count(*) over()
-        from auction a
-	   inner join deal d
-		 on a.user_email = d.user_email_seller
-	 where a.user_email = #{userEmail}
-       and d.deal_condition = '1';
-		 -->
-		 
 		    select *
        from auction a
        where user_email = #{userEmail}

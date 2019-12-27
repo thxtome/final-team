@@ -146,7 +146,6 @@ inAvtiveBtn();
 $('.m-upload__preview').click( () => {	
 	Swal.fire({
         title: '사진을 지우시겠습니까',
-        /*text: "회원가입 혹은 로그인후 진행해주세요",*/
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

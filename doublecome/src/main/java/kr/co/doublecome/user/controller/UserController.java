@@ -1,9 +1,7 @@
 package kr.co.doublecome.user.controller;
 
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,15 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import kr.co.doublecome.common.service.FileService;
-import kr.co.doublecome.common.service.FileServiceImpl;
 import kr.co.doublecome.repository.vo.Auction;
+import kr.co.doublecome.repository.vo.IsYours;
 import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.repository.vo.UtilFile;
 import kr.co.doublecome.user.BO.NaverLoginBO;
@@ -272,7 +269,6 @@ public class UserController {
 	@RequestMapping("/userUpdate.do")
 	public String updateUser(User user, Principal p, HttpServletRequest req, HttpServletResponse res,
 			@RequestParam("file") MultipartFile file) throws Exception {
-		System.out.println(p.getClass() + " << Class");
 		User u = service.selectUserInfoByName(user.getUserEmail());
 		
 		//비밀번호 수정 
@@ -359,6 +355,16 @@ public class UserController {
 	public List<Auction> bidList(String email) throws Exception {
 		return service.bidList(email);
 	}
+	//입찰 리스트 - 입찰 가격 체크
+	@RequestMapping("/isYours.do")
+	@ResponseBody
+	public int isYours(IsYours iy) {
+		iy = service.isYours(iy);
+		if(iy.getMaxPrice() == iy.getBidPrice()) 
+		return 1;
+		else return 0; 
+	}
+
 
 	// 비밀번호 수정 패이지
 	@RequestMapping("/findPassForm.do")

@@ -50,13 +50,30 @@
 			}
 		}
 		
-		
+		function isYours(auctionNo) {
+			let auction = auctionNo;
+			let userEmail = $("#email").html()
+			$.ajax({
+				url:"/doublecome/user/isYours.do",
+				data: {
+					userEmail: userEmail,
+					auctionNo: auction
+					},
+				success:(r) => {
+					console.log(r, 'r')
+					if(r == 1)
+					$(`#${auction}`).attr('style', '')	
+					else 
+					$(`#${auction}`).attr('style', 'border: solid #DB1B3B 2px;border-radius: 5px;')
+				}
+			})
+		}
 		
 		
 		for(i = 0; i < result.length; i++){
 			console.log(result[i]);
 			$('#bidList').append(
-				`<div class="card_container${result[i].auctionCnt % 2}">
+				`<div id='${result[i].auctionNo}' class="card_container${result[i].auctionCnt % 2}">
 				<a id="aution" href="/doublecome/auction/detailAuction.do?no=${result[i].auctionNo}&userEmail=${result[i].userEmail}">
 					<img src="/doublecome/file/downLoadFile.do?fileNo=${result[i].fileNo}" alt="" class="card_image" >
 					<div class="aution_title"><div class="card_autionTitle">${result[i].auctionTitle}</div></div>
@@ -67,6 +84,7 @@
 			);
 
 			CountDownTimer(`${format(result[i].auctionLimitDate, "hms")}`, `remainTime${result[i].auctionCnt}`); 
+			isYours(`${result[i].auctionNo}`)
 		}	
 		
 	}
@@ -101,7 +119,7 @@ $(document).on("click", "#deleteBtn", () => {
         		url:"/doublecome/user/checkAuction.do",
         		data: {email: $("#email").html()},
         		success: (r) => {
-        			console.log()
+        			console.log(r)
         			if(r.length < 1){        				
         				$("#d").submit()
         			}else{
