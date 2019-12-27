@@ -66,7 +66,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 								</dd>
 							</dl>
 						</dd>
-						<dt class="col-xs-3 menu fileUp">파일첨부<i class="fas fa-question-circle fa-sm fileUpIcon"></i></dt>
+						<dt class="col-xs-3 menu fileUp">파일첨부<i class="glyphicon glyphicon-exclamation-sign fileUpIcon"></i></dt>
 						<dd class="col-xs-9 attach">
 							<dl class="uploadWrap">
   							<p class="upload_btn"><i class="glyphicon glyphicon-picture uploadPhoto"></i> 사진</p>

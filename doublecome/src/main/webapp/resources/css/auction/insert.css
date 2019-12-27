@@ -106,10 +106,10 @@ a:visited {
 	cursor: pointer;
 }
 .hoverNotification {
-    display: none;
-    position: absolute;
-    top: 51%;
-    left: 13%;
+	display: none;
+    position: relative;
+    bottom: 716px;
+    left: 180px;
     background: #eee;
     color: black;
     width: 126px;
@@ -122,7 +122,7 @@ a:visited {
 }
 .fileUpIcon {
 	position: relative;
-    top: -5px;
+    top: -5px !important;
     left: 3px;
 }
 .img_wrap {
@@ -179,4 +179,7 @@ img {
 .uploadWrap {
 	padding: 0 !important;
 	width: 46px;
+}
+.note-toolbar {
+	z-index: 4 !important;
 }

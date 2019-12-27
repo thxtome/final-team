@@ -2,7 +2,6 @@ function auctionCount($target, limitDate) {
 	let target_date = new Date(limitDate);
 	let days, hours, minutes, seconds;
 	
-	console.log(limitDate)
 	// update the tag with id "countdown" every 1 second
 	setInterval(function() {
 	

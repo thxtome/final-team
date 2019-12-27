@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.doublecome.repository.vo.Auction;
+import kr.co.doublecome.repository.vo.IsYours;
 import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.repository.vo.UtilFile;
 
@@ -24,6 +25,7 @@ public interface UserService {
 	public String findPass(String email);
 
 	public List<Auction> bidList(String email);
+	public IsYours isYours(IsYours iy);
 	
 	public int checkEmail(String userEmail);
 	public int checkPhnum(String userPhnum);

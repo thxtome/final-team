@@ -268,7 +268,7 @@ function makeReviewList (result) {
 									<div class="review_contents_top row">
 										<div class="review_top col-xs-10">
 											<div class="col-xs-3">
-												<img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+												<img src="/doublecome/file/downLoadFile.do?fileNo=${review.fileGroupCode}"
 													class="review_img img-rounded img-fluid" />
 											</div>
 											<div class="col-xs-7 review_contents_title">

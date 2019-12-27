@@ -172,7 +172,7 @@ public class AuctionDetailController {
 	@ResponseBody
 	public void fileTag(String data, UtilFile file) throws Exception {
 		int fileGroupCode = service.maxFileGroupCode() + 1;
-		System.out.println("경매 넣기" + fileGroupCode);
+		System.out.println("파일 등록" + fileGroupCode);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(data);
 		JsonObject obj = element.getAsJsonObject(); 
@@ -200,7 +200,7 @@ public class AuctionDetailController {
 			file.setFilePath(path);
 			file.setFileSystemName(sysName);
 			service.addFile(file);
-			
+			System.out.println("파일넣었음" + fileGroupCode);
 			if (element.getAsJsonObject().get(entry.getKey()).isJsonArray()) {
 				JsonArray jsonArray = obj.getAsJsonArray(entry.getKey());
 				for (int i = 0; i < jsonArray.size(); i++) {
