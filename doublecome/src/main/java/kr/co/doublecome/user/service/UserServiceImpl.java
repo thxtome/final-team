@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.doublecome.repository.mapper.UserMapper;
 import kr.co.doublecome.repository.vo.Auction;
+import kr.co.doublecome.repository.vo.IsYours;
 import kr.co.doublecome.repository.vo.User;
 
 @Service
@@ -59,6 +60,11 @@ public class UserServiceImpl implements UserService{
 	public List<Auction> bidList(String email) {	
 		return mapper.bidList(email);
 	}
+	//마이페이지 - 입찰 가격 체크
+	@Override
+	public IsYours isYours(IsYours iy) {
+		return mapper.isYours(iy);
+	}
 
 	
 	//이메일 찾기
@@ -95,6 +101,7 @@ public class UserServiceImpl implements UserService{
 	public void updateUserDefaultProfile(String email) {
 		mapper.updateUserDefaultProfile(email);
 	}
+	
 
 
 
