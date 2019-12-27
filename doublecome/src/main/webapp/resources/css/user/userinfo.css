@@ -83,7 +83,7 @@ td svg, span svg{
 
 #deleteBtn{
 	z-index: 100;
-	
+	cursor: pointer;
 	position: absolute;
 	width: 120px;
 	height: 40px;
@@ -101,7 +101,7 @@ td svg, span svg{
 
 #updateFormBtn{
 	z-index: 100;
-	
+	cursor: pointer;
 	position: absolute;
 	width: 120px;
 	height: 40px;
@@ -119,7 +119,7 @@ td svg, span svg{
 
 #historyGoBtn{
 		z-index: 100;
-	 	
+	 	cursor: pointer;
 		position: absolute;
 		width: 120px;
 		height: 40px;
