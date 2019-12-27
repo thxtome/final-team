@@ -96,7 +96,6 @@ public class HistoryServiceImpl implements HistoryService{
 	public void updateReview(Review review) {
 		review.setType("update");
 		mapper.updateReview(review);
-		System.out.println(review);
 		mapper.updateUserReviewInfo(review);
 	}
 	public void dealComplete(Deal deal) {

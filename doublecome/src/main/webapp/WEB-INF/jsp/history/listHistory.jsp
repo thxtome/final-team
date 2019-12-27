@@ -141,7 +141,7 @@ if (request.getProtocol().equals("HTTP/1.1"))
 									<input type="hidden" name = "reviewScore" value="" />
 									<c:forEach var="r" begin="1" end="10">
 									<span class="scoreSpan">
-										<label class="scoreLabel" for="reviewScore${r}" data-no="${r}" >
+										<label class="scoreLabel" id="reviewScore${r}" for="reviewScore${r}" data-no="${r}" >
 										<i class='fas fa-star regitStar'></i>${r}
 										</label>
 									</span>

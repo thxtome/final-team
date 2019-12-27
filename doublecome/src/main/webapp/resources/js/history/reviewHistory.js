@@ -342,19 +342,19 @@ $("body").on("click", ".reviewBtn", (e) => {
 });
 
 //후기 수정
-$("body").on("click", ".editBtn > button", (e) => {
-	$.get({
-		url: "editReview.do",
-		data : {
-			reviewNo: $(".regitbtn").data("no"),
-			reviewReceiver: $(".regitbtn").data("receiver")
-		},
-		success: function() {
-			success("수정");
-			setTimeout("location.reload()", 1500);
-		}
-	});
-});
+//$("body").on("click", ".editBtn > button", (e) => {
+//	$.get({
+//		url: "editReview.do",
+//		data : {
+//			reviewNo: $(".regitbtn").data("no"),
+//			reviewReceiver: $(".regitbtn").data("receiver")
+//		},
+//		success: function() {
+//			success("수정");
+//			setTimeout("location.reload()", 1500);
+//		}
+//	});
+//});
 
 // 후기 수정 폼
 $("body").on("click", ".editreview", (e) => {
@@ -366,7 +366,8 @@ $("body").on("click", ".editreview", (e) => {
 		success: result => {
 			$("#reviewForm > form").attr("action","editReview.do");
 			$("#auctionTitle").html(result.auctionTitle);
-			$(`#reviewScore${result.reviewScore}`).next("label").find(".fa-star").addClass("scoreChoice");
+			$('input:hidden[name="reviewScore"]').val(`${result.reviewScore}`);
+			$(`#reviewScore${result.reviewScore}`).closest(".scoreSpan").find(".fa-star").addClass("scoreChoice");
 			$(`#reviewScore${result.reviewScore}`).prop("checked", true);
 			$(".reviewTitleDiv input").val(result.reviewTitle);
 			$('#summernote').summernote('code', result.reviewContent);
@@ -389,8 +390,19 @@ $(".regitbtn").click((e) => {
 	} else if($(".note-editable").html() == ""){
 		Swal.fire("후기를 입력해주세요.");
 	} else {
-		Swal.fire("후기가 등록되었습니다.");
-		$("#rform").submit();
+		if($(".regitbtn > button").html() == "등록"){
+			Swal.fire("후기가 등록되었습니다.").then((result) => {
+		        if (result.value) {
+		        	$("#rform").submit();
+		        }
+		      })
+		} else if($(".regitbtn > button").html() == "수정"){
+			Swal.fire("후기가 수정되었습니다.").then((result) => {
+		        if (result.value) {
+		        	$("#rform").submit();
+		        }
+		      })
+		}
 	}
 });
 $("body").on("click", ".reviewModalClose", (e) => {
