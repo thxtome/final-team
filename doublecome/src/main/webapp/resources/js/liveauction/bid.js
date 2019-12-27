@@ -2,7 +2,7 @@ let bidWs = null;
 
 $(() => {
   // 접속할 주소를 설정 : 웹소켓 핸들러 구현 클래스와 연결된 URL
-  bidWs = new WebSocket("wss://doublecome.shop:443/doublecome/ws/bid.do");
+  bidWs = new WebSocket(`wss://doublecome.shop:443/doublecome/ws/bid.do?auctionNo=${auctionNo}`);
   bidWs.onopen = () => {
     console.log("연결성공");
   };
