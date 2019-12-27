@@ -50,7 +50,7 @@ function searchAjax(e) {
 				+","+ '"'+ endBidCount + '"' + " : " + bidCount[1]				
 			} else if ($(option).data("name") == "searchKeyWord") {
 				let searchKeyWord = $(option).data("name") 
-				sendData += '"'+ searchKeyWord+ '"' + " : " + $(option).data("value")
+				sendData += '"'+ searchKeyWord+ '"' + " : " + '"'+ $(option).data("value") + '"'
 			} else {
 				sendData = sendData + '"'+ $(option).data("name") + '"' + " : " + $(option).data("value")				
 			}
@@ -74,7 +74,7 @@ function searchAjax(e) {
 			+","+ '"'+ endBidCount + '"' + " : " + bidCount[1]				
 		} else if ($(option).data("name") == "searchKeyWord") {
 			let searchKeyWord = $(option).data("name") 
-			sendData += "," + '"'+ searchKeyWord + '"'+ " : " + $(option).data("value")
+			sendData += "," + '"'+ searchKeyWord + '"'+ " : " + '"'+ $(option).data("value") + '"'
 		} else	{
 			sendData = sendData + "," + '"'+ $(option).data("name") + '"'+ " : " + $(option).data("value")				
 		}
