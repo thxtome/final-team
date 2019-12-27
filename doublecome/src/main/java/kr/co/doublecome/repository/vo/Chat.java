@@ -24,4 +24,5 @@ public class Chat {
 	private String auctionTitle;
 	private int fileGroupCode;
 	private int userType;
+	private int fileNo;
 }

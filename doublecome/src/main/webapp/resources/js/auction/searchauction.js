@@ -157,8 +157,8 @@ $(document).on("click",".options", e => {
 		searchAjax(e);
 		for (let filter of arr) {
 		if ($(e.target).parent().data("value") == filter.dataset.value) {
-			$(filter).removeClass("selected");
-			$(filter).prev().removeClass("selected")
+				$(filter).removeClass("selected");
+				$(filter).prev().removeClass("selected")
 			}
 		}
 		return false;
@@ -197,7 +197,6 @@ function selectCheck(e) {
 		}
 	}
 	let chkArr = $("."+clz);
-	console.log(clz)
 	let arr = $(".options");
 	for (let filter of arr) {
 		for (let val of chkArr) {
