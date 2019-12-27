@@ -76,10 +76,17 @@ $(".start, .buy").click((e) => {
 	   $($(e.target)).val("")
 })
 
-$(".fileUpIcon").hover(() => {
+//$(".fileUp").hover(() => {
+//	$(".hoverNotification").show();
+//},() => {
+//  $(".hoverNotification").hide();
+//})
+
+$(".fileUpIcon").mouseenter(() => {
 	$(".hoverNotification").show();
-},() => {
-  $(".hoverNotification").hide();
+})
+$(".fileUpIcon").mouseleave(() => {
+	$(".hoverNotification").hide();
 })
 
 $(".button").click(() => {
