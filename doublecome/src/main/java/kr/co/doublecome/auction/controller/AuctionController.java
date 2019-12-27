@@ -35,6 +35,8 @@ public class AuctionController {
 			model.addAttribute("selectCategory",category);
 			model.addAttribute("category",service.listCategory());
 			model.addAttribute("auctionlist", ap.getList());
+			System.out.println("끝나는 페이지"+ap.getPr().getEndPage());
+			
 		} else {
 			AjaxPage ap = service.auctionList(search);
 			model.addAttribute("pr", ap.getPr());
@@ -46,8 +48,8 @@ public class AuctionController {
 	@RequestMapping("/searchActionList.do")
 	@ResponseBody
 	public AjaxPage auctionSearchList(@RequestBody SearchAuction search) {
-		System.out.println(search.getListSize());
-		System.out.println(search.getPageNo());
+		System.out.println(search.getSearchKeyWord());
+		System.out.println(search.getSorts());
 		return service.auctionList(search);
 	}
 }

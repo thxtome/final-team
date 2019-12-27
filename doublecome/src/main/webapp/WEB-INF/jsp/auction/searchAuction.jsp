@@ -166,8 +166,21 @@
   <script src="<c:url value="/resources/js/auction/searchauction.js" />"></script>
   <script>
 	  $(document).ready(e => {
+		  let searchKeyWord = `${searchKeyWord}`;
+		  if (searchKeyWord != "") {
+			  $("#selectbar").append(
+				`<a href="/doublecome/auction/searchActionList.do" 
+					data-name="searchKeyWord" 
+					data-value=${searchKeyWord}
+					class="options selected searchKeyWord "
+					data-selected="true">
+					${searchKeyWord}
+						<span class="del"></span>
+				</a>
+			`)
+		  }
 	  let cateCode = `${selectCategory}`
-	  if (cateCode != null) {
+	  if (cateCode != "") {
 		$("#selectbar").append(
 			`<a href="/doublecome/auction/searchActionList.do" 
 			data-name="categoryCode" 
@@ -192,22 +205,8 @@
 				}
 			}
 		}
-	  } else {
-		  keyWordMk(${searchKeyWord})
-	  }
+	  } 
 	})
-	function keyWordMk(keyWord) {
-		alert(keyWord)
-  		$("#selectbar").append(
- 			  `<a href="/doublecome/auction/searchActionList.do" 
- 				data-name="searchKeyWord" 
- 				data-value=
- 				class="options selected category "
- 				data-selected="true">
- 					<span class="del"></span>
- 				</a>
-				`)
-	}
   </script>
   <script src="<c:url value="/resources/js/auction/accordion.js" />"></script>
 </body>
