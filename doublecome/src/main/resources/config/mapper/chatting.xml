@@ -12,6 +12,7 @@
 		    b.covst_content,
 		    b.covst_reg_date,
             d.auction_title,
+            d.file_no,
 		    (select file_group_Code
 			   from user
 			  where user_email = c.user_email_seller
@@ -38,10 +39,17 @@
 						 on con.covst_no = inn.maxNo
 		              ) as b
 		    on c.chat_no = b.chat_no
-		  inner join (select deal_no, del.auction_no, auction_title
+		  inner join (select distinct 
+		  			  deal_no, 
+		  			  del.auction_no, 
+		  			  auction_title,
+		  			  max(f.file_no) over (partition by f.file_group_code) as file_no
 						from deal del
 					   inner join auction auc
-						on del.auction_no = auc.auction_no) as d
+						on del.auction_no = auc.auction_no
+					   inner join file f
+					      on f.file_group_Code = auc.file_group_code
+						) as d
 				on d.deal_no = c.deal_no
 		  where  (user_email_seller like #{email}
 		     or user_email_buyer like #{email})
