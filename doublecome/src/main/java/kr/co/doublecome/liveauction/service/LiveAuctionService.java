@@ -6,5 +6,4 @@ public interface LiveAuctionService {
 	Auction retrieveAuction(int auctionNo);
 	String startOnAir(int auctionNo);
 	void closeOnAir(int auctionNo);
-
 }
