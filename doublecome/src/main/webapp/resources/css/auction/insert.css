@@ -180,3 +180,6 @@ img {
 	padding: 0 !important;
 	width: 46px;
 }
+.note-toolbar {
+	z-index: 4 !important;
+}
