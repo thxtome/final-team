@@ -104,8 +104,10 @@ public class AuctionDetailController {
 		auction.setAuctionBuyNow(auction.getAuctionBuyNow().replaceAll(",", ""));
 		auction.setAuctionMinPrice(auction.getAuctionMinPrice().replaceAll(",", ""));
 		auction.setFileGroupCode(groupCode);
+		//utc시간으로 변경
+		Date limitdate = auction.getAuctionLimitDate();
+		auction.setAuctionLimitDate(new Date(limitdate.getTime() - 1000*60*60*9));
 		service.addAuction(auction);
-		
 		return "redirect:/main.do";
 	}
 	
