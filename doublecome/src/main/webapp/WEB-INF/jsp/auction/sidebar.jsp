@@ -279,7 +279,7 @@
 									src="<c:url value="/file/downLoadFile.do?fileNo=${f.fileNo}" />"></a>
 								<c:forEach items="${tag}" var="t">
 								<c:if test="${f.fileNo eq t.fileNo}">
-								<div class="tagTextBox" style="top: ${t.tagXCor}%; left: ${t.tagYCor}%;">
+								<div class="tagTextBox" style="top: ${t.tagYCor}%; left: ${t.tagXCor}%;">
 									${t.tagContent}
 								</div>
 								</c:if>
