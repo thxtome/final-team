@@ -430,8 +430,7 @@ $('#summernote').summernote(
 		    toolbar : ['insert', ['picture']],
 		    popover: {},
 		    focus: true
-//		    callbacks: {
-//		    	
+		    	
 //		    	onImageUpload: function (files, editor, welEditable) {
 //		        for (var i = files.length - 1; i >= 0; i--) {
 //		        	console.log(files[i]);
