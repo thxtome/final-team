@@ -6,7 +6,6 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.doublecome.repository.mapper.FileMapper;
-import kr.co.doublecome.repository.mapper.UserMapper;
 import kr.co.doublecome.repository.vo.User;
 import kr.co.doublecome.repository.vo.UtilFile;
 
@@ -30,11 +28,6 @@ public class FileServiceImpl implements FileService{
 
 	@Autowired
 	private FileMapper mapper;
-	
-	@Autowired
-	private UserMapper userMapper;
-	
-	
 	
 	public UtilFile uploadFile(UtilFile uFile) {
 		SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
