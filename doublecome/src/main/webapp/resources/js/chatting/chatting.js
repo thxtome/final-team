@@ -150,7 +150,7 @@ function withchat(message) {
 	})
 }
 $(() => {
-	ws = new WebSocket("wss://doublecome.shop:443/doublecome/ws/chatting.do");	
+	ws = new WebSocket("wss://192.168.0.36:8443/doublecome/chatting.do");	
 	ws.onopen = () => {
 		console.log("채팅 접속")
 	};
@@ -271,7 +271,7 @@ function makeSearchList(data) {
 				$peopleArea.append(`
 						<li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
 						<span class="${showCount}" count="${chat.readsSeller}">
-						<img src="/doublecome/resources/images/macbook.jpg">
+						<img src="/doublecome/file/downLoadFile.do?fileNo=${chat.fileNo}">
 						</span>
 						<span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
 						<span class="time"></span>			                            				                            	
@@ -283,7 +283,7 @@ function makeSearchList(data) {
 				$peopleArea.append(`
 						<li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
 						<span class="${showCount}" count="${chat.readsSeller}">
-						<img src="/doublecome/resources/images/macbook.jpg">
+						<img src="/doublecome/file/downLoadFile.do?fileNo=${chat.fileNo}">
 						</span>
 						<span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
 						<span class="time">${regDate}</span>		                            	
@@ -297,7 +297,7 @@ function makeSearchList(data) {
 				$peopleArea.append(`
 						<li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
 						<span class="${showCount}" count="${chat.readsBuyer}">
-						<img src="/doublecome/resources/images/macbook.jpg">
+						<img src="/doublecome/file/downLoadFile.do?fileNo=${chat.fileNo}">
 						</span>
 						<span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
 						<span class="time"></span>			                            				                            	
@@ -309,7 +309,7 @@ function makeSearchList(data) {
 				$peopleArea.append(`
 						<li class="person" data-chat="person${chat.chatNo}" data-file-code="${chat.fileGroupCode}" data-type=1>
 						<span class="${showCount}" count="${chat.readsBuyer}">
-						<img src="/doublecome/resources/images/macbook.jpg">
+						<img src="/doublecome/file/downLoadFile.do?fileNo=${chat.fileNo}">
 						</span>
 						<span class="name" data-title="${chat.auctionTitle}" data-no="${chat.chatNo}">${chat.auctionTitle}</span>
 						<span class="time">${regDate}</span>		                            	

@@ -28,7 +28,6 @@ function searchAjax(e) {
 	let ele = e.target;
 	let flag = true;
 	let priceChoice = [];
-	let limits = [];
 	
 	for (let option of filter){
 		if (flag == true) {
@@ -40,7 +39,10 @@ function searchAjax(e) {
 				+","+ '"'+ endPrice + '"' + " : " + priceChoice[1]				
 			} else if ($(option).data("name") == "limits") {
 				let startLimit ="startLimit"
-				limit = $(option).data("value");
+				let limit = $(option).data("value");
+				if (limit == "1day") limit = "1";
+				else if (limit == "2day") limit = "2";
+				else if (limit == "3day") limit = "3";
 				sendData += '"'+ startLimit+ '"' + " : " + limit
 			} else if ($(option).data("name") == "bidCount") {
 				let startBidCount ="startBidCount"
@@ -64,7 +66,10 @@ function searchAjax(e) {
 			+","+ '"'+ endPrice + '"' + " : " + priceChoice[1]				
 		} else if ($(option).data("name") == "limits") {
 			let startLimit ="startLimit"
-			limit = $(option).data("value");
+			let limit = $(option).data("value");
+			if (limit == "1day") limit = "1";
+			else if (limit == "2day") limit = "2";
+			else if (limit == "3day") limit = "3";
 			sendData += ","+ '"'+ startLimit+ '"' + " : " + limit
 		} else if ($(option).data("name") == "bidCount") {
 			let startBidCount ="startBidCount"
