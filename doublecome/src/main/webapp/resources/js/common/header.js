@@ -11,13 +11,11 @@ $("#movetomain").click(() => {
 $(() => {
 	ws = new WebSocket("wss://doublecome.shop:443/doublecome/ws/chatting.do");	
 	ws.onopen = () => {
-		console.log("채팅 접속")
 	};
 	
 	ws.onmessage = (evt) => {
 	  let email = $(".topbar .readsCount").data("id");
 	  let sendData = {'email':email}
-	  console.log(sendData)
 	  let options = {
 			url : "/doublecome/chatting/readsCount.do",
 			type : "POST",
@@ -66,7 +64,6 @@ function readsUpdate(data) {
 	  }
 	  let readsCount = sellerCount + buyerCount;
 	  $(".topbar .readsCount").attr("readsCount", readsCount);
-	  console.log($(".topbar .readsCount").attr("readsCount"))
 	  if ($(".topbar .readsCount").attr("readsCount") == 0) {
 		  $(".topbar .readsCount").addClass("hideCount")
 	  } else {
@@ -78,7 +75,6 @@ $(".topContent .searchField").keypress((e) =>{
 	if ($(e.target).val() != null){
 		if(e.keyCode == 13) {
 			let value = $(e.target).val();
-			console.log(value)
 			location.href = `/doublecome/auction/searchAuction.do?searchKeyWord=${value}`
 		}
 	}

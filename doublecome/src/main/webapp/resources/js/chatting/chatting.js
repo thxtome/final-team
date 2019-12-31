@@ -143,16 +143,13 @@ function insertData () {
 }
 
 function withchat(message) {
-	console.log("widthchat : " + message)
 	$.each(message, (index, ele) => {
-		console.log(ele)
 		$(ele).text("");
 	})
 }
 $(() => {
 	ws = new WebSocket("wss://192.168.0.36:8443/doublecome/chatting.do");	
 	ws.onopen = () => {
-		console.log("채팅 접속")
 	};
 	
 	
@@ -208,7 +205,6 @@ $(() => {
 			}
 		} else if(data.dataType == 2) {
 			let checkCnt = $(".right_field .bubble.me span");
-			console.log(checkCnt)
 			$.each(checkCnt, (index, ele) => {
 				$(ele).text("");
 			})
@@ -253,7 +249,6 @@ function nowDate() {
 	return time;
 }
 function makeSearchList(data) {
-	console.log("데이터 값" + data)
 	$peopleArea = $("<ul class='people'></ul>")
 	if (data.length == 0){
 		return $peopleArea.html(`
