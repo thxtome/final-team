@@ -16,6 +16,7 @@
 	href="<c:url value="/resources/css/common/normalize.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/auction/bootstrap.min.css"/>">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/auction/side button.css"/>">
@@ -230,7 +231,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 		let email = '${auction.userEmail}';
 		let id = '${log.userEmail}';
 	</script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	<script src="<c:url value="/resources/js/auction/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/js/auction/loopcounter.js" />"></script>

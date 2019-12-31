@@ -20,7 +20,7 @@
 		<!--인증이 됐을 때  -->
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal.user" var="u" />
-			<div style="width : 1023px">
+			<div>
 				<span class="readsCount" readsCount=0 data-id="${u.userEmail}">
 					<a href="javascript:popupOpen('<c:url value="/chatting/messenger.do?email=${u.userEmail}"/>')"><i class="far fa-comment-dots"></i>메세지</a>
 				</span>

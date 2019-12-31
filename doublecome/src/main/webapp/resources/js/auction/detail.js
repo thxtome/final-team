@@ -2,7 +2,6 @@ let rPageNo = 1; //판매자 후기
 let reviewCnt = 0;
 let limit = new Date($('.counter-class').data('date'));
 let now = new Date($('.counter-class').data('now')) 
-limit.setHours(limit.getHours() + 12)
 //해당글 리밋시간 지날시 모든이벤트 off
 $(document).ready(() => {
 	if(limit.getTime() < now.getTime()) {

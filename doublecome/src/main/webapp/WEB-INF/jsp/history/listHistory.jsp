@@ -37,14 +37,14 @@ if (request.getProtocol().equals("HTTP/1.1"))
 			<div id="myDeal">MY거래</div>
 			<div data-location="purchaseHead" id="purchaseDeal">
 				<span>구매내역</span>
-				<span>${userHistory.buyCnt}</span> <span>회</span>
+				<span>${userHistory.buyCnt}</span> <span>개</span>
 			</div>
 			<div data-location="salesHead" id="salesDeal">
 				<span>판매내역</span>
-				<span>${userHistory.sellCnt}</span> <span>회</span>
+				<span>${userHistory.sellCnt}</span> <span>개</span>
 			</div>
 			<div data-location="reviewHead" id="reviewDeal">
-				<span>후기</span>
+				<span>받은 후기</span>
 				<span>${userHistory.userReviewCnt}</span> <span>개</span>
 			</div>
 		</div>

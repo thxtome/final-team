@@ -106,17 +106,7 @@ function groupMessage(dataObj){
 	        $(ele).text(dataObj.maxPrice);
 	      });
 	    } else {
-	      $(".auctionInfo").html(
-	        $(`      <div style="width: 100%;">
-	        <h2>즉시구매로</h2>
-	      </div>
-	      <div style="width: 100%;">
-	        <h2>경매종료</h2>
-	      </div>`)
-	      );
-
-	      
-	      $(".realTModal").remove();
+	      endAuction("즉시 구매로");
 
 	      $bidSpace = $(".bidSpace");
 	      $bid = $(`<div class="bid">
@@ -158,6 +148,18 @@ function checkPrice($bid) {
 	 alert("최고 입찰가보다 큰 금액을 입력해주세요.");
 	 $bid.val("");
 	 return false;
+}
+
+function endAuction(msg){
+    $(".auctionInfo").html(
+	        $(`<div style="width: 100%;">
+	        <h2>${msg}</h2>
+	      </div>
+	      <div style="width: 100%;">
+	        <h2>경매종료</h2>
+	      </div>`)
+	      );
+	$(".realTModal").remove();
 }
 
 
