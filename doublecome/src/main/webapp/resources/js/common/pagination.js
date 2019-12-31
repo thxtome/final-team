@@ -56,7 +56,6 @@ let pg = {print: print,
             if(next == true) {
                 $pageContent.append($(`<div class="pageArrowNext" data-pageNo=${endPage+1}><i class="fas fa-chevron-right"></i></div>`));
             }
-            console.log($pageContent)
             $ele.find(".pagination").html($pageContent)
         }
         

@@ -319,17 +319,31 @@ function success(msg){
 
 // 후기 삭제 ajax
 $("body").on("click", ".delreview", (e) => {
-	$.get({
-		url: "removeReview.do",
-		data : {
-			reviewNo: $(e.target).data("no"),
-			reviewReceiver: $(e.target).data("receiver")
-		},
-		success: function() {
-			success("삭제");
-			setTimeout("location.reload()", 1500);
-		}
-	});
+	Swal.fire({
+		  title: `삭제 하시겠습니까?`,
+		  text: `삭제하신 후에는 복구가 불가능합니다.`,
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '확인',
+		  cancelButtonText: '취소'
+			  
+		}).then((result) => {
+	        if (result.value) {
+	        	$.get({
+	        		url: "removeReview.do",
+	        		data : {
+	        			reviewNo: $(e.target).data("no"),
+	        			reviewReceiver: $(e.target).data("receiver")
+	        		},
+	        		success: function() {
+	        			success("삭제");
+	        			setTimeout("location.reload()", 1500);
+	        		}
+	        	});
+	        }
+		})
 });
 
 let $addReviewModal = $("#addReviewModal");
@@ -492,9 +506,7 @@ $("body").on("click", ".scoreLabel", (e) => {
 });
 
 let myInfo = $("#myInfo");
-console.log(myInfo.offset().left + 930);
 $("#moveButton").css("left", myInfo.offset().left + 930);
-console.log($("#moveButton").css("left"));
 // 페이지 상단으로 이동
 $("#toTheTop").click((e) => {
 	let htmlOffset = jQuery( 'html' ).offset();

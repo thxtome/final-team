@@ -11,7 +11,6 @@ $("#movetomain").click(() => {
 $(() => {
 	ws = new WebSocket("wss://192.168.0.36:8443/doublecome/chatting.do");	
 	ws.onopen = () => {
-		console.log("채팅 접속")
 	};
 	
 	ws.onmessage = (evt) => {
@@ -60,15 +59,12 @@ function readsCount(data) {
 	 let sellerCount = 0;
 	  let buyerCount = 0;
 	  if (data.readsSeller != 0) {
-		  console.log(data.readsSeller)
 		  sellerCount = data.readsSeller;
 	  }
 	  if (data.readsBuyer != 0) {
-		  console.log(data.readsBuyer)
 		  buyerCount = data.readsBuyer;
 	  }
 	  let readsCount = sellerCount + buyerCount;
-	  console.log(readsCount)
 	  $(".topbar .readsCount").attr("readsCount", readsCount);
 	  if ($(".topbar .readsCount").attr("readsCount")) {
 		  $(".topbar .readsCount").addClass("hideCount")
@@ -80,7 +76,6 @@ $(".topContent .searchField").keypress((e) =>{
 	if ($(e.target).val() != null){
 		if(e.keyCode == 13) {
 			let value = $(e.target).val();
-			console.log(value)
 			location.href = `/doublecome/auction/searchAuction.do?searchKeyWord=${value}`
 		}
 	}
