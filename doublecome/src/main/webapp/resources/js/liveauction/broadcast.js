@@ -61,11 +61,11 @@ window.onbeforeunload = function() {
 	if(type == 'presenter'){
 		closeBroadCast();
 		setTimeout(() => {
-			alert("방송이 종료되었습니다.")		
+			Swal.fire("방송이 종료되었습니다.")		
 		}, 0);
 	}
 	
-		ws.close();
+    ws.close();
 	
 };
 

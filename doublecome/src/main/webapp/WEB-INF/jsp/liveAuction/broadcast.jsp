@@ -124,6 +124,7 @@
 		let type = '${type}'
 		let auctionNo = ${auction.auctionNo}
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	<script src="<c:url value="/resources/js/auction/loopcounter.js" />"></script>
 	<script src="<c:url value="/resources/js/liveauction/chat.js"/>"></script>
 	<script src="<c:url value="/resources/js/liveauction/bid.js"/>"></script>

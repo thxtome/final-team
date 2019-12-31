@@ -11,7 +11,7 @@
    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <div class="topbar">
 	<sec:authorize access="isAnonymous()">
-		<div style="width:1083px">
+		<div>
 			<span><a href="<c:url value="/user/loginForm.do" />">로그인</a></span>
 			<span><a href="<c:url value="/user/joinForm.do" />">회원가입</a></span>
 		</div>
