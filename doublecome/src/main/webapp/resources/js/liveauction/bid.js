@@ -50,10 +50,7 @@ $("#sendBidBtn").click(() => {
 });
 
 $("#sendPurchaseBtn").click(() => {
-	
-  if (confirm("즉시구매하시겠습니까?")) {
-    purchase();
-  }
+	swalConfirm("즉시구매하시겠습니까?",purchase)  
 });
 
 // 입찰알림 삭제
