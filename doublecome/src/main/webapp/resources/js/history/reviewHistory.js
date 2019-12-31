@@ -319,17 +319,31 @@ function success(msg){
 
 // 후기 삭제 ajax
 $("body").on("click", ".delreview", (e) => {
-	$.get({
-		url: "removeReview.do",
-		data : {
-			reviewNo: $(e.target).data("no"),
-			reviewReceiver: $(e.target).data("receiver")
-		},
-		success: function() {
-			success("삭제");
-			setTimeout("location.reload()", 1500);
-		}
-	});
+	Swal.fire({
+		  title: `삭제 하시겠습니까?`,
+		  text: `삭제하신 후에는 복구가 불가능합니다.`,
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '확인',
+		  cancelButtonText: '취소'
+			  
+		}).then((result) => {
+	        if (result.value) {
+	        	$.get({
+	        		url: "removeReview.do",
+	        		data : {
+	        			reviewNo: $(e.target).data("no"),
+	        			reviewReceiver: $(e.target).data("receiver")
+	        		},
+	        		success: function() {
+	        			success("삭제");
+	        			setTimeout("location.reload()", 1500);
+	        		}
+	        	});
+	        }
+		})
 });
 
 let $addReviewModal = $("#addReviewModal");
@@ -342,19 +356,19 @@ $("body").on("click", ".reviewBtn", (e) => {
 });
 
 //후기 수정
-$("body").on("click", ".editBtn > button", (e) => {
-	$.get({
-		url: "editReview.do",
-		data : {
-			reviewNo: $(".regitbtn").data("no"),
-			reviewReceiver: $(".regitbtn").data("receiver")
-		},
-		success: function() {
-			success("수정");
-			setTimeout("location.reload()", 1500);
-		}
-	});
-});
+//$("body").on("click", ".editBtn > button", (e) => {
+//	$.get({
+//		url: "editReview.do",
+//		data : {
+//			reviewNo: $(".regitbtn").data("no"),
+//			reviewReceiver: $(".regitbtn").data("receiver")
+//		},
+//		success: function() {
+//			success("수정");
+//			setTimeout("location.reload()", 1500);
+//		}
+//	});
+//});
 
 // 후기 수정 폼
 $("body").on("click", ".editreview", (e) => {
@@ -366,7 +380,8 @@ $("body").on("click", ".editreview", (e) => {
 		success: result => {
 			$("#reviewForm > form").attr("action","editReview.do");
 			$("#auctionTitle").html(result.auctionTitle);
-			$(`#reviewScore${result.reviewScore}`).next("label").find(".fa-star").addClass("scoreChoice");
+			$('input:hidden[name="reviewScore"]').val(`${result.reviewScore}`);
+			$(`#reviewScore${result.reviewScore}`).closest(".scoreSpan").find(".fa-star").addClass("scoreChoice");
 			$(`#reviewScore${result.reviewScore}`).prop("checked", true);
 			$(".reviewTitleDiv input").val(result.reviewTitle);
 			$('#summernote').summernote('code', result.reviewContent);
@@ -389,8 +404,19 @@ $(".regitbtn").click((e) => {
 	} else if($(".note-editable").html() == ""){
 		Swal.fire("후기를 입력해주세요.");
 	} else {
-		Swal.fire("후기가 등록되었습니다.");
-		$("#rform").submit();
+		if($(".regitbtn > button").html() == "등록"){
+			Swal.fire("후기가 등록되었습니다.").then((result) => {
+		        if (result.value) {
+		        	$("#rform").submit();
+		        }
+		      })
+		} else if($(".regitbtn > button").html() == "수정"){
+			Swal.fire("후기가 수정되었습니다.").then((result) => {
+		        if (result.value) {
+		        	$("#rform").submit();
+		        }
+		      })
+		}
 	}
 });
 $("body").on("click", ".reviewModalClose", (e) => {
@@ -418,8 +444,7 @@ $('#summernote').summernote(
 		    toolbar : ['insert', ['picture']],
 		    popover: {},
 		    focus: true
-//		    callbacks: {
-//		    	
+		    	
 //		    	onImageUpload: function (files, editor, welEditable) {
 //		        for (var i = files.length - 1; i >= 0; i--) {
 //		        	console.log(files[i]);
@@ -481,9 +506,7 @@ $("body").on("click", ".scoreLabel", (e) => {
 });
 
 let myInfo = $("#myInfo");
-console.log(myInfo.offset().left + 930);
 $("#moveButton").css("left", myInfo.offset().left + 930);
-console.log($("#moveButton").css("left"));
 // 페이지 상단으로 이동
 $("#toTheTop").click((e) => {
 	let htmlOffset = jQuery( 'html' ).offset();

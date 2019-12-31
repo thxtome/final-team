@@ -10,8 +10,6 @@
 	href="<c:url value="/resources/css/common/normalize.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/auction/bootstrap.min.css"/>">
-<!-- <link rel="stylesheet" -->
-<%-- 	href="<c:url value="/resources/css/auction/swiper.min.css"/>">	 --%>
 <link rel="stylesheet"
 	href="<c:url value="/resources/summernote/summernote.css"/>">
 <link rel="stylesheet"
@@ -44,7 +42,7 @@ if (request.getProtocol().equals("HTTP/1.1"))
 				<span>${userHistory.sellCnt}</span> <span>개</span>
 			</div>
 			<div data-location="reviewHead" id="reviewDeal">
-				<span>받은 후기</span>
+				<span>받은후기</span>
 				<span>${userHistory.userReviewCnt}</span> <span>개</span>
 			</div>
 		</div>
@@ -141,7 +139,7 @@ if (request.getProtocol().equals("HTTP/1.1"))
 									<input type="hidden" name = "reviewScore" value="" />
 									<c:forEach var="r" begin="1" end="10">
 									<span class="scoreSpan">
-										<label class="scoreLabel" for="reviewScore${r}" data-no="${r}" >
+										<label class="scoreLabel" id="reviewScore${r}" for="reviewScore${r}" data-no="${r}" >
 										<i class='fas fa-star regitStar'></i>${r}
 										</label>
 									</span>
