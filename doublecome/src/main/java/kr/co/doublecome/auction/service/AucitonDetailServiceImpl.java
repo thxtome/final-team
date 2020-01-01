@@ -1,9 +1,11 @@
 package kr.co.doublecome.auction.service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import kr.co.doublecome.repository.mapper.AuctionDetailMapper;
@@ -15,6 +17,7 @@ import kr.co.doublecome.repository.vo.Category;
 import kr.co.doublecome.repository.vo.Deal;
 import kr.co.doublecome.repository.vo.History;
 import kr.co.doublecome.repository.vo.Inquiry;
+import kr.co.doublecome.repository.vo.Report;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
 import kr.co.doublecome.repository.vo.UtilFile;
@@ -127,5 +130,14 @@ public class AucitonDetailServiceImpl implements AuctionDetailService {
 	}
 	public void addTag(UtilFile file) {
 		mapper.addTag(file);
+	}
+	public int checkReport(int no, Principal p) {
+		Report report = new Report();
+		if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+			report.setAuctionNo(no);
+			report.setReportSender(p.getName());
+			return mapper.checkReport(report);
+		}
+		return 0;
 	}
 }

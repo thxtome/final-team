@@ -45,9 +45,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 <%-- 					<a href="updateAuction.do?no=${auction.auctionNo}"><button class="edit_btn writer_btn">수정</button></a> --%>
 				</div>
 			</c:when>
-			<c:otherwise>
+			<c:when test="${reportCheck eq 0}">
 				<div class="writer_btns">
 						<button id="openReportModal" type="button" class="writer_btn reportBtn">신고하기</button>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="writer_btns">
+					<button type="button" class="alreadyReport">신고접수</button>
 				</div>
 			</c:otherwise>
 			</c:choose>

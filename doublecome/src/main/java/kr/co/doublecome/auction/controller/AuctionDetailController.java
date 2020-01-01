@@ -2,9 +2,7 @@ package kr.co.doublecome.auction.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,13 +13,12 @@ import java.util.UUID;
 
 import org.apache.commons.net.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -33,6 +30,7 @@ import kr.co.doublecome.common.service.SmsService;
 import kr.co.doublecome.repository.vo.AjaxPage;
 import kr.co.doublecome.repository.vo.Auction;
 import kr.co.doublecome.repository.vo.Inquiry;
+import kr.co.doublecome.repository.vo.Report;
 import kr.co.doublecome.repository.vo.Review;
 import kr.co.doublecome.repository.vo.Search;
 import kr.co.doublecome.repository.vo.UtilFile;
@@ -49,7 +47,7 @@ public class AuctionDetailController {
 	private SmsService smsService;
 	
 	@RequestMapping("/detailAuction.do")
-	public void auctionDetail(int no, String userEmail, Model model, Integer pageNo, Search search ) {
+	public void auctionDetail(int no, String userEmail, Model model, Integer pageNo, Search search, Principal principal ) {
 		model.addAttribute("auction", service.auctiondetail(no));
 		model.addAttribute("user", service.userInfo(userEmail));
 		search.setKeyword("c@c");
@@ -62,6 +60,8 @@ public class AuctionDetailController {
 		model.addAttribute("file", service.retrieveFile(no));
 		model.addAttribute("bid", service.bidList(no));
 		model.addAttribute("tag", service.retrieveFileTag(no));
+		model.addAttribute("reportCheck", service.checkReport(no, principal));
+		
 	}
 	
 	@RequestMapping("/retrieveReceiveReview.do")

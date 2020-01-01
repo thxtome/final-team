@@ -21,6 +21,7 @@
 				<div class="swiper-wrapper">
 					<c:forEach items="${file}" var="f">
 						<div class="swiper-slide"
+						data-no="${f.fileNo}"
 							style="background-image: url('<c:url value="/file/downLoadFile.do?fileNo=${f.fileNo}" />')"></div>
 					</c:forEach>
 				</div>
@@ -32,6 +33,7 @@
 					<div class="swiper-wrapper">
 						<c:forEach items="${file}" var="f">
 							<div class="swiper-slide"
+								data-no="${f.fileNo}"
 								style="background-image: url('<c:url value="/file/downLoadFile.do?fileNo=${f.fileNo}" />')">
 							</div>
 						</c:forEach>
@@ -271,7 +273,7 @@
 		<div id="carousel-example" class="carousel slide">
 			<div class="carousel-inner">
 				<c:forEach items="${file}" var="f">
-					<div class="item">
+					<div class="item ${f.fileNo}">
 					<button type="button" class="tagCancel">닫기</button>
 						<div class="imgtempWrapper">
 							<div class="imgWrapper">
