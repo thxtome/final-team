@@ -147,7 +147,7 @@ public class UserController {
 		// 위에서 설정한 값을 Spring security에서 사용할 수 있도록 세션에 설정해줍니다.
 		APIsession.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
 
-		return "/main";
+		return "user/redirectMain";
 	}
 
 	// 이메일 찾기 페이지, 이메일 찾기
