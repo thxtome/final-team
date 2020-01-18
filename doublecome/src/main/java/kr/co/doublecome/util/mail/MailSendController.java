@@ -27,7 +27,7 @@ public class MailSendController {
 	//비밀번호 찾기
 	@RequestMapping("/findPass.do") 
 	public String mailSender( String email ) { 
-		System.out.println("/sendMailForFindPass.do");
+		System.out.println("/sendMailForFindPass.do>>" + email);
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			@Override 
 			public void prepare(MimeMessage mimeMessage) throws Exception { 
