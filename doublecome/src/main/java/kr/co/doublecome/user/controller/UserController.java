@@ -297,47 +297,6 @@ public class UserController {
 		service.updateUser(user);
 		
 		
-		/*
-		 * //비밀번호 수정 if(user.getUserPass().length() == 0)
-		 * user.setUserPass(u.getUserPass()); else {
-		 * user.setUserPass(encoder.encode(user.getUserPass())); }
-		 * 
-		 * // 별명 수정 if(user.getUserNickname().length() == 0)
-		 * user.setUserPass(u.getUserNickname()); else
-		 * user.setUserNickname(user.getUserNickname());
-		 * 
-		 * 
-		 * 
-		 * //파일 수정 
-		 * System.out.println("user>>" + user); 
-		 * System.out.println("u>>" + u);
-		 * user.setFileOriginName(file.getOriginalFilename());
-		 * System.out.println("file.getOriginalFilename().length()>>" +file.getOriginalFilename().length() );
-		 * 
-		 * if(file.getOriginalFilename().length() == 0) {
-		 * user.setFileGroupCode(u.getFileGroupCode()); }
-		 * 
-		 * 
-		 * 
-		 * 
-		 * if(file.getOriginalFilename().length() != 0 ) { 
-		 * UtilFile util = new UtilFile(); 
-		 * List<MultipartFile> attach = new ArrayList<>(); 
-		 * attach.add(file);
-		 * util.setAttach(attach); 
-		 * user.setFileNo(u.getFileNo());
-		 * user.setFileGroupCode(u.getFileGroupCode()); 
-		 * if(u.getFileGroupCode() != 0) {
-		 * fileService.deleteProfile(u.getFileNo());
-		 * user.setFileGroupCode(fileService.maxFileGroupCode() + 1);
-		 * fileService.uploadProfile(util, user); 
-		 * }else {
-		 * user.setFileGroupCode(fileService.maxFileGroupCode() + 1);
-		 * fileService.uploadProfile(util, user);
-		 * }
-		 * }
-		 */
-
 		User updatedU = service.selectUserInfoByName(user.getUserEmail());
 		// 세션 등록
 		UserDetails uu = userService.loadUserByUsername(updatedU.getUserEmail());
@@ -381,7 +340,7 @@ public class UserController {
 	public String paddUpdate(User u) {
 		System.out.println("passUpdate.do");
 		User user = service.selectUserInfoByName(u.getUserEmail());
-		if(u.getUserType() == 0) {
+		if(u.getUserType() == 3) {
 			return "redirect:/main.do";
 		}
 		System.out.println(u.getUserPass());

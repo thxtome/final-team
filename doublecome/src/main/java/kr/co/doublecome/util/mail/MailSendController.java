@@ -39,10 +39,9 @@ public class MailSendController {
 				
 				
 				helper.setText(
-						
 						"본인이 요청하지 않았다면 무시해 주세요<br>" +
 						"<br>비밀번호 수정 페이지로 " +
-						"<a href=http://localhost:80/doublecome/user/findPassForm.do"+
+						"<a href=https://doublecome.shop/doublecome/user/findPassForm.do"+
 								"?userEmail=" + email +
 								"&userPass=" + service.findPass(email) + "> 이동 <a>"
 										+ "합니다"  , true);	 			// 메일 내용
