@@ -128,7 +128,7 @@ if (request.getProtocol().equals("HTTP/1.1"))
 				<span class="reviewModalClose">&times;</span>
 				<div class="addReviewContent" data-value="헤이">
 					<div id="reviewForm">
-						<form action="" id="rform" method="post">
+						<form action="" id="rform" method="post" enctype="multipart/form-data">
 							<div class="auctionTitleDiv">
 								<div>경매글</div>
 								<div id="auctionTitle"></div>

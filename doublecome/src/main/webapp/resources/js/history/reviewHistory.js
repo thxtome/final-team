@@ -401,7 +401,7 @@ $(".regitbtn").click((e) => {
 		Swal.fire("신뢰도를 선택해주세요.");
 	} else if ($('input:text[name="reviewTitle"]').val() == ""){
 		Swal.fire("한줄 요약을 입력해주세요.");
-	} else if($(".note-editable").html() == ""){
+	} else if($(".note-editable p").html() == "<br>"){
 		Swal.fire("후기를 입력해주세요.");
 	} else {
 		if($(".regitbtn > button").html() == "등록"){
